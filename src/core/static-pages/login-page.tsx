@@ -1,4 +1,4 @@
-import Login from '../static-components/login';
+import Login from '../static-components/login/login';
 
 function LoginPage() {
   return <Login />;

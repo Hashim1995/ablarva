@@ -8,6 +8,31 @@ body {
 * {
   font-family: 'Poppins', sans-serif;
 }
-.placeholder-bold::placeholder {
-  font-weight: thin; /* or use a numeric value like 600, 700, etc. */
+::selection {
+  color: white;
+  background: blue;
+}
+.flip-card {
+}
+
+.flip-card-inner {
+  position: relative;
+  width: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+}
+
+.flip-card.flipped .flip-card-inner {
+  transform: rotateY(180deg);
+}
+
+.front,
+.back {
+  position: absolute;
+  width: 100%;
+  backface-visibility: hidden;
+}
+
+.back {
+  transform: rotateY(180deg);
 }
