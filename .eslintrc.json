@@ -1,0 +1,43 @@
+{
+  "root": true,
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+
+  "extends": ["airbnb", "prettier"],
+  "ignorePatterns": ["src/stories/*"],
+  "plugins": ["react", "prettier"],
+  "rules": {
+    "prettier/prettier": "off",
+    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "react/react-in-jsx-scope": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/extensions": "off",
+    "react/require-default-props": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-props-no-spreading": "off",
+    "react/no-unescaped-entities": "off",
+    "react/jsx-curly-brace-presence": "off",
+    "no-console": "off",
+    "no-unsafe-optional-chaining": "off",
+    "no-unused-expressions": "off",
+    "no-param-reassign": "off"
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".css", ".scss", ".tsx"]
+      },
+      "typescript": {}
+    }
+  }
+}

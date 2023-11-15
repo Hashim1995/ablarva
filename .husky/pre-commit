@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+. "$(dirname "$0")/_/husky.sh"
+
+# Run Prettier
+yarn prettier:fix
+
+# Run ESLint
+yarn lint
+
+
+
+# If you'd like to automatically fix linting issues and formatting, you can do so by uncommenting the following lines:
+# npm run lint:fix
+# npm run prettier:fix
+# chmod +x .husky/pre-commit write this command on dev's terminal for set the husky config
