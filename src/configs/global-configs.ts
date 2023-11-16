@@ -22,4 +22,35 @@ const getTimeLineStyle = (token: any) => ({
   color: token.colorPrimary
 });
 
-export { toastOptions, getTimeLineStyle };
+const inputConfig = {
+  inputWrapper: [
+    'relative',
+    'w-full',
+    'inline',
+    'inline-flex',
+    'tap-highlight-transparent',
+    'shadow-sm',
+    'min-h-unit-8',
+    'flex-col',
+    'items-start',
+    'justify-center',
+    'gap-0',
+    'border',
+    ' px-3',
+    'py-1',
+    'rounded-md',
+    ' h-8',
+    'data-[hover=true]:border-gray-400',
+    'group-data-[focus=true]:border-gray-400',
+    'transition-background',
+    '!duration-150 ',
+    'transition-colors',
+    'motion-reduce:transition-none ',
+    'hover:border-red-400',
+    'focus:border-red-400'
+  ],
+  innerWrapper: 'h-fit  text-xs',
+  input: ' font-light '
+}
+
+export { toastOptions, inputConfig, getTimeLineStyle };

@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-unstable-nested-components */
 import { IUserRegister } from '@/models/user';
 import {
@@ -5,7 +7,16 @@ import {
   ILoginResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
-import { Button, Input, Radio, RadioGroup, Tooltip } from '@nextui-org/react';
+import {
+  Button,
+  Input,
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+  Radio,
+  RadioGroup,
+  Tooltip
+} from '@nextui-org/react';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
@@ -22,6 +33,7 @@ import {
 import { useLocalStorage } from 'usehooks-ts';
 import Datepicker from 'tailwind-datepicker-react';
 import { IOptions } from 'tailwind-datepicker-react/types/Options';
+import { inputConfig } from '@/configs/global-configs';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -132,62 +144,45 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 }
               }}
               render={({ field: { onChange, onBlur, value } }) => (
-                <Tooltip
-                  className="!bg-black !text-white"
-                  isOpen={Boolean(errors.email?.message)}
-                  content={errors.email?.message || ''}
-                >
-                  <Input
-                    type="email"
-                    placeholder="Email adresinizi daxil edin"
-                    variant="bordered"
-                    required
-                    onBlur={onBlur}
-                    value={value}
-                    isInvalid={Boolean(errors.email?.message)}
-                    size="sm"
-                    // onChange={onChange}
-                    onValueChange={onChange}
-                    className="!text-black  w-72"
-                    classNames={{
-                      inputWrapper: [
-                        'relative',
-                        'w-full',
-                        'inline',
-                        'inline-flex',
-                        'tap-highlight-transparent',
-                        'shadow-sm',
-                        'min-h-unit-8',
-                        'flex-col',
-                        'items-start',
-                        'justify-center',
-                        'gap-0',
-                        'border',
-                        ' px-3',
-                        'py-1',
-                        'rounded-md',
-                        ' h-8',
-                        'data-[hover=true]:border-gray-400',
-                        'group-data-[focus=true]:border-gray-400',
-                        'transition-background',
-                        '!duration-150 ',
-                        'transition-colors',
-                        'motion-reduce:transition-none ',
-                        'hover:border-red-400',
-                        'focus:border-red-400'
-                      ],
-                      innerWrapper: 'h-fit ',
-                      input: ' font-ligh text-xs italic '
-                    }}
-                    // errorMessage={errors.email?.message || ''}
-                    startContent={
-                      <BsEnvelopeFill
-                        size={16}
-                        className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                      />
-                    }
-                  />
-                </Tooltip>
+                <Input
+                  type="email"
+                  placeholder="Email adresinizi daxil edin"
+                  variant="bordered"
+                  required
+                  onBlur={onBlur}
+                  value={value}
+                  isInvalid={Boolean(errors.email?.message)}
+                  size="sm"
+                  onChange={onChange}
+                  className="!text-black  w-72"
+                  classNames={inputConfig}
+                  startContent={
+                    errors.email?.message ? (
+                      <Tooltip
+                        className="!bg-black !text-white"
+                        placement="top-start"
+                        offset={12}
+                        content={errors.email?.message || ''}
+                      >
+                        <div>
+                          <BsEnvelopeFill
+                            size={16}
+                            color={errors.email?.message ? 'red' : ''}
+                            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                          />
+                        </div>
+                      </Tooltip>
+                    ) : (
+                      <div>
+                        <BsEnvelopeFill
+                          size={16}
+                          color={errors.email?.message ? 'red' : ''}
+                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                        />
+                      </div>
+                    )
+                  }
+                />
               )}
             />
 
@@ -210,36 +205,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   size="sm"
                   onChange={onChange}
                   className="text-black  w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit ',
-                    input: ' font-light '
-                  }}
+                  classNames={inputConfig}
                   errorMessage={errors.firstName?.message || ''}
                   startContent={
                     <BsFillPersonFill
@@ -269,36 +235,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   size="sm"
                   onChange={onChange}
                   className="text-black  w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit ',
-                    input: ' font-light '
-                  }}
+                  classNames={inputConfig}
                   errorMessage={errors.lastName?.message || ''}
                   startContent={
                     <BsFillPersonFill
@@ -339,36 +276,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                       value={String(value || '')}
                       size="sm"
                       className="text-black  w-72"
-                      classNames={{
-                        inputWrapper: [
-                          'relative',
-                          'w-full',
-                          'inline',
-                          'inline-flex',
-                          'tap-highlight-transparent',
-                          'shadow-sm',
-                          'min-h-unit-8',
-                          'flex-col',
-                          'items-start',
-                          'justify-center',
-                          'gap-0',
-                          'border',
-                          ' px-3',
-                          'py-1',
-                          'rounded-md',
-                          ' h-8',
-                          'data-[hover=true]:border-gray-400',
-                          'group-data-[focus=true]:border-gray-400',
-                          'transition-background',
-                          '!duration-150 ',
-                          'transition-colors',
-                          'motion-reduce:transition-none ',
-                          'hover:border-red-400',
-                          'focus:border-red-400'
-                        ],
-                        innerWrapper: 'h-fit ',
-                        input: ' font-light '
-                      }}
+                      classNames={inputConfig}
                       // errorMessage={errors.lastName?.message || ''}
                       startContent={
                         <BsCalendarWeekFill
@@ -465,36 +373,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                     }
                   }}
                   className="text-black w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit',
-                    input: ' font-light'
-                  }}
+                  classNames={inputConfig}
                   placeholder="Şifrənizi daxil edin"
                   endContent={
                     <button
@@ -573,36 +452,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                     }
                   }}
                   className="text-black w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit',
-                    input: ' font-light'
-                  }}
+                  classNames={inputConfig}
                   placeholder="Şifrənizi daxil edin"
                   endContent={
                     <button

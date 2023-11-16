@@ -81,3 +81,9 @@ input::-webkit-datetime-edit {
   position: relative;
   left: 10%;
 }
+
+input::placeholder {
+  color: #292d32 !important;
+  opacity: 0.5;
+  font-style: italic;
+}
