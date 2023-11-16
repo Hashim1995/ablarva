@@ -44,6 +44,15 @@ export interface ILogin {
   email: string;
   password: string;
 }
+export interface IUserRegister {
+  email: string,
+  firstName: string,
+  lastName: string,
+  password: string,
+  confirmPassword: string,
+  gender: string,
+  dateOfBirth: string | Date
+}
 
 export interface IUserData {
   accessToken: string;

@@ -19,6 +19,7 @@ body {
   position: relative;
   width: 100%;
   transition: transform 0.8s;
+  height: 100vh;
   transform-style: preserve-3d;
 }
 
@@ -35,4 +36,48 @@ body {
 
 .back {
   transform: rotateY(180deg);
+}
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background: url(https://mywildalberta.ca/images/GFX-MWA-Parks-Reservations.png)
+    no-repeat;
+  width: 20px;
+  height: 20px;
+  border-width: thin;
+}
+
+// input[type='date']::placeholder {
+//   color: red;
+// }
+
+// input[type='date']:required:invalid::-webkit-datetime-edit {
+//   color: transparent;
+// }
+// input[type='date']:focus::-webkit-datetime-edit {
+//   color: black !important;
+// }
+
+input[type='date']::-webkit-calendar-picker-indicator {
+  color: rgba(0, 0, 0, 0);
+  opacity: 1;
+  display: block;
+  background-repeat: no-repeat;
+  width: 25px;
+  height: 25px;
+  border-width: thin;
+}
+input[type='date']::-webkit-calendar-picker-indicator {
+  position: absolute;
+  left: 5%;
+}
+input::-webkit-datetime-edit-fields-wrapper {
+  position: relative;
+  left: 10%;
+}
+input::-webkit-datetime-edit {
+  position: relative;
+  left: 10%;
 }

@@ -59,7 +59,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
 
       <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
         <h3 className="leading-none text-2xl font-semibold text-gray-700">
-          Login
+          Daxil ol
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -70,16 +70,19 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               control={control}
               name="email"
               rules={{
-                required: true,
+                required: {
+                  value: true,
+                  message: 'Email xanası məcburidir'
+                },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'invalid email address'
+                  message: 'Düzgün olmayan email adresi'
                 }
               }}
               render={({ field: { onChange, value } }) => (
                 <Input
                   type="email"
-                  placeholder="Enter your Email address"
+                  placeholder="Email adresinizi daxil edin"
                   variant="bordered"
                   required
                   value={value}
@@ -130,7 +133,10 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               control={control}
               name="password"
               rules={{
-                required: true
+                required: {
+                  value: true,
+                  message: 'Şifrə xanası məcburidir'
+                }
               }}
               render={({ field: { onChange, value } }) => (
                 <Input
@@ -172,7 +178,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                     innerWrapper: 'h-fit',
                     input: ' font-light'
                   }}
-                  placeholder="Enter your password"
+                  placeholder="Şifrənizi daxil edin"
                   endContent={
                     <button
                       className="focus:outline-none"
@@ -209,27 +215,27 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             className="w-full  text-white border"
             type="submit"
           >
-            Log in
+            Daxil ol
           </Button>
         </form>
         <div className="flex flex-col space-y-5">
-          <span className="flex items-center justify-center space-x-2">
-            <span className="h-px bg-gray-400 w-14" />
+          <span className="flex items-center justify-center ">
+            <span className="h-px bg-gray-400 w-10" />
             <span
               aria-hidden
               onClick={handleFlip}
               className="font-normal text-black  text-sm"
             >
-              or{' '}
+              və ya{' '}
               <span
                 className=" text-blue-500   cursor-pointer"
                 aria-hidden
                 onClick={handleFlip}
               >
-                Register
+                Qeydiyyatdan keç
               </span>
             </span>
-            <span className="h-px bg-gray-400 w-14" />
+            <span className="h-px bg-gray-400 w-10" />
           </span>
         </div>
       </div>
