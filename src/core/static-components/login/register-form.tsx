@@ -15,6 +15,8 @@ import {
   PopoverTrigger,
   Radio,
   RadioGroup,
+  Select,
+  SelectItem,
   Tooltip
 } from '@nextui-org/react';
 import { useState } from 'react';
@@ -26,6 +28,7 @@ import {
   BsRobot,
   BsCalendarWeekFill,
   BsEnvelopeFill,
+  BsGenderAmbiguous,
   BsFillKeyFill,
   BsFillPersonFill,
   BsEyeSlash
@@ -290,41 +293,55 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            <Controller
-              control={control}
-              name="gender"
-              render={({ field: { onChange, value } }) => (
-                <div className="flex  gap-3">
-                  <RadioGroup
-                    orientation="horizontal"
-                    value={value}
-                    defaultValue="1"
-                    size="sm"
-                    className="gap-5 text-black"
-                    onValueChange={onChange}
-                  >
-                    <Radio
-                      classNames={{
-                        label: 'text-black'
-                      }}
-                      size="sm"
-                      value={'1'}
-                    >
-                      Kişi
-                    </Radio>
-                    <Radio
-                      classNames={{
-                        label: 'text-black'
-                      }}
-                      size="sm"
-                      value={'2'}
-                    >
-                      Qadın
-                    </Radio>
-                  </RadioGroup>
-                </div>
-              )}
-            />
+            <Select
+              classNames={{
+                mainWrapper: 'h-8',
+                trigger: [
+                  'relative',
+                  'w-full',
+                  'inline',
+                  'h-full',
+                  'inline-flex',
+                  'tap-highlight-transparent',
+                  'shadow-sm',
+                  'min-h-unit-8',
+                  'flex-col',
+                  'items-start',
+                  'justify-center',
+                  'gap-0',
+                  'border',
+                  ' px-3',
+                  'py-1',
+                  'rounded-md',
+                  ' h-8',
+                  'data-[hover=true]:border-gray-400',
+                  'group-data-[focus=true]:border-gray-400',
+                  'transition-background',
+                  '!duration-150 ',
+                  'transition-colors',
+                  'motion-reduce:transition-none ',
+                  'hover:border-red-400',
+                  'focus:border-red-400'
+                ]
+              }}
+              placeholder="Cins seçin"
+              variant="bordered"
+              // label="Cins seçin"
+              className=" h-8"
+              startContent={
+                <BsGenderAmbiguous
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                  size={16}
+                />
+              }
+            >
+              <SelectItem key={1} value={1}>
+                Kişi
+              </SelectItem>
+              <SelectItem key={2} value={2}>
+                Qadın
+              </SelectItem>
+            </Select>
             <Controller
               control={control}
               name="password"
