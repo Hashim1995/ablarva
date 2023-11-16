@@ -5,7 +5,7 @@ import {
   ILoginResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
-import { Button, Input, Radio, RadioGroup } from '@nextui-org/react';
+import { Button, Input, Radio, RadioGroup, Tooltip } from '@nextui-org/react';
 import { useState } from 'react';
 import dayjs from 'dayjs';
 
@@ -13,9 +13,9 @@ import { Controller, useForm } from 'react-hook-form';
 import {
   BsEye,
   BsRobot,
-  BsCalendar,
-  BsEnvelope,
-  BsKey,
+  BsCalendarWeekFill,
+  BsEnvelopeFill,
+  BsFillKeyFill,
   BsFillPersonFill,
   BsEyeSlash
 } from 'react-icons/bs';
@@ -35,7 +35,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     formState: { errors, isSubmitting },
     control
   } = useForm<IUserRegister>({
-    mode: 'onSubmit',
+    mode: 'onChange',
     defaultValues: {}
   });
   // eslint-disable-next-line no-unused-vars
@@ -56,7 +56,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const options: IOptions = {
     autoHide: true,
     todayBtn: false,
-    clearBtn: false,
+    clearBtn: true,
     clearBtnText: 'Təmizlə',
     // maxDate: new Date('2023-01-01'),
     theme: {
@@ -131,54 +131,63 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   message: 'Düzgün olmayan email adresi'
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  type="email"
-                  placeholder="Email adresinizi daxil edin"
-                  variant="bordered"
-                  required
-                  value={value}
-                  size="sm"
-                  onChange={onChange}
-                  className="text-black  w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit ',
-                    input: ' font-light '
-                  }}
-                  errorMessage={errors.email?.message || ''}
-                  startContent={
-                    <BsEnvelope
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
-                />
+              render={({ field: { onChange, onBlur, value } }) => (
+                <Tooltip
+                  className="!bg-black !text-white"
+                  isOpen={Boolean(errors.email?.message)}
+                  content={errors.email?.message || ''}
+                >
+                  <Input
+                    type="email"
+                    placeholder="Email adresinizi daxil edin"
+                    variant="bordered"
+                    required
+                    onBlur={onBlur}
+                    value={value}
+                    isInvalid={Boolean(errors.email?.message)}
+                    size="sm"
+                    // onChange={onChange}
+                    onValueChange={onChange}
+                    className="!text-black  w-72"
+                    classNames={{
+                      inputWrapper: [
+                        'relative',
+                        'w-full',
+                        'inline',
+                        'inline-flex',
+                        'tap-highlight-transparent',
+                        'shadow-sm',
+                        'min-h-unit-8',
+                        'flex-col',
+                        'items-start',
+                        'justify-center',
+                        'gap-0',
+                        'border',
+                        ' px-3',
+                        'py-1',
+                        'rounded-md',
+                        ' h-8',
+                        'data-[hover=true]:border-gray-400',
+                        'group-data-[focus=true]:border-gray-400',
+                        'transition-background',
+                        '!duration-150 ',
+                        'transition-colors',
+                        'motion-reduce:transition-none ',
+                        'hover:border-red-400',
+                        'focus:border-red-400'
+                      ],
+                      innerWrapper: 'h-fit ',
+                      input: ' font-ligh text-xs italic '
+                    }}
+                    // errorMessage={errors.email?.message || ''}
+                    startContent={
+                      <BsEnvelopeFill
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                      />
+                    }
+                  />
+                </Tooltip>
               )}
             />
 
@@ -362,7 +371,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                       }}
                       // errorMessage={errors.lastName?.message || ''}
                       startContent={
-                        <BsCalendar
+                        <BsCalendarWeekFill
                           size={16}
                           className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                         />
@@ -508,7 +517,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }
                   type={showPassword ? 'text' : 'password'}
                   startContent={
-                    <BsKey
+                    <BsFillKeyFill
                       size={16}
                       className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                     />
@@ -616,7 +625,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }
                   type={showPassword ? 'text' : 'password'}
                   startContent={
-                    <BsKey
+                    <BsFillKeyFill
                       size={16}
                       className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                     />
