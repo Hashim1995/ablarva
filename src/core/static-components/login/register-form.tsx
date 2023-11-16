@@ -37,6 +37,9 @@ import { useLocalStorage } from 'usehooks-ts';
 import Datepicker from 'tailwind-datepicker-react';
 import { IOptions } from 'tailwind-datepicker-react/types/Options';
 import { inputConfig } from '@/configs/global-configs';
+import AppHandledInput from '@/components/forms/input/handled-input';
+import { dictionary } from '@/utils/constants/dictionary';
+import { inputPlaceholderText } from '@/utils/constants/texts';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -133,7 +136,31 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
           className="flex flex-col space-y-5"
         >
           <div className="flex flex-col gap-5  ">
-            <Controller
+            <AppHandledInput
+              name="email"
+              inputProps={{
+                id: 'email'
+              }}
+              type="email"
+              control={control}
+              isInvalid={Boolean(errors.email?.message)}
+              errors={errors}
+              size="sm"
+              rules={{
+                required: {
+                  value: true,
+                  message: inputValidationText(dictionary.az.email)
+                },
+                pattern: {
+                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                  message: 'Düzgün olmayan email adresi'
+                }
+              }}
+              placeholder={inputPlaceholderText(dictionary.az.email)}
+              required
+              IconElement={BsEnvelopeFill}
+            />
+            {/* <Controller
               control={control}
               name="email"
               rules={{
@@ -187,7 +214,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }
                 />
               )}
-            />
+            /> */}
 
             <Controller
               control={control}

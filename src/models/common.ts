@@ -5,17 +5,9 @@ interface IGlobalResponse {
   isSuccess: boolean;
 }
 
-
-
 interface selectOption {
   value: string | number;
   label: string;
 }
 
-
-
-
-export type {
-  selectOption,
-  IGlobalResponse
-};
+export type { selectOption, IGlobalResponse };

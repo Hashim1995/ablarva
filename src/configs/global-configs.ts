@@ -51,6 +51,6 @@ const inputConfig = {
   ],
   innerWrapper: 'h-fit  text-xs',
   input: ' font-light '
-}
+};
 
 export { toastOptions, inputConfig, getTimeLineStyle };
