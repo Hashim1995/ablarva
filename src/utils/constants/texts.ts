@@ -2,7 +2,7 @@
 import { dictionary } from './dictionary';
 
 export const inputPlaceholderText = (t?: string): string =>
-  t ? `Please enter ${t} field` : dictionary.en.enter;
+  t ? `${t} daxil edin` : dictionary.en.enter;
 
 export const selectPlaceholderText = (t?: string): string =>
   t ? `Please select from ${t} field` : dictionary.en.select;

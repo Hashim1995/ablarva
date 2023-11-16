@@ -22,8 +22,6 @@ function convertFormDataToQueryParams<T>(formData: T): IHTTPSParams[] {
   return z;
 }
 
-
-
 function convertBytesToReadableSize(bytes: number): string {
   const suffixes: string[] = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
 
