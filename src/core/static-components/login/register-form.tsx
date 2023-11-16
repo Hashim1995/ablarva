@@ -158,7 +158,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               placeholder={inputPlaceholderText(dictionary.az.email)}
               required
-              IconElement={BsEnvelopeFill}
+              IconElement={() => (
+                <BsEnvelopeFill
+                  size={16}
+                  color={errors.email?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
             />
             {/* <Controller
               control={control}

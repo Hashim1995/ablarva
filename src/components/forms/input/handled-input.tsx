@@ -56,7 +56,6 @@ function AppHandledInput({
           className={className}
           classNames={inputConfig}
           size={size}
-          {...inputProps}
           startContent={
             errors[name]?.message ? (
               <Tooltip
@@ -65,22 +64,13 @@ function AppHandledInput({
                 offset={12}
                 content={errors[name] ? errors[name].message : ''}
               >
-                <div>
-                  <IconElement
-                    size={16}
-                    color={errors[name] ? '#f31260' : ''}
-                    className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                  />
-                </div>
+                <div>{IconElement()}</div>
               </Tooltip>
             ) : (
-              <IconElement
-                size={16}
-                color={errors[name] ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
+              <div>{IconElement}</div>
             )
           }
+          {...inputProps}
         />
       )}
     />
