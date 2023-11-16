@@ -13,7 +13,6 @@ interface IHandledInput {
   >;
   variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   required?: boolean;
-  onAppChange?: any;
   startContentIconType?: null;
   errors?: any;
   type?: string;
@@ -72,7 +71,7 @@ function AppHandledInput({
                 <div>{IconElement()}</div>
               </Tooltip>
             ) : (
-              <div>{IconElement}</div>
+              <div>{IconElement()}</div>
             )
           }
           {...inputProps}

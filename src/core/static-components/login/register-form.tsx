@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-unstable-nested-components */
@@ -148,6 +149,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               isInvalid={Boolean(errors.email?.message)}
               errors={errors}
               size="sm"
+              className="text-black w-72"
               rules={{
                 required: {
                   value: true,
@@ -174,8 +176,9 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 id: 'firstName'
               }}
               type="text"
+              className="text-black w-72"
               control={control}
-              isInvalid={Boolean(errors.email?.message)}
+              isInvalid={Boolean(errors.firstName?.message)}
               errors={errors}
               size="sm"
               rules={{
@@ -195,62 +198,33 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
             <AppHandledInput
-              name="firstName"
+              name="lastName"
               inputProps={{
-                id: 'firstName'
+                id: 'lastName'
               }}
               type="text"
               control={control}
-              isInvalid={Boolean(errors.email?.message)}
+              className="text-black w-72"
+              isInvalid={Boolean(errors.lastName?.message)}
               errors={errors}
               size="sm"
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.firstName)
+                  message: inputValidationText(dictionary.az.lastName)
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.firstName)}
+              placeholder={inputPlaceholderText(dictionary.az.lastName)}
               required
               IconElement={() => (
                 <BsFillPersonFill
                   size={16}
-                  color={errors.firstName?.message ? '#f31260' : ''}
+                  color={errors.lastName?.message ? '#f31260' : ''}
                   className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                 />
               )}
             />
 
-            <Controller
-              control={control}
-              name="lastName"
-              rules={{
-                required: {
-                  value: true,
-                  message: 'Soyad xanası məcburidir'
-                }
-              }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  type="text"
-                  placeholder="Soyadınızı daxil edin"
-                  variant="bordered"
-                  required
-                  value={value}
-                  size="sm"
-                  onChange={onChange}
-                  className="text-black  w-72"
-                  classNames={inputConfig}
-                  errorMessage={errors.lastName?.message || ''}
-                  startContent={
-                    <BsFillPersonFill
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
-                />
-              )}
-            />
             <Controller
               control={control}
               name="dateOfBirth"
@@ -302,132 +276,161 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               className=" h-8"
             />
 
-            {/* <Select
-              classNames={{
-                mainWrapper: 'h-8 data-[open=true]:border-red-300',
-                trigger: [
-                  'relative',
-                  'w-full',
-                  'inline',
-                  'h-full',
-                  'inline-flex',
-                  'tap-highlight-transparent',
-                  'shadow-sm',
-                  'min-h-unit-8',
-                  'flex-col',
-                  'data-[open=true]:border-gray-400',
-                  'data-[focus=true]:border-gray-400',
-                  'items-start',
-                  'justify-center',
-                  'gap-0',
-                  'border',
-                  ' px-3',
-                  'py-1',
-                  'rounded-md',
-                  ' h-8',
-                  '!duration-150 ',
-                  'transition-colors',
-                  'motion-reduce:transition-none '
-                ]
-              }}
-              placeholder="Cins seçin"
-              variant="bordered"
-              // label="Cins seçin"
-              className=" h-8 text-black app-select"
-              startContent={
-                <BsFillPersonLinesFill
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                  size={16}
-                />
-              }
-            >
-              <SelectItem key={1} value={1}>
-                Kişi
-              </SelectItem>
-              <SelectItem key={2} value={2}>
-                Qadın
-              </SelectItem>
-            </Select> */}
-            <Controller
-              control={control}
+            <AppHandledInput
               name="password"
+              control={control}
+              className="text-black w-72"
+              isInvalid={Boolean(errors.password?.message)}
+              errors={errors}
+              onChangeApp={() => {
+                if (watch('password') !== watch('confirmPassword')) {
+                  setError('password', {
+                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                  });
+                  setError('confirmPassword', {
+                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                  });
+                } else {
+                  clearErrors('password');
+                  clearErrors('confirmPassword');
+                }
+              }}
+              size="sm"
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText('Yeni Şifrə')
+                  message: inputValidationText(dictionary.az.password)
                 },
                 minLength: {
                   value: 8,
-                  message: 'Şifrə ən az 8 xarakter olmalıdı'
+                  message: 'Şifrə uzunluğu azı 8 simvol olmalıdır'
                 },
                 validate: {
                   RequireDigit: value =>
-                    /[^0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
+                    /[0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
                   RequireLowercase: value =>
                     /[a-z]/.test(value) ||
                     'Şifrədə ən az 1 kiçik hərf olmalıdır',
                   RequireUppercase: value =>
                     /[A-Z]/.test(value) ||
-                    'Şifrədə ən az 1 böyük hərf olmalıdır  '
+                    'Şifrədə ən az 1 böyük hərf olmalıdır  ',
+                  RequireSpecialCharacter: value =>
+                    /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
+                    'Şifrədə ən az 1 xüsusi simvol olmalıdır'
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  // label="Password"
-                  variant="bordered"
-                  required
-                  errorMessage={errors.password?.message || ''}
-                  value={value}
-                  size="sm"
-                  onChange={e => {
-                    onChange(e);
-                    if (watch('password') !== watch('confirmPassword')) {
-                      setError('password', {
-                        message:
-                          'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
-                      });
-                      setError('confirmPassword', {
-                        message:
-                          'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
-                      });
-                    } else {
-                      clearErrors('password');
-                      clearErrors('confirmPassword');
-                    }
-                  }}
-                  className="text-black w-72"
-                  classNames={inputConfig}
-                  placeholder="Şifrənizi daxil edin"
-                  endContent={
-                    <button
-                      className="focus:outline-none"
-                      type="button"
-                      onClick={() => setShowPassword(z => !z)}
-                    >
-                      {showPassword ? (
-                        <BsEye
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      ) : (
-                        <BsEyeSlash
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      )}
-                    </button>
-                  }
-                  type={showPassword ? 'text' : 'password'}
-                  startContent={
-                    <BsFillKeyFill
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
+              placeholder={inputPlaceholderText(dictionary.az.password)}
+              required
+              inputProps={{
+                id: 'password',
+                endContent: (
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={() => setShowPassword(z => !z)}
+                  >
+                    {showPassword ? (
+                      <BsEye
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    )}
+                  </button>
+                )
+              }}
+              type={showPassword ? 'text' : 'password'}
+              IconElement={() => (
+                <BsFillPersonFill
+                  size={16}
+                  color={errors.password?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
+            />
+
+            <AppHandledInput
+              name="confirmPassword"
+              control={control}
+              className="text-black w-72"
+              isInvalid={Boolean(errors.confirmPassword?.message)}
+              errors={errors}
+              onChangeApp={() => {
+                if (watch('password') !== watch('confirmPassword')) {
+                  setError('password', {
+                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                  });
+                  setError('confirmPassword', {
+                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                  });
+                } else {
+                  clearErrors('password');
+                  clearErrors('confirmPassword');
+                }
+              }}
+              size="sm"
+              rules={{
+                required: {
+                  value: true,
+                  message: inputValidationText(dictionary.az.confirmPassword)
+                },
+                minLength: {
+                  value: 8,
+                  message: 'Şifrə uzunluğu azı 8 simvol olmalıdır'
+                },
+                validate: {
+                  RequireDigit: value =>
+                    /[0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
+                  RequireLowercase: value =>
+                    /[a-z]/.test(value) ||
+                    'Şifrədə ən az 1 kiçik hərf olmalıdır',
+                  RequireUppercase: value =>
+                    /[A-Z]/.test(value) ||
+                    'Şifrədə ən az 1 böyük hərf olmalıdır  ',
+                  RequireSpecialCharacter: value =>
+                    /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
+                    'Şifrədə ən az 1 xüsusi simvol olmalıdır'
+                }
+              }}
+              placeholder={inputPlaceholderText(dictionary.az.confirmPassword)}
+              required
+              inputProps={{
+                id: 'confirmPassword',
+                endContent: (
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={() => setShowPasswordConfirm(z => !z)}
+                  >
+                    {showPasswordConfirm ? (
+                      <BsEye
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    )}
+                  </button>
+                )
+              }}
+              type={showPasswordConfirm ? 'text' : 'password'}
+              IconElement={() => (
+                <BsFillPersonFill
+                  size={16}
+                  color={errors.confirmPassword?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                 />
               )}
             />
           </div>
+
           <Button
             size="sm"
             isLoading={isSubmitting}

@@ -1,6 +1,9 @@
 export const dictionary = {
   az: {
     firstName: 'Ad',
+    lastName: 'Soyad',
+    passWord: 'Şifrə',
+    confirmPassword: 'Tərar şifrə',
     personalCabinet: 'Şəxsi kabinet',
     legalCabinet: 'Şirkət məlumatları',
     lightMode: 'Gündüz rejimi',
