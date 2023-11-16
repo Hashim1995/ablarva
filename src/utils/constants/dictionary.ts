@@ -1,5 +1,6 @@
 export const dictionary = {
   az: {
+    firstName: 'Ad',
     personalCabinet: 'Şəxsi kabinet',
     legalCabinet: 'Şirkət məlumatları',
     lightMode: 'Gündüz rejimi',

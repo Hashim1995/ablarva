@@ -168,92 +168,59 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 />
               )}
             />
-            {/* <Controller
-              control={control}
-              name="email"
-              rules={{
-                required: {
-                  value: true,
-                  message: 'Email xanası məcburidir'
-                },
-                pattern: {
-                  value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Düzgün olmayan email adresi'
-                }
-              }}
-              render={({ field: { onChange, onBlur, value } }) => (
-                <Input
-                  type="email"
-                  placeholder="Email adresinizi daxil edin"
-                  variant="bordered"
-                  required
-                  onBlur={onBlur}
-                  value={value}
-                  isInvalid={Boolean(errors.email?.message)}
-                  size="sm"
-                  onChange={onChange}
-                  className="!text-black  w-72"
-                  classNames={inputConfig}
-                  startContent={
-                    errors.email?.message ? (
-                      <Tooltip
-                        className="!bg-black !text-white"
-                        placement="top-start"
-                        offset={12}
-                        content={errors.email?.message || ''}
-                      >
-                        <div>
-                          <BsEnvelopeFill
-                            size={16}
-                            color={errors.email?.message ? 'red' : ''}
-                            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                          />
-                        </div>
-                      </Tooltip>
-                    ) : (
-                      <div>
-                        <BsEnvelopeFill
-                          size={16}
-                          color={errors.email?.message ? 'red' : ''}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      </div>
-                    )
-                  }
-                />
-              )}
-            /> */}
-
-            <Controller
-              control={control}
+            <AppHandledInput
               name="firstName"
+              inputProps={{
+                id: 'firstName'
+              }}
+              type="text"
+              control={control}
+              isInvalid={Boolean(errors.email?.message)}
+              errors={errors}
+              size="sm"
               rules={{
                 required: {
                   value: true,
-                  message: 'Ad xanası məcburidir'
+                  message: inputValidationText(dictionary.az.firstName)
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  type="text"
-                  placeholder="Adınızı daxil edin"
-                  variant="bordered"
-                  required
-                  value={value}
-                  size="sm"
-                  onChange={onChange}
-                  className="text-black  w-72"
-                  classNames={inputConfig}
-                  errorMessage={errors.firstName?.message || ''}
-                  startContent={
-                    <BsFillPersonFill
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
+              placeholder={inputPlaceholderText(dictionary.az.firstName)}
+              required
+              IconElement={() => (
+                <BsFillPersonFill
+                  size={16}
+                  color={errors.firstName?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                 />
               )}
             />
+            <AppHandledInput
+              name="firstName"
+              inputProps={{
+                id: 'firstName'
+              }}
+              type="text"
+              control={control}
+              isInvalid={Boolean(errors.email?.message)}
+              errors={errors}
+              size="sm"
+              rules={{
+                required: {
+                  value: true,
+                  message: inputValidationText(dictionary.az.firstName)
+                }
+              }}
+              placeholder={inputPlaceholderText(dictionary.az.firstName)}
+              required
+              IconElement={() => (
+                <BsFillPersonFill
+                  size={16}
+                  color={errors.firstName?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
+            />
+
             <Controller
               control={control}
               name="lastName"
