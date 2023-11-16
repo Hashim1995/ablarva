@@ -49,17 +49,6 @@ input[type='date']::-webkit-calendar-picker-indicator {
   border-width: thin;
 }
 
-// input[type='date']::placeholder {
-//   color: red;
-// }
-
-// input[type='date']:required:invalid::-webkit-datetime-edit {
-//   color: transparent;
-// }
-// input[type='date']:focus::-webkit-datetime-edit {
-//   color: black !important;
-// }
-
 input[type='date']::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);
   opacity: 1;
