@@ -18,6 +18,7 @@ interface IHandledInput {
   errors?: any;
   type?: string;
   inputProps?: InputProps;
+  onChangeApp?: any;
   className?: string;
   IconElement?: any;
   size?: 'sm' | 'md' | 'lg';
@@ -35,6 +36,7 @@ function AppHandledInput({
   isInvalid = false,
   className = '',
   type = 'text',
+  onChangeApp,
   size,
   IconElement
 }: IHandledInput) {
@@ -50,7 +52,10 @@ function AppHandledInput({
           variant={variant}
           required={required}
           onBlur={onBlur}
-          onChange={onChange}
+          onChange={e => {
+            onChange(e);
+            onChangeApp && onChangeApp(e);
+          }}
           isInvalid={isInvalid}
           value={value}
           className={className}
