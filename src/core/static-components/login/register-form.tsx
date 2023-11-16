@@ -40,6 +40,8 @@ import { inputConfig } from '@/configs/global-configs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
+import AppHandledSelect from '@/components/forms/select/handled-select';
+import { generateOptionListPerNumber } from '@/utils/functions/functions';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -325,8 +327,15 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 </Datepicker>
               )}
             />
+            <AppHandledSelect
+              name=""
+              control={control}
+              placeholder="Cins seçin"
+              variant="bordered"
+              className=" h-8"
+            />
 
-            <Select
+            {/* <Select
               classNames={{
                 mainWrapper: 'h-8',
                 trigger: [
@@ -374,7 +383,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               <SelectItem key={2} value={2}>
                 Qadın
               </SelectItem>
-            </Select>
+            </Select> */}
             <Controller
               control={control}
               name="password"
