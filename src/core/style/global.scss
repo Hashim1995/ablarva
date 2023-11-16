@@ -87,3 +87,17 @@ input::placeholder {
   opacity: 0.5;
   font-style: italic;
 }
+
+.app-select {
+  span {
+    color: #292d32 !important;
+    opacity: 0.5;
+    font-style: italic;
+    font-weight: 300;
+  }
+  span:has(> div) {
+    opacity: 1;
+    font-style: normal;
+    font-weight: 300;
+  }
+}

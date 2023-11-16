@@ -28,7 +28,7 @@ import {
   BsRobot,
   BsCalendarWeekFill,
   BsEnvelopeFill,
-  BsGenderAmbiguous,
+  BsFillPersonLinesFill,
   BsFillKeyFill,
   BsFillPersonFill,
   BsEyeSlash
@@ -80,7 +80,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     clearBtnText: 'Təmizlə',
     // maxDate: new Date('2023-01-01'),
     theme: {
-      background: 'border-1 border-black',
+      background: 'border-1 dark:bg-white border-black',
       todayBtn: '!bg-white !text-black',
       clearBtn: '!bg-white !text-black',
       icons: '',
@@ -290,7 +290,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: 'Soyad xanası məcburidir'
+                  message: 'Doğum tarixi xanası məcburidir'
                 }
               }}
               render={({ field: { onChange, value } }) => (
@@ -306,7 +306,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   <div className="...">
                     <Input
                       type="text"
-                      placeholder="doğum tarixinizi daxil edin"
+                      placeholder="Doğum tarixinizi daxil edin"
                       variant="bordered"
                       readOnly
                       onFocus={() => setShow(true)}
@@ -337,7 +337,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
             {/* <Select
               classNames={{
-                mainWrapper: 'h-8',
+                mainWrapper: 'h-8 data-[open=true]:border-red-300',
                 trigger: [
                   'relative',
                   'w-full',
@@ -348,6 +348,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   'shadow-sm',
                   'min-h-unit-8',
                   'flex-col',
+                  'data-[open=true]:border-gray-400',
+                  'data-[focus=true]:border-gray-400',
                   'items-start',
                   'justify-center',
                   'gap-0',
@@ -356,22 +358,17 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   'py-1',
                   'rounded-md',
                   ' h-8',
-                  'data-[hover=true]:border-gray-400',
-                  'group-data-[focus=true]:border-gray-400',
-                  'transition-background',
                   '!duration-150 ',
                   'transition-colors',
-                  'motion-reduce:transition-none ',
-                  'hover:border-red-400',
-                  'focus:border-red-400'
+                  'motion-reduce:transition-none '
                 ]
               }}
               placeholder="Cins seçin"
               variant="bordered"
               // label="Cins seçin"
-              className=" h-8"
+              className=" h-8 text-black app-select"
               startContent={
-                <BsGenderAmbiguous
+                <BsFillPersonLinesFill
                   className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                   size={16}
                 />
@@ -441,85 +438,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                       onClick={() => setShowPassword(z => !z)}
                     >
                       {showPassword ? (
-                        <BsEye
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      ) : (
-                        <BsEyeSlash
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      )}
-                    </button>
-                  }
-                  type={showPassword ? 'text' : 'password'}
-                  startContent={
-                    <BsFillKeyFill
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
-                />
-              )}
-            />
-            <Controller
-              control={control}
-              name="confirmPassword"
-              rules={{
-                required: {
-                  value: true,
-                  message: inputValidationText('Yeni Şifrə')
-                },
-                minLength: {
-                  value: 8,
-                  message: 'Şifrə ən az 8 xarakter olmalıdı'
-                },
-                validate: {
-                  RequireDigit: value =>
-                    /[^0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
-                  RequireLowercase: value =>
-                    /[a-z]/.test(value) ||
-                    'Şifrədə ən az 1 kiçik hərf olmalıdır',
-                  RequireUppercase: value =>
-                    /[A-Z]/.test(value) ||
-                    'Şifrədə ən az 1 böyük hərf olmalıdır  '
-                }
-              }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  // label="Password"
-                  variant="bordered"
-                  required
-                  errorMessage={errors.password?.message || ''}
-                  value={value}
-                  size="sm"
-                  onChange={e => {
-                    onChange(e);
-                    if (watch('password') !== watch('confirmPassword')) {
-                      setError('password', {
-                        message:
-                          'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
-                      });
-                      setError('confirmPassword', {
-                        message:
-                          'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
-                      });
-                    } else {
-                      clearErrors('password');
-                      clearErrors('confirmPassword');
-                    }
-                  }}
-                  className="text-black w-72"
-                  classNames={inputConfig}
-                  placeholder="Şifrənizi daxil edin"
-                  endContent={
-                    <button
-                      className="focus:outline-none"
-                      type="button"
-                      onClick={() => setShowPasswordConfirm(z => !z)}
-                    >
-                      {showPasswordConfirm ? (
                         <BsEye
                           size={16}
                           className="text-2xl text-default-400 pointer-events-none"

@@ -58,7 +58,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
       </div>
 
       <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
-        <h3 className="leading-none text-2xl font-semibold text-gray-700">
+        <h3 className="leading-none text-3xl font-semibold text-gray-700">
           Daxil ol
         </h3>
         <form

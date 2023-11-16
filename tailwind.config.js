@@ -11,6 +11,14 @@ export default {
 
   darkMode: 'class',
   theme: {
+    fontSize: {
+      xs: '8px',
+      sm: '12px',
+      base: '14px',
+      xl: '16px',
+      '2xl': '18px',
+      '3xl': '20px'
+    },
     extend: {
       // backgroundImage: {
       //   'login-pattern': "url('/src/assets/bgai.png')",
@@ -22,6 +30,7 @@ export default {
     nextui({
       addCommonColors: true,
       defaultTheme: 'light',
+
       themes: {
         light: {
           colors: {

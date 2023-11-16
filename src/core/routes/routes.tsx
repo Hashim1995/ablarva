@@ -28,7 +28,14 @@ const routes = [
         element: (
           <Suspense fallback={<div>fallback</div>}>
             {' '}
-            <h1>chat</h1>
+            <p className="text-xs">Lorem Ipsum xs</p>
+            <p className="text-sm">Lorem Ipsum sm</p>
+            <p className="text-md">Lorem Ipsum md</p>
+            <p className="text-xl">Lorem Ipsum xl</p>
+            <p className="text-2xl">Lorem Ipsum 2xl</p>
+            <p className="text-3xl">Lorem Ipsum 3xl</p>
+            <p className="text-4xl">Lorem Ipsum 4xl</p>
+            <p className="text-5xl">Lorem Ipsum 5xl</p>
           </Suspense>
         )
       },
