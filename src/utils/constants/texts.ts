@@ -5,7 +5,7 @@ export const inputPlaceholderText = (t?: string): string =>
   t ? `${t} daxil edin` : dictionary.en.enter;
 
 export const selectPlaceholderText = (t?: string): string =>
-  t ? `Please select from ${t} field` : dictionary.en.select;
+  t ? `${t} seçin` : dictionary.en.select;
 
 // export const yesTxt: string = dictionary.en.yesTxt;
 // export const searchTxt: string = dictionary.en.searchTxt;

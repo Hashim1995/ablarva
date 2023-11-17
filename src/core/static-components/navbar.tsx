@@ -28,6 +28,7 @@ import {
   BsRobot
 } from 'react-icons/bs';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { dictionary } from '@/utils/constants/dictionary';
 
 export default function Navbar() {
   const menuItems = [
@@ -82,7 +83,7 @@ export default function Navbar() {
             }}
             startContent={<BsFillChatLeftDotsFill size={17} />}
           >
-            Söhbət
+            {dictionary.az.chat}
           </Button>
 
           <Button
@@ -96,7 +97,7 @@ export default function Navbar() {
             }}
             startContent={<BsFillFilterSquareFill size={17} />}
           >
-            Tariflər
+            {dictionary.az.tariffs}
           </Button>
 
           <Button
@@ -110,7 +111,7 @@ export default function Navbar() {
             }}
             startContent={<BsFillGearFill size={17} />}
           >
-            Tənzimləmə
+            {dictionary.az.settings}
           </Button>
 
           <Button
@@ -124,7 +125,7 @@ export default function Navbar() {
             }}
             startContent={<BsClockFill size={17} />}
           >
-            Tariçə
+            {dictionary.az.history}
           </Button>
         </ButtonGroup>
       </NavbarContent>

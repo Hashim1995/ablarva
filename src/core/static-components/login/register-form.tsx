@@ -40,9 +40,13 @@ import { IOptions } from 'tailwind-datepicker-react/types/Options';
 import { inputConfig } from '@/configs/global-configs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
-import { inputPlaceholderText } from '@/utils/constants/texts';
+import {
+  inputPlaceholderText,
+  selectPlaceholderText
+} from '@/utils/constants/texts';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { generateOptionListPerNumber } from '@/utils/functions/functions';
+import { genderOptions } from '@/utils/constants/options';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -132,7 +136,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
       <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
         <h3 className="leading-none text-2xl font-semibold text-gray-700">
-          Bizə qoşul
+          {dictionary.az.joinUs}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -157,7 +161,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Düzgün olmayan email adresi'
+                  message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
               placeholder={inputPlaceholderText(dictionary.az.email)}
@@ -231,7 +235,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: 'Doğum tarixi xanası məcburidir'
+                  message: inputValidationText(dictionary.az.dateOfBirth)
                 }
               }}
               render={({ field: { onChange, value } }) => (
@@ -247,7 +251,9 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   <div className="...">
                     <Input
                       type="text"
-                      placeholder="Doğum tarixinizi daxil edin"
+                      placeholder={inputPlaceholderText(
+                        dictionary.az.dateOfBirth
+                      )}
                       variant="bordered"
                       readOnly
                       onFocus={() => setShow(true)}
@@ -269,11 +275,20 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
             <AppHandledSelect
-              name=""
+              name="gender"
               control={control}
-              placeholder="Cins seçin"
+              placeholder={selectPlaceholderText(dictionary.az.gender)}
               variant="bordered"
-              className=" h-8"
+              className="h-8"
+              required
+              rules={{
+                required: {
+                  value: true,
+                  message: inputValidationText(dictionary.az.gender)
+                }
+              }}
+              options={genderOptions}
+              errors={errors}
             />
 
             <AppHandledInput
@@ -285,10 +300,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onChangeApp={() => {
                 if (watch('password') !== watch('confirmPassword')) {
                   setError('password', {
-                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                    message: `${dictionary.az.confirmPasswordMessage}`
                   });
                   setError('confirmPassword', {
-                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                    message: `${dictionary.az.confirmPasswordMessage}`
                   });
                 } else {
                   clearErrors('password');
@@ -303,20 +318,18 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 },
                 minLength: {
                   value: 8,
-                  message: 'Şifrə uzunluğu azı 8 simvol olmalıdır'
+                  message: `${dictionary.az.minLength}`
                 },
                 validate: {
                   RequireDigit: value =>
-                    /[0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
+                    /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
                   RequireLowercase: value =>
-                    /[a-z]/.test(value) ||
-                    'Şifrədə ən az 1 kiçik hərf olmalıdır',
+                    /[a-z]/.test(value) || `${dictionary.az.minSmallLetter}`,
                   RequireUppercase: value =>
-                    /[A-Z]/.test(value) ||
-                    'Şifrədə ən az 1 böyük hərf olmalıdır  ',
+                    /[A-Z]/.test(value) || `${dictionary.az.minBigLetter}`,
                   RequireSpecialCharacter: value =>
                     /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
-                    'Şifrədə ən az 1 xüsusi simvol olmalıdır'
+                    `${dictionary.az.minCharacter}`
                 }
               }}
               placeholder={inputPlaceholderText(dictionary.az.password)}
@@ -362,10 +375,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onChangeApp={() => {
                 if (watch('password') !== watch('confirmPassword')) {
                   setError('password', {
-                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                    message: `${dictionary.az.confirmPasswordMessage}`
                   });
                   setError('confirmPassword', {
-                    message: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı'
+                    message: `${dictionary.az.confirmPasswordMessage}`
                   });
                 } else {
                   clearErrors('password');
@@ -380,20 +393,18 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 },
                 minLength: {
                   value: 8,
-                  message: 'Şifrə uzunluğu azı 8 simvol olmalıdır'
+                  message: `${dictionary.az.minLength}`
                 },
                 validate: {
                   RequireDigit: value =>
-                    /[0-9]/.test(value) || 'Şifrəda ən azı 1 rəqəm olmalıdır ',
+                    /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
                   RequireLowercase: value =>
-                    /[a-z]/.test(value) ||
-                    'Şifrədə ən az 1 kiçik hərf olmalıdır',
+                    /[a-z]/.test(value) || `${dictionary.az.minSmallLetter}`,
                   RequireUppercase: value =>
-                    /[A-Z]/.test(value) ||
-                    'Şifrədə ən az 1 böyük hərf olmalıdır  ',
+                    /[A-Z]/.test(value) || `${dictionary.az.minBigLetter}`,
                   RequireSpecialCharacter: value =>
                     /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
-                    'Şifrədə ən az 1 xüsusi simvol olmalıdır'
+                    `${dictionary.az.minCharacter}`
                 }
               }}
               placeholder={inputPlaceholderText(dictionary.az.confirmPassword)}
@@ -437,7 +448,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             className="w-full  text-white border"
             type="submit"
           >
-            Qeydiyyat
+            {dictionary.az.register}
           </Button>
         </form>
         <div className="flex flex-col space-y-5">
@@ -448,13 +459,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onClick={handleFlip}
               className="font-normal text-black  text-sm"
             >
-              və ya{' '}
+              {dictionary.az.or}{' '}
               <span
-                className=" text-blue-500   cursor-pointer"
+                className=" text-blue-500 cursor-pointer"
                 aria-hidden
                 onClick={handleFlip}
               >
-                Daxil ol
+                {dictionary.az.login}
               </span>
             </span>
             <span className="h-px bg-gray-400 w-10" />

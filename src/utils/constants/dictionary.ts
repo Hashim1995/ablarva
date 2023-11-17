@@ -180,7 +180,22 @@ export const dictionary = {
     forInfo: 'Məlumat üçün',
     createdBy: 'Tərtib edən şəxs',
     confirmationSaveDraftMessage:
-      'Bu sənədi qaralama kimi saxlamaq istəyirsinizmi?'
+      'Bu sənədi qaralama kimi saxlamaq istəyirsinizmi?',
+    register: 'Qeydiyyatdan keç',
+    or: 'və ya',
+    joinUs: 'Bizə qoşul',
+    dateOfBirth: 'Doğum tarixi',
+    regexFormatValidatorText: 'xanasını düzgün formatda daxil edin.',
+    confirmPasswordMessage: 'Yeni şifrə və yeni şifrənin təkrarı eyni olmalıdı',
+    minLength: 'Minimum 8 simvol',
+    minNumber: 'Minimum 1 rəqəm',
+    minSmallLetter: 'Minimum 1 kiçik hərf',
+    minBigLetter: 'Minimum 1 böyük hərf',
+    minCharacter: 'Minimum 1 simvol',
+    gender: 'Cinsiyyəti',
+    chat: 'Söhbət',
+    tariffs: 'Tariflər',
+    history: 'Tariçə'
   },
   en: {
     personalCabinet: 'Personal Cabinet',
@@ -359,6 +374,22 @@ export const dictionary = {
     forInfo: 'For Information',
     createdBy: 'Created by',
     confirmationSaveDraftMessage:
-      'Would you like to save this document as a draft?'
+      'Would you like to save this document as a draft?',
+    register: 'Register',
+    or: 'or',
+    joinUs: 'Join us',
+    dateOfBirth: 'Date of birth',
+    regexFormatValidatorText: 'input must be entered correctly',
+    confirmPasswordMessage:
+      'The new password and the repetition of the new password should be the same',
+    minLength: 'Minimum 8 characters',
+    minNumber: 'Minimum 1 digit',
+    minSmallLetter: 'Minimum 1 lowercase letter',
+    minBigLetter: 'Minimum 1 uppercase letter',
+    minCharacter: 'Minimum 1 character',
+    gender: 'Gender',
+    chat: 'Chat',
+    tariffs: 'Tariffs',
+    history: 'History'
   }
 };
