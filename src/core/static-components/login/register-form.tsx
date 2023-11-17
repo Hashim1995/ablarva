@@ -36,7 +36,6 @@ import {
 } from 'react-icons/bs';
 import { useLocalStorage } from 'usehooks-ts';
 import Datepicker from 'tailwind-datepicker-react';
-import { IOptions } from 'tailwind-datepicker-react/types/Options';
 import { inputConfig } from '@/configs/global-configs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -47,6 +46,7 @@ import {
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { generateOptionListPerNumber } from '@/utils/functions/functions';
 import { genderOptions } from '@/utils/constants/options';
+import AppHandledDate from '@/components/forms/date/handled-date';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -67,7 +67,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const [show, setShow] = useState<boolean>(false);
 
   const onSubmit = async (data: IUserRegister) => {
     try {
@@ -78,38 +77,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     }
   };
 
-  const options: IOptions = {
-    autoHide: true,
-    todayBtn: false,
-    clearBtn: true,
-    clearBtnText: 'Təmizlə',
-    // maxDate: new Date('2023-01-01'),
-    theme: {
-      background: 'border-1 dark:bg-white border-black',
-      todayBtn: '!bg-white !text-black',
-      clearBtn: '!bg-white !text-black',
-      icons: '',
-      text: '!text-black',
-      disabledText: 'bg-red',
-      input: '',
-      inputIcon: '',
-      selected: '!bg-black !text-white'
-    },
-    datepickerClassNames: 'top-12',
-    defaultDate: new Date('2022-01-01'),
-    language: 'en',
-    // disabledDates: [],
-    weekDays: ['Be', 'Ça', 'Ç', 'Ca', 'C', 'Ş', 'B'],
-    inputNameProp: 'date',
-    inputIdProp: 'date',
-    inputPlaceholderProp: 'Select Date',
-    inputDateFormatProp: {
-      formatMatcher: 'basic',
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }
-  };
   return (
     <>
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
@@ -229,7 +196,34 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            <Controller
+            <AppHandledDate
+              name="dateOfBirth"
+              inputProps={{
+                id: 'dateOfBirth'
+              }}
+              control={control}
+              className="text-black w-72 relative"
+              isInvalid={Boolean(errors.dateOfBirth?.message)}
+              errors={errors}
+              size="sm"
+              rules={{
+                required: {
+                  value: true,
+                  message: inputValidationText(dictionary.az.dateOfBirth)
+                }
+              }}
+              placeholder={inputPlaceholderText(dictionary.az.dateOfBirth)}
+              required
+              IconElement={() => (
+                <BsCalendarWeekFill
+                  size={16}
+                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
+            />
+
+            {/* <Controller
               control={control}
               name="dateOfBirth"
               rules={{
@@ -273,7 +267,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   </div>
                 </Datepicker>
               )}
-            />
+            /> */}
             <AppHandledSelect
               name="gender"
               control={control}
