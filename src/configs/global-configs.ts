@@ -47,8 +47,7 @@ const inputConfig = {
     '!duration-150 ',
     'transition-colors',
     '',
-    'motion-reduce:transition-none ',
-
+    'motion-reduce:transition-none '
   ],
   innerWrapper: 'h-fit  text-xs',
   input: ' font-light '

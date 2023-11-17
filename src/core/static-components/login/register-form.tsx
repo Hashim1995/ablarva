@@ -5,7 +5,8 @@
 import { IUserRegister } from '@/models/user';
 import {
   AuthService,
-  ILoginResponse
+  ILoginResponse,
+  IRegisterResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -18,7 +19,8 @@ import {
   RadioGroup,
   Select,
   SelectItem,
-  Tooltip
+  Tooltip,
+  useNavbar
 } from '@nextui-org/react';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -44,9 +46,13 @@ import {
   selectPlaceholderText
 } from '@/utils/constants/texts';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { generateOptionListPerNumber } from '@/utils/functions/functions';
+import {
+  convertDateFormat,
+  generateOptionListPerNumber
+} from '@/utils/functions/functions';
 import { genderOptions } from '@/utils/constants/options';
 import AppHandledDate from '@/components/forms/date/handled-date';
+import { useNavigate } from 'react-router-dom';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -67,11 +73,26 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data: IUserRegister) => {
+    console.log(convertDateFormat(String(data.dateOfBirth)), 'xaliq quluzade');
+
+    const payload: IUserRegister = {
+      ...data,
+      dateOfBirth: convertDateFormat(String(data.dateOfBirth)),
+      gender: Number(data.gender)
+    };
+
     try {
-      const res: ILoginResponse = await AuthService.getInstance().login(data);
-      setUserToken(res.data.accessToken);
+      const res: IRegisterResponse = await AuthService.getInstance().register(
+        payload
+      );
+      if (res.isSuccess) {
+        navigate('/login');
+      }
+
+      // setUserToken(res.data.accessToken);
     } catch (err) {
       console.log(err);
     }
@@ -401,7 +422,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full  text-white border"
+            className="w-full bg-black text-white border"
             type="submit"
           >
             {dictionary.az.register}

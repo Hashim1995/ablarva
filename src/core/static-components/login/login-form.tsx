@@ -156,7 +156,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full  text-white border"
+            className="w-full bg-black  text-white border"
             type="submit"
           >
             {dictionary.az.login}

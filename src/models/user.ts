@@ -46,7 +46,7 @@ export interface IUserRegister {
   lastName: string;
   password: string;
   confirmPassword: string;
-  gender: string;
+  gender: string | number;
   dateOfBirth: string | Date;
 }
 
