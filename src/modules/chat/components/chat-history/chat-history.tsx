@@ -60,7 +60,7 @@ function ChatHistory() {
           <BsFillFilterCircleFill size={20} color="#292D32" />
         </Button>
       </div>
-      <div className="bg-white rounded-lg shadow p-3 max-w-sm overflow-y-scroll">
+      <div className="bg-white rounded-lg shadow p-3 h-3/4 max-w-sm overflow-y-scroll">
         {messageHistory.map(day => (
           <div key={day.date} className="mb-4">
             <div className="text-black text-xs font-bold-200  mb-2">
