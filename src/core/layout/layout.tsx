@@ -10,8 +10,8 @@ function LayoutPage() {
       <div>
         <Navbar />
 
-        <div style={{ overflow: 'initial' }}>
-          <div style={{ minHeight: '80vh' }}>
+        <div style={{}}>
+          <div style={{ minHeight: '100vh' }}>
             <Outlet />
           </div>
         </div>
