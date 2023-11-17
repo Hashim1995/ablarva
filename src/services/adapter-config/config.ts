@@ -28,7 +28,7 @@ axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = JSON.parse(localStorage.getItem('userToken') || '{}');
   // Replace with your token retrieval logic
   if (token) {
-    config.headers.AuthPerson = `${token}`;
+    config.headers.Authorization = `Bearer ${token.token}`;
   }
   return config;
 });

@@ -4,51 +4,13 @@ import type { PayloadAction } from '@reduxjs/toolkit';
 
 const initialState = {
   user: {
-    Id: null,
-    Name: '',
-    Surname: '',
-    FathersName: '',
-    FinCode: '',
-    PhoneNumber: '',
-    Email: '',
-    CreatedDate: null,
-    Status: '',
-    Profession: '',
-    PermissionId: '',
-    Permission: '',
-    StatusId: null,
-    LegalEntityId: null,
-    LegalEntity: '',
-    IsFounder: null,
-    documentType: '',
-    documentId: null,
-    acceptor: '',
-    acceptorVoen: null,
-    getLegalEntityDto: {
-      Id: null,
-      Name: '',
-      Voen: '',
-      Email: '',
-      PhoneNumber: '',
-      StatusId: null,
-      ActivityField: '',
-      Address: ''
-    },
-    getFile: {
-      id: null,
-      mimeType: '',
-      uploadDate: '',
-      size: null,
-      name: '',
-      fileUrl: '',
-      fileNameOnDisk: ''
-    },
-    PermissionDto: {
-      isFounder: false,
-      documentCompilation: false,
-      sendingDocument: false,
-      editingUser: false
-    }
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    confirmPassword: '',
+    gender: 0,
+    dateOfBirth: ''
   },
 
   entities: []
@@ -61,13 +23,11 @@ export const userSlice = createSlice({
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
     },
-    setEntities: (state, action: PayloadAction<any>) => {
-      state.entities = action.payload;
-    }
+
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, setEntities } = userSlice.actions;
+export const { setUser, } = userSlice.actions;
 
 export default userSlice.reducer;

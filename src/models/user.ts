@@ -60,3 +60,6 @@ export interface IUserData {
   gender: number;
   verified: boolean;
 }
+
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {
+}

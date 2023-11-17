@@ -1,8 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
-import { ILogin } from '@/models/user';
+import { ILogin, IUserLoggedData } from '@/models/user';
+import { setUser } from '@/redux/auth/auth-slice';
 import {
   AuthService,
+  IGetMeResponse,
   ILoginResponse
 } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -12,6 +14,7 @@ import { Button } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsRobot, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
@@ -32,11 +35,19 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   const [showPassword, setShowPassword] = useState(false);
 
   const navigate = useNavigate();
+  const disptach = useDispatch();
 
   const onSubmit = async (data: ILogin) => {
     try {
       const res: ILoginResponse = await AuthService.getInstance().login(data);
-      setUserToken(res.data.accessToken);
+
+      if (!res) return;
+
+      if (!userToken) setUserToken({ token: res.data.accessToken });
+
+      const resGetMe: IGetMeResponse = await AuthService.getInstance().getMe();
+      const userSlicePayload: IUserLoggedData = resGetMe.data;
+      disptach(setUser(userSlicePayload));
       navigate('/chat');
     } catch (err) {
       console.log(err);

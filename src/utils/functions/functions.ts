@@ -143,8 +143,6 @@ export {
   toCapitalize
 };
 
-
-
 export function convertDateFormat(dateStr: string): string {
   // Split the date by the '.' delimiter
   const parts = dateStr.split('.');
