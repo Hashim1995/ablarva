@@ -14,7 +14,11 @@ import {
   NavbarMenu,
   NavbarMenuItem,
   ButtonGroup,
-  User
+  User,
+  DropdownTrigger,
+  Dropdown,
+  DropdownMenu,
+  DropdownItem
 } from '@nextui-org/react';
 
 import { useDarkMode } from 'usehooks-ts';
@@ -139,7 +143,7 @@ export default function Navbar() {
             <button onClick={toggle}>Light Mode / Dark Mode</button>
           </div>
         </NavbarItem> */}
-        <NavbarItem className="bg-white dark:border-white dark:border-1 dark:bg-black rounded-lg shadow-md p-1 px-3 md:flex gap-5 items-center justify-between	">
+        <NavbarItem className="bg-white  rounded-lg shadow-md p-1 px-3 md:flex gap-5 items-center justify-between	">
           <User
             name="Jane Doe"
             description="Product Designer"
@@ -185,14 +189,24 @@ export default function Navbar() {
               </svg>
             )}
           </div> */}
-
-          <BsArrowRightCircle
-            onClick={() => {
-              localStorage.removeItem('userToken');
-              navigate('/login');
-            }}
-            size={20}
-          />
+          <Dropdown>
+            <DropdownTrigger>
+              <div>
+                <BsArrowRightCircle className="cursor-pointer" size={20} />
+              </div>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Static Actions">
+              <DropdownItem
+                onClick={() => {
+                  localStorage.removeItem('userToken');
+                  navigate('/login');
+                }}
+                key="logout"
+              >
+                {dictionary.az.logOut}
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
       </NavbarContent>
 
