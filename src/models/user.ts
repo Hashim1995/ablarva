@@ -61,5 +61,4 @@ export interface IUserData {
   verified: boolean;
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {
-}
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}

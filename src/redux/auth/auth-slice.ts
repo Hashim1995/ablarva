@@ -22,12 +22,11 @@ export const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
-    },
-
+    }
   }
 });
 
 // Action creators are generated for each case reducer function
-export const { setUser, } = userSlice.actions;
+export const { setUser } = userSlice.actions;
 
 export default userSlice.reducer;

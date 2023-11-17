@@ -1,7 +1,12 @@
 /* eslint-disable no-empty-function */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
-import { ILogin, IUserData, IUserLoggedData, IUserRegister } from '@/models/user';
+import {
+  ILogin,
+  IUserData,
+  IUserLoggedData,
+  IUserRegister
+} from '@/models/user';
 import { IGlobalResponse } from '@/models/common';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
@@ -19,7 +24,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): AuthService {
     if (!this.instance) {
@@ -53,6 +58,4 @@ export class AuthService {
     const res = await HttpUtil.post('api/client/user/Register', body, onError);
     return res;
   }
-
-
 }
