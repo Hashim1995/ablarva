@@ -51,19 +51,24 @@ function ChatHistory() {
   ];
 
   return (
-    <Card className="  shadow max-w-sm h-full ">
+    <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
         <h2 className="text-xl text-white font-semibold">
           Əvvəlki <br /> Söhbətlər
         </h2>
-        <Button size="sm" isIconOnly className="bg-white" aria-label="Filter">
+        <Button
+          size="sm"
+          isIconOnly
+          className="bg-white rounded-full"
+          aria-label="Filter"
+        >
           <BsFillFilterCircleFill size={20} color="#292D32" />
         </Button>
       </div>
-      <div className="bg-white rounded-lg shadow p-3 h-3/4 max-w-sm overflow-y-scroll">
+      <div className="bg-white rounded-lg shadow py-3 px-6 overflow-y-scroll">
         {messageHistory.map(day => (
           <div key={day.date} className="mb-4">
-            <div className="text-black text-xs font-bold-200  mb-2">
+            <div className="text-black text-sm font-medium	  mb-2">
               {day.date}
             </div>
             {day.conversations.map(conv => (
@@ -78,7 +83,7 @@ function ChatHistory() {
                 <Button
                   size="sm"
                   isIconOnly
-                  className="bg-transparent !w-4 !h-6 !unit-lg"
+                  className="bg-white rounded-full !w-6 !h-8 !unit-lg"
                   aria-label="Remove chat"
                 >
                   <BsTrash size={16} className=" text-gray-500" />
