@@ -37,7 +37,7 @@ const routes = [
         element: (
           <Suspense fallback={<div>fallback</div>}>
             {' '}
-            <h1>tenzimleme</h1>
+            <h1>lorem*200</h1>
           </Suspense>
         )
       },

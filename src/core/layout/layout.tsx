@@ -6,11 +6,11 @@ import Navbar from '../static-components/navbar';
 
 function LayoutPage() {
   return (
-    <div className=" " style={{ minHeight: '100vh' }}>
+    <div style={{ minHeight: '100vh' }}>
       <div>
         <Navbar />
 
-        <div style={{}}>
+        <div style={{ overflow: 'initial' }}>
           <div style={{ minHeight: '100vh' }}>
             <Outlet />
           </div>
