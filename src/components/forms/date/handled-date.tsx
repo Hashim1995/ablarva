@@ -1,10 +1,11 @@
 import { inputConfig } from '@/configs/global-configs';
 import { Input, InputProps, Tooltip } from '@nextui-org/react';
 import dayjs from 'dayjs';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 import DatePicker from 'tailwind-datepicker-react';
 import { IOptions } from 'tailwind-datepicker-react/types/Options';
+import { useOnClickOutside } from 'usehooks-ts';
 
 const options: IOptions = {
   autoHide: true,
@@ -77,8 +78,16 @@ function AppHandledDate({
 }: IHandledDate) {
   const [show, setShow] = useState<boolean>(false);
 
+  const dateRef = useRef(null);
+
+  const handleOutSideClick = () => {
+    setShow(false);
+  };
+
+  useOnClickOutside(dateRef, handleOutSideClick);
+
   return (
-    <div className="relative">
+    <div className="relative" ref={dateRef}>
       <Controller
         control={control}
         name={name}

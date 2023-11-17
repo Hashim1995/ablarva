@@ -9,7 +9,7 @@ export default {
     './node_modules/tailwind-datepicker-react/dist/**/*.js' // <--- Add this line
   ],
 
-  darkMode: 'class',
+  // darkMode: 'class',
   theme: {
     fontSize: {
       xs: '8px',
@@ -29,7 +29,7 @@ export default {
   plugins: [
     nextui({
       addCommonColors: true,
-      defaultTheme: 'dark',
+      defaultTheme: 'light',
 
       themes: {
         light: {

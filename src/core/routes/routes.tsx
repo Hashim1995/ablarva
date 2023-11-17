@@ -4,8 +4,6 @@ import { Navigate } from 'react-router-dom';
 // const LoginPage = React.lazy(() => import('@core/static-pages/login-page'));
 import LoginPage from '@core/static-pages/login-page';
 
-const HomePage = React.lazy(() => import('@/modules/home/pages/index'));
-
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 
 const routes = [
@@ -13,17 +11,10 @@ const routes = [
     path: '/',
     element: <LayoutPage />,
     children: [
-      { path: '/', element: <Navigate to="home" /> },
+      { path: '/', element: <Navigate to="chat" /> },
+
       {
-        path: 'home',
         index: true,
-        element: (
-          <Suspense fallback={<div>fallback</div>}>
-            <HomePage />{' '}
-          </Suspense>
-        )
-      },
-      {
         path: 'chat',
         element: (
           <Suspense fallback={<div>fallback</div>}>

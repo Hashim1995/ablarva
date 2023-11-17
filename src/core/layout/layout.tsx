@@ -6,7 +6,7 @@ import Navbar from '../static-components/navbar';
 
 function LayoutPage() {
   return (
-    <div className="bg-gray-300 dark:bg-black" style={{ minHeight: '100vh' }}>
+    <div className=" " style={{ minHeight: '100vh' }}>
       <div>
         <Navbar />
 

@@ -8,6 +8,7 @@ import { Button, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
 import { BsEye, BsRobot, BsEnvelope, BsKey, BsEyeSlash } from 'react-icons/bs';
+import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
 interface ILoginFormProps {
@@ -26,10 +27,13 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+
   const onSubmit = async (data: ILogin) => {
     try {
       const res: ILoginResponse = await AuthService.getInstance().login(data);
       setUserToken(res.data.accessToken);
+      navigate('/chat');
     } catch (err) {
       console.log(err);
     }

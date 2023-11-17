@@ -43,7 +43,7 @@ export default function Navbar() {
     'Help & Feedback',
     'Log Out'
   ];
-  const { toggle, isDarkMode } = useDarkMode();
+  // const { toggle, isDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
 
@@ -147,7 +147,7 @@ export default function Navbar() {
               src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
             }}
           />
-          <div
+          {/* <div
             role="checkbox"
             aria-checked={isDarkMode ? 'true' : 'false'}
             tabIndex={0}
@@ -184,9 +184,15 @@ export default function Navbar() {
                 />
               </svg>
             )}
-          </div>
+          </div> */}
 
-          <BsArrowRightCircle size={20} />
+          <BsArrowRightCircle
+            onClick={() => {
+              localStorage.removeItem('userToken');
+              navigate('/login');
+            }}
+            size={20}
+          />
         </NavbarItem>
       </NavbarContent>
 
