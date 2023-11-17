@@ -205,7 +205,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               className="text-black w-72 relative"
               isInvalid={Boolean(errors.dateOfBirth?.message)}
               errors={errors}
-              size="sm"
               rules={{
                 required: {
                   value: true,
@@ -223,57 +222,14 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            {/* <Controller
-              control={control}
-              name="dateOfBirth"
-              rules={{
-                required: {
-                  value: true,
-                  message: inputValidationText(dictionary.az.dateOfBirth)
-                }
-              }}
-              render={({ field: { onChange, value } }) => (
-                <Datepicker
-                  options={options}
-                  show={show}
-                  onChange={e => {
-                    onChange(dayjs(e).format('YYYY-MM-DD'));
-                    console.log(e);
-                  }}
-                  setShow={() => setShow(z => !z)}
-                >
-                  <div className="...">
-                    <Input
-                      type="text"
-                      placeholder={inputPlaceholderText(
-                        dictionary.az.dateOfBirth
-                      )}
-                      variant="bordered"
-                      readOnly
-                      onFocus={() => setShow(true)}
-                      required
-                      value={String(value || '')}
-                      size="sm"
-                      className="text-black  w-72"
-                      classNames={inputConfig}
-                      // errorMessage={errors.lastName?.message || ''}
-                      startContent={
-                        <BsCalendarWeekFill
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      }
-                    />
-                  </div>
-                </Datepicker>
-              )}
-            /> */}
             <AppHandledSelect
               name="gender"
+              isInvalid={Boolean(errors.gender?.message)}
               control={control}
               placeholder={selectPlaceholderText(dictionary.az.gender)}
               variant="bordered"
-              className="h-8"
+              className="h-8 app-select"
+              size="sm"
               required
               rules={{
                 required: {
@@ -283,6 +239,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               options={genderOptions}
               errors={errors}
+              IconElement={() => (
+                <BsCalendarWeekFill
+                  size={16}
+                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
             />
 
             <AppHandledInput
@@ -304,7 +267,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   clearErrors('confirmPassword');
                 }
               }}
-              size="sm"
               rules={{
                 required: {
                   value: true,
