@@ -62,11 +62,11 @@ const fileTypeOptions: selectOption[] = [
 const genderOptions: selectOption[] = [
   {
     value: '1',
-    label: dictionary.en.male
+    label: dictionary.az.male
   },
   {
     value: '2',
-    label: dictionary.en.female
+    label: dictionary.az.female
   }
 ];
 

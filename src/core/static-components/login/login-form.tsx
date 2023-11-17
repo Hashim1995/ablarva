@@ -3,6 +3,7 @@ import {
   AuthService,
   ILoginResponse
 } from '@/services/auth-services/auth-services';
+import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Input } from '@nextui-org/react';
 import { useState } from 'react';
 import { Controller, useForm } from 'react-hook-form';
@@ -59,7 +60,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
 
       <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
         <h3 className="leading-none text-3xl font-semibold text-gray-700">
-          Daxil ol
+          {dictionary.az.login}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -215,7 +216,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             className="w-full  text-white border"
             type="submit"
           >
-            Daxil ol
+            {dictionary.az.login}
           </Button>
         </form>
         <div className="flex flex-col space-y-5">
@@ -226,13 +227,13 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               onClick={handleFlip}
               className="font-normal text-black  text-sm"
             >
-              və ya{' '}
+              {dictionary.az.or}{' '}
               <span
                 className=" text-blue-500   cursor-pointer"
                 aria-hidden
                 onClick={handleFlip}
               >
-                Qeydiyyatdan keç
+                {dictionary.az.register}
               </span>
             </span>
             <span className="h-px bg-gray-400 w-10" />

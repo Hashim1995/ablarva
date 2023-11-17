@@ -19,6 +19,7 @@ interface IAppHandledSelect {
   className?: string;
   errors?: any;
   selectProps?: SelectProps;
+  options: { value: string | number; label: string }[];
 }
 
 function AppHandledSelect({
@@ -30,7 +31,8 @@ function AppHandledSelect({
   variant = 'bordered',
   required = false,
   className,
-  selectProps
+  selectProps,
+  options
 }: IAppHandledSelect) {
   return (
     <Controller
@@ -86,12 +88,11 @@ function AppHandledSelect({
           }
           {...selectProps}
         >
-          <SelectItem key={1} value={1}>
-            Kişi
-          </SelectItem>
-          <SelectItem key={2} value={2}>
-            Qadın
-          </SelectItem>
+          {options?.map(z => (
+            <SelectItem key={z.value} value={z.value}>
+              {z.label}
+            </SelectItem>
+          ))}
         </Select>
       )}
     />
