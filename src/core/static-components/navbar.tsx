@@ -56,6 +56,7 @@ export default function Navbar() {
       className="bg-transparent"
       maxWidth="full"
       height={'7rem'}
+      position="static"
       disableAnimation
     >
       <NavbarContent className="sm:hidden" justify="start">
@@ -164,7 +165,7 @@ export default function Navbar() {
           </Dropdown>
         </NavbarItem>
       </NavbarContent>
-
+      {/* 
       <NavbarMenu>
         {menuItems.map((item, index) => (
           <NavbarMenuItem key={`${item}-${index}`}>
@@ -183,7 +184,7 @@ export default function Navbar() {
             </Link>
           </NavbarMenuItem>
         ))}
-      </NavbarMenu>
+      </NavbarMenu> */}
     </NavbarNext>
   );
 }
