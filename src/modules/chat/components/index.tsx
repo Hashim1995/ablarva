@@ -10,7 +10,7 @@ function Chat() {
         <div className=" rounded-3xl lg:row-span-5 md:row-span-8">
           <LeftBar />
         </div>
-        <div className="bg-blue-500 rounded-3xl lg:col-span-8 lg:row-span-5 md:col-span-11 md:row-span-5">
+        <div className=" rounded-3xl lg:col-span-8 lg:row-span-5 md:col-span-11 md:row-span-5">
           <Messenger />
         </div>
         <div className=" rounded-3xl  lg:col-span-3  lg:row-span-3 lg:col-start-10 md:col-span-7 md:row-span-3 md:col-start-2 md:row-start-6">
