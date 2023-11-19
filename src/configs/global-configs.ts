@@ -53,9 +53,7 @@ const inputConfig = {
   input: ' font-light '
 };
 const textAreaConfig = {
-  base: [
-    'shadow-none',
-  ],
+  base: ['shadow-none'],
   inputWrapper: [
     'relative',
     'px-0 py-3',
