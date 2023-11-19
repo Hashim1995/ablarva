@@ -10,31 +10,18 @@ import OpenAI from 'openai';
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
 import Markdown from 'markdown-to-jsx';
-import { Button, Divider, Textarea } from '@nextui-org/react';
+import { Button, Card, Divider, Textarea } from '@nextui-org/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
-
-// function CodeBlock({ language, value }: any) {
-//   return (
-//     <SyntaxHighlighter style={dark} language={language}>
-//       {value}
-//     </SyntaxHighlighter>
-//   );
-// }
+import { IChatForm } from '@/modules/chat/types';
+import ChatForm from './chat-form';
 
 type IChat = {
   comment: string;
 };
 
-function Messenger() {
+function ChatInner() {
   const [bubble, setBubbleList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
-  const {
-    register,
-    handleSubmit,
-    reset,
-    watch,
-    formState: { errors }
-  } = useForm<IChat>();
 
   function Code({ className, children }: any) {
     const language = className?.replace('lang-', '');
@@ -72,11 +59,11 @@ function Messenger() {
     return chatCompletion;
   }
 
-  const onSubmit: SubmitHandler<IChat> = async data => {
-    reset();
+  const onSubmit: SubmitHandler<IChatForm> = async data => {
+    setBubbleList((old: any) => [...old, data.message]);
     setLoading(true);
     try {
-      const res = await main(data.comment);
+      const res = await main(data.message);
 
       setBubbleList((old: any) => [...old, res.choices[0].message.content]);
       setLoading(false);
@@ -86,12 +73,12 @@ function Messenger() {
   };
 
   return (
-    <div className="h-full  p-2">
-      <div className="messenger-box h-4/5 overflow-y-scroll">
+    <div className="h-full bg-white  px-4 pt-4  pb-18">
+      <div className="messenger-box mb-4 h-[70%] overflow-y-auto mb-auto">
         <div>
           {bubble?.map((item: any, i) => (
             <>
-              <div key={i} className="bubble bg-gray-500 my-3">
+              <div key={i} className="bubble bg-[#F0F1F3] rounded-lg p-2 my-3">
                 <div className="markdown-table-container">
                   <Markdown
                     options={{
@@ -270,31 +257,11 @@ function Messenger() {
         </div>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="sticky mt-2">
-        <div className="w-full mb-4 border bg-black rounded-lg">
-          <div className="px-4 py-2  rounded-t-lg ">
-            <label htmlFor="comment" className="sr-only">
-              Your comment
-            </label>
-            <Textarea
-              isRequired
-              id="comment"
-              labelPlacement="outside"
-              {...register('comment', { required: true })}
-              placeholder="Ask to aibot"
-              className="w-full"
-            />
-          </div>
-          <div className="flex items-center justify-between px-3 py-2 border-t dark:border-gray-600">
-            <Button type="submit" variant="bordered" className="text-white">
-              {' '}
-              Ask to AzBot
-            </Button>
-          </div>
-        </div>
-      </form>
+      <Card className="sticky bottom-0 my-2 rounded-xl">
+        <ChatForm onSubmit={onSubmit} />
+      </Card>
     </div>
   );
 }
 
-export default Messenger;
+export default ChatInner;
