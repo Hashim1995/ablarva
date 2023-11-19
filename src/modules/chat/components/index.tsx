@@ -1,6 +1,6 @@
 import ChatHistory from './chat-history/chat-history';
 import LeftBar from './leftbar/leftbar';
-import Messenger from './messenger/messenger';
+import Layout from './messenger/layout';
 import MyPlan from './my-plan/my-plan';
 
 function Chat() {
@@ -11,7 +11,7 @@ function Chat() {
           <LeftBar />
         </div>
         <div className=" rounded-3xl lg:col-span-8 lg:row-span-5 md:col-span-11 md:row-span-5">
-          <Messenger />
+          <Layout />
         </div>
         <div className=" rounded-3xl  lg:col-span-3  lg:row-span-3 lg:col-start-10 md:col-span-7 md:row-span-3 md:col-start-2 md:row-start-6">
           <ChatHistory />

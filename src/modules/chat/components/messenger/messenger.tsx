@@ -26,11 +26,12 @@ type IChat = {
 };
 
 function Messenger() {
-  const [pox, setPox] = useState<string[]>([]);
+  const [bubble, setBubbleList] = useState<string[]>([]);
   const [loading, setLoading] = useState(false);
   const {
     register,
     handleSubmit,
+    reset,
     watch,
     formState: { errors }
   } = useForm<IChat>();
@@ -72,11 +73,12 @@ function Messenger() {
   }
 
   const onSubmit: SubmitHandler<IChat> = async data => {
+    reset();
     setLoading(true);
     try {
       const res = await main(data.comment);
 
-      setPox((old: any) => [...old, res.choices[0].message.content]);
+      setBubbleList((old: any) => [...old, res.choices[0].message.content]);
       setLoading(false);
     } catch (err) {
       console.log(err);
@@ -84,12 +86,12 @@ function Messenger() {
   };
 
   return (
-    <div className="h-full ">
+    <div className="h-full  p-2">
       <div className="messenger-box h-4/5 overflow-y-scroll">
         <div>
-          {pox?.map((item: any, i) => (
+          {bubble?.map((item: any, i) => (
             <>
-              <div key={i} className="bubble bg-gray-500">
+              <div key={i} className="bubble bg-gray-500 my-3">
                 <div className="markdown-table-container">
                   <Markdown
                     options={{
