@@ -5,7 +5,8 @@
 import { IUserRegister } from '@/models/user';
 import {
   AuthService,
-  ILoginResponse
+  ILoginResponse,
+  IRegisterResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -18,7 +19,8 @@ import {
   RadioGroup,
   Select,
   SelectItem,
-  Tooltip
+  Tooltip,
+  useNavbar
 } from '@nextui-org/react';
 import { useState } from 'react';
 import dayjs from 'dayjs';
@@ -36,7 +38,6 @@ import {
 } from 'react-icons/bs';
 import { useLocalStorage } from 'usehooks-ts';
 import Datepicker from 'tailwind-datepicker-react';
-import { IOptions } from 'tailwind-datepicker-react/types/Options';
 import { inputConfig } from '@/configs/global-configs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -45,8 +46,13 @@ import {
   selectPlaceholderText
 } from '@/utils/constants/texts';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { generateOptionListPerNumber } from '@/utils/functions/functions';
+import {
+  convertDateFormat,
+  generateOptionListPerNumber
+} from '@/utils/functions/functions';
 import { genderOptions } from '@/utils/constants/options';
+import AppHandledDate from '@/components/forms/date/handled-date';
+import { useNavigate } from 'react-router-dom';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -67,49 +73,31 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const [show, setShow] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   const onSubmit = async (data: IUserRegister) => {
+    console.log(convertDateFormat(String(data.dateOfBirth)), 'xaliq quluzade');
+
+    const payload: IUserRegister = {
+      ...data,
+      dateOfBirth: convertDateFormat(String(data.dateOfBirth)),
+      gender: Number(data.gender)
+    };
+
     try {
-      const res: ILoginResponse = await AuthService.getInstance().login(data);
-      setUserToken(res.data.accessToken);
+      const res: IRegisterResponse = await AuthService.getInstance().register(
+        payload
+      );
+      if (res.isSuccess) {
+        navigate('/login');
+      }
+
+      // setUserToken(res.data.accessToken);
     } catch (err) {
       console.log(err);
     }
   };
 
-  const options: IOptions = {
-    autoHide: true,
-    todayBtn: false,
-    clearBtn: true,
-    clearBtnText: 'Təmizlə',
-    // maxDate: new Date('2023-01-01'),
-    theme: {
-      background: 'border-1 dark:bg-white border-black',
-      todayBtn: '!bg-white !text-black',
-      clearBtn: '!bg-white !text-black',
-      icons: '',
-      text: '!text-black',
-      disabledText: 'bg-red',
-      input: '',
-      inputIcon: '',
-      selected: '!bg-black !text-white'
-    },
-    datepickerClassNames: 'top-12',
-    defaultDate: new Date('2022-01-01'),
-    language: 'en',
-    // disabledDates: [],
-    weekDays: ['Be', 'Ça', 'Ç', 'Ca', 'C', 'Ş', 'B'],
-    inputNameProp: 'date',
-    inputIdProp: 'date',
-    inputPlaceholderProp: 'Select Date',
-    inputDateFormatProp: {
-      formatMatcher: 'basic',
-      day: 'numeric',
-      month: 'numeric',
-      year: 'numeric'
-    }
-  };
   return (
     <>
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
@@ -229,57 +217,40 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            <Controller
-              control={control}
+            <AppHandledDate
               name="dateOfBirth"
+              inputProps={{
+                id: 'dateOfBirth'
+              }}
+              control={control}
+              className="text-black w-72 relative"
+              isInvalid={Boolean(errors.dateOfBirth?.message)}
+              errors={errors}
               rules={{
                 required: {
                   value: true,
                   message: inputValidationText(dictionary.az.dateOfBirth)
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Datepicker
-                  options={options}
-                  show={show}
-                  onChange={e => {
-                    onChange(dayjs(e).format('YYYY-MM-DD'));
-                    console.log(e);
-                  }}
-                  setShow={() => setShow(z => !z)}
-                >
-                  <div className="...">
-                    <Input
-                      type="text"
-                      placeholder={inputPlaceholderText(
-                        dictionary.az.dateOfBirth
-                      )}
-                      variant="bordered"
-                      readOnly
-                      onFocus={() => setShow(true)}
-                      required
-                      value={String(value || '')}
-                      size="sm"
-                      className="text-black  w-72"
-                      classNames={inputConfig}
-                      // errorMessage={errors.lastName?.message || ''}
-                      startContent={
-                        <BsCalendarWeekFill
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      }
-                    />
-                  </div>
-                </Datepicker>
+              placeholder={inputPlaceholderText(dictionary.az.dateOfBirth)}
+              required
+              IconElement={() => (
+                <BsCalendarWeekFill
+                  size={16}
+                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
               )}
             />
+
             <AppHandledSelect
               name="gender"
+              isInvalid={Boolean(errors.gender?.message)}
               control={control}
               placeholder={selectPlaceholderText(dictionary.az.gender)}
               variant="bordered"
-              className="h-8"
+              className="h-8 app-select"
+              size="sm"
               required
               rules={{
                 required: {
@@ -289,6 +260,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               options={genderOptions}
               errors={errors}
+              IconElement={() => (
+                <BsCalendarWeekFill
+                  size={16}
+                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                />
+              )}
             />
 
             <AppHandledInput
@@ -310,7 +288,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   clearErrors('confirmPassword');
                 }
               }}
-              size="sm"
               rules={{
                 required: {
                   value: true,
@@ -445,7 +422,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full  text-white border"
+            className="w-full bg-black text-white border"
             type="submit"
           >
             {dictionary.az.register}

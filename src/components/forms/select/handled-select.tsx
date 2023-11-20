@@ -1,7 +1,6 @@
-import { Select, SelectItem, SelectProps } from '@nextui-org/react';
+import { Select, SelectItem, SelectProps, Tooltip } from '@nextui-org/react';
 import React from 'react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
-import { BsGenderAmbiguous } from 'react-icons/bs';
 
 interface IAppHandledSelect {
   name: string;
@@ -20,6 +19,8 @@ interface IAppHandledSelect {
   errors?: any;
   selectProps?: SelectProps;
   options: { value: string | number; label: string }[];
+  size?: 'sm' | 'md' | 'lg';
+  IconElement?: any;
 }
 
 function AppHandledSelect({
@@ -27,12 +28,16 @@ function AppHandledSelect({
   control,
   placeholder = 'Seçin',
   rules,
+  errors,
+  isInvalid,
   onChangeApp,
   variant = 'bordered',
   required = false,
   className,
+  IconElement,
   selectProps,
-  options
+  options,
+  size
 }: IAppHandledSelect) {
   return (
     <Controller
@@ -63,6 +68,9 @@ function AppHandledSelect({
               ' h-8',
               'data-[hover=true]:border-gray-400',
               'group-data-[focus=true]:border-gray-400',
+              'data-[active=true]:border-gray-400',
+              'border-[#292D32]',
+
               'transition-background',
               '!duration-150 ',
               'transition-colors',
@@ -73,19 +81,29 @@ function AppHandledSelect({
           }}
           variant={variant}
           required={required}
+          size={size}
+          isInvalid={isInvalid}
           onChange={e => {
             onChange(e);
             onChangeApp && onChangeApp(e);
           }}
           value={value}
           className={className}
-          placeholder={placeholder}
           startContent={
-            <BsGenderAmbiguous
-              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              size={16}
-            />
+            errors[name]?.message ? (
+              <Tooltip
+                className={'!bg-black !text-white'}
+                placement="top-start"
+                offset={12}
+                content={errors[name] ? errors[name].message : ''}
+              >
+                <div>{IconElement()}</div>
+              </Tooltip>
+            ) : (
+              <div>{IconElement()}</div>
+            )
           }
+          placeholder={placeholder}
           {...selectProps}
         >
           {options?.map(z => (

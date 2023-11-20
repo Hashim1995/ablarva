@@ -3,7 +3,7 @@
 @import 'tailwindcss/utilities';
 body {
   margin: 0;
-  min-height: 100vh;
+  overflow-y: auto;
 }
 * {
   font-family: 'Poppins', sans-serif;
@@ -88,5 +88,98 @@ input::placeholder {
     opacity: 1;
     font-style: normal;
     font-weight: 300;
+  }
+}
+
+@media (min-width: 1920px) {
+  .container {
+    max-width: 1920px;
+  }
+}
+.container-fluid {
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.recharts-legend-item-text {
+  color: #292d32 !important;
+}
+
+.recharts-default-legend {
+  text-align: left !important;
+}
+
+.markdown-table-container table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.markdown-table-container th,
+.markdown-table-container td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+.markdown-table-container th {
+  background-color: #f2f2f2;
+}
+
+.markdown-table-container {
+  pre {
+    border-radius: 1rem;
+  }
+}
+
+.loading05 {
+  perspective: 1000px;
+  span {
+    transform-origin: 50% 50% -25px;
+    transform-style: preserve-3d;
+    animation: loading05 1.6s infinite;
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  font-weight: 400;
+  text-align: center;
+  span {
+    display: inline-block;
+    margin: 0 -0.05em;
+  }
+}
+
+.loading03 {
+  font-size: 24px;
+  font-weight: 400;
+  text-align: center;
+  span {
+    margin: 0 -0.075em;
+    animation: loading03 0.7s infinite alternate;
+    @for $i from 1 through 6 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: #{$i * 0.1}s;
+      }
+    }
+  }
+}
+@keyframes loading03 {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(0.8);
   }
 }

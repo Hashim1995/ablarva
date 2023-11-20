@@ -1,3 +1,4 @@
+/* eslint-disable no-restricted-globals */
 /* eslint-disable no-else-return */
 /* eslint-disable no-plusplus */
 /* eslint-disable no-prototype-builtins */
@@ -141,3 +142,27 @@ export {
   formatDate,
   toCapitalize
 };
+
+export function convertDateFormat(dateStr: string): string {
+  // Split the date by the '.' delimiter
+  const parts = dateStr.split('.');
+
+  // Check if the date string is valid
+  if (parts.length !== 3) {
+    throw new Error('Invalid date format');
+  }
+
+  const [day, month, year] = parts;
+
+  // Check if day, month, and year are valid numbers
+  if (isNaN(+day) || isNaN(+month) || isNaN(+year)) {
+    throw new Error('Invalid date components');
+  }
+
+  // Pad the day and month with leading zero if necessary
+  const paddedDay = day.padStart(2, '0');
+  const paddedMonth = month.padStart(2, '0');
+
+  // Format the date as 'yyyy-mm-dd'
+  return `${year}-${paddedMonth}-${paddedDay}`;
+}

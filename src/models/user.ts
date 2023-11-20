@@ -46,7 +46,7 @@ export interface IUserRegister {
   lastName: string;
   password: string;
   confirmPassword: string;
-  gender: string;
+  gender: string | number;
   dateOfBirth: string | Date;
 }
 
@@ -60,3 +60,5 @@ export interface IUserData {
   gender: number;
   verified: boolean;
 }
+
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}

@@ -1,3 +1,4 @@
+/* eslint-disable global-require */
 import { nextui } from '@nextui-org/react';
 
 /** @type {import('tailwindcss').Config} */
@@ -9,7 +10,6 @@ export default {
     './node_modules/tailwind-datepicker-react/dist/**/*.js' // <--- Add this line
   ],
 
-  darkMode: 'class',
   theme: {
     fontSize: {
       xs: '8px',
@@ -18,15 +18,10 @@ export default {
       xl: '16px',
       '2xl': '18px',
       '3xl': '20px'
-    },
-    extend: {
-      // backgroundImage: {
-      //   'login-pattern': "url('/src/assets/bgai.png')",
-      //   'footer-texture': "url('/img/footer-texture.png')"
-      // }
     }
   },
   plugins: [
+    require('@tailwindcss/line-clamp'),
     nextui({
       addCommonColors: true,
       defaultTheme: 'light',
@@ -34,7 +29,8 @@ export default {
       themes: {
         light: {
           colors: {
-            black: '#292D32'
+            black: '#292D32',
+            custom: 'red'
           }
         },
         dark: {

@@ -1,13 +1,21 @@
-import { ILogin } from '@/models/user';
+/* eslint-disable react/no-unstable-nested-components */
+import AppHandledInput from '@/components/forms/input/handled-input';
+import { ILogin, IUserLoggedData } from '@/models/user';
+import { setUser } from '@/redux/auth/auth-slice';
 import {
   AuthService,
+  IGetMeResponse,
   ILoginResponse
 } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
-import { Button, Input } from '@nextui-org/react';
+import { inputPlaceholderText } from '@/utils/constants/texts';
+import { inputValidationText } from '@/utils/constants/validations';
+import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-import { Controller, useForm } from 'react-hook-form';
-import { BsEye, BsRobot, BsEnvelope, BsKey, BsEyeSlash } from 'react-icons/bs';
+import { useForm } from 'react-hook-form';
+import { BsEye, BsRobot, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 
 interface ILoginFormProps {
@@ -26,10 +34,21 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
 
+  const navigate = useNavigate();
+  const disptach = useDispatch();
+
   const onSubmit = async (data: ILogin) => {
     try {
       const res: ILoginResponse = await AuthService.getInstance().login(data);
-      setUserToken(res.data.accessToken);
+
+      if (!res) return;
+
+      if (!userToken) setUserToken({ token: res.data.accessToken });
+
+      const resGetMe: IGetMeResponse = await AuthService.getInstance().getMe();
+      const userSlicePayload: IUserLoggedData = resGetMe.data;
+      disptach(setUser(userSlicePayload));
+      navigate('/chat');
     } catch (err) {
       console.log(err);
     }
@@ -67,145 +86,80 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           className="flex flex-col space-y-5"
         >
           <div className="flex flex-col gap-5  ">
-            <Controller
-              control={control}
+            <AppHandledInput
               name="email"
+              inputProps={{
+                id: 'email'
+              }}
+              type="email"
+              control={control}
+              isInvalid={Boolean(errors.email?.message)}
+              errors={errors}
+              size="sm"
+              className="text-black w-72"
               rules={{
                 required: {
                   value: true,
-                  message: 'Email xanası məcburidir'
+                  message: inputValidationText(dictionary.az.email)
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: 'Düzgün olmayan email adresi'
+                  message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  type="email"
-                  placeholder="Email adresinizi daxil edin"
-                  variant="bordered"
-                  required
-                  value={value}
-                  size="sm"
-                  onChange={onChange}
-                  className="text-black  w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit ',
-                    input: ' font-light '
-                  }}
-                  errorMessage={errors.email?.message || ''}
-                  startContent={
-                    <BsEnvelope
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
+              placeholder={inputPlaceholderText(dictionary.az.email)}
+              required
+              IconElement={() => (
+                <BsEnvelopeFill
+                  size={16}
+                  color={errors.email?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                 />
               )}
             />
-            <Controller
-              control={control}
+            <AppHandledInput
+              type={showPassword ? 'text' : 'password'}
               name="password"
+              inputProps={{
+                id: 'password',
+                endContent: (
+                  <button
+                    className="focus:outline-none"
+                    type="button"
+                    onClick={() => setShowPassword(z => !z)}
+                  >
+                    {showPassword ? (
+                      <BsEye
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    ) : (
+                      <BsEyeSlash
+                        size={16}
+                        className="text-2xl text-default-400 pointer-events-none"
+                      />
+                    )}
+                  </button>
+                )
+              }}
+              control={control}
+              isInvalid={Boolean(errors.password?.message)}
+              errors={errors}
+              size="sm"
+              className="text-black w-72"
               rules={{
                 required: {
                   value: true,
-                  message: 'Şifrə xanası məcburidir'
+                  message: inputValidationText(dictionary.az.password)
                 }
               }}
-              render={({ field: { onChange, value } }) => (
-                <Input
-                  // label="Password"
-                  variant="bordered"
-                  required
-                  errorMessage={errors.password?.message || ''}
-                  value={value}
-                  size="sm"
-                  onChange={onChange}
-                  className="text-black w-72"
-                  classNames={{
-                    inputWrapper: [
-                      'relative',
-                      'w-full',
-                      'inline',
-                      'inline-flex',
-                      'tap-highlight-transparent',
-                      'shadow-sm',
-                      'min-h-unit-8',
-                      'flex-col',
-                      'items-start',
-                      'justify-center',
-                      'gap-0',
-                      'border',
-                      ' px-3',
-                      'py-1',
-                      'rounded-md',
-                      ' h-8',
-                      'data-[hover=true]:border-gray-400',
-                      'group-data-[focus=true]:border-gray-400',
-                      'transition-background',
-                      '!duration-150 ',
-                      'transition-colors',
-                      'motion-reduce:transition-none ',
-                      'hover:border-red-400',
-                      'focus:border-red-400'
-                    ],
-                    innerWrapper: 'h-fit',
-                    input: ' font-light'
-                  }}
-                  placeholder="Şifrənizi daxil edin"
-                  endContent={
-                    <button
-                      className="focus:outline-none"
-                      type="button"
-                      onClick={() => setShowPassword(z => !z)}
-                    >
-                      {showPassword ? (
-                        <BsEye
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      ) : (
-                        <BsEyeSlash
-                          size={16}
-                          className="text-2xl text-default-400 pointer-events-none"
-                        />
-                      )}
-                    </button>
-                  }
-                  type={showPassword ? 'text' : 'password'}
-                  startContent={
-                    <BsKey
-                      size={16}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                    />
-                  }
+              placeholder={inputPlaceholderText(dictionary.az.password)}
+              required
+              IconElement={() => (
+                <BsEnvelopeFill
+                  size={16}
+                  color={errors.password?.message ? '#f31260' : ''}
+                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                 />
               )}
             />
@@ -213,7 +167,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full  text-white border"
+            className="w-full bg-black  text-white border"
             type="submit"
           >
             {dictionary.az.login}
