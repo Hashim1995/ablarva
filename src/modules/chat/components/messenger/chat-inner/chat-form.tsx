@@ -12,11 +12,14 @@ interface IChatFormProps {
 
 function ChatForm({ onSubmit }: IChatFormProps) {
   // Initialize the hook form methods
-  const { register, handleSubmit } = useForm<IChatForm>();
+  const { register, handleSubmit, reset } = useForm<IChatForm>();
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(z => {
+        onSubmit(z);
+        reset();
+      })}
       className="  bg-[#FBF9F9] shadow  rounded-xl relative   h-44"
     >
       {/* Message Textarea Field */}
