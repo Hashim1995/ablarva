@@ -41,7 +41,7 @@ function ChatInner() {
   }
 
   const openai = new OpenAI({
-    apiKey: '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',
+    apiKey: import.meta.env.VITE_OPENAI_KEY,
     dangerouslyAllowBrowser: true
   });
 
