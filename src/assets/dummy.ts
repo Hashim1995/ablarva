@@ -1,3 +1,4 @@
+// import { PricingList } from '@/models/common';
 import { IAsistanCard } from '@/modules/chat/types';
 
 export const asistansList: IAsistanCard[] = [
@@ -38,3 +39,61 @@ export const asistansList: IAsistanCard[] = [
     description: 'Sosial media paylaşımlarınız üçün şüarlar hazırlayın'
   }
 ];
+
+export const pricingList: any = {
+  tHeader: [
+    {
+      title: 'Tarifə nələr daxildir?',
+      price: null,
+      id: 1,
+      desciption: null
+    },
+    {
+      title: 'Söhbət',
+      price: '15',
+      id: 2,
+      desciption:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+    },
+    {
+      title: 'Şəkil genaratoru',
+      price: '20',
+      id: 3,
+      desciption:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+    },
+    {
+      title: 'Səsli söhbət',
+      price: '10',
+      id: 4,
+      desciption:
+        'Lorem Ipsum is simply dummy text of the printing and typesetting industry.'
+    }
+  ],
+  tBody: [
+    {
+      title: 'Sorgu',
+      chatLimit: 1000,
+      imgLimit: null,
+      voiceLimit: null
+    },
+    {
+      title: 'Sorğu (Köməkçi ilə)',
+      chatLimit: null,
+      imgLimit: null,
+      voiceLimit: null
+    },
+    {
+      title: 'Şəkil generasiya',
+      chatLimit: null,
+      imgLimit: 2000,
+      voiceLimit: null
+    },
+    {
+      title: 'Səsli sorğu',
+      chatLimit: null,
+      imgLimit: null,
+      voiceLimit: 2000
+    }
+  ]
+};
