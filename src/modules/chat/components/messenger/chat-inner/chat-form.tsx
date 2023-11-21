@@ -32,17 +32,18 @@ function ChatForm({ onSubmit }: IChatFormProps) {
         classNames={textAreaConfig}
         className="flex-1 !border-none !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
         rows={3}
+        onKeyDown={e => {
+          // Check if the key pressed is 'Enter' and there is no shift key pressed
+          if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault(); // Prevent the default behavior of Enter key in a textarea (which is to insert a new line)
+            handleSubmit(onSubmit)(); // Call the submit handler
+            reset();
+          }
+        }}
         maxRows={3}
       />
 
       <div className="flex w-full items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0] rounded-2xl h-12">
-        {/* <label htmlFor="file-upload" className="cursor-pointer p-2">
-          <BsPaperclip
-            size={24}
-            className="text-gray-500 hover:text-gray-700 transition-colors"
-          />
-          <input id="file-upload" type="file" className="hidden" />
-        </label> */}
         <div />
         <div className="flex  gap-2 px-5 items-center justify-between">
           <Button
