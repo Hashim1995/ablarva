@@ -12,4 +12,9 @@ interface IPricingListBody {
   voiceLimit: number | null;
 }
 
-export type { IPricingListHeader, IPricingListBody };
+interface IPricingListData {
+  tHeader: IPricingListHeader[];
+  tBody: IPricingListBody[];
+}
+
+export type { IPricingListBody, IPricingListHeader, IPricingListData };

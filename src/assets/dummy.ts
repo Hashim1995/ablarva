@@ -1,5 +1,6 @@
 // import { PricingList } from '@/models/common';
 import { IAsistanCard } from '@/modules/chat/types';
+import { IPricingListData } from '@/modules/pricing/types';
 
 export const asistansList: IAsistanCard[] = [
   {
@@ -40,7 +41,7 @@ export const asistansList: IAsistanCard[] = [
   }
 ];
 
-export const pricingList: any = {
+export const pricingList: IPricingListData = {
   tHeader: [
     {
       title: 'Tarifə nələr daxildir?',
