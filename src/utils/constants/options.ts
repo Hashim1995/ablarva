@@ -72,9 +72,6 @@ const genderOptions: selectOption[] = [
   }
 ];
 
-
-
-
 const markdownOptions: MarkdownToJSX.Options = {
   overrides: {
     h1: {
@@ -129,15 +126,13 @@ const markdownOptions: MarkdownToJSX.Options = {
     ul: {
       component: 'ul',
       props: {
-        className:
-          'list-disc list-inside space-y-2 p-5   rounded-xl'
+        className: 'list-disc list-inside space-y-2 p-5   rounded-xl'
       }
     },
     ol: {
       component: 'ol',
       props: {
-        className:
-          'list-decimal list-inside space-y-2 p-5  rounded-xl'
+        className: 'list-decimal list-inside space-y-2 p-5  rounded-xl'
       }
     },
     li: {
@@ -174,8 +169,7 @@ const markdownOptions: MarkdownToJSX.Options = {
     img: {
       component: 'img',
       props: {
-        className:
-          'my-4 mx-auto max-w-full h-auto rounded-lg shadow-lg'
+        className: 'my-4 mx-auto max-w-full h-auto rounded-lg shadow-lg'
       }
     },
     code: {
@@ -226,7 +220,7 @@ const markdownOptions: MarkdownToJSX.Options = {
       }
     }
   }
-}
+};
 
 export {
   genderOptions,
@@ -234,5 +228,6 @@ export {
   fileTypeOptions,
   docStatusOptions,
   isBlockedOptions,
-  statusOptions, markdownOptions
+  statusOptions,
+  markdownOptions
 };
