@@ -196,7 +196,12 @@ export const dictionary = {
     gender: 'Cinsiyyəti',
     chat: 'Söhbət',
     tariffs: 'Tariflər',
-    history: 'Tarixçə'
+    history: 'Tarixçə',
+    tariffTitle: 'Tarifə nələr daxildir?',
+    joinNow: 'İndi qoşul',
+    aiSimple: 'AI sadə',
+    aiAssistant: 'AI köməkçi ilə',
+    allInOne: 'Hamısı birində'
   },
   en: {
     personalCabinet: 'Personal Cabinet',
@@ -391,6 +396,10 @@ export const dictionary = {
     gender: 'Gender',
     chat: 'Chat',
     tariffs: 'Tariffs',
-    history: 'History'
+    history: 'History',
+    tariffTitle: 'What is included in the tariff?',
+    joinNow: 'Join now',
+    aiSimple: 'AI simple',
+    allInOne: 'All in one'
   }
 };
