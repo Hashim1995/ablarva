@@ -10,4 +10,10 @@ interface selectOption {
   label: string;
 }
 
-export type { selectOption, IGlobalResponse };
+interface IMenuItemsNavbar {
+  label: string;
+  path: string;
+  icon: any;
+}
+
+export type { selectOption, IGlobalResponse, IMenuItemsNavbar };
