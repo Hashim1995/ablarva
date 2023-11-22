@@ -33,23 +33,39 @@ import {
 } from 'react-icons/bs';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
+import { useState, useEffect } from 'react';
 
 export default function Navbar() {
+  const [isMenuOpen, setIsMenuOpen] = useState<any>(false);
   const menuItems = [
-    'Profile',
-    'Dashboard',
-    'Activity',
-    'Analytics',
-    'System',
-    'Deployments',
-    'My Settings',
-    'Team Settings',
-    'Help & Feedback',
-    'Log Out'
+    {
+      label: 'Söhbət',
+      path: 'chat',
+      icon: <BsFillChatLeftDotsFill />
+    },
+    {
+      label: 'Tariflər',
+      path: 'pricing',
+      icon: <BsFillFilterSquareFill />
+    },
+    {
+      label: 'Tənzimləmə',
+      path: 'settings',
+      icon: <BsFillGearFill />
+    },
+    {
+      label: 'Tarixçə',
+      path: 'history',
+      icon: <BsClockFill />
+    }
   ];
   // const { toggle, isDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setIsMenuOpen(false);
+  }, [location]);
 
   return (
     <NavbarNext
@@ -57,10 +73,14 @@ export default function Navbar() {
       maxWidth="full"
       height={'7rem'}
       position="static"
+      isMenuOpen={isMenuOpen}
+      onMenuOpenChange={setIsMenuOpen}
       disableAnimation
     >
       <NavbarContent className="lg:hidden" justify="start">
-        <NavbarMenuToggle />
+        <NavbarMenuToggle
+          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+        />
       </NavbarContent>
 
       <NavbarContent className="lg:hidden pr-3" justify="center">
@@ -136,7 +156,7 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white  rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between	">
+        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between">
           <User
             name="Jane Doe"
             description="Product Designer"
@@ -165,26 +185,21 @@ export default function Navbar() {
           </Dropdown>
         </NavbarItem>
       </NavbarContent>
-      {/* 
-      <NavbarMenu>
+
+      <NavbarMenu className=" md:hidden items-start pt-10">
         {menuItems.map((item, index) => (
-          <NavbarMenuItem key={`${item}-${index}`}>
-            <Link
-              className="w-full"
-              color={
-                index === 2
-                  ? 'warning'
-                  : index === menuItems.length - 1
-                  ? 'danger'
-                  : 'foreground'
-              }
-              to="/f"
+          <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
+            <Button
+              className="w-full flex bg-transparent items-center gap-2 font-medium"
+              onClick={() => {
+                navigate(`/${item.path}`);
+              }}
             >
-              {item}
-            </Link>
+              {item.icon} {item.label}
+            </Button>
           </NavbarMenuItem>
         ))}
-      </NavbarMenu> */}
+      </NavbarMenu>
     </NavbarNext>
   );
 }
