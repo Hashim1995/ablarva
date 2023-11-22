@@ -196,7 +196,7 @@ export const dictionary = {
     gender: 'Cinsiyyəti',
     chat: 'Söhbət',
     tariffs: 'Tariflər',
-    history: 'Tariçə'
+    history: 'Tarixçə'
   },
   en: {
     personalCabinet: 'Personal Cabinet',

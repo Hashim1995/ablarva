@@ -6,17 +6,15 @@ import Navbar from '../static-components/navbar';
 
 function LayoutPage() {
   return (
-    <div>
-      <div>
-        <Navbar />
+    <div className="flex flex-col justify-between gap-2 h-screen  max-h-screen ">
+      <Navbar />
 
-        <div style={{ overflow: 'initial' }} className="my-2">
-          <div>
-            <Outlet />
-          </div>
+      <div style={{ overflow: 'hidden' }} className="my-2 h-[80%]">
+        <div className="h-full">
+          <Outlet />
         </div>
-        <Footer />
       </div>
+      <Footer />
     </div>
   );
 }

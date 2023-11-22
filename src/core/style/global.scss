@@ -1,12 +1,30 @@
 @import 'tailwindcss/base';
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
+
+// html {
+//   overflow: hidden;
+// }
+
 body {
   margin: 0;
   overflow-y: auto;
 }
 * {
   font-family: 'Poppins', sans-serif;
+  // ::-webkit-scrollbar {
+  //   width: 10px;
+  //   border: 1px solid #292d3222;
+  // }
+
+  /* Track */
+
+  // /* Handle */
+  // ::-webkit-scrollbar-thumb {
+  //   background: #292d32;
+  //   height: 5px;
+  //   width: 10px;
+  // }
 }
 ::selection {
   color: white;
