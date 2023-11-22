@@ -13,6 +13,7 @@ import Markdown from 'markdown-to-jsx';
 import { Button, Card, Divider, Textarea } from '@nextui-org/react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import { IChatForm } from '@/modules/chat/types';
+import { dictionary } from '@/utils/constants/dictionary';
 import { BsRecycle } from 'react-icons/bs';
 import ChatForm from './chat-form';
 import ChatBubble from './chat-bubble/chat-bubble';
@@ -118,7 +119,7 @@ function ChatInner() {
                 size="sm"
                 className="bg-black text-white rounded-full pl-[2px]"
               >
-                Regenerate
+                {dictionary.az.regenerate}
               </Button>
             </div>
           )}

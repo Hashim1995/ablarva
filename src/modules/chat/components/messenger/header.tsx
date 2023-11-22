@@ -1,4 +1,5 @@
 /* eslint-disable no-bitwise */
+import { dictionary } from '@/utils/constants/dictionary';
 import { Button } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 import { BsFillFilterCircleFill, BsJustify } from 'react-icons/bs';
@@ -28,7 +29,9 @@ function MessengerHeader({
               className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
             />
           </Button>
-          <h2 className="text-xl text-white font-semibold">Söhbət</h2>
+          <h2 className="text-xl text-white font-semibold">
+            {dictionary.az.chat}
+          </h2>
         </div>
 
         <Button

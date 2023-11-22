@@ -31,30 +31,31 @@ import {
   BsFillFilterSquareFill,
   BsRobot
 } from 'react-icons/bs';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect } from 'react';
+import { IMenuItemsNavbar } from '@/models/common';
 
 export default function Navbar() {
-  const [isMenuOpen, setIsMenuOpen] = useState<any>(false);
-  const menuItems = [
+  const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
+  const menuItems: IMenuItemsNavbar[] = [
     {
-      label: 'Söhbət',
+      label: `${dictionary.az.chat}`,
       path: 'chat',
       icon: <BsFillChatLeftDotsFill />
     },
     {
-      label: 'Tariflər',
+      label: `${dictionary.az.tariffs}`,
       path: 'pricing',
       icon: <BsFillFilterSquareFill />
     },
     {
-      label: 'Tənzimləmə',
+      label: `${dictionary.az.settings}`,
       path: 'settings',
       icon: <BsFillGearFill />
     },
     {
-      label: 'Tarixçə',
+      label: `${dictionary.az.history}`,
       path: 'history',
       icon: <BsClockFill />
     }
