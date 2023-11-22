@@ -28,7 +28,9 @@ function MessengerHeader({
               className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
             />
           </Button>
-          <h2 className="text-xl text-white font-semibold">Söhbət</h2>
+          <h2 className="xl:text-xl lg:text-sm text-white font-semibold">
+            Söhbət
+          </h2>
         </div>
 
         <Button

@@ -6,17 +6,20 @@ import MyPlan from './my-plan/my-plan';
 function Chat() {
   return (
     <div className=" container-fluid h-full mx-auto ">
-      <div className="grid lg:grid-cols-12 lg:grid-rows-5 h-full lg:gap-10 md:grid md:grid-cols-12 md:grid-rows-8 md:gap-10">
-        <div className=" rounded-3xl lg:row-span-5 md:row-span-8">
+      <div className="h-full grid gap-5 md:grid-cols-12 md:grid-rows-12 xl:grid-cols-12 xl:grid-rows-5">
+        <div className="rounded-3xl xl:col-span-1 xl:row-span-5 md:row-span-1 md:col-span-12">
           <LeftBar />
         </div>
-        <div className=" rounded-3xl lg:col-span-8 lg:row-span-5 md:col-span-11 md:row-span-5">
+
+        <div className="rounded-3xl xl:col-span-7 xl:row-span-5 md:row-span-4 md:col-span-12">
           <Layout />
         </div>
-        <div className=" rounded-3xl  lg:col-span-3  lg:row-span-3 lg:col-start-10 md:col-span-7 md:row-span-3 md:col-start-2 md:row-start-6">
+
+        <div className="rounded-3xl xl:col-span-4 xl:row-span-3 md:row-span-1 md:col-span-6">
           <ChatHistory />
         </div>
-        <div className=" rounded-3xl lg:col-span-3 lg:row-span-2 lg:col-start-10 lg:row-start-4 md:col-span-4 md:row-span-3 md:col-start-9 md:row-start-6">
+
+        <div className="rounded-3xl xl:col-span-4 xl:row-span-2 md:row-span-1 md:col-span-6">
           <MyPlan />
         </div>
       </div>

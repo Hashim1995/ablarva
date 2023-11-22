@@ -9,7 +9,7 @@ function LayoutPage() {
     <div className="flex flex-col justify-between gap-2 h-screen  max-h-screen ">
       <Navbar />
 
-      <div style={{ overflow: 'hidden' }} className="my-2 h-[80%]">
+      <div className="my-2 h-[80%] overflow-y-scroll">
         <div className="h-full">
           <Outlet />
         </div>
