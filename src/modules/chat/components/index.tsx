@@ -6,7 +6,7 @@ import MyPlan from './my-plan/my-plan';
 function Chat() {
   return (
     <div className=" container-fluid h-full mx-auto ">
-      <div className="grid lg:grid-cols-12 lg:grid-rows-5 h-768 lg:gap-10 md:grid md:grid-cols-12 md:grid-rows-8 md:gap-10">
+      <div className="grid lg:grid-cols-12 lg:grid-rows-5 h-full lg:gap-10 md:grid md:grid-cols-12 md:grid-rows-8 md:gap-10">
         <div className=" rounded-3xl lg:row-span-5 md:row-span-8">
           <LeftBar />
         </div>
