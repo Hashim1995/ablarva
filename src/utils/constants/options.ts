@@ -113,7 +113,13 @@ const markdownOptions: MarkdownToJSX.Options = {
     p: {
       component: 'p',
       props: {
-        className: 'mb-4 text-gray-700'
+        className: 'mb-4 text-sm text-gray-700'
+      }
+    },
+    span: {
+      component: 'span',
+      props: {
+        className: 'text-[14px]'
       }
     },
     a: {

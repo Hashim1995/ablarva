@@ -20,7 +20,7 @@ function ChatForm({ onSubmit }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className="  bg-[#FBF9F9] shadow  rounded-xl relative   h-44"
+      className="  bg-[#FBF9F9] shadow  rounded-xl relative   h-full"
     >
       {/* Message Textarea Field */}
       <Textarea
