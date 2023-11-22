@@ -59,23 +59,23 @@ export default function Navbar() {
       position="static"
       disableAnimation
     >
-      <NavbarContent className="sm:hidden" justify="start">
+      <NavbarContent className="lg:hidden" justify="start">
         <NavbarMenuToggle />
       </NavbarContent>
 
-      <NavbarContent className="sm:hidden pr-3" justify="center">
+      <NavbarContent className="lg:hidden pr-3" justify="center">
         <NavbarBrand>
           <p className="font-bold text-inherit">ACMasdE</p>
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden sm:flex gap-4" justify="start">
+      <NavbarContent className="hidden lg:flex gap-4" justify="start">
         <NavbarBrand>
           <BsRobot size={48} />
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className=" hidden sm:flex gap-4 " justify="center">
+      <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
         <ButtonGroup className=" rounded-xl  shadow-md dark:border-white dark:border-1">
           <Button
             className={` w-40 h-12  ${
@@ -136,7 +136,7 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white  rounded-lg shadow-md p-1 px-3 md:flex gap-5 items-center justify-between	">
+        <NavbarItem className="bg-white  rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between	">
           <User
             name="Jane Doe"
             description="Product Designer"
