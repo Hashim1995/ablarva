@@ -1,3 +1,4 @@
+import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 
@@ -49,7 +50,7 @@ function ChatBubble({ item }: any) {
               size="sm"
               className="bg-white rounded-full pl-0"
             >
-              Kopyala
+              {dictionary.az.copy}
             </Button>
           </div>
         </div>

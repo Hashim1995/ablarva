@@ -3,6 +3,7 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
+import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card } from '@nextui-org/react';
 import React from 'react';
 import { RiPriceTag2Fill } from 'react-icons/ri';
@@ -67,8 +68,8 @@ function MyPlan() {
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="xl:text-xl lg:text-sm text-white font-semibold">
-          Mənim <br /> Tarifim
+        <h2 className="text-xl text-white font-semibold">
+          {dictionary.az.my} <br /> {dictionary.az.tariff}
         </h2>
         <Button
           size="sm"

@@ -1,3 +1,4 @@
+import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card } from '@nextui-org/react';
 import { BsFillFilterCircleFill, BsTrash } from 'react-icons/bs';
 
@@ -53,8 +54,8 @@ function ChatHistory() {
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="xl:text-xl lg:text-sm text-white font-semibold">
-          Əvvəlki <br /> Söhbətlər
+        <h2 className="text-xl text-white font-semibold">
+          {dictionary.az.previous} <br /> {dictionary.az.chats}
         </h2>
         <Button
           size="sm"

@@ -196,7 +196,22 @@ export const dictionary = {
     gender: 'Cinsiyyəti',
     chat: 'Söhbət',
     tariffs: 'Tariflər',
-    history: 'Tarixçə'
+    history: 'Tarixçə',
+    tariffTitle: 'Tarifə nələr daxildir?',
+    joinNow: 'İndi qoşul',
+    aiSimple: 'AI sadə',
+    aiAssistant: 'AI köməkçi ilə',
+    allInOne: 'Hamısı birində',
+    contact: 'Əlaqə',
+    about: 'Haqqında',
+    privacyPolicy: 'Gizlilik Siyasəti',
+    licensing: 'Lisenziya',
+    previous: 'Əvvəlki',
+    chats: 'Söhbətlər',
+    regenerate: 'Yenilə',
+    copy: 'Kopyala',
+    my: 'Mənim',
+    tariff: 'Tarifim'
   },
   en: {
     personalCabinet: 'Personal Cabinet',
@@ -391,6 +406,20 @@ export const dictionary = {
     gender: 'Gender',
     chat: 'Chat',
     tariffs: 'Tariffs',
-    history: 'History'
+    history: 'History',
+    tariffTitle: 'What is included in the tariff?',
+    joinNow: 'Join now',
+    aiSimple: 'AI simple',
+    allInOne: 'All in one',
+    contact: 'Contact',
+    about: 'About',
+    privacyPolicy: 'Privacy Policy',
+    licensing: 'Licensing',
+    previous: 'Previous',
+    chats: 'Chats',
+    regenerate: 'Regenerate',
+    copy: 'Copy',
+    my: 'My',
+    tariff: 'Tariff'
   }
 };
