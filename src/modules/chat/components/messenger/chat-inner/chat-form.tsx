@@ -43,7 +43,7 @@ function ChatForm({ onSubmit }: IChatFormProps) {
         maxRows={3}
       />
 
-      <div className="flex w-full items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0] rounded-2xl h-12">
+      <div className="flex w-full items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-12">
         <div />
         <div className="flex  gap-2 px-5 items-center justify-between">
           <Button
