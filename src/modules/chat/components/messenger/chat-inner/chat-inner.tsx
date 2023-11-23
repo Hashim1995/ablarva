@@ -72,10 +72,10 @@ function ChatInner() {
   }, [bubble, loading]);
 
   return (
-    <div className="xl:h-full md:h-[700px]  bg-white  p-4 ">
+    <div className="xl:h-full md:h-[700px]  bg-white   ">
       <div
         ref={messengerBoxRef}
-        className="messenger-box h-[70%] mb-6 overflow-y-auto "
+        className="messenger-box h-[77%] mb-6 p-4 overflow-y-auto "
       >
         <div>
           {bubble?.map((item: any, i) => <ChatBubble item={item} key={i} />)}
@@ -112,7 +112,7 @@ function ChatInner() {
         </div>
       </div>
 
-      <Card className=" h-[20%]  rounded-xl">
+      <Card className=" h-[20%] ">
         <ChatForm onSubmit={onSubmit} />
       </Card>
     </div>
