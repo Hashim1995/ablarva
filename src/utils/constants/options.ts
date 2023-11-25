@@ -69,7 +69,7 @@ const genderOptions: selectOption[] = [
   {
     value: '2',
     label: dictionary.az.female
-  }
+  },
 ];
 
 const markdownOptions: MarkdownToJSX.Options = {

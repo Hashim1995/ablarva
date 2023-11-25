@@ -23,6 +23,7 @@ const getTimeLineStyle = (token: any) => ({
 });
 
 const inputConfig = {
+  label: 'text-md font-normal',
   inputWrapper: [
     'relative',
     'w-full',
@@ -39,7 +40,6 @@ const inputConfig = {
     ' px-3',
     'py-1',
     'rounded-md',
-    ' h-8',
     'data-[hover=true]:border-[#292D32]',
     'group-data-[focus=true]:border-gray-200',
     'border-[#292D32]',
@@ -49,11 +49,12 @@ const inputConfig = {
     '',
     'motion-reduce:transition-none '
   ],
-  innerWrapper: 'h-fit  text-xs',
-  input: ' font-light '
+  input: ' font-light ',
 };
+
 const textAreaConfig = {
   base: ['shadow-none'],
+  label: 'text-md font-normal',
   inputWrapper: [
     'relative',
     'px-0 py-3',

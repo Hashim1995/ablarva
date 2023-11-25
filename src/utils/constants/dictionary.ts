@@ -6,6 +6,8 @@ export const dictionary = {
     dateOfBirth: 'Doğum tarixi',
     confirmPassword: 'Tərar şifrə',
     logOut: 'Çıxış',
+    account: 'Hesab',
+    infos: 'Məlumatları',
     personalCabinet: 'Şəxsi kabinet',
     legalCabinet: 'Şirkət məlumatları',
     lightMode: 'Gündüz rejimi',
