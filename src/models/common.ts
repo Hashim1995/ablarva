@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 /* eslint-disable no-unused-vars */
 interface IGlobalResponse {
@@ -19,5 +19,5 @@ interface IMenuItemsNavbar {
   icon: any;
 }
 
-type setState = Dispatch<SetStateAction<boolean>>
+type setState = Dispatch<SetStateAction<boolean>>;
 export type { selectOption, setState, IGlobalResponse, IMenuItemsNavbar };

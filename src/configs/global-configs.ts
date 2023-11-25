@@ -49,7 +49,7 @@ const inputConfig = {
     '',
     'motion-reduce:transition-none '
   ],
-  input: ' font-light ',
+  input: ' font-light '
 };
 
 const textAreaConfig = {

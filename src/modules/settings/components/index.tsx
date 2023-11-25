@@ -5,14 +5,14 @@ import Sessions from './sessions/sessions';
 function Settings() {
   return (
     <div className=" container-fluid h-full mx-auto w-full">
-      <div className="grid grid-cols-12 h-full grid-rows-12 gap-5">
-        <div className="col-span-8 row-span-8  ">
+      <div className="grid grid-cols-12 grid-rows-5 gap-5 h-full">
+        <div className="rounded-3xl col-span-8 row-span-4">
           <Account />
         </div>
-        <div className="col-span-8 row-span-4 col-start-1 row-start-9 bg-blue-400">
+        <div className="rounded-3xl col-span-8 col-start-1 row-start-5 bg-blue-400">
           <Bottom />
         </div>
-        <div className="col-span-4 row-span-12 col-start-9 row-start-1 bg-green-500">
+        <div className=" rounded-3xl col-span-4 row-span-5 col-start-9 row-start-1 bg-green-500">
           {' '}
           <Sessions />
         </div>

@@ -8,6 +8,7 @@ export const dictionary = {
     logOut: 'Çıxış',
     account: 'Hesab',
     infos: 'Məlumatları',
+    sessions: 'Sessiyalar',
     personalCabinet: 'Şəxsi kabinet',
     legalCabinet: 'Şirkət məlumatları',
     lightMode: 'Gündüz rejimi',

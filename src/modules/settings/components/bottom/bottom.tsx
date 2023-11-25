@@ -1,5 +1,5 @@
 function Bottom() {
-  return <div>Bottom</div>;
+  return <div>lorem</div>;
 }
 
 export default Bottom;
