@@ -7,6 +7,7 @@ import LoginPage from '@core/static-pages/login-page';
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 const ChatPage = React.lazy(() => import('../../modules/chat/pages'));
 const PricingPage = React.lazy(() => import('../../modules/pricing/pages'));
+const SettingsPage = React.lazy(() => import('../../modules/settings/pages'));
 
 const routes = [
   {
@@ -36,8 +37,7 @@ const routes = [
         path: 'settings',
         element: (
           <Suspense fallback={<div>fallback</div>}>
-            {' '}
-            <h1>lorem*200</h1>
+            <SettingsPage />
           </Suspense>
         )
       },
