@@ -7,7 +7,7 @@ function Account() {
   const [fieldsIsDisable, setFieldsIsDisable] = useState(true);
 
   return (
-    <Card className="h-full !bg-white  rounded-2xl bg-transparent  shadow-md">
+    <Card className="h-full !bg-white overflow-y-auto  rounded-2xl bg-transparent  shadow-md">
       <AccountHeader
         fieldsIsDisable={fieldsIsDisable}
         setFieldsIsDisable={setFieldsIsDisable}
