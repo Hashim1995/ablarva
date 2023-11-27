@@ -73,7 +73,7 @@ function ChatInner() {
   }, [bubble, loading]);
 
   return (
-    <div className="xl:h-full md:h-[700px]  bg-white   ">
+    <div className="xl:h-full h-[600px]  bg-white   ">
       <div
         ref={messengerBoxRef}
         className="messenger-box h-[77%] mb-6 p-4 overflow-y-auto "

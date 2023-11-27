@@ -9,7 +9,7 @@ function Layout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
 
   return (
-    <Card className="h-full rounded-2xl bg-transparent  shadow">
+    <Card className="h-full rounded-2xl bg-transparent  shadow-md">
       <MessengerHeader
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}

@@ -1,5 +1,4 @@
-import { Select, SelectItem, SelectProps, Tooltip } from '@nextui-org/react';
-import React from 'react';
+import { Select, SelectItem, Tooltip } from '@nextui-org/react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
 interface IAppHandledSelect {
@@ -17,7 +16,7 @@ interface IAppHandledSelect {
   IsDynamic?: boolean;
   className?: string;
   errors?: any;
-  selectProps?: SelectProps;
+  selectProps?: any;
   options: { value: string | number; label: string }[];
   size?: 'sm' | 'md' | 'lg';
   IconElement?: any;
@@ -47,7 +46,7 @@ function AppHandledSelect({
       render={({ field: { onChange, value } }) => (
         <Select
           classNames={{
-            mainWrapper: 'h-8',
+            label: 'text-md font-normal',
             trigger: [
               'relative',
               'w-full',
@@ -56,7 +55,6 @@ function AppHandledSelect({
               'inline-flex',
               'tap-highlight-transparent',
               'shadow-sm',
-              'min-h-unit-8',
               'flex-col',
               'items-start',
               'justify-center',
@@ -65,7 +63,6 @@ function AppHandledSelect({
               ' px-3',
               'py-1',
               'rounded-md',
-              ' h-8',
               'data-[hover=true]:border-gray-400',
               'group-data-[focus=true]:border-gray-400',
               'data-[active=true]:border-gray-400',
@@ -88,6 +85,8 @@ function AppHandledSelect({
             onChangeApp && onChangeApp(e);
           }}
           value={value}
+          onSelectionChange={onChange}
+          selectedKeys={value}
           className={className}
           startContent={
             errors[name]?.message ? (

@@ -226,6 +226,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               className="text-black w-72 relative"
               isInvalid={Boolean(errors.dateOfBirth?.message)}
               errors={errors}
+              size="sm"
               rules={{
                 required: {
                   value: true,
@@ -249,7 +250,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               control={control}
               placeholder={selectPlaceholderText(dictionary.az.gender)}
               variant="bordered"
-              className="h-8 app-select"
+              className=" app-select"
               size="sm"
               required
               rules={{
@@ -311,6 +312,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               placeholder={inputPlaceholderText(dictionary.az.password)}
               required
+              size="sm"
               inputProps={{
                 id: 'password',
                 endContent: (
@@ -346,6 +348,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             <AppHandledInput
               name="confirmPassword"
               control={control}
+              size="sm"
               className="text-black w-72"
               isInvalid={Boolean(errors.confirmPassword?.message)}
               errors={errors}
@@ -362,7 +365,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   clearErrors('confirmPassword');
                 }
               }}
-              size="sm"
               rules={{
                 required: {
                   value: true,

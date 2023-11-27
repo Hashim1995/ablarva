@@ -201,3 +201,9 @@ input::placeholder {
     transform: scale(0.8);
   }
 }
+
+.codeBlock {
+  pre {
+    padding: 8px !important;
+  }
+}
