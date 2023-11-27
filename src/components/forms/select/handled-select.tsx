@@ -85,6 +85,8 @@ function AppHandledSelect({
             onChangeApp && onChangeApp(e);
           }}
           value={value}
+          onSelectionChange={onChange}
+          selectedKeys={value}
           className={className}
           startContent={
             errors[name]?.message ? (

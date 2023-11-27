@@ -4,8 +4,8 @@ interface IAccountForm {
   email: string;
   firstName: string;
   lastName: string;
-  gender: string | number;
-  dateOfBirth: string | Date | selectOption;
+  gender: selectOption | null | string;
+  dateOfBirth: string | Date;
 }
 
 export type { IAccountForm };

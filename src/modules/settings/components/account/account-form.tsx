@@ -30,20 +30,20 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
     formState: { errors, isSubmitting },
     control
   } = useForm<IAccountForm>({
-    mode: 'onSubmit',
-    defaultValues: {
-      email: 'bilalsadiqov@gmail.com',
-      firstName: 'Bilal',
-      lastName: 'Sadiqov',
-      dateOfBirth: '22.11.1997'
-    }
+    mode: 'onSubmit'
   });
 
   const onSubmit = async (data: IAccountForm) => {
     console.log(data);
   };
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    setValue('email', 'bilalsadiqov@gmail.com');
+    setValue('firstName', 'Bilal');
+    setValue('lastName', 'Sadiqov');
+    setValue('dateOfBirth', '22.11.1997');
+    setValue('gender', '1');
+  }, []);
   return (
     <div className="  rounded-lg   p-5">
       <form
