@@ -108,7 +108,7 @@ function Pricing() {
                               /{dictionary.az.month}
                             </p>
                           </div>
-                          <p className="w-fit text-[#C3C1C1] text-[14px] xl:text-[16px] leading-5 leading-4 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
+                          <p className="w-fit text-[#C3C1C1] text-[14px] xl:text-[16px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
                             {hItem.desciption || 'test'}
                           </p>
                           <Button
