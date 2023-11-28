@@ -6,6 +6,7 @@ import { Button, Spinner } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
 import { dictionary } from '@/utils/constants/dictionary';
 import { IPricingListBody, IPricingListHeader } from '../types';
+import Header from './header/header';
 
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
@@ -38,7 +39,10 @@ function Pricing() {
 
   return (
     <div className=" container-fluid h-full mx-auto ">
-      <div className="h-40"> </div>
+      <div className="grid grid-cols-12">
+        {' '}
+        <Header />
+      </div>
       <div className="grid grid-cols-12 grid-rows-6 gap-3">
         <div className="col-span-12 xl:col-span-2 row-span-6 flex xl:flex-col items-center justify-start xl:justify-center">
           <Button

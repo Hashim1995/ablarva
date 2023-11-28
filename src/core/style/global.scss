@@ -207,3 +207,14 @@ input::placeholder {
     padding: 8px !important;
   }
 }
+
+.custom-row-chart-wrapper {
+  display: flex;
+  height: 233px !important;
+  align-items: center;
+  justify-content: space-between;
+
+  .recharts-legend-wrapper {
+    position: static !important;
+  }
+}
