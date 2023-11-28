@@ -5,6 +5,8 @@ import { SubmitHandler } from 'react-hook-form';
 import { IChatForm } from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
 import { BsRecycle } from 'react-icons/bs';
+import ScrollToBottom from 'react-scroll-to-bottom';
+
 import ChatForm from './chat-form';
 import ChatBubble from './chat-bubble/chat-bubble';
 
@@ -68,54 +70,53 @@ function ChatInner() {
   }, [bubbleList, loading]);
 
   return (
-    <div className=" h-full     ">
-      <div
-        ref={messengerBoxRef}
-        className="messenger-box h-[75%]  p-4 overflow-y-auto "
+    <div className="flex flex-col gap-2 h-full  ">
+      <ScrollToBottom
+        scrollViewClassName="flex-grow flex-1 p-4"
+        followButtonClassName="hidden"
+        className=" flex-grow flex-1 row-span-8 overflow-y-auto  h-full "
       >
-        <div>
-          {bubbleList?.map((item: IBubble, i) => (
-            <ChatBubble
-              message={item.message}
-              isTyping={item.isTyping}
-              // eslint-disable-next-line react/no-array-index-key
-              key={i}
-            />
-          ))}
-          {loading && (
-            <div className="h-full flex justify-center mt-2 items-center ">
-              <div className="loader bg-black p-2 rounded-full flex space-x-3">
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-              </div>
+        {bubbleList?.map((item: IBubble, i) => (
+          <ChatBubble
+            message={item.message}
+            isTyping={item.isTyping}
+            // eslint-disable-next-line react/no-array-index-key
+            key={i}
+          />
+        ))}
+        {loading && (
+          <div className="h-full flex justify-center mt-2 items-center ">
+            <div className="loader bg-black p-2 rounded-full flex space-x-3">
+              <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
+              <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
+              <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
             </div>
-          )}
-          {!loading && bubbleList?.length > 0 && (
-            <div className="flex justify-center mt-3 items-center w-full">
-              <Button
-                type="button"
-                startContent={
-                  <Button
-                    type="submit"
-                    isIconOnly
-                    size="sm"
-                    className="bg-black rounded-full"
-                  >
-                    <BsRecycle size={18} color="white" />
-                  </Button>
-                }
-                size="sm"
-                className="bg-black text-white rounded-full pl-[2px]"
-              >
-                {dictionary.az.regenerate}
-              </Button>
-            </div>
-          )}
-        </div>
-      </div>
+          </div>
+        )}
+        {!loading && bubbleList?.length > 0 && (
+          <div className="flex justify-center mt-3 items-center w-full">
+            <Button
+              type="button"
+              startContent={
+                <Button
+                  type="submit"
+                  isIconOnly
+                  size="sm"
+                  className="bg-black rounded-full"
+                >
+                  <BsRecycle size={18} color="white" />
+                </Button>
+              }
+              size="sm"
+              className="bg-black text-white rounded-full pl-[2px]"
+            >
+              {dictionary.az.regenerate}
+            </Button>
+          </div>
+        )}
+      </ScrollToBottom>
 
-      <Card className=" h-[25%] ">
+      <Card className=" flex-shrink-0 h-[170px] row-span-4 ">
         <ChatForm onSubmit={onSubmit} />
       </Card>
     </div>
