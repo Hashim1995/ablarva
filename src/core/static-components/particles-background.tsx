@@ -4,7 +4,10 @@ import type { Container, Engine } from 'tsparticles-engine';
 // import { loadFull } from "tsparticles"; // if you are going to use `loadFull`, install the "tsparticles" package too.
 import { loadSlim } from 'tsparticles-slim'; // if you are going to use `loadSlim`, install the "tsparticles-slim" package too.
 
-function ParticlesBackground() {
+interface IParticlesBackgroundProps {
+  isDark?: boolean;
+}
+function ParticlesBackground({ isDark = false }: IParticlesBackgroundProps) {
   const particlesInit = useCallback(async (engine: Engine) => {
     console.log(engine);
 
@@ -29,7 +32,7 @@ function ParticlesBackground() {
       options={{
         background: {
           color: {
-            value: '#292D32'
+            value: isDark ? '#E4E4E7' : '#292D32'
           }
         },
         fpsLimit: 120,
@@ -57,10 +60,10 @@ function ParticlesBackground() {
         },
         particles: {
           color: {
-            value: '#ffffff'
+            value: isDark ? '#292D32' : '#ffffff'
           },
           links: {
-            color: '#ffffff',
+            color: isDark ? '#292D32' : '#ffffff',
             distance: 150,
             enable: true,
             // opacity: 0.5,

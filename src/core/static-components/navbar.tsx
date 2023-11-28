@@ -72,6 +72,7 @@ export default function Navbar() {
     <NavbarNext
       className="bg-transparent"
       maxWidth="full"
+      isBlurred={false}
       height={'7rem'}
       position="static"
       isMenuOpen={isMenuOpen}

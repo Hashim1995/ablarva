@@ -12,8 +12,8 @@ function LeftBar() {
     <div className="flex items-center justify-center h-full">
       <Dropdown>
         <DropdownTrigger>
-          <Button isIconOnly className="bg-black rounded-full" size="sm">
-            <BsPlusLg size={23} color="white" />
+          <Button isIconOnly className="bg-black rounded-full" size="lg">
+            <BsPlusLg size={25} color="white" />
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">

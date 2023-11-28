@@ -18,12 +18,13 @@ import { BsRecycle } from 'react-icons/bs';
 import ChatForm from './chat-form';
 import ChatBubble from './chat-bubble/chat-bubble';
 
-type IChat = {
-  comment: string;
-};
+interface IBubble {
+  message: string;
+  isTyping: boolean;
+}
 
 function ChatInner() {
-  const [bubble, setBubbleList] = useState<string[]>([]);
+  const [bubbleList, setBubbleList] = useState<IBubble[]>([]);
   const [loading, setLoading] = useState(false);
 
   const openai = new OpenAI({
@@ -46,18 +47,23 @@ function ChatInner() {
   }
 
   const onSubmit: SubmitHandler<IChatForm> = async data => {
-    setBubbleList((old: any) => [...old, data.message]);
+    // Add your own message without the typewriter effect
+    setBubbleList(old => [...old, { message: data.message, isTyping: false }]);
     setLoading(true);
+
     try {
       const res = await main(data.message);
 
-      setBubbleList((old: any) => [...old, res.choices[0].message.content]);
+      // Add OpenAI's response with the typewriter effect
+      setBubbleList(old => [
+        ...old,
+        { message: res.choices[0].message.content || '', isTyping: true }
+      ]);
       setLoading(false);
     } catch (err) {
       console.log(err);
     }
   };
-
   const messengerBoxRef = useRef<HTMLDivElement>(null);
 
   const scrollToBottom = () => {
@@ -70,7 +76,7 @@ function ChatInner() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [bubble, loading]);
+  }, [bubbleList, loading]);
 
   return (
     <div className="xl:h-full h-[600px]  bg-white   ">
@@ -79,7 +85,13 @@ function ChatInner() {
         className="messenger-box h-[77%] mb-6 p-4 overflow-y-auto "
       >
         <div>
-          {bubble?.map((item: any, i) => <ChatBubble item={item} key={i} />)}
+          {bubbleList?.map((item: IBubble, i) => (
+            <ChatBubble
+              message={item.message}
+              isTyping={item.isTyping}
+              key={i}
+            />
+          ))}
           {loading && (
             <div className="h-full flex justify-center mt-2 items-center ">
               <div className="loader bg-black p-2 rounded-full flex space-x-3">
@@ -89,7 +101,7 @@ function ChatInner() {
               </div>
             </div>
           )}
-          {!loading && bubble?.length > 0 && (
+          {!loading && bubbleList?.length > 0 && (
             <div className="flex justify-center mt-3 items-center w-full">
               <Button
                 type="button"
