@@ -132,13 +132,13 @@ const markdownOptions: MarkdownToJSX.Options = {
     ul: {
       component: 'ul',
       props: {
-        className: 'list-disc list-inside space-y-2 p-5   rounded-xl'
+        className: 'list-disc list-inside space-y-2 p-1   rounded-xl'
       }
     },
     ol: {
       component: 'ol',
       props: {
-        className: 'list-decimal list-inside space-y-2 p-5  rounded-xl'
+        className: 'list-decimal list-inside space-y-2 p-1 rounded-xl'
       }
     },
     li: {

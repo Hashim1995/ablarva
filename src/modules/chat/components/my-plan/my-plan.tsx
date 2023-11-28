@@ -83,7 +83,7 @@ function MyPlan() {
       <div className="bg-white rounded-lg shadow h-full px-6 overflow-y-scroll">
         <div className="mb-3">
           <div className="text-black text-sm font-medium	  ">Hərtərəfli XL</div>
-          <div className="flex md:flex-row lg:flex-col xl:flex-row justify-center ">
+          <div className="flex  justify-center ">
             <div className="w-32 h-32 ">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
