@@ -139,20 +139,6 @@ export default function Navbar() {
           >
             {dictionary.az.settings}
           </Button>
-
-          <Button
-            className={`w-40 h-12  ${
-              location.pathname.includes('history')
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/history');
-            }}
-            startContent={<BsClockFill size={17} />}
-          >
-            {dictionary.az.history}
-          </Button>
         </ButtonGroup>
       </NavbarContent>
 

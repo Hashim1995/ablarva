@@ -3,6 +3,7 @@ import { Navigate } from 'react-router-dom';
 
 // const LoginPage = React.lazy(() => import('@core/static-pages/login-page'));
 import LoginPage from '@core/static-pages/login-page';
+import SuspenseLoader from '../static-components/suspense-loader';
 
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 const ChatPage = React.lazy(() => import('../../modules/chat/pages'));
@@ -20,7 +21,7 @@ const routes = [
         index: true,
         path: 'chat',
         element: (
-          <Suspense fallback={<div>fallback</div>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <ChatPage />
           </Suspense>
         )
@@ -28,7 +29,7 @@ const routes = [
       {
         path: 'pricing',
         element: (
-          <Suspense fallback={<div>fallback</div>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <PricingPage />
           </Suspense>
         )
@@ -36,17 +37,8 @@ const routes = [
       {
         path: 'settings',
         element: (
-          <Suspense fallback={<div>fallback</div>}>
+          <Suspense fallback={<SuspenseLoader />}>
             <SettingsPage />
-          </Suspense>
-        )
-      },
-      {
-        path: 'history',
-        element: (
-          <Suspense fallback={<div>fallback</div>}>
-            {' '}
-            <h1>tarixce</h1>
           </Suspense>
         )
       },

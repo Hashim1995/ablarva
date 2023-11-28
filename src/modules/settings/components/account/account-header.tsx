@@ -12,8 +12,8 @@ function AccountHeader({
   fieldsIsDisable
 }: IAccountHeaderProps) {
   return (
-    <div>
-      <div className="flex justify-between items-center mb-4 bg-black p-3">
+    <div className="">
+      <div className="flex justify-between items-center  bg-black p-3">
         <h2 className="text-xl text-white font-semibold">
           {dictionary.az.account} <br /> {dictionary.az.infos}
         </h2>
