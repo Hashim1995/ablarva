@@ -1,17 +1,7 @@
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/no-unknown-property */
-/* eslint-disable jsx-a11y/label-has-associated-control */
-/* eslint-disable react/prop-types */
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-restricted-syntax */
-import React, { useEffect, useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import OpenAI from 'openai';
-import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
-import { materialDark } from 'react-syntax-highlighter/dist/esm/styles/prism';
-import Markdown from 'markdown-to-jsx';
-import { Button, Card, Divider, Textarea } from '@nextui-org/react';
-import { SubmitHandler, useForm } from 'react-hook-form';
+import { Button, Card } from '@nextui-org/react';
+import { SubmitHandler } from 'react-hook-form';
 import { IChatForm } from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
 import { BsRecycle } from 'react-icons/bs';
@@ -54,7 +44,6 @@ function ChatInner() {
     try {
       const res = await main(data.message);
 
-      // Add OpenAI's response with the typewriter effect
       setBubbleList(old => [
         ...old,
         { message: res.choices[0].message.content || '', isTyping: true }
@@ -79,16 +68,17 @@ function ChatInner() {
   }, [bubbleList, loading]);
 
   return (
-    <div className="xl:h-full h-[600px]  bg-white   ">
+    <div className=" h-full     ">
       <div
         ref={messengerBoxRef}
-        className="messenger-box h-[77%] mb-6 p-4 overflow-y-auto "
+        className="messenger-box h-[75%]  p-4 overflow-y-auto "
       >
         <div>
           {bubbleList?.map((item: IBubble, i) => (
             <ChatBubble
               message={item.message}
               isTyping={item.isTyping}
+              // eslint-disable-next-line react/no-array-index-key
               key={i}
             />
           ))}
@@ -125,7 +115,7 @@ function ChatInner() {
         </div>
       </div>
 
-      <Card className=" h-[20%] ">
+      <Card className=" h-[25%] ">
         <ChatForm onSubmit={onSubmit} />
       </Card>
     </div>

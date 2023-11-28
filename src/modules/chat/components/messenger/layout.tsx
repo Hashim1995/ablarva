@@ -18,7 +18,7 @@ function Layout() {
         <Drawer className="bg-black" isOpen={isDrawerOpen}>
           <AsistanCardList activeId={2} />
         </Drawer>
-        <main className="flex-1 transition-all duration-300 ease-in-out h-full">
+        <main className="flex-1 bg-white transition-all duration-300 ease-in-out h-full">
           <ChatInner />
         </main>
       </div>
