@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { IAsistanCard } from '@/modules/chat/types';
 import { Card, Image, Divider, CardFooter, Button } from '@nextui-org/react';
 
@@ -14,35 +15,21 @@ function AsistanCard({
 }: IAsistanCardProps) {
   console.log(activeId === id);
   return (
-    <Card
-      isFooterBlurred
-      radius="lg"
-      className={`border-none  h-24 relative my-2 grayscale hover:grayscale-0 cursor-pointer ${
-        activeId === id ? '!grayscale-0' : ''
-      } `}
-    >
+    <div className="group p-1 flex h-18 hover:bg-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl items-center justify-between mb-2 gap-4">
       <Image
         alt="Woman listing to music"
-        className=" object-contain h-full w-full "
+        className="object-contain h-full w-16 rounded-full"
         src={img || ''}
       />
-      <Divider />
-      <CardFooter className=" items-start bg-black/50  flex-col justify-between before:bg-white/10 border-white/20 border-1 overflow-hidden py-1 absolute before:rounded-xl rounded-large  w-full shadow-small h-full z-10">
-        <p className="text-[13px] text-white/80 font-bold ">{title || ''}</p>
-        <p className="text-[11px] italic leading-4 text-white/80 my-1">
-          {description || ''}
+      <div className="text-white w-full flex h-full justify-between flex-col">
+        <h3 className="text-[14px] group-hover:text-black transition-all duration-300 ease-in-out text-left leading-4 mb-2">
+          {title}
+        </h3>
+        <p className="text-[10px] group-hover:text-black transition-all duration-300 ease-in-out text-left">
+          {description}
         </p>
-        <Button
-          className="text-tiny text-white bg-black/20 "
-          variant="flat"
-          color="default"
-          radius="lg"
-          size="sm"
-        >
-          Switch to
-        </Button>
-      </CardFooter>
-    </Card>
+      </div>
+    </div>
   );
 }
 

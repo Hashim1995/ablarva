@@ -9,10 +9,18 @@ interface DrawerProps {
 function Drawer({ isOpen, className, children }: DrawerProps) {
   return (
     <div
-      className={`transition-width duration-300 ease-in-out overflow-hidden
-                  ${isOpen ? `w-64` : 'w-0'} ${className}`}
+      className={`transition-width duration-1000 ease overflow-hidden
+                ${isOpen ? 'w-72' : 'w-0'} ${className}`}
     >
-      {isOpen && <div className="p-4 overflow-y-auto h-full">{children}</div>}
+      {
+        <div
+          className={`p-4 overflow-y-auto h-full
+                  transition-transform duration-[3s] ease
+                  ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
+        >
+          {isOpen && children}
+        </div>
+      }
     </div>
   );
 }
