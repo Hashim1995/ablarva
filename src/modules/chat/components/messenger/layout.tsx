@@ -14,6 +14,7 @@ function Layout() {
         isDrawerOpen={isDrawerOpen}
         setIsDrawerOpen={setIsDrawerOpen}
       />
+
       <div className="inner  h-full flex">
         <Drawer className="bg-black" isOpen={isDrawerOpen}>
           <AsistanCardList activeId={2} />
