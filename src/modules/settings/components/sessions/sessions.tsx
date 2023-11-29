@@ -131,10 +131,13 @@ function Sessions() {
             className=" my-3 border-1  px-5 py-3  rounded-xl overflow-hidden "
           >
             <div className="md:flex items-center justify-between">
-              <div className="mr-3"> {returnDeviceIconByType(item.type)}</div>
+              <div className="2xl:mr-2 xl:mr-1">
+                {' '}
+                {returnDeviceIconByType(item.type)}
+              </div>
               <Divider orientation="vertical" className="h-20" />
               <div className="flex flex-1 justify-between items-center">
-                <div className="px-8">
+                <div className="2xl:px-4 xl:px-1">
                   <div className="tracking-wide text-[14px] text-black ">
                     <span className="font-bold"> Sistem:</span> {item.os}
                   </div>
@@ -150,7 +153,7 @@ function Sessions() {
                     {item.loginDate}
                   </div>
                 </div>
-                <div className="font-bold px-8">
+                <div className="font-bold 2xl:px-4 xl:px-1">
                   {' '}
                   <Chip
                     className="text-white"
@@ -171,7 +174,7 @@ function Sessions() {
                 </div>
               </div>
               <Divider orientation="vertical" className="h-20" />
-              <div className="ml-3">
+              <div className="2xl:ml-2 xl:ml-1">
                 <MdOutlineLogout color="red" size={25} />
               </div>
             </div>

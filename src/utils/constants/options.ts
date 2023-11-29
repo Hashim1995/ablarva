@@ -73,7 +73,11 @@ const genderOptions: selectOption[] = [
 ];
 
 const markdownOptions: MarkdownToJSX.Options = {
+  disableParsingRawHTML: true,
   overrides: {
+    code: {
+      component: Code
+    },
     h1: {
       component: 'h1',
       props: {
@@ -113,7 +117,7 @@ const markdownOptions: MarkdownToJSX.Options = {
     p: {
       component: 'p',
       props: {
-        className: 'mb-4 text-sm text-gray-700'
+        className: 'mb-4 text-[14px] text-gray-700'
       }
     },
     span: {
@@ -178,16 +182,6 @@ const markdownOptions: MarkdownToJSX.Options = {
         className: 'my-4 mx-auto max-w-full h-auto rounded-lg shadow-lg'
       }
     },
-    code: {
-      component: Code
-    },
-    // pre: {
-    //   component: 'pre',
-    //   props: {
-    //     className:
-    //       'bg-gray-900 text-white overflow-x-auto p-4 rounded-lg font-mono text-sm my-4 shadow-lg'
-    //   }
-    // },
     table: {
       component: 'table',
       props: {
@@ -224,7 +218,14 @@ const markdownOptions: MarkdownToJSX.Options = {
       props: {
         className: 'my-6 border-gray-300'
       }
-    }
+    },
+    // pre: {
+    //   component: 'pre',
+    //   props: {
+    //     className:
+    //       'bg-gray-900 text-white overflow-x-auto p-4 rounded-lg font-mono text-sm my-4 shadow-lg'
+    //   }
+    // },
   }
 };
 

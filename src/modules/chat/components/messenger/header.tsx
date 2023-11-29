@@ -13,36 +13,34 @@ function MessengerHeader({
   setIsDrawerOpen
 }: IMessengerHeaderProps) {
   return (
-    <div>
-      <div className="flex justify-between  items-center bg-black p-3">
-        <div className="flex justify-between  gap-5 items-center ">
-          <Button
-            size="sm"
-            isIconOnly
-            onClick={() => setIsDrawerOpen((z: boolean) => !z)}
-            className="bg-transparent rounded-full"
-            aria-label="Filter"
-          >
-            <BsJustify
-              size={20}
-              color="white"
-              className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
-            />
-          </Button>
-          <h2 className="text-xl text-white font-semibold">
-            {dictionary.az.chat}
-          </h2>
-        </div>
-
+    <div className="flex justify-between  items-center bg-black p-3">
+      <div className="flex justify-between  gap-5 items-center ">
         <Button
           size="sm"
           isIconOnly
-          className="bg-white rounded-full"
+          onClick={() => setIsDrawerOpen((z: boolean) => !z)}
+          className="bg-transparent rounded-full"
           aria-label="Filter"
         >
-          <BsFillFilterCircleFill size={20} color="#292D32" />
+          <BsJustify
+            size={20}
+            color="white"
+            className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
+          />
         </Button>
+        <h2 className="text-xl text-white font-semibold">
+          {dictionary.az.chat}
+        </h2>
       </div>
+
+      <Button
+        size="sm"
+        isIconOnly
+        className="bg-white rounded-full"
+        aria-label="Filter"
+      >
+        <BsFillFilterCircleFill size={20} color="#292D32" />
+      </Button>
     </div>
   );
 }

@@ -70,8 +70,9 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent"
+      className="bg-transparent  z-10 "
       maxWidth="full"
+      isBlurred={false}
       height={'7rem'}
       position="static"
       isMenuOpen={isMenuOpen}
@@ -90,7 +91,7 @@ export default function Navbar() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden lg:flex gap-4" justify="start">
+      <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
         <NavbarBrand>
           <BsRobot size={48} />
         </NavbarBrand>
