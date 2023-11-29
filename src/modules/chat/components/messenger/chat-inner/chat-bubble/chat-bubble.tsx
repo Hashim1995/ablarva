@@ -4,7 +4,7 @@ import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 
 import Markdown from 'markdown-to-jsx';
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsHandThumbsDownFill, BsClipboard2CheckFill } from 'react-icons/bs';
 import { useReadLocalStorage } from 'usehooks-ts';
 
@@ -12,14 +12,13 @@ interface IBubble {
   message: string;
   isTyping: boolean;
 }
+const typewriterSound = new Audio(
+  'https://assets.codepen.io/162656/audio-old-typewriter.wav'
+);
 
 function Typewriter({ message, isTyping }: IBubble) {
   const [displayedContent, setDisplayedContent] = useState('');
   const audioEnable = useReadLocalStorage('audioEnable');
-
-  const typewriterSound = useRef(
-    new Audio('https://assets.codepen.io/162656/audio-old-typewriter.wav')
-  );
 
   useEffect(() => {
     if (!isTyping) return;
@@ -27,7 +26,7 @@ function Typewriter({ message, isTyping }: IBubble) {
     if (displayedContent.length < message.length) {
       const timeoutId = setTimeout(() => {
         setDisplayedContent(message.slice(0, displayedContent.length + 1));
-        audioEnable && typewriterSound.current.play();
+        audioEnable && typewriterSound.play();
       }, 10);
 
       return () => clearTimeout(timeoutId);
@@ -35,8 +34,8 @@ function Typewriter({ message, isTyping }: IBubble) {
 
     // Stop the sound when the full message is displayed
     if (audioEnable) {
-      typewriterSound.current.pause();
-      typewriterSound.current.currentTime = 0;
+      typewriterSound.pause();
+      typewriterSound.currentTime = 0;
     }
   }, [displayedContent, message, isTyping]);
 
