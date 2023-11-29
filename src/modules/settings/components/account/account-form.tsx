@@ -45,13 +45,13 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
     setValue('gender', '1');
   }, []);
   return (
-    <div className="  rounded-lg   p-5">
+    <div className="flex-1 flex items-center  rounded-lg   p-5">
       <form
         id="account-form"
         onSubmit={handleSubmit(onSubmit)}
         className="flex w-full justify-between   gap-4"
       >
-        <div className="flex-col w-2/5  flex gap-8">
+        <div className="flex-col w-2/5  flex gap-4">
           <AppHandledInput
             name="email"
             inputProps={{
@@ -64,7 +64,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
             control={control}
             isInvalid={Boolean(errors.email?.message)}
             errors={errors}
-            size="md"
+            size="sm"
             className="text-black bg-transparent"
             rules={{
               required: {
@@ -95,7 +95,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
               isDisabled: fieldsIsDisable
             }}
             control={control}
-            size="md"
+            size="sm"
             className="text-black  relative"
             isInvalid={Boolean(errors.dateOfBirth?.message)}
             errors={errors}
@@ -129,7 +129,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
             placeholder={selectPlaceholderText(dictionary.az.gender)}
             variant="bordered"
             className=" app-select"
-            size="md"
+            size="sm"
             required
             rules={{
               required: {
@@ -149,7 +149,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
           />
         </div>
 
-        <div className="flex-col w-2/5  flex gap-8">
+        <div className="flex-col w-2/5  flex gap-4">
           <AppHandledInput
             name="firstName"
             inputProps={{
@@ -163,7 +163,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
             control={control}
             isInvalid={Boolean(errors.firstName?.message)}
             errors={errors}
-            size="md"
+            size="sm"
             rules={{
               required: {
                 value: true,
@@ -193,7 +193,7 @@ function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
             className="text-black "
             isInvalid={Boolean(errors.lastName?.message)}
             errors={errors}
-            size="md"
+            size="sm"
             rules={{
               required: {
                 value: true,

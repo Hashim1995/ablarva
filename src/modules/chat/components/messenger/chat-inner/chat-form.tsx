@@ -1,10 +1,14 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
-import React from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Textarea } from '@nextui-org/react';
 import { BsFillMicFill, BsFillSendFill } from 'react-icons/bs';
+import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
+
 import { textAreaConfig } from '@/configs/global-configs';
 import { IChatForm } from '@/modules/chat/types';
+
+import { useLocalStorage } from 'usehooks-ts';
+import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
   onSubmit: SubmitHandler<IChatForm>;
@@ -13,6 +17,12 @@ interface IChatFormProps {
 function ChatForm({ onSubmit }: IChatFormProps) {
   // Initialize the hook form methods
   const { register, handleSubmit, reset } = useForm<IChatForm>();
+  const [audioEnable, setAudioEnable] = useLocalStorage<Boolean>(
+    'audioEnable',
+    true
+  );
+
+  const typewriterSound = new Audio(audioUrl);
 
   return (
     <form
@@ -34,6 +44,11 @@ function ChatForm({ onSubmit }: IChatFormProps) {
         rows={3}
         onKeyDown={e => {
           // Check if the key pressed is 'Enter' and there is no shift key pressed
+          if (audioEnable) {
+            typewriterSound.currentTime = 0; // Reset the typewriterSound to the start
+            typewriterSound.play();
+          }
+
           if (e.key === 'Enter' && !e.shiftKey) {
             e.preventDefault(); // Prevent the default behavior of Enter key in a textarea (which is to insert a new line)
             handleSubmit(onSubmit)(); // Call the submit handler
@@ -43,9 +58,21 @@ function ChatForm({ onSubmit }: IChatFormProps) {
         maxRows={3}
       />
 
-      <div className="flex w-full items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-12">
-        <div />
-        <div className="flex  gap-2 px-5 items-center justify-between">
+      <div className="flex w-full px-5 items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-12">
+        <Button
+          type="button"
+          isIconOnly
+          size="sm"
+          onClick={() => setAudioEnable(z => !z)}
+          className="bg-black rounded-full "
+        >
+          {audioEnable ? (
+            <AiFillSound size={16} color="white" />
+          ) : (
+            <AiOutlineSound size={16} color="white" />
+          )}{' '}
+        </Button>
+        <div className="flex  gap-2  items-center justify-between">
           <Button
             type="button"
             isIconOnly

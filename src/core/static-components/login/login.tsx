@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import ParticlesBackground from '../test';
+import ParticlesBackground from '../particles-background';
 import LoginForm from './login-form';
 import RegisterForm from './register-form';
 

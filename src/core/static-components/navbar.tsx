@@ -70,8 +70,9 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent"
+      className="bg-transparent  z-10 "
       maxWidth="full"
+      isBlurred={false}
       height={'7rem'}
       position="static"
       isMenuOpen={isMenuOpen}
@@ -90,7 +91,7 @@ export default function Navbar() {
         </NavbarBrand>
       </NavbarContent>
 
-      <NavbarContent className="hidden lg:flex gap-4" justify="start">
+      <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
         <NavbarBrand>
           <BsRobot size={48} />
         </NavbarBrand>
@@ -138,20 +139,6 @@ export default function Navbar() {
             startContent={<BsFillGearFill size={17} />}
           >
             {dictionary.az.settings}
-          </Button>
-
-          <Button
-            className={`w-40 h-12  ${
-              location.pathname.includes('history')
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/history');
-            }}
-            startContent={<BsClockFill size={17} />}
-          >
-            {dictionary.az.history}
           </Button>
         </ButtonGroup>
       </NavbarContent>

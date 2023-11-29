@@ -117,6 +117,7 @@ input::placeholder {
 .container-fluid {
   width: 100%;
   padding-right: 15px;
+  padding-bottom: 2px;
   padding-left: 15px;
   margin-right: auto;
   margin-left: auto;
@@ -205,5 +206,16 @@ input::placeholder {
 .codeBlock {
   pre {
     padding: 8px !important;
+  }
+}
+
+.custom-row-chart-wrapper {
+  display: flex;
+  height: 233px !important;
+  align-items: center;
+  justify-content: space-between;
+
+  .recharts-legend-wrapper {
+    position: static !important;
   }
 }
