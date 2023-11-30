@@ -78,7 +78,6 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           </a>
         </p>
       </div>
-
       <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
         <h3 className="leading-none text-3xl font-semibold text-gray-700">
           {dictionary.az.login}
@@ -211,7 +210,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           </span>
         </div>
       </div>
-      <ForgotPassword onOpenChange={onOpenChange} isOpen={isOpen} />
+      {isOpen && <ForgotPassword onOpenChange={onOpenChange} isOpen={isOpen} />}{' '}
     </>
   );
 }

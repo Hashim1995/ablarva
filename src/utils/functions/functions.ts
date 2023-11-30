@@ -169,7 +169,7 @@ export function convertDateFormat(dateStr: string): string {
 }
 
 export function convertDDMMYYYtoISOString(dateStr: string): string {
-  const [day, month, year] = dateStr.split('.')
-  const dateObj = new Date(+year, +month - 1, +day).toISOString()
-  return dateObj
+  const [day, month, year] = dateStr.split('.');
+  const dateObj = new Date(+year, +month - 1, +day).toISOString();
+  return dateObj;
 }

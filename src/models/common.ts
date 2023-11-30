@@ -24,4 +24,10 @@ interface IMenuItemsNavbar {
 }
 
 type setState = Dispatch<SetStateAction<boolean>>;
-export type { IGlobalResponseEmpty, selectOption, setState, IGlobalResponse, IMenuItemsNavbar };
+export type {
+  IGlobalResponseEmpty,
+  selectOption,
+  setState,
+  IGlobalResponse,
+  IMenuItemsNavbar
+};

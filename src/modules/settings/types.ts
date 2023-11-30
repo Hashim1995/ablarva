@@ -8,8 +8,6 @@ interface IAccountForm {
   dateOfBirth: string | Date;
 }
 
-
-interface IAccountPayload extends Omit<IAccountForm, 'email'> { }
-
+interface IAccountPayload extends Omit<IAccountForm, 'email'> {}
 
 export type { IAccountForm, IAccountPayload };

@@ -25,7 +25,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): AuthService {
     if (!this.instance) {
@@ -56,10 +56,13 @@ export class AuthService {
     body: Omit<ILogin, 'password'>,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.post('api/client/user/ResetPassword', body, onError);
+    const res = await HttpUtil.post(
+      'api/client/user/ResetPassword',
+      body,
+      onError
+    );
     return res;
   }
-
 
   public async changeUserDetail(
     body: IAccountPayload,
@@ -68,7 +71,6 @@ export class AuthService {
     const res = await HttpUtil.put('api/client/user/Details', body, onError);
     return res;
   }
-
 
   public async register(
     body: IUserRegister,
