@@ -218,7 +218,7 @@ const markdownOptions: MarkdownToJSX.Options = {
       props: {
         className: 'my-6 border-gray-300'
       }
-    },
+    }
     // pre: {
     //   component: 'pre',
     //   props: {
