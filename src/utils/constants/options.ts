@@ -63,11 +63,11 @@ const fileTypeOptions: selectOption[] = [
 
 const genderOptions: selectOption[] = [
   {
-    value: '1',
+    value: 1,
     label: dictionary.az.male
   },
   {
-    value: '2',
+    value: 2,
     label: dictionary.az.female
   }
 ];
@@ -218,7 +218,7 @@ const markdownOptions: MarkdownToJSX.Options = {
       props: {
         className: 'my-6 border-gray-300'
       }
-    },
+    }
     // pre: {
     //   component: 'pre',
     //   props: {

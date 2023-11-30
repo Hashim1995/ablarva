@@ -1,3 +1,4 @@
+/* eslint-disable radix */
 /* eslint-disable no-restricted-globals */
 /* eslint-disable no-else-return */
 /* eslint-disable no-plusplus */
@@ -165,4 +166,10 @@ export function convertDateFormat(dateStr: string): string {
 
   // Format the date as 'yyyy-mm-dd'
   return `${year}-${paddedMonth}-${paddedDay}`;
+}
+
+export function convertDDMMYYYtoISOString(dateStr: string): string {
+  const [day, month, year] = dateStr.split('.');
+  const dateObj = new Date(+year, +month - 1, +day).toISOString();
+  return dateObj;
 }
