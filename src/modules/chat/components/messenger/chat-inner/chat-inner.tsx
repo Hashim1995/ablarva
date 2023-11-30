@@ -6,6 +6,7 @@ import { SubmitHandler } from 'react-hook-form';
 import { IChatForm } from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
 import { BsRecycle } from 'react-icons/bs';
+// @ts-ignore
 import ScrollToBottom from 'react-scroll-to-bottom';
 
 import ChatForm from './chat-form';
