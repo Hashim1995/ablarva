@@ -1,44 +1,25 @@
 /* eslint-disable no-useless-escape */
-/* eslint-disable no-unused-vars */
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-unstable-nested-components */
 import { IUserRegister } from '@/models/user';
 import {
   AuthService,
-  ILoginResponse,
   IRegisterResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
-import {
-  Button,
-  Input,
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-  Radio,
-  RadioGroup,
-  Select,
-  SelectItem,
-  Tooltip,
-  useNavbar
-} from '@nextui-org/react';
+import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-import dayjs from 'dayjs';
 
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import {
   BsEye,
   BsRobot,
   BsCalendarWeekFill,
   BsEnvelopeFill,
-  BsFillPersonLinesFill,
-  BsFillKeyFill,
   BsFillPersonFill,
   BsEyeSlash
 } from 'react-icons/bs';
 import { useLocalStorage } from 'usehooks-ts';
-import Datepicker from 'tailwind-datepicker-react';
-import { inputConfig } from '@/configs/global-configs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
@@ -46,13 +27,9 @@ import {
   selectPlaceholderText
 } from '@/utils/constants/texts';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import {
-  convertDateFormat,
-  generateOptionListPerNumber
-} from '@/utils/functions/functions';
+import { convertDateFormat } from '@/utils/functions/functions';
 import { genderOptions } from '@/utils/constants/options';
 import AppHandledDate from '@/components/forms/date/handled-date';
-import { useNavigate } from 'react-router-dom';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -63,6 +40,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     watch,
     clearErrors,
     setError,
+    setValue,
     formState: { errors, isSubmitting },
     control
   } = useForm<IUserRegister>({
@@ -73,7 +51,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
-  const navigate = useNavigate();
 
   const onSubmit = async (data: IUserRegister) => {
     console.log(convertDateFormat(String(data.dateOfBirth)), 'xaliq quluzade');
@@ -89,10 +66,15 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
         payload
       );
       if (res.isSuccess) {
-        navigate('/login');
+        handleFlip();
+        setValue('confirmPassword', '');
+        setValue('email', '');
+        setValue('firstName', '');
+        setValue('lastName', '');
+        setValue('password', '');
+        setValue('dateOfBirth', '');
+        setValue('gender', '');
       }
-
-      // setUserToken(res.data.accessToken);
     } catch (err) {
       console.log(err);
     }

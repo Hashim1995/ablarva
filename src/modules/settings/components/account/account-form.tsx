@@ -17,33 +17,78 @@ import AppHandledDate from '@/components/forms/date/handled-date';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
 import { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import {
+  AuthService,
+  IGetMeResponse
+} from '@/services/auth-services/auth-services';
+import { IGlobalResponseEmpty, setState } from '@/models/common';
+import { IUserLoggedData } from '@/models/user';
+import { setUser } from '@/redux/auth/auth-slice';
+import dayjs from 'dayjs';
+import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
 import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
   fieldsIsDisable: boolean;
+  setIsLoading: setState;
 }
 
-function AccountForm({ fieldsIsDisable }: IAccountFormProps) {
+function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
   const {
     handleSubmit,
     setValue,
     formState: { errors, isSubmitting },
     control
   } = useForm<IAccountForm>({
-    mode: 'onSubmit'
+    mode: 'onSubmit',
+    defaultValues: {}
   });
 
-  const onSubmit = async (data: IAccountForm) => {
-    console.log(data);
+  const disptach = useDispatch();
+
+  const getMe = async () => {
+    try {
+      const res: IGetMeResponse = await AuthService.getInstance().getMe();
+      const userSlicePayload: IUserLoggedData = res.data;
+      disptach(setUser(userSlicePayload));
+    } catch (err) {
+      console.log(err);
+    }
   };
 
+  const onSubmit = async (data: IAccountForm) => {
+    const payload: Omit<IAccountForm, 'email'> = {
+      firstName: data?.firstName,
+      lastName: data?.lastName,
+      gender: data?.gender,
+      dateOfBirth: convertDDMMYYYtoISOString(String(data.dateOfBirth))
+    };
+    console.log(payload, 'aaa');
+
+    setIsLoading(true);
+    try {
+      const res: IGlobalResponseEmpty =
+        await AuthService.getInstance().changeUserDetail(payload);
+
+      res.isSuccess && getMe();
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const { user } = useSelector((state: RootState) => state.user);
+
   useEffect(() => {
-    setValue('email', 'bilalsadiqov@gmail.com');
-    setValue('firstName', 'Bilal');
-    setValue('lastName', 'Sadiqov');
-    setValue('dateOfBirth', '22.11.1997');
-    setValue('gender', '1');
-  }, []);
+    setValue('email', user.email);
+    setValue('firstName', user.firstName);
+    setValue('lastName', user.lastName);
+    setValue('dateOfBirth', user.dateOfBirth);
+    setValue('gender', String(user.gender));
+  }, [user]);
   return (
     <div className="flex-1 flex items-center  rounded-lg   p-5">
       <form

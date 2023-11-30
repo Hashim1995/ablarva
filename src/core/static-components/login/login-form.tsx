@@ -10,18 +10,21 @@ import {
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
-import { Button } from '@nextui-org/react';
+import { Button, useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsRobot, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
+import ForgotPassword from './forgot-password';
 
 interface ILoginFormProps {
   handleFlip: () => void;
 }
 function LoginForm({ handleFlip }: ILoginFormProps) {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -30,7 +33,6 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
     mode: 'onSubmit',
     defaultValues: {}
   });
-  // eslint-disable-next-line no-unused-vars
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
 
@@ -163,6 +165,21 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                 />
               )}
             />
+            <div className="flex flex-col space-y-5">
+              <span className="flex items-center justify-center ">
+                <span className="h-px bg-gray-400 w-10" />
+                <span
+                  aria-hidden
+                  onClick={onOpen}
+                  className="font-normal text-black  text-sm"
+                >
+                  <span className=" text-blue-500   cursor-pointer" aria-hidden>
+                    {dictionary.az.forgetPassword}
+                  </span>
+                </span>
+                <span className="h-px bg-gray-400 w-10" />
+              </span>
+            </div>
           </div>
           <Button
             size="sm"
@@ -194,6 +211,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           </span>
         </div>
       </div>
+      <ForgotPassword onOpenChange={onOpenChange} isOpen={isOpen} />
     </>
   );
 }
