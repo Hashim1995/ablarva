@@ -35,6 +35,8 @@ import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -63,6 +65,7 @@ export default function Navbar() {
   // const { toggle, isDarkMode } = useDarkMode();
   const location = useLocation();
   const navigate = useNavigate();
+  const { user } = useSelector((state: RootState) => state.user);
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -146,8 +149,10 @@ export default function Navbar() {
       <NavbarContent justify="end">
         <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between">
           <User
-            name="Jane Doe"
-            description="Product Designer"
+            name={
+              user ? `${user.firstName} ${user.lastName}` : dictionary.az.empty
+            }
+            description={user.email || dictionary.az.empty}
             avatarProps={{
               src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
             }}

@@ -6,10 +6,12 @@ import { BsPencilSquare, BsFolderFill } from 'react-icons/bs';
 interface IAccountHeaderProps {
   setFieldsIsDisable: setState;
   fieldsIsDisable: boolean;
+  isLoading: boolean;
 }
 function AccountHeader({
-  setFieldsIsDisable,
-  fieldsIsDisable
+  fieldsIsDisable,
+  isLoading,
+  setFieldsIsDisable
 }: IAccountHeaderProps) {
   return (
     <div className="">
@@ -17,10 +19,11 @@ function AccountHeader({
         <h2 className="text-xl text-white font-semibold">
           {dictionary.az.account} <br /> {dictionary.az.infos}
         </h2>
-        {fieldsIsDisable ? (
+        <div className="flex gap-5">
           <Button
             size="sm"
             isIconOnly
+            isDisabled={isLoading}
             onClick={() => setFieldsIsDisable(z => !z)}
             className="bg-white rounded-full"
             aria-label="submit"
@@ -28,18 +31,20 @@ function AccountHeader({
           >
             <BsPencilSquare size={20} color="#292D32" />
           </Button>
-        ) : (
-          <Button
-            size="sm"
-            isIconOnly
-            form="account-form"
-            className="bg-white rounded-full"
-            aria-label="submit"
-            type={'submit'}
-          >
-            <BsFolderFill size={20} color="#292D32" />
-          </Button>
-        )}
+          {!fieldsIsDisable && (
+            <Button
+              size="sm"
+              isLoading={isLoading}
+              isIconOnly
+              form="account-form"
+              className="bg-white rounded-full"
+              aria-label="submit"
+              type="submit"
+            >
+              <BsFolderFill size={20} color="#292D32" />
+            </Button>
+          )}
+        </div>
       </div>
     </div>
   );

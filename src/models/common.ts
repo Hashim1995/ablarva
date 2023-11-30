@@ -7,6 +7,10 @@ interface IGlobalResponse {
   errors: null | string | string[];
   isSuccess: boolean;
 }
+interface IGlobalResponseEmpty {
+  errors: null | string | string[];
+  isSuccess: boolean;
+}
 
 interface selectOption {
   value: string | number;
@@ -20,4 +24,10 @@ interface IMenuItemsNavbar {
 }
 
 type setState = Dispatch<SetStateAction<boolean>>;
-export type { selectOption, setState, IGlobalResponse, IMenuItemsNavbar };
+export type {
+  IGlobalResponseEmpty,
+  selectOption,
+  setState,
+  IGlobalResponse,
+  IMenuItemsNavbar
+};
