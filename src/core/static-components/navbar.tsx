@@ -73,10 +73,9 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent  z-10 "
+      className="bg-transparent z-10 h-[6rem] sm:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
-      height={'7rem'}
       position="static"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -147,7 +146,7 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
           <User
             name={
               user ? `${user.firstName} ${user.lastName}` : dictionary.az.empty
@@ -179,7 +178,7 @@ export default function Navbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className=" md:hidden items-start pt-10">
+      <NavbarMenu className=" md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button

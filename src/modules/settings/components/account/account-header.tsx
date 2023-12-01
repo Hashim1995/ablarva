@@ -15,8 +15,8 @@ function AccountHeader({
 }: IAccountHeaderProps) {
   return (
     <div className="">
-      <div className="flex justify-between items-center  bg-black p-3">
-        <h2 className="text-xl text-white font-semibold">
+      <div className="flex justify-between items-center  bg-black p-2 sm:p-3">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.account} <br /> {dictionary.az.infos}
         </h2>
         <div className="flex gap-5">
@@ -29,7 +29,11 @@ function AccountHeader({
             aria-label="submit"
             type="button"
           >
-            <BsPencilSquare size={20} color="#292D32" />
+            <BsPencilSquare
+              size={20}
+              className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
+              color="#292D32"
+            />
           </Button>
           {!fieldsIsDisable && (
             <Button
@@ -41,7 +45,11 @@ function AccountHeader({
               aria-label="submit"
               type="submit"
             >
-              <BsFolderFill size={20} color="#292D32" />
+              <BsFolderFill
+                size={20}
+                className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
+                color="#292D32"
+              />
             </Button>
           )}
         </div>

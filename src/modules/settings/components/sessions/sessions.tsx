@@ -100,19 +100,39 @@ function Sessions() {
   const returnDeviceIconByType = (type: number) => {
     switch (type) {
       case 1:
-        return <MdOutlineLaptopMac size={35} />;
+        return (
+          <MdOutlineLaptopMac
+            className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            size={35}
+          />
+        );
       case 2:
-        return <MdOutlinePhoneIphone size={35} />;
+        return (
+          <MdOutlinePhoneIphone
+            className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            size={35}
+          />
+        );
       case 3:
-        return <TbDeviceIpad size={35} />;
+        return (
+          <TbDeviceIpad
+            className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            size={35}
+          />
+        );
       default:
-        return <TbDeviceIpad size={35} />;
+        return (
+          <TbDeviceIpad
+            className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            size={35}
+          />
+        );
     }
   };
   return (
-    <Card className="  shadow  h-full ">
-      <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="text-xl text-white font-semibold">
+    <Card className="rounded-lg sm:rounded-2xl shadow h-full ">
+      <div className="flex justify-between items-center xl:mb-4 bg-black p-3">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.active} <br /> {dictionary.az.sessions}
         </h2>
         <Button
@@ -121,23 +141,27 @@ function Sessions() {
           className="bg-white rounded-full"
           aria-label="Filter"
         >
-          <BsFillFilterCircleFill size={20} color="#292D32" />
+          <BsFillFilterCircleFill
+            size={20}
+            className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
+            color="#292D32"
+          />
         </Button>
       </div>
       <div className="bg-white  rounded-lg   xl:py-3 xl:px-6 py-1 px-2 overflow-y-scroll">
         {sessionHistory.map((item: ISessionsListItem) => (
           <div
             key={item.id}
-            className=" my-3 border-1  px-5 py-3  rounded-xl overflow-hidden "
+            className=" my-3 border-1 px-2 sm:px-5 py-2 sm:py-3  rounded-xl overflow-hidden "
           >
-            <div className="md:flex items-center justify-between">
-              <div className="2xl:mr-2 xl:mr-1">
+            <div className="flex items-center justify-between">
+              <div className="2xl:mr-2 xl:mr-1 mr-2">
                 {' '}
                 {returnDeviceIconByType(item.type)}
               </div>
               <Divider orientation="vertical" className="h-20" />
               <div className="flex flex-1 justify-between items-center">
-                <div className="2xl:px-4 xl:px-1">
+                <div className="2xl:px-4 px-2">
                   <div className="tracking-wide text-[14px] text-black ">
                     <span className="font-bold"> Sistem:</span> {item.os}
                   </div>
@@ -153,7 +177,7 @@ function Sessions() {
                     {item.loginDate}
                   </div>
                 </div>
-                <div className="font-bold 2xl:px-4 xl:px-1">
+                <div className="font-bold 2xl:px-4 px-2">
                   {' '}
                   <Chip
                     className="text-white"
@@ -174,8 +198,12 @@ function Sessions() {
                 </div>
               </div>
               <Divider orientation="vertical" className="h-20" />
-              <div className="2xl:ml-2 xl:ml-1">
-                <MdOutlineLogout color="red" size={25} />
+              <div className="2xl:ml-2 ml-2">
+                <MdOutlineLogout
+                  className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px]"
+                  color="red"
+                  size={25}
+                />
               </div>
             </div>
           </div>
