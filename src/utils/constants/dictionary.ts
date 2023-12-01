@@ -8,7 +8,8 @@ export const dictionary = {
     logOut: 'Çıxış',
     account: 'Hesab',
     forgetPassword: 'Şifrəmi unutdum',
-    newPswrdSentToEmail: "Yeni şifrəniz email ünvanınıza uğurla göndərildi. Email ünvanınza gələn kodu 'kod' xanasına yazın və yeni şifrənizi təyin edin ",
+    newPswrdSentToEmail:
+      "Yeni şifrəniz email ünvanınıza uğurla göndərildi. Email ünvanınza gələn kodu 'kod' xanasına yazın və yeni şifrənizi təyin edin ",
     infos: 'Məlumatları',
     sessions: 'Sessiyalar',
     personalCabinet: 'Şəxsi kabinet',

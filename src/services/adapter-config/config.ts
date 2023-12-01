@@ -24,10 +24,10 @@ const axiosErrorHandler = (error: unknown) => {
 
 const axiosErrorHandlerRaw = (error: any) => {
   if (error instanceof AxiosError) {
-    return error.response?.data
-  };
-  return error
-}
+    return error.response?.data;
+  }
+  return error;
+};
 
 // Define a request interceptor to add the authorization token to headers if available
 axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
@@ -131,7 +131,11 @@ export class HttpUtil {
         .then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e), axiosErrorHandlerRaw(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
 
       if (onError) onError!(error);
       if (error.preventDefault) {
@@ -147,8 +151,11 @@ export class HttpUtil {
       const result = await axios.post(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e), axiosErrorHandlerRaw(e));
-
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
 
       if (onError) onError!(error);
       if (error.preventDefault) {
@@ -165,8 +172,11 @@ export class HttpUtil {
       const result = await axios.put(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e), axiosErrorHandlerRaw(e));
-
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
 
       if (onError) onError!(error);
       if (error.preventDefault) {
@@ -183,8 +193,11 @@ export class HttpUtil {
       const result = await axios.patch(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e), axiosErrorHandlerRaw(e));
-
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
 
       if (onError) onError!(error);
       if (error.preventDefault) {
@@ -201,8 +214,11 @@ export class HttpUtil {
       const result = await axios.delete(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e), axiosErrorHandlerRaw(e));
-
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
 
       if (onError) onError!(error);
       if (error.preventDefault) {
