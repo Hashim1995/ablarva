@@ -10,6 +10,7 @@ interface IGlobalResponse {
 interface IGlobalResponseEmpty {
   errors: null | string | string[];
   isSuccess: boolean;
+  data: null | boolean,
 }
 
 interface selectOption {
