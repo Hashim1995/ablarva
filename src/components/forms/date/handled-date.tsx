@@ -14,13 +14,13 @@ const options: IOptions = {
   clearBtnText: 'Təmizlə',
   maxDate: new Date('2023-01-01'),
   theme: {
-    background: 'bg-black dark:bg-black',
+    background: 'bg-black ',
     todayBtn: 'bg-black',
     clearBtn: '!bg-black',
     icons: '!bg-black',
     text: '',
     disabledText:
-      'hover:bg-gray-100 dark:hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  dark:text-white font-semibold text-sm  text-gray-900  ',
+      'hover:bg-gray-100 hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  text-white font-semibold text-sm  text-gray-900  ',
     input: '!bg-black',
     inputIcon: '!bg-black',
     selected: 'bg-black'

@@ -15,7 +15,7 @@ function Bottom() {
     <Card className="h-full rounded-lg sm:rounded-2xl">
       <div className="flex justify-between items-center mb-4 bg-black p-2 sm:p-3">
         <h2 className="text-base sm:text-xl text-white font-semibold">
-          {dictionary.az.account} <br /> {`${dictionary.az.history}si`}
+          {dictionary.az.account} {`${dictionary.az.history}si`}
         </h2>
       </div>
       <Table

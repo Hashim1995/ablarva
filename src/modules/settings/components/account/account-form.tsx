@@ -185,7 +185,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             options={genderOptions}
             errors={errors}
             IconElement={() => (
-              <BsCalendarWeekFill
+              <BsFillPersonFill
                 size={16}
                 color={errors.dateOfBirth?.message ? '#f31260' : ''}
                 className="text-2xl text-default-400 pointer-events-none flex-shrink-0"

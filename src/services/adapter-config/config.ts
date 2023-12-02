@@ -14,13 +14,19 @@ axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const axiosErrorHandler = (error: unknown) => {
   if (error instanceof AxiosError) {
-    console.log(error.response?.data);
     if (error?.response?.data?.errors?.length) {
       return error.response.data.errors;
     }
     return dictionary.en.errorOccurred;
   }
   return dictionary.en.errorOccurred;
+};
+
+const axiosErrorHandlerRaw = (error: any) => {
+  if (error instanceof AxiosError) {
+    return error.response?.data;
+  }
+  return error;
 };
 
 // Define a request interceptor to add the authorization token to headers if available
@@ -125,7 +131,12 @@ export class HttpUtil {
         .then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
+
       if (onError) onError!(error);
       if (error.preventDefault) {
         return null;
@@ -140,7 +151,12 @@ export class HttpUtil {
       const result = await axios.post(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
+
       if (onError) onError!(error);
       if (error.preventDefault) {
         return null;
@@ -156,7 +172,12 @@ export class HttpUtil {
       const result = await axios.put(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
+
       if (onError) onError!(error);
       if (error.preventDefault) {
         return null;
@@ -172,7 +193,12 @@ export class HttpUtil {
       const result = await axios.patch(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
+
       if (onError) onError!(error);
       if (error.preventDefault) {
         return null;
@@ -188,7 +214,12 @@ export class HttpUtil {
       const result = await axios.delete(url, body).then(responseBody);
       return result;
     } catch (e: any) {
-      const error = new HttpError(e.response.status, axiosErrorHandler(e));
+      const error = new HttpError(
+        e.response.status,
+        axiosErrorHandler(e),
+        axiosErrorHandlerRaw(e)
+      );
+
       if (onError) onError!(error);
       if (error.preventDefault) {
         return null;
