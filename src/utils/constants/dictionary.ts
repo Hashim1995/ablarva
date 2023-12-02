@@ -8,6 +8,8 @@ export const dictionary = {
     logOut: 'Çıxış',
     account: 'Hesab',
     forgetPassword: 'Şifrəmi unutdum',
+    emailVerify: 'Email təsdiqlənməsi',
+    verifyCodeSentSuccesfully: 'Email təsdiqlənmə kodu uğurla email ünvanınıza göndərildi',
     newPswrdSentToEmail:
       "Yeni şifrəniz email ünvanınıza uğurla göndərildi. Email ünvanınza gələn kodu 'kod' xanasına yazın və yeni şifrənizi təyin edin ",
     infos: 'Məlumatları',
@@ -155,6 +157,7 @@ export const dictionary = {
     password: 'Şifrə',
     login: 'Daxil ol',
     sendPswrdToEmail: 'Email-ə yeni şifrəni göndər',
+    sendCodeToEmail: 'Email-ə yeni kod göndər',
     settings: 'Tənzimləmələr',
     edcCreateInvoice: 'Faktura tərtibi',
     voen: 'VÖEN',

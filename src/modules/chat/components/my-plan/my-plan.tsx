@@ -69,7 +69,7 @@ function MyPlan() {
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
         <h2 className="text-xl text-white font-semibold">
-          {dictionary.az.my} <br /> {dictionary.az.tariff}
+          {dictionary.az.my} {dictionary.az.tariff}
         </h2>
         <Button
           size="sm"

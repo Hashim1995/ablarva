@@ -10,7 +10,8 @@ const initialState = {
     password: '',
     confirmPassword: '',
     gender: 0,
-    dateOfBirth: ''
+    dateOfBirth: '',
+    verified: false,
   },
 
   entities: []

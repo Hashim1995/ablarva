@@ -133,7 +133,7 @@ function Sessions() {
     <Card className="rounded-lg sm:rounded-2xl shadow h-full ">
       <div className="flex justify-between items-center xl:mb-4 bg-black p-3">
         <h2 className="text-base sm:text-xl text-white font-semibold">
-          {dictionary.az.active} <br /> {dictionary.az.sessions}
+          {dictionary.az.active} {dictionary.az.sessions}
         </h2>
         <Button
           size="sm"

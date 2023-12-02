@@ -10,6 +10,7 @@ import {
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import { IAccountPayload } from '@/modules/settings/types';
 import { IForgotPasswordForm } from '@/core/static-components/login/forgot-password';
+import { IVerifyEmailForm } from '@/core/static-components/verify-email';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 export interface IGetMeResponse extends IGlobalResponse {
@@ -26,7 +27,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): AuthService {
     if (!this.instance) {
@@ -76,6 +77,34 @@ export class AuthService {
     );
     return res;
   }
+
+  public async verifyEmail(
+    body: IVerifyEmailForm,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.post(
+      'api/client/user/Verify',
+      body,
+      onError
+    );
+    return res;
+  }
+
+  public async resendVerificationCode(
+
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.post(
+      'api/client/user/ResendVerificationCode',
+      null,
+      onError
+    );
+    return res;
+  }
+
+
+
+
 
   public async changeUserDetail(
     body: IAccountPayload,
