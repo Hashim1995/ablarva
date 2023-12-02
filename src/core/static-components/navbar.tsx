@@ -18,7 +18,9 @@ import {
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
-  DropdownItem
+  Tooltip,
+  DropdownItem,
+  useDisclosure
 } from '@nextui-org/react';
 
 import { useDarkMode } from 'usehooks-ts';
@@ -29,7 +31,8 @@ import {
   BsArrowRightCircle,
   BsFillGearFill,
   BsFillFilterSquareFill,
-  BsRobot
+  BsRobot,
+  BsEnvelope
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -37,6 +40,7 @@ import { useState, useEffect } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import VerifyEmail from './verify-email';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -66,6 +70,7 @@ export default function Navbar() {
   const location = useLocation();
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   useEffect(() => {
     setIsMenuOpen(false);
@@ -73,10 +78,9 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent  z-10 "
+      className="bg-transparent z-10 h-[6rem] sm:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
-      height={'7rem'}
       position="static"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
@@ -101,7 +105,7 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-        <ButtonGroup className=" rounded-xl  shadow-md dark:border-white dark:border-1">
+        <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
           <Button
             className={` w-40 h-12  ${
               location.pathname.includes('chat')
@@ -147,7 +151,25 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+          {' '}
+          {!user.verified && (
+            <Tooltip placement="left" content={dictionary.az.emailVerify}>
+              <Button
+                onClick={onOpen}
+                size="sm"
+                isIconOnly
+                className="bg-white rounded-full"
+                aria-label="Filter"
+              >
+                <BsEnvelope
+                  className="cursor-pointer animate-pulse"
+                  color="red"
+                  size={22}
+                />
+              </Button>
+            </Tooltip>
+          )}
           <User
             name={
               user ? `${user.firstName} ${user.lastName}` : dictionary.az.empty
@@ -157,7 +179,6 @@ export default function Navbar() {
               src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
             }}
           />
-
           <Dropdown>
             <DropdownTrigger>
               <div>
@@ -179,7 +200,7 @@ export default function Navbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className=" md:hidden items-start pt-10">
+      <NavbarMenu className=" md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button
@@ -193,6 +214,7 @@ export default function Navbar() {
           </NavbarMenuItem>
         ))}
       </NavbarMenu>
+      {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
     </NavbarNext>
   );
 }

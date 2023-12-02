@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
 import { useEffect, useRef, useState } from 'react';
 import OpenAI from 'openai';

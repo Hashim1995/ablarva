@@ -1,7 +1,7 @@
+/* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { IGlobalResponseEmpty } from '@/models/common';
-import { ILogin } from '@/models/user';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
@@ -16,49 +16,79 @@ import {
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEnvelopeFill } from 'react-icons/bs';
+import {
+  BsEnvelopeFill,
+  BsEye,
+  BsFillKeyFill,
+  BsEyeSlash,
+  BsFillPersonFill
+} from 'react-icons/bs';
 
 interface IForgotPassword {
   isOpen: boolean;
   onOpenChange: () => void;
 }
 
+export interface IForgotPasswordForm {
+  email?: string;
+  password?: string;
+  confirmPassword?: string;
+  code?: string;
+}
+
 function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
   const {
     handleSubmit,
+    watch,
+    clearErrors,
+    setError,
     reset,
     formState: { errors, isSubmitting },
     control
-  } = useForm<Omit<ILogin, 'password'>>({
-    mode: 'onChange',
-    defaultValues: {
-      email: ''
-    }
+  } = useForm<IForgotPasswordForm>({
+    mode: 'onChange'
   });
+  const [showPassword, setShowPassword] = useState(false);
+  const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const [hasCode, setHasCode] = useState(false);
 
-  const [showAlert, setshowAlert] = useState(false);
-
-  const onSubmit = async (data: Omit<ILogin, 'password'>) => {
-    try {
-      const res: IGlobalResponseEmpty =
-        await AuthService.getInstance().forgetPassword(data);
-
-      res.isSuccess && setshowAlert(true);
-    } catch (err) {
-      console.log(err);
+  const onSubmit = async (data: IForgotPasswordForm) => {
+    if (!hasCode) {
+      try {
+        const res = await AuthService.getInstance().forgetPassword(data, e => {
+          console.log(e.rawError, 'edahim');
+          if (e.rawError.data) {
+            setHasCode(true);
+          }
+        });
+        if (res.isSuccess) {
+          setHasCode(true);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    } else {
+      try {
+        const res: IGlobalResponseEmpty =
+          await AuthService.getInstance().resetPassword(data);
+        res.isSuccess && onOpenChange();
+      } catch (err) {
+        console.log(err);
+      }
     }
   };
 
   useEffect(
     () => () => {
       reset();
-      setshowAlert(false);
+      setHasCode(false);
     },
     []
   );
   return (
     <div>
       <Modal
+        size="lg"
         isDismissable={false}
         backdrop="opaque"
         isOpen={isOpen}
@@ -107,16 +137,218 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                         />
                       )}
                     />
+
+                    {hasCode && (
+                      <>
+                        <AppHandledInput
+                          name="code"
+                          inputProps={{
+                            id: 'code'
+                          }}
+                          type="text"
+                          className="text-black"
+                          control={control}
+                          isInvalid={Boolean(errors.code?.message)}
+                          errors={errors}
+                          size="sm"
+                          rules={{
+                            required: {
+                              value: true,
+                              message: inputValidationText(dictionary.az.code)
+                            }
+                          }}
+                          placeholder={inputPlaceholderText(dictionary.az.code)}
+                          required
+                          IconElement={() => (
+                            <BsFillKeyFill
+                              size={16}
+                              color={errors.code?.message ? '#f31260' : ''}
+                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                            />
+                          )}
+                        />
+                        <AppHandledInput
+                          name="password"
+                          control={control}
+                          className="text-black"
+                          isInvalid={Boolean(errors.password?.message)}
+                          errors={errors}
+                          onChangeApp={() => {
+                            if (
+                              watch('password') !== watch('confirmPassword')
+                            ) {
+                              setError('password', {
+                                message: `${dictionary.az.confirmPasswordMessage}`
+                              });
+                              setError('confirmPassword', {
+                                message: `${dictionary.az.confirmPasswordMessage}`
+                              });
+                            } else {
+                              clearErrors('password');
+                              clearErrors('confirmPassword');
+                            }
+                          }}
+                          rules={{
+                            required: {
+                              value: true,
+                              message: inputValidationText(
+                                dictionary.az.password
+                              )
+                            },
+                            minLength: {
+                              value: 8,
+                              message: `${dictionary.az.minLength}`
+                            },
+                            validate: {
+                              RequireDigit: value =>
+                                /[0-9]/.test(value) ||
+                                `${dictionary.az.minNumber}`,
+                              RequireLowercase: value =>
+                                /[a-z]/.test(value) ||
+                                `${dictionary.az.minSmallLetter}`,
+                              RequireUppercase: value =>
+                                /[A-Z]/.test(value) ||
+                                `${dictionary.az.minBigLetter}`,
+                              RequireSpecialCharacter: value =>
+                                /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
+                                  value
+                                ) || `${dictionary.az.minCharacter}`
+                            }
+                          }}
+                          placeholder={inputPlaceholderText(
+                            dictionary.az.password
+                          )}
+                          required
+                          size="sm"
+                          inputProps={{
+                            id: 'password',
+                            endContent: (
+                              <button
+                                className="focus:outline-none"
+                                type="button"
+                                onClick={() => setShowPassword(z => !z)}
+                              >
+                                {showPassword ? (
+                                  <BsEye
+                                    size={16}
+                                    className="text-2xl text-default-400 pointer-events-none"
+                                  />
+                                ) : (
+                                  <BsEyeSlash
+                                    size={16}
+                                    className="text-2xl text-default-400 pointer-events-none"
+                                  />
+                                )}
+                              </button>
+                            )
+                          }}
+                          type={showPassword ? 'text' : 'password'}
+                          IconElement={() => (
+                            <BsFillPersonFill
+                              size={16}
+                              color={errors.password?.message ? '#f31260' : ''}
+                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                            />
+                          )}
+                        />
+
+                        <AppHandledInput
+                          name="confirmPassword"
+                          control={control}
+                          size="sm"
+                          className="text-black"
+                          isInvalid={Boolean(errors.confirmPassword?.message)}
+                          errors={errors}
+                          onChangeApp={() => {
+                            if (
+                              watch('password') !== watch('confirmPassword')
+                            ) {
+                              setError('password', {
+                                message: `${dictionary.az.confirmPasswordMessage}`
+                              });
+                              setError('confirmPassword', {
+                                message: `${dictionary.az.confirmPasswordMessage}`
+                              });
+                            } else {
+                              clearErrors('password');
+                              clearErrors('confirmPassword');
+                            }
+                          }}
+                          rules={{
+                            required: {
+                              value: true,
+                              message: inputValidationText(
+                                dictionary.az.confirmPassword
+                              )
+                            },
+                            minLength: {
+                              value: 8,
+                              message: `${dictionary.az.minLength}`
+                            },
+                            validate: {
+                              RequireDigit: value =>
+                                /[0-9]/.test(value) ||
+                                `${dictionary.az.minNumber}`,
+                              RequireLowercase: value =>
+                                /[a-z]/.test(value) ||
+                                `${dictionary.az.minSmallLetter}`,
+                              RequireUppercase: value =>
+                                /[A-Z]/.test(value) ||
+                                `${dictionary.az.minBigLetter}`,
+                              RequireSpecialCharacter: value =>
+                                /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
+                                  value
+                                ) || `${dictionary.az.minCharacter}`
+                            }
+                          }}
+                          placeholder={inputPlaceholderText(
+                            dictionary.az.confirmPassword
+                          )}
+                          required
+                          inputProps={{
+                            id: 'confirmPassword',
+                            endContent: (
+                              <button
+                                className="focus:outline-none"
+                                type="button"
+                                onClick={() => setShowPasswordConfirm(z => !z)}
+                              >
+                                {showPasswordConfirm ? (
+                                  <BsEye
+                                    size={16}
+                                    className="text-2xl text-default-400 pointer-events-none"
+                                  />
+                                ) : (
+                                  <BsEyeSlash
+                                    size={16}
+                                    className="text-2xl text-default-400 pointer-events-none"
+                                  />
+                                )}
+                              </button>
+                            )
+                          }}
+                          type={showPasswordConfirm ? 'text' : 'password'}
+                          IconElement={() => (
+                            <BsFillPersonFill
+                              size={16}
+                              color={
+                                errors.confirmPassword?.message ? '#f31260' : ''
+                              }
+                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                            />
+                          )}
+                        />
+                      </>
+                    )}
                   </div>
-                  {showAlert && (
+                  {hasCode && (
                     <div
-                      className="p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+                      className="p-4 mb-4 text-sm  rounded-lg bg-green-50 text-green-400"
                       role="alert"
                     >
                       <span className="font-medium">
-                        {dictionary.az.successTxt}!
-                      </span>{' '}
-                      {dictionary.az.newPswrdSentToEmail}
+                        {dictionary.az.newPswrdSentToEmail}
+                      </span>
                     </div>
                   )}
                   <Button
@@ -125,7 +357,9 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                     className="w-full bg-black  text-white border"
                     type="submit"
                   >
-                    {dictionary.az.sendPswrdToEmail}
+                    {!hasCode
+                      ? dictionary.az.sendPswrdToEmail
+                      : dictionary.az.approve}
                   </Button>
                 </form>
               </ModalBody>

@@ -90,13 +90,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     setValue('gender', String(user.gender));
   }, [user]);
   return (
-    <div className="flex-1 flex items-center  rounded-lg   p-5">
+    <div className="flex-1 flex items-center  rounded-lg px-2 py-4 sm:p-3 xl:p-5">
       <form
         id="account-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex w-full justify-between   gap-4"
+        className="flex flex-col sm:flex-row w-full justify-between gap-3 sm:gap-4"
       >
-        <div className="flex-col w-2/5  flex gap-4">
+        <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
           <AppHandledInput
             name="email"
             inputProps={{
@@ -110,7 +110,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             isInvalid={Boolean(errors.email?.message)}
             errors={errors}
             size="sm"
-            className="text-black bg-transparent"
+            className="text-black bg-transparent text-base sm:text-xl"
             rules={{
               required: {
                 value: true,
@@ -141,7 +141,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             }}
             control={control}
             size="sm"
-            className="text-black  relative"
+            className="text-black  relative text-base sm:text-xl"
             isInvalid={Boolean(errors.dateOfBirth?.message)}
             errors={errors}
             rules={{
@@ -173,7 +173,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             control={control}
             placeholder={selectPlaceholderText(dictionary.az.gender)}
             variant="bordered"
-            className=" app-select"
+            className=" app-select text-base sm:text-xl"
             size="sm"
             required
             rules={{
@@ -185,7 +185,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             options={genderOptions}
             errors={errors}
             IconElement={() => (
-              <BsCalendarWeekFill
+              <BsFillPersonFill
                 size={16}
                 color={errors.dateOfBirth?.message ? '#f31260' : ''}
                 className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
@@ -194,7 +194,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
           />
         </div>
 
-        <div className="flex-col w-2/5  flex gap-4">
+        <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
           <AppHandledInput
             name="firstName"
             inputProps={{
@@ -204,7 +204,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
               isDisabled: fieldsIsDisable
             }}
             type="text"
-            className="text-black "
+            className="text-black text-base sm:text-xl"
             control={control}
             isInvalid={Boolean(errors.firstName?.message)}
             errors={errors}
@@ -235,7 +235,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             }}
             type="text"
             control={control}
-            className="text-black "
+            className="text-black text-base sm:text-xl"
             isInvalid={Boolean(errors.lastName?.message)}
             errors={errors}
             size="sm"
