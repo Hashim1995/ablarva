@@ -105,7 +105,7 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-        <ButtonGroup className=" rounded-xl  shadow-md dark:border-white dark:border-1">
+        <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
           <Button
             className={` w-40 h-12  ${
               location.pathname.includes('chat')

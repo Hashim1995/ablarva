@@ -11,6 +11,7 @@ import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import { IAccountPayload } from '@/modules/settings/types';
 import { IForgotPasswordForm } from '@/core/static-components/login/forgot-password';
 import { IVerifyEmailForm } from '@/core/static-components/verify-email';
+import { IChangePasswordForm } from '@/modules/settings/components/account/change-password';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 export interface IGetMeResponse extends IGlobalResponse {
@@ -82,16 +83,11 @@ export class AuthService {
     body: IVerifyEmailForm,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.post(
-      'api/client/user/Verify',
-      body,
-      onError
-    );
+    const res = await HttpUtil.post('api/client/user/Verify', body, onError);
     return res;
   }
 
   public async resendVerificationCode(
-
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
     const res = await HttpUtil.post(
@@ -102,9 +98,17 @@ export class AuthService {
     return res;
   }
 
-
-
-
+  public async changePassword(
+    body: IChangePasswordForm,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.put(
+      'api/client/user/Password',
+      body,
+      onError
+    );
+    return res;
+  }
 
   public async changeUserDetail(
     body: IAccountPayload,

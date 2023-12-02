@@ -8,8 +8,12 @@ export const dictionary = {
     logOut: 'Çıxış',
     account: 'Hesab',
     forgetPassword: 'Şifrəmi unutdum',
+    oldPassword: 'Köhnə şifrə',
     emailVerify: 'Email təsdiqlənməsi',
-    verifyCodeSentSuccesfully: 'Email təsdiqlənmə kodu uğurla email ünvanınıza göndərildi',
+    editAccount: 'Hesab məlumatları',
+    changePassWord: 'Şifrəni dəyiş',
+    verifyCodeSentSuccesfully:
+      'Email təsdiqlənmə kodu uğurla email ünvanınıza göndərildi',
     newPswrdSentToEmail:
       "Yeni şifrəniz email ünvanınıza uğurla göndərildi. Email ünvanınza gələn kodu 'kod' xanasına yazın və yeni şifrənizi təyin edin ",
     infos: 'Məlumatları',
