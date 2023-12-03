@@ -1,7 +1,7 @@
-/* eslint-disable no-param-reassign */
-import { createSlice } from '@reduxjs/toolkit';
-import type { PayloadAction } from '@reduxjs/toolkit';
+import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
+import { AuthService } from '@/services/auth-services/auth-services';
 
+// Define the initial state of the user slice
 const initialState = {
   user: {
     email: '',
@@ -11,23 +11,53 @@ const initialState = {
     confirmPassword: '',
     gender: 0,
     dateOfBirth: '',
-    verified: false
+    verified: false,
+    userSessions: []
   },
-
-  entities: []
+  status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
+  error: null
 };
 
-export const userSlice = createSlice({
+// Async thunk for fetching user data
+export const fetchUserData = createAsyncThunk(
+  'user/fetchUserData',
+  async () => {
+    try {
+      const response = await AuthService.getInstance().getMe();
+      return response.data;
+    } catch (err) {
+      return err;
+    }
+  }
+);
+
+// Create the user slice
+const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
     }
+    // You can add more reducers here if needed
+  },
+  extraReducers: builder => {
+    builder
+      .addCase(fetchUserData.pending, state => {
+        state.status = 'loading';
+      })
+      .addCase(fetchUserData.fulfilled, (state: any, action) => {
+        state.status = 'succeeded';
+        state.user = action.payload;
+      })
+      .addCase(fetchUserData.rejected, (state: any, action) => {
+        state.status = 'failed';
+        state.error = action.payload;
+      });
+    // You can handle more actions here if needed
   }
 });
 
-// Action creators are generated for each case reducer function
+// Export the reducer and actions
 export const { setUser } = userSlice.actions;
-
 export default userSlice.reducer;

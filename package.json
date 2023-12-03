@@ -24,7 +24,7 @@
     "@nextui-org/react": "^2.2.9",
     "@nlux/nlux-react": "^0.4.0",
     "@nlux/openai-react": "^0.4.0",
-    "@reduxjs/toolkit": "~1.2.5",
+    "@reduxjs/toolkit": "^1.9.7",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react-redux": "~7.1.25",
     "@types/react-syntax-highlighter": "^15.5.10",
