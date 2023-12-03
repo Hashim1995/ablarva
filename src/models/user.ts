@@ -50,6 +50,22 @@ export interface IUserRegister {
   dateOfBirth: string | Date;
 }
 
+export interface IUserSessions {
+
+  id: number,
+  userId: number,
+  userAgent: string,
+  deviceType: number,
+  platformName: string,
+  platformType: number,
+  browserName: string,
+  browserVersion: string,
+  mobileDeviceType: null | number,
+  loginDate: string,
+  status: true,
+  ipAddress: string
+}
+
 export interface IUserData {
   accessToken: string;
   id: number;
@@ -59,6 +75,7 @@ export interface IUserData {
   dateOfBirth: Date;
   gender: number;
   verified: boolean;
+  userSessions: IUserSessions[]
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
