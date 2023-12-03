@@ -1,5 +1,4 @@
 /* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable no-unused-vars */
 import { useForm } from 'react-hook-form';
 import { inputValidationText } from '@/utils/constants/validations';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -18,15 +17,10 @@ import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
-import {
-  AuthService,
-  IGetMeResponse
-} from '@/services/auth-services/auth-services';
+import { AppDispatch, RootState } from '@/redux/store';
+import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
-import { IUserLoggedData } from '@/models/user';
-import { setUser } from '@/redux/auth/auth-slice';
-import dayjs from 'dayjs';
+import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
 import { IAccountForm } from '../../types';
 
@@ -39,24 +33,14 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
   const {
     handleSubmit,
     setValue,
-    formState: { errors, isSubmitting },
+    formState: { errors },
     control
   } = useForm<IAccountForm>({
     mode: 'onSubmit',
     defaultValues: {}
   });
 
-  const disptach = useDispatch();
-
-  const getMe = async () => {
-    try {
-      const res: IGetMeResponse = await AuthService.getInstance().getMe();
-      const userSlicePayload: IUserLoggedData = res.data;
-      disptach(setUser(userSlicePayload));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: IAccountForm) => {
     const payload: Omit<IAccountForm, 'email'> = {
@@ -72,7 +56,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
       const res: IGlobalResponseEmpty =
         await AuthService.getInstance().changeUserDetail(payload);
 
-      res.isSuccess && getMe();
+      res.isSuccess && dispatch(fetchUserData());
     } catch (err) {
       console.log(err);
     } finally {

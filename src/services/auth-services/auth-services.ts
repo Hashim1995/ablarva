@@ -28,7 +28,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): AuthService {
     if (!this.instance) {
@@ -102,11 +102,7 @@ export class AuthService {
     body: IChangePasswordForm,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.put(
-      'api/client/user/Password',
-      body,
-      onError
-    );
+    const res = await HttpUtil.put('api/client/user/Password', body, onError);
     return res;
   }
 
@@ -123,6 +119,18 @@ export class AuthService {
     onError?: ErrorCallBack
   ): Promise<IRegisterResponse> {
     const res = await HttpUtil.post('api/client/user/Register', body, onError);
+    return res;
+  }
+
+  public async removeSession(
+    id: number,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.delete(
+      `api/client/user/Sessions/${id}`,
+      false,
+      onError
+    );
     return res;
   }
 }
