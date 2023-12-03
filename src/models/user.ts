@@ -51,19 +51,18 @@ export interface IUserRegister {
 }
 
 export interface IUserSessions {
-
-  id: number,
-  userId: number,
-  userAgent: string,
-  deviceType: number,
-  platformName: string,
-  platformType: number,
-  browserName: string,
-  browserVersion: string,
-  mobileDeviceType: null | number,
-  loginDate: string,
-  status: true,
-  ipAddress: string
+  id: number;
+  userId: number;
+  userAgent: string;
+  deviceType: number;
+  platformName: string;
+  platformType: number;
+  browserName: string;
+  browserVersion: string;
+  mobileDeviceType: null | number;
+  loginDate: string;
+  status: true;
+  ipAddress: string;
 }
 
 export interface IUserData {
@@ -75,7 +74,7 @@ export interface IUserData {
   dateOfBirth: Date;
   gender: number;
   verified: boolean;
-  userSessions: IUserSessions[]
+  userSessions: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}

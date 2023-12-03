@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
-import { AuthService, } from '@/services/auth-services/auth-services';
+import { AuthService } from '@/services/auth-services/auth-services';
 
 // Define the initial state of the user slice
 const initialState = {
@@ -12,10 +12,10 @@ const initialState = {
     gender: 0,
     dateOfBirth: '',
     verified: false,
-    userSessions: [],
+    userSessions: []
   },
   status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
-  error: null,
+  error: null
 };
 
 // Async thunk for fetching user data
@@ -26,7 +26,7 @@ export const fetchUserData = createAsyncThunk(
       const response = await AuthService.getInstance().getMe();
       return response.data;
     } catch (err) {
-      return err
+      return err;
     }
   }
 );
@@ -38,12 +38,12 @@ const userSlice = createSlice({
   reducers: {
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
-    },
+    }
     // You can add more reducers here if needed
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     builder
-      .addCase(fetchUserData.pending, (state) => {
+      .addCase(fetchUserData.pending, state => {
         state.status = 'loading';
       })
       .addCase(fetchUserData.fulfilled, (state: any, action) => {
@@ -55,7 +55,7 @@ const userSlice = createSlice({
         state.error = action.payload;
       });
     // You can handle more actions here if needed
-  },
+  }
 });
 
 // Export the reducer and actions

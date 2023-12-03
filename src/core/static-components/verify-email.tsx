@@ -3,12 +3,9 @@
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
-import { IUserLoggedData } from '@/models/user';
-import { setUser } from '@/redux/auth/auth-slice';
-import {
-  AuthService,
-  IGetMeResponse
-} from '@/services/auth-services/auth-services';
+import { fetchUserData } from '@/redux/auth/auth-slice';
+import { AppDispatch } from '@/redux/store';
+import { AuthService } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
@@ -46,17 +43,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-  const disptach = useDispatch();
-
-  const getMe = async () => {
-    try {
-      const res: IGetMeResponse = await AuthService.getInstance().getMe();
-      const userSlicePayload: IUserLoggedData = res.data;
-      disptach(setUser(userSlicePayload));
-    } catch (err) {
-      console.log(err);
-    }
-  };
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: IVerifyEmailForm) => {
     try {
@@ -66,7 +53,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
         });
       if (res.isSuccess) {
         onOpenChange();
-        getMe();
+        dispatch(fetchUserData());
       }
     } catch (err) {
       console.log(err);

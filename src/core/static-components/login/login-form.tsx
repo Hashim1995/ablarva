@@ -1,10 +1,10 @@
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
-import { ILogin, IUserLoggedData } from '@/models/user';
-import { setUser } from '@/redux/auth/auth-slice';
+import { ILogin } from '@/models/user';
+import { fetchUserData } from '@/redux/auth/auth-slice';
+import { AppDispatch } from '@/redux/store';
 import {
   AuthService,
-  IGetMeResponse,
   ILoginResponse
 } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -23,8 +23,6 @@ interface ILoginFormProps {
   handleFlip: () => void;
 }
 function LoginForm({ handleFlip }: ILoginFormProps) {
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -33,23 +31,19 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
     mode: 'onSubmit',
     defaultValues: {}
   });
+
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
-
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const navigate = useNavigate();
-  const disptach = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onSubmit = async (data: ILogin) => {
     try {
       const res: ILoginResponse = await AuthService.getInstance().login(data);
-
       if (!res) return;
-
       if (!userToken) setUserToken({ token: res.data.accessToken });
-
-      const resGetMe: IGetMeResponse = await AuthService.getInstance().getMe();
-      const userSlicePayload: IUserLoggedData = resGetMe.data;
-      disptach(setUser(userSlicePayload));
+      dispatch(fetchUserData());
       navigate('/chat');
     } catch (err) {
       console.log(err);
