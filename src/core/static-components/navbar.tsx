@@ -20,7 +20,8 @@ import {
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure
+  useDisclosure,
+  Image
 } from '@nextui-org/react';
 
 import { useDarkMode } from 'usehooks-ts';
@@ -78,7 +79,7 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent z-10 h-[6rem] sm:h-[7rem]"
+      className="bg-transparent z-10 h-[5rem] sm:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
       position="static"
@@ -151,10 +152,14 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
           {' '}
           {!user.verified && (
-            <Tooltip placement="left" content={dictionary.az.emailVerify}>
+            <Tooltip
+              className="hidden sm:block"
+              placement="left"
+              content={dictionary.az.emailVerify}
+            >
               <Button
                 onClick={onOpen}
                 size="sm"
@@ -178,14 +183,52 @@ export default function Navbar() {
             avatarProps={{
               src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
             }}
+            className="hidden sm:flex"
           />
-          <Dropdown>
-            <DropdownTrigger>
+          <Dropdown className="hidden sm:block">
+            <DropdownTrigger className="hidden sm:block">
               <div>
                 <BsArrowRightCircle className="cursor-pointer" size={20} />
               </div>
             </DropdownTrigger>
+            <DropdownMenu
+              className="hidden sm:block"
+              aria-label="Static Actions"
+            >
+              <DropdownItem
+                className="hidden sm:block"
+                onClick={() => {
+                  localStorage.removeItem('userToken');
+                  navigate('/login');
+                }}
+                key="logout"
+              >
+                {dictionary.az.logOut}
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
+          <Dropdown className="block sm:hidden">
+            <DropdownTrigger>
+              <div>
+                <Image
+                  src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                  width={39}
+                  alt="user-image"
+                  className="rounded-full block sm:hidden"
+                />
+              </div>
+            </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
+              <DropdownItem isReadOnly>
+                <p className="text-sm sm:text-base text-default-500">
+                  {user
+                    ? `${user.firstName} ${user.lastName}`
+                    : dictionary.az.empty}
+                </p>
+                <p className="text-sm sm:text-base text-default-500">
+                  {user.email || dictionary.az.empty}
+                </p>
+              </DropdownItem>
               <DropdownItem
                 onClick={() => {
                   localStorage.removeItem('userToken');
@@ -200,11 +243,11 @@ export default function Navbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className=" md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
+      <NavbarMenu className="md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button
-              className="w-full flex bg-transparent items-center gap-2 font-medium"
+              className="w-full px-1 flex bg-transparent items-center font-medium"
               onClick={() => {
                 navigate(`/${item.path}`);
               }}
