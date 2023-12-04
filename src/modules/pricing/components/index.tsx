@@ -50,7 +50,7 @@ function Pricing() {
               activetab === 1
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-[16px] xl:text-[20px] w-[180px] xl:w-[200px] h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[20px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               setActiveTab(1);
@@ -63,7 +63,7 @@ function Pricing() {
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-[16px] xl:text-[20px] w-[180px] xl:w-[200px] h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[20px] w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               setActiveTab(2);
@@ -76,7 +76,7 @@ function Pricing() {
               activetab === 3
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-[16px] xl:text-[20px] w-[180px] xl:w-[200px] h-[42px] xl:h-[50px] bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[20px] w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               setActiveTab(3);
@@ -85,7 +85,7 @@ function Pricing() {
             {dictionary.az.allInOne}
           </Button>
         </div>
-        <div className="col-span-12 xl:col-span-10 row-span-6 xl:col-start-3 bg-white rounded-2xl">
+        <div className="col-span-12 xl:col-span-10 overflow-x-scroll row-span-6 xl:col-start-3 bg-white rounded-2xl">
           {!loading ? (
             <table className="transition ease-in-out delay-150 duration-300">
               <thead className="border-b-1">
@@ -97,14 +97,14 @@ function Pricing() {
                         className="xl:h-[262px] text-center w-max bg-transparent border-r-2 last:border-r-0"
                       >
                         <div className="flex flex-col items-center h-full px-2.5 py-3 xl:py-5">
-                          <p className="text-[16px] xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
+                          <p className="text-base sm:text-xl xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
                             {hItem.title || 'test'}
                           </p>
                           <div className="flex flex-row items-center py-2 xl:py-6">
                             <p className="text-[20px] sm:text-[24px] md:text-[30px] xl:text-[40px] font-bold leading-6">
                               {hItem.price || 'test'} ₼
                             </p>
-                            <p className="text-[16px] sm:text-[18] xl:text-[24px] leading-6 mb-[-3px] font-bold text-[#C3C1C1]">
+                            <p className="text-base sm:text-xl  xl:text-[24px] leading-6 mb-[-3px] font-bold text-[#C3C1C1]">
                               /{dictionary.az.month}
                             </p>
                           </div>
@@ -112,9 +112,14 @@ function Pricing() {
                             {hItem.desciption || 'test'}
                           </p>
                           <Button
-                            className="bg-black text-white text-[14px] xl:text-[16px] border py-5 px-2 sm:px-5 xl:px-7"
+                            className="bg-black text-white text-sm sm:text-base md:text-xl border py-2 sm:py-5 px-2 sm:px-5 xl:px-7"
                             type="submit"
-                            endContent={<BsArrowRightShort size={20} />}
+                            endContent={
+                              <BsArrowRightShort
+                                className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
+                                size={20}
+                              />
+                            }
                           >
                             {dictionary.az.joinNow}
                           </Button>
@@ -123,7 +128,7 @@ function Pricing() {
                     ) : (
                       <td
                         key={window.crypto.randomUUID()}
-                        className="xl:h-[262px] w-[189px] bg-black text-white text-[16px] xl:text-[20px] px-2 text-center rounded-tl-2xl"
+                        className="xl:h-[262px] w-[189px] bg-black text-white text-base sm:text-xl xl:text-[20px] px-2 text-center rounded-tl-2xl"
                       >
                         {dictionary.az.tariffTitle}
                       </td>
@@ -137,10 +142,10 @@ function Pricing() {
                     className="w-[189px] odd:bg-white even:bg-slate-100"
                     key={window.crypto.randomUUID()}
                   >
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-bold border-r-2 last:border-r-0">
+                    <td className="text-center text-base sm:text-xl xl:text-[20px] py-3 px-3 font-bold border-r-2 last:border-r-0">
                       {rItem.title}
                     </td>
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
+                    <td className="text-center text-base sm:text-xl xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
                       {rItem.chatLimit || (
                         <div className="w-auto bg-transparent flex items-center justify-center">
                           <BsFillXCircleFill

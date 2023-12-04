@@ -16,9 +16,9 @@ function AccountHeader({
   return (
     <div className="">
       <div className="flex justify-between items-center  bg-black p-2 sm:p-3">
-        <h2 className="text-base sm:text-xl text-white font-semibold">
-          {dictionary.az.account} <br /> {dictionary.az.infos}
-        </h2>
+        <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 sm:flex-col text-white font-semibold">
+          <p>{dictionary.az.account}</p> <p>{dictionary.az.infos}</p>
+        </div>
         <div className="flex gap-5">
           <Button
             size="sm"
