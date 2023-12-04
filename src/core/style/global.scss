@@ -219,3 +219,21 @@ input::placeholder {
     position: static !important;
   }
 }
+
+@media (max-width: 767px) {
+  .jack {
+    height: 473px;
+  }
+}
+
+@media (max-width: 480px) {
+  .leblebi {
+    height: calc(68vh - 56px) !important;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .leblebi {
+    height: calc(72vh - 56px) !important;
+  }
+}
