@@ -4,7 +4,8 @@
 export class HttpError {
   constructor(
     public code: number,
-    public message: string | string[]
+    public message: string | string[],
+    public rawError: any
   ) {}
 
   preventDefault: boolean = false;
