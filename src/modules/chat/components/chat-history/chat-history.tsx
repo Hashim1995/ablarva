@@ -54,7 +54,7 @@ function ChatHistory() {
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="text-xl text-white font-semibold">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.previous} {dictionary.az.chats}
         </h2>
         <Button

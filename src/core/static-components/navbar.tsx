@@ -79,7 +79,7 @@ export default function Navbar() {
 
   return (
     <NavbarNext
-      className="bg-transparent z-10 h-[5rem] sm:h-[7rem]"
+      className="bg-transparent z-10 sm:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
       position="static"
@@ -243,7 +243,7 @@ export default function Navbar() {
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className="md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
+      <NavbarMenu className="md:hidden items-start pt-3 sm:pt-10 mt-0 sm:mt-4">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button
