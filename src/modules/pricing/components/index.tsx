@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-useless-fragment */
-import { pricingList1, pricingList2, pricingList3 } from '@/assets/dummy';
 import { useState, useEffect } from 'react';
 import { Button, Spinner } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
@@ -16,7 +14,6 @@ import Header from './header/header';
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
   const [data, setData] = useState<IPricingData>();
-
   const [loading, setLoading] = useState<boolean>(false);
 
   const fetchPricing = async () => {
@@ -36,7 +33,9 @@ function Pricing() {
     fetchPricing();
   }, [activetab]);
 
-  const list = [
+  const list: {
+    [key: string]: string;
+  }[] = [
     {
       chatLimit: 'Sorgu 1'
     },
@@ -157,38 +156,6 @@ function Pricing() {
                         )}
                       </td>
                     ))}
-
-                    {/* <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.chatLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.assistantLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.voiceLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td> */}
                   </tr>
                 ))}
               </tbody>
