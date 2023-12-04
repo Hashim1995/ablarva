@@ -12,7 +12,7 @@ function LayoutPage() {
       </div>
       <Navbar />
 
-      <div className="my-2 h-[80vh] z-10 overflow-y-scroll">
+      <div className="my-2 sm:h-[80vh] z-10 overflow-y-scroll">
         <div className="h-full">
           <Outlet />
         </div>

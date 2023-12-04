@@ -68,7 +68,7 @@ function MyPlan() {
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="text-xl text-white font-semibold">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.my} {dictionary.az.tariff}
         </h2>
         <Button
@@ -82,8 +82,8 @@ function MyPlan() {
       </div>
       <div className="bg-white rounded-lg shadow h-full px-6 overflow-y-scroll">
         <div className="mb-3">
-          <div className="text-black text-sm font-medium	  ">Hərtərəfli XL</div>
-          <div className="flex  justify-center ">
+          <div className="text-black text-sm font-medium">Hərtərəfli XL</div>
+          <div className="flex justify-center ">
             <div className="w-32 h-32 ">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart>
