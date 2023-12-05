@@ -9,12 +9,16 @@ import {
   IPricingTableBody,
   IPricingTableHeader
 } from '@/models/payment';
+import { IBuyPacketBody } from '@/modules/pricing/types';
 import Header from './header/header';
 
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
   const [data, setData] = useState<IPricingData>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [buyPackageLoader, setBuyPackageLoader] = useState<
+    Record<number, boolean>
+  >({});
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -49,6 +53,22 @@ function Pricing() {
       assistantLimit: 'Səsli sorğu'
     }
   ];
+
+  const buyPackage = async (id: number) => {
+    setBuyPackageLoader(prev => ({ ...prev, [id]: true }));
+    const payload: IBuyPacketBody = {
+      packageId: id
+    };
+    try {
+      const res = await PaymentService.getInstance().buyPacket(payload);
+      if (res.isSuccess) {
+        window.location.href = res.data.paymentLink;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setBuyPackageLoader(prev => ({ ...prev, [id]: false }));
+  };
 
   return (
     <div className=" container-fluid h-full mx-auto ">
@@ -118,8 +138,12 @@ function Pricing() {
                           {hItem.description || 'test'}
                         </p>
                         <Button
+                          onClick={() => {
+                            buyPackage(hItem.id);
+                          }}
                           className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-2 sm:px-5 xl:px-7"
                           type="submit"
+                          isLoading={buyPackageLoader[hItem.id]}
                           endContent={
                             <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           }

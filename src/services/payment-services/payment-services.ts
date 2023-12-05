@@ -2,19 +2,24 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponse } from '@/models/common';
+import { IGlobalResponse, } from '@/models/common';
 import { IPricingData } from '@/models/payment';
+import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/pricing/types';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 export interface IPricingDataResponse extends IGlobalResponse {
   data: IPricingData;
 }
 
+interface IBuyPacketServiceResponse extends IGlobalResponse {
+  data: IBuyPacketResponse
+}
+
 export class PaymentService {
   // eslint-disable-next-line no-use-before-define
   private static instance: PaymentService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): PaymentService {
     if (!this.instance) {
@@ -35,4 +40,14 @@ export class PaymentService {
     );
     return res;
   }
+
+  public async buyPacket(
+    body: IBuyPacketBody,
+    onError?: ErrorCallBack
+  ): Promise<IBuyPacketServiceResponse> {
+    const res = await HttpUtil.post('api/client/transactions', body, onError);
+    return res;
+  }
+
 }
+

@@ -17,4 +17,14 @@ interface IPricingListData {
   tBody: IPricingListBody[];
 }
 
-export type { IPricingListBody, IPricingListHeader, IPricingListData };
+interface IBuyPacketBody {
+  packageId: number;
+}
+interface IBuyPacketResponse {
+  amount: number,
+  orderId: string,
+  paymentLink: string,
+  paymentMessage?: string,
+  selectedPackageName: string,
+}
+export type { IPricingListBody, IBuyPacketBody, IBuyPacketResponse, IPricingListHeader, IPricingListData };
