@@ -53,7 +53,7 @@ function MyPlan() {
       <text
         x={x}
         y={y}
-        fill="#292D32" // Change color if needed to make it visible on the segment
+        fill="#292D32"
         textAnchor="middle" // Anchor the text in the middle for better alignment
         dominantBaseline="central"
         style={{
