@@ -235,3 +235,15 @@ input::placeholder {
     height: calc(72vh - 56px) !important;
   }
 }
+
+@media (max-width: 639px) {
+  .mobile-row-chart {
+    .recharts-legend-wrapper {
+      .recharts-default-legend {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+    }
+  }
+}
