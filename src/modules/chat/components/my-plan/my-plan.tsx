@@ -83,10 +83,10 @@ function MyPlan() {
       <div className="bg-white rounded-lg shadow h-full px-6 overflow-y-scroll">
         <div className="mb-3">
           <div className="text-black text-sm font-medium">Hərtərəfli XL</div>
-          <div className="flex justify-center ">
-            <div className="w-32 h-32 ">
+          <div className=" justify-center grid grid-cols-12 chartsHeight">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData1}
                     outerRadius={50}
@@ -135,9 +135,9 @@ function MyPlan() {
               </ResponsiveContainer>
             </div>
 
-            <div className="w-32 h-32 ">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData2}
                     outerRadius={50}
@@ -181,9 +181,9 @@ function MyPlan() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="w-32 h-32 ">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData3}
                     labelLine={false}
