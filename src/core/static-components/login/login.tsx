@@ -19,20 +19,10 @@ function Login() {
           }`}
         >
           <div className="flip-card-inner flex justify-center items-center">
-            <div
-              style={{
-                height: '700px'
-              }}
-              className="front   z-10 border-1 border-white flex flex-col overflow-hidden rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm"
-            >
+            <div className="front h-full md:h-[700px]  z-10 md:border-1 md:border-white flex flex-col items-center md:items-stretch overflow-hidden md:rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm">
               <LoginForm handleFlip={handleFlip} />
             </div>
-            <div
-              style={{
-                height: '700px'
-              }}
-              className="back  z-10 border-1 border-white flex flex-col overflow-hidden rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm"
-            >
+            <div className="back h-full md:h-[700px] z-10 md:border-1 md:border-white flex flex-col overflow-hidden md:rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm">
               <RegisterForm handleFlip={handleFlip} />
             </div>
           </div>
