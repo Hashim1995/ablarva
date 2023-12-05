@@ -60,11 +60,6 @@ export default function Navbar() {
       label: `${dictionary.az.settings}`,
       path: 'settings',
       icon: <BsFillGearFill />
-    },
-    {
-      label: `${dictionary.az.history}`,
-      path: 'history',
-      icon: <BsClockFill />
     }
   ];
   // const { toggle, isDarkMode } = useDarkMode();
