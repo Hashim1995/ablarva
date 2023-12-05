@@ -83,16 +83,16 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   return (
     <>
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-        <div className="my-3 text-4xl font-bold tracking-wider text-center">
-          <BsRobot className="animate-pulse	" size={68} />
+        <div className="my-3 text-4xl font-bold tracking-wider flex items-center justify-center">
+          <BsRobot className="animate-pulse	w-[50px] h-[50px]	md:w-[68px] md:h-[68px]" />
         </div>
-        <p className="mt-6 text-sm font-normal text-center text-white md:mt-0">
+        <p className="mt-3 text-sm font-normal text-center text-white md:mt-0">
           With necəsən, gəle, öp, qıdığla the power of K-WD, you can now focus
           only on functionaries for your digital products, while leaving the UI
           design on us!
         </p>
 
-        <p className="mt-6 text-sm text-center text-white">
+        <p className="mt-3 md:mt-6 text-sm text-center text-white">
           Read our{' '}
           <a href="/#" className="underline">
             terms
@@ -104,15 +104,15 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
         </p>
       </div>
 
-      <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
-        <h3 className="leading-none text-2xl font-semibold text-gray-700">
+      <div className="p-4 md:p-3 bg-white rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
+        <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold text-gray-700">
           {dictionary.az.joinUs}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col space-y-5"
         >
-          <div className="flex flex-col gap-5  ">
+          <div className="flex flex-col gap-3 md:gap-5">
             <AppHandledInput
               name="email"
               inputProps={{
@@ -412,7 +412,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             {dictionary.az.register}
           </Button>
         </form>
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col pt-3 md:pt-0 space-y-5">
           <span className="flex items-center justify-center space-x-2">
             <span className="h-px bg-gray-400 w-10" />
             <span
