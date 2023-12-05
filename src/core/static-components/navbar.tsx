@@ -24,7 +24,7 @@ import {
   Image
 } from '@nextui-org/react';
 
-import { useDarkMode } from 'usehooks-ts';
+import { useDarkMode, useOnClickOutside } from 'usehooks-ts';
 
 import {
   BsFillChatLeftDotsFill,
@@ -37,7 +37,7 @@ import {
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -72,20 +72,30 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [show, setShow] = useState<boolean>(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
+  const handleOutSideClick = () => {
+    setIsMenuOpen(false);
+    setShow(false);
+  };
+
+  useOnClickOutside(navRef, handleOutSideClick);
+
   return (
     <NavbarNext
-      className="bg-transparent z-10 sm:h-[7rem]"
+      className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
       position="static"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       disableAnimation
+      onClick={handleOutSideClick}
     >
       <NavbarContent className="lg:hidden" justify="start">
         <NavbarMenuToggle
@@ -220,12 +230,12 @@ export default function Navbar() {
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
               <DropdownItem isReadOnly>
-                <p className="text-sm sm:text-base text-default-500">
+                <p className="text-base text-default-500">
                   {user
                     ? `${user.firstName} ${user.lastName}`
                     : dictionary.az.empty}
                 </p>
-                <p className="text-sm sm:text-base text-default-500">
+                <p className="text-base text-default-500">
                   {user.email || dictionary.az.empty}
                 </p>
               </DropdownItem>
@@ -235,15 +245,16 @@ export default function Navbar() {
                   navigate('/login');
                 }}
                 key="logout"
+                className="pt-0"
               >
-                {dictionary.az.logOut}
+                <p className="text-sm">{dictionary.az.logOut}</p>
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className="md:hidden items-start pt-3 sm:pt-10 mt-0 sm:mt-4">
+      <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button

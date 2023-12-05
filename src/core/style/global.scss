@@ -30,8 +30,6 @@ body {
   color: white;
   background: blue;
 }
-.flip-card {
-}
 
 .flip-card-inner {
   position: relative;
@@ -221,19 +219,19 @@ input::placeholder {
 }
 
 @media (max-width: 767px) {
-  .jack {
+  .chartsHeight {
     height: 473px;
   }
 }
 
 @media (max-width: 480px) {
-  .leblebi {
+  .layoutHeight {
     height: calc(68vh - 56px) !important;
   }
 }
 
 @media (min-width: 481px) and (max-width: 768px) {
-  .leblebi {
+  .layoutHeight {
     height: calc(72vh - 56px) !important;
   }
 }

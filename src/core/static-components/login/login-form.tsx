@@ -52,16 +52,16 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   return (
     <>
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-        <div className="my-3 text-4xl font-bold tracking-wider text-center">
-          <BsRobot className="animate-pulse	" size={68} />
+        <div className="my-3 text-4xl font-bold tracking-wider flex items-center justify-center">
+          <BsRobot className="animate-pulse w-[50px] h-[50px]	md:w-[68px] md:h-[68px]" />
         </div>
-        <p className="mt-6  text-sm font-normal text-center text-white md:mt-0">
+        <p className="mt-3 text-sm font-normal text-center text-white md:mt-0">
           With necəsən, gəle, öp, qıdığla the power of K-WD, you can now focus
           only on functionaries for your digital products, while leaving the UI
           design on us!
         </p>
 
-        <p className="mt-6 text-sm text-center text-white">
+        <p className="mt-3 md:mt-6 text-sm text-center text-white">
           Read our{' '}
           <a href="/#" className="underline">
             terms
@@ -72,15 +72,15 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           </a>
         </p>
       </div>
-      <div className="p-3 bg-white md:flex-1 flex items-center		flex-col	justify-around">
-        <h3 className="leading-none text-3xl font-semibold text-gray-700">
+      <div className="p-4 md:p-3 bg-white md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
+        <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-gray-700">
           {dictionary.az.login}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col space-y-5"
         >
-          <div className="flex flex-col gap-5  ">
+          <div className="flex flex-col gap-3 md:gap-5  ">
             <AppHandledInput
               name="email"
               inputProps={{
@@ -160,7 +160,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             />
             <div className="flex flex-col space-y-5">
               <span className="flex items-center justify-center ">
-                <span className="h-px bg-gray-400 w-10" />
+                <span className="h-px bg-gray-400 mr-1 w-10" />
                 <span
                   aria-hidden
                   onClick={onOpen}
@@ -170,22 +170,22 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                     {dictionary.az.forgetPassword}
                   </span>
                 </span>
-                <span className="h-px bg-gray-400 w-10" />
+                <span className="h-px bg-gray-400 ml-1 w-10" />
               </span>
             </div>
           </div>
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full bg-black  text-white border"
+            className="w-full !mt-3 md:mt-5 bg-black text-white border"
             type="submit"
           >
             {dictionary.az.login}
           </Button>
         </form>
-        <div className="flex flex-col space-y-5">
+        <div className="flex flex-col mt-3 md:mt-0 space-y-5">
           <span className="flex items-center justify-center ">
-            <span className="h-px bg-gray-400 w-10" />
+            <span className="h-px bg-gray-400 mr-1 w-10" />
             <span
               aria-hidden
               onClick={handleFlip}
@@ -200,7 +200,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                 {dictionary.az.register}
               </span>
             </span>
-            <span className="h-px bg-gray-400 w-10" />
+            <span className="h-px bg-gray-400 ml-1 w-10" />
           </span>
         </div>
       </div>
