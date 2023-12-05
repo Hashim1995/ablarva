@@ -54,10 +54,10 @@ function MyPlan() {
         x={x}
         y={y}
         fill="#292D32"
-        textAnchor="middle" // Anchor the text in the middle for better alignment
+        textAnchor="middle"
         dominantBaseline="central"
         style={{
-          fontSize: '11px' // Adjust font size if needed
+          fontSize: '11px'
         }}
       >
         {`${(percent * 100).toFixed(0)}%`}
