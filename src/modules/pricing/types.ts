@@ -21,10 +21,16 @@ interface IBuyPacketBody {
   packageId: number;
 }
 interface IBuyPacketResponse {
-  amount: number,
-  orderId: string,
-  paymentLink: string,
-  paymentMessage?: string,
-  selectedPackageName: string,
+  amount: number;
+  orderId: string;
+  paymentLink: string;
+  paymentMessage?: string;
+  selectedPackageName: string;
 }
-export type { IPricingListBody, IBuyPacketBody, IBuyPacketResponse, IPricingListHeader, IPricingListData };
+export type {
+  IPricingListBody,
+  IBuyPacketBody,
+  IBuyPacketResponse,
+  IPricingListHeader,
+  IPricingListData
+};

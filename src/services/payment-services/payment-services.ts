@@ -2,19 +2,25 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponse, } from '@/models/common';
+import { IGlobalResponse } from '@/models/common';
 import { IPricingData } from '@/models/payment';
 import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/pricing/types';
-import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
+import { ITransactionsItem } from '@/modules/settings/types';
+import { ErrorCallBack, HttpUtil, IHTTPSParams } from '../adapter-config/config';
 
 export interface IPricingDataResponse extends IGlobalResponse {
   data: IPricingData;
 }
 
 interface IBuyPacketServiceResponse extends IGlobalResponse {
-  data: IBuyPacketResponse
+  data: IBuyPacketResponse;
 }
-
+interface ITransactionResponse extends IGlobalResponse {
+  data: {
+    pagedData: ITransactionsItem[],
+    totalPages: number,
+  }
+}
 export class PaymentService {
   // eslint-disable-next-line no-use-before-define
   private static instance: PaymentService | null;
@@ -49,5 +55,17 @@ export class PaymentService {
     return res;
   }
 
-}
+  public async getTransactions(
+    params: IHTTPSParams[],
+    onError?: ErrorCallBack
+  ): Promise<ITransactionResponse> {
+    const res = await HttpUtil.get(
+      'api/client/transactions',
+      params,
+      false,
+      onError
+    );
+    return res;
+  }
 
+}
