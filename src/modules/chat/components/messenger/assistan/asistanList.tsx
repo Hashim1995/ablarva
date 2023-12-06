@@ -6,7 +6,7 @@ import { asistansList } from '../../../../../assets/dummy';
 function AsistanCardList({ activeId }: { activeId: number }) {
   return (
     <div>
-      <h1 className="text-white text-[2.2rem] font-semibold text-center mb-3">
+      <h1 className="text-white text-[1.2rem] sm:text-[1.6rem] xl:text-[2.2rem] font-semibold text-center mb-3">
         Köməkçi
       </h1>
       <Divider className="h-[1px] bg-white mb-3" />

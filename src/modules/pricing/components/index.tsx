@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-useless-fragment */
-import { pricingList1, pricingList2, pricingList3 } from '@/assets/dummy';
 import { useState, useEffect } from 'react';
 import { Button, Spinner } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
@@ -11,13 +9,16 @@ import {
   IPricingTableBody,
   IPricingTableHeader
 } from '@/models/payment';
+import { IBuyPacketBody } from '@/modules/pricing/types';
 import Header from './header/header';
 
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
   const [data, setData] = useState<IPricingData>();
-
   const [loading, setLoading] = useState<boolean>(false);
+  const [buyPackageLoader, setBuyPackageLoader] = useState<
+    Record<number, boolean>
+  >({});
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -36,7 +37,9 @@ function Pricing() {
     fetchPricing();
   }, [activetab]);
 
-  const list = [
+  const list: {
+    [key: string]: string;
+  }[] = [
     {
       chatLimit: 'Sorgu 1'
     },
@@ -51,6 +54,22 @@ function Pricing() {
     }
   ];
 
+  const buyPackage = async (id: number) => {
+    setBuyPackageLoader(prev => ({ ...prev, [id]: true }));
+    const payload: IBuyPacketBody = {
+      packageId: id
+    };
+    try {
+      const res = await PaymentService.getInstance().buyPacket(payload);
+      if (res.isSuccess) {
+        window.location.href = res.data.paymentLink;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setBuyPackageLoader(prev => ({ ...prev, [id]: false }));
+  };
+
   return (
     <div className=" container-fluid h-full mx-auto ">
       <div className="grid grid-cols-12">
@@ -64,7 +83,7 @@ function Pricing() {
               activetab === 1
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-[16px] xl:text-[20px] w-[180px] xl:w-[200px] h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[20px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               setActiveTab(1);
@@ -77,7 +96,7 @@ function Pricing() {
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-[16px] xl:text-[20px] w-[180px] xl:w-[200px] h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[20px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               setActiveTab(2);
@@ -86,13 +105,13 @@ function Pricing() {
             {dictionary.az.aiAssistant}
           </Button>
         </div>
-        <div className="col-span-12 xl:col-span-10 row-span-6 xl:col-start-3 bg-white rounded-2xl">
+        <div className="col-span-12 xl:col-span-10 overflow-x-scroll row-span-6 xl:col-start-3 bg-white rounded-2xl">
           {!loading ? (
             <table className="w-full transition ease-in-out delay-150 duration-300">
               <thead className="border-b-1">
                 <td
                   key={window.crypto.randomUUID()}
-                  className="xl:h-[262px] w-[189px] bg-black text-white text-[16px] xl:text-[20px] px-2 text-center rounded-tl-2xl"
+                  className="xl:h-[262px] w-[189px] bg-black text-white text-base sm:text-[16px] xl:text-[20px] px-2 text-center rounded-tl-2xl"
                 >
                   {dictionary.az.tariffTitle}
                 </td>
@@ -103,25 +122,31 @@ function Pricing() {
                       key={window.crypto.randomUUID()}
                       className="xl:h-[262px] text-center w-max bg-transparent border-r-2 last:border-r-0"
                     >
-                      <div className="flex flex-col items-center h-full px-2.5 py-3 xl:py-5">
-                        <p className="text-[16px] xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
+                      <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5">
+                        <p className="text-base sm:text-[16px] xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
                           {hItem.name || 'test'}
                         </p>
-                        <div className="flex flex-row items-center py-2 xl:py-6">
+                        <div className="flex flex-row items-center py-2 sm:py-3 xl:py-6">
                           <p className="text-[20px] sm:text-[24px] md:text-[30px] xl:text-[40px] font-bold leading-6">
                             {hItem.price || 'test'} ₼
                           </p>
-                          <p className="text-[16px] sm:text-[18] xl:text-[24px] leading-6 mb-[-3px] font-bold text-[#C3C1C1]">
+                          <p className="text-[16px] sm:text-[18px] xl:text-[24px] leading-6 mb-[-3px] font-bold text-[#C3C1C1]">
                             /{dictionary.az.month}
                           </p>
                         </div>
-                        <p className="w-fit text-[#C3C1C1] text-[14px] xl:text-[16px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
+                        <p className="w-fit text-[#C3C1C1] text-sm sm:text-base xl:text-xl min-h-[45px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
                           {hItem.description || 'test'}
                         </p>
                         <Button
-                          className="bg-black text-white text-[14px] xl:text-[16px] border py-5 px-2 sm:px-5 xl:px-7"
+                          onClick={() => {
+                            buyPackage(hItem.id);
+                          }}
+                          className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-2 sm:px-5 xl:px-7"
                           type="submit"
-                          endContent={<BsArrowRightShort size={20} />}
+                          isLoading={buyPackageLoader[hItem.id]}
+                          endContent={
+                            <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
+                          }
                         >
                           {dictionary.az.joinNow}
                         </Button>
@@ -157,38 +182,6 @@ function Pricing() {
                         )}
                       </td>
                     ))}
-
-                    {/* <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.chatLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.assistantLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.voiceLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td> */}
                   </tr>
                 ))}
               </tbody>

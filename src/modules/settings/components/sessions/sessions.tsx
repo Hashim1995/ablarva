@@ -105,9 +105,11 @@ function Sessions() {
   return (
     <Card className="rounded-lg sm:rounded-2xl shadow h-full ">
       <div className="flex justify-between items-center xl:mb-4 bg-black p-3">
-        <h2 className="text-base sm:text-xl text-white font-semibold">
-          {dictionary.az.active} {dictionary.az.sessions}
-        </h2>
+        <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
+          <p>
+            {dictionary.az.active} {dictionary.az.sessions}
+          </p>
+        </div>
         <Button
           size="sm"
           isIconOnly
@@ -155,25 +157,28 @@ function Sessions() {
                           {item.loginDate || dictionary.az.empty}
                         </div>
                       </div>
-                      <div className="font-bold 2xl:px-4 px-2">
-                        <Chip
-                          className="text-white"
-                          color={item.status ? 'success' : item.status}
-                        >
-                          {item.status ? 'Aktiv' : item.status}
-                        </Chip>
-                      </div>
-                      <Divider orientation="vertical" className="h-20" />
-                      <div className="2xl:ml-2 ml-2">
-                        <MdOutlineLogout
-                          className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px] cursor-pointer"
-                          color="red"
-                          size={25}
-                          aria-hidden
-                          onClick={() => {
-                            removeSession(item.id);
-                          }}
-                        />
+
+                      <div className="flex items-center">
+                        <div className="font-bold 2xl:px-4 px-2">
+                          <Chip
+                            className="text-white"
+                            color={item.status ? 'success' : item.status}
+                          >
+                            {item.status ? 'Aktiv' : item.status}
+                          </Chip>
+                        </div>
+                        <Divider orientation="vertical" className="h-20" />
+                        <div className="2xl:ml-2 ml-2">
+                          <MdOutlineLogout
+                            className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px] cursor-pointer"
+                            color="red"
+                            size={25}
+                            aria-hidden
+                            onClick={() => {
+                              removeSession(item.id);
+                            }}
+                          />
+                        </div>
                       </div>
                     </div>
                   </div>

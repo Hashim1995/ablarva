@@ -20,10 +20,11 @@ import {
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure
+  useDisclosure,
+  Image
 } from '@nextui-org/react';
 
-import { useDarkMode } from 'usehooks-ts';
+import { useDarkMode, useOnClickOutside } from 'usehooks-ts';
 
 import {
   BsFillChatLeftDotsFill,
@@ -36,7 +37,7 @@ import {
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
@@ -59,11 +60,6 @@ export default function Navbar() {
       label: `${dictionary.az.settings}`,
       path: 'settings',
       icon: <BsFillGearFill />
-    },
-    {
-      label: `${dictionary.az.history}`,
-      path: 'history',
-      icon: <BsClockFill />
     }
   ];
   // const { toggle, isDarkMode } = useDarkMode();
@@ -71,20 +67,30 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [show, setShow] = useState<boolean>(false);
+  const navRef = useRef(null);
 
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
 
+  const handleOutSideClick = () => {
+    setIsMenuOpen(false);
+    setShow(false);
+  };
+
+  useOnClickOutside(navRef, handleOutSideClick);
+
   return (
     <NavbarNext
-      className="bg-transparent z-10 h-[6rem] sm:h-[7rem]"
+      className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
       maxWidth="full"
       isBlurred={false}
       position="static"
       isMenuOpen={isMenuOpen}
       onMenuOpenChange={setIsMenuOpen}
       disableAnimation
+      onClick={handleOutSideClick}
     >
       <NavbarContent className="lg:hidden" justify="start">
         <NavbarMenuToggle
@@ -151,10 +157,14 @@ export default function Navbar() {
       </NavbarContent>
 
       <NavbarContent justify="end">
-        <NavbarItem className="bg-white rounded-lg shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
           {' '}
           {!user.verified && (
-            <Tooltip placement="left" content={dictionary.az.emailVerify}>
+            <Tooltip
+              className="hidden sm:block"
+              placement="left"
+              content={dictionary.az.emailVerify}
+            >
               <Button
                 onClick={onOpen}
                 size="sm"
@@ -178,15 +188,20 @@ export default function Navbar() {
             avatarProps={{
               src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
             }}
+            className="hidden sm:flex"
           />
-          <Dropdown>
-            <DropdownTrigger>
+          <Dropdown className="hidden sm:block">
+            <DropdownTrigger className="hidden sm:block">
               <div>
                 <BsArrowRightCircle className="cursor-pointer" size={20} />
               </div>
             </DropdownTrigger>
-            <DropdownMenu aria-label="Static Actions">
+            <DropdownMenu
+              className="hidden sm:block"
+              aria-label="Static Actions"
+            >
               <DropdownItem
+                className="hidden sm:block"
                 onClick={() => {
                   localStorage.removeItem('userToken');
                   navigate('/login');
@@ -197,14 +212,48 @@ export default function Navbar() {
               </DropdownItem>
             </DropdownMenu>
           </Dropdown>
+          <Dropdown className="block sm:hidden">
+            <DropdownTrigger>
+              <div>
+                <Image
+                  src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                  width={39}
+                  alt="user-image"
+                  className="rounded-full block sm:hidden"
+                />
+              </div>
+            </DropdownTrigger>
+            <DropdownMenu aria-label="Static Actions">
+              <DropdownItem isReadOnly>
+                <p className="text-xl text-black">
+                  {user
+                    ? `${user.firstName} ${user.lastName}`
+                    : dictionary.az.empty}
+                </p>
+                <p className="text-sm text-black">
+                  {user.email || dictionary.az.empty}
+                </p>
+              </DropdownItem>
+              <DropdownItem
+                onClick={() => {
+                  localStorage.removeItem('userToken');
+                  navigate('/login');
+                }}
+                key="logout"
+                className="pt-0"
+              >
+                <p className="text-sm">{dictionary.az.logOut}</p>
+              </DropdownItem>
+            </DropdownMenu>
+          </Dropdown>
         </NavbarItem>
       </NavbarContent>
 
-      <NavbarMenu className=" md:hidden items-start pt-8 sm:pt-10 mt-3 sm:mt-4">
+      <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
         {menuItems.map((item, index) => (
           <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
             <Button
-              className="w-full flex bg-transparent items-center gap-2 font-medium"
+              className="w-full px-1 flex bg-transparent items-center font-medium"
               onClick={() => {
                 navigate(`/${item.path}`);
               }}

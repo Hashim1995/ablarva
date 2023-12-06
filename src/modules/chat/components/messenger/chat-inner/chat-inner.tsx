@@ -76,7 +76,7 @@ function ChatInner() {
     <div className="flex flex-col gap-2 h-full  ">
       <div style={{ paddingBottom: 205 }} className="h-full">
         <ScrollToBottom
-          scrollViewClassName="flex-grow flex-1 p-4"
+          scrollViewClassName="flex-grow flex-1 p-4 !h-[300px]"
           followButtonClassName="hidden"
           className="row-span-8 overflow-y-auto h-full"
         >
@@ -121,7 +121,7 @@ function ChatInner() {
         </ScrollToBottom>
       </div>
 
-      <Card className=" flex-shrink-0 h-[150px] row-span-4 absolute w-full bottom-0">
+      <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] row-span-4 absolute w-full bottom-0">
         <ChatForm onSubmit={onSubmit} />
       </Card>
     </div>

@@ -5,14 +5,14 @@ import ParticlesBackground from '../static-components/particles-background';
 
 function LayoutPage() {
   return (
-    <div className="flex particles flex-col justify-between gap-2 h-screen  max-h-screen ">
+    <div className="flex particles flex-col justify-normal gap-2 h-screen  max-h-screen ">
       <div className="z-1">
         {' '}
         <ParticlesBackground isDark />
       </div>
       <Navbar />
 
-      <div className="my-2 h-[80vh] z-10 overflow-y-scroll">
+      <div className="my-2 sm:h-[80vh] flex-1 z-10 scrollBar overflow-y-scroll">
         <div className="h-full">
           <Outlet />
         </div>

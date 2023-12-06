@@ -15,13 +15,13 @@ function Layout() {
         setIsDrawerOpen={setIsDrawerOpen}
       />
 
-      <div className="inner  h-full flex">
+      <div className="inner h-full flex">
         <Drawer className="bg-black" isOpen={isDrawerOpen}>
           <AsistanCardList activeId={2} />
         </Drawer>
         <main
           style={{ height: 'calc(80vh - 56px) ' }}
-          className="flex-1 bg-white transition-all duration-300 ease-in-out h-full"
+          className="flex-1 layoutHeight bg-white transition-all duration-300 ease-in-out h-full"
         >
           <ChatInner />
         </main>

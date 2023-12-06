@@ -53,11 +53,11 @@ function MyPlan() {
       <text
         x={x}
         y={y}
-        fill="#292D32" // Change color if needed to make it visible on the segment
-        textAnchor="middle" // Anchor the text in the middle for better alignment
+        fill="#292D32"
+        textAnchor="middle"
         dominantBaseline="central"
         style={{
-          fontSize: '11px' // Adjust font size if needed
+          fontSize: '11px'
         }}
       >
         {`${(percent * 100).toFixed(0)}%`}
@@ -68,7 +68,7 @@ function MyPlan() {
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="text-xl text-white font-semibold">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.my} {dictionary.az.tariff}
         </h2>
         <Button
@@ -82,11 +82,11 @@ function MyPlan() {
       </div>
       <div className="bg-white rounded-lg shadow h-full px-6 overflow-y-scroll">
         <div className="mb-3">
-          <div className="text-black text-sm font-medium	  ">Hərtərəfli XL</div>
-          <div className="flex  justify-center ">
-            <div className="w-32 h-32 ">
+          <div className="text-black text-sm font-medium">Hərtərəfli XL</div>
+          <div className=" justify-center grid grid-cols-12 chartsHeight">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData1}
                     outerRadius={50}
@@ -135,9 +135,9 @@ function MyPlan() {
               </ResponsiveContainer>
             </div>
 
-            <div className="w-32 h-32 ">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData2}
                     outerRadius={50}
@@ -181,9 +181,9 @@ function MyPlan() {
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="w-32 h-32 ">
+            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
-                <PieChart>
+                <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData3}
                     labelLine={false}

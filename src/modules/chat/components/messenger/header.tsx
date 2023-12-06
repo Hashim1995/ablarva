@@ -14,7 +14,7 @@ function MessengerHeader({
 }: IMessengerHeaderProps) {
   return (
     <div className="flex justify-between  items-center bg-black p-3">
-      <div className="flex justify-between  gap-5 items-center ">
+      <div className="flex justify-between gap-2 sm:gap-5 items-center ">
         <Button
           size="sm"
           isIconOnly
@@ -28,7 +28,7 @@ function MessengerHeader({
             className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
           />
         </Button>
-        <h2 className="text-xl text-white font-semibold">
+        <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.chat}
         </h2>
       </div>
