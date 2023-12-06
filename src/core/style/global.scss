@@ -26,6 +26,23 @@ body {
   //   width: 10px;
   // }
 }
+
+body::-webkit-scrollbar,
+.scrollBar::-webkit-scrollbar {
+  width: 4px;
+}
+
+body::-webkit-scrollbar-track,
+.scrollBar::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 6px rgba(185, 185, 185, 0.3);
+}
+
+body::-webkit-scrollbar-thumb,
+.scrollBar::-webkit-scrollbar-thumb {
+  background-color: #292d32;
+  height: 50px;
+}
+
 ::selection {
   color: white;
   background: blue;

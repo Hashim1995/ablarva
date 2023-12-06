@@ -23,18 +23,18 @@ function TermsConditionsModal({
     <div>
       <Modal
         size="lg"
-        isDismissable={false}
         backdrop="opaque"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
+        hideCloseButton
       >
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-row items-center gap-1 border-b-1">
                 {dictionary.az.privacyPolicy}
               </ModalHeader>
-              <ModalBody className=" overflow-y-scroll">
+              <ModalBody className="scrollBar overflow-y-scroll">
                 <div className="justify-center   h-80 pr-3">
                   <p className="pb-6 text-md">
                     We, in AI-zade, (" Company ", "we", "us", "our") are
@@ -493,7 +493,7 @@ function TermsConditionsModal({
                   </p>
                 </div>
               </ModalBody>
-              <ModalFooter>
+              <ModalFooter className="border-t-1">
                 <Button variant="bordered" onPress={onClose}>
                   {dictionary.az.closeBtn}
                 </Button>

@@ -225,12 +225,12 @@ export default function Navbar() {
             </DropdownTrigger>
             <DropdownMenu aria-label="Static Actions">
               <DropdownItem isReadOnly>
-                <p className="text-base text-default-500">
+                <p className="text-xl text-black">
                   {user
                     ? `${user.firstName} ${user.lastName}`
                     : dictionary.az.empty}
                 </p>
-                <p className="text-base text-default-500">
+                <p className="text-sm text-black">
                   {user.email || dictionary.az.empty}
                 </p>
               </DropdownItem>
