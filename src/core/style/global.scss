@@ -209,6 +209,16 @@ input::placeholder {
     }
   }
 }
+
+.settingHistoryTable {
+  height: 100%;
+}
+
+.settingHistoryTable div:first-child {
+  display: flex !important;
+  justify-content: space-between !important;
+}
+
 @keyframes loading03 {
   0% {
     transform: scale(1);
