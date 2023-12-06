@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useState, useEffect } from 'react';
-import { Button, Spinner } from '@nextui-org/react';
+import { Button, Spinner, useDisclosure } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
 import { dictionary } from '@/utils/constants/dictionary';
 import { PaymentService } from '@/services/payment-services/payment-services';
@@ -11,14 +11,15 @@ import {
 } from '@/models/payment';
 import { IBuyPacketBody } from '@/modules/pricing/types';
 import Header from './header/header';
+import PricingModal from './pricingModal';
 
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
   const [data, setData] = useState<IPricingData>();
   const [loading, setLoading] = useState<boolean>(false);
-  const [buyPackageLoader, setBuyPackageLoader] = useState<
-    Record<number, boolean>
-  >({});
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const [wantedPackageId, setWantedPackageId] = useState<number>(0);
+  const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -54,10 +55,11 @@ function Pricing() {
     }
   ];
 
-  const buyPackage = async (id: number) => {
-    setBuyPackageLoader(prev => ({ ...prev, [id]: true }));
+  // eslint-disable-next-line no-unused-vars
+  const buyPackage = async () => {
+    setBuyPackageLoader(true);
     const payload: IBuyPacketBody = {
-      packageId: id
+      packageId: wantedPackageId
     };
     try {
       const res = await PaymentService.getInstance().buyPacket(payload);
@@ -67,7 +69,7 @@ function Pricing() {
     } catch (err) {
       console.log(err);
     }
-    setBuyPackageLoader(prev => ({ ...prev, [id]: false }));
+    setBuyPackageLoader(false);
   };
 
   return (
@@ -120,9 +122,16 @@ function Pricing() {
                   <>
                     <td
                       key={window.crypto.randomUUID()}
-                      className="xl:h-[262px] text-center w-max bg-transparent border-r-2 last:border-r-0"
+                      className="xl:h-[262px] text-center w-max bg-transparent border-r-2 last:border-r-0 overflow-hidden"
                     >
-                      <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5">
+                      <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5 relative ">
+                        <div className="absolute top-0 right-0">
+                          <div className="w-40 h-8 absolute top-2 -right-11">
+                            <div className="h-full w-full bg-black text-white text-center text-sm leading-8 transform rotate-45">
+                              Mövcud Paket
+                            </div>
+                          </div>
+                        </div>
                         <p className="text-base sm:text-[16px] xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
                           {hItem.name || 'test'}
                         </p>
@@ -139,11 +148,11 @@ function Pricing() {
                         </p>
                         <Button
                           onClick={() => {
-                            buyPackage(hItem.id);
+                            setWantedPackageId(hItem.id);
+                            onOpen();
                           }}
                           className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-2 sm:px-5 xl:px-7"
                           type="submit"
-                          isLoading={buyPackageLoader[hItem.id]}
                           endContent={
                             <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           }
@@ -191,6 +200,14 @@ function Pricing() {
           )}
         </div>
       </div>
+      {isOpen && (
+        <PricingModal
+          loading={buyPackageLoader}
+          onOkFunction={buyPackage}
+          onOpenChange={onOpenChange}
+          isOpen={isOpen}
+        />
+      )}
     </div>
   );
 }
