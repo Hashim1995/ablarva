@@ -6,7 +6,11 @@ import { IGlobalResponse } from '@/models/common';
 import { IPricingData } from '@/models/payment';
 import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/pricing/types';
 import { ITransactionsItem } from '@/modules/settings/types';
-import { ErrorCallBack, HttpUtil, IHTTPSParams } from '../adapter-config/config';
+import {
+  ErrorCallBack,
+  HttpUtil,
+  IHTTPSParams
+} from '../adapter-config/config';
 
 export interface IPricingDataResponse extends IGlobalResponse {
   data: IPricingData;
@@ -17,15 +21,15 @@ interface IBuyPacketServiceResponse extends IGlobalResponse {
 }
 interface ITransactionResponse extends IGlobalResponse {
   data: {
-    pagedData: ITransactionsItem[],
-    totalPages: number,
-  }
+    pagedData: ITransactionsItem[];
+    totalPages: number;
+  };
 }
 export class PaymentService {
   // eslint-disable-next-line no-use-before-define
   private static instance: PaymentService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): PaymentService {
     if (!this.instance) {
@@ -67,5 +71,4 @@ export class PaymentService {
     );
     return res;
   }
-
 }

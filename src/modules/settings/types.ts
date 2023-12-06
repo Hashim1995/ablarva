@@ -9,15 +9,15 @@ interface IAccountForm {
 }
 
 interface ITransactionsItem {
-  id: number,
-  userId: number,
-  packageId: number,
-  amount: number,
-  transactionDate: string | Date,
-  status: string,
-  orderId: string
+  id: number;
+  userId: number;
+  packageId: number;
+  amount: number;
+  transactionDate: string | Date;
+  status: string;
+  orderId: string;
 }
 
-interface IAccountPayload extends Omit<IAccountForm, 'email'> { }
+interface IAccountPayload extends Omit<IAccountForm, 'email'> {}
 
 export type { IAccountForm, ITransactionsItem, IAccountPayload };
