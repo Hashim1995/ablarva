@@ -1,3 +1,4 @@
+import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -63,7 +64,9 @@ function Bottom() {
 
       case 'transactionDate':
         // Format the date as needed
-        return z.transactionDate.toString();
+        return dayjs(new Date(z.transactionDate).toISOString()).format(
+          'DD.MM.YYYY HH:mm'
+        );
       case 'status':
         return (
           <Chip
@@ -88,43 +91,47 @@ function Bottom() {
           </p>
         </div>
       </div>
-      <Table
-        removeWrapper
-        isStriped
-        isHeaderSticky
-        bottomContent={
-          totalPage > 0 ? (
-            <div className=" w-full backdrop-blur-sm  sticky bottom-0 p-1  gray   ">
-              <Pagination
-                isCompact
-                showControls
-                showShadow
-                color="primary"
-                className="overflow-hidden flex items-center justify-center"
-                page={page}
-                total={totalPage}
-                onChange={(currentPage: number) => setPage(currentPage)}
-              />
-            </div>
-          ) : null
-        }
-        aria-label="Example static collection  table "
-        className="overflow-y-scroll min-h-full  md:overflow-x-hidden"
-        classNames={{}}
-      >
-        <TableHeader columns={columns}>
-          {column => <TableColumn key={column.uid}>{column.name}</TableColumn>}
-        </TableHeader>
-        <TableBody emptyContent={'No rows to display.'} items={data}>
-          {item => (
-            <TableRow key={item.id}>
-              {columnKey => (
-                <TableCell>{renderCell(item, columnKey)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      <div className="settingHistoryTable">
+        <Table
+          removeWrapper
+          isStriped
+          isHeaderSticky
+          bottomContent={
+            totalPage > 0 ? (
+              <div className="w-full backdrop-blur-sm flex justify-center sticky bottom-0 p-1 gray">
+                <Pagination
+                  isCompact
+                  showControls
+                  showShadow
+                  color="primary"
+                  className="overflow-hidden"
+                  page={page}
+                  total={totalPage}
+                  onChange={(currentPage: number) => setPage(currentPage)}
+                />
+              </div>
+            ) : null
+          }
+          aria-label="Example static collection  table "
+          className="overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
+          classNames={{}}
+        >
+          <TableHeader columns={columns}>
+            {column => (
+              <TableColumn key={column.uid}>{column.name}</TableColumn>
+            )}
+          </TableHeader>
+          <TableBody emptyContent={'No rows to display.'} items={data}>
+            {item => (
+              <TableRow key={item.id}>
+                {columnKey => (
+                  <TableCell>{renderCell(item, columnKey)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+      </div>
     </Card>
   );
 }

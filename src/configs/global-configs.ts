@@ -71,7 +71,7 @@ const textAreaConfig = {
     'gap-0',
     'border',
     'rounded-md',
-    ' h-8',
+    ' h-6',
     'data-[hover=true]:border-[#292D32]',
     'group-data-[focus=true]:border-gray-200',
     'border-[#292D32]',
