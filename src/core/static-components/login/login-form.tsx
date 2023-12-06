@@ -13,11 +13,12 @@ import { inputValidationText } from '@/utils/constants/validations';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEye, BsRobot, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
+import { BsEye, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
 import ForgotPassword from './forgot-password';
+import LoginLeftBar from './login-leftbar';
 
 interface ILoginFormProps {
   handleFlip: () => void;
@@ -35,6 +36,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const navigate = useNavigate();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -52,25 +54,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   return (
     <>
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-        <div className="my-3 text-4xl font-bold tracking-wider flex items-center justify-center">
-          <BsRobot className="animate-pulse w-[50px] h-[50px]	md:w-[68px] md:h-[68px]" />
-        </div>
-        <p className="mt-3 text-sm font-normal text-center text-white md:mt-0">
-          With necəsən, gəle, öp, qıdığla the power of K-WD, you can now focus
-          only on functionaries for your digital products, while leaving the UI
-          design on us!
-        </p>
-
-        <p className="mt-3 md:mt-6 text-sm text-center text-white">
-          Read our{' '}
-          <a href="/#" className="underline">
-            terms
-          </a>{' '}
-          and{' '}
-          <a href="/#" className="underline">
-            conditions
-          </a>
-        </p>
+        <LoginLeftBar />
       </div>
       <div className="p-4 md:p-3 bg-white md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
         <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-gray-700">
