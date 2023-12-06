@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/jsx-no-useless-fragment */
-import { pricingList1, pricingList2, pricingList3 } from '@/assets/dummy';
 import { useState, useEffect } from 'react';
 import { Button, Spinner } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
@@ -11,13 +9,16 @@ import {
   IPricingTableBody,
   IPricingTableHeader
 } from '@/models/payment';
+import { IBuyPacketBody } from '@/modules/pricing/types';
 import Header from './header/header';
 
 function Pricing() {
   const [activetab, setActiveTab] = useState<number>(1);
   const [data, setData] = useState<IPricingData>();
-
   const [loading, setLoading] = useState<boolean>(false);
+  const [buyPackageLoader, setBuyPackageLoader] = useState<
+    Record<number, boolean>
+  >({});
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -36,7 +37,9 @@ function Pricing() {
     fetchPricing();
   }, [activetab]);
 
-  const list = [
+  const list: {
+    [key: string]: string;
+  }[] = [
     {
       chatLimit: 'Sorgu 1'
     },
@@ -50,6 +53,22 @@ function Pricing() {
       assistantLimit: 'Səsli sorğu'
     }
   ];
+
+  const buyPackage = async (id: number) => {
+    setBuyPackageLoader(prev => ({ ...prev, [id]: true }));
+    const payload: IBuyPacketBody = {
+      packageId: id
+    };
+    try {
+      const res = await PaymentService.getInstance().buyPacket(payload);
+      if (res.isSuccess) {
+        window.location.href = res.data.paymentLink;
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setBuyPackageLoader(prev => ({ ...prev, [id]: false }));
+  };
 
   return (
     <div className=" container-fluid h-full mx-auto ">
@@ -119,8 +138,12 @@ function Pricing() {
                           {hItem.description || 'test'}
                         </p>
                         <Button
+                          onClick={() => {
+                            buyPackage(hItem.id);
+                          }}
                           className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-2 sm:px-5 xl:px-7"
                           type="submit"
+                          isLoading={buyPackageLoader[hItem.id]}
                           endContent={
                             <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           }
@@ -159,38 +182,6 @@ function Pricing() {
                         )}
                       </td>
                     ))}
-
-                    {/* <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.chatLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.assistantLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td>
-
-                    <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
-                      {data?.tableBodies[index]?.voiceLimit || (
-                        <div className="w-auto bg-transparent flex items-center justify-center">
-                          <BsFillXCircleFill
-                            style={{ fill: '#EB0000' }}
-                            className="text-[20px] sm:text-[24px] xl:text-[34px]"
-                          />
-                        </div>
-                      )}
-                    </td> */}
                   </tr>
                 ))}
               </tbody>
