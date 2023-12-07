@@ -1,64 +1,27 @@
-import { inputConfig } from '@/configs/global-configs';
-import { Input, InputProps, Tooltip } from '@nextui-org/react';
-import dayjs from 'dayjs';
-import { useRef, useState } from 'react';
+/* eslint-disable jsx-a11y/label-has-associated-control */
+import { dictionary } from '@/utils/constants/dictionary';
+import { inputPlaceholderText } from '@/utils/constants/texts';
+import { Tooltip } from '@nextui-org/react';
+import { useState } from 'react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
-import DatePicker from 'tailwind-datepicker-react';
-import { IOptions } from 'tailwind-datepicker-react/types/Options';
-import { useOnClickOutside } from 'usehooks-ts';
-
-const options: IOptions = {
-  autoHide: true,
-  todayBtn: false,
-  clearBtn: true,
-  clearBtnText: 'Təmizlə',
-  maxDate: new Date('2023-01-01'),
-  theme: {
-    background: 'bg-black ',
-    todayBtn: 'bg-black',
-    clearBtn: '!bg-black',
-    icons: '!bg-black',
-    text: '',
-    disabledText:
-      'hover:bg-gray-100 hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  text-white font-semibold text-sm  text-gray-900  ',
-    input: '!bg-black',
-    inputIcon: '!bg-black',
-    selected: 'bg-black'
-  },
-  datepickerClassNames: 'top-6 z-50',
-  defaultDate: new Date('2022-01-01'),
-  language: 'en',
-  // disabledDates: [],
-  weekDays: ['Be', 'Ça', 'Ç', 'Ca', 'C', 'Ş', 'B'],
-  inputNameProp: 'date',
-  inputIdProp: 'date',
-  inputPlaceholderProp: 'Select Date',
-  inputDateFormatProp: {
-    formatMatcher: 'basic',
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric'
-  }
-};
+import { BsCalendarWeekFill } from 'react-icons/bs';
+import ReactInputMask from 'react-input-mask';
 
 interface IHandledDate {
   name: string;
   control: any;
-  isInvalid?: boolean;
   placeholder?: string;
+  label?: string;
   rules?: Omit<
     RegisterOptions<FieldValues>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   required?: boolean;
-  startContentIconType?: null;
   errors?: any;
-  inputProps?: InputProps;
+  // inputProps?: InputProps;
   onChangeApp?: any;
+  fieldsIsDisable?: boolean;
   className?: string;
-  IconElement?: any;
-  size?: 'sm' | 'md' | 'lg';
 }
 
 function AppHandledDate({
@@ -66,75 +29,84 @@ function AppHandledDate({
   control,
   placeholder = 'Daxil edin',
   rules,
-  variant = 'bordered',
   required = false,
-  inputProps,
+  // inputProps,
   errors,
-  isInvalid = false,
+  fieldsIsDisable,
+  label,
   className = '',
-  onChangeApp,
-  size,
-  IconElement
+  onChangeApp
 }: IHandledDate) {
-  const [show, setShow] = useState<boolean>(false);
-
-  const dateRef = useRef(null);
-
-  const handleOutSideClick = () => {
-    setShow(false);
-  };
-
-  useOnClickOutside(dateRef, handleOutSideClick);
-
+  const [datePlaceholder, setDatePlaceholder] = useState<string>('');
   return (
-    <div className="relative" ref={dateRef}>
-      <Controller
-        control={control}
-        name={name}
-        rules={rules}
-        render={({ field: { onChange, value } }) => (
-          <DatePicker
-            options={options}
-            show={show}
-            onChange={e => {
-              onChange(dayjs(e).format('DD.MM.YYYY'));
-              onChangeApp && onChangeApp(e);
-            }}
-            setShow={() => setShow(z => !z)}
+    <div
+      className={className}
+      style={{ opacity: fieldsIsDisable ? 0.5 : 1, marginTop: -7 }}
+    >
+      {label && <label> {label}</label>}
+      <div
+        style={{
+          border: '1px solid black',
+          borderRadius: '0.375rem',
+          borderColor: errors.dateOfBirth?.message ? '#f31260' : 'black'
+        }}
+        className="flex items-center ps-3 mt-1 h-full"
+      >
+        {errors.dateOfBirth?.message ? (
+          <Tooltip
+            className={'!bg-black !text-white'}
+            placement="top-start"
+            offset={12}
+            content={errors.dateOfBirth ? errors.dateOfBirth.message : ''}
           >
-            <div className="relative">
-              <Input
-                type="text"
-                placeholder={placeholder}
-                variant={variant}
-                isInvalid={isInvalid}
-                readOnly
-                onFocus={() => setShow(true)}
-                required={required}
-                value={String(value || '')}
-                size={size}
-                className={className}
-                classNames={inputConfig}
-                startContent={
-                  errors[name]?.message ? (
-                    <Tooltip
-                      className={'!bg-black !text-white'}
-                      placement="top-start"
-                      offset={12}
-                      content={errors[name] ? errors[name].message : ''}
-                    >
-                      <div>{IconElement()}</div>
-                    </Tooltip>
-                  ) : (
-                    <div>{IconElement()}</div>
-                  )
-                }
-                {...inputProps}
+            <div>
+              {' '}
+              <BsCalendarWeekFill
+                size={16}
+                color={errors.dateOfBirth?.message ? '#f31260' : ''}
+                className="text-2xl text-default-400 pointer-events-none flex-shrink-0 mr-1.5"
               />
             </div>
-          </DatePicker>
+          </Tooltip>
+        ) : (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.dateOfBirth?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0 mr-1.5"
+          />
         )}
-      />
+
+        <Controller
+          name={name}
+          control={control}
+          rules={rules}
+          render={({ field: { onChange, onBlur, value } }) => (
+            <ReactInputMask
+              placeholder={
+                datePlaceholder ||
+                inputPlaceholderText(dictionary.az.dateOfBirth) ||
+                placeholder
+              }
+              onFocus={() => setDatePlaceholder('YYYY-MM-DD')}
+              required={required}
+              onBlur={() => {
+                setDatePlaceholder('');
+                onBlur();
+              }}
+              style={{ fontSize: '0.875rem' }}
+              onChange={e => {
+                onChangeApp && onChangeApp();
+                onChange(e);
+              }}
+              value={value}
+              mask="9999-99-99"
+              disabled={fieldsIsDisable}
+              maskChar=""
+              className="text-black bg-transparent text-base sm:text-xl w-full h-full outline-none"
+            />
+          )}
+        />
+      </div>
     </div>
   );
 }

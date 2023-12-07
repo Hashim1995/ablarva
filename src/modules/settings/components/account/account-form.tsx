@@ -1,29 +1,24 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 /* eslint-disable react/no-unstable-nested-components */
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { inputValidationText } from '@/utils/constants/validations';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
 } from '@/utils/constants/texts';
-import {
-  BsCalendarWeekFill,
-  BsEnvelopeFill,
-  BsFillPersonFill
-} from 'react-icons/bs';
+import { BsEnvelopeFill, BsFillPersonFill } from 'react-icons/bs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
-import InputMask from 'react-input-mask';
-import { Tooltip } from '@nextui-org/react';
+import AppHandledDate from '@/components/forms/date/handled-date';
 import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
@@ -32,8 +27,6 @@ interface IAccountFormProps {
 }
 
 function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
-  const [datePlaceholder, setDatePlaceholder] = useState<string>('');
-
   const {
     handleSubmit,
     setValue,
@@ -188,80 +181,27 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
               />
             )}
           />
-          <div style={{ opacity: fieldsIsDisable ? 0.5 : 1, marginTop: -7 }}>
-            <label> Doğum tarixi</label>
-            <div
-              style={{
-                border: '1px solid black',
-                borderRadius: '0.375rem',
-                height: 32,
-                borderColor: errors.dateOfBirth?.message ? '#f31260' : 'black'
-              }}
-              className="flex items-center ps-3 mt-1"
-            >
-              {errors.dateOfBirth?.message ? (
-                <Tooltip
-                  className={'!bg-black !text-white'}
-                  placement="top-start"
-                  offset={12}
-                  content={errors.dateOfBirth ? errors.dateOfBirth.message : ''}
-                >
-                  <div>
-                    {' '}
-                    <BsCalendarWeekFill
-                      size={16}
-                      color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                      className="text-2xl text-default-400 pointer-events-none flex-shrink-0 mr-1.5"
-                    />
-                  </div>
-                </Tooltip>
-              ) : (
-                <BsCalendarWeekFill
-                  size={16}
-                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0 mr-1.5"
-                />
-              )}
 
-              <Controller
-                name="dateOfBirth"
-                control={control}
-                rules={{
-                  required: {
-                    value: true,
-                    message: inputValidationText(dictionary.az.dateOfBirth)
-                  },
-                  pattern: {
-                    value:
-                      /^(?:19|20)\d\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$/,
-                    message: `${dictionary.az.dateOfBirth} ${dictionary.az.regexFormatValidatorText}`
-                  }
-                }}
-                render={({ field: { onChange, onBlur, value } }) => (
-                  <InputMask
-                    id="dateOfBirth"
-                    placeholder={
-                      datePlaceholder ||
-                      inputPlaceholderText(dictionary.az.dateOfBirth)
-                    }
-                    onFocus={() => setDatePlaceholder('YYYY-MM-DD')}
-                    required
-                    onBlur={() => {
-                      setDatePlaceholder('');
-                      onBlur();
-                    }}
-                    style={{ fontSize: '0.875rem' }}
-                    onChange={onChange}
-                    value={value}
-                    mask="9999-99-99"
-                    disabled={fieldsIsDisable}
-                    maskChar=""
-                    className="text-black bg-transparent text-base sm:text-xl w-full h-full outline-none"
-                  />
-                )}
-              />
-            </div>
-          </div>
+          <AppHandledDate
+            name="dateOfBirth"
+            fieldsIsDisable={fieldsIsDisable}
+            label={dictionary.az.dateOfBirth}
+            control={control}
+            errors={errors}
+            rules={{
+              required: {
+                value: true,
+                message: inputValidationText(dictionary.az.dateOfBirth)
+              },
+              pattern: {
+                value:
+                  /^(?:19|20)\d\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$/,
+                message: `${dictionary.az.dateOfBirth} ${dictionary.az.regexFormatValidatorText}`
+              }
+            }}
+            placeholder={inputPlaceholderText(dictionary.az.dateOfBirth)}
+            required
+          />
         </div>
 
         <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">

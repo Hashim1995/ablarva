@@ -183,29 +183,22 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
             <AppHandledDate
               name="dateOfBirth"
-              inputProps={{
-                id: 'dateOfBirth'
-              }}
+              className="h-12 my-0.5"
               control={control}
-              className="text-black w-72 relative"
-              isInvalid={Boolean(errors.dateOfBirth?.message)}
               errors={errors}
-              size="sm"
               rules={{
                 required: {
                   value: true,
                   message: inputValidationText(dictionary.az.dateOfBirth)
+                },
+                pattern: {
+                  value:
+                    /^(?:19|20)\d\d-(?:0[1-9]|1[0-2])-(?:0[1-9]|[12][0-9]|3[01])$/,
+                  message: `${dictionary.az.dateOfBirth} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
               placeholder={inputPlaceholderText(dictionary.az.dateOfBirth)}
               required
-              IconElement={() => (
-                <BsCalendarWeekFill
-                  size={16}
-                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
 
             <AppHandledSelect
