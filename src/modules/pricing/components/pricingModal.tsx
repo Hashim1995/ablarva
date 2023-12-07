@@ -12,6 +12,7 @@ interface IPricingModal {
   isOpen: boolean;
   onOpenChange: () => void;
   onOkFunction: () => void;
+  // currentPackage: () => void;
   loading: boolean;
 }
 
@@ -19,6 +20,7 @@ function PricingModal({
   isOpen,
   onOpenChange,
   onOkFunction,
+  // currentPackage,
   loading
 }: IPricingModal) {
   return (
@@ -43,6 +45,7 @@ function PricingModal({
                 <Button
                   className="bg-black text-white"
                   onPress={onOkFunction}
+                  // onClick={currentPackage}
                   isLoading={loading}
                 >
                   {dictionary.az.yesTxt}

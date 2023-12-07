@@ -84,7 +84,7 @@ function Header() {
         </div>
         <Divider orientation="vertical" className="h-28 ml-2 hidden lg:block" />
       </div>
-      <div className="w-full flex overflow-y-scroll sm:overflow-y-hidden">
+      <div className="w-full flex componentsScrollBar overflow-y-scroll sm:overflow-y-hidden">
         <div className="w-full grid grid-cols-12 chartsHeight">
           <div className="w-full sm:w-[14rem] xl:w-[15rem] h-36 col-span-12 sm:col-span-6 md:col-span-4">
             <ResponsiveContainer width="100%" height="100%">

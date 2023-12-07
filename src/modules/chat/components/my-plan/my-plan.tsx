@@ -80,7 +80,7 @@ function MyPlan() {
           <RiPriceTag2Fill size={20} color="#292D32" />
         </Button>
       </div>
-      <div className="bg-white rounded-lg shadow h-full px-6 overflow-y-scroll">
+      <div className="bg-white rounded-lg shadow h-full px-6 componentsScrollBar overflow-y-scroll">
         <div className="mb-3">
           <div className="text-black text-sm font-medium">Hərtərəfli XL</div>
           <div className=" justify-center grid grid-cols-12 chartsHeight">
