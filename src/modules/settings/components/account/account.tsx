@@ -8,16 +8,18 @@ function Account() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <Card className="h-full !bg-white overflow-y-auto flex rounded-lg sm:rounded-2xl bg-transparent  shadow-md">
+    <Card className="h-full !bg-white flex rounded-lg sm:rounded-2xl bg-transparent  shadow-md overflow-visible">
       <AccountHeader
         fieldsIsDisable={fieldsIsDisable}
         setFieldsIsDisable={setFieldsIsDisable}
         isLoading={isLoading}
       />
-      <AccountForm
-        setIsLoading={setIsLoading}
-        fieldsIsDisable={fieldsIsDisable}
-      />
+      <div className="overflow-y-auto">
+        <AccountForm
+          setIsLoading={setIsLoading}
+          fieldsIsDisable={fieldsIsDisable}
+        />
+      </div>
     </Card>
   );
 }

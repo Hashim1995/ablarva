@@ -5,7 +5,8 @@ interface IAccountForm {
   firstName: string;
   lastName: string;
   gender: selectOption | null | string;
-  dateOfBirth: string | Date;
+  dateOfBirth: string;
+  // dateOfBirth: string |Date;
 }
 
 interface IAccountPayload extends Omit<IAccountForm, 'email'> {}
