@@ -73,10 +73,6 @@ function Pricing() {
     setBuyPackageLoader(false);
   };
 
-  // const currentPackage = () =>{
-  //   setCurrentPackageId()
-  // }
-
   useEffect(() => {
     setCurrentPackageId(2);
   }, []);
@@ -218,7 +214,6 @@ function Pricing() {
         <PricingModal
           loading={buyPackageLoader}
           onOkFunction={buyPackage}
-          // currentPackage={currentPackage}
           onOpenChange={onOpenChange}
           isOpen={isOpen}
         />

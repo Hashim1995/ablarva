@@ -123,7 +123,7 @@ function Sessions() {
           />
         </Button>
       </div>
-      <div className="bg-white  rounded-lg   xl:py-3 xl:px-6 py-1 px-2 overflow-y-auto">
+      <div className="bg-white  rounded-lg  componentsScrollBar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
           <div>
             {userSessions?.length > 0 ? (
