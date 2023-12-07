@@ -84,7 +84,7 @@ function ChatHistory() {
                 <Button
                   size="sm"
                   isIconOnly
-                  className="bg-white rounded-full !w-6 !h-8 !unit-lg"
+                  className="bg-white rounded-full ml-2 !w-6 !h-8 !unit-lg"
                   aria-label="Remove chat"
                 >
                   <BsTrash size={16} className=" text-gray-500" />

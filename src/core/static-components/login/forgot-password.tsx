@@ -97,13 +97,13 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col px-6 py-3 md:px-6 md:py-4 gap-1">
                 {dictionary.az.forgetPassword}
               </ModalHeader>
               <ModalBody>
                 <form
                   onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col space-y-5"
+                  className="flex flex-col space-y-3 md:space-y-5"
                 >
                   <div className="flex flex-col gap-5  ">
                     <AppHandledInput

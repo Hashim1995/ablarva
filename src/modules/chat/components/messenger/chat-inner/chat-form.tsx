@@ -7,7 +7,7 @@ import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
 import { textAreaConfig } from '@/configs/global-configs';
 import { IChatForm } from '@/modules/chat/types';
 
-import { useLocalStorage } from 'usehooks-ts';
+import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
@@ -23,6 +23,7 @@ function ChatForm({ onSubmit }: IChatFormProps) {
   );
 
   const typewriterSound = new Audio(audioUrl);
+  const matches = useMediaQuery('(min-width: 468px)');
 
   return (
     <form
@@ -55,10 +56,10 @@ function ChatForm({ onSubmit }: IChatFormProps) {
             reset();
           }
         }}
-        maxRows={3}
+        maxRows={matches ? 3 : 2}
       />
 
-      <div className="flex w-full px-5 items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-12">
+      <div className="flex w-full px-5 items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-10 sm:h-12">
         <Button
           type="button"
           isIconOnly
