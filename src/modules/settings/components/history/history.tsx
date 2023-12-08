@@ -116,7 +116,7 @@ function Bottom() {
             ) : null
           }
           aria-label="Example static collection  table "
-          className="overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
+          className="componentsScrollBar overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
           classNames={{}}
         >
           <TableHeader columns={columns}>
