@@ -1,14 +1,23 @@
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AuthService } from '@/services/auth-services/auth-services';
+import { IUserData } from '@/models/user';
 
 // Define the initial state of the user slice
-const initialState = {
+
+interface AuthSliceInitalState {
+  status: string,
+  error: unknown,
+  user: IUserData
+}
+
+const initialState: AuthSliceInitalState = {
   user: {
     email: '',
+    accessToken: '',
     firstName: '',
     lastName: '',
-    password: '',
-    confirmPassword: '',
+    currentSubscription: null,
+    id: 0,
     gender: 0,
     dateOfBirth: '',
     verified: false,

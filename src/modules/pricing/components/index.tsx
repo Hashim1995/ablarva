@@ -10,6 +10,8 @@ import {
   IPricingTableHeader
 } from '@/models/payment';
 import { IBuyPacketBody } from '@/modules/pricing/types';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import Header from './header/header';
 import PricingModal from './pricingModal';
 
@@ -20,7 +22,11 @@ function Pricing() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
-  const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
+  // const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
+
+  const packageId = useSelector(
+    (state: RootState) => state.user.user.currentSubscription?.packageId
+  );
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -73,9 +79,9 @@ function Pricing() {
     setBuyPackageLoader(false);
   };
 
-  useEffect(() => {
-    setCurrentPackageId(2);
-  }, []);
+  // useEffect(() => {
+  //   setCurrentPackageId(2);
+  // }, []);
 
   return (
     <div className=" container-fluid h-full mx-auto ">
@@ -130,7 +136,7 @@ function Pricing() {
                       className="h-[210px] xl:h-[262px] min-w-[190px] md:min-w-[200px] text-center w-max bg-transparent border-r-2 last:border-r-0 overflow-hidden"
                     >
                       <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5 relative ">
-                        {currentPackageId === hItem.id && (
+                        {packageId === hItem.id && (
                           <div className="absolute top-0 right-0">
                             <div className="w-40 h-8 absolute top-[0.2rem] -right-12">
                               <div className="h-full w-full bg-black text-white text-center text-[10px] leading-8 transform rotate-45">
@@ -165,7 +171,7 @@ function Pricing() {
                             <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           }
                         >
-                          {currentPackageId === hItem.id
+                          {packageId === hItem.id
                             ? 'Paketi yenile'
                             : dictionary.az.joinNow}
                         </Button>
