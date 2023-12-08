@@ -20,6 +20,7 @@ function Pricing() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
+  const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
 
   const fetchPricing = async () => {
     setLoading(true);
@@ -72,6 +73,10 @@ function Pricing() {
     setBuyPackageLoader(false);
   };
 
+  useEffect(() => {
+    setCurrentPackageId(2);
+  }, []);
+
   return (
     <div className=" container-fluid h-full mx-auto ">
       <div className="grid grid-cols-12">
@@ -107,7 +112,7 @@ function Pricing() {
             {dictionary.az.aiAssistant}
           </Button>
         </div>
-        <div className="col-span-12 xl:col-span-10 overflow-x-scroll row-span-6 xl:col-start-3 bg-white rounded-2xl">
+        <div className="col-span-12 xl:col-span-10 componentsScrollBar overflow-x-scroll row-span-6 xl:col-start-3 bg-white rounded-2xl">
           {!loading ? (
             <table className="w-full transition ease-in-out delay-150 duration-300">
               <thead className="border-b-1">
@@ -122,16 +127,19 @@ function Pricing() {
                   <>
                     <td
                       key={window.crypto.randomUUID()}
-                      className="xl:h-[262px] text-center w-max bg-transparent border-r-2 last:border-r-0 overflow-hidden"
+                      className="h-[210px] xl:h-[262px] min-w-[190px] md:min-w-[200px] text-center w-max bg-transparent border-r-2 last:border-r-0 overflow-hidden"
                     >
                       <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5 relative ">
-                        <div className="absolute top-0 right-0">
-                          <div className="w-40 h-8 absolute top-2 -right-11">
-                            <div className="h-full w-full bg-black text-white text-center text-sm leading-8 transform rotate-45">
-                              Mövcud Paket
+                        {currentPackageId === hItem.id && (
+                          <div className="absolute top-0 right-0">
+                            <div className="w-40 h-8 absolute top-[0.2rem] -right-12">
+                              <div className="h-full w-full bg-black text-white text-center text-[10px] leading-8 transform rotate-45">
+                                Mövcud Paket
+                              </div>
                             </div>
                           </div>
-                        </div>
+                        )}
+
                         <p className="text-base sm:text-[16px] xl:text-[20px] font-bold leading-6 h-[45px] sm:h-auto">
                           {hItem.name || 'test'}
                         </p>
@@ -151,13 +159,15 @@ function Pricing() {
                             setWantedPackageId(hItem.id);
                             onOpen();
                           }}
-                          className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-2 sm:px-5 xl:px-7"
+                          className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-3 sm:px-5 xl:px-7"
                           type="submit"
                           endContent={
                             <BsArrowRightShort className="w-[18px] h-[18px] sm:w-[20px] sm:h-[20px]" />
                           }
                         >
-                          {dictionary.az.joinNow}
+                          {currentPackageId === hItem.id
+                            ? 'Paketi yenile'
+                            : dictionary.az.joinNow}
                         </Button>
                       </div>
                     </td>
