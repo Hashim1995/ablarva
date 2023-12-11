@@ -50,7 +50,6 @@ export interface IUserRegister {
   dateOfBirth: string | Date;
 }
 
-
 export interface IUserSessions {
   id: number;
   userId: number;
@@ -67,16 +66,15 @@ export interface IUserSessions {
 }
 
 export interface IUserCurrentSubscription {
-  endDate: string,
-  packageDescription: string,
-  packageId: number,
-  packageName: string,
-  startDate: string,
-  subscriptionId: number,
-
+  endDate: string;
+  packageDescription: string;
+  packageId: number;
+  packageName: string;
+  startDate: string;
+  subscriptionId: number;
 }
 export interface IUserData {
-  currentSubscription: IUserCurrentSubscription | null,
+  currentSubscription: IUserCurrentSubscription | null;
   accessToken: string;
   id: number;
   email: string;
@@ -88,4 +86,4 @@ export interface IUserData {
   userSessions: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}

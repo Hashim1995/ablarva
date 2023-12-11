@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
 import { AppDispatch } from './redux/store';
+import statisticsSocket from './utils/functions/socket-config';
+import { setStatisticsCount } from './redux/statistics/statistics-slice';
+import { StatisticsUpdateData } from './models/common';
 
 function App() {
   const router = useRoutes(routesList);
@@ -24,6 +27,29 @@ function App() {
       dispatch(fetchUserData());
     }
   }, [userToken]);
+
+  useEffect(() => {
+    if (userToken?.token) {
+      if (statisticsSocket.state === 'Disconnected') {
+        statisticsSocket
+          .start()
+          .then(() => {
+            statisticsSocket.on(
+              'StatisticsUpdate',
+              (z: StatisticsUpdateData) => {
+                dispatch(setStatisticsCount(z));
+              }
+            );
+          })
+          .catch(error => console.error('SignalR connection failed:', error));
+      }
+    }
+
+    return () => {
+      statisticsSocket.stop();
+    };
+  }, [dispatch]);
+
   return (
     <main
       className={`${

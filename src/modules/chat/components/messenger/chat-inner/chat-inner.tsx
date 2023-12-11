@@ -74,9 +74,9 @@ function ChatInner() {
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
-      <div style={{ paddingBottom: 205 }} className="h-full">
+      <div style={{ paddingBottom: 160 }} className="h-full">
         <ScrollToBottom
-          scrollViewClassName="flex-grow flex-1 p-4 !h-[300px]"
+          scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
           className="row-span-8 componentsScrollBar overflow-y-auto h-full"
         >

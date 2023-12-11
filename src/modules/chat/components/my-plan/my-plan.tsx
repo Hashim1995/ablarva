@@ -3,37 +3,41 @@
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/prop-types */
 /* eslint-disable react/function-component-definition */
+import { StatisticsUpdateData } from '@/models/common';
+import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card } from '@nextui-org/react';
-import React from 'react';
+import { useEffect, useState } from 'react';
 import { RiPriceTag2Fill } from 'react-icons/ri';
+import { useSelector } from 'react-redux';
 
 import {
   PieChart,
   Pie,
   Legend,
   ResponsiveContainer,
-  Tooltip,
   Cell,
   Label
 } from 'recharts';
 
 function MyPlan() {
+  const [chartData, setChartData] = useState<StatisticsUpdateData['data']>();
+
+  const statisticsData: StatisticsUpdateData = useSelector(
+    (state: RootState) => state.statisticsCount.statisticsCount
+  );
+
   const chartData1 = [
-    { name: 'Geri qalan', value: 600 },
-    { name: 'İstifadə olunan', value: 200 }
+    { name: 'Geri qalan', value: chartData?.basic.remainder },
+    { name: 'İstifadə olunan', value: chartData?.basic?.usage }
   ];
   const chartData2 = [
-    { name: 'Geri qalan', value: 600 },
-    { name: 'İstifadə olunan', value: 200 }
+    { name: 'Geri qalan', value: chartData?.premium?.remainder },
+    { name: 'İstifadə olunan', value: chartData?.premium?.usage }
   ];
-  const chartData3 = [
-    { name: 'Geri qalan', value: 500 },
-    { name: 'İstifadə olunan', value: 500 }
-  ];
+
   const colorData1 = ['#319CFF', '#B3DAFF'];
   const colorData2 = ['#31FF90', '#B3FFD6'];
-  const colorData3 = ['#FF9431', '#FFD7B3'];
 
   const RADIAN = Math.PI / 180;
   const renderCustomizedLabel = ({
@@ -65,6 +69,10 @@ function MyPlan() {
     );
   };
 
+  useEffect(() => {
+    setChartData(statisticsData.data);
+  }, [statisticsData]);
+
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
@@ -82,9 +90,11 @@ function MyPlan() {
       </div>
       <div className="bg-white rounded-lg shadow h-full px-6 componentsScrollBar overflow-y-scroll">
         <div className="mb-3">
-          <div className="text-black text-sm font-medium">Hərtərəfli XL</div>
+          <div className="text-black text-sm font-medium">
+            {chartData?.packageName || ''}
+          </div>
           <div className=" justify-center grid grid-cols-12 chartsHeight">
-            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
+            <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
@@ -101,11 +111,7 @@ function MyPlan() {
                     dataKey="value"
                   >
                     <Label
-                      value={chartData1.reduce(
-                        (accumulator, currentItem) =>
-                          accumulator + currentItem.value,
-                        0
-                      )}
+                      value={chartData?.basic?.total}
                       className="text-sm"
                       style={{
                         fill: '#292D32'
@@ -135,7 +141,7 @@ function MyPlan() {
               </ResponsiveContainer>
             </div>
 
-            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
+            <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
@@ -155,7 +161,7 @@ function MyPlan() {
                       style={{
                         fill: '#292D32'
                       }}
-                      value="123"
+                      value={chartData?.premium?.total}
                       className="text-sm"
                       position="center"
                     />
@@ -171,17 +177,17 @@ function MyPlan() {
                     iconSize={8}
                     verticalAlign="bottom"
                     height={1}
-                    payload={chartData1.map((item, index) => ({
+                    payload={chartData2.map((item, index) => ({
                       id: item.name,
                       type: 'square',
                       value: `${item.name} : ${item.value}`,
-                      color: colorData1[index % colorData1.length]
+                      color: colorData2[index % colorData2.length]
                     }))}
                   />
                 </PieChart>
               </ResponsiveContainer>
             </div>
-            <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
+            {/* <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
@@ -223,7 +229,7 @@ function MyPlan() {
                   />
                 </PieChart>
               </ResponsiveContainer>
-            </div>
+            </div> */}
           </div>
         </div>
       </div>

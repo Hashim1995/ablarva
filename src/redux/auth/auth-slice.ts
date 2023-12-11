@@ -5,9 +5,9 @@ import { IUserData } from '@/models/user';
 // Define the initial state of the user slice
 
 interface AuthSliceInitalState {
-  status: string,
-  error: unknown,
-  user: IUserData
+  status: string;
+  error: unknown;
+  user: IUserData;
 }
 
 const initialState: AuthSliceInitalState = {
