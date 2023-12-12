@@ -24,11 +24,29 @@ interface IMenuItemsNavbar {
   icon: any;
 }
 
+interface UsageStats {
+  total: number;
+  usage: number;
+  remainder: number;
+}
+
+interface StatisticsUpdateData {
+  isSuccess: boolean;
+  data: {
+    title: string;
+    packageName: string;
+    basic: UsageStats;
+    premium: UsageStats;
+  };
+  errors: any;
+}
+
 type setState = Dispatch<SetStateAction<boolean>>;
 export type {
   IGlobalResponseEmpty,
   selectOption,
   setState,
   IGlobalResponse,
-  IMenuItemsNavbar
+  IMenuItemsNavbar,
+  StatisticsUpdateData
 };

@@ -290,3 +290,24 @@ input::placeholder {
     }
   }
 }
+
+.custom-date-picker {
+  button {
+    padding: 8px;
+  }
+  .dow {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.recharts-legend-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .recharts-default-legend {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}
