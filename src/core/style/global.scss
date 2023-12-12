@@ -300,3 +300,14 @@ input::placeholder {
     width: 1.5rem;
   }
 }
+
+.recharts-legend-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .recharts-default-legend {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
+}

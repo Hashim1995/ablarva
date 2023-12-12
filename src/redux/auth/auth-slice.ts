@@ -1,3 +1,4 @@
+/* eslint-disable no-useless-catch */
 import { createSlice, createAsyncThunk, PayloadAction } from '@reduxjs/toolkit';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { IUserData } from '@/models/user';
@@ -35,7 +36,7 @@ export const fetchUserData = createAsyncThunk(
       const response = await AuthService.getInstance().getMe();
       return response.data;
     } catch (err) {
-      return err;
+      throw err;
     }
   }
 );
@@ -59,10 +60,11 @@ const userSlice = createSlice({
         state.status = 'succeeded';
         state.user = action.payload;
       })
-      .addCase(fetchUserData.rejected, (state: any, action) => {
+      .addCase(fetchUserData.rejected, (state, action) => {
         state.status = 'failed';
-        state.error = action.payload;
+        state.error = action.error; // Use action.error to get the thrown error
       });
+
     // You can handle more actions here if needed
   }
 });

@@ -2,10 +2,10 @@ import { useNavigate, useRoutes } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import { useReadLocalStorage } from 'usehooks-ts';
 import routesList from '@core/routes/routes';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
-import { AppDispatch } from './redux/store';
+import { AppDispatch, RootState } from './redux/store';
 import statisticsSocket from './utils/functions/socket-config';
 import { setStatisticsCount } from './redux/statistics/statistics-slice';
 import { StatisticsUpdateData } from './models/common';
@@ -17,6 +17,7 @@ function App() {
   // const { isDarkMode } = useDarkMode();
 
   const userToken: any = useReadLocalStorage('userToken');
+  const getme = useSelector((state: RootState) => state.user);
 
   const navigate = useNavigate();
 
@@ -59,7 +60,11 @@ function App() {
         //   : 'h-screen text-foreground bg-background'
       }`}
     >
-      <Suspense fallback={<SuspenseLoader />}>{router}</Suspense>
+      {getme.status !== 'succeeded' ? (
+        <SuspenseLoader />
+      ) : (
+        <Suspense fallback={<SuspenseLoader />}>{router}</Suspense>
+      )}
     </main>
   );
 }

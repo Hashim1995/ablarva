@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/auth-slice';
-import statisticReducer from './statistics/statistics-slice'
+import statisticReducer from './statistics/statistics-slice';
 
 export const store = configureStore({
   reducer: { user: authReducer, statisticsCount: statisticReducer }

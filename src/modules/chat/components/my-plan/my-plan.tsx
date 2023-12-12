@@ -53,7 +53,7 @@ function MyPlan() {
     const x = cx + radius * Math.cos(-midAngle * RADIAN);
     const y = cy + radius * Math.sin(-midAngle * RADIAN);
 
-    return (
+    return percent * 100 !== 0 ? (
       <text
         x={x}
         y={y}
@@ -66,7 +66,7 @@ function MyPlan() {
       >
         {`${(percent * 100).toFixed(0)}%`}
       </text>
-    );
+    ) : null;
   };
 
   useEffect(() => {
@@ -93,13 +93,13 @@ function MyPlan() {
           <div className="text-black text-sm font-medium">
             {chartData?.packageName || ''}
           </div>
-          <div className=" justify-center grid grid-cols-12 chartsHeight">
-            <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
+          <div className=" justify-center flex chartsHeight">
+            <div className="  col-span-12 h-36 sm:col-span-6 md:col-span-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData1}
-                    outerRadius={50}
+                    outerRadius={65}
                     innerRadius={28}
                     fill="#8884d8"
                     style={{
@@ -124,8 +124,8 @@ function MyPlan() {
                   </Pie>
                   <Legend
                     wrapperStyle={{
-                      fontSize: '9px',
-                      bottom: '0'
+                      fontSize: '12px',
+                      bottom: '-21px'
                     }}
                     iconSize={8}
                     verticalAlign="bottom"
@@ -141,13 +141,13 @@ function MyPlan() {
               </ResponsiveContainer>
             </div>
 
-            <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
+            <div className="  col-span-12 h-36 sm:col-span-6 md:col-span-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
                     data={chartData2}
-                    outerRadius={50}
                     labelLine={false}
+                    outerRadius={65}
                     innerRadius={28}
                     style={{
                       fontSize: '12px !important'
@@ -171,8 +171,8 @@ function MyPlan() {
                   </Pie>
                   <Legend
                     wrapperStyle={{
-                      fontSize: '9px',
-                      bottom: '0'
+                      fontSize: '12px',
+                      bottom: '-21px'
                     }}
                     iconSize={8}
                     verticalAlign="bottom"

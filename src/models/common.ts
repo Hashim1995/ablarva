@@ -30,7 +30,6 @@ interface UsageStats {
   remainder: number;
 }
 
-
 interface StatisticsUpdateData {
   isSuccess: boolean;
   data: {
@@ -41,9 +40,6 @@ interface StatisticsUpdateData {
   };
   errors: any;
 }
-
-
-
 
 type setState = Dispatch<SetStateAction<boolean>>;
 export type {
