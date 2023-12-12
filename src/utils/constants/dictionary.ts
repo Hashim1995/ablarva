@@ -215,6 +215,7 @@ export const dictionary = {
     tariffTitle: 'Tarifə nələr daxildir?',
     joinNow: 'İndi qoşul',
     aiSimple: 'AI sadə',
+    assistan: 'Asistan',
     aiAssistant: 'AI köməkçi ilə',
     allInOne: 'Hamısı birində',
     contact: 'Əlaqə',

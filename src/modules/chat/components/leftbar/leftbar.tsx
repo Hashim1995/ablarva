@@ -23,9 +23,8 @@ function LeftBar() {
           </Button>
         </DropdownTrigger>
         <DropdownMenu aria-label="Static Actions">
-          <DropdownItem key="new">New Chat</DropdownItem>
-          <DropdownItem key="copy">New Assistan</DropdownItem>
-          <DropdownItem key="edit">New somesthing</DropdownItem>
+          <DropdownItem key="new">Yeni Çat - sadə</DropdownItem>
+          <DropdownItem key="copy">Yeni Çat - Premium</DropdownItem>
         </DropdownMenu>
       </Dropdown>
     </div>

@@ -33,7 +33,8 @@ import {
   BsFillGearFill,
   BsFillFilterSquareFill,
   BsRobot,
-  BsEnvelope
+  BsEnvelope,
+  BsYelp
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -126,6 +127,20 @@ export default function Navbar() {
             {dictionary.az.chat}
           </Button>
 
+          <Button
+            className={` w-40 h-12  ${
+              location.pathname.includes('assistan')
+                ? 'bg-black text-white'
+                : 'bg-white text-black'
+            }`}
+            onClick={() => {
+              navigate('/assistan');
+            }}
+            isDisabled
+            startContent={<BsYelp size={17} />}
+          >
+            {dictionary.az.assistan}
+          </Button>
           <Button
             className={`w-40 h-12  ${
               location.pathname.includes('pricing')
