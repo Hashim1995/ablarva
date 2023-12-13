@@ -1,61 +1,87 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
+/* eslint-disable import/no-unresolved */
 import { useEffect, useRef, useState } from 'react';
-import OpenAI from 'openai';
-import { Button, Card } from '@nextui-org/react';
+import { Button, Card, Chip } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-import { IChatForm } from '@/modules/chat/types';
+import { IChatForm, ISendMessagePayload } from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
+import { TfiFaceSad } from 'react-icons/tfi';
+
 import { BsRecycle } from 'react-icons/bs';
 // @ts-ignore
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-import ChatForm from './chat-form';
+import { ChatService } from '@/services/chat-services/chat-services';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { setCurrentThreadId } from '@/redux/chat/chat-slice';
 import ChatBubble from './chat-bubble/chat-bubble';
+import ChatForm from './chat-form';
 
 interface IBubble {
+  isClient: boolean;
   message: string;
   isTyping: boolean;
+  chatHistoryId: string | null;
+  createdTime?: string | Date;
+  id?: string;
+  question?: string;
+  voiceId?: string;
 }
 
 function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IBubble[]>([]);
   const [loading, setLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_KEY,
-    dangerouslyAllowBrowser: true
-  });
-
-  async function main(message: string) {
-    const chatCompletion = await openai.chat.completions.create({
-      messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ],
-      model: 'gpt-3.5-turbo'
-    });
-    console.log(chatCompletion, 'mudahim');
-    return chatCompletion;
-  }
-
+  const { currentModel, currentThreadId } = useSelector(
+    (state: RootState) => state.chat
+  );
+  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<IChatForm> = async data => {
-    // Add your own message without the typewriter effect
-    setBubbleList(old => [...old, { message: data.message, isTyping: false }]);
+    setBubbleList(old => [
+      ...old,
+      {
+        isClient: true,
+        message: data.message,
+        isTyping: false,
+        chatHistoryId: currentThreadId || null
+      }
+    ]);
+
     setLoading(true);
-
+    const payload: ISendMessagePayload = {
+      servicePlan: Number(currentModel),
+      question: data.message,
+      chatId: currentThreadId || null
+    };
     try {
-      const res = await main(data.message);
+      const res = await ChatService.getInstance().sendMessage(payload);
+      if (res.isSuccess) {
+        dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
 
-      setBubbleList(old => [
-        ...old,
-        { message: res.choices[0].message.content || '', isTyping: true }
-      ]);
+        setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
+
+        setBubbleList(old => [
+          ...old,
+          {
+            message: res?.data?.answer || '',
+            isTyping: true,
+            chatHistoryId: res?.data?.chatHistoryId,
+            createdTime: res?.data?.createdTime,
+            id: res?.data?.id,
+            question: res?.data?.question,
+            isClient: false
+          }
+        ]);
+      }
       setLoading(false);
+      setHasError(false);
     } catch (err) {
-      console.log(err);
+      setHasError(true);
+      setLoading(false);
     }
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
@@ -71,6 +97,14 @@ function ChatInner() {
   useEffect(() => {
     scrollToBottom();
   }, [bubbleList, loading]);
+
+  useEffect(
+    () => () => {
+      dispatch(setCurrentThreadId(''));
+      setBubbleList([]);
+    },
+    []
+  );
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
@@ -95,6 +129,13 @@ function ChatInner() {
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
               </div>
+            </div>
+          )}
+          {hasError && (
+            <div className=" flex justify-center mt-2 items-center ">
+              <Chip startContent={<TfiFaceSad size={18} />} color="danger">
+                Beynim yandı :(
+              </Chip>
             </div>
           )}
           {!loading && bubbleList?.length > 0 && (

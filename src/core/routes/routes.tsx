@@ -20,7 +20,7 @@ const routes = [
 
       {
         index: true,
-        path: 'chat',
+        path: 'chat/*',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <ChatPage />

@@ -4,7 +4,11 @@ import statisticReducer from './statistics/statistics-slice';
 import chatReducer from './chat/chat-slice';
 
 export const store = configureStore({
-  reducer: { user: authReducer, statisticsCount: statisticReducer, chat: chatReducer }
+  reducer: {
+    user: authReducer,
+    statisticsCount: statisticReducer,
+    chat: chatReducer
+  }
 });
 
 // Infer the `RootState` and `AppDispatch` types from the store itself

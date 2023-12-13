@@ -1,11 +1,13 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-bitwise */
-import { setCurrentChatModel } from '@/redux/chat/chat-slice';
+import { setCurrentThreadId, setResetChatInner } from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
-import { Button, Select, SelectItem } from '@nextui-org/react';
-import { Dispatch, SetStateAction } from 'react';
+import { Button, Tooltip, Tabs, Tab } from '@nextui-org/react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 
 interface IMessengerHeaderProps {
   isDrawerOpen: boolean;
@@ -16,23 +18,14 @@ function MessengerHeader({
   setIsDrawerOpen
 }: IMessengerHeaderProps) {
   const dispatch = useDispatch();
-  const currentModel = useSelector(
-    (state: RootState) => state.chat.currentModel
-  );
-  const models = [
-    {
-      label: 'Basic',
-      value: '1'
-    },
-    {
-      label: 'Premium',
-      value: '2'
-    }
-  ];
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const handleSelectionChange = (e: any) => {
-    dispatch(setCurrentChatModel(e.target.value));
-  };
+  const { currentModel, currentThreadId } = useSelector(
+    (state: RootState) => state.chat
+  );
+  const [selected, setSelected] = useState<string>('2');
+
+  const navigate = useNavigate();
 
   return (
     <div className="flex justify-between  items-center bg-black p-3">
@@ -56,26 +49,37 @@ function MessengerHeader({
       </div>
 
       <div className="flex w-[20%] items-center gap-2">
-        <Select
-          onChange={handleSelectionChange}
-          selectedKeys={[currentModel]}
-          isRequired
-          size="sm"
+        <Tabs
+          selectedKey={selected}
+          // @ts-ignore
+          onSelectionChange={e => setSelected(e)}
+          size={'sm'}
+          color="primary"
+          classNames={{
+            cursor: ' bg-[#292D32]',
+            tabContent: 'group-data-[selected=true]:text-[white]'
+          }}
         >
-          {models.map(z => (
-            <SelectItem key={z.value} value={z.value}>
-              {z.label}
-            </SelectItem>
-          ))}
-        </Select>
-        <Button
-          size="sm"
-          isIconOnly
-          className="bg-white rounded-full"
-          aria-label="Filter"
-        >
-          <BsFillPlusCircleFill size={20} color="#292D32" />
-        </Button>
+          <Tab key="1" title="Basic" isDisabled={Boolean(currentThreadId)} />
+          <Tab key="2" title="Premium" isDisabled={Boolean(currentThreadId)} />
+        </Tabs>
+
+        <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
+          <Button
+            size="sm"
+            isIconOnly
+            className="bg-white rounded-full"
+            aria-label="Filter"
+            onClick={() => {
+              searchParams.delete('threadID');
+              dispatch(setCurrentThreadId(''));
+              dispatch(setResetChatInner(Date.now()));
+              navigate('/chat');
+            }}
+          >
+            <BsFillPlusCircleFill size={20} color="#292D32" />
+          </Button>
+        </Tooltip>
       </div>
     </div>
   );
