@@ -20,7 +20,7 @@ export class ChatService {
   // eslint-disable-next-line no-use-before-define
   private static instance: ChatService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): ChatService {
     if (!this.instance) {
@@ -44,8 +44,6 @@ export class ChatService {
     const res = await HttpUtil.delete(`api/client/chats/${id}`, false, onError);
     return res;
   }
-
-
 
   public async fetchThreadHistory(
     id?: number,

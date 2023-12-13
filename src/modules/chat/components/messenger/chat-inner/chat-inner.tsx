@@ -109,6 +109,18 @@ function ChatInner() {
     []
   );
 
+  // const fetchThreadonUrl = async () => {
+  //     try {
+  //       const res = await ChatService.getInstance().fetchThreadHistory();
+  //       if (res.isSuccess) {
+  //         setThreadHistory(res?.data);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  // };
+
   useEffect(() => {
     console.log(currentThreadId, 'BURDADI 44444444444');
   }, [param]);
