@@ -24,12 +24,12 @@ export interface IArrivalBuble {
 }
 
 export interface IThreadHistory {
-  chatId: string,
-  firstMessageOfChat: string,
-  servicePlan: number
+  chatId: string;
+  firstMessageOfChat: string;
+  servicePlan: number;
 }
 
 export interface IThreadHistoryList {
-  dateOfChats: string,
-  chats: IThreadHistory[]
+  dateOfChats: string;
+  chats: IThreadHistory[];
 }

@@ -3,14 +3,18 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
-import { IArrivalBuble, ISendMessagePayload, IThreadHistoryList } from '@/modules/chat/types';
+import {
+  IArrivalBuble,
+  ISendMessagePayload,
+  IThreadHistoryList
+} from '@/modules/chat/types';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 interface ISendMessageResponse extends IGlobalResponse {
   data: IArrivalBuble;
 }
 interface IThreadHistoryListResponse extends IGlobalResponse {
-  data: IThreadHistoryList[]
+  data: IThreadHistoryList[];
 }
 export class ChatService {
   // eslint-disable-next-line no-use-before-define
@@ -37,13 +41,10 @@ export class ChatService {
     id: string,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.delete(
-      `api/client/chats/${id}`,
-      false,
-      onError
-    );
+    const res = await HttpUtil.delete(`api/client/chats/${id}`, false, onError);
     return res;
   }
+
 
 
   public async fetchThreadHistory(

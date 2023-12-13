@@ -38,7 +38,7 @@ function MessengerHeader({
   return (
     <div className="flex justify-between  items-center bg-black p-3">
       <div className="flex justify-between gap-2 sm:gap-5 items-center ">
-        <Button
+        {/* <Button
           size="sm"
           isIconOnly
           onClick={() => setIsDrawerOpen((z: boolean) => !z)}
@@ -50,7 +50,7 @@ function MessengerHeader({
             color="white"
             className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
           />
-        </Button>
+        </Button> */}
         <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.chat}
         </h2>

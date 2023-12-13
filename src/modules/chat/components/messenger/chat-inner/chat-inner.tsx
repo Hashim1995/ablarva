@@ -88,8 +88,9 @@ function ChatInner() {
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
 
+  const { search } = useLocation();
+  const param = new URLSearchParams(search).get('param');
   const scrollToBottom = () => {
-    console.log('called');
     if (messengerBoxRef.current) {
       messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
       messengerBoxRef.current.scrollTop = messengerBoxRef.current.scrollHeight;
@@ -107,6 +108,10 @@ function ChatInner() {
     },
     []
   );
+
+  useEffect(() => {
+    console.log(currentThreadId, 'BURDADI 44444444444');
+  }, [param]);
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
