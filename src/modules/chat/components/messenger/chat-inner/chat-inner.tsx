@@ -1,67 +1,96 @@
-/* eslint-disable import/no-unresolved */
 /* eslint-disable no-unused-vars */
+/* eslint-disable import/no-unresolved */
 import { useEffect, useRef, useState } from 'react';
-import OpenAI from 'openai';
-import { Button, Card } from '@nextui-org/react';
+import { Button, Card, Chip } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-import { IChatForm } from '@/modules/chat/types';
+import { IChatForm, ISendMessagePayload } from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
+import { TfiFaceSad } from 'react-icons/tfi';
+
 import { BsRecycle } from 'react-icons/bs';
 // @ts-ignore
 import ScrollToBottom from 'react-scroll-to-bottom';
 
-import ChatForm from './chat-form';
+import { ChatService } from '@/services/chat-services/chat-services';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import {
+  setCurrentThreadId,
+  setWaitingForResponse
+} from '@/redux/chat/chat-slice';
 import ChatBubble from './chat-bubble/chat-bubble';
+import ChatForm from './chat-form';
 
 interface IBubble {
+  isClient: boolean;
   message: string;
   isTyping: boolean;
+  chatHistoryId: string | null;
+  createdTime?: string | Date;
+  id?: string;
+  question?: string;
+  voiceId?: string;
 }
 
 function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IBubble[]>([]);
-  const [loading, setLoading] = useState(false);
+  const [hasError, setHasError] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
 
-  const openai = new OpenAI({
-    apiKey: import.meta.env.VITE_OPENAI_KEY,
-    dangerouslyAllowBrowser: true
-  });
-
-  async function main(message: string) {
-    const chatCompletion = await openai.chat.completions.create({
-      messages: [
-        {
-          role: 'user',
-          content: message
-        }
-      ],
-      model: 'gpt-3.5-turbo'
-    });
-    console.log(chatCompletion, 'mudahim');
-    return chatCompletion;
-  }
-
+  const { currentModel, currentThreadId, waitingForResponse } = useSelector(
+    (state: RootState) => state.chat
+  );
+  const dispatch = useDispatch();
   const onSubmit: SubmitHandler<IChatForm> = async data => {
-    // Add your own message without the typewriter effect
-    setBubbleList(old => [...old, { message: data.message, isTyping: false }]);
-    setLoading(true);
+    setBubbleList(old => [
+      ...old,
+      {
+        isClient: true,
+        message: data.message,
+        isTyping: false,
+        chatHistoryId: currentThreadId || null
+      }
+    ]);
 
+    dispatch(setWaitingForResponse(true));
+    const payload: ISendMessagePayload = {
+      servicePlan: Number(currentModel),
+      question: data.message,
+      chatId: currentThreadId || null
+    };
     try {
-      const res = await main(data.message);
+      const res = await ChatService.getInstance().sendMessage(payload);
+      if (res.isSuccess) {
+        dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
 
-      setBubbleList(old => [
-        ...old,
-        { message: res.choices[0].message.content || '', isTyping: true }
-      ]);
-      setLoading(false);
+        setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
+
+        setBubbleList(old => [
+          ...old,
+          {
+            message: res?.data?.answer || '',
+            isTyping: true,
+            chatHistoryId: res?.data?.chatHistoryId,
+            createdTime: res?.data?.createdTime,
+            id: res?.data?.id,
+            question: res?.data?.question,
+            isClient: false
+          }
+        ]);
+      }
+      dispatch(setWaitingForResponse(false));
+      setHasError(false);
     } catch (err) {
-      console.log(err);
+      setHasError(true);
+      dispatch(setWaitingForResponse(false));
     }
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
 
+  const { search } = useLocation();
+  const param = new URLSearchParams(search).get('param');
   const scrollToBottom = () => {
-    console.log('called');
     if (messengerBoxRef.current) {
       messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
       messengerBoxRef.current.scrollTop = messengerBoxRef.current.scrollHeight;
@@ -70,15 +99,39 @@ function ChatInner() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [bubbleList, loading]);
+  }, [bubbleList, waitingForResponse]);
+
+  useEffect(
+    () => () => {
+      dispatch(setCurrentThreadId(''));
+      setBubbleList([]);
+    },
+    []
+  );
+
+  // const fetchThreadonUrl = async () => {
+  //     try {
+  //       const res = await ChatService.getInstance().fetchThreadHistory();
+  //       if (res.isSuccess) {
+  //         setThreadHistory(res?.data);
+  //       }
+  //     } catch (err) {
+  //       console.log(err);
+  //     }
+  //   };
+  // };
+
+  useEffect(() => {
+    console.log(currentThreadId, 'BURDADI 44444444444');
+  }, [param]);
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
-      <div style={{ paddingBottom: 205 }} className="h-full">
+      <div style={{ paddingBottom: 160 }} className="h-full">
         <ScrollToBottom
-          scrollViewClassName="flex-grow flex-1 p-4 !h-[300px]"
+          scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 overflow-y-auto h-full"
+          className="row-span-8 componentsScrollBar overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IBubble, i) => (
             <ChatBubble
@@ -88,7 +141,7 @@ function ChatInner() {
               key={i}
             />
           ))}
-          {loading && (
+          {waitingForResponse && (
             <div className=" flex justify-center mt-2 items-center ">
               <div className="loader bg-black p-2 rounded-full flex space-x-3">
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
@@ -97,7 +150,14 @@ function ChatInner() {
               </div>
             </div>
           )}
-          {!loading && bubbleList?.length > 0 && (
+          {hasError && (
+            <div className=" flex justify-center mt-2 items-center ">
+              <Chip startContent={<TfiFaceSad size={18} />} color="danger">
+                Beynim yandı :(
+              </Chip>
+            </div>
+          )}
+          {!waitingForResponse && bubbleList?.length > 0 && (
             <div className="flex justify-center mt-3 items-center w-full">
               <Button
                 type="button"

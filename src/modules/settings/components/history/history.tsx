@@ -10,6 +10,7 @@ import {
   TableRow,
   TableCell,
   Chip,
+  Spinner,
   Pagination,
   Card
 } from '@nextui-org/react';
@@ -24,6 +25,7 @@ function Bottom() {
   const [page, setPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(0);
   const [data, setData] = useState<ITransactionsItem[]>([]);
+  const [loading, setLoading] = useState(false);
 
   const columns: IColumn[] = [
     { name: 'ORDER ID', uid: 'orderId' },
@@ -33,6 +35,7 @@ function Bottom() {
   ];
 
   const getTransactions = useCallback(async () => {
+    setLoading(true);
     try {
       const res = await PaymentService.getInstance().getTransactions([
         { name: 'page', value: page }
@@ -43,8 +46,8 @@ function Bottom() {
       }
     } catch (err) {
       console.log(err);
-      // Handle error in UI here
     }
+    setLoading(false);
   }, [page]);
 
   useEffect(() => {
@@ -113,7 +116,7 @@ function Bottom() {
             ) : null
           }
           aria-label="Example static collection  table "
-          className="overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
+          className="componentsScrollBar overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
           classNames={{}}
         >
           <TableHeader columns={columns}>
@@ -121,7 +124,12 @@ function Bottom() {
               <TableColumn key={column.uid}>{column.name}</TableColumn>
             )}
           </TableHeader>
-          <TableBody emptyContent={'No rows to display.'} items={data}>
+          <TableBody
+            isLoading={loading}
+            loadingContent={<Spinner />}
+            emptyContent={'No rows to display.'}
+            items={data}
+          >
             {item => (
               <TableRow key={item.id}>
                 {columnKey => (

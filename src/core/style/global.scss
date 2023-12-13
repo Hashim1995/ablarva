@@ -43,6 +43,22 @@ body::-webkit-scrollbar-thumb,
   height: 50px;
 }
 
+.componentsScrollBar::-webkit-scrollbar {
+  -webkit-appearance: none;
+  width: 5px;
+  height: 8px;
+}
+
+.componentsScrollBar::-webkit-scrollbar-track {
+  border-radius: 4px;
+  background: #f1f1f1;
+}
+
+.componentsScrollBar::-webkit-scrollbar-thumb {
+  border-radius: 4px;
+  background-color: rgb(180, 180, 180);
+}
+
 ::selection {
   color: white;
   background: blue;
@@ -272,5 +288,26 @@ input::placeholder {
         justify-content: center;
       }
     }
+  }
+}
+
+.custom-date-picker {
+  button {
+    padding: 8px;
+  }
+  .dow {
+    height: 1.5rem;
+    width: 1.5rem;
+  }
+}
+
+.recharts-legend-wrapper {
+  display: flex;
+  justify-content: center;
+
+  .recharts-default-legend {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
   }
 }

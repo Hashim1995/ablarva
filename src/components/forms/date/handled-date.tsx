@@ -10,24 +10,25 @@ import { useOnClickOutside } from 'usehooks-ts';
 const options: IOptions = {
   autoHide: true,
   todayBtn: false,
-  clearBtn: true,
+  clearBtn: false,
   clearBtnText: 'Təmizlə',
   maxDate: new Date('2023-01-01'),
   theme: {
     background: 'bg-black ',
-    todayBtn: 'bg-black',
+    todayBtn: 'bg-black ',
     clearBtn: '!bg-black',
     icons: '!bg-black',
-    text: '',
+    text: 'w-auto h-6 flex items-center justify-center',
     disabledText:
-      'hover:bg-gray-100 hover:bg-gray-600 block flex-1 leading-9 border-0 rounded-lg cursor-pointer text-center  text-white font-semibold text-sm  text-gray-900  ',
+      'hover:bg-gray-100 hover:bg-gray-600 w-auto h-6   flex items-center justify-center flex-1 leading-1 border-0 rounded-lg cursor-pointer text-center  text-white font-semibold text-sm  text-gray-900  ',
     input: '!bg-black',
     inputIcon: '!bg-black',
     selected: 'bg-black'
   },
-  datepickerClassNames: 'top-6 z-50',
+  datepickerClassNames: 'top-12 z-50 custom-date-picker',
   defaultDate: new Date('2022-01-01'),
   language: 'en',
+
   // disabledDates: [],
   weekDays: ['Be', 'Ça', 'Ç', 'Ca', 'C', 'Ş', 'B'],
   inputNameProp: 'date',
