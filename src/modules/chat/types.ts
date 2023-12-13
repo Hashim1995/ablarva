@@ -1,20 +1,20 @@
-export interface IAsistanCard {
+interface IAsistanCard {
   title: string;
   img: string;
   description: string;
   id: number | string;
 }
 
-export interface IChatForm {
+interface IChatForm {
   message: string;
 }
 
-export interface ISendMessagePayload {
+interface ISendMessagePayload {
   servicePlan: number;
   question: string;
   chatId: string | null;
 }
-export interface IArrivalBuble {
+interface IArrivalBuble {
   id: string;
   chatHistoryId: string;
   question: string;
@@ -23,13 +23,16 @@ export interface IArrivalBuble {
   voiceId: null | string;
 }
 
-export interface IThreadHistory {
+interface IThreadHistory {
   chatId: string;
   firstMessageOfChat: string;
   servicePlan: number;
 }
 
-export interface IThreadHistoryList {
+interface IThreadHistoryList {
   dateOfChats: string;
   chats: IThreadHistory[];
 }
+
+
+export type { IThreadHistoryList, IThreadHistory, IArrivalBuble, ISendMessagePayload, IChatForm, IAsistanCard, }
