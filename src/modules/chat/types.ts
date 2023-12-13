@@ -34,5 +34,11 @@ interface IThreadHistoryList {
   chats: IThreadHistory[];
 }
 
-
-export type { IThreadHistoryList, IThreadHistory, IArrivalBuble, ISendMessagePayload, IChatForm, IAsistanCard, }
+export type {
+  IThreadHistoryList,
+  IThreadHistory,
+  IArrivalBuble,
+  ISendMessagePayload,
+  IChatForm,
+  IAsistanCard
+};
