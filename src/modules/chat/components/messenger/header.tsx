@@ -3,7 +3,15 @@
 import { setCurrentThreadId, setResetChatInner } from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
-import { Button, Tooltip, Tabs, Tab } from '@nextui-org/react';
+import {
+  Button,
+  Tooltip,
+  Tabs,
+  Tab,
+  PopoverTrigger,
+  Popover,
+  PopoverContent
+} from '@nextui-org/react';
 import { Dispatch, SetStateAction, useState } from 'react';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
@@ -20,7 +28,7 @@ function MessengerHeader({
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { currentModel, currentThreadId } = useSelector(
+  const { currentModel, currentThreadId, waitingForResponse } = useSelector(
     (state: RootState) => state.chat
   );
   const [selected, setSelected] = useState<string>('2');
@@ -47,8 +55,7 @@ function MessengerHeader({
           {dictionary.az.chat}
         </h2>
       </div>
-
-      <div className="flex w-[20%] items-center gap-2">
+      <div className="flex w-[26%] items-center justify-between gap-2">
         <Tabs
           selectedKey={selected}
           // @ts-ignore
@@ -64,22 +71,51 @@ function MessengerHeader({
           <Tab key="2" title="Premium" isDisabled={Boolean(currentThreadId)} />
         </Tabs>
 
-        <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
-          <Button
-            size="sm"
-            isIconOnly
-            className="bg-white rounded-full"
-            aria-label="Filter"
-            onClick={() => {
-              searchParams.delete('threadID');
-              dispatch(setCurrentThreadId(''));
-              dispatch(setResetChatInner(Date.now()));
-              navigate('/chat');
-            }}
-          >
-            <BsFillPlusCircleFill size={20} color="#292D32" />
-          </Button>
-        </Tooltip>
+        {!waitingForResponse ? (
+          <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
+            <Button
+              size="sm"
+              isIconOnly
+              className="bg-white rounded-full"
+              aria-label="Filter"
+              onClick={() => {
+                searchParams.delete('threadID');
+                dispatch(setCurrentThreadId(''));
+                dispatch(setResetChatInner(Date.now()));
+                navigate('/chat');
+              }}
+            >
+              <BsFillPlusCircleFill size={20} color="#292D32" />
+            </Button>
+          </Tooltip>
+        ) : (
+          <Popover placement="right">
+            <PopoverTrigger>
+              <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
+                <Button
+                  size="sm"
+                  isIconOnly
+                  className="bg-white rounded-full"
+                  aria-label="Filter"
+                  onClick={() => {
+                    searchParams.delete('threadID');
+                    dispatch(setCurrentThreadId(''));
+                    dispatch(setResetChatInner(Date.now()));
+                    navigate('/chat');
+                  }}
+                >
+                  <BsFillPlusCircleFill size={20} color="#292D32" />
+                </Button>
+              </Tooltip>
+            </PopoverTrigger>
+            <PopoverContent>
+              <div className="px-1 py-2">
+                <div className="text-small font-bold">Popover Content</div>
+                <div className="text-tiny">This is the popover content</div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        )}
       </div>
     </div>
   );

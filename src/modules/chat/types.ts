@@ -10,15 +10,26 @@ export interface IChatForm {
 }
 
 export interface ISendMessagePayload {
-  servicePlan: number,
-  question: string,
-  chatId: string | null
+  servicePlan: number;
+  question: string;
+  chatId: string | null;
 }
 export interface IArrivalBuble {
-  id: string,
-  chatHistoryId: string,
-  question: string,
-  answer: string,
-  createdTime: string,
-  voiceId: null | string
+  id: string;
+  chatHistoryId: string;
+  question: string;
+  answer: string;
+  createdTime: string;
+  voiceId: null | string;
+}
+
+export interface IThreadHistory {
+  chatId: string,
+  firstMessageOfChat: string,
+  servicePlan: number
+}
+
+export interface IThreadHistoryList {
+  dateOfChats: string,
+  chats: IThreadHistory[]
 }

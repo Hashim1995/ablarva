@@ -15,7 +15,10 @@ import { ChatService } from '@/services/chat-services/chat-services';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
-import { setCurrentThreadId } from '@/redux/chat/chat-slice';
+import {
+  setCurrentThreadId,
+  setWaitingForResponse
+} from '@/redux/chat/chat-slice';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -32,11 +35,10 @@ interface IBubble {
 
 function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IBubble[]>([]);
-  const [loading, setLoading] = useState(false);
   const [hasError, setHasError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { currentModel, currentThreadId } = useSelector(
+  const { currentModel, currentThreadId, waitingForResponse } = useSelector(
     (state: RootState) => state.chat
   );
   const dispatch = useDispatch();
@@ -51,7 +53,7 @@ function ChatInner() {
       }
     ]);
 
-    setLoading(true);
+    dispatch(setWaitingForResponse(true));
     const payload: ISendMessagePayload = {
       servicePlan: Number(currentModel),
       question: data.message,
@@ -77,11 +79,11 @@ function ChatInner() {
           }
         ]);
       }
-      setLoading(false);
+      dispatch(setWaitingForResponse(false));
       setHasError(false);
     } catch (err) {
       setHasError(true);
-      setLoading(false);
+      dispatch(setWaitingForResponse(false));
     }
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
@@ -96,7 +98,7 @@ function ChatInner() {
 
   useEffect(() => {
     scrollToBottom();
-  }, [bubbleList, loading]);
+  }, [bubbleList, waitingForResponse]);
 
   useEffect(
     () => () => {
@@ -122,7 +124,7 @@ function ChatInner() {
               key={i}
             />
           ))}
-          {loading && (
+          {waitingForResponse && (
             <div className=" flex justify-center mt-2 items-center ">
               <div className="loader bg-black p-2 rounded-full flex space-x-3">
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
@@ -138,7 +140,7 @@ function ChatInner() {
               </Chip>
             </div>
           )}
-          {!loading && bubbleList?.length > 0 && (
+          {!waitingForResponse && bubbleList?.length > 0 && (
             <div className="flex justify-center mt-3 items-center w-full">
               <Button
                 type="button"

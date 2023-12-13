@@ -6,6 +6,7 @@ const chatSlice = createSlice({
     currentModel: '1',
     currentThreadId: null,
     resetChatInner: Date.now(),
+    waitingForResponse: false,
   },
   reducers: {
     setCurrentChatModel: (state, action: PayloadAction<any>) => {
@@ -16,9 +17,13 @@ const chatSlice = createSlice({
     },
     setResetChatInner: (state, action: PayloadAction<any>) => {
       state.resetChatInner = action.payload;
+    },
+    setWaitingForResponse: (state, action: PayloadAction<any>) => {
+      state.waitingForResponse = action.payload;
     }
   }
 });
 
-export const { setCurrentChatModel, setCurrentThreadId, setResetChatInner } = chatSlice.actions;
+export const { setCurrentChatModel, setCurrentThreadId, setResetChatInner, setWaitingForResponse } =
+  chatSlice.actions;
 export default chatSlice.reducer;

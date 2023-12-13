@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { toastOptions } from '@/configs/global-configs';
 import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
@@ -6,6 +7,7 @@ import { Avatar, Button } from '@nextui-org/react';
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
 import { BsHandThumbsDownFill, BsClipboard2CheckFill } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 import { useReadLocalStorage } from 'usehooks-ts';
 
 interface IBubble {
@@ -78,6 +80,16 @@ function ChatBubble({ message, isTyping }: IBubble) {
           <div className="flex  gap-2  items-center justify-between">
             <Button
               type="button"
+              onClick={() => {
+                navigator.clipboard.writeText(message).then(
+                  () => {
+                    toast.success('Məlumat uğurla kopyalandı', toastOptions);
+                  },
+                  err => {
+                    console.error('Async: Could not copy text: ', err);
+                  }
+                );
+              }}
               startContent={
                 <Button
                   type="submit"
