@@ -1,6 +1,5 @@
 import { useNavigate, useRoutes } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
-import { useReadLocalStorage } from 'usehooks-ts';
 import routesList from '@core/routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import SuspenseLoader from './core/static-components/suspense-loader';
@@ -16,7 +15,7 @@ function App() {
 
   // const { isDarkMode } = useDarkMode();
 
-  const userToken: any = useReadLocalStorage('userToken');
+  const userToken: any = JSON.parse(localStorage.getItem('userToken') || '{}');
   const getme = useSelector((state: RootState) => state.user);
 
   const navigate = useNavigate();
@@ -27,7 +26,7 @@ function App() {
     } else {
       dispatch(fetchUserData());
     }
-  }, [userToken]);
+  }, []);
 
   useEffect(() => {
     if (userToken?.token) {
