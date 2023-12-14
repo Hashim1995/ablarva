@@ -28,6 +28,10 @@ function MyPlan() {
     (state: RootState) => state.statisticsCount.statisticsCount
   );
 
+  const { currentSubscription } = useSelector(
+    (state: RootState) => state.user.user
+  );
+
   const chartData1 = [
     { name: 'Geri qalan', value: chartData?.basic.remainder },
     { name: 'İstifadə olunan', value: chartData?.basic?.usage }
@@ -90,7 +94,7 @@ function MyPlan() {
         </Button>
       </div>
       <div className="bg-white rounded-lg shadow h-full px-6 componentsScrollBar overflow-y-scroll">
-        {statisticsData.isSuccess ? (
+        {currentSubscription ? (
           <div className="mb-3">
             <div className="text-black text-sm font-medium">
               {chartData?.packageName || ''}
