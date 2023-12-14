@@ -1,6 +1,6 @@
 import { setState } from '@/models/common';
 import { dictionary } from '@/utils/constants/dictionary';
-import { Button, Tooltip, useDisclosure } from '@nextui-org/react';
+import { Button, Card, Tooltip, useDisclosure } from '@nextui-org/react';
 import { BsPencilSquare, BsFillKeyFill, BsFolderFill } from 'react-icons/bs';
 import ChangePassword from './change-password';
 
@@ -17,7 +17,7 @@ function AccountHeader({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="">
+    <Card className="rounded-b-none">
       <div className="flex justify-between items-center  bg-black p-2 sm:p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
@@ -80,7 +80,7 @@ function AccountHeader({
         </div>
       </div>
       {isOpen && <ChangePassword onOpenChange={onOpenChange} isOpen={isOpen} />}
-    </div>
+    </Card>
   );
 }
 
