@@ -14,14 +14,7 @@ interface ISendMessagePayload {
   question: string;
   chatId: string | null;
 }
-interface IArrivalBuble {
-  id: string;
-  chatHistoryId: string;
-  question: string;
-  answer: string;
-  createdTime: string;
-  voiceId: null | string;
-}
+
 
 interface IThreadHistory {
   chatId: string;
@@ -34,11 +27,23 @@ interface IThreadHistoryList {
   chats: IThreadHistory[];
 }
 
+
+interface IThreadBubblesItem {
+  answerId: string | null,
+  content: string,
+  isClient: boolean,
+  isTyping: boolean,
+  questionId?: string,
+  voiceId?: null
+  chatHistoryId: string | null,
+  bubbleId: string | null,
+}
+
 export type {
   IThreadHistoryList,
   IThreadHistory,
-  IArrivalBuble,
   ISendMessagePayload,
   IChatForm,
-  IAsistanCard
+  IAsistanCard,
+  IThreadBubblesItem
 };

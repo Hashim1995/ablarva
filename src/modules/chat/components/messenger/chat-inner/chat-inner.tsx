@@ -3,7 +3,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Card, Chip } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-import { IChatForm, ISendMessagePayload } from '@/modules/chat/types';
+import {
+  IChatForm,
+  ISendMessagePayload,
+  IThreadBubblesItem
+} from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
 import { TfiFaceSad } from 'react-icons/tfi';
 
@@ -22,19 +26,8 @@ import {
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
-interface IBubble {
-  isClient: boolean;
-  message: string;
-  isTyping: boolean;
-  chatHistoryId: string | null;
-  createdTime?: string | Date;
-  id?: string;
-  question?: string;
-  voiceId?: string;
-}
-
 function ChatInner() {
-  const [bubbleList, setBubbleList] = useState<IBubble[]>([]);
+  const [bubbleList, setBubbleList] = useState<IThreadBubblesItem[]>([]);
   const [hasError, setHasError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
@@ -46,10 +39,12 @@ function ChatInner() {
     setBubbleList(old => [
       ...old,
       {
+        answerId: null,
+        content: data.message,
         isClient: true,
-        message: data.message,
         isTyping: false,
-        chatHistoryId: currentThreadId || null
+        chatHistoryId: null,
+        bubbleId: null
       }
     ]);
 
@@ -69,13 +64,14 @@ function ChatInner() {
         setBubbleList(old => [
           ...old,
           {
-            message: res?.data?.answer || '',
-            isTyping: true,
+            answerId: res.data.answerId,
+            content: res?.data?.content || '',
+            isClient: res?.data?.isClient,
+            isTyping: res?.data?.isTyping,
+            questionId: res?.data?.questionId,
+            voiceId: res?.data?.voiceId,
             chatHistoryId: res?.data?.chatHistoryId,
-            createdTime: res?.data?.createdTime,
-            id: res?.data?.id,
-            question: res?.data?.question,
-            isClient: false
+            bubbleId: res?.data?.bubbleId
           }
         ]);
       }
@@ -88,8 +84,6 @@ function ChatInner() {
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
 
-  const { search } = useLocation();
-  const param = new URLSearchParams(search).get('param');
   const scrollToBottom = () => {
     if (messengerBoxRef.current) {
       messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
@@ -109,21 +103,23 @@ function ChatInner() {
     []
   );
 
-  // const fetchThreadonUrl = async () => {
-  //     try {
-  //       const res = await ChatService.getInstance().fetchThreadHistory();
-  //       if (res.isSuccess) {
-  //         setThreadHistory(res?.data);
-  //       }
-  //     } catch (err) {
-  //       console.log(err);
-  //     }
-  //   };
-  // };
+  const fetchThreadonUrl = async (id: string) => {
+    try {
+      const res = await ChatService.getInstance().fetchBubbleHistory(id);
+      if (res.isSuccess) {
+        setBubbleList(res?.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   useEffect(() => {
-    console.log(currentThreadId, 'BURDADI 44444444444');
-  }, [param]);
+    if (searchParams.get('threadID') && currentThreadId) {
+      fetchThreadonUrl(searchParams.get('threadID') || '');
+      dispatch(setCurrentThreadId(searchParams.get('threadID')));
+    }
+  }, [searchParams]);
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
@@ -133,12 +129,12 @@ function ChatInner() {
           followButtonClassName="hidden"
           className="row-span-8 componentsScrollBar overflow-y-auto h-full"
         >
-          {bubbleList?.map((item: IBubble, i) => (
+          {bubbleList?.map((item: IThreadBubblesItem) => (
             <ChatBubble
-              message={item.message}
+              message={item.content}
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
-              key={i}
+              key={item?.bubbleId}
             />
           ))}
           {waitingForResponse && (
