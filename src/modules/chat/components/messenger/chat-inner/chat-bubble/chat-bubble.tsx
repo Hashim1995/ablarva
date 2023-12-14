@@ -31,7 +31,10 @@ function Typewriter({ message, isTyping }: IBubble) {
         audioEnable && typewriterSound.play();
       }, 10);
 
-      return () => clearTimeout(timeoutId);
+      return () => {
+        clearTimeout(timeoutId);
+        typewriterSound.pause();
+      };
     }
 
     // Stop the sound when the full message is displayed

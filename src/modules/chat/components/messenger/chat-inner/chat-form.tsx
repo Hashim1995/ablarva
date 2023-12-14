@@ -12,9 +12,10 @@ import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
   onSubmit: SubmitHandler<IChatForm>;
+  waitingForResponse: boolean;
 }
 
-function ChatForm({ onSubmit }: IChatFormProps) {
+function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   // Initialize the hook form methods
   const { register, handleSubmit, reset } = useForm<IChatForm>();
   const [audioEnable, setAudioEnable] = useLocalStorage<Boolean>(
@@ -50,7 +51,7 @@ function ChatForm({ onSubmit }: IChatFormProps) {
             typewriterSound.play();
           }
 
-          if (e.key === 'Enter' && !e.shiftKey) {
+          if (e.key === 'Enter' && !e.shiftKey && !waitingForResponse) {
             e.preventDefault(); // Prevent the default behavior of Enter key in a textarea (which is to insert a new line)
             handleSubmit(onSubmit)(); // Call the submit handler
             reset();
@@ -86,6 +87,7 @@ function ChatForm({ onSubmit }: IChatFormProps) {
             type="submit"
             isIconOnly
             size="sm"
+            isDisabled={waitingForResponse}
             className="bg-black rounded-full"
           >
             <BsFillSendFill size={16} color="white" />

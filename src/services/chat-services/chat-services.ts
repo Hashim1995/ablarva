@@ -23,7 +23,7 @@ export class ChatService {
   // eslint-disable-next-line no-use-before-define
   private static instance: ChatService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): ChatService {
     if (!this.instance) {
@@ -51,12 +51,7 @@ export class ChatService {
   public async fetchThreadHistory(
     onError?: ErrorCallBack
   ): Promise<IThreadHistoryListResponse> {
-    const res = await HttpUtil.get(
-      'api/client/chats',
-      null,
-      false,
-      onError
-    );
+    const res = await HttpUtil.get('api/client/chats', null, false, onError);
     return res;
   }
 

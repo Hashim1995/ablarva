@@ -178,7 +178,7 @@ function ChatInner() {
       </div>
 
       <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] row-span-4 absolute w-full bottom-0">
-        <ChatForm onSubmit={onSubmit} />
+        <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
       </Card>
     </div>
   );

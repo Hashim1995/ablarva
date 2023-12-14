@@ -15,7 +15,6 @@ interface ISendMessagePayload {
   chatId: string | null;
 }
 
-
 interface IThreadHistory {
   chatId: string;
   firstMessageOfChat: string;
@@ -27,16 +26,15 @@ interface IThreadHistoryList {
   chats: IThreadHistory[];
 }
 
-
 interface IThreadBubblesItem {
-  answerId: string | null,
-  content: string,
-  isClient: boolean,
-  isTyping: boolean,
-  questionId?: string,
-  voiceId?: null
-  chatHistoryId: string | null,
-  bubbleId: string | null,
+  answerId: string | null;
+  content: string;
+  isClient: boolean;
+  isTyping: boolean;
+  questionId?: string;
+  voiceId?: null;
+  chatHistoryId: string | null;
+  bubbleId: string | null;
 }
 
 export type {
