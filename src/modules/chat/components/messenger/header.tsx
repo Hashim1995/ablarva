@@ -1,6 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-bitwise */
-import { setCurrentThreadId, setResetChatInner } from '@/redux/chat/chat-slice';
+import {
+  setCurrentChatModel,
+  setCurrentThreadId,
+  setResetChatInner
+} from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
@@ -12,7 +16,7 @@ import {
   Popover,
   PopoverContent
 } from '@nextui-org/react';
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -31,9 +35,15 @@ function MessengerHeader({
   const { currentModel, currentThreadId, waitingForResponse } = useSelector(
     (state: RootState) => state.chat
   );
-  const [selected, setSelected] = useState<string>('2');
+  const { total } = useSelector(
+    (state: RootState) => state.statisticsCount.statisticsCount.data.premium
+  );
+  const [selected, setSelected] = useState<string>('1');
 
   const navigate = useNavigate();
+  useEffect(() => {
+    dispatch(setCurrentChatModel(selected));
+  }, [selected]);
 
   return (
     <div className="flex justify-between  items-center bg-black p-3">
@@ -68,7 +78,11 @@ function MessengerHeader({
           }}
         >
           <Tab key="1" title="Basic" isDisabled={Boolean(currentThreadId)} />
-          <Tab key="2" title="Premium" isDisabled={Boolean(currentThreadId)} />
+          <Tab
+            key="2"
+            title="Premium"
+            isDisabled={Boolean(currentThreadId) || total === 0}
+          />
         </Tabs>
 
         {!waitingForResponse ? (
