@@ -93,8 +93,8 @@ function MyPlan() {
           <div className="text-black text-sm font-medium">
             {chartData?.packageName || ''}
           </div>
-          <div className=" justify-center flex chartsHeight">
-            <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
+          <div className=" justify-center items-center flex flex-col md:flex-row chartsHeight">
+            <div className="sm:w-[14rem] md:mb-0 mb-14 col-span-12 h-36 sm:col-span-6 md:col-span-6">
               <ResponsiveContainer width="100%" height="100%">
                 <PieChart className="mobile-row-chart">
                   <Pie
