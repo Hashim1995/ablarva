@@ -4,17 +4,20 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
-  IArrivalBuble,
   ISendMessagePayload,
+  IThreadBubblesItem,
   IThreadHistoryList
 } from '@/modules/chat/types';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 interface ISendMessageResponse extends IGlobalResponse {
-  data: IArrivalBuble;
+  data: IThreadBubblesItem;
 }
 interface IThreadHistoryListResponse extends IGlobalResponse {
   data: IThreadHistoryList[];
+}
+interface IThreadBubblesItemResponse extends IGlobalResponse {
+  data: IThreadBubblesItem[];
 }
 export class ChatService {
   // eslint-disable-next-line no-use-before-define
@@ -46,11 +49,18 @@ export class ChatService {
   }
 
   public async fetchThreadHistory(
-    id?: number,
     onError?: ErrorCallBack
   ): Promise<IThreadHistoryListResponse> {
+    const res = await HttpUtil.get('api/client/chats', null, false, onError);
+    return res;
+  }
+
+  public async fetchBubbleHistory(
+    id: string,
+    onError?: ErrorCallBack
+  ): Promise<IThreadBubblesItemResponse> {
     const res = await HttpUtil.get(
-      id ? `api/client/chats/${id}` : 'api/client/chats',
+      `api/client/chats/${id}/bubbles`,
       null,
       false,
       onError

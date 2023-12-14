@@ -106,9 +106,21 @@ function ChatHistory() {
             {day.chats.map((conv, i) => (
               <div
                 key={conv.chatId}
-                className="flex relative items-center justify-between mb-2 bg-gray-100 rounded-2xl  pl-10 pr-3 py-2 z-10"
+                aria-hidden
+                onClick={() => {
+                  dispatch(setCurrentThreadId(conv.chatId));
+
+                  setSearchParams({
+                    threadID: String(conv.chatId)
+                  });
+                }}
+                className="flex cursor-pointer relative items-center justify-between mb-2 bg-gray-100 rounded-2xl  pl-10 pr-3 py-2 z-10"
               >
-                <div className="absolute top-[0px] bg-[#18C964] left-[0px] rounded-tl-mini rounded-2xl  rounded-tr-none rounded-br-none  w-[26px] h-full" />
+                <div
+                  className={`absolute top-[0px] ${
+                    conv.servicePlan === 1 ? 'bg-[#31FF90]' : 'bg-[#319CFF]'
+                  } left-[0px] rounded-tl-mini rounded-2xl  rounded-tr-none rounded-br-none  w-[26px] h-full`}
+                />
                 <p className="text-black  leading-4  text-sm line-clamp-3">
                   {conv.firstMessageOfChat}
                 </p>
