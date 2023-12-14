@@ -86,7 +86,7 @@ function Bottom() {
   };
 
   return (
-    <Card className="h-full rounded-lg relative  sm:rounded-2xl">
+    <Card className="h-full rounded-lg relative sm:rounded-2xl">
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 bg-black p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
@@ -116,7 +116,7 @@ function Bottom() {
             ) : null
           }
           aria-label="Example static collection  table "
-          className="componentsScrollBar overflow-x-scroll overflow-y-scroll min-h-full md:overflow-x-hidden"
+          className="componentsScrollBar overflow-x-scroll overflow-y-auto min-h-full md:overflow-x-hidden"
           classNames={{}}
         >
           <TableHeader columns={columns}>
