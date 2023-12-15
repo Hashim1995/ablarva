@@ -12,6 +12,7 @@ const generateStatisticsSocket = (token: string) => {
         // withCredentials: false,
       }
     )
+    .withAutomaticReconnect()
     .build();
   return statisticsSocket;
 };
