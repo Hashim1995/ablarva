@@ -63,11 +63,7 @@ function App() {
         //   : 'h-screen text-foreground bg-background'
       }`}
     >
-      {getme.status !== 'succeeded' ? (
-        <SuspenseLoader />
-      ) : (
-        <Suspense fallback={<SuspenseLoader />}>{router}</Suspense>
-      )}
+      <Suspense fallback={<SuspenseLoader />}>{router}</Suspense>
     </main>
   );
 }
