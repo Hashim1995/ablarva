@@ -3,8 +3,7 @@ import * as signalR from '@microsoft/signalr';
 const generateStatisticsSocket = (token: string) => {
   const statisticsSocket = new signalR.HubConnectionBuilder()
     .withUrl(
-      `${
-        import.meta.env.VITE_SOCKET_BASE_URL
+      `${import.meta.env.VITE_SOCKET_BASE_URL
       }/hubs/statistics-hub?token=${token}`,
       {
         skipNegotiation: true,
@@ -12,6 +11,7 @@ const generateStatisticsSocket = (token: string) => {
         // withCredentials: false,
       }
     )
+    .withAutomaticReconnect()
     .build();
   return statisticsSocket;
 };
