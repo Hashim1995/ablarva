@@ -65,13 +65,14 @@ function MessengerHeader({
           {dictionary.az.chat}
         </h2>
       </div>
-      <div className="flex w-[26%] items-center justify-between gap-2">
+      <div className="flex items-center justify-between gap-2">
         <Tabs
           selectedKey={selected}
           // @ts-ignore
           onSelectionChange={e => setSelected(e)}
           size={'sm'}
           color="primary"
+          className="mr-5"
           classNames={{
             cursor: ' bg-[#292D32]',
             tabContent: 'group-data-[selected=true]:text-[white]'
