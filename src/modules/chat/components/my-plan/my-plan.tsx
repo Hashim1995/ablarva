@@ -100,145 +100,112 @@ function MyPlan() {
               {chartData?.packageName || ''}
             </div>
             <div className="justify-center items-center flex flex-col lg:flex-row chartsHeight">
-              <div className="sm:w-[14rem] lg:mb-0 mb-20 col-span-12 h-36 sm:col-span-6 md:col-span-6">
-                <div className="text-center text-sm">Premium</div>
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart className="mobile-row-chart">
-                    <Pie
-                      data={chartData1}
-                      outerRadius={65}
-                      innerRadius={28}
-                      fill="#8884d8"
-                      style={{
-                        fontSize: '12px !important'
-                      }}
-                      labelLine={false}
-                      label={renderCustomizedLabel}
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      <Label
-                        value={chartData?.basic?.total}
-                        className="text-sm"
+              {statisticsData.data.basic.total > 0 && (
+                <div className="sm:w-[14rem] lg:mb-0 mb-20 col-span-12 h-36 sm:col-span-6 md:col-span-6">
+                  <div className="text-center text-sm">Premium</div>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart className="mobile-row-chart">
+                      <Pie
+                        data={chartData1}
+                        outerRadius={65}
+                        innerRadius={28}
+                        fill="#8884d8"
                         style={{
-                          fill: '#292D32'
+                          fontSize: '12px !important'
                         }}
-                        position="center"
+                        labelLine={false}
+                        label={renderCustomizedLabel}
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        <Label
+                          value={chartData?.basic?.total}
+                          className="text-sm"
+                          style={{
+                            fill: '#292D32'
+                          }}
+                          position="center"
+                        />
+                        {chartData1.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={colorData1[index]}
+                          />
+                        ))}
+                      </Pie>
+                      <Legend
+                        wrapperStyle={{
+                          fontSize: '12px',
+                          bottom: '-21px'
+                        }}
+                        iconSize={8}
+                        verticalAlign="bottom"
+                        height={1}
+                        payload={chartData1.map((item, index) => ({
+                          id: item.name,
+                          type: 'square',
+                          value: `${item.name} : ${item.value}`,
+                          color: colorData1[index % colorData1.length]
+                        }))}
                       />
-                      {chartData1.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={colorData1[index]} />
-                      ))}
-                    </Pie>
-                    <Legend
-                      wrapperStyle={{
-                        fontSize: '12px',
-                        bottom: '-21px'
-                      }}
-                      iconSize={8}
-                      verticalAlign="bottom"
-                      height={1}
-                      payload={chartData1.map((item, index) => ({
-                        id: item.name,
-                        type: 'square',
-                        value: `${item.name} : ${item.value}`,
-                        color: colorData1[index % colorData1.length]
-                      }))}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
 
-              <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
-                <div className="text-center text-sm">Basic</div>
+              {statisticsData.data.premium.total > 0 && (
+                <div className="sm:w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
+                  <div className="text-center text-sm">Basic</div>
 
-                <ResponsiveContainer width="100%" height="100%">
-                  <PieChart className="mobile-row-chart">
-                    <Pie
-                      data={chartData2}
-                      labelLine={false}
-                      outerRadius={65}
-                      innerRadius={28}
-                      style={{
-                        fontSize: '12px !important'
-                      }}
-                      label={renderCustomizedLabel}
-                      fill="#8884d8"
-                      paddingAngle={5}
-                      dataKey="value"
-                    >
-                      <Label
+                  <ResponsiveContainer width="100%" height="100%">
+                    <PieChart className="mobile-row-chart">
+                      <Pie
+                        data={chartData2}
+                        labelLine={false}
+                        outerRadius={65}
+                        innerRadius={28}
                         style={{
-                          fill: '#292D32'
+                          fontSize: '12px !important'
                         }}
-                        value={chartData?.premium?.total}
-                        className="text-sm"
-                        position="center"
+                        label={renderCustomizedLabel}
+                        fill="#8884d8"
+                        paddingAngle={5}
+                        dataKey="value"
+                      >
+                        <Label
+                          style={{
+                            fill: '#292D32'
+                          }}
+                          value={chartData?.premium?.total}
+                          className="text-sm"
+                          position="center"
+                        />
+                        {chartData2.map((entry, index) => (
+                          <Cell
+                            key={`cell-${index}`}
+                            fill={colorData2[index]}
+                          />
+                        ))}
+                      </Pie>
+                      <Legend
+                        wrapperStyle={{
+                          fontSize: '12px',
+                          bottom: '-21px'
+                        }}
+                        iconSize={8}
+                        verticalAlign="bottom"
+                        height={1}
+                        payload={chartData2.map((item, index) => ({
+                          id: item.name,
+                          type: 'square',
+                          value: `${item.name} : ${item.value}`,
+                          color: colorData2[index % colorData2.length]
+                        }))}
                       />
-                      {chartData2.map((entry, index) => (
-                        <Cell key={`cell-${index}`} fill={colorData2[index]} />
-                      ))}
-                    </Pie>
-                    <Legend
-                      wrapperStyle={{
-                        fontSize: '12px',
-                        bottom: '-21px'
-                      }}
-                      iconSize={8}
-                      verticalAlign="bottom"
-                      height={1}
-                      payload={chartData2.map((item, index) => ({
-                        id: item.name,
-                        type: 'square',
-                        value: `${item.name} : ${item.value}`,
-                        color: colorData2[index % colorData2.length]
-                      }))}
-                    />
-                  </PieChart>
-                </ResponsiveContainer>
-              </div>
-              {/* <div className="sm:w-[14rem] md:w-32 col-span-12 h-36 sm:col-span-6 md:col-span-4">
-              <ResponsiveContainer width="100%" height="100%">
-                <PieChart className="mobile-row-chart">
-                  <Pie
-                    data={chartData3}
-                    labelLine={false}
-                    outerRadius={50}
-                    innerRadius={28}
-                    label={renderCustomizedLabel}
-                    fill="#8884d8"
-                    paddingAngle={5}
-                    dataKey="value"
-                  >
-                    <Label
-                      style={{
-                        fill: '#292D32'
-                      }}
-                      value="4312"
-                      className="text-sm"
-                      position="center"
-                    />
-                    {chartData3.map((entry, index) => (
-                      <Cell key={`cell-${index}`} fill={colorData3[index]} />
-                    ))}
-                  </Pie>
-                  <Legend
-                    wrapperStyle={{
-                      fontSize: '9px',
-                      bottom: '0'
-                    }}
-                    iconSize={8}
-                    verticalAlign="bottom"
-                    height={1}
-                    payload={chartData1.map((item, index) => ({
-                      id: item.name,
-                      type: 'square',
-                      value: `${item.name} : ${item.value}`,
-                      color: colorData1[index % colorData1.length]
-                    }))}
-                  />
-                </PieChart>
-              </ResponsiveContainer>
-            </div> */}
+                    </PieChart>
+                  </ResponsiveContainer>
+                </div>
+              )}
             </div>
           </div>
         ) : (
