@@ -32,14 +32,21 @@ interface IThreadBubblesItem {
   isClient: boolean;
   isTyping: boolean;
   questionId?: string;
+  feedbackStatus?: number | null;
   voiceId?: null;
   chatHistoryId: string | null;
   bubbleId: string | null;
 }
 
+interface IFeedbackPayload {
+  bubbleId: string;
+  feedbackStatus: number;
+}
+
 export type {
   IThreadHistoryList,
   IThreadHistory,
+  IFeedbackPayload,
   ISendMessagePayload,
   IChatForm,
   IAsistanCard,
