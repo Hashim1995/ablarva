@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import ParticlesBackground from '../particles-background';
 import LoginForm from './login-form';
 import RegisterForm from './register-form';
 
@@ -12,7 +11,6 @@ function Login() {
   return (
     <div>
       <div className=" particles min-h-screen ">
-        <ParticlesBackground />
         <div
           className={`flip-card  flex h-screen items-center   justify-center ${
             isFlipped ? 'flipped' : ''

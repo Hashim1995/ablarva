@@ -1,0 +1,60 @@
+$numberOfElements: 6;
+$fontSize: 14px;
+
+.thinkText-center {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.thinkText-carousel {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: 100%;
+  text-align: center;
+  font-size: $fontSize;
+
+  .thinkText-pre {
+    top: 0;
+    right: 54.5%;
+  }
+
+  .thinkText-change_outer {
+    top: 0;
+    left: 46%;
+    text-align: left;
+    height: $fontSize * 1.5;
+    overflow: hidden;
+
+    .thinkText-change_inner {
+      position: relative;
+      animation: rotate 8s ease-in-out infinite;
+    }
+
+    .thinkText-element {
+      display: block;
+    }
+  }
+}
+
+@keyframes rotate {
+  0%,
+  20% {
+    transform: translateY(0);
+  }
+  25%,
+  45% {
+    transform: translateY($fontSize * -1.5);
+  }
+  50%,
+  70% {
+    transform: translateY($fontSize * -3);
+  }
+  75%,
+  95% {
+    transform: translateY($fontSize * -4.5);
+  }
+  100% {
+    transform: translateY($fontSize * -6);
+  }
+}
