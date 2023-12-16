@@ -21,7 +21,7 @@ function Layout() {
         </Drawer>
         <main
           style={{ height: 'calc(80vh - 56px) ' }}
-          className="flex-1 overflow-x-auto layoutHeight bg-white transition-all duration-300 ease-in-out h-full"
+          className="flex-1  layoutHeight bg-white transition-all duration-300 ease-in-out h-full"
         >
           <ChatInner />
         </main>

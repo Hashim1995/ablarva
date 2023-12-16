@@ -1,7 +1,6 @@
 import axios, {
   AxiosError,
   AxiosResponse,
-  CancelTokenSource,
   InternalAxiosRequestConfig
 } from 'axios';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -71,11 +70,6 @@ axios.interceptors.response.use(
   }
 );
 
-// Function to cancel a request
-export function cancelRequest(cancelTokenSource: CancelTokenSource) {
-  cancelTokenSource.cancel('Request canceled by user');
-}
-
 const responseBody = (response: any) => response.data;
 
 export interface IHTTPSParams {
@@ -120,13 +114,15 @@ export class HttpUtil {
     url: string,
     params: IHTTPSParams[] | null | number,
     isStream?: boolean | undefined,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController
   ): Promise<any | null> {
     try {
       const result = await axios
         .get(url, {
           params: buildQueryParams(params),
-          responseType: isStream ? 'blob' : 'json'
+          responseType: isStream ? 'blob' : 'json',
+          signal: abortController?.signal
         })
         .then(responseBody);
       return result;
@@ -146,9 +142,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async post(url: string, body: any, onError?: ErrorCallBack) {
+  static async post(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.post(url, body).then(responseBody);
+      const result = await axios
+        .post(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -167,9 +172,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async put(url: string, body: any, onError?: ErrorCallBack) {
+  static async put(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.put(url, body).then(responseBody);
+      const result = await axios
+        .put(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -188,9 +202,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async patch(url: string, body: any, onError?: ErrorCallBack) {
+  static async patch(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.patch(url, body).then(responseBody);
+      const result = await axios
+        .patch(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -209,9 +232,17 @@ export class HttpUtil {
     return null;
   }
 
-  static async delete(url: string, body: any, onError?: ErrorCallBack) {
+  static async delete(
+    url: string,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.delete(url, body).then(responseBody);
+      const result = await axios
+        .delete(url, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(

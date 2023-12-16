@@ -26,6 +26,7 @@ import {
 } from '@/redux/chat/chat-slice';
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
+import ThinkText from '@/core/static-components/think-text';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -45,7 +46,18 @@ function ChatInner() {
   } = useSelector((state: RootState) => state.chat);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
+  const abortController = useRef(new AbortController());
+
+  const resetAbortController = () => {
+    if (abortController.current) {
+      abortController.current.abort();
+    }
+    abortController.current = new AbortController();
+  };
+
   const onSubmit: SubmitHandler<IChatForm> = async data => {
+    const currentAbortController = abortController.current;
+
     if (!verified) {
       onOpen();
     } else {
@@ -69,7 +81,11 @@ function ChatInner() {
         chatId: currentThreadId || null
       };
       try {
-        const res = await ChatService.getInstance().sendMessage(payload);
+        const res = await ChatService.getInstance().sendMessage(
+          payload,
+          undefined,
+          currentAbortController.signal
+        );
         if (res.isSuccess) {
           dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
 
@@ -116,8 +132,16 @@ function ChatInner() {
       setBubbleList([]);
       setHasError(false);
     },
-    []
+    [searchParams]
   );
+  useEffect(() => {
+    resetAbortController();
+
+    return () => {
+      resetAbortController();
+    };
+  }, [searchParams, waitingForThreadLoad]);
+
   useEffect(() => {
     setHasError(false);
   }, [bubbleList]);
@@ -154,7 +178,7 @@ function ChatInner() {
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 componentsScrollBar  overflow-y-auto h-full"
+          className="row-span-8 componentsScrollBar overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IThreadBubblesItem) => (
             <ChatBubble
@@ -162,7 +186,7 @@ function ChatInner() {
               isClient={item.isClient}
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
-              key={item?.bubbleId}
+              key={window.crypto.randomUUID()}
               bubbleId={item?.bubbleId || ''}
               feedbackStatus={item?.feedbackStatus || null}
             />
@@ -175,7 +199,7 @@ function ChatInner() {
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
               </div> */}
-              <div className="text-sm italic"> Salam qaqam gozle gelirem</div>
+              <ThinkText />
             </div>
           )}
           {waitingForThreadLoad && (
@@ -183,6 +207,7 @@ function ChatInner() {
               <AiLoder />
             </div>
           )}
+
           {hasError && (
             <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">
