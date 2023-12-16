@@ -4,6 +4,7 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
+  IFeedbackPayload,
   ISendMessagePayload,
   IThreadBubblesItem,
   IThreadHistoryList
@@ -30,6 +31,14 @@ export class ChatService {
       ChatService.instance = new ChatService();
     }
     return ChatService.instance!;
+  }
+
+  public async sendFeedback(
+    body: IFeedbackPayload,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post('api/client/chats/feedback', body, onError);
+    return res;
   }
 
   public async sendMessage(

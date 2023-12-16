@@ -29,6 +29,8 @@ import AppHandledSelect from '@/components/forms/select/handled-select';
 import { convertDateFormat } from '@/utils/functions/functions';
 import { genderOptions } from '@/utils/constants/options';
 import AppHandledDate from '@/components/forms/date/handled-date';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@/configs/global-configs';
 import LoginLeftBar from './login-leftbar';
 
 interface IRegisterFormProps {
@@ -66,6 +68,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
         payload
       );
       if (res.isSuccess) {
+        toast.success(
+          'Uğurla qeydiyyatdan keçdiniz. Zəhmət olmasa yenidən daxil olun',
+          toastOptions
+        );
         handleFlip();
         setValue('confirmPassword', '');
         setValue('email', '');

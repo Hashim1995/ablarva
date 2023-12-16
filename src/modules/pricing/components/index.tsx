@@ -12,6 +12,7 @@ import {
 import { IBuyPacketBody } from '@/modules/pricing/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import VerifyEmail from '@/core/static-components/verify-email';
 import Header from './header/header';
 import PricingModal from './pricingModal';
 
@@ -21,8 +22,15 @@ function Pricing() {
   const [loading, setLoading] = useState<boolean>(false);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
+  const { verified } = useSelector((state: RootState) => state?.user?.user);
+
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
   // const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
+  const {
+    isOpen: modalIsopen,
+    onOpen: modalOnopen,
+    onOpenChange: modalOpenChange
+  } = useDisclosure();
 
   const packageId = useSelector(
     (state: RootState) => state.user.user.currentSubscription?.packageId
@@ -162,8 +170,12 @@ function Pricing() {
                         </p>
                         <Button
                           onClick={() => {
-                            setWantedPackageId(hItem.id);
-                            onOpen();
+                            if (!verified) {
+                              modalOnopen();
+                            } else {
+                              setWantedPackageId(hItem.id);
+                              onOpen();
+                            }
                           }}
                           className="bg-black text-white h-auto text-sm sm:text-base xl:text-xl border rounded-lg sm:rounded-xl py-2 sm:py-3 px-3 sm:px-5 xl:px-7"
                           type="submit"
@@ -172,7 +184,7 @@ function Pricing() {
                           }
                         >
                           {packageId === hItem.id
-                            ? 'Paketi yenile'
+                            ? 'Paketi yenilə'
                             : dictionary.az.joinNow}
                         </Button>
                       </div>
@@ -223,6 +235,9 @@ function Pricing() {
           onOpenChange={onOpenChange}
           isOpen={isOpen}
         />
+      )}
+      {modalIsopen && (
+        <VerifyEmail onOpenChange={modalOpenChange} isOpen={modalIsopen} />
       )}
     </div>
   );

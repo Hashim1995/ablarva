@@ -1,0 +1,241 @@
+$shape-1: 'M 100 600 q 0 -500, 500 -500 t 500 500 t -500 500 T 100 600 z';
+$shape-2: 'M 100 600 q -50 -400, 500 -500 t 450 550 t -500 500 T 100 600 z';
+$shape-3: 'M 100 600 q 0 -400, 500 -500 t 400 500 t -500 500 T 100 600 z';
+$shape-4: 'M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z';
+$shape-5: 'M 150 600 q 0 -600, 500 -500 t 500 550 t -500 500 T 150 600 z';
+$shape-6: 'M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z';
+
+.container,
+.palette-1 {
+  --bg-0: #101030;
+  --bg-1: #050515;
+  --blob-1: #984ddf;
+  --blob-2: #4344ad;
+  --blob-3: #74d9e1;
+  --blob-4: #050515;
+}
+
+.palette-2 {
+  --bg-0: #545454;
+  --bg-1: #150513;
+  --blob-1: #ff3838;
+  --blob-2: #ff9d7c;
+  --blob-3: #ffdda0;
+  --blob-4: #fff6ea;
+}
+
+.palette-3 {
+  --bg-0: #300030;
+  --bg-1: #000000;
+  --blob-1: #291528;
+  --blob-2: #3a3e3b;
+  --blob-3: #9e829c;
+  --blob-4: #f0eff4;
+}
+
+.palette-4 {
+  --bg-0: #ffffff;
+  --bg-1: #d3f7ff;
+  --blob-1: #bb74ff;
+  --blob-2: #7c7dff;
+  --blob-3: #a0f8ff;
+  --blob-4: #ffffff;
+}
+
+.palette-5 {
+  --bg-0: #968e85;
+  --bg-1: #8cc084;
+  --blob-1: #c1d7ae;
+  --blob-2: #9eff72;
+  --blob-3: #ffcab1;
+  --blob-4: #ecdcb0;
+}
+
+.palette-6 {
+  --bg-0: #ffffff;
+  --bg-1: #4e598c;
+  --blob-1: #ff8c42;
+  --blob-2: #fcaf58;
+  --blob-3: #f9c784;
+  --blob-4: #ffffff;
+}
+
+.blobs {
+  width: min(3em, 3em);
+  height: min(3em, 3em);
+  max-height: 100%;
+  max-width: 100%;
+
+  svg {
+    position: relative;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .blob {
+    animation: rotate 25s infinite alternate ease-in-out;
+    transform-origin: 50% 50%;
+    opacity: 0.7;
+
+    path {
+      animation: blob-anim-1 1s infinite alternate
+        cubic-bezier(0.45, 0.2, 0.55, 0.8);
+      transform-origin: 50% 50%;
+      transform: scale(0.8);
+
+      transition: fill 800ms ease;
+    }
+
+    &.alt {
+      animation-direction: alternate-reverse;
+      opacity: 0.3;
+    }
+  }
+
+  .blob-1 {
+    path {
+      fill: var(--blob-1);
+      filter: blur(1rem);
+    }
+  }
+
+  .blob-2 {
+    animation-duration: 18s;
+    animation-direction: alternate-reverse;
+
+    path {
+      fill: var(--blob-2);
+      animation-name: blob-anim-2;
+      animation-duration: 7s;
+      filter: blur(0.75rem);
+      transform: scale(0.78);
+    }
+
+    &.alt {
+      animation-direction: alternate;
+    }
+  }
+
+  .blob-3 {
+    animation-duration: 23s;
+
+    path {
+      fill: var(--blob-3);
+      animation-name: blob-anim-3;
+      animation-duration: 6s;
+      filter: blur(0.5rem);
+      transform: scale(0.76);
+    }
+  }
+
+  .blob-4 {
+    animation-duration: 31s;
+    animation-direction: alternate-reverse;
+    opacity: 0.9;
+
+    path {
+      fill: var(--blob-4);
+      animation-name: blob-anim-4;
+      animation-duration: 10s;
+      filter: blur(10rem);
+      transform: scale(0.5);
+    }
+
+    &.alt {
+      animation-direction: alternate;
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes blob-anim-1 {
+    0% {
+      d: path($shape-1);
+    }
+    30% {
+      d: path($shape-2);
+    }
+    70% {
+      d: path($shape-3);
+    }
+    100% {
+      d: path($shape-4);
+    }
+  }
+
+  @keyframes blob-anim-2 {
+    0% {
+      d: path($shape-3);
+    }
+    40% {
+      d: path($shape-5);
+    }
+    80% {
+      d: path($shape-2);
+    }
+    100% {
+      d: path($shape-6);
+    }
+  }
+
+  @keyframes blob-anim-3 {
+    0% {
+      d: path($shape-2);
+    }
+    35% {
+      d: path($shape-4);
+    }
+    75% {
+      d: path($shape-6);
+    }
+    100% {
+      d: path($shape-3);
+    }
+  }
+
+  @keyframes blob-anim-4 {
+    0% {
+      d: path($shape-4);
+    }
+    30% {
+      d: path($shape-6);
+    }
+    70% {
+      d: path($shape-2);
+    }
+    100% {
+      d: path($shape-5);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
+
+.switcher {
+  position: absolute;
+  left: 1rem;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 1rem;
+
+  .switch-button {
+    cursor: pointer;
+    width: min(10vh, 5rem);
+    height: min(10vh, 5rem);
+    background: red;
+
+    background: radial-gradient(var(--bg-0), var(--bg-1));
+    border-radius: 0.5rem;
+    backdrop-filter: blur(1rem);
+    border: 1px solid rgba(120, 120, 120, 0.5);
+  }
+}
