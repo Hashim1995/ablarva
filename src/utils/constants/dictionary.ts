@@ -9,7 +9,8 @@ export const dictionary = {
     account: 'Hesab',
     forgetPassword: 'Şifrəmi unutdum',
     oldPassword: 'Köhnə şifrə',
-    emailVerify: 'Pulsuz plan işlətmək vəya Premium paket almaq üçün email adresinizi təsdiqləyin',
+    emailVerify:
+      'Pulsuz plan işlətmək vəya Premium paket almaq üçün email adresinizi təsdiqləyin',
     editAccount: 'Hesab məlumatları',
     changePassWord: 'Şifrəni dəyiş',
     verifyCodeSentSuccesfully:
