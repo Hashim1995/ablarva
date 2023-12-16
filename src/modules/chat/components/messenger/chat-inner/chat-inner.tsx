@@ -132,6 +132,7 @@ function ChatInner() {
           {bubbleList?.map((item: IThreadBubblesItem) => (
             <ChatBubble
               message={item.content}
+              isClient={item.isClient}
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
               key={item?.bubbleId}

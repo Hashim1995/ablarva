@@ -12,13 +12,18 @@ import { useReadLocalStorage } from 'usehooks-ts';
 
 interface IBubble {
   message: string;
+  isClient: boolean;
+  isTyping: boolean;
+}
+interface ITypewriter {
+  message: string;
   isTyping: boolean;
 }
 const typewriterSound = new Audio(
   'https://assets.codepen.io/162656/audio-old-typewriter.wav'
 );
 
-function Typewriter({ message, isTyping }: IBubble) {
+function Typewriter({ message, isTyping }: ITypewriter) {
   const [displayedContent, setDisplayedContent] = useState('');
   const audioEnable = useReadLocalStorage('audioEnable');
 
@@ -51,7 +56,7 @@ function Typewriter({ message, isTyping }: IBubble) {
   );
 }
 
-function ChatBubble({ message, isTyping }: IBubble) {
+function ChatBubble({ message, isTyping, isClient }: IBubble) {
   return (
     <div className="bubble flex gap-5 bg-[#F0F1F3] rounded-lg p-3 my-3">
       <Avatar name="Junior" />
@@ -59,26 +64,30 @@ function ChatBubble({ message, isTyping }: IBubble) {
         <Typewriter message={message} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
           <div className="flex  gap-2  items-center justify-between">
-            <Button
-              type="button"
-              isIconOnly
-              size="sm"
-              className="bg-white rounded-full"
-            >
-              <BsHandThumbsDownFill size={16} color="#292D32" />
-            </Button>
-            <Button
-              type="submit"
-              isIconOnly
-              size="sm"
-              className="bg-white rounded-full"
-            >
-              <BsHandThumbsDownFill
-                size={16}
-                color="#292D32"
-                className="rotate-180"
-              />
-            </Button>
+            {isClient && (
+              <>
+                <Button
+                  type="button"
+                  isIconOnly
+                  size="sm"
+                  className="bg-white rounded-full"
+                >
+                  <BsHandThumbsDownFill size={16} color="#292D32" />
+                </Button>
+                <Button
+                  type="submit"
+                  isIconOnly
+                  size="sm"
+                  className="bg-white rounded-full"
+                >
+                  <BsHandThumbsDownFill
+                    size={16}
+                    color="#292D32"
+                    className="rotate-180"
+                  />
+                </Button>
+              </>
+            )}
           </div>
           <div className="flex  gap-2  items-center justify-between">
             <Button
