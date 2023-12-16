@@ -59,10 +59,10 @@ function App() {
   }, [getme]);
 
   useEffect(() => {
-    if (!verified) {
+    if (!verified && getme?.user?.id) {
       onOpen();
     }
-  }, [verified]);
+  }, [verified, getme]);
   return (
     <main
       className={`${

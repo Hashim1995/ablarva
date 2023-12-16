@@ -42,6 +42,8 @@ import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@/configs/global-configs';
 import VerifyEmail from './verify-email';
 
 export default function Navbar() {
@@ -135,9 +137,8 @@ export default function Navbar() {
                   : 'bg-white text-black'
               }`}
               onClick={() => {
-                navigate('/assistan');
+                toast.warn('Hazırlanır', toastOptions);
               }}
-              isDisabled
               startContent={<BsYelp size={17} />}
             >
               {dictionary.az.assistan}
@@ -204,7 +205,7 @@ export default function Navbar() {
               }
               description={user.email || dictionary.az.empty}
               avatarProps={{
-                src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
+                src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
               className="hidden sm:flex"
             />

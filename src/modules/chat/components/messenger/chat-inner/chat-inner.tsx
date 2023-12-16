@@ -33,6 +33,8 @@ function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IThreadBubblesItem[]>([]);
   const [hasError, setHasError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const [lastQuestion, setLastQuestion] = useState<string>('');
+
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const {
@@ -47,6 +49,7 @@ function ChatInner() {
     if (!verified) {
       onOpen();
     } else {
+      setLastQuestion(data?.message);
       setBubbleList(old => [
         ...old,
         {
@@ -115,6 +118,9 @@ function ChatInner() {
     },
     []
   );
+  useEffect(() => {
+    setHasError(false);
+  }, [bubbleList]);
 
   const fetchThreadonUrl = async (id: string) => {
     dispatch(setWaitingForThreadLoad(true));
@@ -178,21 +184,14 @@ function ChatInner() {
             </div>
           )}
           {hasError && (
-            <div className=" flex justify-center mt-2 items-center ">
+            <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">
-                Beynim yandı :(
+                Beynim yandı
               </Chip>
-            </div>
-          )}
-          {!waitingForResponse && bubbleList?.length > 0 && (
-            <div className="flex justify-center mt-3 items-center w-full">
               <Button
                 onClick={() => {
                   onSubmit({
-                    message:
-                      bubbleList?.length === 1
-                        ? bubbleList[0].content
-                        : bubbleList[bubbleList.length - 2].content
+                    message: lastQuestion
                   });
                 }}
                 type="button"

@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
 import { IFeedbackPayload } from '@/modules/chat/types';
+import { RootState } from '@/redux/store';
 import { ChatService } from '@/services/chat-services/chat-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
@@ -9,6 +10,7 @@ import { Avatar, Button } from '@nextui-org/react';
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
 import { BsHandThumbsDownFill, BsClipboard2CheckFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useReadLocalStorage } from 'usehooks-ts';
 
@@ -69,6 +71,7 @@ function ChatBubble({
 }: IBubble) {
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
+  const { user } = useSelector((state: RootState) => state.user);
 
   const feedbackBubble = async (type: number) => {
     const payload: IFeedbackPayload = {
@@ -99,7 +102,14 @@ function ChatBubble({
 
   return (
     <div className="bubble flex gap-5 bg-[#F0F1F3] rounded-lg p-3 my-3">
-      <Avatar name="Junior" />
+      <Avatar
+        name="Junior"
+        src={
+          isClient
+            ? `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
+            : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdOAnEBb4e_d0YITbc9hDL3Ex-EbHzQemJKiJc_xxO7gCR5YLgPcGpMonCKpeMmifJoY&usqp=CAU'
+        }
+      />
       <div className=" flex-1 markdown-table-container">
         <Typewriter message={message} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
