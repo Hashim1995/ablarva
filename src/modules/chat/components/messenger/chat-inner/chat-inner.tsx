@@ -21,8 +21,10 @@ import { RootState } from '@/redux/store';
 import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
 import {
   setCurrentThreadId,
-  setWaitingForResponse
+  setWaitingForResponse,
+  setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
+import AiLoder from '@/core/static-components/ai-loader';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -31,9 +33,12 @@ function ChatInner() {
   const [hasError, setHasError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
 
-  const { currentModel, currentThreadId, waitingForResponse } = useSelector(
-    (state: RootState) => state.chat
-  );
+  const {
+    currentModel,
+    currentThreadId,
+    waitingForResponse,
+    waitingForThreadLoad
+  } = useSelector((state: RootState) => state.chat);
   const dispatch = useDispatch();
   const onSubmit: SubmitHandler<IChatForm> = async data => {
     setBubbleList(old => [
@@ -104,10 +109,12 @@ function ChatInner() {
   );
 
   const fetchThreadonUrl = async (id: string) => {
+    dispatch(setWaitingForThreadLoad(true));
     try {
       const res = await ChatService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
         setBubbleList(res?.data);
+        dispatch(setWaitingForThreadLoad(false));
       }
     } catch (err) {
       console.log(err);
@@ -115,11 +122,17 @@ function ChatInner() {
   };
 
   useEffect(() => {
-    if (searchParams.get('threadID') && currentThreadId) {
+    if (searchParams.get('threadID')) {
       fetchThreadonUrl(searchParams.get('threadID') || '');
       dispatch(setCurrentThreadId(searchParams.get('threadID')));
     }
   }, [searchParams]);
+
+  useEffect(() => {
+    if (waitingForThreadLoad) {
+      setBubbleList([]);
+    }
+  }, [waitingForThreadLoad]);
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
@@ -136,15 +149,23 @@ function ChatInner() {
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
               key={item?.bubbleId}
+              bubbleId={item?.bubbleId || ''}
+              feedbackStatus={item?.feedbackStatus || null}
             />
           ))}
           {waitingForResponse && (
             <div className=" flex justify-center mt-2 items-center ">
-              <div className="loader bg-black p-2 rounded-full flex space-x-3">
+              <AiLoder />
+              {/* <div className="loader bg-black p-2 rounded-full flex space-x-3">
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-              </div>
+              </div> */}
+            </div>
+          )}
+          {waitingForThreadLoad && (
+            <div className="flex items-center justify-center h-full">
+              <AiLoder />
             </div>
           )}
           {hasError && (
@@ -157,6 +178,11 @@ function ChatInner() {
           {!waitingForResponse && bubbleList?.length > 0 && (
             <div className="flex justify-center mt-3 items-center w-full">
               <Button
+                onClick={() => {
+                  onSubmit({
+                    message: bubbleList[bubbleList.length - 2].content
+                  });
+                }}
                 type="button"
                 startContent={
                   <Button

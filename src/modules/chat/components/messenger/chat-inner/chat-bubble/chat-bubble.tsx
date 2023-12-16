@@ -1,5 +1,7 @@
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
+import { IFeedbackPayload } from '@/modules/chat/types';
+import { ChatService } from '@/services/chat-services/chat-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
@@ -14,6 +16,8 @@ interface IBubble {
   message: string;
   isClient: boolean;
   isTyping: boolean;
+  feedbackStatus: number | null;
+  bubbleId: string;
 }
 interface ITypewriter {
   message: string;
@@ -56,7 +60,43 @@ function Typewriter({ message, isTyping }: ITypewriter) {
   );
 }
 
-function ChatBubble({ message, isTyping, isClient }: IBubble) {
+function ChatBubble({
+  message,
+  isTyping,
+  isClient,
+  bubbleId,
+  feedbackStatus
+}: IBubble) {
+  const [liked, setLiked] = useState(false);
+  const [dislike, setDisliked] = useState(false);
+
+  const feedbackBubble = async (type: number) => {
+    const payload: IFeedbackPayload = {
+      bubbleId,
+      feedbackStatus: type
+    };
+    try {
+      const res = await ChatService.getInstance().sendFeedback(payload);
+      if (res.isSuccess) {
+        if (type === 1) {
+          setLiked(true);
+        } else {
+          setDisliked(true);
+        }
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(
+    () => () => {
+      setDisliked(false);
+      setLiked(false);
+    },
+    []
+  );
+
   return (
     <div className="bubble flex gap-5 bg-[#F0F1F3] rounded-lg p-3 my-3">
       <Avatar name="Junior" />
@@ -64,25 +104,50 @@ function ChatBubble({ message, isTyping, isClient }: IBubble) {
         <Typewriter message={message} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
           <div className="flex  gap-2  items-center justify-between">
-            {isClient && (
+            {!isClient && (
               <>
                 <Button
                   type="button"
                   isIconOnly
+                  isDisabled={
+                    dislike ||
+                    liked ||
+                    feedbackStatus === 1 ||
+                    feedbackStatus === 2
+                  }
+                  onClick={() => feedbackBubble(1)}
                   size="sm"
-                  className="bg-white rounded-full"
+                  className={`${
+                    liked || feedbackStatus === 1 ? 'bg-black' : 'bg-white'
+                  }  rounded-full`}
                 >
-                  <BsHandThumbsDownFill size={16} color="#292D32" />
+                  <BsHandThumbsDownFill
+                    size={16}
+                    color={`${
+                      liked || feedbackStatus === 1 ? 'white' : '#292D32'
+                    }`}
+                  />
                 </Button>
                 <Button
                   type="submit"
                   isIconOnly
+                  isDisabled={
+                    liked ||
+                    dislike ||
+                    feedbackStatus === 1 ||
+                    feedbackStatus === 2
+                  }
+                  onClick={() => feedbackBubble(2)}
                   size="sm"
-                  className="bg-white rounded-full"
+                  className={`${
+                    dislike || feedbackStatus === 2 ? 'bg-black' : 'bg-white'
+                  }  rounded-full`}
                 >
                   <BsHandThumbsDownFill
                     size={16}
-                    color="#292D32"
+                    color={`${
+                      dislike || feedbackStatus === 2 ? 'white' : '#292D32'
+                    }`}
                     className="rotate-180"
                   />
                 </Button>

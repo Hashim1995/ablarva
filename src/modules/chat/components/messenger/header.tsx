@@ -112,12 +112,6 @@ function MessengerHeader({
                   isIconOnly
                   className="bg-white rounded-full"
                   aria-label="Filter"
-                  onClick={() => {
-                    searchParams.delete('threadID');
-                    dispatch(setCurrentThreadId(''));
-                    dispatch(setResetChatInner(Date.now()));
-                    navigate('/chat');
-                  }}
                 >
                   <BsFillPlusCircleFill size={20} color="#292D32" />
                 </Button>
@@ -125,8 +119,36 @@ function MessengerHeader({
             </PopoverTrigger>
             <PopoverContent>
               <div className="px-1 py-2">
-                <div className="text-small font-bold">Popover Content</div>
-                <div className="text-tiny">This is the popover content</div>
+                <Button
+                  size="sm"
+                  isIconOnly
+                  className="bg-white rounded-full"
+                  aria-label="Filter"
+                >
+                  <BsFillPlusCircleFill size={20} color="#292D32" />
+                </Button>
+                <Button
+                  size="sm"
+                  isIconOnly
+                  className="bg-white rounded-full"
+                  aria-label="Filter"
+                  onClick={() => {
+                    searchParams.delete('threadID');
+                    dispatch(setCurrentThreadId(''));
+                    dispatch(setResetChatInner(Date.now()));
+                    navigate('/chat');
+                  }}
+                >
+                  Bəli
+                </Button>
+                <Button
+                  size="sm"
+                  isIconOnly
+                  className="bg-white rounded-full"
+                  aria-label="Filter"
+                >
+                  Xeyr
+                </Button>
               </div>
             </PopoverContent>
           </Popover>

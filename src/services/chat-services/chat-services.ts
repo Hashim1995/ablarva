@@ -4,6 +4,7 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
+  IFeedbackPayload,
   ISendMessagePayload,
   IThreadBubblesItem,
   IThreadHistoryList
@@ -23,13 +24,21 @@ export class ChatService {
   // eslint-disable-next-line no-use-before-define
   private static instance: ChatService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): ChatService {
     if (!this.instance) {
       ChatService.instance = new ChatService();
     }
     return ChatService.instance!;
+  }
+
+  public async sendFeedback(
+    body: IFeedbackPayload,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post('api/client/chats/feedback', body, onError);
+    return res;
   }
 
   public async sendMessage(
@@ -55,6 +64,7 @@ export class ChatService {
     return res;
   }
 
+
   public async fetchBubbleHistory(
     id: string,
     onError?: ErrorCallBack
@@ -67,4 +77,8 @@ export class ChatService {
     );
     return res;
   }
+
+
+
+
 }

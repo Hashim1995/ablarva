@@ -102,7 +102,7 @@ function MyPlan() {
             <div className="justify-center items-center flex flex-col lg:flex-row chartsHeight">
               {statisticsData?.data?.basic?.total > 0 && (
                 <div className="w-[14rem] lg:mb-0 mb-20 col-span-12 h-36 sm:col-span-6 md:col-span-6">
-                  <div className="text-center text-sm">Premium</div>
+                  <div className="text-center text-sm">Basic</div>
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart className="mobile-row-chart">
                       <Pie
@@ -155,7 +155,7 @@ function MyPlan() {
 
               {statisticsData?.data?.premium?.total > 0 && (
                 <div className="w-[14rem]  col-span-12 h-36 sm:col-span-6 md:col-span-6">
-                  <div className="text-center text-sm">Basic</div>
+                  <div className="text-center text-sm">Premium</div>
 
                   <ResponsiveContainer width="100%" height="100%">
                     <PieChart className="mobile-row-chart">

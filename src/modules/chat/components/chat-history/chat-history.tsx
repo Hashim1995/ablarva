@@ -1,4 +1,8 @@
-import { setCurrentThreadId, setResetChatInner } from '@/redux/chat/chat-slice';
+import {
+  setCurrentThreadId,
+  setResetChatInner,
+  setWaitingForThreadLoad
+} from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
 import { ChatService } from '@/services/chat-services/chat-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -111,6 +115,7 @@ function ChatHistory() {
                   aria-hidden
                   onClick={() => {
                     dispatch(setCurrentThreadId(conv.chatId));
+                    dispatch(setWaitingForThreadLoad(true));
 
                     setSearchParams({
                       threadID: String(conv.chatId)
