@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/no-unresolved */
 import { useEffect, useRef, useState } from 'react';
-import { Button, Card, Chip } from '@nextui-org/react';
+import { Button, Card, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
 import {
   IChatForm,
@@ -25,6 +25,7 @@ import {
   setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
 import AiLoder from '@/core/static-components/ai-loader';
+import VerifyEmail from '@/core/static-components/verify-email';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -32,6 +33,7 @@ function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IThreadBubblesItem[]>([]);
   const [hasError, setHasError] = useState(false);
   const [searchParams, setSearchParams] = useSearchParams();
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const {
     currentModel,
@@ -39,52 +41,57 @@ function ChatInner() {
     waitingForResponse,
     waitingForThreadLoad
   } = useSelector((state: RootState) => state.chat);
+  const { verified } = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
   const onSubmit: SubmitHandler<IChatForm> = async data => {
-    setBubbleList(old => [
-      ...old,
-      {
-        answerId: null,
-        content: data.message,
-        isClient: true,
-        isTyping: false,
-        chatHistoryId: null,
-        bubbleId: null
+    if (!verified) {
+      onOpen();
+    } else {
+      setBubbleList(old => [
+        ...old,
+        {
+          answerId: null,
+          content: data.message,
+          isClient: true,
+          isTyping: false,
+          chatHistoryId: null,
+          bubbleId: null
+        }
+      ]);
+
+      dispatch(setWaitingForResponse(true));
+      const payload: ISendMessagePayload = {
+        servicePlan: Number(currentModel),
+        question: data.message,
+        chatId: currentThreadId || null
+      };
+      try {
+        const res = await ChatService.getInstance().sendMessage(payload);
+        if (res.isSuccess) {
+          dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
+
+          setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
+
+          setBubbleList(old => [
+            ...old,
+            {
+              answerId: res.data.answerId,
+              content: res?.data?.content || '',
+              isClient: res?.data?.isClient,
+              isTyping: res?.data?.isTyping,
+              questionId: res?.data?.questionId,
+              voiceId: res?.data?.voiceId,
+              chatHistoryId: res?.data?.chatHistoryId,
+              bubbleId: res?.data?.bubbleId
+            }
+          ]);
+        }
+        dispatch(setWaitingForResponse(false));
+        setHasError(false);
+      } catch (err) {
+        setHasError(true);
+        dispatch(setWaitingForResponse(false));
       }
-    ]);
-
-    dispatch(setWaitingForResponse(true));
-    const payload: ISendMessagePayload = {
-      servicePlan: Number(currentModel),
-      question: data.message,
-      chatId: currentThreadId || null
-    };
-    try {
-      const res = await ChatService.getInstance().sendMessage(payload);
-      if (res.isSuccess) {
-        dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
-
-        setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
-
-        setBubbleList(old => [
-          ...old,
-          {
-            answerId: res.data.answerId,
-            content: res?.data?.content || '',
-            isClient: res?.data?.isClient,
-            isTyping: res?.data?.isTyping,
-            questionId: res?.data?.questionId,
-            voiceId: res?.data?.voiceId,
-            chatHistoryId: res?.data?.chatHistoryId,
-            bubbleId: res?.data?.bubbleId
-          }
-        ]);
-      }
-      dispatch(setWaitingForResponse(false));
-      setHasError(false);
-    } catch (err) {
-      setHasError(true);
-      dispatch(setWaitingForResponse(false));
     }
   };
   const messengerBoxRef = useRef<HTMLDivElement>(null);
@@ -104,6 +111,7 @@ function ChatInner() {
     () => () => {
       dispatch(setCurrentThreadId(''));
       setBubbleList([]);
+      setHasError(false);
     },
     []
   );
@@ -154,13 +162,14 @@ function ChatInner() {
             />
           ))}
           {waitingForResponse && (
-            <div className=" flex justify-center mt-2 items-center ">
+            <div className=" flex justify-start mt-2 items-center ">
               <AiLoder />
               {/* <div className="loader bg-black p-2 rounded-full flex space-x-3">
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
               </div> */}
+              <div className="text-sm italic"> Salam qaqam gozle gelirem</div>
             </div>
           )}
           {waitingForThreadLoad && (
@@ -180,7 +189,10 @@ function ChatInner() {
               <Button
                 onClick={() => {
                   onSubmit({
-                    message: bubbleList[bubbleList.length - 2].content
+                    message:
+                      bubbleList?.length === 1
+                        ? bubbleList[0].content
+                        : bubbleList[bubbleList.length - 2].content
                   });
                 }}
                 type="button"
@@ -207,6 +219,7 @@ function ChatInner() {
       <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] row-span-4 absolute w-full bottom-0">
         <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
       </Card>
+      {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
     </div>
   );
 }

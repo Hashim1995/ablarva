@@ -83,202 +83,209 @@ export default function Navbar() {
   useOnClickOutside(navRef, handleOutSideClick);
 
   return (
-    <NavbarNext
-      className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
-      maxWidth="full"
-      isBlurred={false}
-      position="static"
-      isMenuOpen={isMenuOpen}
-      onMenuOpenChange={setIsMenuOpen}
-      disableAnimation
-      onClick={handleOutSideClick}
-    >
-      <NavbarContent className="lg:hidden" justify="start">
-        <NavbarMenuToggle
-          aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
-        />
-      </NavbarContent>
+    <>
+      <NavbarNext
+        className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
+        maxWidth="full"
+        isBlurred={false}
+        position="static"
+        isMenuOpen={isMenuOpen}
+        onMenuOpenChange={setIsMenuOpen}
+        disableAnimation
+        onClick={handleOutSideClick}
+      >
+        <NavbarContent className="lg:hidden" justify="start">
+          <NavbarMenuToggle
+            aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+          />
+        </NavbarContent>
 
-      <NavbarContent className="lg:hidden pr-3" justify="center">
-        <NavbarBrand>
-          <p className="font-bold text-inherit">ACMasdE</p>
-        </NavbarBrand>
-      </NavbarContent>
+        <NavbarContent className="lg:hidden pr-3" justify="center">
+          <NavbarBrand>
+            <p className="font-bold text-inherit">ACMasdE</p>
+          </NavbarBrand>
+        </NavbarContent>
 
-      <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
-        <NavbarBrand>
-          <BsRobot size={48} />
-        </NavbarBrand>
-      </NavbarContent>
+        <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
+          <NavbarBrand>
+            <BsRobot size={48} />
+          </NavbarBrand>
+        </NavbarContent>
 
-      <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-        <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
-          <Button
-            className={` w-40 h-12  ${
-              location.pathname.includes('chat')
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/chat');
-            }}
-            startContent={<BsFillChatLeftDotsFill size={17} />}
-          >
-            {dictionary.az.chat}
-          </Button>
+        <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
+          <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
+            <Button
+              className={` w-40 h-12  ${
+                location.pathname.includes('chat')
+                  ? 'bg-black text-white'
+                  : 'bg-white text-black'
+              }`}
+              onClick={() => {
+                navigate('/chat');
+              }}
+              startContent={<BsFillChatLeftDotsFill size={17} />}
+            >
+              {dictionary.az.chat}
+            </Button>
 
-          <Button
-            className={` w-40 h-12  ${
-              location.pathname.includes('assistan')
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/assistan');
-            }}
-            isDisabled
-            startContent={<BsYelp size={17} />}
-          >
-            {dictionary.az.assistan}
-          </Button>
-          <Button
-            className={`w-40 h-12  ${
-              location.pathname.includes('pricing')
-                ? 'bg-black text-white'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/pricing');
-            }}
-            startContent={<BsFillFilterSquareFill size={17} />}
-          >
-            {dictionary.az.tariffs}
-          </Button>
+            <Button
+              className={` w-40 h-12  ${
+                location.pathname.includes('assistan')
+                  ? 'bg-black text-white'
+                  : 'bg-white text-black'
+              }`}
+              onClick={() => {
+                navigate('/assistan');
+              }}
+              isDisabled
+              startContent={<BsYelp size={17} />}
+            >
+              {dictionary.az.assistan}
+            </Button>
+            <Button
+              className={`w-40 h-12  ${
+                location.pathname.includes('pricing')
+                  ? 'bg-black text-white'
+                  : 'bg-white text-black'
+              }`}
+              onClick={() => {
+                navigate('/pricing');
+              }}
+              startContent={<BsFillFilterSquareFill size={17} />}
+            >
+              {dictionary.az.tariffs}
+            </Button>
 
-          <Button
-            className={`w-40 h-12 ${
-              location.pathname.includes('settings')
-                ? 'bg-black text-white hover:bg-black'
-                : 'bg-white text-black'
-            }`}
-            onClick={() => {
-              navigate('/settings');
-            }}
-            startContent={<BsFillGearFill size={17} />}
-          >
-            {dictionary.az.settings}
-          </Button>
-        </ButtonGroup>
-      </NavbarContent>
+            <Button
+              className={`w-40 h-12 ${
+                location.pathname.includes('settings')
+                  ? 'bg-black text-white hover:bg-black'
+                  : 'bg-white text-black'
+              }`}
+              onClick={() => {
+                navigate('/settings');
+              }}
+              startContent={<BsFillGearFill size={17} />}
+            >
+              {dictionary.az.settings}
+            </Button>
+          </ButtonGroup>
+        </NavbarContent>
 
-      <NavbarContent justify="end">
-        <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
-          {' '}
-          {!user.verified && (
-            <Tooltip
-              className="hidden sm:block"
-              placement="left"
-              content={dictionary.az.emailVerify}
+        <NavbarContent justify="end">
+          <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+            {' '}
+            {!user.verified && (
+              <Tooltip
+                className="hidden sm:block"
+                placement="left"
+                content={dictionary.az.emailVerify}
+              >
+                <Button
+                  onClick={onOpen}
+                  size="sm"
+                  isIconOnly
+                  className="bg-white rounded-full"
+                  aria-label="Filter"
+                >
+                  <BsEnvelope
+                    className="cursor-pointer animate-pulse"
+                    color="red"
+                    size={22}
+                  />
+                </Button>
+              </Tooltip>
+            )}
+            <User
+              name={
+                user
+                  ? `${user.firstName} ${user.lastName}`
+                  : dictionary.az.empty
+              }
+              description={user.email || dictionary.az.empty}
+              avatarProps={{
+                src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
+              }}
+              className="hidden sm:flex"
+            />
+            <Dropdown className="hidden sm:block">
+              <DropdownTrigger className="hidden sm:block">
+                <div>
+                  <BsArrowRightCircle className="cursor-pointer" size={20} />
+                </div>
+              </DropdownTrigger>
+              <DropdownMenu
+                className="hidden sm:block"
+                aria-label="Static Actions"
+              >
+                <DropdownItem
+                  className="hidden sm:block"
+                  onClick={() => {
+                    localStorage.removeItem('userToken');
+                    navigate('/login');
+                  }}
+                  key="logout"
+                >
+                  {dictionary.az.logOut}
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+            <Dropdown className="block sm:hidden">
+              <DropdownTrigger>
+                <div>
+                  <Image
+                    src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                    width={39}
+                    alt="user-image"
+                    className="rounded-full block sm:hidden"
+                  />
+                </div>
+              </DropdownTrigger>
+              <DropdownMenu aria-label="Static Actions">
+                <DropdownItem isReadOnly>
+                  <p className="text-xl text-black">
+                    {user
+                      ? `${user.firstName} ${user.lastName}`
+                      : dictionary.az.empty}
+                  </p>
+                  <p className="text-sm text-black">
+                    {user.email || dictionary.az.empty}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  onClick={() => {
+                    localStorage.removeItem('userToken');
+                    navigate('/login');
+                  }}
+                  key="logout"
+                  className="pt-0"
+                >
+                  <p className="text-sm">{dictionary.az.logOut}</p>
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
+          </NavbarItem>
+        </NavbarContent>
+
+        <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
+          {menuItems.map((item, index) => (
+            <NavbarMenuItem
+              className="flex items-start"
+              key={`${item}-${index}`}
             >
               <Button
-                onClick={onOpen}
-                size="sm"
-                isIconOnly
-                className="bg-white rounded-full"
-                aria-label="Filter"
+                className="w-full px-1 flex bg-transparent items-center font-medium"
+                onClick={() => {
+                  navigate(`/${item.path}`);
+                }}
               >
-                <BsEnvelope
-                  className="cursor-pointer animate-pulse"
-                  color="red"
-                  size={22}
-                />
+                {item.icon} {item.label}
               </Button>
-            </Tooltip>
-          )}
-          <User
-            name={
-              user ? `${user.firstName} ${user.lastName}` : dictionary.az.empty
-            }
-            description={user.email || dictionary.az.empty}
-            avatarProps={{
-              src: 'https://i.pravatar.cc/150?u=a04258114e29026702d'
-            }}
-            className="hidden sm:flex"
-          />
-          <Dropdown className="hidden sm:block">
-            <DropdownTrigger className="hidden sm:block">
-              <div>
-                <BsArrowRightCircle className="cursor-pointer" size={20} />
-              </div>
-            </DropdownTrigger>
-            <DropdownMenu
-              className="hidden sm:block"
-              aria-label="Static Actions"
-            >
-              <DropdownItem
-                className="hidden sm:block"
-                onClick={() => {
-                  localStorage.removeItem('userToken');
-                  navigate('/login');
-                }}
-                key="logout"
-              >
-                {dictionary.az.logOut}
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-          <Dropdown className="block sm:hidden">
-            <DropdownTrigger>
-              <div>
-                <Image
-                  src="https://i.pravatar.cc/150?u=a04258114e29026702d"
-                  width={39}
-                  alt="user-image"
-                  className="rounded-full block sm:hidden"
-                />
-              </div>
-            </DropdownTrigger>
-            <DropdownMenu aria-label="Static Actions">
-              <DropdownItem isReadOnly>
-                <p className="text-xl text-black">
-                  {user
-                    ? `${user.firstName} ${user.lastName}`
-                    : dictionary.az.empty}
-                </p>
-                <p className="text-sm text-black">
-                  {user.email || dictionary.az.empty}
-                </p>
-              </DropdownItem>
-              <DropdownItem
-                onClick={() => {
-                  localStorage.removeItem('userToken');
-                  navigate('/login');
-                }}
-                key="logout"
-                className="pt-0"
-              >
-                <p className="text-sm">{dictionary.az.logOut}</p>
-              </DropdownItem>
-            </DropdownMenu>
-          </Dropdown>
-        </NavbarItem>
-      </NavbarContent>
-
-      <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
-        {menuItems.map((item, index) => (
-          <NavbarMenuItem className="flex items-start" key={`${item}-${index}`}>
-            <Button
-              className="w-full px-1 flex bg-transparent items-center font-medium"
-              onClick={() => {
-                navigate(`/${item.path}`);
-              }}
-            >
-              {item.icon} {item.label}
-            </Button>
-          </NavbarMenuItem>
-        ))}
-      </NavbarMenu>
+            </NavbarMenuItem>
+          ))}
+        </NavbarMenu>
+      </NavbarNext>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
-    </NavbarNext>
+    </>
   );
 }
