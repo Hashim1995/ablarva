@@ -116,7 +116,9 @@ function ChatHistory() {
                   onClick={() => {
                     dispatch(setCurrentThreadId(conv.chatId));
                     dispatch(setWaitingForThreadLoad(true));
+                    dispatch(setResetChatInner(Date.now()));
 
+                    setResetChatInner;
                     setSearchParams({
                       threadID: String(conv.chatId)
                     });

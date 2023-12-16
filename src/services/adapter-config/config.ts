@@ -142,11 +142,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async post(url: string, body: any, onError?: ErrorCallBack, abortController?: AbortController['signal']) {
+  static async post(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.post(url, body, {
-        signal: abortController
-      }).then(responseBody);
+      const result = await axios
+        .post(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -165,11 +172,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async put(url: string, body: any, onError?: ErrorCallBack, abortController?: AbortController['signal']) {
+  static async put(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.put(url, body, {
-        signal: abortController
-      }).then(responseBody);
+      const result = await axios
+        .put(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -188,11 +202,18 @@ export class HttpUtil {
     return null;
   }
 
-  static async patch(url: string, body: any, onError?: ErrorCallBack, abortController?: AbortController['signal']) {
+  static async patch(
+    url: string,
+    body: any,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.patch(url, body, {
-        signal: abortController
-      }).then(responseBody);
+      const result = await axios
+        .patch(url, body, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(
@@ -211,11 +232,17 @@ export class HttpUtil {
     return null;
   }
 
-  static async delete(url: string, onError?: ErrorCallBack, abortController?: AbortController['signal']) {
+  static async delete(
+    url: string,
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+  ) {
     try {
-      const result = await axios.delete(url, {
-        signal: abortController
-      }).then(responseBody);
+      const result = await axios
+        .delete(url, {
+          signal: abortController
+        })
+        .then(responseBody);
       return result;
     } catch (e: any) {
       const error = new HttpError(

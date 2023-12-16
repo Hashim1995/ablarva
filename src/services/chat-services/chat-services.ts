@@ -46,8 +46,12 @@ export class ChatService {
     onError?: ErrorCallBack,
     abortController?: AbortController['signal']
   ): Promise<ISendMessageResponse> {
-    console.log(abortController, 'akif');
-    const res = await HttpUtil.post('api/client/chats', body, onError, abortController);
+    const res = await HttpUtil.post(
+      'api/client/chats',
+      body,
+      onError,
+      abortController
+    );
     return res;
   }
 
@@ -55,9 +59,12 @@ export class ChatService {
     id: string,
     onError?: ErrorCallBack,
     abortController?: AbortController['signal']
-
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.delete(`api/client/chats/${id}`, onError, abortController);
+    const res = await HttpUtil.delete(
+      `api/client/chats/${id}`,
+      onError,
+      abortController
+    );
     return res;
   }
 

@@ -26,6 +26,7 @@ import {
 } from '@/redux/chat/chat-slice';
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
+import ThinkText from '@/core/static-components/think-text';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -47,7 +48,16 @@ function ChatInner() {
   const dispatch = useDispatch();
   const abortController = useRef(new AbortController());
 
+  const resetAbortController = () => {
+    if (abortController.current) {
+      abortController.current.abort();
+    }
+    abortController.current = new AbortController();
+  };
+
   const onSubmit: SubmitHandler<IChatForm> = async data => {
+    const currentAbortController = abortController.current;
+
     if (!verified) {
       onOpen();
     } else {
@@ -74,7 +84,7 @@ function ChatInner() {
         const res = await ChatService.getInstance().sendMessage(
           payload,
           undefined,
-          abortController.current.signal
+          currentAbortController.signal
         );
         if (res.isSuccess) {
           dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
@@ -118,14 +128,20 @@ function ChatInner() {
 
   useEffect(
     () => () => {
-      abortController.current.abort();
-
       dispatch(setCurrentThreadId(''));
       setBubbleList([]);
       setHasError(false);
     },
-    []
+    [searchParams]
   );
+  useEffect(() => {
+    resetAbortController();
+
+    return () => {
+      resetAbortController();
+    };
+  }, [searchParams, waitingForThreadLoad]);
+
   useEffect(() => {
     setHasError(false);
   }, [bubbleList]);
@@ -170,7 +186,7 @@ function ChatInner() {
               isClient={item.isClient}
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
-              key={item?.bubbleId}
+              key={window.crypto.randomUUID()}
               bubbleId={item?.bubbleId || ''}
               feedbackStatus={item?.feedbackStatus || null}
             />
@@ -183,7 +199,7 @@ function ChatInner() {
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
               </div> */}
-              <div className="text-sm italic"> Salam qaqam gozle gelirem</div>
+              <ThinkText />
             </div>
           )}
           {waitingForThreadLoad && (
