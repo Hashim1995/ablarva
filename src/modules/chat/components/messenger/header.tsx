@@ -4,7 +4,8 @@ import VerifyEmail from '@/core/static-components/verify-email';
 import {
   setCurrentChatModel,
   setCurrentThreadId,
-  setResetChatInner
+  setResetChatInner,
+  setWaitingForResponse
 } from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -33,7 +34,8 @@ function MessengerHeader({
 }: IMessengerHeaderProps) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
+  const [isOpen, setIsOpen] = useState(false);
 
   const { currentModel, currentThreadId, waitingForResponse } = useSelector(
     (state: RootState) => state?.chat
@@ -113,62 +115,62 @@ function MessengerHeader({
               </Button>
             </Tooltip>
           ) : (
-            <Popover placement="right">
+            <Popover
+              isOpen={isOpen}
+              onOpenChange={open => setIsOpen(open)}
+              placement="bottom"
+              offset={6}
+            >
               <PopoverTrigger>
-                <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
-                  <Button
-                    size="sm"
-                    isIconOnly
-                    className="bg-white rounded-full"
-                    aria-label="Filter"
-                  >
-                    <BsFillPlusCircleFill size={20} color="#292D32" />
-                  </Button>
-                </Tooltip>
+                <Button size="sm" isIconOnly className="bg-white rounded-full">
+                  <BsFillPlusCircleFill size={20} color="#292D32" />
+                </Button>
               </PopoverTrigger>
+
               <PopoverContent>
-                <div className="px-1 py-2">
-                  <Button
-                    size="sm"
-                    isIconOnly
-                    className="bg-white rounded-full"
-                    aria-label="Filter"
-                  >
-                    <BsFillPlusCircleFill size={20} color="#292D32" />
-                  </Button>
-                  <Button
-                    size="sm"
-                    isIconOnly
-                    className="bg-white rounded-full"
-                    aria-label="Filter"
-                    onClick={() => {
-                      if (!verified) {
-                        onOpen();
-                      } else {
-                        searchParams.delete('threadID');
-                        dispatch(setCurrentThreadId(''));
-                        dispatch(setResetChatInner(Date.now()));
-                        navigate('/chat');
-                      }
-                    }}
-                  >
-                    Bəli
-                  </Button>
-                  <Button
-                    size="sm"
-                    isIconOnly
-                    className="bg-white rounded-full"
-                    aria-label="Filter"
-                  >
-                    Xeyr
-                  </Button>
+                <div className="px-1 flex flex-col py-2 gap-2">
+                  <p>
+                    Hal-hazırda cavab gözlənilir. Yeni çata keçək istədiyinizə
+                    əminsinizmi?
+                  </p>
+
+                  <div className="flex gap-2">
+                    <Button
+                      size="sm"
+                      className="bg-black text-white"
+                      onClick={() => {
+                        if (!verified) {
+                          onOpen();
+                        } else {
+                          searchParams.delete('threadID');
+                          dispatch(setWaitingForResponse(false));
+                          dispatch(setCurrentThreadId(''));
+                          dispatch(setResetChatInner(Date.now()));
+                          navigate('/chat');
+                        }
+                      }}
+                      aria-label="Remove thread"
+                    >
+                      {dictionary.az.yesTxt}
+                    </Button>
+                    <Button
+                      size="sm"
+                      onClick={() => setIsOpen(false)}
+                      className=" bg-black text-white"
+                      aria-label="Remove thread"
+                    >
+                      {dictionary.az.noTxt}
+                    </Button>
+                  </div>
                 </div>
               </PopoverContent>
             </Popover>
           )}
         </div>
       </div>
-      {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
+      {modalIsopen && (
+        <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
+      )}
     </>
   );
 }

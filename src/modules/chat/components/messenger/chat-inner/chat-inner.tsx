@@ -154,7 +154,7 @@ function ChatInner() {
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 componentsScrollBar overflow-y-auto h-full"
+          className="row-span-8 componentsScrollBar  overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IThreadBubblesItem) => (
             <ChatBubble

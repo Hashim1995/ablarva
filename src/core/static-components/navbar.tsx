@@ -42,8 +42,6 @@ import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { toast } from 'react-toastify';
-import { toastOptions } from '@/configs/global-configs';
 import VerifyEmail from './verify-email';
 
 export default function Navbar() {
@@ -137,8 +135,9 @@ export default function Navbar() {
                   : 'bg-white text-black'
               }`}
               onClick={() => {
-                toast.warn('Hazırlanır', toastOptions);
+                navigate('/assistan');
               }}
+              isDisabled
               startContent={<BsYelp size={17} />}
             >
               {dictionary.az.assistan}
@@ -179,7 +178,7 @@ export default function Navbar() {
             {!user.verified && (
               <Tooltip
                 className="hidden sm:block"
-                placement="left"
+                placement="bottom"
                 content={dictionary.az.emailVerify}
               >
                 <Button

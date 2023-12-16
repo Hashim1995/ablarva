@@ -40,11 +40,10 @@ function Typewriter({ message, isTyping }: ITypewriter) {
       const timeoutId = setTimeout(() => {
         setDisplayedContent(message.slice(0, displayedContent.length + 1));
         audioEnable && typewriterSound.play();
-      }, 2);
+      }, 20);
 
       return () => {
         clearTimeout(timeoutId);
-        typewriterSound.pause();
       };
     }
 
@@ -54,6 +53,20 @@ function Typewriter({ message, isTyping }: ITypewriter) {
       typewriterSound.currentTime = 0;
     }
   }, [displayedContent, message, isTyping]);
+
+  const stopAudio = () => {
+    if (audioEnable) {
+      typewriterSound.pause();
+      typewriterSound.currentTime = 0;
+    }
+  };
+
+  useEffect(
+    () => () => {
+      stopAudio();
+    },
+    []
+  );
 
   return (
     <Markdown options={markdownOptions}>
@@ -101,7 +114,7 @@ function ChatBubble({
   );
 
   return (
-    <div className="bubble flex gap-5 bg-[#F0F1F3] rounded-lg p-3 my-3">
+    <div className="bubble flex gap-5 bg-[#F0F1F3]   rounded-lg p-3 my-3">
       <Avatar
         name="Junior"
         src={
@@ -110,7 +123,7 @@ function ChatBubble({
             : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdOAnEBb4e_d0YITbc9hDL3Ex-EbHzQemJKiJc_xxO7gCR5YLgPcGpMonCKpeMmifJoY&usqp=CAU'
         }
       />
-      <div className=" flex-1 markdown-table-container">
+      <div className=" flex-1 markdown-table-container overflow-auto">
         <Typewriter message={message} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
           <div className="flex  gap-2  items-center justify-between">
