@@ -24,7 +24,7 @@ export class ChatService {
   // eslint-disable-next-line no-use-before-define
   private static instance: ChatService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): ChatService {
     if (!this.instance) {
@@ -43,17 +43,21 @@ export class ChatService {
 
   public async sendMessage(
     body: ISendMessagePayload,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
   ): Promise<ISendMessageResponse> {
-    const res = await HttpUtil.post('api/client/chats', body, onError);
+    console.log(abortController, 'akif');
+    const res = await HttpUtil.post('api/client/chats', body, onError, abortController);
     return res;
   }
 
   public async removeThread(
     id: string,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
+
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.delete(`api/client/chats/${id}`, false, onError);
+    const res = await HttpUtil.delete(`api/client/chats/${id}`, onError, abortController);
     return res;
   }
 

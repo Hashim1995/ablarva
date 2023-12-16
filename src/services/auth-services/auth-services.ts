@@ -28,7 +28,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): AuthService {
     if (!this.instance) {
@@ -124,12 +124,14 @@ export class AuthService {
 
   public async removeSession(
     id: number,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController
+
   ): Promise<IGlobalResponseEmpty> {
     const res = await HttpUtil.delete(
       `api/client/user/Sessions/${id}`,
-      false,
-      onError
+      onError,
+      abortController
     );
     return res;
   }

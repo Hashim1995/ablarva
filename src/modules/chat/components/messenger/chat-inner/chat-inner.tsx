@@ -45,6 +45,8 @@ function ChatInner() {
   } = useSelector((state: RootState) => state.chat);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
+  const abortController = useRef(new AbortController());
+
   const onSubmit: SubmitHandler<IChatForm> = async data => {
     if (!verified) {
       onOpen();
@@ -69,7 +71,11 @@ function ChatInner() {
         chatId: currentThreadId || null
       };
       try {
-        const res = await ChatService.getInstance().sendMessage(payload);
+        const res = await ChatService.getInstance().sendMessage(
+          payload,
+          undefined,
+          abortController.current.signal
+        );
         if (res.isSuccess) {
           dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
 
@@ -112,6 +118,8 @@ function ChatInner() {
 
   useEffect(
     () => () => {
+      abortController.current.abort();
+
       dispatch(setCurrentThreadId(''));
       setBubbleList([]);
       setHasError(false);
@@ -154,7 +162,7 @@ function ChatInner() {
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 componentsScrollBar  overflow-y-auto h-full"
+          className="row-span-8 componentsScrollBar overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IThreadBubblesItem) => (
             <ChatBubble
@@ -183,6 +191,7 @@ function ChatInner() {
               <AiLoder />
             </div>
           )}
+
           {hasError && (
             <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">

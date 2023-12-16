@@ -100,7 +100,7 @@ function ChatHistory() {
           <BsFillFilterCircleFill size={20} color="#292D32" />
         </Button>
       </div>
-      <div className="bg-white  rounded-lg shadow h-full  xl:py-3 xl:px-6 py-1 px-2 componentsScrollBar overflow-y-scroll">
+      <div className="bg-white  overflow-y-auto rounded-lg shadow h-full  xl:py-3 xl:px-6 py-1 px-2 componentsScrollBar ">
         {threadHistory && threadHistory?.length !== 0 ? (
           threadHistory?.map(day => (
             <div key={day.dateOfChats} className="mb-4">
@@ -125,7 +125,7 @@ function ChatHistory() {
                 >
                   <div
                     className={`absolute top-[0px] ${
-                      conv.servicePlan === 1 ? 'bg-[#31FF90]' : 'bg-[#319CFF]'
+                      conv.servicePlan === 2 ? 'bg-[#31FF90]' : 'bg-[#319CFF]'
                     } left-[0px] rounded-tl-mini rounded-2xl  rounded-tr-none rounded-br-none  w-[26px] h-full`}
                   />
                   <p className="text-black  leading-4  text-sm line-clamp-3">
