@@ -3,7 +3,6 @@
 import VerifyEmail from '@/core/static-components/verify-email';
 import {
   setCurrentChatModel,
-  setCurrentThreadId,
   setResetChatInner,
   setWaitingForResponse
 } from '@/redux/chat/chat-slice';
@@ -37,7 +36,7 @@ function MessengerHeader({
   const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { currentModel, currentThreadId, waitingForResponse } = useSelector(
+  const { currentModel, waitingForResponse } = useSelector(
     (state: RootState) => state?.chat
   );
   const { total } = useSelector(
@@ -85,11 +84,15 @@ function MessengerHeader({
               tabContent: 'group-data-[selected=true]:text-[white]'
             }}
           >
-            <Tab key="1" title="Basic" isDisabled={Boolean(currentThreadId)} />
+            <Tab
+              key="1"
+              title="Basic"
+              isDisabled={Boolean(searchParams.get('threadID'))}
+            />
             <Tab
               key="2"
               title="Premium"
-              isDisabled={Boolean(currentThreadId) || total === 0}
+              isDisabled={Boolean(searchParams.get('threadID')) || total === 0}
             />
           </Tabs>
 
@@ -105,7 +108,6 @@ function MessengerHeader({
                     onOpen();
                   } else {
                     searchParams.delete('threadID');
-                    dispatch(setCurrentThreadId(''));
                     dispatch(setResetChatInner(Date.now()));
                     navigate('/chat');
                   }
@@ -144,7 +146,6 @@ function MessengerHeader({
                         } else {
                           searchParams.delete('threadID');
                           dispatch(setWaitingForResponse(false));
-                          dispatch(setCurrentThreadId(''));
                           dispatch(setResetChatInner(Date.now()));
                           navigate('/chat');
                         }

@@ -1,9 +1,7 @@
 import {
-  setCurrentThreadId,
   setResetChatInner,
   setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
-import { RootState } from '@/redux/store';
 import { ChatService } from '@/services/chat-services/chat-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
@@ -17,7 +15,7 @@ import {
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
 import { BsFillFilterCircleFill, BsTrash } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
 import { IThreadHistoryList } from '../../types';
@@ -29,10 +27,6 @@ function ChatHistory() {
   const [popoversVisible, setPopoversVisible] = useState<{
     [key: string]: boolean;
   }>({});
-
-  const { resetChatInner, currentThreadId } = useSelector(
-    (state: RootState) => state.chat
-  );
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -50,13 +44,6 @@ function ChatHistory() {
     }
   };
 
-  const togglePopover = (id: any) => {
-    setPopoversVisible((prevState: { [key: string]: boolean }) => ({
-      ...prevState,
-      [id]: !prevState[id]
-    }));
-  };
-
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {
@@ -67,13 +54,12 @@ function ChatHistory() {
           ...prevState,
           [id]: false
         }));
-        const queryParams = new URLSearchParams(window.location.search);
-        const threadID = queryParams.get('threadID');
-        if (threadID === id) {
+        if (searchParams.get('threadID') === id) {
           searchParams.delete('threadID');
-          dispatch(setCurrentThreadId(''));
-          dispatch(setResetChatInner(Date.now()));
-          navigate('/chat');
+          navigate('/chat', { replace: true });
+          setTimeout(() => {
+            dispatch(setResetChatInner(Date.now()));
+          }, 500);
         }
       }
     } catch (err) {
@@ -84,7 +70,7 @@ function ChatHistory() {
 
   useEffect(() => {
     fetchThreadHistory();
-  }, [resetChatInner, currentThreadId]);
+  }, [searchParams.get('threadID')]);
   return (
     <Card className="  shadow  h-full ">
       <div className="flex justify-between items-center mb-4 bg-black p-3">
@@ -109,12 +95,11 @@ function ChatHistory() {
                   'DD.MM.YYYY'
                 )}
               </div>
-              {day.chats.map((conv, i) => (
+              {day.chats.map(conv => (
                 <div
                   key={conv.chatId}
                   aria-hidden
                   onClick={() => {
-                    dispatch(setCurrentThreadId(conv.chatId));
                     dispatch(setWaitingForThreadLoad(true));
                     dispatch(setResetChatInner(Date.now()));
 
@@ -134,14 +119,12 @@ function ChatHistory() {
                     {conv.firstMessageOfChat}
                   </p>
                   <Popover
-                    isOpen={popoversVisible[i] || false}
-                    onOpenChange={(isVisible: boolean) =>
-                      setPopoversVisible(
-                        (prevState: { [key: string]: boolean }) => ({
-                          ...prevState,
-                          [i]: isVisible
-                        })
-                      )
+                    key={conv?.chatId}
+                    isOpen={popoversVisible[conv?.chatId] || false}
+                    onOpenChange={() =>
+                      setPopoversVisible({
+                        [conv?.chatId]: true
+                      })
                     }
                     placement="right"
                   >
@@ -175,7 +158,11 @@ function ChatHistory() {
                             size="sm"
                             className=" "
                             aria-label="Remove thread"
-                            onClick={() => togglePopover(i)}
+                            onClick={() =>
+                              setPopoversVisible({
+                                [conv?.chatId]: false
+                              })
+                            }
                           >
                             {dictionary.az.noTxt}
                           </Button>

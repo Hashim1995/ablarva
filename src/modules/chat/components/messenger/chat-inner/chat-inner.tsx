@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-disable import/no-unresolved */
 import { useEffect, useRef, useState } from 'react';
 import { Button, Card, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
@@ -18,9 +16,8 @@ import ScrollToBottom from 'react-scroll-to-bottom';
 import { ChatService } from '@/services/chat-services/chat-services';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
-import { useLocation, useNavigate, useSearchParams } from 'react-router-dom';
+import { useSearchParams } from 'react-router-dom';
 import {
-  setCurrentThreadId,
   setWaitingForResponse,
   setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
@@ -33,26 +30,40 @@ import ChatForm from './chat-form';
 function ChatInner() {
   const [bubbleList, setBubbleList] = useState<IThreadBubblesItem[]>([]);
   const [hasError, setHasError] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
   const [lastQuestion, setLastQuestion] = useState<string>('');
-
+  const [searchParams, setSearchParams] = useSearchParams();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-
-  const {
-    currentModel,
-    currentThreadId,
-    waitingForResponse,
-    waitingForThreadLoad
-  } = useSelector((state: RootState) => state.chat);
+  const { currentModel, waitingForResponse, waitingForThreadLoad } =
+    useSelector((state: RootState) => state.chat);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const dispatch = useDispatch();
   const abortController = useRef(new AbortController());
+  const messengerBoxRef = useRef<HTMLDivElement>(null);
 
   const resetAbortController = () => {
     if (abortController.current) {
       abortController.current.abort();
     }
     abortController.current = new AbortController();
+  };
+  const scrollToBottom = () => {
+    if (messengerBoxRef.current) {
+      messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
+      messengerBoxRef.current.scrollTop = messengerBoxRef.current.scrollHeight;
+    }
+  };
+
+  const fetchThreadonUrl = async (id: string) => {
+    dispatch(setWaitingForThreadLoad(true));
+    try {
+      const res = await ChatService.getInstance().fetchBubbleHistory(id);
+      if (res.isSuccess) {
+        setBubbleList(res?.data);
+        dispatch(setWaitingForThreadLoad(false));
+      }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const onSubmit: SubmitHandler<IChatForm> = async data => {
@@ -78,7 +89,7 @@ function ChatInner() {
       const payload: ISendMessagePayload = {
         servicePlan: Number(currentModel),
         question: data.message,
-        chatId: currentThreadId || null
+        chatId: searchParams.get('threadID') || null
       };
       try {
         const res = await ChatService.getInstance().sendMessage(
@@ -87,8 +98,6 @@ function ChatInner() {
           currentAbortController.signal
         );
         if (res.isSuccess) {
-          dispatch(setCurrentThreadId(res?.data?.chatHistoryId));
-
           setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
 
           setBubbleList(old => [
@@ -113,27 +122,7 @@ function ChatInner() {
       }
     }
   };
-  const messengerBoxRef = useRef<HTMLDivElement>(null);
 
-  const scrollToBottom = () => {
-    if (messengerBoxRef.current) {
-      messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
-      messengerBoxRef.current.scrollTop = messengerBoxRef.current.scrollHeight;
-    }
-  };
-
-  useEffect(() => {
-    scrollToBottom();
-  }, [bubbleList, waitingForResponse]);
-
-  useEffect(
-    () => () => {
-      dispatch(setCurrentThreadId(''));
-      setBubbleList([]);
-      setHasError(false);
-    },
-    [searchParams]
-  );
   useEffect(() => {
     resetAbortController();
 
@@ -144,25 +133,13 @@ function ChatInner() {
 
   useEffect(() => {
     setHasError(false);
+    scrollToBottom();
   }, [bubbleList]);
 
-  const fetchThreadonUrl = async (id: string) => {
-    dispatch(setWaitingForThreadLoad(true));
-    try {
-      const res = await ChatService.getInstance().fetchBubbleHistory(id);
-      if (res.isSuccess) {
-        setBubbleList(res?.data);
-        dispatch(setWaitingForThreadLoad(false));
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   useEffect(() => {
-    if (searchParams.get('threadID')) {
-      fetchThreadonUrl(searchParams.get('threadID') || '');
-      dispatch(setCurrentThreadId(searchParams.get('threadID')));
+    const threadID = searchParams.get('threadID');
+    if (threadID) {
+      fetchThreadonUrl(threadID);
     }
   }, [searchParams]);
 
@@ -171,6 +148,14 @@ function ChatInner() {
       setBubbleList([]);
     }
   }, [waitingForThreadLoad]);
+
+  useEffect(
+    () => () => {
+      setBubbleList([]);
+      setHasError(false);
+    },
+    [searchParams]
+  );
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
