@@ -86,7 +86,7 @@ function ChatHistory() {
           <BsFillFilterCircleFill size={20} color="#292D32" />
         </Button>
       </div>
-      <div className="bg-white  overflow-y-auto rounded-lg shadow h-full  xl:py-3 xl:px-6 py-1 px-2 componentsScrollBar ">
+      <div className="bg-white  overflow-y-auto rounded-lg shadow   xl:py-3 xl:px-6 py-1 px-2 h-[300px] lg:h-full componentsScrollBar ">
         {threadHistory && threadHistory?.length !== 0 ? (
           threadHistory?.map(day => (
             <div key={day.dateOfChats} className="mb-4">
