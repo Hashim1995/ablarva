@@ -13,7 +13,7 @@ import { IBuyPacketBody } from '@/modules/pricing/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
-import Header from './header/header';
+// import Header from './header/header';
 import PricingModal from './pricingModal';
 
 function Pricing() {
@@ -93,10 +93,7 @@ function Pricing() {
 
   return (
     <div className=" container-fluid h-full mx-auto ">
-      <div className="grid grid-cols-12">
-        {' '}
-        <Header />
-      </div>
+      <div className="grid grid-cols-12"> {/* <Header /> */}</div>
       <div className="grid grid-cols-12 grid-rows-6 gap-3">
         <div className="col-span-12 xl:col-span-2 row-span-6 flex xl:flex-col items-center justify-start xl:justify-center">
           <Button
