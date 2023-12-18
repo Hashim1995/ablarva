@@ -14,7 +14,7 @@ import {
 } from '@nextui-org/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
-import { BsFillFilterCircleFill, BsTrash } from 'react-icons/bs';
+import { BsTrash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
@@ -77,14 +77,14 @@ function ChatHistory() {
         <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.previous} {dictionary.az.chats}
         </h2>
-        <Button
+        {/* <Button
           size="sm"
           isIconOnly
           className="bg-white rounded-full"
           aria-label="Filter"
         >
           <BsFillFilterCircleFill size={20} color="#292D32" />
-        </Button>
+        </Button> */}
       </div>
       <div className="bg-white  overflow-y-auto rounded-lg shadow   xl:py-3 xl:px-6 py-1 px-2 h-[300px] lg:h-full componentsScrollBar ">
         {threadHistory && threadHistory?.length !== 0 ? (

@@ -42,13 +42,8 @@ function MessengerHeader({
   const { total } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data?.premium
   );
-  const [selected, setSelected] = useState<string>('1');
   const { verified } = useSelector((state: RootState) => state?.user?.user);
-
   const navigate = useNavigate();
-  useEffect(() => {
-    dispatch(setCurrentChatModel(selected));
-  }, [selected]);
 
   return (
     <>
@@ -73,9 +68,9 @@ function MessengerHeader({
         </div>
         <div className="flex items-center justify-between gap-2">
           <Tabs
-            selectedKey={selected}
+            selectedKey={currentModel}
             // @ts-ignore
-            onSelectionChange={e => setSelected(e)}
+            onSelectionChange={e => dispatch(setCurrentChatModel(e))}
             size={'sm'}
             color="primary"
             className="mr-5"
