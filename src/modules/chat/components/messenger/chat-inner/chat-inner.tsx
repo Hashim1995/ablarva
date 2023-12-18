@@ -109,8 +109,11 @@ function ChatInner() {
         if (res.isSuccess) {
           setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
 
-          setBubbleList(old => [
-            ...old,
+          setBubbleList(oldBubbles => [
+            ...oldBubbles.map(bubble => ({
+              ...bubble,
+              isTyping: false
+            })),
             {
               answerId: res.data.answerId,
               content: res?.data?.content || '',
@@ -174,13 +177,13 @@ function ChatInner() {
           followButtonClassName="hidden"
           className="row-span-8 componentsScrollBar overflow-x-auto   overflow-y-auto h-full"
         >
-          {bubbleList?.map((item: IThreadBubblesItem) => (
+          {bubbleList?.map((item: IThreadBubblesItem, index: number) => (
             <ChatBubble
               message={item.content}
               isClient={item.isClient}
               isTyping={item.isTyping}
               // eslint-disable-next-line react/no-array-index-key
-              key={window.crypto.randomUUID()}
+              key={item?.bubbleId || index}
               bubbleId={item?.bubbleId || ''}
               feedbackStatus={item?.feedbackStatus || null}
             />

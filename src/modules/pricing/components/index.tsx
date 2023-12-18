@@ -60,17 +60,20 @@ function Pricing() {
     [key: string]: string;
   }[] = [
     {
-      chatLimit: 'Söhbət'
+      basicChatLimit: 'Söhbət (Sadə)'
     },
     {
-      imageLimit: 'Söhbət (Asistan ilə)'
+      premiumChatLimit: 'Söhbət (Premium)'
     },
     {
-      voiceLimit: 'Şəkil generasiya'
+      assistantLimit: 'Söhbət (Asistan ilə)'
     },
     {
-      assistantLimit: 'Səsli Söhbət'
+      imageLimit: 'Şəkil generasiya'
     }
+    // {
+    //   voiceLimit: 'Səsli Söhbət'
+    // }
   ];
 
   // eslint-disable-next-line no-unused-vars
@@ -184,12 +187,8 @@ function Pricing() {
                         >
                           <div className="flex flex-col items-center h-auto px-2.5 py-3 xl:py-5 relative ">
                             {packageId === hItem.id && (
-                              <div className="absolute top-0 right-0">
-                                <div className="w-40 h-8 absolute top-[0.2rem] -right-12">
-                                  <div className="h-full w-full bg-black text-white text-center text-[10px] leading-8 transform rotate-45">
-                                    Mövcud Paket
-                                  </div>
-                                </div>
+                              <div className=" w-40 h-8 absolute top-[12px] right-[-52px] bg-black text-white text-center text-[10px] leading-8 transform rotate-45">
+                                Mövcud
                               </div>
                             )}
 
@@ -204,7 +203,7 @@ function Pricing() {
                                 /{dictionary.az.month}
                               </p>
                             </div>
-                            <p className="w-fit text-[#C3C1C1] text-sm sm:text-base xl:text-xl min-h-[45px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
+                            <p className="w-fit text-[#C3C1C1] text-sm sm:text-base xl:text-lg min-h-[45px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
                               {/* {hItem.description || 'test'} */}
                               Qiymətlər, məhsullarımıza olan anlıq sorğu
                               əsasında təyin olunmuşdur.
