@@ -14,10 +14,10 @@ export default defineConfig({
       usePolling: true
     }
   },
-  build: {
-    outDir: 'public',
-  },
-  publicDir: 'assets',
+  // build: {
+  //   outDir: 'dist',
+  // },
+  // publicDir: 'assets',
   optimizeDeps: {
     exclude: ['react-particles-js']
   }
