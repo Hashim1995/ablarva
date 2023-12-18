@@ -1,7 +1,10 @@
 /* eslint-disable jsx-a11y/label-has-associated-control */
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { Button, Textarea } from '@nextui-org/react';
-import { BsFillMicFill, BsFillSendFill } from 'react-icons/bs';
+import {
+  //  BsFillMicFill,
+  BsFillSendFill
+} from 'react-icons/bs';
 import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
 
 import { textAreaConfig } from '@/configs/global-configs';
@@ -75,14 +78,14 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           )}{' '}
         </Button>
         <div className="flex  gap-2  items-center justify-between">
-          <Button
+          {/* <Button
             type="button"
             isIconOnly
             size="sm"
             className="bg-black rounded-full"
           >
             <BsFillMicFill size={16} color="white" />
-          </Button>
+          </Button> */}
           <Button
             type="submit"
             isIconOnly
