@@ -3,8 +3,8 @@
 import { IUserSessions } from '@/models/user';
 import { AppDispatch, RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
-import { Button, Card, Chip, Divider, Skeleton } from '@nextui-org/react';
-import { BsFillFilterCircleFill, BsAndroid2 } from 'react-icons/bs';
+import { Card, Chip, Divider, Skeleton } from '@nextui-org/react';
+import { BsAndroid2 } from 'react-icons/bs';
 import { MdOutlineLaptopMac, MdOutlineLogout } from 'react-icons/md';
 import { TbDeviceIpad } from 'react-icons/tb';
 import { useDispatch, useSelector } from 'react-redux';
@@ -110,7 +110,7 @@ function Sessions() {
             {dictionary.az.active} {dictionary.az.sessions}
           </p>
         </div>
-        <Button
+        {/* <Button
           size="sm"
           isIconOnly
           className="bg-white rounded-full"
@@ -121,7 +121,7 @@ function Sessions() {
             className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
             color="#292D32"
           />
-        </Button>
+        </Button> */}
       </div>
       <div className="bg-white  rounded-lg  componentsScrollBar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
@@ -162,7 +162,7 @@ function Sessions() {
                         <div className="font-bold 2xl:px-4 px-2">
                           <Chip
                             className="text-white"
-                            color={item.status ? 'success' : item.status}
+                            color={item.status ? 'success' : 'danger'}
                           >
                             {item.status ? 'Aktiv' : item.status}
                           </Chip>

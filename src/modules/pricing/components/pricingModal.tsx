@@ -38,7 +38,8 @@ function PricingModal({
                 Təstiqləmə
               </ModalHeader>
               <ModalBody className="scrollBar overflow-y-scroll">
-                Əməliyyatı yerinə yetirmək istədiyinizə əminsinizmi?
+                Mövcud paketiniz sıfırlanacaq. Əməliyyatı yerinə yetirmək
+                istədiyinizə əminsinizmi?
               </ModalBody>
               <ModalFooter>
                 <Button
