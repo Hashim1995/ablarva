@@ -79,6 +79,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
         size="lg"
         isDismissable={false}
         backdrop="opaque"
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
