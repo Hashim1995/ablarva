@@ -18,6 +18,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useSearchParams } from 'react-router-dom';
 import {
+  setCurrentChatModel,
   setWaitingForResponse,
   setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
@@ -33,9 +34,15 @@ function ChatInner() {
   const [lastQuestion, setLastQuestion] = useState<string>('');
   const [searchParams, setSearchParams] = useSearchParams();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { currentModel, waitingForResponse, waitingForThreadLoad } =
-    useSelector((state: RootState) => state.chat);
+
+  const {
+    currentChatLanguage,
+    currentModel,
+    waitingForResponse,
+    waitingForThreadLoad
+  } = useSelector((state: RootState) => state.chat);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
+
   const dispatch = useDispatch();
   const abortController = useRef(new AbortController());
   const messengerBoxRef = useRef<HTMLDivElement>(null);
@@ -58,8 +65,9 @@ function ChatInner() {
     try {
       const res = await ChatService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
-        setBubbleList(res?.data);
+        setBubbleList(res?.data?.allBubbles);
         dispatch(setWaitingForThreadLoad(false));
+        dispatch(setCurrentChatModel(res?.data?.parameters?.servicePlan));
       }
     } catch (err) {
       console.log(err);
@@ -89,6 +97,7 @@ function ChatInner() {
       const payload: ISendMessagePayload = {
         servicePlan: Number(currentModel),
         question: data.message,
+        language: Number(currentChatLanguage),
         chatId: searchParams.get('threadID') || null
       };
       try {
@@ -192,7 +201,6 @@ function ChatInner() {
               <AiLoder />
             </div>
           )}
-
           {hasError && (
             <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">

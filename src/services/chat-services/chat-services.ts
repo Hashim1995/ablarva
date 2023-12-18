@@ -18,13 +18,18 @@ interface IThreadHistoryListResponse extends IGlobalResponse {
   data: IThreadHistoryList[];
 }
 interface IThreadBubblesItemResponse extends IGlobalResponse {
-  data: IThreadBubblesItem[];
+  data: {
+    allBubbles: IThreadBubblesItem[],
+    parameters: {
+      servicePlan: '1' | '2'
+    }
+  };
 }
 export class ChatService {
   // eslint-disable-next-line no-use-before-define
   private static instance: ChatService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): ChatService {
     if (!this.instance) {

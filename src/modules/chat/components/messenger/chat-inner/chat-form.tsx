@@ -1,16 +1,14 @@
-/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable import/no-unresolved */
 import { useForm, SubmitHandler } from 'react-hook-form';
-import { Button, Textarea } from '@nextui-org/react';
-import {
-  //  BsFillMicFill,
-  BsFillSendFill
-} from 'react-icons/bs';
+import { Button, Textarea, Tabs, Tab, Chip } from '@nextui-org/react';
+import { BsFillSendFill } from 'react-icons/bs';
 import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
-
 import { textAreaConfig } from '@/configs/global-configs';
 import { IChatForm } from '@/modules/chat/types';
-
 import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
+import { setCurrentChatLanguage } from '@/redux/chat/chat-slice';
+import { useDispatch, useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
@@ -26,9 +24,30 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
     true
   );
 
+  const dispatch = useDispatch();
+
   const typewriterSound = new Audio(audioUrl);
   const matches = useMediaQuery('(min-width: 468px)');
+  const { currentChatLanguage } = useSelector(
+    (state: RootState) => state?.chat
+  );
 
+  const currentLanguageText = (id: string) => {
+    switch (id) {
+      case '0':
+        return 'Qlobal';
+      case '1':
+        return 'Azərbaycan dili';
+      case '2':
+        return 'Türk dili';
+      case '3':
+        return 'İngilis dili';
+      case '4':
+        return 'Rus dili';
+      default:
+        return 'Azərbaycan dili';
+    }
+  };
   return (
     <form
       onSubmit={handleSubmit(z => {
@@ -78,14 +97,54 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           )}{' '}
         </Button>
         <div className="flex  gap-2  items-center justify-between">
-          {/* <Button
-            type="button"
-            isIconOnly
-            size="sm"
-            className="bg-black rounded-full"
+          <Chip>{currentLanguageText(currentChatLanguage)}</Chip>
+          <Tabs
+            selectedKey={currentChatLanguage}
+            // @ts-ignore
+            onSelectionChange={e => dispatch(setCurrentChatLanguage(e))}
+            size={'sm'}
+            color="primary"
+            className="mr-5"
+            classNames={{
+              cursor: ' bg-slate-300'
+            }}
           >
-            <BsFillMicFill size={16} color="white" />
-          </Button> */}
+            <Tab
+              key="0"
+              title={
+                <img
+                  width={22}
+                  alt="uk flag"
+                  src="/public/flags/global-flag.svg"
+                />
+              }
+            />
+            <Tab
+              key="1"
+              title={
+                <img width={22} alt="uk flag" src="/public/flags/az-flag.svg" />
+              }
+            />
+            <Tab
+              key="2"
+              title={
+                <img width={22} alt="uk flag" src="/public/flags/tr-flag.svg" />
+              }
+            />
+            <Tab
+              key="3"
+              title={
+                <img width={22} alt="uk flag" src="/public/flags/en-flag.svg" />
+              }
+            />
+            <Tab
+              key="4"
+              title={
+                <img width={22} alt="uk flag" src="/public/flags/ru-flag.svg" />
+              }
+            />
+          </Tabs>
+
           <Button
             type="submit"
             isIconOnly

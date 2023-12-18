@@ -13,6 +13,7 @@ interface ISendMessagePayload {
   servicePlan: number;
   question: string;
   chatId: string | null;
+  language: number,
 }
 
 interface IThreadHistory {
