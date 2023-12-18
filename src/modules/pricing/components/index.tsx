@@ -1,6 +1,6 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useState, useEffect } from 'react';
-import { Button, Spinner, useDisclosure } from '@nextui-org/react';
+import { Button, Spinner, useDisclosure, Tooltip } from '@nextui-org/react';
 import { BsArrowRightShort, BsFillXCircleFill } from 'react-icons/bs';
 import { dictionary } from '@/utils/constants/dictionary';
 import { PaymentService } from '@/services/payment-services/payment-services';
@@ -60,16 +60,16 @@ function Pricing() {
     [key: string]: string;
   }[] = [
     {
-      chatLimit: 'Sorgu 1'
+      chatLimit: 'Söhbət'
     },
     {
-      imageLimit: 'Sorğu (Köməkçi ilə)'
+      imageLimit: 'Söhbət (Asistan ilə)'
     },
     {
       voiceLimit: 'Şəkil generasiya'
     },
     {
-      assistantLimit: 'Səsli sorğu'
+      assistantLimit: 'Səsli Söhbət'
     }
   ];
 
@@ -146,12 +146,28 @@ function Pricing() {
           >
             Kataliz
           </Button>
+          <Button
+            className={`${
+              activetab === 2
+                ? '!bg-black !text-white'
+                : '!bg-white !text-black'
+            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            type="submit"
+            onClick={() => {
+              toast.warn(
+                'Məhsullarımız hazırlanır, yeni süni intellekt modelləri hazır olanda sizə məlumat veriləcək',
+                toastOptions
+              );
+            }}
+          >
+            İstəsən
+          </Button>
         </div>
-        <div className="col-span-12 lg:col-span-10 h-full componentsScrollBar overflow-x-auto row-span-6 lg:col-start-3 bg-white rounded-2xl">
+        <div className="col-span-12 lg:col-span-10 h-full componentsScrollBar overflow-x-auto row-span-6 lg:col-start-3 bg-white border-1 border-[#292D32]/100 rounded-2xl">
           {!loading ? (
             <>
               {data ? (
-                <table className="w-full h-full transition ease-in-out delay-150 duration-300">
+                <table className="w-full  h-full transition ease-in-out delay-150 duration-300">
                   <thead className="border-b-1">
                     <td
                       key={window.crypto.randomUUID()}
@@ -224,14 +240,25 @@ function Pricing() {
                         key={window.crypto.randomUUID()}
                       >
                         <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-bold border-r-2 last:border-r-0">
-                          {Object.values(list[index])}
+                          <span>{Object.values(list[index])}</span>
                         </td>
 
                         {data?.tableBodies?.map((bItem: IPricingTableBody) => (
                           <td className="text-center text-[14px] sm:text-[16px] xl:text-[20px] py-3 px-3 font-medium border-r-2 last:border-r-0">
                             {/* 
+// @ts-ignore */}{' '}
+                            {bItem[Object.keys(list[index])] ? (
+                              <Tooltip
+                                placement="bottom"
+                                content={
+                                  '30 kalendar günü müddətində sistemə göndərilən maksimal sorğu sayı'
+                                }
+                              >
+                                {/* 
 // @ts-ignore */}
-                            {bItem[Object.keys(list[index])] || (
+                                <span>{bItem[Object.keys(list[index])]}</span>
+                              </Tooltip>
+                            ) : (
                               <div
                                 key={window.crypto.randomUUID()}
                                 className="w-auto bg-transparent flex items-center justify-center"

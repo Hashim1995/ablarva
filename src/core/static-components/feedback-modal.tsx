@@ -7,6 +7,7 @@ import { AppDispatch } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
+// import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
   Modal,
@@ -16,11 +17,11 @@ import {
   ButtonGroup,
   ModalFooter,
   Textarea,
-  Tooltip,
+  // Tooltip,
   Button
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-import { BsQuestionCircleFill } from 'react-icons/bs';
+// import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 
@@ -91,8 +92,9 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                       })}
                       variant="bordered"
                       fullWidth
-                      color="primary"
                       isRequired
+                      label="Mesaj"
+                      labelPlacement="outside"
                       placeholder={inputPlaceholderText('Mesaj')}
                       classNames={{
                         label: 'text-md font-normal',
@@ -124,51 +126,52 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                         ],
                         input: ' font-light '
                       }}
+                      minRows={5}
                       rows={5}
-                      className="flex-1"
+                      className="flex-1 feedBackTextArea"
                       isInvalid={Boolean(errors.feedbackMessage)}
-                      startContent={
-                        errors.feedbackMessage ? (
-                          <Tooltip
-                            className={'!bg-black !text-white'}
-                            placement="top-start"
-                            offset={12}
-                            content={
-                              errors.feedbackMessage
-                                ? errors.feedbackMessage.message
-                                : ''
-                            }
-                          >
-                            <div>
-                              {
-                                <BsQuestionCircleFill
-                                  size={16}
-                                  color={
-                                    errors.feedbackMessage?.message
-                                      ? '#f31260'
-                                      : ''
-                                  }
-                                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                                />
-                              }
-                            </div>
-                          </Tooltip>
-                        ) : (
-                          <div>
-                            {
-                              <BsQuestionCircleFill
-                                size={16}
-                                color={
-                                  errors.feedbackMessage?.message
-                                    ? '#f31260'
-                                    : ''
-                                }
-                                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                              />
-                            }
-                          </div>
-                        )
-                      }
+                      // startContent={
+                      //   errors.feedbackMessage ? (
+                      //     <Tooltip
+                      //       className={'!bg-black !text-white'}
+                      //       placement="top-start"
+                      //       offset={12}
+                      //       content={
+                      //         errors.feedbackMessage
+                      //           ? errors.feedbackMessage.message
+                      //           : ''
+                      //       }
+                      //     >
+                      //       <div>
+                      //         {
+                      //           <BsQuestionCircleFill
+                      //             size={16}
+                      //             color={
+                      //               errors.feedbackMessage?.message
+                      //                 ? '#f31260'
+                      //                 : ''
+                      //             }
+                      //             className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                      //           />
+                      //         }
+                      //       </div>
+                      //     </Tooltip>
+                      //   ) : (
+                      //     <div>
+                      //       {
+                      //         <BsQuestionCircleFill
+                      //           size={16}
+                      //           color={
+                      //             errors.feedbackMessage?.message
+                      //               ? '#f31260'
+                      //               : ''
+                      //           }
+                      //           className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                      //         />
+                      //       }
+                      //     </div>
+                      //   )
+                      // }
                       maxRows={5}
                     />
                     {/* <AppHandledInput

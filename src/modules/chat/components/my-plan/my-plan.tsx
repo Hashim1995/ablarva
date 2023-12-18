@@ -84,14 +84,14 @@ function MyPlan() {
         <h2 className="text-base sm:text-xl text-white font-semibold">
           {dictionary.az.my} {dictionary.az.tariff}
         </h2>
-        <Button
+        {/* <Button
           size="sm"
           isIconOnly
           className="bg-white rounded-full"
           aria-label="Filter"
         >
           <RiPriceTag2Fill size={20} color="#292D32" />
-        </Button>
+        </Button> */}
       </div>
       <div className="bg-white rounded-lg shadow h-full px-6 componentsScrollBar overflow-y-scroll">
         {currentSubscription ? (
