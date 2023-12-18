@@ -67,6 +67,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
       <Modal
         size="lg"
         isDismissable={false}
+        className="centerModalOnMobile"
         backdrop="opaque"
         isOpen={isOpen}
         onOpenChange={onOpenChange}

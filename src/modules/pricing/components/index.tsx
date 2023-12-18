@@ -15,6 +15,8 @@ import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
 // import Header from './header/header';
 import Empty from '@/components/layout/empty';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@/configs/global-configs';
 import PricingModal from './pricingModal';
 
 function Pricing() {
@@ -104,26 +106,45 @@ function Pricing() {
               activetab === 1
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[20px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               data && setActiveTab(1);
             }}
           >
-            {dictionary.az.aiSimple}
+            Ai söhbət
           </Button>
           <Button
             className={`${
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[20px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
-              data && setActiveTab(2);
+              toast.warn(
+                'Məhsullarımız hazırlanır, yeni süni intellekt modelləri hazır olanda sizə məlumat veriləcək',
+                toastOptions
+              );
             }}
           >
             {dictionary.az.aiAssistant}
+          </Button>
+          <Button
+            className={`${
+              activetab === 2
+                ? '!bg-black !text-white'
+                : '!bg-white !text-black'
+            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            type="submit"
+            onClick={() => {
+              toast.warn(
+                'Məhsullarımız hazırlanır, yeni süni intellekt modelləri hazır olanda sizə məlumat veriləcək',
+                toastOptions
+              );
+            }}
+          >
+            Kataliz
           </Button>
         </div>
         <div className="col-span-12 lg:col-span-10 h-full componentsScrollBar overflow-x-auto row-span-6 lg:col-start-3 bg-white rounded-2xl">
@@ -168,7 +189,9 @@ function Pricing() {
                               </p>
                             </div>
                             <p className="w-fit text-[#C3C1C1] text-sm sm:text-base xl:text-xl min-h-[45px] leading-5 xl:leading-6 xl:px-5 pb-2 xl:pb-6">
-                              {hItem.description || 'test'}
+                              {/* {hItem.description || 'test'} */}
+                              Qiymətlər, məhsullarımıza olan anlıq sorğu
+                              əsasında təyin olunmuşdur.
                             </p>
                             <Button
                               onClick={() => {

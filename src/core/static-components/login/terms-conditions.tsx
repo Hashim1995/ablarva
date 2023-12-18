@@ -25,6 +25,7 @@ function TermsConditionsModal({
         size="lg"
         backdrop="opaque"
         isOpen={isOpen}
+        className="centerModalOnMobile"
         onOpenChange={onOpenChange}
         hideCloseButton
       >
