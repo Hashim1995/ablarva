@@ -1,6 +1,5 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
-import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
@@ -16,6 +15,8 @@ import {
   ModalBody,
   ButtonGroup,
   ModalFooter,
+  Textarea,
+  Tooltip,
   Button
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
@@ -35,8 +36,8 @@ export interface IFeedbackModalForm {
 function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
   const {
     handleSubmit,
-    formState: { errors, isSubmitting },
-    control
+    register,
+    formState: { errors, isSubmitting }
   } = useForm<IFeedbackModalForm>({
     mode: 'onChange'
   });
@@ -80,7 +81,96 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                   className="flex flex-col space-y-5"
                 >
                   <div className="flex flex-col gap-5  ">
-                    <AppHandledInput
+                    <Textarea
+                      {...register('feedbackMessage', {
+                        required: {
+                          value: true,
+                          message: inputValidationText('Mesaj')
+                        }
+                      })}
+                      variant="bordered"
+                      fullWidth
+                      color="primary"
+                      isRequired
+                      placeholder={inputPlaceholderText('Mesaj')}
+                      classNames={{
+                        label: 'text-md font-normal',
+                        innerWrapper: ' flex items-center',
+                        inputWrapper: [
+                          'relative',
+                          'w-full',
+                          'inline',
+                          'inline-flex',
+                          'tap-highlight-transparent',
+                          'shadow-sm',
+                          'min-h-unit-8',
+                          'flex-col',
+                          'items-start',
+                          'justify-center',
+                          'gap-0',
+                          'border',
+                          ' px-3',
+                          'py-1',
+                          'rounded-md',
+                          'data-[hover=true]:border-[#292D32]',
+                          'group-data-[focus=true]:border-gray-200',
+                          'border-[#292D32]',
+                          'transition-background',
+                          '!duration-150 ',
+                          'transition-colors',
+                          '',
+                          'motion-reduce:transition-none '
+                        ],
+                        input: ' font-light '
+                      }}
+                      rows={5}
+                      className="flex-1"
+                      isInvalid={Boolean(errors.feedbackMessage)}
+                      startContent={
+                        errors.feedbackMessage ? (
+                          <Tooltip
+                            className={'!bg-black !text-white'}
+                            placement="top-start"
+                            offset={12}
+                            content={
+                              errors.feedbackMessage
+                                ? errors.feedbackMessage.message
+                                : ''
+                            }
+                          >
+                            <div>
+                              {
+                                <BsQuestionCircleFill
+                                  size={16}
+                                  color={
+                                    errors.feedbackMessage?.message
+                                      ? '#f31260'
+                                      : ''
+                                  }
+                                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                                />
+                              }
+                            </div>
+                          </Tooltip>
+                        ) : (
+                          <div>
+                            {
+                              <BsQuestionCircleFill
+                                size={16}
+                                color={
+                                  errors.feedbackMessage?.message
+                                    ? '#f31260'
+                                    : ''
+                                }
+                                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+                              />
+                            }
+                          </div>
+                        )
+                      }
+                      maxRows={5}
+                    />
+                    {/* <AppHandledInput
                       name="feedbackMessage"
                       inputProps={{
                         id: 'feedbackMessage'
@@ -108,7 +198,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                           className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
                         />
                       )}
-                    />
+                    /> */}
                   </div>
 
                   <ButtonGroup>
