@@ -61,21 +61,17 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   const currentLanguageFlag = (id: string) => {
     switch (id) {
       case '0':
-        return (
-          <img width={22} alt="uk flag" src="/public/flags/global-flag.svg" />
-        );
+        return <img width={22} alt="uk flag" src="/flags/global-flag.svg" />;
       case '1':
-        return <img width={22} alt="uk flag" src="/public/flags/az-flag.svg" />;
+        return <img width={22} alt="uk flag" src="/flags/az-flag.svg" />;
       case '2':
-        return <img width={22} alt="uk flag" src="/public/flags/tr-flag.svg" />;
+        return <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />;
       case '3':
-        return <img width={22} alt="uk flag" src="/public/flags/en-flag.svg" />;
+        return <img width={22} alt="uk flag" src="/flags/en-flag.svg" />;
       case '4':
-        return <img width={22} alt="uk flag" src="/public/flags/ru-flag.svg" />;
+        return <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />;
       default:
-        return (
-          <img width={22} alt="uk flag" src="/public/flags/global-flag.svg" />
-        );
+        return <img width={22} alt="uk flag" src="/flags/global-flag.svg" />;
     }
   };
   return (
@@ -156,39 +152,19 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
                 }
               >
                 <DropdownItem key="0">
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/global-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/global-flag.svg" />
                 </DropdownItem>
                 <DropdownItem key="1">
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/az-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
                 </DropdownItem>
                 <DropdownItem key="2">
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/tr-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
                 </DropdownItem>
                 <DropdownItem key="3">
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/en-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
                 </DropdownItem>
                 <DropdownItem key="4">
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/ru-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
@@ -207,51 +183,31 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
               <Tab
                 key="0"
                 title={
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/global-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/global-flag.svg" />
                 }
               />
               <Tab
                 key="1"
                 title={
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/az-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
                 }
               />
               <Tab
                 key="2"
                 title={
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/tr-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
                 }
               />
               <Tab
                 key="3"
                 title={
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/en-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
                 }
               />
               <Tab
                 key="4"
                 title={
-                  <img
-                    width={22}
-                    alt="uk flag"
-                    src="/public/flags/ru-flag.svg"
-                  />
+                  <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
                 }
               />
             </Tabs>
