@@ -41,6 +41,7 @@ import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
+
 import { RootState } from '@/redux/store';
 import VerifyEmail from './verify-email';
 
@@ -127,21 +128,40 @@ export default function Navbar() {
             >
               {dictionary.az.chat}
             </Button>
-
-            <Button
-              className={` w-40 h-12  ${
-                location.pathname.includes('assistan')
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black'
-              }`}
-              onClick={() => {
-                navigate('/assistan');
-              }}
-              isDisabled
-              startContent={<BsYelp size={17} />}
+            <Tooltip
+              className="hidden sm:block"
+              placement="bottom"
+              content={'Hazırlanır'}
             >
-              {dictionary.az.assistan}
-            </Button>
+              <Button
+                className={`isDisabled w-40 h-12  ${
+                  location.pathname.includes('assistan')
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black'
+                }`}
+                startContent={<BsYelp size={17} />}
+              >
+                {dictionary.az.assistan}
+              </Button>
+            </Tooltip>
+
+            <Tooltip
+              className="hidden sm:block"
+              placement="bottom"
+              content={'Hazırlanır'}
+            >
+              <Button
+                className={`isDisabled w-40 h-12  ${
+                  location.pathname.includes('Kataliz')
+                    ? 'bg-black text-white'
+                    : 'bg-white text-black'
+                }`}
+                startContent={<BsClockFill size={17} />}
+              >
+                Kataliz
+              </Button>
+            </Tooltip>
+
             <Button
               className={`w-40 h-12  ${
                 location.pathname.includes('pricing')
@@ -155,7 +175,6 @@ export default function Navbar() {
             >
               {dictionary.az.tariffs}
             </Button>
-
             <Button
               className={`w-40 h-12 ${
                 location.pathname.includes('settings')
