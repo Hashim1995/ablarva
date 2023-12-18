@@ -347,3 +347,7 @@ input::placeholder {
     font-size: 16px;
   }
 }
+
+.w-screen:has(.centerModalOnMobile) {
+  align-items: center !important;
+}

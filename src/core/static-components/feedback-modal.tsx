@@ -66,6 +66,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
         size="lg"
         isDismissable={false}
         backdrop="opaque"
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >

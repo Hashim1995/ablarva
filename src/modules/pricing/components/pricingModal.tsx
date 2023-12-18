@@ -27,6 +27,7 @@ function PricingModal({
         size="lg"
         backdrop="opaque"
         isOpen={isOpen}
+        className="centerModalOnMobile"
         onOpenChange={onOpenChange}
         hideCloseButton
       >
@@ -34,7 +35,7 @@ function PricingModal({
           {onClose => (
             <>
               <ModalHeader className="flex flex-row items-center gap-1">
-                Testiqleme
+                Təstiqləmə
               </ModalHeader>
               <ModalBody className="scrollBar overflow-y-scroll">
                 Əməliyyatı yerinə yetirmək istədiyinizə əminsinizmi?

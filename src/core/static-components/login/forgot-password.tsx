@@ -91,6 +91,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
         size="lg"
         isDismissable={false}
         backdrop="opaque"
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
