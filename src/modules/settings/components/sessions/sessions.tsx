@@ -1,23 +1,33 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { IUserSessions } from '@/models/user';
-import { AppDispatch, RootState } from '@/redux/store';
+import {
+  //  AppDispatch,
+  RootState
+} from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
 import { Card, Chip, Divider, Skeleton } from '@nextui-org/react';
 import { BsAndroid2 } from 'react-icons/bs';
-import { MdOutlineLaptopMac, MdOutlineLogout } from 'react-icons/md';
+import {
+  MdOutlineLaptopMac
+  //  MdOutlineLogout
+} from 'react-icons/md';
 import { TbDeviceIpad } from 'react-icons/tb';
-import { useDispatch, useSelector } from 'react-redux';
+import {
+  // useDispatch,
+  useSelector
+} from 'react-redux';
 import { FaWindows, FaLinux, FaApple, FaBlackberry } from 'react-icons/fa';
-import { AuthService } from '@/services/auth-services/auth-services';
-import { IGlobalResponseEmpty } from '@/models/common';
-import { fetchUserData } from '@/redux/auth/auth-slice';
+// import { AuthService } from '@/services/auth-services/auth-services';
+// import { IGlobalResponseEmpty } from '@/models/common';
+// import { fetchUserData } from '@/redux/auth/auth-slice';
 import { useState } from 'react';
 import Empty from '@/components/layout/empty';
 
 function Sessions() {
   const { userSessions } = useSelector((state: RootState) => state.user.user);
-  const dispatch = useDispatch<AppDispatch>();
+  // const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
 
   const returnDeviceIconByType = (type: number) => {
@@ -88,19 +98,19 @@ function Sessions() {
     }
   };
 
-  const removeSession = async (id: number) => {
-    setLoading(true);
-    try {
-      const res: IGlobalResponseEmpty =
-        await AuthService.getInstance().removeSession(id);
-      if (res.isSuccess) {
-        dispatch(fetchUserData());
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setLoading(false);
-  };
+  // const removeSession = async (id: number) => {
+  //   setLoading(true);
+  //   try {
+  //     const res: IGlobalResponseEmpty =
+  //       await AuthService.getInstance().removeSession(id);
+  //     if (res.isSuccess) {
+  //       dispatch(fetchUserData());
+  //     }
+  //   } catch (err) {
+  //     console.log(err);
+  //   }
+  //   setLoading(false);
+  // };
 
   return (
     <Card className="rounded-lg sm:rounded-2xl shadow h-full ">
@@ -167,7 +177,7 @@ function Sessions() {
                             {item.status ? 'Aktiv' : item.status}
                           </Chip>
                         </div>
-                        <Divider orientation="vertical" className="h-20" />
+                        {/* <Divider orientation="vertical" className="h-20" />
                         <div className="2xl:ml-2 ml-2">
                           <MdOutlineLogout
                             className="w-[20px] h-[20px] sm:w-[25px] sm:h-[25px] cursor-pointer"
@@ -178,7 +188,7 @@ function Sessions() {
                               removeSession(item.id);
                             }}
                           />
-                        </div>
+                        </div> */}
                       </div>
                     </div>
                   </div>

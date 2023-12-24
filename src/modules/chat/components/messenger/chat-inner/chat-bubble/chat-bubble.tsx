@@ -40,7 +40,7 @@ function Typewriter({ message, isTyping }: ITypewriter) {
       const timeoutId = setTimeout(() => {
         setDisplayedContent(message.slice(0, displayedContent.length + 1));
         audioEnable && typewriterSound.play();
-      }, 10);
+      }, 5);
 
       return () => {
         clearTimeout(timeoutId);
