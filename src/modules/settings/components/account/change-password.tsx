@@ -2,6 +2,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
+import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -19,6 +20,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash, BsFillPersonFill } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 
 interface IChangePasswordProps {
   isOpen: boolean;
@@ -54,6 +56,8 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
         await AuthService.getInstance().changePassword(data);
       if (res.isSuccess) {
         onOpenChange();
+        toast.success('Şifrəniz uğurla yeniləndi', toastOptions);
+
         localStorage.removeItem('userToken');
         navigate('/login');
       }
