@@ -39,8 +39,9 @@ function MessengerHeader({
   const { currentModel, waitingForResponse } = useSelector(
     (state: RootState) => state?.chat
   );
-  const { total } = useSelector(
-    (state: RootState) => state?.statisticsCount?.statisticsCount?.data?.premium
+  const total = useSelector(
+    (state: RootState) =>
+      state?.statisticsCount?.statisticsCount?.data?.premium?.total
   );
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const navigate = useNavigate();

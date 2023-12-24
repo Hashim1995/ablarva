@@ -28,9 +28,9 @@ function Bottom() {
   const [loading, setLoading] = useState(false);
 
   const columns: IColumn[] = [
-    { name: 'ORDER ID', uid: 'orderId' },
-    { name: 'AMOUNT', uid: 'amount' },
-    { name: 'TRANSACTION DATE', uid: 'transactionDate' },
+    { name: 'ƏMƏLİYYAT KODU', uid: 'orderId' },
+    { name: 'MƏBLƏĞ', uid: 'amount' },
+    { name: 'ƏMƏLİYYAT TARİXİ', uid: 'transactionDate' },
     { name: 'STATUS', uid: 'status' }
   ];
 
