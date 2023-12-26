@@ -187,17 +187,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            <AppHandledDate
-              control={control}
-              errors={errors}
-              IconElement={() => (
-                <BsCalendarWeekFill
-                  size={16}
-                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
-            />
+            <AppHandledDate control={control} errors={errors} />
 
             <AppHandledSelect
               name="gender"

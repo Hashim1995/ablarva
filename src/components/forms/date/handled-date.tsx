@@ -1,12 +1,12 @@
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputValidationText } from '@/utils/constants/validations';
+import { BsCalendarWeekFill } from 'react-icons/bs';
 import AppHandledInput from '../input/handled-input';
 
 interface IHandledDate {
   control: any;
   errors?: any;
   fieldsIsDisable?: boolean;
-  IconElement: any;
   label?: string;
 }
 
@@ -14,7 +14,6 @@ function AppHandledDate({
   control,
   errors,
   fieldsIsDisable,
-  IconElement,
   label
 }: IHandledDate) {
   return (
@@ -53,7 +52,14 @@ function AppHandledDate({
         }}
         placeholder={dictionary.az.day}
         required
-        IconElement={IconElement}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.day?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
+        )}
       />
       <AppHandledInput
         name="month"
@@ -89,7 +95,14 @@ function AppHandledDate({
         }}
         placeholder={dictionary.az.month}
         required
-        IconElement={IconElement}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.month?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
+        )}
       />
       <AppHandledInput
         name="year"
@@ -125,7 +138,14 @@ function AppHandledDate({
         }}
         placeholder={dictionary.az.year}
         required
-        IconElement={IconElement}
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.year?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
+        )}
       />
     </div>
   );

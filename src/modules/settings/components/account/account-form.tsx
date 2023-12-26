@@ -6,11 +6,7 @@ import {
   inputPlaceholderText,
   selectPlaceholderText
 } from '@/utils/constants/texts';
-import {
-  BsCalendarWeekFill,
-  BsEnvelopeFill,
-  BsFillPersonFill
-} from 'react-icons/bs';
+import { BsEnvelopeFill, BsFillPersonFill } from 'react-icons/bs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
@@ -135,13 +131,6 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             errors={errors}
             fieldsIsDisable={fieldsIsDisable}
             label={dictionary.az.dateOfBirth}
-            IconElement={() => (
-              <BsCalendarWeekFill
-                size={16}
-                color={errors.day?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
-            )}
           />
 
           {/* <AppHandledDate
