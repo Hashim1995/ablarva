@@ -6,13 +6,8 @@ import {
   inputPlaceholderText,
   selectPlaceholderText
 } from '@/utils/constants/texts';
-import {
-  BsCalendarWeekFill,
-  BsEnvelopeFill,
-  BsFillPersonFill
-} from 'react-icons/bs';
+import { BsEnvelopeFill, BsFillPersonFill } from 'react-icons/bs';
 import AppHandledInput from '@/components/forms/input/handled-input';
-import AppHandledDate from '@/components/forms/date/handled-date';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
 import { toastOptions } from '@/configs/global-configs';
@@ -24,6 +19,7 @@ import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
+import AppHandledDate from '@/components/forms/date/handled-date';
 import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
@@ -49,8 +45,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
       firstName: data?.firstName,
       lastName: data?.lastName,
       gender: data?.gender,
-      dateOfBirth: convertDDMMYYYtoISOString(String(data.dateOfBirth))
+      dateOfBirth: convertDDMMYYYtoISOString(
+        `${data.day}.${data.month}.${data.year}`
+      )
     };
+    delete payload.day;
+    delete payload.month;
+    delete payload.year;
     console.log(payload, 'aaa');
 
     setIsLoading(true);
@@ -76,6 +77,10 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     setValue('firstName', user.firstName);
     setValue('lastName', user.lastName);
     setValue('dateOfBirth', user.dateOfBirth);
+    const date = String(user.dateOfBirth).split('.');
+    setValue('day', date[0]);
+    setValue('month', date[1]);
+    setValue('year', date[2]);
     setValue('gender', String(user.gender));
   }, [user]);
   return (
@@ -120,7 +125,15 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
               />
             )}
           />
+
           <AppHandledDate
+            control={control}
+            errors={errors}
+            fieldsIsDisable={fieldsIsDisable}
+            label={dictionary.az.dateOfBirth}
+          />
+
+          {/* <AppHandledDate
             name="dateOfBirth"
             inputProps={{
               id: 'dateOfBirth',
@@ -148,7 +161,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
               />
             )}
-          />
+          /> */}
 
           <AppHandledSelect
             name="gender"
