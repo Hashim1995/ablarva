@@ -2,12 +2,14 @@ import { useNavigate, useRoutes } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import routesList from '@core/routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
+import { useDisclosure } from '@nextui-org/react';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
 import { AppDispatch, RootState } from './redux/store';
 import { setStatisticsCount } from './redux/statistics/statistics-slice';
 import { StatisticsUpdateData } from './models/common';
 import generateStatisticsSocket from './utils/functions/socket-config';
+import VerifyEmail from './core/static-components/verify-email';
 
 function App() {
   const router = useRoutes(routesList);
@@ -17,6 +19,8 @@ function App() {
 
   const userToken: any = JSON.parse(localStorage.getItem('userToken') || '{}');
   const getme = useSelector((state: RootState) => state.user);
+  const { verified } = useSelector((state: RootState) => state?.user?.user);
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const navigate = useNavigate();
 
@@ -54,6 +58,11 @@ function App() {
     };
   }, [getme]);
 
+  useEffect(() => {
+    if (!verified && getme?.user?.id) {
+      onOpen();
+    }
+  }, [verified, getme]);
   return (
     <main
       className={`${
@@ -63,7 +72,10 @@ function App() {
         //   : 'h-screen text-foreground bg-background'
       }`}
     >
-      <Suspense fallback={<SuspenseLoader />}>{router}</Suspense>
+      <Suspense fallback={<SuspenseLoader />}>
+        {router}
+        {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
+      </Suspense>
     </main>
   );
 }

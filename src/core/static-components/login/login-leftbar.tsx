@@ -10,9 +10,11 @@ function LoginLeftBar() {
         <BsRobot className="animate-pulse w-[50px] h-[50px]	md:w-[68px] md:h-[68px]" />
       </div>
       <p className="mt-3 text-sm font-normal text-center text-white md:mt-0">
-        With necəsən, gəle, öp, qıdığla the power of K-WD, you can now focus
-        only on functionaries for your digital products, while leaving the UI
-        design on us!
+        Xoş gəlmisiniz! Bizim Suni İntelekt startapımız AIZade sizin gündəlik
+        həyatınızı asanlaşdırmaq üçün buradadır. Səmərəli və yenilikçi
+        texnologiyamızla, hər bir sualınıza anında cavablar tapa bilərsiniz.
+        Bizim platformamızda hər zaman yeniliklər və fərqliliklərə rast
+        gələcəksiniz. Giriş edin və AIZade dünyasında səyahətə başlayın!
       </p>
 
       <p
@@ -20,7 +22,7 @@ function LoginLeftBar() {
         onClick={onOpen}
         className="mt-3 md:mt-6 underline text-sm text-center text-white cursor-pointer"
       >
-        Read our terms and conditions
+        Gizlilik və məxfilik siyasəti
       </p>
       {isOpen && (
         <TermsConditionsModal onOpenChange={onOpenChange} isOpen={isOpen} />

@@ -16,13 +16,15 @@ import {
   ModalBody,
   ButtonGroup,
   ModalFooter,
-  Button
+  Button,
+  Divider
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsFillKeyFill } from 'react-icons/bs';
+import { BsFillKeyFill, BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useMediaQuery } from 'usehooks-ts';
 
 interface IVerifyEmail {
   isOpen: boolean;
@@ -44,6 +46,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
 
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
+  const matches = useMediaQuery('(max-width: 468px)');
 
   const onSubmit = async (data: IVerifyEmailForm) => {
     try {
@@ -52,6 +55,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
           code: Number(data.code)
         });
       if (res.isSuccess) {
+        toast.success('Email ünvanınız uğurla təsdiqləndi', toastOptions);
         onOpenChange();
         dispatch(fetchUserData());
       }
@@ -79,6 +83,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
         size="lg"
         isDismissable={false}
         backdrop="opaque"
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
@@ -125,7 +130,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
 
                   <ButtonGroup>
                     <Button
-                      size="md"
+                      size={matches ? 'sm' : 'md'}
                       isLoading={isSubmitting}
                       className="w-full bg-black  text-white border"
                       type="submit"
@@ -133,7 +138,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       {dictionary.az.approve}
                     </Button>
                     <Button
-                      size="md"
+                      size={matches ? 'sm' : 'md'}
                       onClick={resendVerificationCode}
                       isLoading={loading}
                       className="w-full bg-black  text-white border"
@@ -142,6 +147,19 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       {dictionary.az.sendCodeToEmail}
                     </Button>
                   </ButtonGroup>
+                  <Divider />
+                  <p className="text-sm text-left clear-both    ">
+                    <BsQuestionCircleFill
+                      size={26}
+                      color="orange"
+                      className="float-left mr-2"
+                    />
+                    Email ünvanızızı təsdiqlədiyiniz təqdirdə, balansınıza,
+                    bizim tərəfimizdən{' '}
+                    <span className="font-semibold"> 300 Sadə</span> və
+                    <span className="font-semibold"> 100 Premium</span> sorğu
+                    imkanı əlavə oluncaqdır
+                  </p>
                 </form>
               </ModalBody>
               <ModalFooter>

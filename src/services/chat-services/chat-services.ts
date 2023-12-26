@@ -4,6 +4,7 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
+  IFeedbackPayload,
   ISendMessagePayload,
   IThreadBubblesItem,
   IThreadHistoryList
@@ -17,7 +18,12 @@ interface IThreadHistoryListResponse extends IGlobalResponse {
   data: IThreadHistoryList[];
 }
 interface IThreadBubblesItemResponse extends IGlobalResponse {
-  data: IThreadBubblesItem[];
+  data: {
+    allBubbles: IThreadBubblesItem[];
+    parameters: {
+      servicePlan: '1' | '2';
+    };
+  };
 }
 export class ChatService {
   // eslint-disable-next-line no-use-before-define
@@ -32,19 +38,38 @@ export class ChatService {
     return ChatService.instance!;
   }
 
+  public async sendFeedback(
+    body: IFeedbackPayload,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post('api/client/chats/feedback', body, onError);
+    return res;
+  }
+
   public async sendMessage(
     body: ISendMessagePayload,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
   ): Promise<ISendMessageResponse> {
-    const res = await HttpUtil.post('api/client/chats', body, onError);
+    const res = await HttpUtil.post(
+      'api/client/chats',
+      body,
+      onError,
+      abortController
+    );
     return res;
   }
 
   public async removeThread(
     id: string,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
   ): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.delete(`api/client/chats/${id}`, false, onError);
+    const res = await HttpUtil.delete(
+      `api/client/chats/${id}`,
+      onError,
+      abortController
+    );
     return res;
   }
 

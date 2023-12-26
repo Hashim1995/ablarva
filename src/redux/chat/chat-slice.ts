@@ -4,30 +4,36 @@ const chatSlice = createSlice({
   name: 'chat',
   initialState: {
     currentModel: '1',
-    currentThreadId: null,
+    currentChatLanguage: '1',
     resetChatInner: Date.now(),
-    waitingForResponse: false
+    waitingForResponse: false,
+    waitingForThreadLoad: false
   },
   reducers: {
     setCurrentChatModel: (state, action: PayloadAction<any>) => {
       state.currentModel = action.payload;
     },
-    setCurrentThreadId: (state, action: PayloadAction<any>) => {
-      state.currentThreadId = action.payload;
+    setCurrentChatLanguage: (state, action: PayloadAction<any>) => {
+      state.currentChatLanguage = action.payload;
     },
+
     setResetChatInner: (state, action: PayloadAction<any>) => {
       state.resetChatInner = action.payload;
     },
     setWaitingForResponse: (state, action: PayloadAction<any>) => {
       state.waitingForResponse = action.payload;
+    },
+    setWaitingForThreadLoad: (state, action: PayloadAction<any>) => {
+      state.waitingForThreadLoad = action.payload;
     }
   }
 });
 
 export const {
   setCurrentChatModel,
-  setCurrentThreadId,
+  setCurrentChatLanguage,
   setResetChatInner,
-  setWaitingForResponse
+  setWaitingForResponse,
+  setWaitingForThreadLoad
 } = chatSlice.actions;
 export default chatSlice.reducer;

@@ -6,6 +6,15 @@
 //   overflow: hidden;
 // }
 
+.app-wrapper {
+  /*
+* Created with https://www.css-gradient.com
+* Gradient link: https://www.css-gradient.com/?c1=3a24ca&c2=fd173a&gt=r&gd=dtl
+*/
+  // background: #3a24ca;
+  // background: radial-gradient(at left top, #3a24ca, #fd173a);
+}
+
 body {
   margin: 0;
   overflow-y: auto;
@@ -85,6 +94,13 @@ body::-webkit-scrollbar-thumb,
 
 .back {
   transform: rotateY(180deg);
+}
+
+button.opacity-disabled,
+button.isDisabled {
+  opacity: 1 !important;
+  background: #eaeaea;
+  cursor: not-allowed !important;
 }
 
 input[type='date']::-webkit-calendar-picker-indicator {
@@ -332,3 +348,10 @@ input::placeholder {
     font-size: 16px;
   }
 }
+
+.w-screen:has(.centerModalOnMobile) {
+  align-items: center !important;
+}
+// .feedBackTextArea textarea::placeholder {
+//   transform: translateY(40px);
+// }

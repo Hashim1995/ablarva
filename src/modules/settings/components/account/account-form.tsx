@@ -14,6 +14,8 @@ import {
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { genderOptions } from '@/utils/constants/options';
+import { toastOptions } from '@/configs/global-configs';
+import { toast } from 'react-toastify';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '@/redux/store';
@@ -61,7 +63,10 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
       const res: IGlobalResponseEmpty =
         await AuthService.getInstance().changeUserDetail(payload);
 
-      res.isSuccess && dispatch(fetchUserData());
+      if (res.isSuccess) {
+        dispatch(fetchUserData());
+        toast.success('Hesab məlumatlarınız uğurla yeniləndi', toastOptions);
+      }
     } catch (err) {
       console.log(err);
     } finally {

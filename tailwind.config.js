@@ -20,6 +20,7 @@ export default {
       '3xl': '20px'
     }
   },
+  darkMode: 'class',
   plugins: [
     require('@tailwindcss/line-clamp'),
     nextui({

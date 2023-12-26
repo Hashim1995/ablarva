@@ -12,6 +12,7 @@ import { IAccountPayload } from '@/modules/settings/types';
 import { IForgotPasswordForm } from '@/core/static-components/login/forgot-password';
 import { IVerifyEmailForm } from '@/core/static-components/verify-email';
 import { IChangePasswordForm } from '@/modules/settings/components/account/change-password';
+import { IFeedbackModalForm } from '@/core/static-components/feedback-modal';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
 export interface IGetMeResponse extends IGlobalResponse {
@@ -87,6 +88,14 @@ export class AuthService {
     return res;
   }
 
+  public async sendFeedback(
+    body: IFeedbackModalForm,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.post('api/client/user/feedback', body, onError);
+    return res;
+  }
+
   public async resendVerificationCode(
     onError?: ErrorCallBack
   ): Promise<IGlobalResponseEmpty> {
@@ -124,12 +133,13 @@ export class AuthService {
 
   public async removeSession(
     id: number,
-    onError?: ErrorCallBack
+    onError?: ErrorCallBack,
+    abortController?: AbortController['signal']
   ): Promise<IGlobalResponseEmpty> {
     const res = await HttpUtil.delete(
       `api/client/user/Sessions/${id}`,
-      false,
-      onError
+      onError,
+      abortController
     );
     return res;
   }

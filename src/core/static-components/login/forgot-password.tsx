@@ -1,6 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
+import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { AuthService } from '@/services/auth-services/auth-services';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -23,6 +24,7 @@ import {
   BsEyeSlash,
   BsFillPersonFill
 } from 'react-icons/bs';
+import { toast } from 'react-toastify';
 
 interface IForgotPassword {
   isOpen: boolean;
@@ -71,7 +73,10 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
       try {
         const res: IGlobalResponseEmpty =
           await AuthService.getInstance().resetPassword(data);
-        res.isSuccess && onOpenChange();
+        if (res.isSuccess) {
+          onOpenChange();
+          toast.success('Şifrəniz uğurla dəyişdirildi', toastOptions);
+        }
       } catch (err) {
         console.log(err);
       }
@@ -91,6 +96,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
         size="lg"
         isDismissable={false}
         backdrop="opaque"
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
