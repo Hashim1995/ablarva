@@ -13,7 +13,6 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import {
   BsEye,
-  BsCalendarWeekFill,
   BsEnvelopeFill,
   BsFillPersonFill,
   BsEyeSlash
@@ -31,6 +30,7 @@ import { genderOptions } from '@/utils/constants/options';
 import AppHandledDate from '@/components/forms/date/handled-date';
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
+import { FaTransgender } from 'react-icons/fa';
 import LoginLeftBar from './login-leftbar';
 
 interface IRegisterFormProps {
@@ -55,13 +55,14 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
   const onSubmit = async (data: IUserRegister) => {
-    console.log(convertDateFormat(String(data.dateOfBirth)), 'xaliq quluzade');
-
     const payload: IUserRegister = {
       ...data,
-      dateOfBirth: convertDateFormat(String(data.dateOfBirth)),
+      dateOfBirth: convertDateFormat(`${data.day}.${data.month}.${data.year}`),
       gender: Number(data.gender)
     };
+    delete payload.day;
+    delete payload.month;
+    delete payload.year;
 
     try {
       const res: IRegisterResponse = await AuthService.getInstance().register(
@@ -187,7 +188,11 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               )}
             />
 
-            <AppHandledDate control={control} errors={errors} />
+            <AppHandledDate
+              control={control}
+              errors={errors}
+              className="w-72"
+            />
 
             <AppHandledSelect
               name="gender"
@@ -207,7 +212,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               options={genderOptions}
               errors={errors}
               IconElement={() => (
-                <BsCalendarWeekFill
+                <FaTransgender
                   size={16}
                   color={errors.dateOfBirth?.message ? '#f31260' : ''}
                   className="text-2xl text-default-400 pointer-events-none flex-shrink-0"

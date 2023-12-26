@@ -8,16 +8,18 @@ interface IHandledDate {
   errors?: any;
   fieldsIsDisable?: boolean;
   label?: string;
+  className?: string;
 }
 
 function AppHandledDate({
   control,
   errors,
   fieldsIsDisable,
-  label
+  label,
+  className
 }: IHandledDate) {
   return (
-    <div className="grid grid-cols-3 gap-4">
+    <div className={`grid grid-cols-3 gap-4 ${className}`}>
       <AppHandledInput
         name="day"
         inputProps={{
@@ -26,7 +28,7 @@ function AppHandledDate({
           label,
           isDisabled: fieldsIsDisable
         }}
-        type="text"
+        type="number"
         control={control}
         isInvalid={Boolean(errors.day?.message)}
         errors={errors}
@@ -69,7 +71,7 @@ function AppHandledDate({
           label: label ? ' ' : '',
           isDisabled: fieldsIsDisable
         }}
-        type="text"
+        type="number"
         control={control}
         isInvalid={Boolean(errors.month?.message)}
         errors={errors}
@@ -112,7 +114,7 @@ function AppHandledDate({
           label: label ? ' ' : '',
           isDisabled: fieldsIsDisable
         }}
-        type="text"
+        type="number"
         control={control}
         isInvalid={Boolean(errors.year?.message)}
         errors={errors}

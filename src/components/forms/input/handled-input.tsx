@@ -55,6 +55,16 @@ function AppHandledInput({
             onChange(e);
             onChangeApp && onChangeApp(e);
           }}
+          onKeyDown={e => {
+            (e.keyCode === 38 || e.keyCode === 40) &&
+              type === 'number' &&
+              e.preventDefault();
+          }}
+          onKeyUp={e => {
+            (e.keyCode === 38 || e.keyCode === 40) &&
+              type === 'number' &&
+              e.preventDefault();
+          }}
           isInvalid={isInvalid}
           value={value}
           className={className}
