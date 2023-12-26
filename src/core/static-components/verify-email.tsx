@@ -55,8 +55,8 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
           code: Number(data.code)
         });
       if (res.isSuccess) {
-        toast.success('Email ünvanınız uğurla təsdiqləndi', toastOptions);
         onOpenChange();
+        toast.success('Email ünvanınız uğurla təsdiqləndi', toastOptions);
         dispatch(fetchUserData());
       }
     } catch (err) {
