@@ -7,11 +7,33 @@ interface IThinkText {
 function ThinkText({
   textList = [
     'Qərara gəlməyə çalışıram 🧐',
-    'Səbr edən dərviş muradına ərmiş 😔',
-    'Tələsmə zaur, bu saat gəlirəm 💦',
-    'İşləyirəm səbirli ol 🤔 ',
-    'Tələsən təndirə düşər 😔',
-    'Fikirləşirəm, bir saniyə 👨🏻‍💻'
+    'Səbr edən dərviş muradına ərmiş 😌',
+    'İşləyirəm səbirli ol 🛠️',
+    'Tələsən təndirə düşər ⏳',
+    'Fikirləşirəm, bir saniyə 🤔',
+    'Zəhmət çəkən zövq alar 💪',
+    'İt ürəyər, karvan keçər 🐶🚶‍♂️',
+    'Nə əkmisən, onu biçərsən 🌱➡️🌾',
+    'Cavabınızı hazırlayıram 💡',
+    'Sizin sualınıza uyğun ən yaxşı cavabı düşünürəm 🎯',
+    'Sizin üçün məlumat axtarıram 🔍',
+    'Sorğunuzu dəyərləndirirəm, biraz gözləyin ⌛',
+    'Zəhmət olmasa gözləyin, cavabınız yoldadır 📬',
+    'Sorğunuz üzərində işləyirəm 🖥️',
+    'Biraz daha vaxt lazımdır, mürəkkəb məsələdir 🧩',
+    'Sizə ən yaxşı cavabı vermək üçün məlumat toplayıram 📚',
+    'Sualınızı dəqiqləşdirirəm, tezliklə cavab verəcəyəm 🔍',
+    'Cavabınız üçün lazımi məlumatları yoxluyuram 📖',
+    'Biraz səbir, tezliklə sizinləyəm ⏰',
+    'Məlumat bazamda axtarış aparıram 🌐',
+    'Sizin sorğunuz üçün ən uyğun məlumatı seçirəm ✅',
+    'Sizin məsələnizlə maraqlanıram, biraz vaxt verin 🤝',
+    'Dəqiq cavab vermək üçün təhlil edirəm 🔬',
+    'Mürəkkəb sorğu, dərindən araşdırıram 🕵️‍♂️',
+    'Sizin sualınıza ən uyğun cavabı tapmaq üzərəyəm 🔎',
+    'Həll yolu axtarırıq, tezliklə cavablandıracağam 🛤️',
+    'Yaxşı dost qıymətli bir xəzinədir 💎',
+    'Vaxt qızıldan dəyərlidir ⌛'
   ]
 }: IThinkText) {
   return (
@@ -23,11 +45,15 @@ function ThinkText({
           </div>
           <div className="thinkText-change_outer">
             <div className="thinkText-change_inner">
-              {textList?.map((item: string) => (
-                <div key={item} className="thinkText-element">
-                  {item}
-                </div>
-              ))}
+              {textList
+                ?.map(value => ({ value, sort: Math.random() }))
+                .sort((a, b) => a.sort - b.sort)
+                .map(({ value }) => value)
+                ?.map((item: string) => (
+                  <div key={item} className="thinkText-element">
+                    {item}
+                  </div>
+                ))}
             </div>
           </div>
         </div>
