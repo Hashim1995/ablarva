@@ -20,7 +20,11 @@ import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
 import { IThreadHistoryList } from '../../types';
 
-function ChatHistory() {
+interface IChatHistoryProps {
+  isResponsive?: boolean;
+}
+
+function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const [threadHistory, setThreadHistory] = useState<IThreadHistoryList[]>();
   const [removeLoading, setRemoveLoading] = useState<boolean>(false);
 
@@ -72,12 +76,16 @@ function ChatHistory() {
     fetchThreadHistory();
   }, [searchParams.get('threadID')]);
   return (
-    <Card className="  shadow  h-full ">
-      <div className="flex justify-between items-center mb-4 bg-black p-3">
-        <h2 className="text-base sm:text-xl text-white font-semibold">
-          {dictionary.az.previous} {dictionary.az.chats}
-        </h2>
-        {/* <Button
+    <Card
+      shadow={`${isResponsive ? 'none' : 'md'}`}
+      className={`${isResponsive ? 'bg-[#292D32]' : ''} h-full`}
+    >
+      {!isResponsive && (
+        <div className="flex justify-between items-center mb-4 bg-black p-3">
+          <h2 className="text-base sm:text-xl text-white font-semibold">
+            {dictionary.az.previous} {dictionary.az.chats}
+          </h2>
+          {/* <Button
           size="sm"
           isIconOnly
           className="bg-white rounded-full"
@@ -85,12 +93,24 @@ function ChatHistory() {
         >
           <BsFillFilterCircleFill size={20} color="#292D32" />
         </Button> */}
-      </div>
-      <div className="bg-white  overflow-y-auto rounded-lg shadow   xl:py-3 xl:px-6 py-1 px-2 h-[300px] lg:h-full componentsScrollBar ">
+        </div>
+      )}
+
+      <div
+        className={`  overflow-y-auto rounded-lg shadow lg:h-full px-2 componentsScrollBar ${
+          isResponsive
+            ? 'h-full pt-3 pb-14 bg-black'
+            : 'h-[300px] xl:py-3 xl:px-6 py-1 bg-white'
+        }`}
+      >
         {threadHistory && threadHistory?.length !== 0 ? (
           threadHistory?.map(day => (
             <div key={day.dateOfChats} className="mb-4">
-              <div className="text-black text-sm font-medium	  mb-2">
+              <div
+                className={`text-sm font-medium	mb-2 ${
+                  isResponsive ? 'text-white' : 'text-black'
+                }`}
+              >
                 {dayjs(new Date(day.dateOfChats).toISOString()).format(
                   'DD.MM.YYYY'
                 )}
