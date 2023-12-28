@@ -3,6 +3,7 @@ import { Suspense, useEffect } from 'react';
 import routesList from '@core/routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDisclosure } from '@nextui-org/react';
+import { useMediaQuery } from 'usehooks-ts';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
 import { AppDispatch, RootState } from './redux/store';
@@ -14,6 +15,7 @@ import VerifyEmail from './core/static-components/verify-email';
 function App() {
   const router = useRoutes(routesList);
   const dispatch = useDispatch<AppDispatch>();
+  const isResponsive = useMediaQuery('(max-width: 1024px)');
 
   // const { isDarkMode } = useDarkMode();
 
@@ -33,30 +35,32 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (userToken?.token && getme.user.currentSubscription) {
-      const statisticsSocket = generateStatisticsSocket(
-        JSON.parse(localStorage.getItem('userToken') || '{}').token
-      );
+    if (!isResponsive) {
+      if (userToken?.token && getme.user.currentSubscription) {
+        const statisticsSocket = generateStatisticsSocket(
+          JSON.parse(localStorage.getItem('userToken') || '{}').token
+        );
 
-      if (statisticsSocket.state === 'Disconnected') {
-        statisticsSocket
-          .start()
-          .then(() => {
-            statisticsSocket.on(
-              'StatisticsUpdate',
-              (z: StatisticsUpdateData) => {
-                dispatch(setStatisticsCount(z));
-              }
-            );
-          })
-          .catch(error => console.error('SignalR connection failed:', error));
+        if (statisticsSocket.state === 'Disconnected') {
+          statisticsSocket
+            .start()
+            .then(() => {
+              statisticsSocket.on(
+                'StatisticsUpdate',
+                (z: StatisticsUpdateData) => {
+                  dispatch(setStatisticsCount(z));
+                }
+              );
+            })
+            .catch(error => console.error('SignalR connection failed:', error));
+        }
       }
     }
 
     return () => {
       generateStatisticsSocket(userToken?.token).stop();
     };
-  }, [getme]);
+  }, [getme, isResponsive]);
 
   useEffect(() => {
     if (!verified && getme?.user?.id) {

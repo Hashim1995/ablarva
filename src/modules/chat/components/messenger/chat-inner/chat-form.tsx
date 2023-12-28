@@ -124,7 +124,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         </Button>
         <div className="flex  gap-2  items-center justify-between">
           {
-            <Chip className="">
+            <Chip className="sm:flex hidden">
               Aİ-ZADƏ sizə {currentLanguageText(currentChatLanguage)} cavab
               verəcək
             </Chip>
@@ -175,37 +175,42 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
               onSelectionChange={e => dispatch(setCurrentChatLanguage(e))}
               size={'sm'}
               color="primary"
-              className="mr-5"
+              className="ml-2"
               classNames={{
                 cursor: ' bg-slate-300'
               }}
             >
               <Tab
                 key="0"
+                className="px-1"
                 title={
                   <img width={22} alt="uk flag" src="/flags/global-flag.svg" />
                 }
               />
               <Tab
                 key="1"
+                className="px-1"
                 title={
                   <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
                 }
               />
               <Tab
                 key="2"
+                className="px-1"
                 title={
                   <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
                 }
               />
               <Tab
                 key="3"
+                className="px-1"
                 title={
                   <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
                 }
               />
               <Tab
                 key="4"
+                className="px-1"
                 title={
                   <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
                 }

@@ -6,6 +6,9 @@ interface IAccountForm {
   lastName: string;
   gender: selectOption | null | string;
   dateOfBirth: string | Date;
+  day?: string;
+  month?: string;
+  year?: string;
 }
 
 interface ITransactionsItem {

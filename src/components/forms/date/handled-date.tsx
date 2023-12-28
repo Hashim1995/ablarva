@@ -1,139 +1,153 @@
-import { inputConfig } from '@/configs/global-configs';
-import { Input, InputProps, Tooltip } from '@nextui-org/react';
-import dayjs from 'dayjs';
-import { useRef, useState } from 'react';
-import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
-import DatePicker from 'tailwind-datepicker-react';
-import { IOptions } from 'tailwind-datepicker-react/types/Options';
-import { useOnClickOutside } from 'usehooks-ts';
-
-const options: IOptions = {
-  autoHide: true,
-  todayBtn: false,
-  clearBtn: false,
-  clearBtnText: 'Təmizlə',
-  maxDate: new Date('2023-01-01'),
-  // theme: {
-  //   // background: 'bg-[#292D32] ',
-  //   // todayBtn: 'bg-black ',
-  //   // clearBtn: '!bg-black',
-  //   // icons: '!bg-black',
-  //   // text: 'w-auto h-6 text-white flex items-center justify-center',
-  //   // disabledText:
-  //   //   'hover:bg-gray-100 hover:bg-gray-600 w-auto h-6   flex items-center justify-center flex-1 leading-1 border-0 rounded-lg cursor-pointer text-center  text-white font-semibold text-sm    ',
-  //   // input: '!bg-black',
-  //   // inputIcon: '!bg-black',
-  //   // selected: 'bg-black'
-  // },
-  datepickerClassNames: 'top-12 z-50 custom-date-picker',
-  defaultDate: new Date('2022-01-01'),
-  language: 'en',
-
-  // disabledDates: [],
-  weekDays: ['Be', 'Ça', 'Ç', 'Ca', 'C', 'Ş', 'B'],
-  inputNameProp: 'date',
-  inputIdProp: 'date',
-  inputPlaceholderProp: 'Select Date',
-  inputDateFormatProp: {
-    formatMatcher: 'basic',
-    day: 'numeric',
-    month: 'numeric',
-    year: 'numeric'
-  }
-};
+import { dictionary } from '@/utils/constants/dictionary';
+import { inputValidationText } from '@/utils/constants/validations';
+import { BsCalendarWeekFill } from 'react-icons/bs';
+import { ReactNode } from 'react';
+import AppHandledInput from '../input/handled-input';
 
 interface IHandledDate {
-  name: string;
   control: any;
-  isInvalid?: boolean;
-  placeholder?: string;
-  rules?: Omit<
-    RegisterOptions<FieldValues>,
-    'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
-  >;
-  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
-  required?: boolean;
-  startContentIconType?: null;
   errors?: any;
-  inputProps?: InputProps;
-  onChangeApp?: any;
+  fieldsIsDisable?: boolean;
+  label?: ReactNode;
   className?: string;
-  IconElement?: any;
-  size?: 'sm' | 'md' | 'lg';
 }
 
 function AppHandledDate({
-  name,
   control,
-  placeholder = 'Daxil edin',
-  rules,
-  variant = 'bordered',
-  required = false,
-  inputProps,
   errors,
-  isInvalid = false,
-  className = '',
-  onChangeApp,
-  size,
-  IconElement
+  fieldsIsDisable,
+  label,
+  className
 }: IHandledDate) {
-  const [show, setShow] = useState<boolean>(false);
-
-  const dateRef = useRef(null);
-
-  const handleOutSideClick = () => {
-    setShow(false);
-  };
-
-  useOnClickOutside(dateRef, handleOutSideClick);
-
   return (
-    <div className="relative" ref={dateRef}>
-      <Controller
+    <div className={`grid grid-cols-3 gap-4 ${className}`}>
+      <AppHandledInput
+        name="day"
+        inputProps={{
+          id: 'day',
+          labelPlacement: 'outside',
+          label,
+          isDisabled: fieldsIsDisable
+        }}
+        type="number"
         control={control}
-        name={name}
-        rules={rules}
-        render={({ field: { onChange, value } }) => (
-          <DatePicker
-            options={options}
-            show={show}
-            onChange={e => {
-              onChange(dayjs(e).format('DD.MM.YYYY'));
-              onChangeApp && onChangeApp(e);
-            }}
-            setShow={() => setShow(z => !z)}
-          >
-            <div className="... relative">
-              <Input
-                type="text"
-                placeholder={placeholder}
-                variant={variant}
-                isInvalid={isInvalid}
-                readOnly
-                onFocus={() => setShow(true)}
-                required={required}
-                value={String(value || '')}
-                size={size}
-                className={className}
-                classNames={inputConfig}
-                startContent={
-                  errors[name]?.message ? (
-                    <Tooltip
-                      className={'!bg-black !text-white'}
-                      placement="top-start"
-                      offset={12}
-                      content={errors[name] ? errors[name].message : ''}
-                    >
-                      <div>{IconElement()}</div>
-                    </Tooltip>
-                  ) : (
-                    <div>{IconElement()}</div>
-                  )
-                }
-                {...inputProps}
-              />
-            </div>
-          </DatePicker>
+        isInvalid={Boolean(errors.day?.message)}
+        errors={errors}
+        size="sm"
+        className="text-black bg-transparent text-base sm:text-xl"
+        rules={{
+          required: {
+            value: true,
+            message: inputValidationText(dictionary.az.day)
+          },
+          pattern: {
+            value: /(0[1-9]|[12]\d|3[01])/,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          minLength: {
+            value: 2,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          maxLength: {
+            value: 2,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          }
+        }}
+        placeholder={dictionary.az.day}
+        required
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.day?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
+        )}
+      />
+      <AppHandledInput
+        name="month"
+        inputProps={{
+          id: 'month',
+          labelPlacement: 'outside',
+          label: label ? ' ' : '',
+          isDisabled: fieldsIsDisable
+        }}
+        type="number"
+        control={control}
+        isInvalid={Boolean(errors.month?.message)}
+        errors={errors}
+        size="sm"
+        className="text-black bg-transparent text-base sm:text-xl"
+        rules={{
+          required: {
+            value: true,
+            message: inputValidationText(dictionary.az.month)
+          },
+          pattern: {
+            value: /\b(0[1-9]|1[0-2])/,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          minLength: {
+            value: 2,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          maxLength: {
+            value: 2,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          }
+        }}
+        placeholder={dictionary.az.month}
+        required
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.month?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
+        )}
+      />
+      <AppHandledInput
+        name="year"
+        inputProps={{
+          id: 'year',
+          labelPlacement: 'outside',
+          label: label ? ' ' : '',
+          isDisabled: fieldsIsDisable
+        }}
+        type="number"
+        control={control}
+        isInvalid={Boolean(errors.year?.message)}
+        errors={errors}
+        size="sm"
+        className="text-black bg-transparent text-base sm:text-xl"
+        rules={{
+          required: {
+            value: true,
+            message: inputValidationText(dictionary.az.year)
+          },
+          pattern: {
+            value: /(19\d\d|20\d\d)\b/,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          minLength: {
+            value: 4,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          },
+          maxLength: {
+            value: 4,
+            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+          }
+        }}
+        placeholder={dictionary.az.year}
+        required
+        // eslint-disable-next-line react/no-unstable-nested-components
+        IconElement={() => (
+          <BsCalendarWeekFill
+            size={16}
+            color={errors.year?.message ? '#f31260' : ''}
+            className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          />
         )}
       />
     </div>

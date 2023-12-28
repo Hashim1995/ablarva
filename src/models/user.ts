@@ -48,6 +48,9 @@ export interface IUserRegister {
   confirmPassword: string;
   gender: string | number;
   dateOfBirth: string | Date;
+  day?: string;
+  month?: string;
+  year?: string;
 }
 
 export interface IUserSessions {

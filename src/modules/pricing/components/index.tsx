@@ -17,6 +17,7 @@ import VerifyEmail from '@/core/static-components/verify-email';
 import Empty from '@/components/layout/empty';
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
+import MyPlan from '@/modules/chat/components/my-plan/my-plan';
 import PricingModal from './pricingModal';
 
 function Pricing() {
@@ -102,6 +103,9 @@ function Pricing() {
       {/* <div className="grid grid-cols-12">
          <Header />
       </div> */}
+      <div className="rounded-3xl lg:hidden block">
+        <MyPlan isPricing />
+      </div>
       <div className="grid grid-cols-12 grid-rows-6 h-full gap-3">
         <div className="col-span-12 lg:col-span-2 lg:row-span-6 sm:row-span-1 flex lg:flex-col items-center sm:justify-center justify-start lg:justify-center">
           <Button
@@ -109,7 +113,7 @@ function Pricing() {
               activetab === 1
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } pricing-tab mb-3 text-sm sm:text-xl xl:text-[16px] px-0 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               data && setActiveTab(1);
@@ -122,7 +126,7 @@ function Pricing() {
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } pricing-tab mb-3 text-sm sm:text-xl xl:text-[16px] px-0 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               toast.warn(
@@ -138,7 +142,7 @@ function Pricing() {
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } pricing-tab mb-3 text-sm sm:text-xl xl:text-[16px] px-0 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               toast.warn(
@@ -154,7 +158,7 @@ function Pricing() {
               activetab === 2
                 ? '!bg-black !text-white'
                 : '!bg-white !text-black'
-            } mb-3 text-base sm:text-xl xl:text-[16px] px-2 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
+            } pricing-tab mb-3 text-sm sm:text-xl xl:text-[16px] px-0 sm:px-4 w-[180px] xl:w-[200px] h-[38px] sm:h-[42px] xl:h-[50px] mr-[10px] xl:mr-0 bg-white hover:!bg-black hover:!text-white border border-black font-bold`}
             type="submit"
             onClick={() => {
               toast.warn(

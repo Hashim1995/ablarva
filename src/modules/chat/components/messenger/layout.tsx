@@ -3,7 +3,7 @@ import { Card } from '@nextui-org/react';
 import MessengerHeader from './header';
 import Drawer from '../../../../components/layout/drawer';
 import ChatInner from './chat-inner/chat-inner';
-import AsistanCardList from './assistan/asistanList';
+import ChatHistory from '../chat-history/chat-history';
 
 function Layout() {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -15,9 +15,9 @@ function Layout() {
         setIsDrawerOpen={setIsDrawerOpen}
       />
 
-      <div className="inner h-full flex">
+      <div className="inner h-full flex chat-wrapper">
         <Drawer className="bg-black" isOpen={isDrawerOpen}>
-          <AsistanCardList activeId={2} />
+          <ChatHistory isResponsive />
         </Drawer>
         <main
           style={{ height: 'calc(80vh - 56px) ' }}
