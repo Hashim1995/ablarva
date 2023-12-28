@@ -96,7 +96,9 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             inputProps={{
               id: 'email',
               labelPlacement: 'outside',
-              label: dictionary.az.email,
+              label: (
+                <div className="w-28 text-base">{dictionary.az.email}</div>
+              ),
               isDisabled: true
             }}
             type="email"
@@ -130,7 +132,9 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             control={control}
             errors={errors}
             fieldsIsDisable={fieldsIsDisable}
-            label={dictionary.az.dateOfBirth}
+            label={
+              <div className="w-28 text-base">{dictionary.az.dateOfBirth}</div>
+            }
           />
 
           {/* <AppHandledDate
@@ -168,7 +172,9 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             selectProps={{
               id: 'gender',
               labelPlacement: 'outside',
-              label: dictionary.az.gender,
+              label: (
+                <div className="w-28 text-base">{dictionary.az.gender}</div>
+              ),
               isDisabled: fieldsIsDisable
             }}
             isInvalid={Boolean(errors.gender?.message)}
@@ -202,7 +208,9 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             inputProps={{
               id: 'firstName',
               labelPlacement: 'outside',
-              label: dictionary.az.firstName,
+              label: (
+                <div className="w-28 text-base">{dictionary.az.firstName}</div>
+              ),
               isDisabled: fieldsIsDisable
             }}
             type="text"
@@ -232,7 +240,9 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             inputProps={{
               id: 'lastName',
               labelPlacement: 'outside',
-              label: dictionary.az.lastName,
+              label: (
+                <div className="w-28 text-base">{dictionary.az.lastName}</div>
+              ),
               isDisabled: fieldsIsDisable
             }}
             type="text"

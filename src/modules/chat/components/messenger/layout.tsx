@@ -15,7 +15,7 @@ function Layout() {
         setIsDrawerOpen={setIsDrawerOpen}
       />
 
-      <div className="inner h-full flex">
+      <div className="inner h-full flex chat-wrapper">
         <Drawer className="bg-black" isOpen={isDrawerOpen}>
           <ChatHistory isResponsive />
         </Drawer>
