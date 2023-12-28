@@ -16,9 +16,9 @@ function LayoutPage() {
       <div className="my-2 flex-1 z-10 scrollBar relative overflow-y-scroll">
         <Button
           onClick={onOpen}
-          size="md"
+          size="sm"
           isIconOnly
-          className="bg-black rounded-full  z-40  fixed bottom-12 right-12"
+          className="bg-black rounded-full  z-40  fixed sm:bottom-12 sm:right-12 bottom-8 right-8"
         >
           <BsQuestionCircle color="white" size={42} />
         </Button>

@@ -1,13 +1,14 @@
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputValidationText } from '@/utils/constants/validations';
 import { BsCalendarWeekFill } from 'react-icons/bs';
+import { ReactNode } from 'react';
 import AppHandledInput from '../input/handled-input';
 
 interface IHandledDate {
   control: any;
   errors?: any;
   fieldsIsDisable?: boolean;
-  label?: string;
+  label?: ReactNode;
   className?: string;
 }
 

@@ -367,3 +367,14 @@ input::-webkit-inner-spin-button {
 input[type='number'] {
   -moz-appearance: textfield;
 }
+
+@media (max-width: 1024px) {
+  .chat-wrapper {
+    height: 520px;
+  }
+}
+@media (max-width: 500px) {
+  .pricing-tab {
+    font-size: 10px;
+  }
+}
