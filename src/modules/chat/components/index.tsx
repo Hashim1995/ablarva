@@ -17,7 +17,7 @@ function Chat() {
           <ChatHistory />
         </div>
 
-        <div className="rounded-3xl col-span-12 lg:col-span-4 lg:row-span-2 sm:row-span-1 ">
+        <div className="rounded-3xl col-span-12 lg:col-span-4 lg:row-span-2 sm:row-span-1 lg:block hidden">
           <MyPlan />
         </div>
       </div>
