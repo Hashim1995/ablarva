@@ -40,8 +40,9 @@ function ThinkText({
     <div className="thinkText-frame">
       <div className="thinkText-center">
         <div className="thinkText-carousel">
-          <div className="thinkText-pre">
-            Hörmətli <strong>Aİ-ZADƏMİZ deyirki: </strong>{' '}
+          <div className="thinkText-pre lg:text-base sm:text-sm text-xs">
+            <span className="sm:inline hidden">Hörmətli</span>{' '}
+            <strong>Aİ-ZADƏ deyirki: </strong>{' '}
           </div>
           <div className="thinkText-change_outer">
             <div className="thinkText-change_inner">

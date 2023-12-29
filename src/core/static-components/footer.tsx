@@ -1,7 +1,11 @@
 import { useDisclosure } from '@nextui-org/react';
 import InstructionModal from './instruction-modal';
 
-function Footer() {
+interface IFooterProps {
+  onOpenHelp: () => void;
+}
+
+function Footer({ onOpenHelp }: IFooterProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
@@ -11,8 +15,8 @@ function Footer() {
         <div className="text-sm  text-center text-white">
           <a href="/#" className="hover:underline">
             AI-ZADE™
-          </a>
-          . All Rights Reserved. © 2023{' '}
+          </a>{' '}
+          © 2023{' '}
         </div>
         <div className="flex gap-5">
           <div
@@ -22,7 +26,13 @@ function Footer() {
           >
             Təlimat
           </div>
-          <div className="text-sm text-center text-white">Version: 0.2.1</div>
+          <div
+            aria-hidden
+            onClick={onOpenHelp}
+            className="cursor-pointer text-sm text-center text-white lg:hidden block"
+          >
+            Kömək
+          </div>
         </div>
       </div>
       {isOpen && (
