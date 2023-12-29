@@ -283,17 +283,23 @@ input::placeholder {
   }
 }
 
-@media (max-width: 480px) {
+// @media (max-width: 480px) {
+//   .layoutHeight {
+//     height: calc(68vh - 56px) !important;
+//   }
+// }
+
+@media (max-width: 1024px) {
   .layoutHeight {
-    height: calc(68vh - 56px) !important;
+    height: 100%;
   }
 }
 
-@media (min-width: 481px) and (max-width: 768px) {
-  .layoutHeight {
-    height: calc(72vh - 56px) !important;
-  }
-}
+// @media (min-width: 481px) and (max-width: 768px) {
+//   .layoutHeight {
+//     height: calc(72vh - 56px) !important;
+//   }
+// }
 
 @media (max-width: 639px) {
   .mobile-row-chart {
