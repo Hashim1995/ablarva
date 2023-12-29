@@ -171,7 +171,7 @@ function ChatInner() {
 
   return (
     <div className="flex flex-col gap-2 h-full  ">
-      <div className="h-full sm:pb-40 pb-32">
+      <div className="h-full sm:pb-40 pb-16">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
