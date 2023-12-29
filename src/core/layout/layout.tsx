@@ -18,7 +18,7 @@ function LayoutPage() {
           onClick={onOpen}
           size="sm"
           isIconOnly
-          className="bg-black rounded-full  z-40  fixed sm:bottom-12 sm:right-12 bottom-8 right-8"
+          className="bg-black rounded-full lg:flex hidden z-40  fixed sm:bottom-12 sm:right-12 bottom-8 right-8"
         >
           <BsQuestionCircle color="white" size={42} />
         </Button>
@@ -30,7 +30,7 @@ function LayoutPage() {
           <Outlet />
         </div>
       </div>
-      <Footer />
+      <Footer onOpenHelp={onOpen} />
     </div>
   );
 }
