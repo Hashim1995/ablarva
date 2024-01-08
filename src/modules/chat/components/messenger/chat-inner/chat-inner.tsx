@@ -189,7 +189,7 @@ function ChatInner() {
             />
           ))}
           {waitingForResponse && (
-            <div className=" flex justify-start mt-2 items-center ">
+            <div className=" flex justify-start mt-2 mb-5 items-center">
               <AiLoder />
               {/* <div className="loader bg-black p-2 rounded-full flex space-x-3">
                 <div className="w-3 h-3 bg-white rounded-full animate-bounce" />

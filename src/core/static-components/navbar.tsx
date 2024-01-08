@@ -21,7 +21,8 @@ import {
   Tooltip,
   DropdownItem,
   useDisclosure,
-  Image
+  Image,
+  Link
 } from '@nextui-org/react';
 
 import { useDarkMode, useOnClickOutside } from 'usehooks-ts';
@@ -100,19 +101,22 @@ export default function Navbar() {
             aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
           />
         </NavbarContent>
-
         <NavbarContent className="lg:hidden pr-3" justify="center">
           <NavbarBrand>
             <p className="font-bold text-inherit">ACMasdE</p>
           </NavbarBrand>
         </NavbarContent>
-
         <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
-          <NavbarBrand>
-            <BsRobot size={48} />
-          </NavbarBrand>
+          <div
+            onClick={() => navigate('/chat')}
+            className="cursor-pointer"
+            aria-hidden
+          >
+            <NavbarBrand>
+              <BsRobot size={48} />
+            </NavbarBrand>
+          </div>
         </NavbarContent>
-
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
           <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
             <Button
@@ -190,7 +194,6 @@ export default function Navbar() {
             </Button>
           </ButtonGroup>
         </NavbarContent>
-
         <NavbarContent justify="end">
           <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
             {' '}
@@ -253,7 +256,7 @@ export default function Navbar() {
               <DropdownTrigger>
                 <div>
                   <Image
-                    src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                    src={`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`}
                     width={39}
                     alt="user-image"
                     className="rounded-full block sm:hidden"
@@ -285,7 +288,6 @@ export default function Navbar() {
             </Dropdown>
           </NavbarItem>
         </NavbarContent>
-
         <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
           {menuItems.map((item, index) => (
             <NavbarMenuItem
