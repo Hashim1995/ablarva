@@ -253,7 +253,7 @@ export default function Navbar() {
               <DropdownTrigger>
                 <div>
                   <Image
-                    src="https://i.pravatar.cc/150?u=a04258114e29026702d"
+                    src={`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`}
                     width={39}
                     alt="user-image"
                     className="rounded-full block sm:hidden"
