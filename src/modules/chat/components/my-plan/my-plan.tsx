@@ -37,7 +37,7 @@ function MyPlan({ isPricing }: IPropsMyPlan) {
   );
 
   const chartData1 = [
-    { name: 'Geri qalan', value: chartData?.basic.remainder },
+    { name: 'Geri qalanasdasd', value: chartData?.basic.remainder },
     { name: 'İstifadə olunan', value: chartData?.basic?.usage }
   ];
   const chartData2 = [
