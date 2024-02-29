@@ -2,9 +2,9 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-// html {
-//   overflow: hidden;
-// }
+html {
+  overflow: hidden;
+}
 
 .app-wrapper {
   /*
@@ -17,7 +17,7 @@
 
 body {
   margin: 0;
-  overflow-y: auto;
+  // overflow-y: auto;
 }
 * {
   font-family: 'Poppins', sans-serif;
@@ -51,21 +51,34 @@ body::-webkit-scrollbar-thumb,
   background-color: #292d32;
   height: 50px;
 }
+.remove-scrollbar {
+  -ms-overflow-style: none !important; /* IE + Edge */
+  scrollbar-width: none !important; /* Firefox */
+}
+.fixed-height {
+  height: calc(100vh - 64px);
+  max-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+}
+.scroll-to-bottom-wrapper > div:first-child {
+  -ms-overflow-style: none !important; /* IE + Edge */
+  scrollbar-width: none !important;
+}
 
 .componentsScrollBar::-webkit-scrollbar {
   -webkit-appearance: none;
-  width: 5px;
+  width: 50px;
   height: 8px;
 }
 
 .componentsScrollBar::-webkit-scrollbar-track {
-  border-radius: 4px;
-  background: #f1f1f1;
+  border-radius: 20px;
+  background: green;
 }
 
 .componentsScrollBar::-webkit-scrollbar-thumb {
   border-radius: 4px;
-  background-color: rgb(180, 180, 180);
+  background-color: red;
 }
 
 ::selection {
@@ -99,7 +112,8 @@ body::-webkit-scrollbar-thumb,
 button.opacity-disabled,
 button.isDisabled {
   opacity: 1 !important;
-  background: #eaeaea;
+  background: transparent;
+  color: gray;
   cursor: not-allowed !important;
 }
 
@@ -382,5 +396,27 @@ input[type='number'] {
 @media (max-width: 500px) {
   .pricing-tab {
     font-size: 10px;
+  }
+}
+
+.container {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .container {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .container {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .container {
+    width: 1170px;
   }
 }

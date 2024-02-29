@@ -48,13 +48,13 @@ function MessengerHeader({
 
   return (
     <>
-      <div className="flex justify-between  items-center bg-black p-3">
+      <div className="flex justify-between  items-center h-[60px] p-3">
         <div className="flex justify-between gap-2 sm:gap-5 items-center ">
           <Button
             size="sm"
             isIconOnly
             onClick={() => setIsDrawerOpen((z: boolean) => !z)}
-            className="bg-transparent rounded-full block lg:hidden"
+            className="bg-transparent l block lg:hidden"
             aria-label="Filter"
           >
             <BsJustify
@@ -63,9 +63,9 @@ function MessengerHeader({
               className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
             />
           </Button>
-          <h2 className="text-base sm:text-xl text-white font-semibold hidden lg:block">
+          <h3 className="text-base sm:text-xl text-white font-semibold hidden lg:block">
             {dictionary.az.chat}
-          </h2>
+          </h3>
         </div>
         <div className="flex items-center justify-between gap-2">
           <Tabs

@@ -114,7 +114,7 @@ function ChatBubble({
   );
 
   return (
-    <div className="bubble flex sm:gap-5 gap-3 bg-[#F0F1F3]   rounded-lg p-3 my-3">
+    <div className="bubble bg-black flex sm:gap-5 gap-3 bg-[#F0F1F3]   rounded-lg p-3 my-3">
       <Avatar
         name="Junior"
         src={

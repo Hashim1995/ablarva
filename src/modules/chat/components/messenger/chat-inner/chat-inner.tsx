@@ -170,12 +170,12 @@ function ChatInner() {
   );
 
   return (
-    <div className="flex flex-col gap-2 h-full  ">
-      <div className="h-full sm:pb-40 pb-16">
+    <div className="flex flex-col gap-2 h-full bg-black    ">
+      <div className="h-full sm:pb-40 pb-16 container">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 componentsScrollBar overflow-x-auto   overflow-y-auto h-full"
+          className="row-span-8 scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IThreadBubblesItem, index: number) => (
             <ChatBubble
@@ -236,7 +236,7 @@ function ChatInner() {
         </ScrollToBottom>
       </div>
 
-      <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] row-span-4 absolute w-full bottom-0">
+      <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] border-1 rounded-0 shadow-none row-span-4 absolute container bottom-0    left-1/2 transform -translate-x-1/2 -translate-y-1/2">
         <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
       </Card>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}

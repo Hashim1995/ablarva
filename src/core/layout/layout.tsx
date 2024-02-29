@@ -1,7 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { BsQuestionCircle } from 'react-icons/bs';
-import Footer from '../static-components/footer';
 import Navbar from '../static-components/navbar';
 import FeedbackModal from '../static-components/feedback-modal';
 
@@ -9,11 +8,9 @@ function LayoutPage() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <div className="flex particles flex-col justify-normal gap-2 h-screen max-h-screen app-wrapper">
+    <div className=" h-screen  app-wrapper">
       <Navbar />
-      {/* sm:h-[80vh] */}
-
-      <div className="my-2 flex-1 z-10 scrollBar relative overflow-y-scroll">
+      <div className=" z-10   ">
         <Button
           onClick={onOpen}
           size="sm"
@@ -26,11 +23,8 @@ function LayoutPage() {
           <FeedbackModal onOpenChange={onOpenChange} isOpen={isOpen} />
         )}
 
-        <div className="h-full">
-          <Outlet />
-        </div>
+        <Outlet />
       </div>
-      <Footer onOpenHelp={onOpen} />
     </div>
   );
 }

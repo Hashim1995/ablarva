@@ -80,7 +80,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className="  bg-[#FBF9F9] shadow  rounded-xl relative   h-full"
+      className="  bg-black  relative rounded-0 shadow-none   h-full"
     >
       {/* Message Textarea Field */}
       <Textarea
@@ -108,7 +108,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         maxRows={matches ? 3 : 2}
       />
 
-      <div className="flex w-full px-5 items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-10 sm:h-12">
+      <div className="flex w-full px-5 bg-[#171717] items-center justify-between absolute rounded-0 shadow-none bottom-0 z-20   h-10 sm:h-12">
         <Button
           type="button"
           isIconOnly
@@ -122,7 +122,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
             <AiOutlineSound size={16} color="white" />
           )}{' '}
         </Button>
-        <div className="flex  gap-2  items-center justify-between">
+        <div className="flex rounded-0 shadow-none  gap-2  items-center justify-between">
           {
             <Chip className="sm:flex hidden">
               Aİ-ZADƏ sizə {currentLanguageText(currentChatLanguage)} cavab

@@ -87,7 +87,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
+        className="z-10  bg-[#171717]"
         maxWidth="full"
         isBlurred={false}
         position="static"
@@ -113,18 +113,16 @@ export default function Navbar() {
             aria-hidden
           >
             <NavbarBrand>
-              <BsRobot size={48} />
+              <BsRobot color="white" size={48} />
             </NavbarBrand>
           </div>
         </NavbarContent>
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-          <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
+          <ButtonGroup className="">
             <Button
-              className={` w-40 h-12  ${
-                location.pathname.includes('chat')
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black'
-              }`}
+              className={` w-40 text-white bg-transparent h-12  ${location.pathname.includes(
+                'chat'
+              )}`}
               onClick={() => {
                 navigate('/chat');
               }}
@@ -138,12 +136,10 @@ export default function Navbar() {
               content={'Hazırlanır'}
             >
               <Button
-                className={`isDisabled w-40 h-12  ${
-                  location.pathname.includes('assistan')
-                    ? 'bg-black text-white'
-                    : 'bg-white text-black'
-                }`}
-                startContent={<BsYelp size={17} />}
+                className={`isDisabled text-white  w-40 bg-transparent h-12  ${location.pathname.includes(
+                  'assistan'
+                )}`}
+                startContent={<BsYelp color="white" size={17} />}
               >
                 {dictionary.az.assistan}
               </Button>
@@ -155,47 +151,46 @@ export default function Navbar() {
               content={'Hazırlanır'}
             >
               <Button
-                className={`isDisabled w-40 h-12  ${
-                  location.pathname.includes('Kataliz')
-                    ? 'bg-black text-white'
-                    : 'bg-white text-black'
-                }`}
-                startContent={<BsClockFill size={17} />}
+                className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
+                  'Kataliz'
+                )}`}
+                startContent={<BsClockFill color="white" size={17} />}
               >
                 Kataliz
               </Button>
             </Tooltip>
 
             <Button
-              className={`w-40 h-12  ${
-                location.pathname.includes('pricing')
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black'
-              }`}
+              className={`w-40 text-white bg-transparent h-12  ${location.pathname.includes(
+                'pricing'
+              )}`}
               onClick={() => {
                 navigate('/pricing');
               }}
-              startContent={<BsFillFilterSquareFill size={17} />}
+              startContent={<BsFillFilterSquareFill color="white" size={17} />}
             >
               {dictionary.az.tariffs}
             </Button>
             <Button
-              className={`w-40 h-12 ${
-                location.pathname.includes('settings')
-                  ? 'bg-black text-white hover:bg-black'
-                  : 'bg-white text-black'
-              }`}
+              className={`w-40 text-white  bg-transparent h-12 ${location.pathname.includes(
+                'settings'
+              )}`}
               onClick={() => {
                 navigate('/settings');
               }}
-              startContent={<BsFillGearFill size={17} />}
+              startContent={<BsFillGearFill color="white" size={17} />}
             >
               {dictionary.az.settings}
             </Button>
           </ButtonGroup>
         </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarContent
+          style={{
+            marginRight: '-23px'
+          }}
+          justify="end"
+        >
+          <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
             {' '}
             {!user.verified && (
               <Tooltip
@@ -228,12 +223,16 @@ export default function Navbar() {
               avatarProps={{
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
-              className="hidden sm:flex"
+              className="hidden sm:flex text-white"
             />
             <Dropdown className="hidden sm:block">
               <DropdownTrigger className="hidden sm:block">
                 <div>
-                  <BsArrowRightCircle className="cursor-pointer" size={20} />
+                  <BsArrowRightCircle
+                    className="cursor-pointer"
+                    color="white"
+                    size={20}
+                  />
                 </div>
               </DropdownTrigger>
               <DropdownMenu
