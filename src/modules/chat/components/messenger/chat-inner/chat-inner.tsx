@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Card, Chip, useDisclosure } from '@nextui-org/react';
+import { Button, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
 import {
   IChatForm,
@@ -170,8 +170,8 @@ function ChatInner() {
   );
 
   return (
-    <div className="flex flex-col gap-2 h-full bg-black    ">
-      <div className="h-full sm:pb-40 pb-16 container">
+    <div className="flex flex-col gap-2 h-full    relative">
+      <div className="h-full  pb-[13rem] container">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
@@ -236,9 +236,9 @@ function ChatInner() {
         </ScrollToBottom>
       </div>
 
-      <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] border-1 rounded-0 shadow-none row-span-4 absolute container bottom-0    left-1/2 transform -translate-x-1/2 -translate-y-1/2">
-        <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
-      </Card>
+      {/* <div className="container"> */}
+      <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
+      {/* </div> */}
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
     </div>
   );

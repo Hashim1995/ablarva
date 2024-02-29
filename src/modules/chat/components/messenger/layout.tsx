@@ -25,7 +25,7 @@ function Layout() {
           <ChatHistory isResponsive />
         </Drawer>
         <main
-          style={{ height: 'calc(80vh - 56px) ' }}
+          // style={{ height: 'calc(80vh - 56px) ' }}
           className="flex-1  layoutHeight     transition-all duration-300 ease-in-out h-full"
         >
           <ChatInner />

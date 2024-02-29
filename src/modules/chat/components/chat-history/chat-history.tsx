@@ -75,7 +75,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
     fetchThreadHistory();
   }, [searchParams.get('threadID')]);
   return (
-    <div className="w-[250px] bg-darkBlack overflow-y-auto fixed-height">
+    <div className="w-[250px] bg-darkBlack overflow-y-auto remove-scrollbar fixed-height">
       {!isResponsive && (
         <div className="flex justify-between items-center  p-3 h-[60px]">
           <h3 className="text-base sm:text-xl text-white font-semibold">
@@ -85,17 +85,28 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
       )}
 
       <div
-        className={` p-3  overflow-y-scroll     lg:h-full  remove-scrollbar ${
+        className={` p-3       lg:h-full  remove-scrollbar ${
           isResponsive ? 'h-full pt-3 pb-14 ' : 'h-[300px] xl:py-3  py-1'
         }`}
       >
         {threadHistory && threadHistory?.length !== 0 ? (
           threadHistory?.map(day => (
-            <div key={day.dateOfChats} className="mb-4">
-              <div className={`text-sm font-medium	mb-2  text-info text-[gray]`}>
+            <div key={day.dateOfChats} className="pb-5">
+              {/* <div
+                className={`text-sm font-medium mb-1  text-info text-[gray]`}
+              >
                 {dayjs(new Date(day.dateOfChats).toISOString()).format(
                   'DD.MM.YYYY'
                 )}
+              </div> */}
+              <div className="flex items-center">
+                <div className="flex-1 border-t-1 border-gray-200" />
+                <span className="px-3 text-sm  text-[gray]">
+                  {dayjs(new Date(day.dateOfChats).toISOString()).format(
+                    'DD.MM.YYYY'
+                  )}
+                </span>
+                <div className="flex-1 border-t-1 border-gray-200" />
               </div>
               {day.chats.map(conv => (
                 <div
@@ -110,7 +121,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       threadID: String(conv.chatId)
                     });
                   }}
-                  className="flex cursor-pointer relative items-center justify-between mb-2 text-white rounded-2xl    py-2 z-10"
+                  className="flex cursor-pointer relative items-center justify-between  text-white rounded-2xl    py-2 z-10"
                 >
                   <p className="text-white  leading-4  text-sm line-clamp-3">
                     {conv.firstMessageOfChat}
@@ -129,10 +140,10 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       <Button
                         size="sm"
                         isIconOnly
-                        className="bg-white rounded-full ml-2 !w-6 !h-8 !unit-lg"
+                        className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
                         aria-label="Remove chat"
                       >
-                        <BsTrash size={16} className=" text-gray-500" />
+                        <BsTrash size={16} className=" text-white" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
