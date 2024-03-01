@@ -52,22 +52,22 @@ function MessengerHeader({
   );
 
   return (
-    <>
-      <div className="flex justify-between  items-center h-[60px] p-3 pb-1">
-        <div className="flex justify-between gap-2 sm:gap-5 items-center ">
-          <Button
-            size="sm"
-            isIconOnly
-            // onClick={() => setIsDrawerOpen((z: boolean) => !z)}
-            className="bg-transparent block "
-            aria-label="Filter"
-          >
-            <BsJustify
-              size={20}
-              color="white"
-              className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
-            />
-          </Button>
+    <div className=" pt-1 pb-3 h-[60px] flex   ">
+      <Button
+        size="sm"
+        isIconOnly
+        // onClick={() => setIsDrawerOpen((z: boolean) => !z)}
+        className="bg-transparent block  ms-3"
+        aria-label="Filter"
+      >
+        <BsJustify
+          size={20}
+          color="white"
+          className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
+        />
+      </Button>
+      <div className="flex justify-between  items-center container">
+        <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
           {(premium || basic) && (
             <div className="flex w-[400px] justify-content-between gap-4">
               <Tooltip
@@ -116,7 +116,7 @@ function MessengerHeader({
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex items-center justify-between gap-2 mr-5">
           <Tabs
             selectedKey={currentModel}
             // @ts-ignore
@@ -223,7 +223,7 @@ function MessengerHeader({
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
       )}
-    </>
+    </div>
   );
 }
 

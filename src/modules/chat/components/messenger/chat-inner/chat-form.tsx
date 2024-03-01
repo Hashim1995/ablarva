@@ -90,7 +90,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           color="primary"
           rows={3}
           maxRows={3}
-          placeholder="Type a message..."
+          placeholder="Type a message... 💬👨🏻‍💻"
           classNames={textAreaConfig}
           className="flex-1 px-4  !border-none text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
           onKeyDown={e => {

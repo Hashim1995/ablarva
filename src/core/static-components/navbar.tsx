@@ -87,7 +87,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="z-10  bg-[#171717]"
+        className="z-10  bg-black"
         maxWidth="full"
         isBlurred={false}
         position="static"

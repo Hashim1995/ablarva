@@ -24,6 +24,7 @@ import {
 } from '@/redux/chat/chat-slice';
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
+import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
 import ThinkText from '@/core/static-components/think-text';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
@@ -191,11 +192,6 @@ function ChatInner() {
           {waitingForResponse && (
             <div className=" flex justify-start mt-2 mb-5 items-center">
               <AiLoder />
-              {/* <div className="loader bg-black p-2 rounded-full flex space-x-3">
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-              </div> */}
               <ThinkText />
             </div>
           )}
@@ -233,6 +229,10 @@ function ChatInner() {
               </Button>
             </div>
           )}
+          {!waitingForThreadLoad &&
+            !hasError &&
+            !waitingForResponse &&
+            bubbleList?.length < 1 && <AiEmptyWelcome />}
         </ScrollToBottom>
       </div>
 

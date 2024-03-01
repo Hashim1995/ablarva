@@ -30,8 +30,8 @@ export default {
       themes: {
         light: {
           colors: {
-            black: '#424242',
-            darkBlack: '#171717',
+            black: '#020008',
+            darkBlack: '#020008',
             custom: 'red'
           }
         },
