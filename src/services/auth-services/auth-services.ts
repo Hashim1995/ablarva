@@ -8,10 +8,10 @@ import {
   IUserRegister
 } from '@/models/user';
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
-import { IAccountPayload } from '@/modules/settings/types';
+import { IAccountPayload } from '@/modules/cabinet/types';
 import { IForgotPasswordForm } from '@/core/static-components/login/forgot-password';
 import { IVerifyEmailForm } from '@/core/static-components/verify-email';
-import { IChangePasswordForm } from '@/modules/settings/components/account/change-password';
+import { IChangePasswordForm } from '@/modules/cabinet/components/account/change-password';
 import { IFeedbackModalForm } from '@/core/static-components/feedback-modal';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
@@ -29,7 +29,7 @@ export class AuthService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AuthService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): AuthService {
     if (!this.instance) {

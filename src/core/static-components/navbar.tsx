@@ -42,7 +42,10 @@ import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
+import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { AiOutlineUser } from 'react-icons/ai';
 
+import { FaUser } from 'react-icons/fa';
 import { RootState } from '@/redux/store';
 import VerifyEmail from './verify-email';
 
@@ -159,29 +162,6 @@ export default function Navbar() {
                 Kataliz
               </Button>
             </Tooltip>
-
-            <Button
-              className={`w-40 text-white bg-transparent h-12  ${location.pathname.includes(
-                'pricing'
-              )}`}
-              onClick={() => {
-                navigate('/pricing');
-              }}
-              startContent={<BsFillFilterSquareFill color="white" size={17} />}
-            >
-              {dictionary.az.tariffs}
-            </Button>
-            <Button
-              className={`w-40 text-white  bg-transparent h-12 ${location.pathname.includes(
-                'settings'
-              )}`}
-              onClick={() => {
-                navigate('/settings');
-              }}
-              startContent={<BsFillGearFill color="white" size={17} />}
-            >
-              {dictionary.az.settings}
-            </Button>
           </ButtonGroup>
         </NavbarContent>
         <NavbarContent
@@ -225,33 +205,54 @@ export default function Navbar() {
               }}
               className="hidden sm:flex text-white"
             />
-            <Dropdown className="hidden sm:block">
-              <DropdownTrigger className="hidden sm:block">
+            <Dropdown className="">
+              <DropdownTrigger className="">
                 <div>
-                  <BsArrowRightCircle
+                  <MdOutlineKeyboardArrowDown
                     className="cursor-pointer"
                     color="white"
                     size={20}
                   />
                 </div>
               </DropdownTrigger>
-              <DropdownMenu
-                className="hidden sm:block"
-                aria-label="Static Actions"
-              >
+              <DropdownMenu className=" " aria-label="Static Actions">
                 <DropdownItem
-                  className="hidden sm:block"
+                  className=" "
+                  onClick={() => {
+                    navigate('/pricing');
+                  }}
+                  key="pricing"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <MdAttachMoney /> {dictionary.az.tariffs}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
+                  onClick={() => {
+                    navigate('/cabinet');
+                  }}
+                  key="cabinet"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <AiOutlineUser /> {dictionary.az.cabinet}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
                   onClick={() => {
                     localStorage.removeItem('userToken');
                     navigate('/login');
                   }}
                   key="logout"
                 >
-                  {dictionary.az.logOut}
+                  <p className="flex items-center  m-0 gap-2">
+                    <BsArrowRightCircle /> {dictionary.az.logOut}
+                  </p>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <Dropdown className="block sm:hidden">
+            {/* <Dropdown className="block sm:hidden">
               <DropdownTrigger>
                 <div>
                   <Image
@@ -284,7 +285,7 @@ export default function Navbar() {
                   <p className="text-sm">{dictionary.az.logOut}</p>
                 </DropdownItem>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">

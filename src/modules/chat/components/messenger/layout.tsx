@@ -13,7 +13,7 @@ function Layout() {
       style={{
         borderRadius: '0 !important'
       }}
-      className="h-full rounded-0 shadow-none  bg-transparent  "
+      className="h-full rounded-none  shadow-none chat-bg-animation-gradient"
     >
       <MessengerHeader
         isDrawerOpen={isDrawerOpen}

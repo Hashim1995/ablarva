@@ -5,7 +5,7 @@
 import { IGlobalResponse } from '@/models/common';
 import { IPricingData } from '@/models/payment';
 import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/pricing/types';
-import { ITransactionsItem } from '@/modules/settings/types';
+import { ITransactionsItem } from '@/modules/cabinet/types';
 import {
   ErrorCallBack,
   HttpUtil,
@@ -29,7 +29,7 @@ export class PaymentService {
   // eslint-disable-next-line no-use-before-define
   private static instance: PaymentService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): PaymentService {
     if (!this.instance) {

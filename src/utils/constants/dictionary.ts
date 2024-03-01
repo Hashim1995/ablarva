@@ -6,6 +6,7 @@ export const dictionary = {
     dateOfBirth: 'Doğum tarixi',
     confirmPassword: 'Tərar şifrə',
     logOut: 'Çıxış',
+    cabinet: 'Şəxsi kabinet',
     account: 'Hesab',
     forgetPassword: 'Şifrəmi unutdum',
     oldPassword: 'Köhnə şifrə',

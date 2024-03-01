@@ -4,12 +4,12 @@ import { Navigate } from 'react-router-dom';
 // const LoginPage = React.lazy(() => import('@core/static-pages/login-page'));
 import LoginPage from '@core/static-pages/login-page';
 import SuspenseLoader from '../static-components/suspense-loader';
+import CabinetPage from '../../modules/cabinet/pages';
 
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 const ChatPage = React.lazy(() => import('../../modules/chat/pages'));
 const AssistanPage = React.lazy(() => import('../../modules/assistan/pages'));
 const PricingPage = React.lazy(() => import('../../modules/pricing/pages'));
-const SettingsPage = React.lazy(() => import('../../modules/settings/pages'));
 
 const routes = [
   {
@@ -44,10 +44,10 @@ const routes = [
         )
       },
       {
-        path: 'settings',
+        path: 'cabinet',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
-            <SettingsPage />
+            <CabinetPage />
           </Suspense>
         )
       },
