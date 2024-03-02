@@ -37,9 +37,8 @@ function AppHandledInput({
   label,
   errors,
   type = 'text',
-  onChangeApp
-} // size // IconElement
-: IHandledInput) {
+  onChangeApp // size // IconElement
+}: IHandledInput) {
   return (
     <Controller
       name={name}

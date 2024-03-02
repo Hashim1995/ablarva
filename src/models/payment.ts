@@ -1,16 +1,15 @@
-
 export interface ILimitItem {
-  label: string,
-  price: number,
+  label: string;
+  price: number;
 }
 export interface IPackageItem {
-  packageId: number,
-  packageName: string,
-  price: number,
-  packageDescription: string,
-  categoryId: number,
-  limitDetails: ILimitItem[]
+  packageId: number;
+  packageName: string;
+  price: number;
+  packageDescription: string;
+  categoryId: number;
+  limitDetails: ILimitItem[];
 }
 export interface IPackageData {
-  packages: IPackageItem[],
+  packages: IPackageItem[];
 }
