@@ -37,9 +37,9 @@ function AppHandledInput({
   label,
   errors,
   type = 'text',
-  onChangeApp,
-  size // IconElement
-}: IHandledInput) {
+  onChangeApp
+} // size // IconElement
+: IHandledInput) {
   return (
     <Controller
       name={name}
@@ -51,6 +51,7 @@ function AppHandledInput({
           label={label}
           placeholder={placeholder}
           required={required}
+          // labelPlacement="outside"
           onBlur={onBlur}
           onChange={e => {
             onChange(e);
@@ -70,7 +71,7 @@ function AppHandledInput({
           value={value}
           className={className}
           errorMessage={(isInvalid && errors[name].message) || ''}
-          size={size}
+          size="md"
           {...inputProps}
         />
       )}

@@ -7,7 +7,7 @@ import Layout from './messenger/layout';
 function Chat() {
   const { resetChatInner } = useSelector((state: RootState) => state.chat);
   return (
-    <div className="chat-bg-animation-gradient fixed-height  ">
+    <div className="gradient-bg fixed-height  ">
       <div className="flex fixed-height">
         <div className=" w-full fixed-height">
           <Layout key={resetChatInner} />

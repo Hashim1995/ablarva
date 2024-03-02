@@ -426,7 +426,7 @@ input[type='number'] {
   }
 }
 
-.chat-bg-animation-gradient-with-keyframe {
+.gradient-bg-with-keyframe {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   background-size: 800% 800%;
   -webkit-animation: AnimationName 12s ease infinite;
@@ -434,7 +434,7 @@ input[type='number'] {
   animation: AnimationName 12s ease infinite;
 }
 
-.chat-bg-animation-gradient {
+.gradient-bg {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   background-size: 800% 800%;
 }

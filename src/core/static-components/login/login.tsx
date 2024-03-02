@@ -10,7 +10,7 @@ function Login() {
 
   return (
     <div>
-      <div className=" particles chat-bg-animation-gradient-with-keyframe min-h-screen ">
+      <div className=" particles gradient-bg-with-keyframe min-h-screen ">
         <div
           className={`flip-card  flex h-screen items-center   justify-center ${
             isFlipped ? 'flipped' : ''

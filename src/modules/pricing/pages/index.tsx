@@ -6,11 +6,11 @@ import {
   ModalBody,
   ModalFooter,
   Button,
-  Card,
-  CardBody,
   Tab,
   Tabs
 } from '@nextui-org/react';
+import ChatPricing from '../components/chatPricing';
+import AsistanPricing from '../components/asistanPricing';
 
 interface IPricingModal {
   isOpen: boolean;
@@ -36,37 +36,26 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
               </ModalHeader>
               <ModalBody>
                 <div className="flex w-full flex-col">
-                  <Tabs aria-label="Options">
+                  <Tabs
+                    className="w-full"
+                    variant="underlined"
+                    classNames={{
+                      tabList: 'w-full'
+                    }}
+                    aria-label="Options"
+                  >
                     <Tab key="chat" title={dictionary?.az?.chat}>
-                      <Card>
-                        <CardBody>
-                          Lorem ipsum dolor sit amet, consectetur adipiscing
-                          elit, sed do eiusmod tempor incididunt ut labore et
-                          dolore magna aliqua. Ut enim ad minim veniam, quis
-                          nostrud exercitation ullamco laboris nisi ut aliquip
-                          ex ea commodo consequat.
-                        </CardBody>
-                      </Card>
+                      <ChatPricing />
                     </Tab>
                     <Tab key="assistan" title={dictionary?.az?.assistan}>
-                      <Card>
-                        <CardBody>
-                          Ut enim ad minim veniam, quis nostrud exercitation
-                          ullamco laboris nisi ut aliquip ex ea commodo
-                          consequat. Duis aute irure dolor in reprehenderit in
-                          voluptate velit esse cillum dolore eu fugiat nulla
-                          pariatur.
-                        </CardBody>
-                      </Card>
+                      <AsistanPricing />
                     </Tab>
-                    <Tab key="kataliz" title={dictionary?.az?.kataliz}>
-                      <Card>
-                        <CardBody>
-                          Excepteur sint occaecat cupidatat non proident, sunt
-                          in culpa qui officia deserunt mollit anim id est
-                          laborum.
-                        </CardBody>
-                      </Card>
+                    <Tab
+                      isDisabled
+                      key="kataliz"
+                      title={dictionary?.az?.kataliz}
+                    >
+                      kataliz
                     </Tab>
                   </Tabs>
                 </div>
