@@ -113,8 +113,8 @@ function Sessions() {
   // };
 
   return (
-    <Card className="rounded-lg sm:rounded-2xl shadow h-full ">
-      <div className="flex justify-between items-center xl:mb-4 bg-black p-3">
+    <Card className="rounded-lg bg-transparent sm:rounded-2x  h-fulll shadow h-full ">
+      <div className="flex justify-between items-center xl:mb-4  p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
             {dictionary.az.active} {dictionary.az.sessions}
@@ -133,7 +133,7 @@ function Sessions() {
           />
         </Button> */}
       </div>
-      <div className="bg-white  rounded-lg  componentsScrollBar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
+      <div className=" rounded-lg  componentsScrollBar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
           <div>
             {userSessions?.length > 0 ? (

@@ -6,9 +6,9 @@ interface IAccountForm {
   lastName: string;
   gender: selectOption | null | string;
   dateOfBirth: string | Date;
-  day?: string;
-  month?: string;
-  year?: string;
+  day?: any;
+  month?: any;
+  year?: any;
 }
 
 interface ITransactionsItem {
@@ -21,6 +21,6 @@ interface ITransactionsItem {
   orderId: string;
 }
 
-interface IAccountPayload extends Omit<IAccountForm, 'email'> {}
+interface IAccountPayload extends Omit<IAccountForm, 'email'> { }
 
 export type { IAccountForm, ITransactionsItem, IAccountPayload };

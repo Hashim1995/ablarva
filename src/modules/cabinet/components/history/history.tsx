@@ -86,8 +86,8 @@ function Bottom() {
   };
 
   return (
-    <Card className="h-full rounded-lg relative sm:rounded-2xl">
-      <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 bg-black p-2 sm:p-3">
+    <Card className="h-full  h-full rounded-lg relative bg-transparent sm:rounded-2xl">
+      <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
             {dictionary.az.account} {`${dictionary.az.history}si`}

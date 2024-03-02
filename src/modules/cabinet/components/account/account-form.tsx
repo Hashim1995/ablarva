@@ -1,15 +1,21 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import { useForm } from 'react-hook-form';
+import { Controller, useForm } from 'react-hook-form';
 import { inputValidationText } from '@/utils/constants/validations';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
 } from '@/utils/constants/texts';
-import { BsEnvelopeFill, BsFillPersonFill } from 'react-icons/bs';
+// import { BsFillPersonFill } from 'react-icons/bs';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { genderOptions } from '@/utils/constants/options';
+import {
+  daysList,
+  genderOptions,
+  monthsList,
+  yearsList
+} from '@/utils/constants/options';
 import { toastOptions } from '@/configs/global-configs';
 import { toast } from 'react-toastify';
 import { useEffect } from 'react';
@@ -19,7 +25,7 @@ import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
-import AppHandledDate from '@/components/forms/date/handled-date';
+import { Select, SelectItem } from '@nextui-org/react';
 import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
@@ -95,18 +101,15 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             name="email"
             inputProps={{
               id: 'email',
-              labelPlacement: 'outside',
-              label: (
-                <div className="w-28 text-base">{dictionary.az.email}</div>
-              ),
-              isDisabled: true
+              isDisabled: fieldsIsDisable
             }}
             type="email"
+            className="text-white"
             control={control}
             isInvalid={Boolean(errors.email?.message)}
             errors={errors}
             size="sm"
-            className="text-black bg-transparent text-base sm:text-xl"
+            // className="text-black bg-transparent text-base sm:text-xl"
             rules={{
               required: {
                 value: true,
@@ -117,71 +120,91 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
               }
             }}
-            placeholder={inputPlaceholderText(dictionary.az.email)}
+            label={inputPlaceholderText(dictionary.az.email)}
             required
-            IconElement={() => (
-              <BsEnvelopeFill
-                size={16}
-                color={errors.email?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
-            )}
           />
-
-          <AppHandledDate
-            control={control}
-            errors={errors}
-            fieldsIsDisable={fieldsIsDisable}
-            label={
-              <div className="w-28 text-base">{dictionary.az.dateOfBirth}</div>
-            }
-          />
-
-          {/* <AppHandledDate
-            name="dateOfBirth"
-            inputProps={{
-              id: 'dateOfBirth',
-              labelPlacement: 'outside',
-              label: dictionary.az.dateOfBirth,
-              isDisabled: fieldsIsDisable
-            }}
-            control={control}
-            size="sm"
-            className="text-black  relative text-base sm:text-xl"
-            isInvalid={Boolean(errors.dateOfBirth?.message)}
-            errors={errors}
-            rules={{
-              required: {
-                value: true,
-                message: inputValidationText(dictionary.az.dateOfBirth)
-              }
-            }}
-            placeholder={inputPlaceholderText(dictionary.az.dateOfBirth)}
-            required
-            IconElement={() => (
-              <BsCalendarWeekFill
-                size={16}
-                color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
+          <div className="flex space-x-4">
+            <div className="flex-1">
+              <AppHandledSelect
+                name="day"
+                selectProps={{
+                  id: 'day',
+                  isDisabled: fieldsIsDisable
+                }}
+                isInvalid={Boolean(errors.day?.message)}
+                control={control}
+                label={'Gün'}
+                size="sm"
+                required
+                rules={{
+                  required: {
+                    value: true,
+                    message: inputValidationText('Gün')
+                  }
+                }}
+                options={daysList}
+                errors={errors}
               />
-            )}
-          /> */}
+            </div>
 
+            <div className="flex-1">
+              <AppHandledSelect
+                name="month"
+                selectProps={{
+                  id: 'month',
+                  isDisabled: fieldsIsDisable
+                }}
+                isInvalid={Boolean(errors.month?.message)}
+                control={control}
+                label={'Ay'}
+                size="sm"
+                required
+                rules={{
+                  required: {
+                    value: true,
+                    message: inputValidationText('Ay')
+                  }
+                }}
+                options={monthsList}
+                errors={errors}
+              />
+            </div>
+
+            <div className="flex-1">
+              <AppHandledSelect
+                name="year"
+                selectProps={{
+                  id: 'year',
+                  isDisabled: fieldsIsDisable
+                }}
+                isInvalid={Boolean(errors.year?.message)}
+                control={control}
+                label={'İl'}
+                size="sm"
+                required
+                rules={{
+                  required: {
+                    value: true,
+                    message: inputValidationText('İl')
+                  }
+                }}
+                options={yearsList}
+                errors={errors}
+              />
+            </div>
+          </div>
           <AppHandledSelect
             name="gender"
             selectProps={{
               id: 'gender',
-              labelPlacement: 'outside',
-              label: (
-                <div className="w-28 text-base">{dictionary.az.gender}</div>
-              ),
+
               isDisabled: fieldsIsDisable
             }}
             isInvalid={Boolean(errors.gender?.message)}
             control={control}
-            placeholder={selectPlaceholderText(dictionary.az.gender)}
+            label={selectPlaceholderText(dictionary.az.gender)}
             variant="bordered"
-            className=" app-select text-base sm:text-xl"
+            // className=" app-select text-base sm:text-xl"
             size="sm"
             required
             rules={{
@@ -192,13 +215,6 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             }}
             options={genderOptions}
             errors={errors}
-            IconElement={() => (
-              <BsFillPersonFill
-                size={16}
-                color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
-            )}
           />
         </div>
 
@@ -207,14 +223,10 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             name="firstName"
             inputProps={{
               id: 'firstName',
-              labelPlacement: 'outside',
-              label: (
-                <div className="w-28 text-base">{dictionary.az.firstName}</div>
-              ),
+
               isDisabled: fieldsIsDisable
             }}
             type="text"
-            className="text-black text-base sm:text-xl"
             control={control}
             isInvalid={Boolean(errors.firstName?.message)}
             errors={errors}
@@ -225,29 +237,18 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 message: inputValidationText(dictionary.az.firstName)
               }
             }}
-            placeholder={inputPlaceholderText(dictionary.az.firstName)}
+            label={inputPlaceholderText(dictionary.az.firstName)}
             required
-            IconElement={() => (
-              <BsFillPersonFill
-                size={16}
-                color={errors.firstName?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
-            )}
           />
           <AppHandledInput
             name="lastName"
             inputProps={{
               id: 'lastName',
-              labelPlacement: 'outside',
-              label: (
-                <div className="w-28 text-base">{dictionary.az.lastName}</div>
-              ),
+
               isDisabled: fieldsIsDisable
             }}
             type="text"
             control={control}
-            className="text-black text-base sm:text-xl"
             isInvalid={Boolean(errors.lastName?.message)}
             errors={errors}
             size="sm"
@@ -257,15 +258,8 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 message: inputValidationText(dictionary.az.lastName)
               }
             }}
-            placeholder={inputPlaceholderText(dictionary.az.lastName)}
+            label={inputPlaceholderText(dictionary.az.lastName)}
             required
-            IconElement={() => (
-              <BsFillPersonFill
-                size={16}
-                color={errors.lastName?.message ? '#f31260' : ''}
-                className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-              />
-            )}
           />
         </div>
       </form>

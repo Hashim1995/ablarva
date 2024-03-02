@@ -1,5 +1,5 @@
-import { inputConfig } from '@/configs/global-configs';
-import { Input, InputProps, Tooltip } from '@nextui-org/react';
+// import { inputConfig } from '@/configs/global-configs';
+import { Input, InputProps } from '@nextui-org/react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
 interface IHandledInput {
@@ -7,11 +7,12 @@ interface IHandledInput {
   control: any;
   isInvalid?: boolean;
   placeholder?: string;
+  label?: string;
   rules?: Omit<
     RegisterOptions<FieldValues>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
+  // variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   required?: boolean;
   startContentIconType?: null;
   errors?: any;
@@ -26,18 +27,17 @@ interface IHandledInput {
 function AppHandledInput({
   name,
   control,
-  placeholder = 'Daxil edin',
+  placeholder,
   rules,
-  variant = 'bordered',
+  // variant = 'bordered',
   required = false,
   inputProps,
-  errors,
   isInvalid = false,
   className = '',
+  label,
   type = 'text',
   onChangeApp,
-  size,
-  IconElement
+  size // IconElement
 }: IHandledInput) {
   return (
     <Controller
@@ -47,8 +47,8 @@ function AppHandledInput({
       render={({ field: { onChange, onBlur, value } }) => (
         <Input
           type={type}
+          label={label}
           placeholder={placeholder}
-          variant={variant}
           required={required}
           onBlur={onBlur}
           onChange={e => {
@@ -68,22 +68,8 @@ function AppHandledInput({
           isInvalid={isInvalid}
           value={value}
           className={className}
-          classNames={inputConfig}
+          errorMessage={isInvalid && 'Bu xana daxil edilməlidir'}
           size={size}
-          startContent={
-            errors[name]?.message ? (
-              <Tooltip
-                className={'!bg-black !text-white'}
-                placement="top-start"
-                offset={12}
-                content={errors[name] ? errors[name].message : ''}
-              >
-                <div>{IconElement()}</div>
-              </Tooltip>
-            ) : (
-              <div>{IconElement()}</div>
-            )
-          }
           {...inputProps}
         />
       )}

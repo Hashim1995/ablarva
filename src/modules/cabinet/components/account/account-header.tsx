@@ -17,8 +17,8 @@ function AccountHeader({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <Card className="rounded-b-none">
-      <div className="flex justify-between items-center  bg-black p-2 sm:p-3">
+    <Card className="rounded-b-none  bg-transparent">
+      <div className="flex justify-between items-center  bg-transparent p-2 sm:p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
             {dictionary.az.account} {dictionary.az.infos}
