@@ -129,18 +129,6 @@ function Sessions() {
             {dictionary.az.active} {dictionary.az.sessions}
           </p>
         </div>
-        {/* <Button
-          size="sm"
-          isIconOnly
-          className="bg-white rounded-full"
-          aria-label="Filter"
-        >
-          <BsFillFilterCircleFill
-            size={20}
-            className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
-            color="#292D32"
-          />
-        </Button> */}
       </div>
       <div className=" rounded-lg  remove-scrollbar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (

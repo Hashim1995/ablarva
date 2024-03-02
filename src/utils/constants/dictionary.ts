@@ -32,6 +32,7 @@ export const dictionary = {
     report: 'Hesabat',
     users: 'İstifadəçilər',
     contract: 'Müqavilə',
+    kataliz: "Kataliz",
     attachment: 'Əlavə',
     invoice: 'Faktura',
     act: 'Akt',

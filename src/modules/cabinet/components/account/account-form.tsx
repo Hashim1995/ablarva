@@ -203,7 +203,6 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             isInvalid={Boolean(errors.gender?.message)}
             control={control}
             label={selectPlaceholderText(dictionary.az.gender)}
-            variant="bordered"
             // className=" app-select text-base sm:text-xl"
             size="sm"
             required

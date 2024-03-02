@@ -154,6 +154,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                           <Button
                             size="sm"
                             className=" "
+                            variant="bordered"
                             isLoading={removeLoading}
                             onClick={() => {
                               removeThreadFromList(conv.chatId);

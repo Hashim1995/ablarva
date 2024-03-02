@@ -124,7 +124,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                     <Button
                       size={matches ? 'sm' : 'md'}
                       isLoading={isSubmitting}
-                      className="w-full bg-black  text-white border"
+                      variant="bordered"
                       type="submit"
                     >
                       {dictionary.az.approve}
@@ -133,7 +133,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       size={matches ? 'sm' : 'md'}
                       onClick={resendVerificationCode}
                       isLoading={loading}
-                      className="w-full bg-black  text-white border"
+                      variant="bordered"
                       type="button"
                     >
                       {dictionary.az.sendCodeToEmail}
@@ -155,9 +155,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}

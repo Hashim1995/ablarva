@@ -276,7 +276,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                   <Button
                     size="md"
                     isLoading={isSubmitting}
-                    className="w-full bg-black  text-white border"
+                    variant="bordered"
                     type="submit"
                   >
                     {dictionary.az.approve}
@@ -284,9 +284,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}

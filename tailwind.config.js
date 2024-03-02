@@ -25,7 +25,7 @@ export default {
     require('@tailwindcss/line-clamp'),
     nextui({
       addCommonColors: true,
-      defaultTheme: 'light',
+      defaultTheme: 'dark',
 
       themes: {
         light: {
@@ -37,7 +37,9 @@ export default {
         },
         dark: {
           colors: {
-            black: '#292D32'
+            black: '#020008',
+            darkBlack: '#020008',
+            custom: 'red'
           }
         }
       }

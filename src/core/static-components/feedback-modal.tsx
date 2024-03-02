@@ -146,9 +146,10 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
 
                   <ButtonGroup>
                     <Button
+                      className="w-full"
                       size="md"
                       isLoading={isSubmitting}
-                      className="w-full bg-black  text-white border"
+                      variant="bordered"
                       type="submit"
                     >
                       {dictionary.az.send}
@@ -157,12 +158,8 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button variant="bordered" onClick={instructionOnOpen}>
-                  Təlimat
-                </Button>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onClick={instructionOnOpen}>Təlimat</Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}

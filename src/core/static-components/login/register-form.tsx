@@ -90,12 +90,12 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
   return (
     <>
-      <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+      <div className="p-4 py-6 bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
 
-      <div className="p-4 md:p-3 bg-white rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
-        <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold text-gray-700">
+      <div className="p-4 md:p-3  border-l-1 rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
+        <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold ">
           {dictionary.az.joinUs}
         </h3>
         <form
@@ -244,7 +244,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 id: 'gender'
               }}
               label={selectPlaceholderText(dictionary.az.gender)}
-              variant="bordered"
               size="sm"
               required
               rules={{
@@ -397,7 +396,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full bg-black text-white border"
+            variant="bordered"
+            className="w-full"
             type="submit"
           >
             {dictionary.az.register}
@@ -409,7 +409,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             <span
               aria-hidden
               onClick={handleFlip}
-              className="font-normal text-black  text-sm"
+              className="font-normal   text-sm"
             >
               {dictionary.az.or}{' '}
               <span

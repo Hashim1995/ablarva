@@ -321,7 +321,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                   <Button
                     size="md"
                     isLoading={isSubmitting}
-                    className="w-full bg-black  text-white border"
+                    variant="bordered"
                     type="submit"
                   >
                     {!hasCode
@@ -331,9 +331,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}

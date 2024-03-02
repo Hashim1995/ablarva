@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
@@ -20,12 +19,10 @@ import {
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure,
-  Image,
-  Link
+  useDisclosure
 } from '@nextui-org/react';
 
-import { useDarkMode, useOnClickOutside } from 'usehooks-ts';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import {
   BsFillChatLeftDotsFill,
@@ -46,7 +43,7 @@ import { useSelector } from 'react-redux';
 import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 
-import { FaUser } from 'react-icons/fa';
+import PricingModal from '@/modules/pricing/pages';
 import { RootState } from '@/redux/store';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
@@ -75,13 +72,17 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: pricingIsOpen,
+    onOpen: pricingOnOpen,
+    onOpenChange: pricingOnOpenChange
+  } = useDisclosure();
 
   const {
     isOpen: feedBackModalIsOpen,
     onOpen: feedBackModalOnOpen,
     onOpenChange: feedBackModaOnOpenChange
   } = useDisclosure();
-  const [show, setShow] = useState<boolean>(false);
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -90,7 +91,6 @@ export default function Navbar() {
 
   const handleOutSideClick = () => {
     setIsMenuOpen(false);
-    setShow(false);
   };
 
   useOnClickOutside(navRef, handleOutSideClick);
@@ -233,9 +233,7 @@ export default function Navbar() {
               <DropdownMenu className=" " aria-label="Static Actions">
                 <DropdownItem
                   className=" "
-                  onClick={() => {
-                    navigate('/pricing');
-                  }}
+                  onClick={pricingOnOpen}
                   key="pricing"
                 >
                   <p className="flex items-center  m-0 gap-2">
@@ -326,6 +324,12 @@ export default function Navbar() {
         <FeedbackModal
           onOpenChange={feedBackModaOnOpenChange}
           isOpen={feedBackModalIsOpen}
+        />
+      )}
+      {pricingIsOpen && (
+        <PricingModal
+          onOpenChange={pricingOnOpenChange}
+          isOpen={pricingIsOpen}
         />
       )}
     </>

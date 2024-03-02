@@ -17,7 +17,6 @@ import VerifyEmail from '@/core/static-components/verify-email';
 import Empty from '@/components/layout/empty';
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
-import MyPlan from '@/modules/chat/components/my-plan/my-plan';
 import PricingModal from './pricingModal';
 
 function Pricing() {
@@ -100,12 +99,6 @@ function Pricing() {
 
   return (
     <div className=" container-fluid h-full mx-auto ">
-      {/* <div className="grid grid-cols-12">
-         <Header />
-      </div> */}
-      <div className="rounded-3xl lg:hidden block">
-        <MyPlan isPricing />
-      </div>
       <div className="grid grid-cols-12 grid-rows-6 h-full gap-3">
         <div className="col-span-12 lg:col-span-2 lg:row-span-6 sm:row-span-1 flex lg:flex-col items-center sm:justify-center justify-start lg:justify-center">
           <Button

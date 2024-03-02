@@ -36,9 +36,7 @@ function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
               />
             </ModalBody>
             <ModalFooter>
-              <Button variant="bordered" onPress={onClose}>
-                {dictionary.az.closeBtn}
-              </Button>
+              <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
             </ModalFooter>
           </>
         )}

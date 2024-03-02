@@ -1,7 +1,9 @@
 import { setState } from '@/models/common';
 import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card, Tooltip, useDisclosure } from '@nextui-org/react';
-import { BsPencilSquare, BsFillKeyFill, BsFolderFill } from 'react-icons/bs';
+import { BsPencilSquare, BsFolder2 } from 'react-icons/bs';
+import { IoKeyOutline } from 'react-icons/io5';
+
 import ChangePassword from './change-password';
 
 interface IAccountHeaderProps {
@@ -17,7 +19,7 @@ function AccountHeader({
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   return (
-    <Card className="rounded-b-none  bg-transparent">
+    <Card className="rounded-b-none  bg-transparent shadow-none">
       <div className="flex justify-between items-center  bg-transparent p-2 sm:p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
@@ -30,14 +32,14 @@ function AccountHeader({
               size="sm"
               isIconOnly
               onClick={onOpen}
-              className="bg-white rounded-full"
+              className=" rounded-full"
               aria-label="submit"
               type="button"
             >
-              <BsFillKeyFill
+              <IoKeyOutline
                 size={20}
                 className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
-                color="#292D32"
+                color="white"
               />
             </Button>
           </Tooltip>
@@ -47,14 +49,14 @@ function AccountHeader({
               isIconOnly
               isDisabled={isLoading}
               onClick={() => setFieldsIsDisable(z => !z)}
-              className="bg-white rounded-full"
+              className="rounded-full"
               aria-label="submit"
               type="button"
             >
               <BsPencilSquare
                 size={20}
                 className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
-                color="#292D32"
+                color="WHITE"
               />
             </Button>
           </Tooltip>
@@ -65,14 +67,14 @@ function AccountHeader({
                 isLoading={isLoading}
                 isIconOnly
                 form="account-form"
-                className="bg-white rounded-full"
+                className="rounded-full"
                 aria-label="submit"
                 type="submit"
               >
-                <BsFolderFill
+                <BsFolder2
                   size={20}
                   className="w-[16px] h-[16px] sm:w-[20px] sm:h-[20px]"
-                  color="#292D32"
+                  color="WHITE"
                 />
               </Button>
             </Tooltip>

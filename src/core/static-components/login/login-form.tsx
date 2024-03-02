@@ -56,8 +56,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
-      <div className="p-4 md:p-3 bg-white md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
-        <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-gray-700">
+      <div className="p-4 border-l-1 md:p-3 md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
+        <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-white">
           {dictionary.az.login}
         </h3>
         <form
@@ -134,7 +134,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                 <span
                   aria-hidden
                   onClick={onOpen}
-                  className="font-normal text-black  text-sm"
+                  className="font-normal  text-sm"
                 >
                   <span className=" text-blue-500   cursor-pointer" aria-hidden>
                     {dictionary.az.forgetPassword}
@@ -147,8 +147,9 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full !mt-3 md:mt-5 bg-black text-white border"
+            className="w-full !mt-3 md:mt-5"
             type="submit"
+            variant="bordered"
           >
             {dictionary.az.login}
           </Button>
@@ -159,7 +160,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             <span
               aria-hidden
               onClick={handleFlip}
-              className="font-normal text-black  text-sm"
+              className="font-normal   text-sm"
             >
               {dictionary.az.or}{' '}
               <span

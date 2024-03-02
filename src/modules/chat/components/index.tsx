@@ -13,7 +13,6 @@ function Chat() {
           <Layout key={resetChatInner} />
         </div>
         <div className="fixed-height">
-          {' '}
           <ChatHistory />
         </div>
       </div>
