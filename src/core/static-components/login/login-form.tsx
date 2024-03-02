@@ -13,7 +13,7 @@ import { inputValidationText } from '@/utils/constants/validations';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEye, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
@@ -75,7 +75,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               isInvalid={Boolean(errors.email?.message)}
               errors={errors}
               size="sm"
-              className="text-black w-72"
+              className=" w-72"
               rules={{
                 required: {
                   value: true,
@@ -86,15 +86,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                   message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.email)}
+              label={inputPlaceholderText(dictionary.az.email)}
               required
-              IconElement={() => (
-                <BsEnvelopeFill
-                  size={16}
-                  color={errors.email?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <AppHandledInput
               type={showPassword ? 'text' : 'password'}
@@ -125,22 +118,15 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               isInvalid={Boolean(errors.password?.message)}
               errors={errors}
               size="sm"
-              className="text-black w-72"
+              className="w-72"
               rules={{
                 required: {
                   value: true,
                   message: inputValidationText(dictionary.az.password)
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.password)}
+              label={inputPlaceholderText(dictionary.az.password)}
               required
-              IconElement={() => (
-                <BsEnvelopeFill
-                  size={16}
-                  color={errors.password?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <div className="flex flex-col space-y-5">
               <span className="flex items-center justify-center ">

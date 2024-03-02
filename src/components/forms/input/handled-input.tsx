@@ -35,6 +35,7 @@ function AppHandledInput({
   isInvalid = false,
   className = '',
   label,
+  errors,
   type = 'text',
   onChangeApp,
   size // IconElement
@@ -68,7 +69,7 @@ function AppHandledInput({
           isInvalid={isInvalid}
           value={value}
           className={className}
-          errorMessage={isInvalid && 'Bu xana daxil edilməlidir'}
+          errorMessage={(isInvalid && errors[name].message) || ''}
           size={size}
           {...inputProps}
         />

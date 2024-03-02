@@ -18,7 +18,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEye, BsEyeSlash, BsFillPersonFill } from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 
@@ -90,7 +90,6 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                   <div className="flex flex-col gap-5  ">
                     <AppHandledInput
                       name="oldPassword"
-                      className="text-black"
                       control={control}
                       isInvalid={Boolean(errors.oldPassword?.message)}
                       errors={errors}
@@ -103,9 +102,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                           )
                         }
                       }}
-                      placeholder={inputPlaceholderText(
-                        dictionary.az.oldPassword
-                      )}
+                      label={inputPlaceholderText(dictionary.az.oldPassword)}
                       required
                       inputProps={{
                         id: 'oldPassword',
@@ -130,18 +127,10 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                         )
                       }}
                       type={showOldPassword ? 'text' : 'password'}
-                      IconElement={() => (
-                        <BsFillPersonFill
-                          size={16}
-                          color={errors.oldPassword?.message ? '#f31260' : ''}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
                     />
                     <AppHandledInput
                       name="password"
                       control={control}
-                      className="text-black"
                       isInvalid={Boolean(errors.password?.message)}
                       errors={errors}
                       onChangeApp={() => {
@@ -181,7 +170,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                             ) || `${dictionary.az.minCharacter}`
                         }
                       }}
-                      placeholder={inputPlaceholderText(dictionary.az.password)}
+                      label={inputPlaceholderText(dictionary.az.password)}
                       required
                       size="sm"
                       inputProps={{
@@ -207,20 +196,12 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                         )
                       }}
                       type={showPassword ? 'text' : 'password'}
-                      IconElement={() => (
-                        <BsFillPersonFill
-                          size={16}
-                          color={errors.password?.message ? '#f31260' : ''}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
                     />
 
                     <AppHandledInput
                       name="confirmPassword"
                       control={control}
                       size="sm"
-                      className="text-black"
                       isInvalid={Boolean(errors.confirmPassword?.message)}
                       errors={errors}
                       onChangeApp={() => {
@@ -262,7 +243,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                             ) || `${dictionary.az.minCharacter}`
                         }
                       }}
-                      placeholder={inputPlaceholderText(
+                      label={inputPlaceholderText(
                         dictionary.az.confirmPassword
                       )}
                       required
@@ -289,15 +270,6 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                         )
                       }}
                       type={showPasswordConfirm ? 'text' : 'password'}
-                      IconElement={() => (
-                        <BsFillPersonFill
-                          size={16}
-                          color={
-                            errors.confirmPassword?.message ? '#f31260' : ''
-                          }
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
                     />
                   </div>
 

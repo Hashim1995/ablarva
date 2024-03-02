@@ -4,7 +4,7 @@ export const dictionary = {
     lastName: 'Soyad',
     passWord: 'Şifrə',
     dateOfBirth: 'Doğum tarixi',
-    confirmPassword: 'Tərar şifrə',
+    confirmPassword: 'Təkrar şifrə',
     logOut: 'Çıxış',
     cabinet: 'Şəxsi kabinet',
     account: 'Hesab',

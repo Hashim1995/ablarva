@@ -21,7 +21,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsFillKeyFill, BsQuestionCircleFill } from 'react-icons/bs';
+import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useMediaQuery } from 'usehooks-ts';
@@ -105,7 +105,6 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                         id: 'code'
                       }}
                       type="number"
-                      className="text-black"
                       control={control}
                       isInvalid={Boolean(errors.code?.message)}
                       errors={errors}
@@ -116,15 +115,8 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                           message: inputValidationText(dictionary.az.code)
                         }
                       }}
-                      placeholder={inputPlaceholderText(dictionary.az.code)}
+                      label={inputPlaceholderText(dictionary.az.code)}
                       required
-                      IconElement={() => (
-                        <BsFillKeyFill
-                          size={16}
-                          color={errors.code?.message ? '#f31260' : ''}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
                     />
                   </div>
 

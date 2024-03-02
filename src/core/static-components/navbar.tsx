@@ -35,7 +35,8 @@ import {
   BsFillFilterSquareFill,
   BsRobot,
   BsEnvelope,
-  BsYelp
+  BsYelp,
+  BsQuestionCircle
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -48,6 +49,7 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { FaUser } from 'react-icons/fa';
 import { RootState } from '@/redux/store';
 import VerifyEmail from './verify-email';
+import FeedbackModal from './feedback-modal';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -73,6 +75,12 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
+  const {
+    isOpen: feedBackModalIsOpen,
+    onOpen: feedBackModalOnOpen,
+    onOpenChange: feedBackModaOnOpenChange
+  } = useDisclosure();
   const [show, setShow] = useState<boolean>(false);
   const navRef = useRef(null);
 
@@ -182,17 +190,24 @@ export default function Navbar() {
                   onClick={onOpen}
                   size="sm"
                   isIconOnly
-                  className="bg-white rounded-full"
-                  aria-label="Filter"
+                  className="bg-black rounded-full flex "
                 >
                   <BsEnvelope
                     className="cursor-pointer animate-pulse"
-                    color="red"
+                    color="white"
                     size={22}
                   />
                 </Button>
               </Tooltip>
             )}
+            <Button
+              onClick={feedBackModalOnOpen}
+              size="sm"
+              isIconOnly
+              className="bg-black rounded-full flex "
+            >
+              <BsQuestionCircle color="white" size={22} />
+            </Button>
             <User
               name={
                 user
@@ -307,6 +322,12 @@ export default function Navbar() {
         </NavbarMenu>
       </NavbarNext>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
+      {feedBackModalIsOpen && (
+        <FeedbackModal
+          onOpenChange={feedBackModaOnOpenChange}
+          isOpen={feedBackModalIsOpen}
+        />
+      )}
     </>
   );
 }

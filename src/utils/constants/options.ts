@@ -241,7 +241,7 @@ function createDaysArray() {
 function createYearsArray(startYear = 1940, endYear = 2023) {
   const yearsArray = [];
   for (let year = startYear; year <= endYear; year++) {
-    yearsArray.push({ value: year?.toString(), label: `${year} - il` });
+    yearsArray.push({ value: year?.toString(), label: `${year}` });
   }
   return yearsArray;
 }

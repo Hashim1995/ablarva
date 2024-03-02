@@ -17,13 +17,7 @@ import {
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
-import {
-  BsEnvelopeFill,
-  BsEye,
-  BsFillKeyFill,
-  BsEyeSlash,
-  BsFillPersonFill
-} from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
 interface IForgotPassword {
@@ -115,14 +109,15 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                     <AppHandledInput
                       name="email"
                       inputProps={{
-                        id: 'email'
+                        id: 'email',
+                        isDisabled: hasCode
                       }}
                       type="email"
                       control={control}
                       isInvalid={Boolean(errors.email?.message)}
                       errors={errors}
                       size="sm"
-                      className="text-black w-full"
+                      className="w-full"
                       rules={{
                         required: {
                           value: true,
@@ -133,15 +128,8 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                           message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                         }
                       }}
-                      placeholder={inputPlaceholderText(dictionary.az.email)}
+                      label={inputPlaceholderText(dictionary.az.email)}
                       required
-                      IconElement={() => (
-                        <BsEnvelopeFill
-                          size={16}
-                          color={errors.email?.message ? '#f31260' : ''}
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
                     />
 
                     {hasCode && (
@@ -152,7 +140,6 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                             id: 'code'
                           }}
                           type="text"
-                          className="text-black"
                           control={control}
                           isInvalid={Boolean(errors.code?.message)}
                           errors={errors}
@@ -163,20 +150,12 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                               message: inputValidationText(dictionary.az.code)
                             }
                           }}
-                          placeholder={inputPlaceholderText(dictionary.az.code)}
+                          label={inputPlaceholderText(dictionary.az.code)}
                           required
-                          IconElement={() => (
-                            <BsFillKeyFill
-                              size={16}
-                              color={errors.code?.message ? '#f31260' : ''}
-                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                            />
-                          )}
                         />
                         <AppHandledInput
                           name="password"
                           control={control}
-                          className="text-black"
                           isInvalid={Boolean(errors.password?.message)}
                           errors={errors}
                           onChangeApp={() => {
@@ -221,9 +200,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                                 ) || `${dictionary.az.minCharacter}`
                             }
                           }}
-                          placeholder={inputPlaceholderText(
-                            dictionary.az.password
-                          )}
+                          label={inputPlaceholderText(dictionary.az.password)}
                           required
                           size="sm"
                           inputProps={{
@@ -249,13 +226,6 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                             )
                           }}
                           type={showPassword ? 'text' : 'password'}
-                          IconElement={() => (
-                            <BsFillPersonFill
-                              size={16}
-                              color={errors.password?.message ? '#f31260' : ''}
-                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                            />
-                          )}
                         />
 
                         <AppHandledInput
@@ -307,7 +277,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                                 ) || `${dictionary.az.minCharacter}`
                             }
                           }}
-                          placeholder={inputPlaceholderText(
+                          label={inputPlaceholderText(
                             dictionary.az.confirmPassword
                           )}
                           required
@@ -334,15 +304,6 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                             )
                           }}
                           type={showPasswordConfirm ? 'text' : 'password'}
-                          IconElement={() => (
-                            <BsFillPersonFill
-                              size={16}
-                              color={
-                                errors.confirmPassword?.message ? '#f31260' : ''
-                              }
-                              className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                            />
-                          )}
                         />
                       </>
                     )}
