@@ -70,8 +70,7 @@ const genderOptions: selectOption[] = [
   {
     value: 2,
     label: dictionary.az.female
-  },
-
+  }
 ];
 
 const markdownOptions: MarkdownToJSX.Options = {
@@ -247,11 +246,20 @@ function createYearsArray(startYear = 1940, endYear = 2023) {
   return yearsArray;
 }
 
-
 function getMonthsArray() {
   const months = [
-    "Yanvar", "Fevral", "Mart", "Aprel", "May", "İyun",
-    "İyul", "Avqust", "Sentyabr", "Oktyabr", "Noyabr", "Dekabr"
+    'Yanvar',
+    'Fevral',
+    'Mart',
+    'Aprel',
+    'May',
+    'İyun',
+    'İyul',
+    'Avqust',
+    'Sentyabr',
+    'Oktyabr',
+    'Noyabr',
+    'Dekabr'
   ];
 
   return months.map((month, index) => ({
@@ -267,12 +275,14 @@ const yearsList = createYearsArray();
 console.log(monthsList, 'ramiz');
 console.log(daysList, 'ramiz');
 
-
 export {
   genderOptions,
   roleOptions,
   fileTypeOptions,
-  docStatusOptions, daysList, yearsList, monthsList,
+  docStatusOptions,
+  daysList,
+  yearsList,
+  monthsList,
   isBlockedOptions,
   statusOptions,
   markdownOptions

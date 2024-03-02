@@ -65,21 +65,21 @@ body::-webkit-scrollbar-thumb,
   scrollbar-width: none !important;
 }
 
-.componentsScrollBar::-webkit-scrollbar {
-  -webkit-appearance: none;
-  width: 50px;
-  height: 8px;
-}
+// .componentsScrollBar::-webkit-scrollbar {
+//   -webkit-appearance: none;
+//   width: 50px;
+//   height: 8px;
+// }
 
-.componentsScrollBar::-webkit-scrollbar-track {
-  border-radius: 20px;
-  background: green;
-}
+// .componentsScrollBar::-webkit-scrollbar-track {
+//   border-radius: 20px;
+//   background: green;
+// }
 
-.componentsScrollBar::-webkit-scrollbar-thumb {
-  border-radius: 4px;
-  background-color: red;
-}
+// .componentsScrollBar::-webkit-scrollbar-thumb {
+//   border-radius: 4px;
+//   background-color: red;
+// }
 
 ::selection {
   color: white;

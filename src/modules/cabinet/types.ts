@@ -21,6 +21,6 @@ interface ITransactionsItem {
   orderId: string;
 }
 
-interface IAccountPayload extends Omit<IAccountForm, 'email'> { }
+interface IAccountPayload extends Omit<IAccountForm, 'email'> {}
 
 export type { IAccountForm, ITransactionsItem, IAccountPayload };

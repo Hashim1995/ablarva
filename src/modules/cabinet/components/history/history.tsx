@@ -38,7 +38,8 @@ function Bottom() {
     setLoading(true);
     try {
       const res = await PaymentService.getInstance().getTransactions([
-        { name: 'page', value: page }
+        { name: 'page', value: page },
+        { name: 'pageSize', value: 7 }
       ]);
       if (res.isSuccess) {
         setData(res.data.pagedData);
@@ -94,20 +95,16 @@ function Bottom() {
           </p>
         </div>
       </div>
-      <div className="settingHistoryTable">
+      <div className="settingHistoryTable  px-2">
         <Table
           removeWrapper
-          isStriped
           isHeaderSticky
           bottomContent={
             totalPage > 0 ? (
-              <div className="w-full backdrop-blur-sm flex justify-center sticky bottom-0 p-1 gray">
+              <div className="flex w-full justify-center mb-2">
                 <Pagination
-                  isCompact
+                  size="sm"
                   showControls
-                  showShadow
-                  color="primary"
-                  className="overflow-hidden"
                   page={page}
                   total={totalPage}
                   onChange={(currentPage: number) => setPage(currentPage)}
@@ -116,12 +113,17 @@ function Bottom() {
             ) : null
           }
           aria-label="Example static collection  table "
-          className="componentsScrollBar overflow-x-scroll overflow-y-auto min-h-full md:overflow-x-hidden"
+          className="remove-scrollbar overflow-x-scroll shadow-none overflow-y-auto min-h-full md:overflow-x-hidden"
           classNames={{}}
         >
-          <TableHeader columns={columns}>
+          <TableHeader className="bg-transparent shadow-none" columns={columns}>
             {column => (
-              <TableColumn key={column.uid}>{column.name}</TableColumn>
+              <TableColumn
+                className="bg-black text-white shadow-none"
+                key={column.uid}
+              >
+                {column.name}
+              </TableColumn>
             )}
           </TableHeader>
           <TableBody
@@ -133,7 +135,9 @@ function Bottom() {
             {item => (
               <TableRow key={item.id}>
                 {columnKey => (
-                  <TableCell>{renderCell(item, columnKey)}</TableCell>
+                  <TableCell className="text-white">
+                    {renderCell(item, columnKey)}
+                  </TableCell>
                 )}
               </TableRow>
             )}

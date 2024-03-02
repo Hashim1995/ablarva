@@ -36,6 +36,7 @@ function Sessions() {
         return (
           <MdOutlineLaptopMac
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -43,6 +44,7 @@ function Sessions() {
         return (
           <FaWindows
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -50,6 +52,7 @@ function Sessions() {
         return (
           <FaLinux
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -57,6 +60,7 @@ function Sessions() {
         return (
           <FaLinux
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -64,6 +68,7 @@ function Sessions() {
         return (
           <FaApple
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -71,6 +76,7 @@ function Sessions() {
         return (
           <FaApple
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -78,6 +84,7 @@ function Sessions() {
         return (
           <FaBlackberry
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -85,6 +92,7 @@ function Sessions() {
         return (
           <BsAndroid2
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -92,6 +100,7 @@ function Sessions() {
         return (
           <TbDeviceIpad
             className="w-[25px] h-[25px] sm:w-[35px] sm:h-[35px]"
+            color="white"
             size={35}
           />
         );
@@ -133,37 +142,36 @@ function Sessions() {
           />
         </Button> */}
       </div>
-      <div className=" rounded-lg  componentsScrollBar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
+      <div className=" rounded-lg  remove-scrollbar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
           <div>
             {userSessions?.length > 0 ? (
               userSessions.map((item: IUserSessions) => (
                 <div
                   key={item.id}
-                  className=" my-3 border-1 px-2 sm:px-5 py-2 sm:py-3  rounded-xl overflow-hidden "
+                  className=" my-2  px-2 sm:px-5 py-2 sm:py-3  border-b-1 overflow-hidden "
                 >
                   <div className="flex items-center justify-between">
                     <div className="2xl:mr-2 xl:mr-1 mr-2">
-                      {' '}
                       {returnDeviceIconByType(item.platformType)}
                     </div>
                     <Divider orientation="vertical" className="h-20" />
                     <div className="flex flex-1 justify-between items-center">
                       <div className="2xl:px-4 px-2">
-                        <div className="tracking-wide text-[14px] text-black ">
-                          <span className="font-bold"> Sistem: </span>
+                        <div className="tracking-wide text-[14px] text-white ">
+                          <span className=" text-gray-400"> Sistem: </span>
                           {item.platformName || dictionary.az.empty}
                         </div>
-                        <div className="tracking-wide text-[14px] text-black">
-                          <span className="font-bold">Brauzer: </span>
+                        <div className="tracking-wide text-[14px] text-white">
+                          <span className=" text-gray-400">Brauzer: </span>
                           {item.browserName || dictionary.az.empty}
                         </div>
-                        <div className="tracking-wide text-[14px] text-black">
-                          <span className="font-bold">IP: </span>
+                        <div className="tracking-wide text-[14px] text-white">
+                          <span className=" text-gray-400">IP: </span>
                           {item.ipAddress || dictionary.az.empty}
                         </div>
-                        <div className="tracking-wide text-[14px] text-black">
-                          <span className="font-bold">Giriş tarixi: </span>
+                        <div className="tracking-wide text-[14px] text-white">
+                          <span className=" text-gray-400">Giriş tarixi: </span>
                           {item.loginDate || dictionary.az.empty}
                         </div>
                       </div>
@@ -199,15 +207,89 @@ function Sessions() {
             )}
           </div>
         ) : (
-          <div className="max-w-[300px] w-full flex items-center gap-3">
-            <div>
-              <Skeleton className="flex rounded-full w-12 h-12" />
+          <>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
             </div>
-            <div className="w-full flex flex-col gap-2">
-              <Skeleton className="h-3 w-3/5 rounded-lg" />
-              <Skeleton className="h-3 w-4/5 rounded-lg" />
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
             </div>
-          </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+            <div className=" my-5 w-full flex items-center gap-3">
+              <div>
+                <Skeleton className="flex rounded-full w-12 h-12" />
+              </div>
+              <div className="w-full flex flex-col gap-2">
+                <Skeleton className="h-3 w-3/5 rounded-lg" />
+                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              </div>
+            </div>
+          </>
         )}
       </div>
     </Card>
