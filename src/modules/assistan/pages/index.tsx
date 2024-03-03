@@ -1,7 +1,7 @@
-import Asistan from '../components';
+import Assitan from '../components';
 
 function AssistanPage() {
-  return <Asistan />;
+  return <Assitan />;
 }
 
 export default AssistanPage;

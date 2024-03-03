@@ -114,7 +114,7 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent className="lg:hidden pr-3" justify="center">
           <NavbarBrand>
-            <p className="font-bold text-inherit">ACMasdE</p>
+            <p className="font-bold text-inherit">Ai-zadə</p>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
@@ -129,11 +129,13 @@ export default function Navbar() {
           </div>
         </NavbarContent>
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-          <ButtonGroup className="">
+          <ButtonGroup className="!rounded-none">
             <Button
-              className={` w-40 text-white bg-transparent h-12  ${location.pathname.includes(
-                'chat'
-              )}`}
+              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+                location.pathname.includes('chat')
+                  ? ' border-b-1 border-white'
+                  : ''
+              }`}
               onClick={() => {
                 navigate('/chat');
               }}
@@ -141,20 +143,19 @@ export default function Navbar() {
             >
               {dictionary.az.chat}
             </Button>
-            <Tooltip
-              className="hidden sm:block"
-              placement="bottom"
-              content={'Hazırlanır'}
+            <Button
+              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+                location.pathname.includes('assistan')
+                  ? ' border-b-1 border-white'
+                  : ''
+              }`}
+              onClick={() => {
+                navigate('/assistan');
+              }}
+              startContent={<BsYelp size={17} />}
             >
-              <Button
-                className={`isDisabled text-white  w-40 bg-transparent h-12  ${location.pathname.includes(
-                  'assistan'
-                )}`}
-                startContent={<BsYelp color="white" size={17} />}
-              >
-                {dictionary.az.assistan}
-              </Button>
-            </Tooltip>
+              {dictionary.az.assistan}
+            </Button>
 
             <Tooltip
               className="hidden sm:block"

@@ -2,12 +2,14 @@ import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth/auth-slice';
 import statisticReducer from './statistics/statistics-slice';
 import chatReducer from './chat/chat-slice';
+import assistanReducer from './assistan/assistan-slice';
 
 export const store = configureStore({
   reducer: {
     user: authReducer,
     statisticsCount: statisticReducer,
-    chat: chatReducer
+    chat: chatReducer,
+    assistan: assistanReducer,
   }
 });
 
