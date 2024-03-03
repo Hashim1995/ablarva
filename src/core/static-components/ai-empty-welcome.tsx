@@ -3,7 +3,7 @@ import './ai-loader.scss';
 function AiEmptyWelcome() {
   return (
     <div className="  h-full">
-      <div className=" flex-col h-full w-full h-full items-center	 justify-center ">
+      <div className=" flex-col  w-full h-full items-center	 justify-center ">
         <div className=" palette-2   flex items-center	 justify-center h-3/5 ">
           <div className="blobsWelcome ">
             <svg viewBox="0 0 1200 1200">

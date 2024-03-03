@@ -2,29 +2,12 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
-import {
-  IFeedbackPayload,
-  ISendMessagePayload,
-  IThreadBubblesItem,
-  IThreadHistoryList
-} from '@/modules/chat/types';
+import { IGlobalResponse, IGlobalResponseEmpty, } from '@/models/common';
+import { IAssistanFeedbackPayload, IAssistanGetAssistansListResponse, IAssistanSendMessagePayload, IAssistanSendMessageResponse, IAssistanThreadBubblesItemResponse, IAssistanThreadHistoryListResponse } from '@/modules/assistan/types';
+
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
-interface ISendMessageResponse extends IGlobalResponse {
-  data: IThreadBubblesItem;
-}
-interface IThreadHistoryListResponse extends IGlobalResponse {
-  data: IThreadHistoryList[];
-}
-interface IThreadBubblesItemResponse extends IGlobalResponse {
-  data: {
-    allBubbles: IThreadBubblesItem[];
-    parameters: {
-      servicePlan: '1' | '2';
-    };
-  };
-}
+
 export class AssistanService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AssistanService | null;
@@ -39,18 +22,22 @@ export class AssistanService {
   }
 
   public async sendFeedback(
-    body: IFeedbackPayload,
+    body: IAssistanFeedbackPayload,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
-    const res = await HttpUtil.post('api/client/assistants/feedback', body, onError);
+    const res = await HttpUtil.post(
+      'api/client/assistants/feedback',
+      body,
+      onError
+    );
     return res;
   }
 
   public async sendMessage(
-    body: ISendMessagePayload,
+    body: IAssistanSendMessagePayload,
     onError?: ErrorCallBack,
     abortController?: AbortController['signal']
-  ): Promise<ISendMessageResponse> {
+  ): Promise<IAssistanSendMessageResponse> {
     const res = await HttpUtil.post(
       'api/client/assistants/message',
       body,
@@ -75,15 +62,32 @@ export class AssistanService {
 
   public async fetchThreadHistory(
     onError?: ErrorCallBack
-  ): Promise<IThreadHistoryListResponse> {
-    const res = await HttpUtil.get('api/client/assistants/threads', null, false, onError);
+  ): Promise<IAssistanThreadHistoryListResponse> {
+    const res = await HttpUtil.get(
+      'api/client/assistants/threads',
+      null,
+      false,
+      onError
+    );
+    return res;
+  }
+
+  public async fetchAssistansList(
+    onError?: ErrorCallBack
+  ): Promise<IAssistanGetAssistansListResponse> {
+    const res = await HttpUtil.get(
+      'api/client/assistants',
+      null,
+      false,
+      onError
+    );
     return res;
   }
 
   public async fetchBubbleHistory(
     id: string,
     onError?: ErrorCallBack
-  ): Promise<IThreadBubblesItemResponse> {
+  ): Promise<IAssistanThreadBubblesItemResponse> {
     const res = await HttpUtil.get(
       `api/client/assistants/${id}/messages`,
       null,

@@ -3,7 +3,6 @@
 import VerifyEmail from '@/core/static-components/verify-email';
 import { StatisticsUpdateData } from '@/models/common';
 import {
-  setCurrentAssistanModel,
   setResetAssistanInner,
   setWaitingForAssistanResponse
 } from '@/redux/assistan/assistan-slice';
@@ -39,9 +38,6 @@ function MessengerHeader({
   const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
 
-  const { currentAssistanModel, waitingForAssistanResponse } = useSelector(
-    (state: RootState) => state?.assistan
-  );
   const { premium, basic } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
@@ -56,7 +52,7 @@ function MessengerHeader({
       <Button
         size="sm"
         isIconOnly
-        // onClick={() => setIsDrawerOpen((z: boolean) => !z)}
+        onClick={() => setIsDrawerOpen((z: boolean) => !z)}
         className="bg-transparent block  ms-3"
         aria-label="Filter"
       >
@@ -116,33 +112,7 @@ function MessengerHeader({
           )}
         </div>
 
-        <div className="flex items-center justify-between gap-2 mr-5">
-          <Tabs
-            selectedKey={currentAssistanModel}
-            // @ts-ignore
-            onSelectionChange={e => dispatch(setCurrentAssistanModel(e))}
-            size={'sm'}
-            color="primary"
-            className="mr-5"
-            classNames={{
-              cursor: ' bg-[#292D32]',
-              tabContent: 'group-data-[selected=true]:text-[white]'
-            }}
-          >
-            <Tab
-              key="1"
-              title="Basic"
-              isDisabled={Boolean(searchParams.get('threadID'))}
-            />
-            <Tab
-              key="2"
-              title="Premium"
-              isDisabled={
-                Boolean(searchParams.get('threadID')) || premium?.total === 0
-              }
-            />
-          </Tabs>
-
+        {/* <div className="flex items-center justify-between gap-2 mr-5">
           {!waitingForAssistanResponse ? (
             <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
               <Button
@@ -218,7 +188,7 @@ function MessengerHeader({
               </PopoverContent>
             </Popover>
           )}
-        </div>
+        </div> */}
       </div>
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />

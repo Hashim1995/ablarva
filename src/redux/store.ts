@@ -9,7 +9,7 @@ export const store = configureStore({
     user: authReducer,
     statisticsCount: statisticReducer,
     chat: chatReducer,
-    assistan: assistanReducer,
+    assistan: assistanReducer
   }
 });
 

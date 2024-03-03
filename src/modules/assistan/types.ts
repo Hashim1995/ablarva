@@ -1,55 +1,86 @@
-interface IAsistanCard {
-  title: string;
-  img: string;
-  description: string;
-  id: number | string;
+import { IGlobalResponse } from "@/models/common";
+
+interface IAsistanItem {
+  assistantId: string,
+  assistantName: string,
+  assistantDescription: string,
+  assistantImagePath: string,
+  assistantServicePlan: number,
+  assistantServicePlanText: string
 }
 
-interface IChatForm {
+interface IAssistanChatForm {
   message: string;
 }
 
-interface ISendMessagePayload {
-  servicePlan: number;
+interface IAssistanSendMessagePayload {
+  assistantId: string;
   question: string;
-  chatId: string | null;
-  language: number;
+  threadId: string | null;
+  languagesEnum: number;
+
+
 }
 
-interface IThreadHistory {
-  chatId: string;
-  firstMessageOfChat: string;
-  servicePlan: number;
+interface IAssistanThreadHistory {
+  threadFirstMessage: string,
+  threadServicePlan: number,
+  threadId: string,
+  assistantName: string,
+  assistantImagePath: string
 }
 
-interface IThreadHistoryList {
+interface IAssistanThreadHistoryList {
   dateOfChats: string;
-  chats: IThreadHistory[];
+  assistantChats: IAssistanThreadHistory[];
 }
 
-interface IThreadBubblesItem {
-  answerId: string | null;
-  content: string;
-  isClient: boolean;
-  isTyping: boolean;
-  questionId?: string;
-  feedbackStatus?: number | null;
-  voiceId?: null;
-  chatHistoryId: string | null;
-  bubbleId: string | null;
+interface IAssistanThreadBubblesItem {
+  isClient: boolean,
+  isTyping: boolean,
+  assistantContent: string,
+  assistantBubbleId: string,
+  assistantThreadId: string,
+  assistantName?: string,
+  assistantImagePath?: string,
+  feedbackStatus?: number,
 }
 
-interface IFeedbackPayload {
-  bubbleId: string;
+interface IAssistanFeedbackPayload {
+  assistantBubbleId: string;
   feedbackStatus: number;
 }
 
+interface IAssistanSendMessageResponse extends IGlobalResponse {
+  data: IAssistanThreadBubblesItem;
+}
+interface IAssistanThreadHistoryListResponse extends IGlobalResponse {
+  data: IAssistanThreadHistoryList[];
+}
+interface IAssistanGetAssistansListResponse extends IGlobalResponse {
+  data: IAsistanItem[]
+}
+interface IAssistanThreadBubblesItemResponse extends IGlobalResponse {
+  data: {
+    allThreadBubbles: IAssistanThreadBubblesItem[];
+    assistantParameters: {
+      assistantServicePlan: 1 | 2;
+      assistantId: string,
+
+    };
+  };
+}
+
 export type {
-  IThreadHistoryList,
-  IThreadHistory,
-  IFeedbackPayload,
-  ISendMessagePayload,
-  IChatForm,
-  IAsistanCard,
-  IThreadBubblesItem
+  IAssistanThreadHistoryList,
+  IAssistanThreadHistory,
+  IAssistanFeedbackPayload,
+  IAsistanItem,
+  IAssistanSendMessageResponse,
+  IAssistanThreadHistoryListResponse,
+  IAssistanThreadBubblesItemResponse,
+  IAssistanSendMessagePayload,
+  IAssistanChatForm,
+  IAssistanGetAssistansListResponse,
+  IAssistanThreadBubblesItem
 };

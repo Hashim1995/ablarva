@@ -1,11 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-import {
-  IChatForm,
-  ISendMessagePayload,
-  IThreadBubblesItem
-} from '@/modules/chat/types';
 import { dictionary } from '@/utils/constants/dictionary';
 import { TfiFaceSad } from 'react-icons/tfi';
 
@@ -25,12 +20,19 @@ import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
 import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
 import { AssistanService } from '@/services/assistan-services/assistan-services';
+import {
+  IAssistanChatForm,
+  IAssistanSendMessagePayload,
+  IAssistanThreadBubblesItem
+} from '@/modules/assistan/types';
 import ThinkText from '@/core/static-components/think-text';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
 function ChatInner() {
-  const [bubbleList, setBubbleList] = useState<IThreadBubblesItem[]>([]);
+  const [bubbleList, setBubbleList] = useState<IAssistanThreadBubblesItem[]>(
+    []
+  );
   const [hasError, setHasError] = useState(false);
   const [lastQuestion, setLastQuestion] = useState<string>('');
   const [searchParams, setSearchParams] = useSearchParams();
@@ -66,16 +68,18 @@ function ChatInner() {
     try {
       const res = await AssistanService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
-        setBubbleList(res?.data?.allBubbles);
+        setBubbleList(res?.data?.allThreadBubbles);
         dispatch(setWaitingForAssistanThreadLoad(false));
-        dispatch(setCurrentAssistanModel(res?.data?.parameters?.servicePlan));
+        dispatch(
+          setCurrentAssistanModel(res?.data?.assistantParameters?.assistantId)
+        );
       }
     } catch (err) {
       console.log(err);
     }
   };
 
-  const onSubmit: SubmitHandler<IChatForm> = async data => {
+  const onSubmit: SubmitHandler<IAssistanChatForm> = async data => {
     const currentAbortController = abortController.current;
 
     if (!verified) {
@@ -86,20 +90,20 @@ function ChatInner() {
         ...old,
         {
           answerId: null,
-          content: data.message,
+          assistantContent: data.message,
           isClient: true,
           isTyping: false,
-          chatHistoryId: null,
-          bubbleId: null
+          assistantThreadId: null,
+          assistantBubbleId: null
         }
       ]);
 
       dispatch(setWaitingForAssistanResponse(true));
-      const payload: ISendMessagePayload = {
-        servicePlan: Number(currentAssistanModel),
+      const payload: IAssistanSendMessagePayload = {
+        assistantId: currentAssistanModel,
         question: data.message,
-        language: Number(currentAssistanLanguage),
-        chatId: searchParams.get('threadID') || null
+        languagesEnum: Number(currentAssistanLanguage),
+        threadId: searchParams.get('threadID') || null
       };
       try {
         const res = await AssistanService.getInstance().sendMessage(
@@ -108,7 +112,7 @@ function ChatInner() {
           currentAbortController.signal
         );
         if (res.isSuccess) {
-          setSearchParams({ threadID: String(res?.data?.chatHistoryId) });
+          setSearchParams({ threadID: String(res?.data?.assistantThreadId) });
 
           setBubbleList(oldBubbles => [
             ...oldBubbles.map(bubble => ({
@@ -116,14 +120,13 @@ function ChatInner() {
               isTyping: false
             })),
             {
-              answerId: res.data.answerId,
-              content: res?.data?.content || '',
+              assistantContent: res?.data?.assistantContent || '',
               isClient: res?.data?.isClient,
               isTyping: res?.data?.isTyping,
-              questionId: res?.data?.questionId,
-              voiceId: res?.data?.voiceId,
-              chatHistoryId: res?.data?.chatHistoryId,
-              bubbleId: res?.data?.bubbleId
+              assistantThreadId: res?.data?.assistantThreadId,
+              assistantBubbleId: res?.data?.assistantBubbleId,
+              assistantName: res?.data?.assistantName,
+              assistantImagePath: res?.data?.assistantImagePath
             }
           ]);
         }
@@ -178,17 +181,22 @@ function ChatInner() {
           followButtonClassName="hidden"
           className="row-span-8 scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >
-          {bubbleList?.map((item: IThreadBubblesItem, index: number) => (
-            <ChatBubble
-              message={item.content}
-              isClient={item.isClient}
-              isTyping={item.isTyping}
-              // eslint-disable-next-line react/no-array-index-key
-              key={item?.bubbleId || index}
-              bubbleId={item?.bubbleId || ''}
-              feedbackStatus={item?.feedbackStatus || null}
-            />
-          ))}
+          {bubbleList?.map(
+            (item: IAssistanThreadBubblesItem, index: number) => (
+              <ChatBubble
+                assistantContent={item?.assistantContent}
+                isClient={item.isClient}
+                isTyping={item.isTyping}
+                // eslint-disable-next-line react/no-array-index-key
+                key={item?.assistantBubbleId || index}
+                assistantBubbleId={item?.assistantBubbleId || ''}
+                feedbackStatus={item?.feedbackStatus || null}
+                assistantImagePath={item?.assistantImagePath}
+                assistantName={item?.assistantName}
+                assistantThreadId={item?.assistantThreadId}
+              />
+            )
+          )}
           {waitingForAssistanResponse && (
             <div className=" flex justify-start mt-2 mb-5 items-center">
               <AiLoder />

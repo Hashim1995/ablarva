@@ -80,7 +80,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className="   shadow-none px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
+      className="    px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
     >
       <div className="h-full w-full bg-darkBlack   rounded-xl">
         <Textarea

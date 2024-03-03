@@ -1,6 +1,10 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
-import { IFeedbackPayload } from '@/modules/chat/types';
+import {
+  IAssistanFeedbackPayload,
+  IAssistanThreadBubblesItem
+} from '@/modules/assistan/types';
 import { RootState } from '@/redux/store';
 import { AssistanService } from '@/services/assistan-services/assistan-services';
 // import { dictionary } from '@/utils/constants/dictionary';
@@ -15,13 +19,6 @@ import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useReadLocalStorage } from 'usehooks-ts';
 
-interface IBubble {
-  message: string;
-  isClient: boolean;
-  isTyping: boolean;
-  feedbackStatus: number | null;
-  bubbleId: string;
-}
 interface ITypewriter {
   message: string;
   isTyping: boolean;
@@ -77,19 +74,22 @@ function Typewriter({ message, isTyping }: ITypewriter) {
 }
 
 function ChatBubble({
-  message,
+  assistantContent,
   isTyping,
   isClient,
-  bubbleId,
-  feedbackStatus
-}: IBubble) {
+  assistantBubbleId,
+  feedbackStatus,
+  assistantImagePath,
+  assistantName,
+  assistantThreadId
+}: IAssistanThreadBubblesItem) {
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
   const { user } = useSelector((state: RootState) => state.user);
 
   const feedbackBubble = async (type: number) => {
-    const payload: IFeedbackPayload = {
-      bubbleId,
+    const payload: IAssistanFeedbackPayload = {
+      assistantBubbleId,
       feedbackStatus: type
     };
     try {
@@ -121,11 +121,12 @@ function ChatBubble({
         src={
           isClient
             ? `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
-            : 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQXdOAnEBb4e_d0YITbc9hDL3Ex-EbHzQemJKiJc_xxO7gCR5YLgPcGpMonCKpeMmifJoY&usqp=CAU'
+            : `${import.meta.env.VITE_BASE_URL}${assistantImagePath}`
         }
       />
       <div className=" flex-1 markdown-table-container overflow-auto">
-        <Typewriter message={message} isTyping={isTyping} />
+        <h3 className="border-b-1 border-white  mb-2">{assistantName}</h3>
+        <Typewriter message={assistantContent} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
           <div className="flex  gap-2  items-center justify-between">
             {!isClient && (
@@ -182,7 +183,7 @@ function ChatBubble({
             <Button
               type="button"
               onClick={() => {
-                navigator.clipboard.writeText(message).then(
+                navigator.clipboard.writeText(assistantContent).then(
                   () => {
                     toast.success('Məlumat uğurla kopyalandı', toastOptions);
                   },

@@ -4,7 +4,8 @@ import {
   Popover,
   PopoverTrigger,
   PopoverContent,
-  Divider
+  Divider,
+  Image
 } from '@nextui-org/react';
 import dayjs from 'dayjs';
 import { useEffect, useState } from 'react';
@@ -17,14 +18,15 @@ import {
   setWaitingForAssistanThreadLoad
 } from '@/redux/assistan/assistan-slice';
 import { AssistanService } from '@/services/assistan-services/assistan-services';
-import { IThreadHistoryList } from '../../types';
+import { IAssistanThreadHistoryList } from '../../types';
 
 interface IChatHistoryProps {
   isResponsive?: boolean;
 }
 
 function ChatHistory({ isResponsive }: IChatHistoryProps) {
-  const [threadHistory, setThreadHistory] = useState<IThreadHistoryList[]>();
+  const [threadHistory, setThreadHistory] =
+    useState<IAssistanThreadHistoryList[]>();
   const [removeLoading, setRemoveLoading] = useState<boolean>(false);
 
   const [popoversVisible, setPopoversVisible] = useState<{
@@ -108,9 +110,9 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                 </span>
                 <div className="flex-1 border-t-1 border-gray-200" />
               </div>
-              {day.chats.map(conv => (
+              {day?.assistantChats?.map(conv => (
                 <div
-                  key={conv.chatId}
+                  key={conv?.threadId}
                   aria-hidden
                   onClick={() => {
                     dispatch(setWaitingForAssistanThreadLoad(true));
@@ -118,67 +120,84 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
 
                     setResetAssistanInner;
                     setSearchParams({
-                      threadID: String(conv.chatId)
+                      threadID: String(conv.threadId)
                     });
                   }}
-                  className="flex  bg-default-50 relative items-center justify-between cursor-pointer text-white rounded-2xl  mb-2   p-3 z-10"
+                  className="  bg-default-50 relative cursor-pointer text-white rounded-2xl  mb-2   px-3 py-2 z-10"
                 >
-                  <p className="text-white  leading-4  text-sm line-clamp-3">
-                    {conv.firstMessageOfChat}
-                  </p>
-                  <Popover
-                    key={conv?.chatId}
-                    isOpen={popoversVisible[conv?.chatId] || false}
-                    onOpenChange={() =>
-                      setPopoversVisible({
-                        [conv?.chatId]: true
-                      })
-                    }
-                    placement="right"
-                  >
-                    <PopoverTrigger>
-                      <Button
-                        size="sm"
-                        isIconOnly
-                        className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
-                        aria-label="Remove chat"
-                      >
-                        <BsTrash size={16} className=" text-white" />
-                      </Button>
-                    </PopoverTrigger>
-                    <PopoverContent>
-                      <div className="px-1 py-2">
-                        <p>Çatı silmək istəyinizə əminsinizmi?</p>
-                        <Divider className="my-2" />
-                        <div className="w-full flex items-center gap-1">
-                          <Button
-                            size="sm"
-                            className=" "
-                            variant="bordered"
-                            isLoading={removeLoading}
-                            onClick={() => {
-                              removeThreadFromList(conv.chatId);
-                            }}
-                            aria-label="Remove thread"
-                          >
-                            {dictionary.az.yesTxt}
-                          </Button>
-                          <Button
-                            size="sm"
-                            className=" "
-                            aria-label="Remove thread"
-                            onClick={() =>
-                              setPopoversVisible({
-                                [conv?.chatId]: false
-                              })
-                            }
-                          >
-                            {dictionary.az.noTxt}
-                          </Button>
+                  <div className="flex  items-center gap-2 mb-2">
+                    <Image
+                      alt="Woman listing to music"
+                      className="object-cover h-full w-10 ounded-full"
+                      src={
+                        `${
+                          import.meta.env.VITE_BASE_URL
+                        }${conv?.assistantImagePath}` || ''
+                      }
+                    />
+                    <p className="text-white  leading-4  text-sm line-clamp-3">
+                      {conv?.assistantName}
+                    </p>
+                  </div>
+
+                  <div className="flex  items-center justify-between mb-2">
+                    <p className="text-white  leading-4  text-sm line-clamp-3">
+                      {conv?.threadFirstMessage}
+                    </p>
+                    <Popover
+                      key={conv?.threadId}
+                      isOpen={popoversVisible[conv?.threadId] || false}
+                      onOpenChange={() =>
+                        setPopoversVisible({
+                          [conv?.threadId]: true
+                        })
+                      }
+                      placement="right"
+                    >
+                      <PopoverTrigger>
+                        <Button
+                          size="sm"
+                          isIconOnly
+                          className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
+                          aria-label="Remove chat"
+                        >
+                          <BsTrash size={16} className=" text-white" />
+                        </Button>
+                      </PopoverTrigger>
+                      <PopoverContent>
+                        <div className="px-1 py-2">
+                          <p>Çatı silmək istəyinizə əminsinizmi?</p>
+                          <Divider className="my-2" />
+                          <div className="w-full flex items-center gap-1">
+                            <Button
+                              size="sm"
+                              className=" "
+                              variant="bordered"
+                              isLoading={removeLoading}
+                              onClick={() => {
+                                removeThreadFromList(conv.threadId);
+                              }}
+                              aria-label="Remove thread"
+                            >
+                              {dictionary.az.yesTxt}
+                            </Button>
+                            <Button
+                              size="sm"
+                              className=" "
+                              aria-label="Remove thread"
+                              onClick={() =>
+                                setPopoversVisible({
+                                  [conv?.threadId]: false
+                                })
+                              }
+                            >
+                              {dictionary.az.noTxt}
+                            </Button>
+                          </div>
                         </div>
-                      </div>
-                    </PopoverContent>
-                  </Popover>
+                      </PopoverContent>
+                    </Popover>
+                  </div>
                 </div>
               ))}
             </div>

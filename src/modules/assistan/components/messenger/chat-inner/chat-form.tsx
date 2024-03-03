@@ -14,21 +14,21 @@ import {
 import { BsFillSendFill } from 'react-icons/bs';
 import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
 import { textAreaConfig } from '@/configs/global-configs';
-import { IChatForm } from '@/modules/chat/types';
 import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 import { setCurrentAssistanLanguage } from '@/redux/assistan/assistan-slice';
 import { useDispatch, useSelector } from 'react-redux';
+import { IAssistanChatForm } from '@/modules/assistan/types';
 import { RootState } from '@/redux/store';
 import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
-  onSubmit: SubmitHandler<IChatForm>;
+  onSubmit: SubmitHandler<IAssistanChatForm>;
   waitingForResponse: boolean;
 }
 
 function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   // Initialize the hook form methods
-  const { register, handleSubmit, reset } = useForm<IChatForm>();
+  const { register, handleSubmit, reset } = useForm<IAssistanChatForm>();
   const [audioEnable, setAudioEnable] = useLocalStorage<Boolean>(
     'audioEnable',
     true
@@ -80,7 +80,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className="   shadow-none px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
+      className="    px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
     >
       <div className="h-full w-full bg-darkBlack   rounded-xl">
         <Textarea
