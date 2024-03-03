@@ -10,17 +10,17 @@ function Login() {
 
   return (
     <div>
-      <div className=" particles gradient-bg-with-keyframe min-h-screen ">
+      <div className=" particles  min-h-screen ">
         <div
           className={`flip-card  flex h-screen items-center   justify-center ${
             isFlipped ? 'flipped' : ''
           }`}
         >
           <div className="flip-card-inner flex justify-center items-center">
-            <div className="front h-full md:h-[700px]  z-10 md:border-1 md:border-white flex flex-col items-center md:items-stretch overflow-hidden md:rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm">
+            <div className="front h-full   z-10 flex flex-col items-center md:items-stretch overflow-hidden  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
               <LoginForm handleFlip={handleFlip} />
             </div>
-            <div className="back h-full  md:h-[700px] z-10 md:border-1 md:border-white flex flex-col overflow-hidden md:rounded-xl bg-black shadow-lg max md:flex-row md:flex-1 lg:max-w-screen-sm">
+            <div className="back h-full   z-10 flex flex-col overflow-hidden  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
               <RegisterForm handleFlip={handleFlip} />
             </div>
           </div>

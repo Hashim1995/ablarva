@@ -99,7 +99,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                   'DD.MM.YYYY'
                 )}
               </div> */}
-              <div className="flex items-center">
+              <div className="flex items-center mb-1">
                 <div className="flex-1 border-t-1 border-gray-200" />
                 <span className="px-3 text-sm  text-[gray]">
                   {dayjs(new Date(day.dateOfChats).toISOString()).format(
@@ -121,7 +121,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       threadID: String(conv.chatId)
                     });
                   }}
-                  className="flex cursor-pointer relative items-center justify-between  text-white rounded-2xl    py-2 z-10"
+                  className="flex  bg-default-50 relative items-center justify-between cursor-pointer text-white rounded-2xl  mb-2   p-3 z-10"
                 >
                   <p className="text-white  leading-4  text-sm line-clamp-3">
                     {conv.firstMessageOfChat}

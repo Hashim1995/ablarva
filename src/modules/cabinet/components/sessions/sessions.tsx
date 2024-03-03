@@ -137,7 +137,7 @@ function Sessions() {
               userSessions.map((item: IUserSessions) => (
                 <div
                   key={item.id}
-                  className=" my-2  px-2 sm:px-5 py-2 sm:py-3  border-b-1 overflow-hidden "
+                  className=" my-2 bg-default-50 rounded-2xl  mb-2   p-5  overflow-hidden "
                 >
                   <div className="flex items-center justify-between">
                     <div className="2xl:mr-2 xl:mr-1 mr-2">
