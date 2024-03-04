@@ -8,15 +8,16 @@ import coreReducer from './core/core-slice';
 
 // Attempt to load the initial layout language from localStorage
 const savedLayoutLanguage = localStorage.getItem('currentLayoutLanguage');
-const initialLayoutLanguage = savedLayoutLanguage ? (savedLayoutLanguage as LayoutLanguage) : LayoutLanguage.Azerbaijani;
+const initialLayoutLanguage = savedLayoutLanguage
+  ? (savedLayoutLanguage as LayoutLanguage)
+  : LayoutLanguage.Azerbaijani;
 
 const preloadedState = {
   core: {
-    currentLayoutLanguage: initialLayoutLanguage,
+    currentLayoutLanguage: initialLayoutLanguage
   }
   // Add other initial states if necessary
 };
-
 
 export const store = configureStore({
   reducer: {
@@ -24,7 +25,7 @@ export const store = configureStore({
     statisticsCount: statisticReducer,
     chat: chatReducer,
     assistant: assistantReducer,
-    core: coreReducer,
+    core: coreReducer
   },
   preloadedState
 });
@@ -37,5 +38,8 @@ store.subscribe(() => {
   // Get the current state
   const state = store.getState();
   // Save the current layout language to localStorage
-  localStorage.setItem('currentLayoutLanguage', state.core.currentLayoutLanguage);
+  localStorage.setItem(
+    'currentLayoutLanguage',
+    state.core.currentLayoutLanguage
+  );
 });

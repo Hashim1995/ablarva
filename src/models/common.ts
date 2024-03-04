@@ -41,9 +41,9 @@ interface StatisticsUpdateData {
   errors: any;
 }
 export enum LayoutLanguage {
-  Azerbaijani = "az",
-  English = "en",
-  Russian = "ru"
+  Azerbaijani = 'az',
+  English = 'en',
+  Russian = 'ru'
 }
 
 type setState = Dispatch<SetStateAction<boolean>>;
