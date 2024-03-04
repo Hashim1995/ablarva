@@ -4,7 +4,7 @@ import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { AuthService } from '@/services/auth-services/auth-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -17,6 +17,7 @@ import {
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { toast } from 'react-toastify';
 
@@ -33,6 +34,8 @@ export interface IForgotPasswordForm {
 }
 
 function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
+  const { t } = useTranslation();
+
   const {
     handleSubmit,
     watch,
@@ -98,7 +101,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col px-6 py-3 md:px-6 md:py-4 gap-1">
-                {dictionary.az.forgetPassword}
+                {t('forgetPassword')}
               </ModalHeader>
               <ModalBody>
                 <form
@@ -121,14 +124,14 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(dictionary.az.email)
+                          message: inputValidationText(t('email'))
                         },
                         pattern: {
                           value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                          message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
+                          message: t('email') + t('regexFormatValidatorText')
                         }
                       }}
-                      label={inputPlaceholderText(dictionary.az.email)}
+                      label={inputPlaceholderText(t('email'))}
                       required
                     />
 
@@ -147,10 +150,10 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                           rules={{
                             required: {
                               value: true,
-                              message: inputValidationText(dictionary.az.code)
+                              message: inputValidationText(t('code'))
                             }
                           }}
-                          label={inputPlaceholderText(dictionary.az.code)}
+                          label={inputPlaceholderText(t('code'))}
                           required
                         />
                         <AppHandledInput
@@ -163,10 +166,10 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                               watch('password') !== watch('confirmPassword')
                             ) {
                               setError('password', {
-                                message: `${dictionary.az.confirmPasswordMessage}`
+                                message: t('confirmPasswordMessage')
                               });
                               setError('confirmPassword', {
-                                message: `${dictionary.az.confirmPasswordMessage}`
+                                message: t('confirmPasswordMessage')
                               });
                             } else {
                               clearErrors('password');
@@ -176,31 +179,26 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                           rules={{
                             required: {
                               value: true,
-                              message: inputValidationText(
-                                dictionary.az.password
-                              )
+                              message: inputValidationText(t('password'))
                             },
                             minLength: {
                               value: 8,
-                              message: `${dictionary.az.minLength}`
+                              message: `${t('minLength')}`
                             },
                             validate: {
                               RequireDigit: value =>
-                                /[0-9]/.test(value) ||
-                                `${dictionary.az.minNumber}`,
+                                /[0-9]/.test(value) || t('minNumber'),
                               RequireLowercase: value =>
-                                /[a-z]/.test(value) ||
-                                `${dictionary.az.minSmallLetter}`,
+                                /[a-z]/.test(value) || t('minSmallLetter'),
                               RequireUppercase: value =>
-                                /[A-Z]/.test(value) ||
-                                `${dictionary.az.minBigLetter}`,
+                                /[A-Z]/.test(value) || t('minBigLetter'),
                               RequireSpecialCharacter: value =>
                                 /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
                                   value
-                                ) || `${dictionary.az.minCharacter}`
+                                ) || `${t('minCharacter')}`
                             }
                           }}
-                          label={inputPlaceholderText(dictionary.az.password)}
+                          label={inputPlaceholderText(t('password'))}
                           required
                           size="sm"
                           inputProps={{
@@ -240,10 +238,10 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                               watch('password') !== watch('confirmPassword')
                             ) {
                               setError('password', {
-                                message: `${dictionary.az.confirmPasswordMessage}`
+                                message: t('confirmPasswordMessage')
                               });
                               setError('confirmPassword', {
-                                message: `${dictionary.az.confirmPasswordMessage}`
+                                message: t('confirmPasswordMessage')
                               });
                             } else {
                               clearErrors('password');
@@ -254,32 +252,27 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                             required: {
                               value: true,
                               message: inputValidationText(
-                                dictionary.az.confirmPassword
+                                t('confirmPasswordMessage')
                               )
                             },
                             minLength: {
                               value: 8,
-                              message: `${dictionary.az.minLength}`
+                              message: `${t('minLength')}`
                             },
                             validate: {
                               RequireDigit: value =>
-                                /[0-9]/.test(value) ||
-                                `${dictionary.az.minNumber}`,
+                                /[0-9]/.test(value) || t('minNumber'),
                               RequireLowercase: value =>
-                                /[a-z]/.test(value) ||
-                                `${dictionary.az.minSmallLetter}`,
+                                /[a-z]/.test(value) || t('minSmallLetter'),
                               RequireUppercase: value =>
-                                /[A-Z]/.test(value) ||
-                                `${dictionary.az.minBigLetter}`,
+                                /[A-Z]/.test(value) || t('minBigLetter'),
                               RequireSpecialCharacter: value =>
                                 /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
                                   value
-                                ) || `${dictionary.az.minCharacter}`
+                                ) || t('minCharacter')
                             }
                           }}
-                          label={inputPlaceholderText(
-                            dictionary.az.confirmPassword
-                          )}
+                          label={inputPlaceholderText(t('confirmPassword'))}
                           required
                           inputProps={{
                             id: 'confirmPassword',
@@ -314,7 +307,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                       role="alert"
                     >
                       <span className="font-medium">
-                        {dictionary.az.newPswrdSentToEmail}
+                        {t('newPswrdSentToEmail')}
                       </span>
                     </div>
                   )}
@@ -324,14 +317,12 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
                     variant="bordered"
                     type="submit"
                   >
-                    {!hasCode
-                      ? dictionary.az.sendPswrdToEmail
-                      : dictionary.az.approve}
+                    {!hasCode ? t('sendPswrdToEmail') : t('approve')}
                   </Button>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

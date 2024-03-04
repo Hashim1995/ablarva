@@ -1,6 +1,9 @@
+import { useTranslation } from 'react-i18next';
 import './ai-loader.scss';
 
 function AiEmptyWelcome() {
+  const { t } = useTranslation();
+
   return (
     <div className="  h-full">
       <div className=" flex-col  w-full h-full items-center	 justify-center ">
@@ -35,7 +38,7 @@ function AiEmptyWelcome() {
           </div>
         </div>
         <h2 className="text-white text-center ">
-          Ağlında sual var? Bizim hörmətli Ai-zadə cavablandırmağa hazırdı! 😊
+          {t("questionAnswerAiZadeh") }
         </h2>
       </div>
     </div>

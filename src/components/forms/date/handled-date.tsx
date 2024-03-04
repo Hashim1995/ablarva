@@ -1,3 +1,4 @@
+import { useTranslation } from 'react-i18next';
 import { dictionary } from '@/utils/constants/dictionary';
 import { inputValidationText } from '@/utils/constants/validations';
 import { BsCalendarWeekFill } from 'react-icons/bs';
@@ -19,6 +20,8 @@ function AppHandledDate({
   label,
   className
 }: IHandledDate) {
+  const { t } = useTranslation();
+
   return (
     <div className={`grid grid-cols-3 gap-4 ${className}`}>
       <AppHandledInput
@@ -38,22 +41,22 @@ function AppHandledDate({
         rules={{
           required: {
             value: true,
-            message: inputValidationText(dictionary.az.day)
+            message: inputValidationText(t('day'))
           },
           pattern: {
             value: /(0[1-9]|[12]\d|3[01])/,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           minLength: {
             value: 2,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           maxLength: {
             value: 2,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           }
         }}
-        placeholder={dictionary.az.day}
+        placeholder={t('day')}
         required
         // eslint-disable-next-line react/no-unstable-nested-components
         IconElement={() => (
@@ -81,22 +84,22 @@ function AppHandledDate({
         rules={{
           required: {
             value: true,
-            message: inputValidationText(dictionary.az.month)
+            message: inputValidationText(t('month'))
           },
           pattern: {
             value: /\b(0[1-9]|1[0-2])/,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           minLength: {
             value: 2,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           maxLength: {
             value: 2,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           }
         }}
-        placeholder={dictionary.az.month}
+        placeholder={t('month')}
         required
         // eslint-disable-next-line react/no-unstable-nested-components
         IconElement={() => (
@@ -124,22 +127,22 @@ function AppHandledDate({
         rules={{
           required: {
             value: true,
-            message: inputValidationText(dictionary.az.year)
+            message: inputValidationText(t('year'))
           },
           pattern: {
             value: /(19\d\d|20\d\d)\b/,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           minLength: {
             value: 4,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           },
           maxLength: {
             value: 4,
-            message: `${dictionary.az.day} ${dictionary.az.regexFormatValidatorText}`
+            message: `${t('day')} ${t('regexFormatValidatorText')}`
           }
         }}
-        placeholder={dictionary.az.year}
+        placeholder={t('year')}
         required
         // eslint-disable-next-line react/no-unstable-nested-components
         IconElement={() => (

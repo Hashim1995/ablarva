@@ -51,6 +51,8 @@ import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
 
 export default function Navbar() {
+  const { t ,i18n} = useTranslation();
+
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuItems: IMenuItemsNavbar[] = [
     {
@@ -69,7 +71,7 @@ export default function Navbar() {
       icon: <BsFillGearFill />
     }
   ];
-  const { t, i18n } = useTranslation();
+  // const { t, i18n } = useTranslation();
   // const { toggle, isDarkMode } = useDarkMode();
   const location = useLocation();
   const dispatch = useDispatch();
@@ -236,7 +238,7 @@ export default function Navbar() {
               <Tooltip
                 className="hidden sm:block"
                 placement="bottom"
-                content={dictionary.az.emailVerify}
+                content={t('emailVerify')}
               >
                 <Button
                   onClick={onOpen}
@@ -261,12 +263,8 @@ export default function Navbar() {
               <BsQuestionCircle color="white" size={22} />
             </Button>
             <User
-              name={
-                user
-                  ? `${user.firstName} ${user.lastName}`
-                  : dictionary.az.empty
-              }
-              description={user.email || dictionary.az.empty}
+              name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
+              description={user.email || t('empty')}
               avatarProps={{
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
@@ -289,7 +287,7 @@ export default function Navbar() {
                   key="pricing"
                 >
                   <p className="flex items-center  m-0 gap-2">
-                    <MdAttachMoney /> {dictionary.az.tariffs}
+                    <MdAttachMoney /> {t('tariffs')}
                   </p>
                 </DropdownItem>
                 <DropdownItem
@@ -300,7 +298,7 @@ export default function Navbar() {
                   key="cabinet"
                 >
                   <p className="flex items-center  m-0 gap-2">
-                    <AiOutlineUser /> {dictionary.az.cabinet}
+                    <AiOutlineUser /> {t('cabinet')}
                   </p>
                 </DropdownItem>
                 <DropdownItem
@@ -312,7 +310,7 @@ export default function Navbar() {
                   key="logout"
                 >
                   <p className="flex items-center  m-0 gap-2">
-                    <BsArrowRightCircle /> {dictionary.az.logOut}
+                    <BsArrowRightCircle /> {t('logOut')}
                   </p>
                 </DropdownItem>
               </DropdownMenu>

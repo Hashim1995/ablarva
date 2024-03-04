@@ -6,7 +6,8 @@ import {
   ModalFooter,
   ModalHeader
 } from '@nextui-org/react';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
+import { useTranslation } from 'react-i18next';
 
 interface IPricingModal {
   isOpen: boolean;
@@ -21,6 +22,8 @@ function PricingModal({
   onOkFunction,
   loading
 }: IPricingModal) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <Modal
@@ -35,11 +38,10 @@ function PricingModal({
           {onClose => (
             <>
               <ModalHeader className="flex flex-row items-center gap-1">
-                Təstiqləmə
+                {t('verification')}
               </ModalHeader>
               <ModalBody className="scrollBar overflow-y-scroll">
-                Mövcud paketiniz sıfırlanacaq. Əməliyyatı yerinə yetirmək
-                istədiyinizə əminsinizmi?
+                {t('resetPackageConfirmation')}
               </ModalBody>
               <ModalFooter>
                 <Button
@@ -48,9 +50,9 @@ function PricingModal({
                   isLoading={loading}
                   variant="bordered"
                 >
-                  {dictionary.az.yesTxt}
+                  {t('yesTxt')}
                 </Button>
-                <Button onPress={onClose}>{dictionary.az.noTxt}</Button>
+                <Button onPress={onClose}>{t('noTxt')}</Button>
               </ModalFooter>
             </>
           )}

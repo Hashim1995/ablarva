@@ -225,6 +225,30 @@
         "regenerate": "Regenerate",
         "copy": "Copy",
         "my": "My",
-        "tariff": "My Tariff"
+        "tariff": "My Tariff",
+        "deleteConfirmationPrompt":"Are you sure you want to delete the chat?",
+        "welcomeMessage": " Welcome to! Our Artificial Intelligence startup AIZade is your diary is here to make your life easier. With our efficient and innovative technology, you can find instant answers to all your questions. You will always find innovations and differences on our platform. Log in and start your journey in the world of AIZade!",
+        "privacyPolicySentence" :"Privacy and confidentiality policy",
+        "questionAnswerAiZadeh":"Have a question in mind? Our respected Ai-zadeh was ready to answer! 😊",
+        "suggestionsAndComments":"Let us know your suggestions and comments",
+        "instructionBTN":"Instruction",
+        "instructionFooterText":"Instruction",
+        "instructionText":"Instruction",
+        "helpFooter":"Help",
+        "currentYearFooter":"2024",
+        "confirmEmailBalance":"If you confirm your email address, your balance, by us",
+        "andText":"and",
+        "ordinary":"ordinary",
+        "premium":"premium",
+        "requestOptionAdded" : "request option will be added",
+        "deleteChatConfirmation":"Are you sure you want to delete the chat?" ,
+        "general":"General",
+        "used":"Used",
+        "rest":"What's left",
+        "awaitedResponseText":"A response is currently awaited.Are you sure you want to go to the new chat ?",
+        "package":"package",
+        "verification":"Verification",
+        "resetPackageConfirmation":"Your existing package will be reset. Perform the operation are you sure you want to?"
+        
     }
 }

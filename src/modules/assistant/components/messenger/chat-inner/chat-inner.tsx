@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { TfiFaceSad } from 'react-icons/tfi';
 
 import { BsRecycle } from 'react-icons/bs';
@@ -28,10 +28,13 @@ import {
 import { toast } from 'react-toastify';
 import ThinkText from '@/core/static-components/think-text';
 import { toastOptions } from '@/configs/global-configs';
+import { useTranslation } from 'react-i18next';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
 function ChatInner() {
+  const { t } = useTranslation();
+
   const [bubbleList, setBubbleList] = useState<IAssistantThreadBubblesItem[]>(
     []
   );
@@ -250,7 +253,7 @@ function ChatInner() {
                 size="sm"
                 className="bg-black text-white rounded-full pl-[2px]"
               >
-                {dictionary.az.regenerate}
+                {t('regenerate')}
               </Button>
             </div>
           )}

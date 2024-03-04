@@ -22,6 +22,7 @@ import {
   Progress
 } from '@nextui-org/react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
@@ -50,6 +51,7 @@ function MessengerHeader({
   const statisticsData: StatisticsUpdateData = useSelector(
     (state: RootState) => state.statisticsCount.statisticsCount
   );
+  const { t } = useTranslation();
 
   return (
     <div className=" pt-1 pb-3 h-[60px] flex   ">
@@ -61,7 +63,9 @@ function MessengerHeader({
               <Tooltip
                 placement="top-start"
                 offset={12}
-                content={`Ümumi: ${basic?.total}, İstifadə olunan: ${basic?.usage}, Geriyə qalan: ${basic?.remainder}`}
+                content={`${t('general')}: ${basic?.total}, ${t(
+                  'used'
+                )}: ${basic?.usage}, ${t('rest')}: ${basic?.remainder}`}
               >
                 <Progress
                   size="sm"
@@ -72,7 +76,7 @@ function MessengerHeader({
                     label: ' text-[11px]  text-white pr-2',
                     value: 'text-[11px] text-white'
                   }}
-                  label="Sadə paket"
+                  label={`${t('ordinary')} paket`}
                   value={basic?.remainder}
                   formatOptions={{}}
                   showValueLabel
@@ -82,7 +86,9 @@ function MessengerHeader({
               <Tooltip
                 placement="top-start"
                 offset={12}
-                content={`Ümumi: ${premium?.total}, İstifadə olunan: ${premium?.usage}, Geriyə qalan: ${premium?.remainder}`}
+                content={`${t('general')}: ${premium?.total}, ${t(
+                  'used'
+                )}: ${premium?.usage}, ${t('rest')}: ${premium?.remainder}`}
               >
                 <Progress
                   size="sm"
@@ -93,7 +99,7 @@ function MessengerHeader({
                     label: ' text-[11px]  text-white pr-2',
                     value: ' text-[11px] text-white'
                   }}
-                  label="Premium paket"
+                  label={`${t('premium')} paket`}
                   value={premium?.remainder}
                   formatOptions={{}}
                   showValueLabel
@@ -171,8 +177,7 @@ function MessengerHeader({
               <PopoverContent>
                 <div className="px-1 flex flex-col py-2 gap-2">
                   <p>
-                    Hal-hazırda cavab gözlənilir. Yeni çata keçək istədiyinizə
-                    əminsinizmi?
+                    {t("awaitedResponseText")}
                   </p>
 
                   <div className="flex gap-2">
@@ -191,7 +196,7 @@ function MessengerHeader({
                       }}
                       aria-label="Remove thread"
                     >
-                      {dictionary.az.yesTxt}
+                      {t('yesTxt')}
                     </Button>
                     <Button
                       size="sm"
@@ -199,7 +204,7 @@ function MessengerHeader({
                       className=" bg-black text-white"
                       aria-label="Remove thread"
                     >
-                      {dictionary.az.noTxt}
+                      {t('noTxt')}
                     </Button>
                   </div>
                 </div>

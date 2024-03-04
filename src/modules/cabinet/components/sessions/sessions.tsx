@@ -24,11 +24,14 @@ import { FaWindows, FaLinux, FaApple, FaBlackberry } from 'react-icons/fa';
 // import { fetchUserData } from '@/redux/auth/auth-slice';
 import { useState } from 'react';
 import Empty from '@/components/layout/empty';
+import { useTranslation } from 'react-i18next';
 
 function Sessions() {
   const { userSessions } = useSelector((state: RootState) => state.user.user);
   // const dispatch = useDispatch<AppDispatch>();
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
+
 
   const returnDeviceIconByType = (type: number) => {
     switch (type) {
@@ -126,7 +129,7 @@ function Sessions() {
       <div className="flex justify-between items-center xl:mb-4  p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
-            {dictionary.az.active} {dictionary.az.sessions}
+            {t('active')} {t('sessions')}
           </p>
         </div>
       </div>
@@ -148,19 +151,19 @@ function Sessions() {
                       <div className="2xl:px-4 px-2">
                         <div className="tracking-wide text-[14px] text-white ">
                           <span className=" text-gray-400"> Sistem: </span>
-                          {item.platformName || dictionary.az.empty}
+                          {item.platformName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
                           <span className=" text-gray-400">Brauzer: </span>
-                          {item.browserName || dictionary.az.empty}
+                          {item.browserName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
                           <span className=" text-gray-400">IP: </span>
-                          {item.ipAddress || dictionary.az.empty}
+                          {item.ipAddress || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
                           <span className=" text-gray-400">Giriş tarixi: </span>
-                          {item.loginDate || dictionary.az.empty}
+                          {item.loginDate || t('empty')}
                         </div>
                       </div>
 
@@ -168,9 +171,9 @@ function Sessions() {
                         <div className="font-bold 2xl:px-4 px-2">
                           <Chip
                             className="text-white"
-                            color={item.status ? 'success' : 'danger'}
+                            color={item?.status ? 'success' : 'danger'}
                           >
-                            {item.status ? 'Aktiv' : item.status}
+                            {item?.status ? 'Aktiv' : item?.status}
                           </Chip>
                         </div>
                         {/* <Divider orientation="vertical" className="h-20" />

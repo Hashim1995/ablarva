@@ -5,7 +5,7 @@ import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { AuthService } from '@/services/auth-services/auth-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -18,6 +18,7 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -48,6 +49,8 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
   const [showPassword, setShowPassword] = useState(false);
   const [showOldPassword, setShowOldPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  const { t } = useTranslation();
+
   const navigate = useNavigate();
 
   const onSubmit = async (data: IChangePasswordForm) => {
@@ -80,7 +83,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {dictionary.az.changePassWord}
+                {t('changePassWord')}
               </ModalHeader>
               <ModalBody>
                 <form
@@ -97,12 +100,10 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(
-                            dictionary.az.oldPassword
-                          )
+                          message: inputValidationText(t('oldPassword'))
                         }
                       }}
-                      label={inputPlaceholderText(dictionary.az.oldPassword)}
+                      label={inputPlaceholderText(t('oldPassword'))}
                       required
                       inputProps={{
                         id: 'oldPassword',
@@ -136,10 +137,10 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       onChangeApp={() => {
                         if (watch('password') !== watch('confirmPassword')) {
                           setError('password', {
-                            message: `${dictionary.az.confirmPasswordMessage}`
+                            message: t('confirmPasswordMessage')
                           });
                           setError('confirmPassword', {
-                            message: `${dictionary.az.confirmPasswordMessage}`
+                            message: t('confirmPasswordMessage')
                           });
                         } else {
                           clearErrors('password');
@@ -149,28 +150,26 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(dictionary.az.password)
+                          message: inputValidationText(t('password'))
                         },
                         minLength: {
                           value: 8,
-                          message: `${dictionary.az.minLength}`
+                          message: t('minLength')
                         },
                         validate: {
                           RequireDigit: value =>
-                            /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
+                            /[0-9]/.test(value) || t('minNumber'),
                           RequireLowercase: value =>
-                            /[a-z]/.test(value) ||
-                            `${dictionary.az.minSmallLetter}`,
+                            /[a-z]/.test(value) || t('minSmallLetter'),
                           RequireUppercase: value =>
-                            /[A-Z]/.test(value) ||
-                            `${dictionary.az.minBigLetter}`,
+                            /[A-Z]/.test(value) || t('minBigLetter'),
                           RequireSpecialCharacter: value =>
                             /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
                               value
-                            ) || `${dictionary.az.minCharacter}`
+                            ) || t('minCharacter')
                         }
                       }}
-                      label={inputPlaceholderText(dictionary.az.password)}
+                      label={inputPlaceholderText(t('password'))}
                       required
                       size="sm"
                       inputProps={{
@@ -207,10 +206,10 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       onChangeApp={() => {
                         if (watch('password') !== watch('confirmPassword')) {
                           setError('password', {
-                            message: `${dictionary.az.confirmPasswordMessage}`
+                            message: t('confirmPasswordMessage')
                           });
                           setError('confirmPassword', {
-                            message: `${dictionary.az.confirmPasswordMessage}`
+                            message: t('confirmPasswordMessage')
                           });
                         } else {
                           clearErrors('password');
@@ -220,32 +219,26 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(
-                            dictionary.az.confirmPassword
-                          )
+                          message: inputValidationText(t('confirmPassword'))
                         },
                         minLength: {
                           value: 8,
-                          message: `${dictionary.az.minLength}`
+                          message: t('minLength')
                         },
                         validate: {
                           RequireDigit: value =>
-                            /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
+                            /[0-9]/.test(value) || t('minNumber'),
                           RequireLowercase: value =>
-                            /[a-z]/.test(value) ||
-                            `${dictionary.az.minSmallLetter}`,
+                            /[a-z]/.test(value) || t('minSmallLetter'),
                           RequireUppercase: value =>
-                            /[A-Z]/.test(value) ||
-                            `${dictionary.az.minBigLetter}`,
+                            /[A-Z]/.test(value) || t('minBigLetter'),
                           RequireSpecialCharacter: value =>
                             /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(
                               value
-                            ) || `${dictionary.az.minCharacter}`
+                            ) || t('minCharacter')
                         }
                       }}
-                      label={inputPlaceholderText(
-                        dictionary.az.confirmPassword
-                      )}
+                      label={inputPlaceholderText(t('confirmPassword'))}
                       required
                       inputProps={{
                         id: 'confirmPassword',
@@ -279,12 +272,12 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                     variant="bordered"
                     type="submit"
                   >
-                    {dictionary.az.approve}
+                    {t('approve')}
                   </Button>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

@@ -1,12 +1,13 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
 import AppHandledInput from '@/components/forms/input/handled-input';
+import { useTranslation } from 'react-i18next';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { AppDispatch } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -36,6 +37,8 @@ export interface IVerifyEmailForm {
 }
 
 function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
+  const { t } = useTranslation();
+
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -69,7 +72,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
     try {
       const res = await AuthService.getInstance().resendVerificationCode();
       if (res.isSuccess) {
-        toast.success(dictionary.az.verifyCodeSentSuccesfully, toastOptions);
+        toast.success(t('verifyCodeSentSuccesfully'), toastOptions);
       }
     } catch (err) {
       console.log(err);
@@ -91,7 +94,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {dictionary.az.emailVerify}
+                {t('emailVerify')}
               </ModalHeader>
               <ModalBody>
                 <form
@@ -112,10 +115,10 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(dictionary.az.code)
+                          message: inputValidationText(t('code'))
                         }
                       }}
-                      label={inputPlaceholderText(dictionary.az.code)}
+                      label={inputPlaceholderText(t('code'))}
                       required
                     />
                   </div>
@@ -127,7 +130,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       variant="bordered"
                       type="submit"
                     >
-                      {dictionary.az.approve}
+                      {t('approve')}
                     </Button>
                     <Button
                       size={matches ? 'sm' : 'md'}
@@ -136,7 +139,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       variant="bordered"
                       type="button"
                     >
-                      {dictionary.az.sendCodeToEmail}
+                      {t('sendCodeToEmail')}
                     </Button>
                   </ButtonGroup>
                   <Divider />
@@ -146,16 +149,16 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
                       color="orange"
                       className="float-left mr-2"
                     />
-                    Email ünvanızızı təsdiqlədiyiniz təqdirdə, balansınıza,
-                    bizim tərəfimizdən{' '}
-                    <span className="font-semibold"> 300 Sadə</span> və
-                    <span className="font-semibold"> 100 Premium</span> sorğu
-                    imkanı əlavə oluncaqdır
+                    {t('confirmEmailBalance')}
+                    <span className="font-semibold"> 300 {t('ordinary')}</span>
+                    {t('andText')}
+                    <span className="font-semibold"> 100 {t('premium')}</span>
+                    {t('requestOptionAdded')}
                   </p>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

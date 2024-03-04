@@ -6,7 +6,6 @@ import {
   ISendMessagePayload,
   IThreadBubblesItem
 } from '@/modules/chat/types';
-import { dictionary } from '@/utils/constants/dictionary';
 import { TfiFaceSad } from 'react-icons/tfi';
 
 import { BsRecycle } from 'react-icons/bs';
@@ -26,6 +25,7 @@ import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
 import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
 import ThinkText from '@/core/static-components/think-text';
+import { useTranslation } from 'react-i18next';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -42,6 +42,8 @@ function ChatInner() {
     waitingForResponse,
     waitingForThreadLoad
   } = useSelector((state: RootState) => state.chat);
+  const { t } = useTranslation();
+
   const { verified } = useSelector((state: RootState) => state?.user?.user);
 
   const dispatch = useDispatch();
@@ -225,7 +227,7 @@ function ChatInner() {
                 size="sm"
                 className="bg-black text-white rounded-full pl-[2px]"
               >
-                {dictionary.az.regenerate}
+                {t('regenerate')}
               </Button>
             </div>
           )}
