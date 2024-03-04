@@ -70,7 +70,8 @@ function App() {
   return (
     <main
       className={`${
-        ' bg-foreground-200'
+        ' bg-foreground-200 overflow-y-hidden'
+
         // isDarkMode
         //   ? 'dark h-screen text-foreground bg-background'
         //   : 'h-screen text-foreground bg-background'

@@ -495,9 +495,7 @@ function TermsConditionsModal({
                 </div>
               </ModalBody>
               <ModalFooter className="border-t-1">
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}

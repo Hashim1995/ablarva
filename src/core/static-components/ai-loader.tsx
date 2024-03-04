@@ -3,7 +3,7 @@ import './ai-loader.scss';
 function AiLoder() {
   return (
     <div>
-      <div className="container palette-2">
+      <div className=" palette-2">
         <div className="blobs">
           <svg viewBox="0 0 1200 1200">
             <g className="blob blob-1">

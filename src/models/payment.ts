@@ -1,20 +1,15 @@
-export interface IPricingTableHeader {
-  id: number;
-  name: string;
+export interface ILimitItem {
+  label: string;
   price: number;
-  description: string;
 }
-
-export interface IPricingTableBody {
-  chatLimit: number;
-  imageLimit: number;
-  voiceLimit: number;
-  assistantLimit: number;
-}
-
-export interface IPricingData {
+export interface IPackageItem {
+  packageId: number;
+  packageName: string;
+  price: number;
+  packageDescription: string;
   categoryId: number;
-  categoryName: string;
-  tableHeaders: IPricingTableHeader[];
-  tableBodies: IPricingTableBody[];
+  limitDetails: ILimitItem[];
+}
+export interface IPackageData {
+  packages: IPackageItem[];
 }

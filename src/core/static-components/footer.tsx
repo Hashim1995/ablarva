@@ -16,7 +16,7 @@ function Footer({ onOpenHelp }: IFooterProps) {
           <a href="/#" className="hover:underline">
             AI-ZADE™
           </a>{' '}
-          © 2023{' '}
+          © 2024{' '}
         </div>
         <div className="flex gap-5">
           <div

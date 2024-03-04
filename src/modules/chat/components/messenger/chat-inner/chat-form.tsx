@@ -80,153 +80,163 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className="  bg-[#FBF9F9] shadow  rounded-xl relative   h-full"
+      className="    px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
     >
-      {/* Message Textarea Field */}
-      <Textarea
-        {...register('message', { required: true })}
-        variant="bordered"
-        fullWidth
-        color="primary"
-        placeholder="Type a message..."
-        classNames={textAreaConfig}
-        className="flex-1 !border-none !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
-        rows={3}
-        onKeyDown={e => {
-          // Check if the key pressed is 'Enter' and there is no shift key pressed
-          if (audioEnable) {
-            typewriterSound.currentTime = 0; // Reset the typewriterSound to the start
-            typewriterSound.play();
-          }
+      <div className="h-full w-full bg-darkBlack   rounded-xl">
+        <Textarea
+          {...register('message', { required: true })}
+          variant="bordered"
+          fullWidth
+          color="primary"
+          rows={3}
+          maxRows={3}
+          placeholder="Type a message... 💬👨🏻‍💻"
+          classNames={textAreaConfig}
+          className="flex-1 px-4  !border-none text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
+          onKeyDown={e => {
+            // Check if the key pressed is 'Enter' and there is no shift key pressed
+            if (audioEnable) {
+              typewriterSound.currentTime = 0; // Reset the typewriterSound to the start
+              typewriterSound.play();
+            }
 
-          if (e.key === 'Enter' && !e.shiftKey && !waitingForResponse) {
-            e.preventDefault(); // Prevent the default behavior of Enter key in a textarea (which is to insert a new line)
-            handleSubmit(onSubmit)(); // Call the submit handler
-            reset();
-          }
-        }}
-        maxRows={matches ? 3 : 2}
-      />
+            if (e.key === 'Enter' && !e.shiftKey && !waitingForResponse) {
+              e.preventDefault(); // Prevent the default behavior of Enter key in a textarea (which is to insert a new line)
+              handleSubmit(onSubmit)(); // Call the submit handler
+              reset();
+            }
+          }}
+        />
+        <div className="flex-1 border-t-1 border-gray-600" />
 
-      <div className="flex w-full px-5 items-center justify-between absolute bottom-0 z-20 bg-[#E2E0E0]  h-10 sm:h-12">
-        <Button
-          type="button"
-          isIconOnly
-          size="sm"
-          onClick={() => setAudioEnable(z => !z)}
-          className="bg-black rounded-full "
-        >
-          {audioEnable ? (
-            <AiFillSound size={16} color="white" />
-          ) : (
-            <AiOutlineSound size={16} color="white" />
-          )}{' '}
-        </Button>
-        <div className="flex  gap-2  items-center justify-between">
-          {
-            <Chip className="sm:flex hidden">
-              Aİ-ZADƏ sizə {currentLanguageText(currentChatLanguage)} cavab
-              verəcək
-            </Chip>
-          }
-
-          {matches ? (
-            <Dropdown
-              classNames={{
-                content: 'min-w-[auto] w-[80px]'
-              }}
-            >
-              <DropdownTrigger>
-                <Button size="sm" className="capitalize">
-                  {currentLanguageFlag(currentChatLanguage)}
-                </Button>
-              </DropdownTrigger>
-              <DropdownMenu
-                aria-label="Single selection example"
-                variant="flat"
-                disallowEmptySelection
-                selectionMode="single"
-                selectedKeys={currentChatLanguage}
-                onSelectionChange={(e: any) =>
-                  dispatch(setCurrentChatLanguage(e?.currentKey))
-                }
-              >
-                <DropdownItem key="0">
-                  <img width={22} alt="uk flag" src="/flags/global-flag.svg" />
-                </DropdownItem>
-                <DropdownItem key="1">
-                  <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
-                </DropdownItem>
-                <DropdownItem key="2">
-                  <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
-                </DropdownItem>
-                <DropdownItem key="3">
-                  <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
-                </DropdownItem>
-                <DropdownItem key="4">
-                  <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
-          ) : (
-            <Tabs
-              selectedKey={currentChatLanguage}
-              // @ts-ignore
-              onSelectionChange={e => dispatch(setCurrentChatLanguage(e))}
-              size={'sm'}
-              color="primary"
-              className="ml-2"
-              classNames={{
-                cursor: ' bg-slate-300'
-              }}
-            >
-              <Tab
-                key="0"
-                className="px-1"
-                title={
-                  <img width={22} alt="uk flag" src="/flags/global-flag.svg" />
-                }
-              />
-              <Tab
-                key="1"
-                className="px-1"
-                title={
-                  <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
-                }
-              />
-              <Tab
-                key="2"
-                className="px-1"
-                title={
-                  <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
-                }
-              />
-              <Tab
-                key="3"
-                className="px-1"
-                title={
-                  <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
-                }
-              />
-              <Tab
-                key="4"
-                className="px-1"
-                title={
-                  <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
-                }
-              />
-            </Tabs>
-          )}
-
+        <div className="flex  px-5    items-center justify-between   shadow-none  z-20 ">
           <Button
-            type="submit"
+            type="button"
             isIconOnly
             size="sm"
-            isDisabled={waitingForResponse}
-            className="bg-black rounded-full"
+            onClick={() => setAudioEnable(z => !z)}
+            className="bg-transparent rounded-full "
           >
-            <BsFillSendFill size={16} color="white" />
+            {audioEnable ? (
+              <AiFillSound size={16} color="white" />
+            ) : (
+              <AiOutlineSound size={16} color="white" />
+            )}{' '}
           </Button>
+          <div className="flex rounded-0 shadow-none   items-center justify-between">
+            {
+              <Chip className="sm:flex hidden bg-transparent text-[gray] text-sm">
+                Aİ-ZADƏ sizə {currentLanguageText(currentChatLanguage)} cavab
+                verəcək
+              </Chip>
+            }
+
+            {matches ? (
+              <Dropdown
+                classNames={{
+                  content: 'min-w-[auto] w-[80px]'
+                }}
+              >
+                <DropdownTrigger>
+                  <Button size="sm" className="capitalize bg-transparent">
+                    {currentLanguageFlag(currentChatLanguage)}
+                  </Button>
+                </DropdownTrigger>
+                <DropdownMenu
+                  aria-label="Single selection example"
+                  variant="flat"
+                  disallowEmptySelection
+                  selectionMode="single"
+                  selectedKeys={currentChatLanguage}
+                  onSelectionChange={(e: any) =>
+                    dispatch(setCurrentChatLanguage(e?.currentKey))
+                  }
+                >
+                  <DropdownItem key="0">
+                    <img
+                      width={22}
+                      alt="uk flag"
+                      src="/flags/global-flag.svg"
+                    />
+                  </DropdownItem>
+                  <DropdownItem key="1">
+                    <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
+                  </DropdownItem>
+                  <DropdownItem key="2">
+                    <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
+                  </DropdownItem>
+                  <DropdownItem key="3">
+                    <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
+                  </DropdownItem>
+                  <DropdownItem key="4">
+                    <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            ) : (
+              <Tabs
+                selectedKey={currentChatLanguage}
+                // @ts-ignore
+                onSelectionChange={e => dispatch(setCurrentChatLanguage(e))}
+                size={'sm'}
+                color="primary"
+                className="ml-2"
+                classNames={{
+                  cursor: ' bg-slate-300'
+                }}
+              >
+                <Tab
+                  key="0"
+                  className="px-1"
+                  title={
+                    <img
+                      width={22}
+                      alt="uk flag"
+                      src="/flags/global-flag.svg"
+                    />
+                  }
+                />
+                <Tab
+                  key="1"
+                  className="px-1"
+                  title={
+                    <img width={22} alt="uk flag" src="/flags/az-flag.svg" />
+                  }
+                />
+                <Tab
+                  key="2"
+                  className="px-1"
+                  title={
+                    <img width={22} alt="uk flag" src="/flags/tr-flag.svg" />
+                  }
+                />
+                <Tab
+                  key="3"
+                  className="px-1"
+                  title={
+                    <img width={22} alt="uk flag" src="/flags/en-flag.svg" />
+                  }
+                />
+                <Tab
+                  key="4"
+                  className="px-1"
+                  title={
+                    <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />
+                  }
+                />
+              </Tabs>
+            )}
+
+            <Button
+              type="submit"
+              isIconOnly
+              size="sm"
+              isDisabled={waitingForResponse}
+              className="bg-transparentrounded-full"
+            >
+              <BsFillSendFill size={16} color="white" />
+            </Button>
+          </div>
         </div>
       </div>
     </form>

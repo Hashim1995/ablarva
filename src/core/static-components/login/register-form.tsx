@@ -11,12 +11,7 @@ import { Button } from '@nextui-org/react';
 import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
-import {
-  BsEye,
-  BsEnvelopeFill,
-  BsFillPersonFill,
-  BsEyeSlash
-} from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useLocalStorage } from 'usehooks-ts';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { dictionary } from '@/utils/constants/dictionary';
@@ -25,12 +20,15 @@ import {
   selectPlaceholderText
 } from '@/utils/constants/texts';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { convertDateFormat } from '@/utils/functions/functions';
-import { genderOptions } from '@/utils/constants/options';
-import AppHandledDate from '@/components/forms/date/handled-date';
+import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
+import {
+  daysList,
+  genderOptions,
+  monthsList,
+  yearsList
+} from '@/utils/constants/options';
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
-import { FaTransgender } from 'react-icons/fa';
 import LoginLeftBar from './login-leftbar';
 
 interface IRegisterFormProps {
@@ -57,7 +55,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const onSubmit = async (data: IUserRegister) => {
     const payload: IUserRegister = {
       ...data,
-      dateOfBirth: convertDateFormat(`${data.day}.${data.month}.${data.year}`),
+
+      dateOfBirth: convertDDMMYYYtoISOString(
+        `${data.day}.${data.month}.${data.year}`
+      ),
       gender: Number(data.gender)
     };
     delete payload.day;
@@ -89,12 +90,12 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
   return (
     <>
-      <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+      <div className="p-4 py-6 bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
 
-      <div className="p-4 md:p-3 bg-white rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
-        <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold text-gray-700">
+      <div className="p-4 md:p-3  border-l-1 rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
+        <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold ">
           {dictionary.az.joinUs}
         </h3>
         <form
@@ -112,7 +113,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               isInvalid={Boolean(errors.email?.message)}
               errors={errors}
               size="sm"
-              className="text-black w-72"
+              className=" w-72"
               rules={{
                 required: {
                   value: true,
@@ -123,15 +124,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.email)}
+              label={inputPlaceholderText(dictionary.az.email)}
               required
-              IconElement={() => (
-                <BsEnvelopeFill
-                  size={16}
-                  color={errors.email?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <AppHandledInput
               name="firstName"
@@ -139,7 +133,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 id: 'firstName'
               }}
               type="text"
-              className="text-black w-72"
+              className="w-72"
               control={control}
               isInvalid={Boolean(errors.firstName?.message)}
               errors={errors}
@@ -150,15 +144,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   message: inputValidationText(dictionary.az.firstName)
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.firstName)}
+              label={inputPlaceholderText(dictionary.az.firstName)}
               required
-              IconElement={() => (
-                <BsFillPersonFill
-                  size={16}
-                  color={errors.firstName?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <AppHandledInput
               name="lastName"
@@ -167,7 +154,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               type="text"
               control={control}
-              className="text-black w-72"
+              className="w-72"
               isInvalid={Boolean(errors.lastName?.message)}
               errors={errors}
               size="sm"
@@ -177,30 +164,86 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   message: inputValidationText(dictionary.az.lastName)
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.lastName)}
+              label={inputPlaceholderText(dictionary.az.lastName)}
               required
-              IconElement={() => (
-                <BsFillPersonFill
-                  size={16}
-                  color={errors.lastName?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
 
-            <AppHandledDate
-              control={control}
-              errors={errors}
-              className="w-72"
-            />
+            <div className="flex space-x-2">
+              <div className="flex-1">
+                <AppHandledSelect
+                  name="day"
+                  selectProps={{
+                    id: 'day'
+                  }}
+                  isInvalid={Boolean(errors.day?.message)}
+                  control={control}
+                  label={'Gün'}
+                  size="sm"
+                  required
+                  rules={{
+                    required: {
+                      value: true,
+                      message: inputValidationText('Gün')
+                    }
+                  }}
+                  options={daysList}
+                  errors={errors}
+                />
+              </div>
+
+              <div className="flex-1">
+                <AppHandledSelect
+                  name="month"
+                  selectProps={{
+                    id: 'month'
+                  }}
+                  isInvalid={Boolean(errors.month?.message)}
+                  control={control}
+                  label={'Ay'}
+                  size="sm"
+                  required
+                  rules={{
+                    required: {
+                      value: true,
+                      message: inputValidationText('Ay')
+                    }
+                  }}
+                  options={monthsList}
+                  errors={errors}
+                />
+              </div>
+
+              <div className="flex-1">
+                <AppHandledSelect
+                  name="year"
+                  selectProps={{
+                    id: 'year'
+                  }}
+                  isInvalid={Boolean(errors.year?.message)}
+                  control={control}
+                  label={'İl'}
+                  size="sm"
+                  required
+                  rules={{
+                    required: {
+                      value: true,
+                      message: inputValidationText('İl')
+                    }
+                  }}
+                  options={yearsList}
+                  errors={errors}
+                />
+              </div>
+            </div>
 
             <AppHandledSelect
               name="gender"
               isInvalid={Boolean(errors.gender?.message)}
               control={control}
-              placeholder={selectPlaceholderText(dictionary.az.gender)}
-              variant="bordered"
-              className=" app-select"
+              selectProps={{
+                id: 'gender'
+              }}
+              label={selectPlaceholderText(dictionary.az.gender)}
               size="sm"
               required
               rules={{
@@ -211,19 +254,12 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               }}
               options={genderOptions}
               errors={errors}
-              IconElement={() => (
-                <FaTransgender
-                  size={16}
-                  color={errors.dateOfBirth?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
 
             <AppHandledInput
               name="password"
               control={control}
-              className="text-black w-72"
+              className="w-72"
               isInvalid={Boolean(errors.password?.message)}
               errors={errors}
               onChangeApp={() => {
@@ -260,7 +296,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                     `${dictionary.az.minCharacter}`
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.password)}
+              label={inputPlaceholderText(dictionary.az.password)}
               required
               size="sm"
               inputProps={{
@@ -286,20 +322,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 )
               }}
               type={showPassword ? 'text' : 'password'}
-              IconElement={() => (
-                <BsFillPersonFill
-                  size={16}
-                  color={errors.password?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
 
             <AppHandledInput
               name="confirmPassword"
               control={control}
               size="sm"
-              className="text-black w-72"
+              className="w-72"
               isInvalid={Boolean(errors.confirmPassword?.message)}
               errors={errors}
               onChangeApp={() => {
@@ -336,7 +365,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                     `${dictionary.az.minCharacter}`
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.confirmPassword)}
+              label={inputPlaceholderText(dictionary.az.confirmPassword)}
               required
               inputProps={{
                 id: 'confirmPassword',
@@ -361,20 +390,14 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 )
               }}
               type={showPasswordConfirm ? 'text' : 'password'}
-              IconElement={() => (
-                <BsFillPersonFill
-                  size={16}
-                  color={errors.confirmPassword?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
           </div>
 
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full bg-black text-white border"
+            variant="bordered"
+            className="w-full"
             type="submit"
           >
             {dictionary.az.register}
@@ -386,7 +409,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             <span
               aria-hidden
               onClick={handleFlip}
-              className="font-normal text-black  text-sm"
+              className="font-normal   text-sm"
             >
               {dictionary.az.or}{' '}
               <span
