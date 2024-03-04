@@ -165,7 +165,6 @@ function convertDDMMYYYtoISOString(dateStr: string): string {
   return dateObj;
 }
 
-
 export {
   convertFormDataToQueryParams,
   generateOptionListPerNumber,
