@@ -38,7 +38,7 @@ function AiEmptyWelcome() {
           </div>
         </div>
         <h2 className="text-white text-center ">
-          {t("questionAnswerAiZadeh") }
+          {t('questionAnswerAiZadeh')}
         </h2>
       </div>
     </div>

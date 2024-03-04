@@ -176,9 +176,7 @@ function MessengerHeader({
 
               <PopoverContent>
                 <div className="px-1 flex flex-col py-2 gap-2">
-                  <p>
-                    {t("awaitedResponseText")}
-                  </p>
+                  <p>{t('awaitedResponseText')}</p>
 
                   <div className="flex gap-2">
                     <Button

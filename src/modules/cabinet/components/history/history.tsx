@@ -80,7 +80,7 @@ function Bottom() {
             color="success"
             aria-label={`Status: ${z.status}`}
           >
-            {t("active")}
+            {t('active')}
           </Chip>
         );
       default:

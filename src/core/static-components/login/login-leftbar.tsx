@@ -21,7 +21,7 @@ function LoginLeftBar() {
         onClick={onOpen}
         className="mt-3 md:mt-6 underline text-sm text-center text-white cursor-pointer"
       >
-       {t('privacyPolicySentence')}
+        {t('privacyPolicySentence')}
       </p>
       {isOpen && (
         <TermsConditionsModal onOpenChange={onOpenChange} isOpen={isOpen} />

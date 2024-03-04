@@ -32,7 +32,6 @@ function Sessions() {
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
-
   const returnDeviceIconByType = (type: number) => {
     switch (type) {
       case 1:

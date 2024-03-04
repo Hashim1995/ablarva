@@ -51,7 +51,7 @@ import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
 
 export default function Navbar() {
-  const { t ,i18n} = useTranslation();
+  const { t, i18n } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuItems: IMenuItemsNavbar[] = [
