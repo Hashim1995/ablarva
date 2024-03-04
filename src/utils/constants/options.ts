@@ -272,7 +272,6 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-
 export {
   genderOptions,
   roleOptions,
