@@ -38,13 +38,15 @@ import {
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect, useRef } from 'react';
-import { IMenuItemsNavbar } from '@/models/common';
-import { useSelector } from 'react-redux';
+import { IMenuItemsNavbar, LayoutLanguage } from '@/models/common';
+import { useDispatch, useSelector } from 'react-redux';
 import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
 
 import PricingModal from '@/modules/pricing/pages';
+import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
 import { RootState } from '@/redux/store';
+import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
 
@@ -67,9 +69,15 @@ export default function Navbar() {
       icon: <BsFillGearFill />
     }
   ];
+  const { t, i18n } = useTranslation();
   // const { toggle, isDarkMode } = useDarkMode();
   const location = useLocation();
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { currentLayoutLanguage } = useSelector(
+    (state: RootState) => state.core
+  );
+
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const {
@@ -91,6 +99,20 @@ export default function Navbar() {
 
   const handleOutSideClick = () => {
     setIsMenuOpen(false);
+  };
+
+  const currentLanguageFlag = (id: string) => {
+    switch (id) {
+      case LayoutLanguage?.Azerbaijani:
+        return <img width={22} alt="uk flag" src="/flags/az-flag.svg" />;
+
+      case LayoutLanguage?.English:
+        return <img width={22} alt="uk flag" src="/flags/en-flag.svg" />;
+      case LayoutLanguage?.Russian:
+        return <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />;
+      default:
+        return <img width={22} alt="uk flag" src="/flags/global-flag.svg" />;
+    }
   };
 
   useOnClickOutside(navRef, handleOutSideClick);
@@ -141,7 +163,8 @@ export default function Navbar() {
               }}
               startContent={<BsFillChatLeftDotsFill size={17} />}
             >
-              {dictionary.az.chat}
+              {/* {dictionary.az.chat} */}
+              {t('simpleChat')}
             </Button>
             <Button
               className={` w-40 !rounded-none text-white bg-transparent h-12  ${
@@ -154,9 +177,9 @@ export default function Navbar() {
               }}
               startContent={<BsYelp size={17} />}
             >
-              {dictionary.az.assistan}
+              {/* {dictionary.az.assistan} */}
+              {t('assistan')}
             </Button>
-
             <Tooltip
               className="hidden sm:block"
               placement="bottom"
@@ -180,7 +203,35 @@ export default function Navbar() {
           justify="end"
         >
           <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
-            {' '}
+            <Dropdown
+              classNames={{
+                content: 'min-w-[auto] w-[80px]'
+              }}
+            >
+              <DropdownTrigger>
+                <Button size="sm" className="capitalize ">
+                  {currentLanguageFlag(currentLayoutLanguage)}
+                </Button>
+              </DropdownTrigger>
+              <DropdownMenu
+                aria-label="Single selection example"
+                variant="flat"
+                disallowEmptySelection
+                selectionMode="single"
+                selectedKeys={currentLayoutLanguage}
+                onSelectionChange={(e: any) => {
+                  dispatch(setCurrentLayoutLanguage(e?.currentKey));
+                  i18n?.changeLanguage(e?.currentKey);
+                }}
+              >
+                <DropdownItem key={LayoutLanguage?.Azerbaijani}>
+                  <img width={22} alt="az flag" src="/flags/az-flag.svg" />
+                </DropdownItem>
+                <DropdownItem key={LayoutLanguage?.English}>
+                  <img width={22} alt="en flag" src="/flags/en-flag.svg" />
+                </DropdownItem>
+              </DropdownMenu>
+            </Dropdown>
             {!user.verified && (
               <Tooltip
                 className="hidden sm:block"

@@ -6,7 +6,7 @@ import {
   IAssistantThreadBubblesItem
 } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
-import { AssistanService } from '@/services/assistant-services/assistant-services';
+import { AssistantService } from '@/services/assistant-services/assistant-services';
 // import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
@@ -93,7 +93,7 @@ function ChatBubble({
       feedbackStatus: type
     };
     try {
-      const res = await AssistanService.getInstance().sendFeedback(payload);
+      const res = await AssistantService.getInstance().sendFeedback(payload);
       if (res.isSuccess) {
         if (type === 1) {
           setLiked(true);

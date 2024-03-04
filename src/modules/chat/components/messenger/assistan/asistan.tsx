@@ -13,7 +13,6 @@ function AsistanCard({
   description,
   activeId
 }: IAsistanCardProps) {
-  console.log(activeId === id);
   return (
     <div className="group p-1 flex h-18 hover:bg-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl items-center justify-between mb-2 gap-4">
       <Image

@@ -272,8 +272,6 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-console.log(monthsList, 'ramiz');
-console.log(daysList, 'ramiz');
 
 export {
   genderOptions,
