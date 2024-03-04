@@ -41,7 +41,7 @@ function AsistantCard({
             assistanName: assistantName
           })
         );
-        navigate('/assistan');
+        navigate('/assistant');
       }}
       aria-hidden
       className={`group p-1 flex h-18 ${
