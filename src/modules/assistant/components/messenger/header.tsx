@@ -31,7 +31,7 @@ function MessengerHeader() {
   const dispatch = useDispatch();
   const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
 
-  const { premium, basic } = useSelector(
+  const { premiumAssistant, basicAssistant } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
   const { currentAssistantModel, assistantsDrawer } = useSelector(
@@ -54,12 +54,12 @@ function MessengerHeader() {
       </Button>
       <div className="flex justify-between  items-center container">
         <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
-          {(premium || basic) && (
+          {(premiumAssistant || basicAssistant) && (
             <div className="flex w-[400px] justify-content-between gap-4">
               <Tooltip
                 placement="top-start"
                 offset={12}
-                content={`Ümumi: ${basic?.total}, İstifadə olunan: ${basic?.usage}, Geriyə qalan: ${basic?.remainder}`}
+                content={`Ümumi: ${basicAssistant?.total}, İstifadə olunan: ${basicAssistant?.usage}, Geriyə qalan: ${basicAssistant?.remainder}`}
               >
                 <Progress
                   size="sm"
@@ -71,16 +71,16 @@ function MessengerHeader() {
                     value: 'text-[11px] text-white'
                   }}
                   label="Sadə paket"
-                  value={basic?.remainder}
+                  value={basicAssistant?.remainder}
                   formatOptions={{}}
                   showValueLabel
-                  maxValue={basic?.total}
+                  maxValue={basicAssistant?.total}
                 />
               </Tooltip>
               <Tooltip
                 placement="top-start"
                 offset={12}
-                content={`Ümumi: ${premium?.total}, İstifadə olunan: ${premium?.usage}, Geriyə qalan: ${premium?.remainder}`}
+                content={`Ümumi: ${premiumAssistant?.total}, İstifadə olunan: ${premiumAssistant?.usage}, Geriyə qalan: ${premiumAssistant?.remainder}`}
               >
                 <Progress
                   size="sm"
@@ -92,10 +92,10 @@ function MessengerHeader() {
                     value: ' text-[11px] text-white'
                   }}
                   label="Premium paket"
-                  value={premium?.remainder}
+                  value={premiumAssistant?.remainder}
                   formatOptions={{}}
                   showValueLabel
-                  maxValue={premium?.total}
+                  maxValue={premiumAssistant?.total}
                 />
               </Tooltip>
             </div>

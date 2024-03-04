@@ -17,6 +17,16 @@ const statisticsSlice = createSlice({
           total: 0,
           usage: 0,
           remainder: 0
+        },
+        basicAssistant: {
+          total: 0,
+          usage: 0,
+          remainder: 0
+        },
+        premiumAssistant: {
+          total: 0,
+          usage: 0,
+          remainder: 0
         }
       },
       errors: null
