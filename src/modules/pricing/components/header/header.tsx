@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable react/no-array-index-key */
 import { Card, Divider } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 
 import {
   PieChart,
@@ -12,6 +13,8 @@ import {
 } from 'recharts';
 
 function Header() {
+  const { t } = useTranslation();
+
   const chartData1 = [
     { name: 'Geri qalan', value: 600 },
     { name: 'İstifadə olunan', value: 200 }
@@ -63,22 +66,22 @@ function Header() {
       <div className="flex w-full lg:w-[300px] xl:w-auto">
         <div className="p-2 w-full grid grid-cols-12 gap-0 sm:gap-0 lg:gap-0 xl:w-72 ">
           <div className="flex col-span-12 sm:col-span-6 lg:col-span-12 text-base sm:text-xl sm:mr-4 xl:mr-0 items-center justify-between mb-1">
-            <span className="font-semibold">Paket:</span>
+            <span className="font-semibold">{t('package')}</span>
             <span className=" italic text-sm">Söhbət 1</span>
           </div>
 
           <div className="flex col-span-12 sm:col-span-6 lg:col-span-12 text-base sm:text-xl justify-between mb-1">
-            <span className="font-semibold">Ümumi sayı:</span>
+            <span className="font-semibold">{t('general')} sayı:</span>
             <span className="italic text-sm">1000</span>
           </div>
 
           <div className="flex col-span-12 sm:col-span-6 lg:col-span-12 text-base sm:text-xl sm:mr-4 lg:mr-0 justify-between mb-1">
-            <span className="font-semibold">İstifadə olunan:</span>
+            <span className="font-semibold">{t('used')}:</span>
             <span className="italic text-sm">519</span>
           </div>
 
           <div className="flex col-span-12 sm:col-span-6 lg:col-span-12 text-base sm:text-xl justify-between mb-1">
-            <span className="font-semibold">Qalıq:</span>
+            <span className="font-semibold">{t('rest')}:</span>
             <span className="italic text-sm">520</span>
           </div>
         </div>

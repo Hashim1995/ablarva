@@ -37,6 +37,8 @@ interface StatisticsUpdateData {
     packageName: string;
     basic: UsageStats;
     premium: UsageStats;
+    basicAssistant: UsageStats;
+    premiumAssistant: UsageStats;
   };
   errors: any;
 }

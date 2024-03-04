@@ -1,4 +1,4 @@
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import {
   Button,
   Popover,
@@ -169,7 +169,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       </PopoverTrigger>
                       <PopoverContent>
                         <div className="px-1 py-2">
-                          <p>Çatı silmək istəyinizə əminsinizmi?</p>
+                          <p>{t('deleteConfirmationPrompt')}</p>
                           <Divider className="my-2" />
                           <div className="w-full flex items-center gap-1">
                             <Button
@@ -182,7 +182,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                               }}
                               aria-label="Remove thread"
                             >
-                              {dictionary.az.yesTxt}
+                              {t('yesTxt')}
                             </Button>
                             <Button
                               size="sm"
@@ -194,7 +194,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                                 })
                               }
                             >
-                              {dictionary.az.noTxt}
+                              {t('noTxt')}
                             </Button>
                           </div>
                         </div>

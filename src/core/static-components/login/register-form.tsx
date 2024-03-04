@@ -14,7 +14,7 @@ import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useLocalStorage } from 'usehooks-ts';
 import AppHandledInput from '@/components/forms/input/handled-input';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
@@ -29,12 +29,14 @@ import {
 } from '@/utils/constants/options';
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
+import { useTranslation } from 'react-i18next';
 import LoginLeftBar from './login-leftbar';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
 }
 function RegisterForm({ handleFlip }: IRegisterFormProps) {
+  const { t } = useTranslation();
   const {
     handleSubmit,
     watch,
@@ -96,7 +98,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
       <div className="p-4 md:p-3  border-l-1 rounded-lg md:rounded-none w-fit md:w-full justify-self-center mx-auto md:mx-0 md:flex-1 flex items-center overflow-x-scroll md:overflow-x-hidden	flex-col md:justify-around">
         <h3 className="leading-none text-2xl pb-3 md:pb-0 font-semibold ">
-          {dictionary.az.joinUs}
+          {t('joinUs')}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -117,14 +119,14 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.email)
+                  message: inputValidationText(t('email'))
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
+                  message: `${t('email')} ${t('regexFormatValidatorText')}`
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.email)}
+              label={inputPlaceholderText(t('email'))}
               required
             />
             <AppHandledInput
@@ -141,10 +143,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.firstName)
+                  message: inputValidationText(t('firstName'))
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.firstName)}
+              label={inputPlaceholderText(t('firstName'))}
               required
             />
             <AppHandledInput
@@ -161,10 +163,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.lastName)
+                  message: inputValidationText(t('lastName'))
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.lastName)}
+              label={inputPlaceholderText(t('lastName'))}
               required
             />
 
@@ -243,13 +245,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               selectProps={{
                 id: 'gender'
               }}
-              label={selectPlaceholderText(dictionary.az.gender)}
+              label={selectPlaceholderText(t('gender'))}
               size="sm"
               required
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.gender)
+                  message: inputValidationText(t('gender'))
                 }
               }}
               options={genderOptions}
@@ -265,10 +267,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onChangeApp={() => {
                 if (watch('password') !== watch('confirmPassword')) {
                   setError('password', {
-                    message: `${dictionary.az.confirmPasswordMessage}`
+                    message: t('confirmPasswordMessage')
                   });
                   setError('confirmPassword', {
-                    message: `${dictionary.az.confirmPasswordMessage}`
+                    message: t('confirmPasswordMessage')
                   });
                 } else {
                   clearErrors('password');
@@ -278,25 +280,24 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.password)
+                  message: inputValidationText(t('password'))
                 },
                 minLength: {
                   value: 8,
-                  message: `${dictionary.az.minLength}`
+                  message: t('minLength')
                 },
                 validate: {
-                  RequireDigit: value =>
-                    /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
+                  RequireDigit: value => /[0-9]/.test(value) || t('minNumber'),
                   RequireLowercase: value =>
-                    /[a-z]/.test(value) || `${dictionary.az.minSmallLetter}`,
+                    /[a-z]/.test(value) || t('minSmallLetter'),
                   RequireUppercase: value =>
-                    /[A-Z]/.test(value) || `${dictionary.az.minBigLetter}`,
+                    /[A-Z]/.test(value) || t('minBigLetter'),
                   RequireSpecialCharacter: value =>
                     /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
-                    `${dictionary.az.minCharacter}`
+                    t('minCharacter')
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.password)}
+              label={inputPlaceholderText(t('password'))}
               required
               size="sm"
               inputProps={{
@@ -334,10 +335,10 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onChangeApp={() => {
                 if (watch('password') !== watch('confirmPassword')) {
                   setError('password', {
-                    message: `${dictionary.az.confirmPasswordMessage}`
+                    message: t('confirmPasswordMessage')
                   });
                   setError('confirmPassword', {
-                    message: `${dictionary.az.confirmPasswordMessage}`
+                    message: t('confirmPasswordMessage')
                   });
                 } else {
                   clearErrors('password');
@@ -347,25 +348,24 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.confirmPassword)
+                  message: inputValidationText(t('confirmPassword'))
                 },
                 minLength: {
                   value: 8,
-                  message: `${dictionary.az.minLength}`
+                  message: t('minLength')
                 },
                 validate: {
-                  RequireDigit: value =>
-                    /[0-9]/.test(value) || `${dictionary.az.minNumber}`,
+                  RequireDigit: value => /[0-9]/.test(value) || t('minNumber'),
                   RequireLowercase: value =>
-                    /[a-z]/.test(value) || `${dictionary.az.minSmallLetter}`,
+                    /[a-z]/.test(value) || t('minSmallLetter'),
                   RequireUppercase: value =>
-                    /[A-Z]/.test(value) || `${dictionary.az.minBigLetter}`,
+                    /[A-Z]/.test(value) || t('minBigLetter'),
                   RequireSpecialCharacter: value =>
                     /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]/.test(value) ||
-                    `${dictionary.az.minCharacter}`
+                    t('minCharacter')
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.confirmPassword)}
+              label={inputPlaceholderText(t('confirmPassword'))}
               required
               inputProps={{
                 id: 'confirmPassword',
@@ -400,7 +400,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
             className="w-full"
             type="submit"
           >
-            {dictionary.az.register}
+            {t('register')}
           </Button>
         </form>
         <div className="flex flex-col pt-3 md:pt-0 space-y-5">
@@ -411,13 +411,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               onClick={handleFlip}
               className="font-normal   text-sm"
             >
-              {dictionary.az.or}{' '}
+              {t('or')}
               <span
                 className=" text-blue-500 cursor-pointer"
                 aria-hidden
                 onClick={handleFlip}
               >
-                {dictionary.az.login}
+                {t('login')}
               </span>
             </span>
             <span className="h-px bg-gray-400 w-10" />

@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { PaymentService } from '@/services/payment-services/payment-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import {
   Table,
   TableHeader,
@@ -14,6 +14,7 @@ import {
   Pagination,
   Card
 } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 import { ITransactionsItem } from '../../types';
 
 interface IColumn {
@@ -26,6 +27,7 @@ function Bottom() {
   const [totalPage, setTotalPage] = useState<number>(0);
   const [data, setData] = useState<ITransactionsItem[]>([]);
   const [loading, setLoading] = useState(false);
+  const { t } = useTranslation();
 
   const columns: IColumn[] = [
     { name: 'ƏMƏLİYYAT KODU', uid: 'orderId' },
@@ -78,7 +80,7 @@ function Bottom() {
             color="success"
             aria-label={`Status: ${z.status}`}
           >
-            Aktiv
+            {t('active')}
           </Chip>
         );
       default:
@@ -91,7 +93,7 @@ function Bottom() {
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
-            {dictionary.az.account} {`${dictionary.az.history}si`}
+            {t('account')} {`${t('history')}si`}
           </p>
         </div>
       </div>

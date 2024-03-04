@@ -3,7 +3,6 @@ import {
   setWaitingForThreadLoad
 } from '@/redux/chat/chat-slice';
 import { ChatService } from '@/services/chat-services/chat-services';
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   Button,
   Popover,
@@ -17,6 +16,7 @@ import { BsTrash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
+import { useTranslation } from 'react-i18next';
 import { IThreadHistoryList } from '../../types';
 
 interface IChatHistoryProps {
@@ -35,6 +35,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
+  const { t } = useTranslation();
 
   const fetchThreadHistory = async () => {
     try {
@@ -79,7 +80,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
       {!isResponsive && (
         <div className="flex justify-between items-center  p-3 h-[60px]">
           <h3 className="text-base sm:text-xl text-white font-semibold">
-            {dictionary.az.previous} {dictionary.az.chats}
+            {t('previous')} {t('chats')}
           </h3>
         </div>
       )}
@@ -148,7 +149,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                     </PopoverTrigger>
                     <PopoverContent>
                       <div className="px-1 py-2">
-                        <p>Çatı silmək istəyinizə əminsinizmi?</p>
+                        <p>{t('deleteChatConfirmation')}</p>
                         <Divider className="my-2" />
                         <div className="w-full flex items-center gap-1">
                           <Button
@@ -161,7 +162,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                             }}
                             aria-label="Remove thread"
                           >
-                            {dictionary.az.yesTxt}
+                            {t('yesTxt')}
                           </Button>
                           <Button
                             size="sm"
@@ -173,7 +174,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                               })
                             }
                           >
-                            {dictionary.az.noTxt}
+                            {t('noTxt')}
                           </Button>
                         </div>
                       </div>

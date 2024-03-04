@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import {
   Modal,
   ModalContent,
@@ -9,6 +9,7 @@ import {
   ModalFooter,
   Button
 } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 
 interface ITermsConditionModalProps {
   isOpen: boolean;
@@ -19,6 +20,7 @@ function TermsConditionsModal({
   isOpen,
   onOpenChange
 }: ITermsConditionModalProps) {
+  const { t } = useTranslation();
   return (
     <div>
       <Modal
@@ -33,7 +35,7 @@ function TermsConditionsModal({
           {onClose => (
             <>
               <ModalHeader className="flex flex-row items-center gap-1 border-b-1">
-                {dictionary.az.privacyPolicy}
+                {t('privacyPolicy')}
               </ModalHeader>
               <ModalBody className="scrollBar overflow-y-scroll">
                 <div className="justify-center   h-80 pr-3">
@@ -495,7 +497,7 @@ function TermsConditionsModal({
                 </div>
               </ModalBody>
               <ModalFooter className="border-t-1">
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

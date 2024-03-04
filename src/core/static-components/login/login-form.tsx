@@ -7,7 +7,9 @@ import {
   AuthService,
   ILoginResponse
 } from '@/services/auth-services/auth-services';
-import { dictionary } from '@/utils/constants/dictionary';
+import { useTranslation } from 'react-i18next';
+
+// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import { Button, useDisclosure } from '@nextui-org/react';
@@ -24,6 +26,8 @@ interface ILoginFormProps {
   handleFlip: () => void;
 }
 function LoginForm({ handleFlip }: ILoginFormProps) {
+  const { t } = useTranslation();
+
   const {
     handleSubmit,
     formState: { errors, isSubmitting },
@@ -58,7 +62,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
       </div>
       <div className="p-4  border-l-1 md:p-3 md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
         <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-white">
-          {dictionary.az.login}
+          {t('login')}
         </h3>
         <form
           onSubmit={handleSubmit(onSubmit)}
@@ -79,14 +83,14 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.email)
+                  message: inputValidationText(t('email'))
                 },
                 pattern: {
                   value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                  message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
+                  message: `${t('email')} ${t('regexFormatValidatorText')}`
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.email)}
+              label={inputPlaceholderText(t('email'))}
               required
             />
             <AppHandledInput
@@ -122,10 +126,10 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               rules={{
                 required: {
                   value: true,
-                  message: inputValidationText(dictionary.az.password)
+                  message: inputValidationText(t('password'))
                 }
               }}
-              label={inputPlaceholderText(dictionary.az.password)}
+              label={inputPlaceholderText(t('password'))}
               required
             />
             <div className="flex flex-col space-y-5">
@@ -137,7 +141,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                   className="font-normal  text-sm"
                 >
                   <span className=" text-blue-500   cursor-pointer" aria-hidden>
-                    {dictionary.az.forgetPassword}
+                    {t('forgetPassword')}
                   </span>
                 </span>
                 <span className="h-px bg-gray-400 ml-1 w-10" />
@@ -151,7 +155,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             type="submit"
             variant="bordered"
           >
-            {dictionary.az.login}
+            {t('login')}
           </Button>
         </form>
         <div className="flex flex-col mt-3 md:mt-0 space-y-5">
@@ -162,13 +166,13 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               onClick={handleFlip}
               className="font-normal   text-sm"
             >
-              {dictionary.az.or}{' '}
+              {t('or')}{' '}
               <span
                 className=" text-blue-500   cursor-pointer"
                 aria-hidden
                 onClick={handleFlip}
               >
-                {dictionary.az.register}
+                {t('register')}
               </span>
             </span>
             <span className="h-px bg-gray-400 ml-1 w-10" />

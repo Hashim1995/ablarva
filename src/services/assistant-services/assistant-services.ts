@@ -4,12 +4,12 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
-  IAssistanFeedbackPayload,
-  IAssistanGetAssistansListResponse,
-  IAssistanSendMessagePayload,
-  IAssistanSendMessageResponse,
-  IAssistanThreadBubblesItemResponse,
-  IAssistanThreadHistoryListResponse
+  IAssistantFeedbackPayload,
+  IAssistantGetAssistansListResponse,
+  IAssistantSendMessagePayload,
+  IAssistantSendMessageResponse,
+  IAssistantThreadBubblesItemResponse,
+  IAssistantThreadHistoryListResponse
 } from '@/modules/assistant/types';
 
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
@@ -28,11 +28,11 @@ export class AssistantService {
   }
 
   public async sendFeedback(
-    body: IAssistanFeedbackPayload,
+    body: IAssistantFeedbackPayload,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
     const res = await HttpUtil.post(
-      'api/client/assistants/feedback',
+      'api/client/assistants/message/feedback',
       body,
       onError
     );
@@ -40,10 +40,10 @@ export class AssistantService {
   }
 
   public async sendMessage(
-    body: IAssistanSendMessagePayload,
+    body: IAssistantSendMessagePayload,
     onError?: ErrorCallBack,
     abortController?: AbortController['signal']
-  ): Promise<IAssistanSendMessageResponse> {
+  ): Promise<IAssistantSendMessageResponse> {
     const res = await HttpUtil.post(
       'api/client/assistants/message',
       body,
@@ -68,7 +68,7 @@ export class AssistantService {
 
   public async fetchThreadHistory(
     onError?: ErrorCallBack
-  ): Promise<IAssistanThreadHistoryListResponse> {
+  ): Promise<IAssistantThreadHistoryListResponse> {
     const res = await HttpUtil.get(
       'api/client/assistants/threads',
       null,
@@ -80,7 +80,7 @@ export class AssistantService {
 
   public async fetchAssistantsList(
     onError?: ErrorCallBack
-  ): Promise<IAssistanGetAssistansListResponse> {
+  ): Promise<IAssistantGetAssistansListResponse> {
     const res = await HttpUtil.get(
       'api/client/assistants',
       null,
@@ -93,7 +93,7 @@ export class AssistantService {
   public async fetchBubbleHistory(
     id: string,
     onError?: ErrorCallBack
-  ): Promise<IAssistanThreadBubblesItemResponse> {
+  ): Promise<IAssistantThreadBubblesItemResponse> {
     const res = await HttpUtil.get(
       `api/client/assistants/${id}/messages`,
       null,
