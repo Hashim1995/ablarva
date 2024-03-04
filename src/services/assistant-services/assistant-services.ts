@@ -18,7 +18,7 @@ export class AssistantService {
   // eslint-disable-next-line no-use-before-define
   private static instance: AssistantService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): AssistantService {
     if (!this.instance) {
