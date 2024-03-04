@@ -3,9 +3,10 @@
 import VerifyEmail from '@/core/static-components/verify-email';
 import { StatisticsUpdateData } from '@/models/common';
 import {
-  setResetAssistanInner,
-  setWaitingForAssistanResponse
-} from '@/redux/assistan/assistan-slice';
+  setAssistantsDrawer,
+  setResetAssistantInner,
+  setWaitingForAssistantResponse
+} from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
@@ -18,48 +19,37 @@ import {
   PopoverContent,
   useDisclosure,
   Badge,
-  Progress
+  Progress,
+  Image
 } from '@nextui-org/react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-interface IMessengerHeaderProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: Dispatch<SetStateAction<boolean>>;
-}
-function MessengerHeader({
-  isDrawerOpen,
-  setIsDrawerOpen
-}: IMessengerHeaderProps) {
+function MessengerHeader() {
   const dispatch = useDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
   const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
-  const [isOpen, setIsOpen] = useState(false);
 
   const { premium, basic } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
-  const { verified } = useSelector((state: RootState) => state?.user?.user);
-  const navigate = useNavigate();
-  const statisticsData: StatisticsUpdateData = useSelector(
-    (state: RootState) => state.statisticsCount.statisticsCount
+  const { currentAssistantModel, assistantsDrawer } = useSelector(
+    (state: RootState) => state?.assistant
   );
-
   return (
-    <div className=" pt-1 pb-3 h-[60px] flex   ">
+    <div className=" pt-1 pb-3 h-[60px] flex    ">
       <Button
         size="sm"
         isIconOnly
-        onClick={() => setIsDrawerOpen((z: boolean) => !z)}
+        onClick={() => dispatch(setAssistantsDrawer(true))}
         className="bg-transparent block  ms-3"
         aria-label="Filter"
       >
         <BsJustify
           size={20}
           color="white"
-          className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
+          className={` ${assistantsDrawer ? 'rotate-90' : ''}`}
         />
       </Button>
       <div className="flex justify-between  items-center container">
@@ -111,6 +101,23 @@ function MessengerHeader({
             </div>
           )}
         </div>
+
+        {currentAssistantModel?.assistanName && (
+          <div className="bg-default-50 px-4 py-1 rounded-xl flex items-center gap-2">
+            <Image
+              alt="Woman listing to music"
+              className="object-contain h-full w-10  rounded-full"
+              src={
+                `${
+                  import.meta.env.VITE_BASE_URL
+                }${currentAssistantModel?.assistantImagePath}` || ''
+              }
+            />{' '}
+            <h3 className="text-[14px] group-hover:text-black transition-all duration-300 ease-in-out text-left leading-4 mb-1 sm:mb-2">
+              {currentAssistantModel?.assistanName}
+            </h3>
+          </div>
+        )}
 
         {/* <div className="flex items-center justify-between gap-2 mr-5">
           {!waitingForAssistanResponse ? (

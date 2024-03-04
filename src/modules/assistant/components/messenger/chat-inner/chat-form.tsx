@@ -15,20 +15,20 @@ import { BsFillSendFill } from 'react-icons/bs';
 import { AiFillSound, AiOutlineSound } from 'react-icons/ai';
 import { textAreaConfig } from '@/configs/global-configs';
 import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
-import { setCurrentAssistanLanguage } from '@/redux/assistan/assistan-slice';
+import { setCurrentAssistantLanguage } from '@/redux/assistant/assistant-slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { IAssistanChatForm } from '@/modules/assistan/types';
+import { IAssistantChatForm } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
 import audioUrl from './mech-keyboard-02-102918.mp3';
 
 interface IChatFormProps {
-  onSubmit: SubmitHandler<IAssistanChatForm>;
+  onSubmit: SubmitHandler<IAssistantChatForm>;
   waitingForResponse: boolean;
 }
 
 function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   // Initialize the hook form methods
-  const { register, handleSubmit, reset } = useForm<IAssistanChatForm>();
+  const { register, handleSubmit, reset } = useForm<IAssistantChatForm>();
   const [audioEnable, setAudioEnable] = useLocalStorage<Boolean>(
     'audioEnable',
     true
@@ -38,8 +38,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
   const typewriterSound = new Audio(audioUrl);
   const matches = useMediaQuery('(min-width: 468px)');
-  const { currentAssistanLanguage } = useSelector(
-    (state: RootState) => state?.assistan
+  const { currentAssistantLanguage } = useSelector(
+    (state: RootState) => state?.assistant
   );
 
   const currentLanguageText = (id: string) => {
@@ -126,7 +126,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           <div className="flex rounded-0 shadow-none   items-center justify-between">
             {
               <Chip className="sm:flex hidden bg-transparent text-[gray] text-sm">
-                Aİ-ZADƏ sizə {currentLanguageText(currentAssistanLanguage)}{' '}
+                Aİ-ZADƏ sizə {currentLanguageText(currentAssistantLanguage)}{' '}
                 cavab verəcək
               </Chip>
             }
@@ -139,7 +139,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
               >
                 <DropdownTrigger>
                   <Button size="sm" className="capitalize bg-transparent">
-                    {currentLanguageFlag(currentAssistanLanguage)}
+                    {currentLanguageFlag(currentAssistantLanguage)}
                   </Button>
                 </DropdownTrigger>
                 <DropdownMenu
@@ -147,9 +147,9 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
                   variant="flat"
                   disallowEmptySelection
                   selectionMode="single"
-                  selectedKeys={currentAssistanLanguage}
+                  selectedKeys={currentAssistantLanguage}
                   onSelectionChange={(e: any) =>
-                    dispatch(setCurrentAssistanLanguage(e?.currentKey))
+                    dispatch(setCurrentAssistantLanguage(e?.currentKey))
                   }
                 >
                   <DropdownItem key="0">
@@ -175,9 +175,11 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
               </Dropdown>
             ) : (
               <Tabs
-                selectedKey={currentAssistanLanguage}
+                selectedKey={currentAssistantLanguage}
                 // @ts-ignore
-                onSelectionChange={e => dispatch(setCurrentAssistanLanguage(e))}
+                onSelectionChange={e =>
+                  dispatch(setCurrentAssistantLanguage(e))
+                }
                 size={'sm'}
                 color="primary"
                 className="ml-2"

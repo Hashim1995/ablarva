@@ -2,23 +2,29 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponse, IGlobalResponseEmpty, } from '@/models/common';
-import { IAssistanFeedbackPayload, IAssistanGetAssistansListResponse, IAssistanSendMessagePayload, IAssistanSendMessageResponse, IAssistanThreadBubblesItemResponse, IAssistanThreadHistoryListResponse } from '@/modules/assistan/types';
+import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
+import {
+  IAssistanFeedbackPayload,
+  IAssistanGetAssistansListResponse,
+  IAssistanSendMessagePayload,
+  IAssistanSendMessageResponse,
+  IAssistanThreadBubblesItemResponse,
+  IAssistanThreadHistoryListResponse
+} from '@/modules/assistant/types';
 
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
-
-export class AssistanService {
+export class AssistantService {
   // eslint-disable-next-line no-use-before-define
-  private static instance: AssistanService | null;
+  private static instance: AssistantService | null;
 
   private constructor() { }
 
-  public static getInstance(): AssistanService {
+  public static getInstance(): AssistantService {
     if (!this.instance) {
-      AssistanService.instance = new AssistanService();
+      AssistantService.instance = new AssistantService();
     }
-    return AssistanService.instance!;
+    return AssistantService.instance!;
   }
 
   public async sendFeedback(
@@ -72,7 +78,7 @@ export class AssistanService {
     return res;
   }
 
-  public async fetchAssistansList(
+  public async fetchAssistantsList(
     onError?: ErrorCallBack
   ): Promise<IAssistanGetAssistansListResponse> {
     const res = await HttpUtil.get(

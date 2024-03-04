@@ -2,7 +2,7 @@ import { Card } from '@nextui-org/react';
 import MessengerHeader from './header';
 import ChatInner from './chat-inner/chat-inner';
 
-function Layout({ isDrawerOpen, setIsDrawerOpen }: any) {
+function Layout() {
   return (
     <Card
       style={{
@@ -10,10 +10,7 @@ function Layout({ isDrawerOpen, setIsDrawerOpen }: any) {
       }}
       className="h-full rounded-none  shadow-none gradient-bg"
     >
-      <MessengerHeader
-        isDrawerOpen={isDrawerOpen}
-        setIsDrawerOpen={setIsDrawerOpen}
-      />
+      <MessengerHeader />
 
       <div className="inner h-full flex  chat-wrapper">
         <main

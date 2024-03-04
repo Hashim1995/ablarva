@@ -12,19 +12,19 @@ function Drawer({ isOpen, className, children }: DrawerProps) {
   useEffect(() => {
     if (isOpen) {
       setContent(children);
+    } else {
+      // Optionally, you could also clear the content or perform other actions when the drawer is closed
+      // setContent(null);
     }
-  }, [isOpen]);
+  }, [isOpen, children]);
 
   return (
     <div
-      className={`transition-width duration-1000  ease overflow-hidden
-                ${isOpen ? 'w-[400px]' : 'w-0'} ${className}`}
+      className={`fixed  h-full  transition-[left] 
+                ${isOpen ? 'left-0' : 'left-[-100%]'} ${className}`}
+      style={{ width: '250px' }} // Set the drawer width here
     >
-      <div
-        className={`p-4 remove-scrollbar overflow-y-auto h-full
-                  transition-transform duration-[3s] ease
-                  ${isOpen ? 'translate-y-0' : 'translate-y-full'}`}
-      >
+      <div className={`p-4 h-full overflow-y-auto remove-scrollbar`}>
         {content}
       </div>
     </div>

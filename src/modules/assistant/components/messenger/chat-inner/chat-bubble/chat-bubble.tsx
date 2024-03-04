@@ -2,11 +2,11 @@
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
 import {
-  IAssistanFeedbackPayload,
-  IAssistanThreadBubblesItem
-} from '@/modules/assistan/types';
+  IAssistantFeedbackPayload,
+  IAssistantThreadBubblesItem
+} from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
-import { AssistanService } from '@/services/assistan-services/assistan-services';
+import { AssistanService } from '@/services/assistant-services/assistant-services';
 // import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
@@ -82,13 +82,13 @@ function ChatBubble({
   assistantImagePath,
   assistantName,
   assistantThreadId
-}: IAssistanThreadBubblesItem) {
+}: IAssistantThreadBubblesItem) {
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
   const { user } = useSelector((state: RootState) => state.user);
 
   const feedbackBubble = async (type: number) => {
-    const payload: IAssistanFeedbackPayload = {
+    const payload: IAssistantFeedbackPayload = {
       assistantBubbleId,
       feedbackStatus: type
     };
@@ -125,7 +125,9 @@ function ChatBubble({
         }
       />
       <div className=" flex-1 markdown-table-container overflow-auto">
-        <h3 className="border-b-1 border-white  mb-2">{assistantName}</h3>
+        {/* <h3 className={` ${isClient ? '' : 'border-b-1 border-white'}  mb-2`}>
+          {assistantName}
+        </h3> */}
         <Typewriter message={assistantContent} isTyping={isTyping} />
         <div className="flex mt-3 items-center justify-between">
           <div className="flex  gap-2  items-center justify-between">

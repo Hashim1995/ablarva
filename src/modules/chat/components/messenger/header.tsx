@@ -53,19 +53,7 @@ function MessengerHeader({
 
   return (
     <div className=" pt-1 pb-3 h-[60px] flex   ">
-      <Button
-        size="sm"
-        isIconOnly
-        // onClick={() => setIsDrawerOpen((z: boolean) => !z)}
-        className="bg-transparent block  ms-3"
-        aria-label="Filter"
-      >
-        <BsJustify
-          size={20}
-          color="white"
-          className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
-        />
-      </Button>
+      <div />
       <div className="flex justify-between  items-center container">
         <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
           {(premium || basic) && (

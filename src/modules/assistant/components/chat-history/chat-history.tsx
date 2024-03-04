@@ -14,11 +14,11 @@ import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
 import {
-  setResetAssistanInner,
-  setWaitingForAssistanThreadLoad
-} from '@/redux/assistan/assistan-slice';
-import { AssistanService } from '@/services/assistan-services/assistan-services';
-import { IAssistanThreadHistoryList } from '../../types';
+  setResetAssistantInner,
+  setWaitingForAssistantThreadLoad
+} from '@/redux/assistant/assistant-slice';
+import { AssistantService } from '@/services/assistant-services/assistant-services';
+import { IAssistantThreadHistoryList } from '../../types';
 
 interface IChatHistoryProps {
   isResponsive?: boolean;
@@ -26,7 +26,7 @@ interface IChatHistoryProps {
 
 function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const [threadHistory, setThreadHistory] =
-    useState<IAssistanThreadHistoryList[]>();
+    useState<IAssistantThreadHistoryList[]>();
   const [removeLoading, setRemoveLoading] = useState<boolean>(false);
 
   const [popoversVisible, setPopoversVisible] = useState<{
@@ -40,7 +40,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
 
   const fetchThreadHistory = async () => {
     try {
-      const res = await AssistanService.getInstance().fetchThreadHistory();
+      const res = await AssistantService.getInstance().fetchThreadHistory();
       if (res.isSuccess) {
         setThreadHistory(res?.data);
       }
@@ -52,7 +52,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {
-      const res = await AssistanService.getInstance().removeThread(id);
+      const res = await AssistantService.getInstance().removeThread(id);
       if (res.isSuccess) {
         fetchThreadHistory();
         setPopoversVisible((prevState: { [key: string]: boolean }) => ({
@@ -61,9 +61,9 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
         }));
         if (searchParams.get('threadID') === id) {
           searchParams.delete('threadID');
-          navigate('/chat', { replace: true });
+          navigate('/assistan', { replace: true });
           setTimeout(() => {
-            dispatch(setResetAssistanInner(Date.now()));
+            dispatch(setResetAssistantInner(Date.now()));
           }, 500);
         }
       }
@@ -115,10 +115,10 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                   key={conv?.threadId}
                   aria-hidden
                   onClick={() => {
-                    dispatch(setWaitingForAssistanThreadLoad(true));
-                    dispatch(setResetAssistanInner(Date.now()));
+                    dispatch(setWaitingForAssistantThreadLoad(true));
+                    dispatch(setResetAssistantInner(Date.now()));
 
-                    setResetAssistanInner;
+                    setResetAssistantInner;
                     setSearchParams({
                       threadID: String(conv.threadId)
                     });

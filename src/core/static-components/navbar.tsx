@@ -145,12 +145,12 @@ export default function Navbar() {
             </Button>
             <Button
               className={` w-40 !rounded-none text-white bg-transparent h-12  ${
-                location.pathname.includes('assistan')
+                location.pathname.includes('assistant')
                   ? ' border-b-1 border-white'
                   : ''
               }`}
               onClick={() => {
-                navigate('/assistan');
+                navigate('/assistant');
               }}
               startContent={<BsYelp size={17} />}
             >

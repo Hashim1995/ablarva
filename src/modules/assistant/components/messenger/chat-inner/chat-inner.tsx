@@ -12,25 +12,27 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { useSearchParams } from 'react-router-dom';
 import {
-  setCurrentAssistanModel,
-  setWaitingForAssistanResponse,
-  setWaitingForAssistanThreadLoad
-} from '@/redux/assistan/assistan-slice';
+  setCurrentAssistantModel,
+  setWaitingForAssistantResponse,
+  setWaitingForAssistantThreadLoad
+} from '@/redux/assistant/assistant-slice';
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
 import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
-import { AssistanService } from '@/services/assistan-services/assistan-services';
+import { AssistantService } from '@/services/assistant-services/assistant-services';
 import {
-  IAssistanChatForm,
-  IAssistanSendMessagePayload,
-  IAssistanThreadBubblesItem
-} from '@/modules/assistan/types';
+  IAssistantChatForm,
+  IAssistantSendMessagePayload,
+  IAssistantThreadBubblesItem
+} from '@/modules/assistant/types';
+import { toast } from 'react-toastify';
 import ThinkText from '@/core/static-components/think-text';
+import { toastOptions } from '@/configs/global-configs';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
 function ChatInner() {
-  const [bubbleList, setBubbleList] = useState<IAssistanThreadBubblesItem[]>(
+  const [bubbleList, setBubbleList] = useState<IAssistantThreadBubblesItem[]>(
     []
   );
   const [hasError, setHasError] = useState(false);
@@ -39,11 +41,11 @@ function ChatInner() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
   const {
-    currentAssistanLanguage,
-    currentAssistanModel,
-    waitingForAssistanResponse,
-    waitingForAssistanThreadLoad
-  } = useSelector((state: RootState) => state.assistan);
+    currentAssistantLanguage,
+    currentAssistantModel,
+    waitingForAssistantResponse,
+    waitingForAssistantThreadLoad
+  } = useSelector((state: RootState) => state.assistant);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
 
   const dispatch = useDispatch();
@@ -64,14 +66,24 @@ function ChatInner() {
   };
 
   const fetchThreadonUrl = async (id: string) => {
-    dispatch(setWaitingForAssistanThreadLoad(true));
+    dispatch(setWaitingForAssistantThreadLoad(true));
     try {
-      const res = await AssistanService.getInstance().fetchBubbleHistory(id);
+      const res = await AssistantService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
         setBubbleList(res?.data?.allThreadBubbles);
-        dispatch(setWaitingForAssistanThreadLoad(false));
+        dispatch(setWaitingForAssistantThreadLoad(false));
         dispatch(
-          setCurrentAssistanModel(res?.data?.assistantParameters?.assistantId)
+          setCurrentAssistantModel(res?.data?.assistantParameters?.assistantId)
+        );
+        dispatch(
+          setCurrentAssistantModel({
+            assistantId: res?.data?.assistantParameters?.assistantId,
+            assistantImagePath:
+              res?.data?.assistantParameters?.assistantImagePath,
+            assistantDescription:
+              res?.data?.assistantParameters?.assistantDescription,
+            assistanName: res?.data?.assistantParameters?.assistantName
+          })
         );
       }
     } catch (err) {
@@ -79,11 +91,16 @@ function ChatInner() {
     }
   };
 
-  const onSubmit: SubmitHandler<IAssistanChatForm> = async data => {
+  const onSubmit: SubmitHandler<IAssistantChatForm> = async data => {
     const currentAbortController = abortController.current;
 
     if (!verified) {
       onOpen();
+    } else if (!currentAssistantModel?.assistantId) {
+      toast.error(
+        'Assistanlar ilə danışmaq üçün hərhansısa bir assistan seçimi etməlisiz',
+        toastOptions
+      );
     } else {
       setLastQuestion(data?.message);
       setBubbleList(old => [
@@ -98,15 +115,15 @@ function ChatInner() {
         }
       ]);
 
-      dispatch(setWaitingForAssistanResponse(true));
-      const payload: IAssistanSendMessagePayload = {
-        assistantId: currentAssistanModel,
+      dispatch(setWaitingForAssistantResponse(true));
+      const payload: IAssistantSendMessagePayload = {
+        assistantId: currentAssistantModel?.assistantId,
         question: data.message,
-        languagesEnum: Number(currentAssistanLanguage),
+        languagesEnum: Number(currentAssistantLanguage),
         threadId: searchParams.get('threadID') || null
       };
       try {
-        const res = await AssistanService.getInstance().sendMessage(
+        const res = await AssistantService.getInstance().sendMessage(
           payload,
           undefined,
           currentAbortController.signal
@@ -130,11 +147,11 @@ function ChatInner() {
             }
           ]);
         }
-        dispatch(setWaitingForAssistanResponse(false));
+        dispatch(setWaitingForAssistantResponse(false));
         setHasError(false);
       } catch (err) {
         setHasError(true);
-        dispatch(setWaitingForAssistanResponse(false));
+        dispatch(setWaitingForAssistantResponse(false));
       }
     }
   };
@@ -145,7 +162,7 @@ function ChatInner() {
     return () => {
       resetAbortController();
     };
-  }, [searchParams, waitingForAssistanThreadLoad]);
+  }, [searchParams, waitingForAssistantThreadLoad]);
 
   useEffect(() => {
     setHasError(false);
@@ -160,10 +177,10 @@ function ChatInner() {
   }, [searchParams]);
 
   useEffect(() => {
-    if (waitingForAssistanThreadLoad) {
+    if (waitingForAssistantThreadLoad) {
       setBubbleList([]);
     }
-  }, [waitingForAssistanThreadLoad]);
+  }, [waitingForAssistantThreadLoad]);
 
   useEffect(
     () => () => {
@@ -182,7 +199,7 @@ function ChatInner() {
           className="row-span-8 scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map(
-            (item: IAssistanThreadBubblesItem, index: number) => (
+            (item: IAssistantThreadBubblesItem, index: number) => (
               <ChatBubble
                 assistantContent={item?.assistantContent}
                 isClient={item.isClient}
@@ -197,13 +214,13 @@ function ChatInner() {
               />
             )
           )}
-          {waitingForAssistanResponse && (
+          {waitingForAssistantResponse && (
             <div className=" flex justify-start mt-2 mb-5 items-center">
               <AiLoder />
               <ThinkText />
             </div>
           )}
-          {waitingForAssistanThreadLoad && (
+          {waitingForAssistantThreadLoad && (
             <div className="flex items-center justify-center h-full">
               <AiLoder />
             </div>
@@ -237,16 +254,16 @@ function ChatInner() {
               </Button>
             </div>
           )}
-          {!waitingForAssistanThreadLoad &&
+          {!waitingForAssistantThreadLoad &&
             !hasError &&
-            !waitingForAssistanResponse &&
+            !waitingForAssistantResponse &&
             bubbleList?.length < 1 && <AiEmptyWelcome />}
         </ScrollToBottom>
       </div>
 
       {/* <div className="container"> */}
       <ChatForm
-        waitingForResponse={waitingForAssistanResponse}
+        waitingForResponse={waitingForAssistantResponse}
         onSubmit={onSubmit}
       />
       {/* </div> */}

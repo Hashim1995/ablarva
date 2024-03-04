@@ -6,7 +6,7 @@ import CabinetPage from '../../modules/cabinet/pages';
 
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 const ChatPage = React.lazy(() => import('../../modules/chat/pages'));
-const AssistanPage = React.lazy(() => import('../../modules/assistan/pages'));
+const AssistantPage = React.lazy(() => import('../../modules/assistant/pages'));
 
 const routes = [
   {
@@ -25,10 +25,10 @@ const routes = [
         )
       },
       {
-        path: 'assistan',
+        path: 'assistant',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
-            <AssistanPage />
+            <AssistantPage />
           </Suspense>
         )
       },
