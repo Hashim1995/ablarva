@@ -58,7 +58,6 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     delete payload.day;
     delete payload.month;
     delete payload.year;
-    console.log(payload, 'aaa');
 
     setIsLoading(true);
     try {

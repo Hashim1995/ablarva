@@ -18,6 +18,7 @@ import {
   setWaitingForAssistantThreadLoad
 } from '@/redux/assistant/assistant-slice';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
+import { useTranslation } from 'react-i18next';
 import { IAssistantThreadHistoryList } from '../../types';
 
 interface IChatHistoryProps {
@@ -32,6 +33,8 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const [popoversVisible, setPopoversVisible] = useState<{
     [key: string]: boolean;
   }>({});
+
+  const { t } = useTranslation();
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -81,7 +84,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
       {!isResponsive && (
         <div className="flex justify-between items-center  p-3 h-[60px]">
           <h3 className="text-base sm:text-xl text-white font-semibold">
-            {dictionary.az.previous} {dictionary.az.chats}
+            {t('previous')} {t('chats')}
           </h3>
         </div>
       )}
