@@ -67,7 +67,6 @@ interface IAssistantThreadBubblesItemResponse extends IGlobalResponse {
       assistantName?: string;
       assistantImagePath?: string;
       assistantDescription: string;
-
     };
   };
 }
