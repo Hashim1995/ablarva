@@ -46,12 +46,11 @@ function PricingModal({
                   className="bg-black text-white"
                   onPress={onOkFunction}
                   isLoading={loading}
+                  variant="bordered"
                 >
                   {dictionary.az.yesTxt}
                 </Button>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.noTxt}
-                </Button>
+                <Button onPress={onClose}>{dictionary.az.noTxt}</Button>
               </ModalFooter>
             </>
           )}

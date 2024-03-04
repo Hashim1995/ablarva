@@ -6,7 +6,6 @@ import { ChatService } from '@/services/chat-services/chat-services';
 import { dictionary } from '@/utils/constants/dictionary';
 import {
   Button,
-  Card,
   Popover,
   PopoverTrigger,
   PopoverContent,
@@ -76,44 +75,38 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
     fetchThreadHistory();
   }, [searchParams.get('threadID')]);
   return (
-    <Card
-      shadow={`${isResponsive ? 'none' : 'md'}`}
-      className={`${isResponsive ? 'bg-[#292D32]' : ''} h-full`}
-    >
+    <div className="w-[250px] bg-darkBlack overflow-y-auto remove-scrollbar fixed-height">
       {!isResponsive && (
-        <div className="flex justify-between items-center mb-4 bg-black p-3">
-          <h2 className="text-base sm:text-xl text-white font-semibold">
+        <div className="flex justify-between items-center  p-3 h-[60px]">
+          <h3 className="text-base sm:text-xl text-white font-semibold">
             {dictionary.az.previous} {dictionary.az.chats}
-          </h2>
-          {/* <Button
-          size="sm"
-          isIconOnly
-          className="bg-white rounded-full"
-          aria-label="Filter"
-        >
-          <BsFillFilterCircleFill size={20} color="#292D32" />
-        </Button> */}
+          </h3>
         </div>
       )}
 
       <div
-        className={`  overflow-y-auto rounded-lg shadow lg:h-full px-2 componentsScrollBar ${
-          isResponsive
-            ? 'h-full pt-3 pb-14 bg-black'
-            : 'h-[300px] xl:py-3 xl:px-6 py-1 bg-white'
+        className={` p-3       lg:h-full  remove-scrollbar ${
+          isResponsive ? 'h-full pt-3 pb-14 ' : 'h-[300px] xl:py-3  py-1'
         }`}
       >
         {threadHistory && threadHistory?.length !== 0 ? (
           threadHistory?.map(day => (
-            <div key={day.dateOfChats} className="mb-4">
-              <div
-                className={`text-sm font-medium	mb-2 ${
-                  isResponsive ? 'text-white' : 'text-black'
-                }`}
+            <div key={day.dateOfChats} className="pb-5">
+              {/* <div
+                className={`text-sm font-medium mb-1  text-info text-[gray]`}
               >
                 {dayjs(new Date(day.dateOfChats).toISOString()).format(
                   'DD.MM.YYYY'
                 )}
+              </div> */}
+              <div className="flex items-center mb-1">
+                <div className="flex-1 border-t-1 border-gray-200" />
+                <span className="px-3 text-sm  text-[gray]">
+                  {dayjs(new Date(day.dateOfChats).toISOString()).format(
+                    'DD.MM.YYYY'
+                  )}
+                </span>
+                <div className="flex-1 border-t-1 border-gray-200" />
               </div>
               {day.chats.map(conv => (
                 <div
@@ -128,14 +121,9 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       threadID: String(conv.chatId)
                     });
                   }}
-                  className="flex cursor-pointer relative items-center justify-between mb-2 bg-gray-100 rounded-2xl  pl-10 pr-3 py-2 z-10"
+                  className="flex  bg-default-50 relative items-center justify-between cursor-pointer text-white rounded-2xl  mb-2   p-3 z-10"
                 >
-                  <div
-                    className={`absolute top-[0px] ${
-                      conv.servicePlan === 2 ? 'bg-[#31FF90]' : 'bg-[#319CFF]'
-                    } left-[0px] rounded-tl-mini rounded-2xl  rounded-tr-none rounded-br-none  w-[26px] h-full`}
-                  />
-                  <p className="text-black  leading-4  text-sm line-clamp-3">
+                  <p className="text-white  leading-4  text-sm line-clamp-3">
                     {conv.firstMessageOfChat}
                   </p>
                   <Popover
@@ -152,10 +140,10 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       <Button
                         size="sm"
                         isIconOnly
-                        className="bg-white rounded-full ml-2 !w-6 !h-8 !unit-lg"
+                        className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
                         aria-label="Remove chat"
                       >
-                        <BsTrash size={16} className=" text-gray-500" />
+                        <BsTrash size={16} className=" text-white" />
                       </Button>
                     </PopoverTrigger>
                     <PopoverContent>
@@ -166,6 +154,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                           <Button
                             size="sm"
                             className=" "
+                            variant="bordered"
                             isLoading={removeLoading}
                             onClick={() => {
                               removeThreadFromList(conv.chatId);
@@ -198,7 +187,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
           <Empty />
         )}
       </div>
-    </Card>
+    </div>
   );
 }
 

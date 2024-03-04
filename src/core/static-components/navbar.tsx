@@ -1,5 +1,4 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/button-has-type */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-nested-ternary */
@@ -20,12 +19,10 @@ import {
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure,
-  Image,
-  Link
+  useDisclosure
 } from '@nextui-org/react';
 
-import { useDarkMode, useOnClickOutside } from 'usehooks-ts';
+import { useOnClickOutside } from 'usehooks-ts';
 
 import {
   BsFillChatLeftDotsFill,
@@ -35,16 +32,21 @@ import {
   BsFillFilterSquareFill,
   BsRobot,
   BsEnvelope,
-  BsYelp
+  BsYelp,
+  BsQuestionCircle
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar } from '@/models/common';
 import { useSelector } from 'react-redux';
+import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
+import { AiOutlineUser } from 'react-icons/ai';
 
+import PricingModal from '@/modules/pricing/pages';
 import { RootState } from '@/redux/store';
 import VerifyEmail from './verify-email';
+import FeedbackModal from './feedback-modal';
 
 export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
@@ -70,7 +72,17 @@ export default function Navbar() {
   const navigate = useNavigate();
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const [show, setShow] = useState<boolean>(false);
+  const {
+    isOpen: pricingIsOpen,
+    onOpen: pricingOnOpen,
+    onOpenChange: pricingOnOpenChange
+  } = useDisclosure();
+
+  const {
+    isOpen: feedBackModalIsOpen,
+    onOpen: feedBackModalOnOpen,
+    onOpenChange: feedBackModaOnOpenChange
+  } = useDisclosure();
   const navRef = useRef(null);
 
   useEffect(() => {
@@ -79,7 +91,6 @@ export default function Navbar() {
 
   const handleOutSideClick = () => {
     setIsMenuOpen(false);
-    setShow(false);
   };
 
   useOnClickOutside(navRef, handleOutSideClick);
@@ -87,7 +98,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="bg-transparent z-10 h-[3rem] md:h-[4rem] lg:h-[7rem]"
+        className="z-10  bg-black"
         maxWidth="full"
         isBlurred={false}
         position="static"
@@ -103,7 +114,7 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent className="lg:hidden pr-3" justify="center">
           <NavbarBrand>
-            <p className="font-bold text-inherit">ACMasdE</p>
+            <p className="font-bold text-inherit">Ai-zadə</p>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
@@ -113,17 +124,17 @@ export default function Navbar() {
             aria-hidden
           >
             <NavbarBrand>
-              <BsRobot size={48} />
+              <BsRobot color="white" size={48} />
             </NavbarBrand>
           </div>
         </NavbarContent>
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-          <ButtonGroup className=" rounded-xl  shadow-md border-white border-1">
+          <ButtonGroup className="!rounded-none">
             <Button
-              className={` w-40 h-12  ${
+              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
                 location.pathname.includes('chat')
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black'
+                  ? ' border-b-1 border-white'
+                  : ''
               }`}
               onClick={() => {
                 navigate('/chat');
@@ -132,22 +143,19 @@ export default function Navbar() {
             >
               {dictionary.az.chat}
             </Button>
-            <Tooltip
-              className="hidden sm:block"
-              placement="bottom"
-              content={'Hazırlanır'}
+            <Button
+              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+                location.pathname.includes('assistant')
+                  ? ' border-b-1 border-white'
+                  : ''
+              }`}
+              onClick={() => {
+                navigate('/assistant');
+              }}
+              startContent={<BsYelp size={17} />}
             >
-              <Button
-                className={`isDisabled w-40 h-12  ${
-                  location.pathname.includes('assistan')
-                    ? 'bg-black text-white'
-                    : 'bg-white text-black'
-                }`}
-                startContent={<BsYelp size={17} />}
-              >
-                {dictionary.az.assistan}
-              </Button>
-            </Tooltip>
+              {dictionary.az.assistan}
+            </Button>
 
             <Tooltip
               className="hidden sm:block"
@@ -155,47 +163,23 @@ export default function Navbar() {
               content={'Hazırlanır'}
             >
               <Button
-                className={`isDisabled w-40 h-12  ${
-                  location.pathname.includes('Kataliz')
-                    ? 'bg-black text-white'
-                    : 'bg-white text-black'
-                }`}
-                startContent={<BsClockFill size={17} />}
+                className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
+                  'Kataliz'
+                )}`}
+                startContent={<BsClockFill color="white" size={17} />}
               >
                 Kataliz
               </Button>
             </Tooltip>
-
-            <Button
-              className={`w-40 h-12  ${
-                location.pathname.includes('pricing')
-                  ? 'bg-black text-white'
-                  : 'bg-white text-black'
-              }`}
-              onClick={() => {
-                navigate('/pricing');
-              }}
-              startContent={<BsFillFilterSquareFill size={17} />}
-            >
-              {dictionary.az.tariffs}
-            </Button>
-            <Button
-              className={`w-40 h-12 ${
-                location.pathname.includes('settings')
-                  ? 'bg-black text-white hover:bg-black'
-                  : 'bg-white text-black'
-              }`}
-              onClick={() => {
-                navigate('/settings');
-              }}
-              startContent={<BsFillGearFill size={17} />}
-            >
-              {dictionary.az.settings}
-            </Button>
           </ButtonGroup>
         </NavbarContent>
-        <NavbarContent justify="end">
-          <NavbarItem className="sm:bg-white sm:rounded-lg sm:shadow-md p-1 px-2 sm:px-3 flex gap-2 lg:gap-5 items-center justify-between">
+        <NavbarContent
+          style={{
+            marginRight: '-23px'
+          }}
+          justify="end"
+        >
+          <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
             {' '}
             {!user.verified && (
               <Tooltip
@@ -207,17 +191,24 @@ export default function Navbar() {
                   onClick={onOpen}
                   size="sm"
                   isIconOnly
-                  className="bg-white rounded-full"
-                  aria-label="Filter"
+                  className="bg-black rounded-full flex "
                 >
                   <BsEnvelope
                     className="cursor-pointer animate-pulse"
-                    color="red"
+                    color="white"
                     size={22}
                   />
                 </Button>
               </Tooltip>
             )}
+            <Button
+              onClick={feedBackModalOnOpen}
+              size="sm"
+              isIconOnly
+              className="bg-black rounded-full flex "
+            >
+              <BsQuestionCircle color="white" size={22} />
+            </Button>
             <User
               name={
                 user
@@ -228,31 +219,54 @@ export default function Navbar() {
               avatarProps={{
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
-              className="hidden sm:flex"
+              className="hidden sm:flex text-white"
             />
-            <Dropdown className="hidden sm:block">
-              <DropdownTrigger className="hidden sm:block">
+            <Dropdown className="">
+              <DropdownTrigger className="">
                 <div>
-                  <BsArrowRightCircle className="cursor-pointer" size={20} />
+                  <MdOutlineKeyboardArrowDown
+                    className="cursor-pointer"
+                    color="white"
+                    size={20}
+                  />
                 </div>
               </DropdownTrigger>
-              <DropdownMenu
-                className="hidden sm:block"
-                aria-label="Static Actions"
-              >
+              <DropdownMenu className=" " aria-label="Static Actions">
                 <DropdownItem
-                  className="hidden sm:block"
+                  className=" "
+                  onClick={pricingOnOpen}
+                  key="pricing"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <MdAttachMoney /> {dictionary.az.tariffs}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
+                  onClick={() => {
+                    navigate('/cabinet');
+                  }}
+                  key="cabinet"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <AiOutlineUser /> {dictionary.az.cabinet}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
                   onClick={() => {
                     localStorage.removeItem('userToken');
                     navigate('/login');
                   }}
                   key="logout"
                 >
-                  {dictionary.az.logOut}
+                  <p className="flex items-center  m-0 gap-2">
+                    <BsArrowRightCircle /> {dictionary.az.logOut}
+                  </p>
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            <Dropdown className="block sm:hidden">
+            {/* <Dropdown className="block sm:hidden">
               <DropdownTrigger>
                 <div>
                   <Image
@@ -285,7 +299,7 @@ export default function Navbar() {
                   <p className="text-sm">{dictionary.az.logOut}</p>
                 </DropdownItem>
               </DropdownMenu>
-            </Dropdown>
+            </Dropdown> */}
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
@@ -307,6 +321,18 @@ export default function Navbar() {
         </NavbarMenu>
       </NavbarNext>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
+      {feedBackModalIsOpen && (
+        <FeedbackModal
+          onOpenChange={feedBackModaOnOpenChange}
+          isOpen={feedBackModalIsOpen}
+        />
+      )}
+      {pricingIsOpen && (
+        <PricingModal
+          onOpenChange={pricingOnOpenChange}
+          isOpen={pricingIsOpen}
+        />
+      )}
     </>
   );
 }

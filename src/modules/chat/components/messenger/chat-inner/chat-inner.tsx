@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import { Button, Card, Chip, useDisclosure } from '@nextui-org/react';
+import { Button, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
 import {
   IChatForm,
@@ -24,6 +24,7 @@ import {
 } from '@/redux/chat/chat-slice';
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
+import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
 import ThinkText from '@/core/static-components/think-text';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
@@ -170,12 +171,12 @@ function ChatInner() {
   );
 
   return (
-    <div className="flex flex-col gap-2 h-full  ">
-      <div className="h-full sm:pb-40 pb-16">
+    <div className="flex flex-col gap-2 h-full    relative">
+      <div className="h-full  pb-[13rem] container">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 componentsScrollBar overflow-x-auto   overflow-y-auto h-full"
+          className="row-span-8 scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map((item: IThreadBubblesItem, index: number) => (
             <ChatBubble
@@ -191,11 +192,6 @@ function ChatInner() {
           {waitingForResponse && (
             <div className=" flex justify-start mt-2 mb-5 items-center">
               <AiLoder />
-              {/* <div className="loader bg-black p-2 rounded-full flex space-x-3">
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-                <div className="w-3 h-3 bg-white rounded-full animate-bounce" />
-              </div> */}
               <ThinkText />
             </div>
           )}
@@ -233,12 +229,16 @@ function ChatInner() {
               </Button>
             </div>
           )}
+          {!waitingForThreadLoad &&
+            !hasError &&
+            !waitingForResponse &&
+            bubbleList?.length < 1 && <AiEmptyWelcome />}
         </ScrollToBottom>
       </div>
 
-      <Card className=" flex-shrink-0 h-[120px] sm:h-[150px] row-span-4 absolute w-full bottom-0">
-        <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
-      </Card>
+      {/* <div className="container"> */}
+      <ChatForm waitingForResponse={waitingForResponse} onSubmit={onSubmit} />
+      {/* </div> */}
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
     </div>
   );

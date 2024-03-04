@@ -18,12 +18,14 @@ import {
   ModalFooter,
   Textarea,
   // Tooltip,
-  Button
+  Button,
+  useDisclosure
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 // import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import InstructionModal from './instruction-modal';
 
 interface IFeedbackModal {
   isOpen: boolean;
@@ -44,6 +46,11 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
   });
 
   const dispatch = useDispatch<AppDispatch>();
+  const {
+    isOpen: instructionIsOpen,
+    onOpen: instructionOnOpen,
+    onOpenChange: instructionOnOpenChange
+  } = useDisclosure();
 
   const onSubmit = async (data: IFeedbackModalForm) => {
     try {
@@ -93,9 +100,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                       variant="bordered"
                       fullWidth
                       isRequired
-                      label="Mesaj"
-                      labelPlacement="outside"
-                      placeholder={inputPlaceholderText('Mesaj')}
+                      label={inputPlaceholderText('Mesaj')}
                       classNames={{
                         label: 'text-md font-normal',
                         innerWrapper: ' flex items-center',
@@ -128,88 +133,23 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                       }}
                       minRows={5}
                       rows={5}
-                      className="flex-1 feedBackTextArea"
+                      className="flex-1 "
+                      errorMessage={
+                        (errors.feedbackMessage &&
+                          errors.feedbackMessage?.message) ||
+                        ''
+                      }
                       isInvalid={Boolean(errors.feedbackMessage)}
-                      // startContent={
-                      //   errors.feedbackMessage ? (
-                      //     <Tooltip
-                      //       className={'!bg-black !text-white'}
-                      //       placement="top-start"
-                      //       offset={12}
-                      //       content={
-                      //         errors.feedbackMessage
-                      //           ? errors.feedbackMessage.message
-                      //           : ''
-                      //       }
-                      //     >
-                      //       <div>
-                      //         {
-                      //           <BsQuestionCircleFill
-                      //             size={16}
-                      //             color={
-                      //               errors.feedbackMessage?.message
-                      //                 ? '#f31260'
-                      //                 : ''
-                      //             }
-                      //             className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                      //           />
-                      //         }
-                      //       </div>
-                      //     </Tooltip>
-                      //   ) : (
-                      //     <div>
-                      //       {
-                      //         <BsQuestionCircleFill
-                      //           size={16}
-                      //           color={
-                      //             errors.feedbackMessage?.message
-                      //               ? '#f31260'
-                      //               : ''
-                      //           }
-                      //           className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                      //         />
-                      //       }
-                      //     </div>
-                      //   )
-                      // }
                       maxRows={5}
                     />
-                    {/* <AppHandledInput
-                      name="feedbackMessage"
-                      inputProps={{
-                        id: 'feedbackMessage'
-                      }}
-                      type="text"
-                      className="text-black"
-                      control={control}
-                      isInvalid={Boolean(errors.feedbackMessage?.message)}
-                      errors={errors}
-                      size="sm"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText('Mesaj')
-                        }
-                      }}
-                      placeholder={inputPlaceholderText('Mesaj')}
-                      required
-                      IconElement={() => (
-                        <BsQuestionCircleFill
-                          size={16}
-                          color={
-                            errors.feedbackMessage?.message ? '#f31260' : ''
-                          }
-                          className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                        />
-                      )}
-                    /> */}
                   </div>
 
                   <ButtonGroup>
                     <Button
+                      className="w-full"
                       size="md"
                       isLoading={isSubmitting}
-                      className="w-full bg-black  text-white border"
+                      variant="bordered"
                       type="submit"
                     >
                       {dictionary.az.send}
@@ -218,14 +158,19 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button variant="bordered" onPress={onClose}>
-                  {dictionary.az.closeBtn}
-                </Button>
+                <Button onClick={instructionOnOpen}>Təlimat</Button>
+                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
               </ModalFooter>
             </>
           )}
         </ModalContent>
       </Modal>
+      {instructionIsOpen && (
+        <InstructionModal
+          onOpenChange={instructionOnOpenChange}
+          isOpen={instructionIsOpen}
+        />
+      )}
     </div>
   );
 }

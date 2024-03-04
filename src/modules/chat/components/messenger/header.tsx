@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-bitwise */
 import VerifyEmail from '@/core/static-components/verify-email';
+import { StatisticsUpdateData } from '@/models/common';
 import {
   setCurrentChatModel,
   setResetChatInner,
@@ -16,7 +17,9 @@ import {
   PopoverTrigger,
   Popover,
   PopoverContent,
-  useDisclosure
+  useDisclosure,
+  Badge,
+  Progress
 } from '@nextui-org/react';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
@@ -39,35 +42,69 @@ function MessengerHeader({
   const { currentModel, waitingForResponse } = useSelector(
     (state: RootState) => state?.chat
   );
-  const total = useSelector(
-    (state: RootState) =>
-      state?.statisticsCount?.statisticsCount?.data?.premium?.total
+  const { premium, basic } = useSelector(
+    (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const navigate = useNavigate();
+  const statisticsData: StatisticsUpdateData = useSelector(
+    (state: RootState) => state.statisticsCount.statisticsCount
+  );
 
   return (
-    <>
-      <div className="flex justify-between  items-center bg-black p-3">
-        <div className="flex justify-between gap-2 sm:gap-5 items-center ">
-          <Button
-            size="sm"
-            isIconOnly
-            onClick={() => setIsDrawerOpen((z: boolean) => !z)}
-            className="bg-transparent rounded-full block lg:hidden"
-            aria-label="Filter"
-          >
-            <BsJustify
-              size={20}
-              color="white"
-              className={` ${isDrawerOpen ? 'rotate-90' : ''}`}
-            />
-          </Button>
-          <h2 className="text-base sm:text-xl text-white font-semibold hidden lg:block">
-            {dictionary.az.chat}
-          </h2>
+    <div className=" pt-1 pb-3 h-[60px] flex   ">
+      <div />
+      <div className="flex justify-between  items-center container">
+        <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
+          {(premium || basic) && (
+            <div className="flex w-[400px] justify-content-between gap-4">
+              <Tooltip
+                placement="top-start"
+                offset={12}
+                content={`Ümumi: ${basic?.total}, İstifadə olunan: ${basic?.usage}, Geriyə qalan: ${basic?.remainder}`}
+              >
+                <Progress
+                  size="sm"
+                  radius="sm"
+                  classNames={{
+                    base: 'max-w-md',
+                    indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
+                    label: ' text-[11px]  text-white pr-2',
+                    value: 'text-[11px] text-white'
+                  }}
+                  label="Sadə paket"
+                  value={basic?.remainder}
+                  formatOptions={{}}
+                  showValueLabel
+                  maxValue={basic?.total}
+                />
+              </Tooltip>
+              <Tooltip
+                placement="top-start"
+                offset={12}
+                content={`Ümumi: ${premium?.total}, İstifadə olunan: ${premium?.usage}, Geriyə qalan: ${premium?.remainder}`}
+              >
+                <Progress
+                  size="sm"
+                  radius="sm"
+                  classNames={{
+                    base: 'max-w-md',
+                    indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
+                    label: ' text-[11px]  text-white pr-2',
+                    value: ' text-[11px] text-white'
+                  }}
+                  label="Premium paket"
+                  value={premium?.remainder}
+                  formatOptions={{}}
+                  showValueLabel
+                  maxValue={premium?.total}
+                />
+              </Tooltip>
+            </div>
+          )}
         </div>
-        <div className="flex items-center justify-between gap-2">
+
+        <div className="flex items-center justify-between gap-2 mr-5">
           <Tabs
             selectedKey={currentModel}
             // @ts-ignore
@@ -88,7 +125,9 @@ function MessengerHeader({
             <Tab
               key="2"
               title="Premium"
-              isDisabled={Boolean(searchParams.get('threadID')) || total === 0}
+              isDisabled={
+                Boolean(searchParams.get('threadID')) || premium?.total === 0
+              }
             />
           </Tabs>
 
@@ -97,7 +136,7 @@ function MessengerHeader({
               <Button
                 size="sm"
                 isIconOnly
-                className="bg-white rounded-full"
+                className="bg-transparent rounded-full"
                 aria-label="Filter"
                 onClick={() => {
                   if (!verified) {
@@ -109,7 +148,7 @@ function MessengerHeader({
                   }
                 }}
               >
-                <BsFillPlusCircleFill size={20} color="#292D32" />
+                <BsFillPlusCircleFill size={24} color="white" />
               </Button>
             </Tooltip>
           ) : (
@@ -120,8 +159,12 @@ function MessengerHeader({
               offset={6}
             >
               <PopoverTrigger>
-                <Button size="sm" isIconOnly className="bg-white rounded-full">
-                  <BsFillPlusCircleFill size={20} color="#292D32" />
+                <Button
+                  size="sm"
+                  isIconOnly
+                  className="transparent rounded-full"
+                >
+                  <BsFillPlusCircleFill size={20} color="white" />
                 </Button>
               </PopoverTrigger>
 
@@ -168,7 +211,7 @@ function MessengerHeader({
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
       )}
-    </>
+    </div>
   );
 }
 

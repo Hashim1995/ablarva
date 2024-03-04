@@ -216,7 +216,162 @@ $shape-6: 'M 100 600 q 100 -600, 500 -500 t 400 500 t -500 500 T 100 600 z';
     }
   }
 }
+.blobsWelcome {
+  width: min(16em, 16em);
+  height: min(16em, 16em);
+  max-height: 100%;
+  max-width: 100%;
 
+  svg {
+    position: relative;
+    height: 100%;
+    z-index: 2;
+  }
+
+  .blob {
+    animation: rotate 25s infinite alternate ease-in-out;
+    transform-origin: 50% 50%;
+    opacity: 0.7;
+
+    path {
+      animation: blob-anim-1 1s infinite alternate
+        cubic-bezier(0.45, 0.2, 0.55, 0.8);
+      transform-origin: 50% 50%;
+      transform: scale(0.8);
+
+      transition: fill 800ms ease;
+    }
+
+    &.alt {
+      animation-direction: alternate-reverse;
+      opacity: 0.3;
+    }
+  }
+
+  .blob-1 {
+    path {
+      fill: var(--blob-1);
+      filter: blur(1rem);
+    }
+  }
+
+  .blob-2 {
+    animation-duration: 18s;
+    animation-direction: alternate-reverse;
+
+    path {
+      fill: var(--blob-2);
+      animation-name: blob-anim-2;
+      animation-duration: 7s;
+      filter: blur(0.75rem);
+      transform: scale(0.78);
+    }
+
+    &.alt {
+      animation-direction: alternate;
+    }
+  }
+
+  .blob-3 {
+    animation-duration: 23s;
+
+    path {
+      fill: var(--blob-3);
+      animation-name: blob-anim-3;
+      animation-duration: 6s;
+      filter: blur(0.5rem);
+      transform: scale(0.76);
+    }
+  }
+
+  .blob-4 {
+    animation-duration: 31s;
+    animation-direction: alternate-reverse;
+    opacity: 0.9;
+
+    path {
+      fill: var(--blob-4);
+      animation-name: blob-anim-4;
+      animation-duration: 10s;
+      filter: blur(10rem);
+      transform: scale(0.5);
+    }
+
+    &.alt {
+      animation-direction: alternate;
+      opacity: 0.8;
+    }
+  }
+
+  @keyframes blob-anim-1 {
+    0% {
+      d: path($shape-1);
+    }
+    30% {
+      d: path($shape-2);
+    }
+    70% {
+      d: path($shape-3);
+    }
+    100% {
+      d: path($shape-4);
+    }
+  }
+
+  @keyframes blob-anim-2 {
+    0% {
+      d: path($shape-3);
+    }
+    40% {
+      d: path($shape-5);
+    }
+    80% {
+      d: path($shape-2);
+    }
+    100% {
+      d: path($shape-6);
+    }
+  }
+
+  @keyframes blob-anim-3 {
+    0% {
+      d: path($shape-2);
+    }
+    35% {
+      d: path($shape-4);
+    }
+    75% {
+      d: path($shape-6);
+    }
+    100% {
+      d: path($shape-3);
+    }
+  }
+
+  @keyframes blob-anim-4 {
+    0% {
+      d: path($shape-4);
+    }
+    30% {
+      d: path($shape-6);
+    }
+    70% {
+      d: path($shape-2);
+    }
+    100% {
+      d: path($shape-5);
+    }
+  }
+
+  @keyframes rotate {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(360deg);
+    }
+  }
+}
 .switcher {
   position: absolute;
   left: 1rem;

@@ -13,7 +13,7 @@ import { inputValidationText } from '@/utils/constants/validations';
 import { Button, useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { BsEye, BsEyeSlash, BsEnvelopeFill } from 'react-icons/bs';
+import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { useLocalStorage } from 'usehooks-ts';
@@ -56,8 +56,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
       <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
-      <div className="p-4 md:p-3 bg-white md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
-        <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-gray-700">
+      <div className="p-4  border-l-1 md:p-3 md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">
+        <h3 className="leading-none pb-3 md:pb-0 text-3xl font-semibold text-white">
           {dictionary.az.login}
         </h3>
         <form
@@ -75,7 +75,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               isInvalid={Boolean(errors.email?.message)}
               errors={errors}
               size="sm"
-              className="text-black w-72"
+              className=" w-72"
               rules={{
                 required: {
                   value: true,
@@ -86,15 +86,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                   message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.email)}
+              label={inputPlaceholderText(dictionary.az.email)}
               required
-              IconElement={() => (
-                <BsEnvelopeFill
-                  size={16}
-                  color={errors.email?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <AppHandledInput
               type={showPassword ? 'text' : 'password'}
@@ -125,22 +118,15 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               isInvalid={Boolean(errors.password?.message)}
               errors={errors}
               size="sm"
-              className="text-black w-72"
+              className="w-72"
               rules={{
                 required: {
                   value: true,
                   message: inputValidationText(dictionary.az.password)
                 }
               }}
-              placeholder={inputPlaceholderText(dictionary.az.password)}
+              label={inputPlaceholderText(dictionary.az.password)}
               required
-              IconElement={() => (
-                <BsEnvelopeFill
-                  size={16}
-                  color={errors.password?.message ? '#f31260' : ''}
-                  className="text-2xl text-default-400 pointer-events-none flex-shrink-0"
-                />
-              )}
             />
             <div className="flex flex-col space-y-5">
               <span className="flex items-center justify-center ">
@@ -148,7 +134,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                 <span
                   aria-hidden
                   onClick={onOpen}
-                  className="font-normal text-black  text-sm"
+                  className="font-normal  text-sm"
                 >
                   <span className=" text-blue-500   cursor-pointer" aria-hidden>
                     {dictionary.az.forgetPassword}
@@ -161,8 +147,9 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           <Button
             size="sm"
             isLoading={isSubmitting}
-            className="w-full !mt-3 md:mt-5 bg-black text-white border"
+            className="w-full !mt-3 md:mt-5"
             type="submit"
+            variant="bordered"
           >
             {dictionary.az.login}
           </Button>
@@ -173,7 +160,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
             <span
               aria-hidden
               onClick={handleFlip}
-              className="font-normal text-black  text-sm"
+              className="font-normal   text-sm"
             >
               {dictionary.az.or}{' '}
               <span

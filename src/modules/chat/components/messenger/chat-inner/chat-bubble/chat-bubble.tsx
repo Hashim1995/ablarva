@@ -3,13 +3,14 @@ import { toastOptions } from '@/configs/global-configs';
 import { IFeedbackPayload } from '@/modules/chat/types';
 import { RootState } from '@/redux/store';
 import { ChatService } from '@/services/chat-services/chat-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
-import { BsHandThumbsDownFill, BsClipboard2CheckFill } from 'react-icons/bs';
+import { BsHandThumbsDownFill } from 'react-icons/bs';
+import { FaCopy } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useReadLocalStorage } from 'usehooks-ts';
@@ -114,7 +115,7 @@ function ChatBubble({
   );
 
   return (
-    <div className="bubble flex sm:gap-5 gap-3 bg-[#F0F1F3]   rounded-lg p-3 my-3">
+    <div className="bubble  flex sm:gap-5 gap-3 bg-transparent   rounded-lg p-3 my-3">
       <Avatar
         name="Junior"
         src={
@@ -190,20 +191,10 @@ function ChatBubble({
                   }
                 );
               }}
-              startContent={
-                <Button
-                  type="submit"
-                  isIconOnly
-                  size="sm"
-                  className="bg-foreground-200 rounded-full"
-                >
-                  <BsClipboard2CheckFill size={16} color="#292D32" />
-                </Button>
-              }
               size="sm"
-              className="bg-white rounded-full pl-0"
+              className="bg-transparent rounded-full pl-0"
             >
-              {dictionary.az.copy}
+              <FaCopy color="white" size={16} />
             </Button>
           </div>
         </div>
