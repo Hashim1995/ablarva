@@ -6,7 +6,7 @@ export class HttpError {
     public code: number,
     public message: string | string[],
     public rawError: any
-  ) {}
+  ) { }
 
   preventDefault: boolean = false;
 }

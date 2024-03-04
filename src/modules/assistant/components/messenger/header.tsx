@@ -1,35 +1,20 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-bitwise */
 import VerifyEmail from '@/core/static-components/verify-email';
-import { StatisticsUpdateData } from '@/models/common';
-import {
-  setAssistantsDrawer,
-  setResetAssistantInner,
-  setWaitingForAssistantResponse
-} from '@/redux/assistant/assistant-slice';
+import { setAssistantsDrawer } from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   Button,
   Tooltip,
-  Tabs,
-  Tab,
-  PopoverTrigger,
-  Popover,
-  PopoverContent,
   useDisclosure,
-  Badge,
   Progress,
   Image
 } from '@nextui-org/react';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
-import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
+import { BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
-import { useNavigate, useSearchParams } from 'react-router-dom';
 
 function MessengerHeader() {
   const dispatch = useDispatch();
-  const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
+  const { isOpen: modalIsopen, onOpenChange } = useDisclosure();
 
   const { premiumAssistant, basicAssistant } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data

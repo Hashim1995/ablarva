@@ -12,7 +12,6 @@ import { useState } from 'react';
 
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { useLocalStorage } from 'usehooks-ts';
 import AppHandledInput from '@/components/forms/input/handled-input';
 // import { dictionary } from '@/utils/constants/dictionary';
 import {
@@ -49,8 +48,6 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     mode: 'onChange',
     defaultValues: {}
   });
-  // eslint-disable-next-line no-unused-vars
-  const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 

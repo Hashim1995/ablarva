@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { IUserSessions } from '@/models/user';
@@ -6,7 +5,6 @@ import {
   //  AppDispatch,
   RootState
 } from '@/redux/store';
-import { dictionary } from '@/utils/constants/dictionary';
 import { Card, Chip, Divider, Skeleton } from '@nextui-org/react';
 import { BsAndroid2 } from 'react-icons/bs';
 import {
@@ -29,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 function Sessions() {
   const { userSessions } = useSelector((state: RootState) => state.user.user);
   // const dispatch = useDispatch<AppDispatch>();
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 

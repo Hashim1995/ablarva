@@ -1,18 +1,7 @@
-/* eslint-disable no-unused-vars */
 import { IAsistanCard } from '@/modules/chat/types';
-import { Card, Image, Divider, CardFooter, Button } from '@nextui-org/react';
+import { Image } from '@nextui-org/react';
 
-interface IAsistanCardProps extends IAsistanCard {
-  activeId: number | string;
-}
-
-function AsistanCard({
-  title,
-  img,
-  id,
-  description,
-  activeId
-}: IAsistanCardProps) {
+function AsistanCard({ title, img, description }: IAsistanCard) {
   return (
     <div className="group p-1 flex h-18 hover:bg-white transition-all duration-300 ease-in-out cursor-pointer rounded-xl items-center justify-between mb-2 gap-4">
       <Image

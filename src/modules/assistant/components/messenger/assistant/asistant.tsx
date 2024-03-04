@@ -1,11 +1,9 @@
-/* eslint-disable no-unused-vars */
 import { IAssistantItem } from '@/modules/assistant/types';
-import { IAsistanCard } from '@/modules/chat/types';
 import {
   setCurrentAssistantModel,
   setResetAssistantInner
 } from '@/redux/assistant/assistant-slice';
-import { Card, Image, Divider, CardFooter, Button } from '@nextui-org/react';
+import { Image } from '@nextui-org/react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
@@ -20,12 +18,11 @@ function AsistantCard({
     assistantId,
     assistantName,
     assistantDescription,
-    assistantImagePath,
-    assistantServicePlan,
-    assistantServicePlanText
+    assistantImagePath
   } = data;
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
 
   return (

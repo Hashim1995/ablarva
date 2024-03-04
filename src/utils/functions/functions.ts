@@ -134,17 +134,7 @@ function toCapitalize(str: string): string {
   return capitalizedWords.join(' ');
 }
 
-export {
-  convertFormDataToQueryParams,
-  generateOptionListPerNumber,
-  convertBytesToReadableSize,
-  formatDateToWords,
-  tokenizeImage,
-  formatDate,
-  toCapitalize
-};
-
-export function convertDateFormat(dateStr: string): string {
+function convertDateFormat(dateStr: string): string {
   // Split the date by the '.' delimiter
   const parts = dateStr.split('.');
 
@@ -168,9 +158,22 @@ export function convertDateFormat(dateStr: string): string {
   return `${year}-${paddedMonth}-${paddedDay}`;
 }
 
-export function convertDDMMYYYtoISOString(dateStr: string): string {
+function convertDDMMYYYtoISOString(dateStr: string): string {
   const [day, month, year] = dateStr.split('.');
   // Set the date at noon to avoid any DST changes that might affect the date
   const dateObj = new Date(+year, +month - 1, +day, 12).toISOString();
   return dateObj;
 }
+
+
+export {
+  convertFormDataToQueryParams,
+  generateOptionListPerNumber,
+  convertBytesToReadableSize,
+  formatDateToWords,
+  tokenizeImage,
+  formatDate,
+  toCapitalize,
+  convertDateFormat,
+  convertDDMMYYYtoISOString
+};

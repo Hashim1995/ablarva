@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
 import {
@@ -79,9 +78,7 @@ function ChatBubble({
   isClient,
   assistantBubbleId,
   feedbackStatus,
-  assistantImagePath,
-  assistantName,
-  assistantThreadId
+  assistantImagePath
 }: IAssistantThreadBubblesItem) {
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);

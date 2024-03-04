@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { dictionary } from '@/utils/constants/dictionary';
 import { inputValidationText } from '@/utils/constants/validations';
 import { BsCalendarWeekFill } from 'react-icons/bs';
 import { ReactNode } from 'react';

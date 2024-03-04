@@ -1,14 +1,11 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-bitwise */
 import VerifyEmail from '@/core/static-components/verify-email';
-import { StatisticsUpdateData } from '@/models/common';
 import {
   setCurrentChatModel,
   setResetChatInner,
   setWaitingForResponse
 } from '@/redux/chat/chat-slice';
 import { RootState } from '@/redux/store';
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   Button,
   Tooltip,
@@ -18,24 +15,17 @@ import {
   Popover,
   PopoverContent,
   useDisclosure,
-  Badge,
   Progress
 } from '@nextui-org/react';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { BsFillPlusCircleFill, BsJustify } from 'react-icons/bs';
+import { BsFillPlusCircleFill } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
-interface IMessengerHeaderProps {
-  isDrawerOpen: boolean;
-  setIsDrawerOpen: Dispatch<SetStateAction<boolean>>;
-}
-function MessengerHeader({
-  isDrawerOpen,
-  setIsDrawerOpen
-}: IMessengerHeaderProps) {
+function MessengerHeader() {
   const dispatch = useDispatch();
+  // eslint-disable-next-line no-unused-vars
   const [searchParams, setSearchParams] = useSearchParams();
   const { isOpen: modalIsopen, onOpen, onOpenChange } = useDisclosure();
   const [isOpen, setIsOpen] = useState(false);
@@ -48,9 +38,7 @@ function MessengerHeader({
   );
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const navigate = useNavigate();
-  const statisticsData: StatisticsUpdateData = useSelector(
-    (state: RootState) => state.statisticsCount.statisticsCount
-  );
+
   const { t } = useTranslation();
 
   return (

@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { inputValidationText } from '@/utils/constants/validations';
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
@@ -25,7 +23,6 @@ import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
-import { Select, SelectItem } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import { IAccountForm } from '../../types';
 
