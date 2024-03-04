@@ -26,6 +26,7 @@ import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
 import { Select, SelectItem } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
@@ -43,6 +44,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     mode: 'onSubmit',
     defaultValues: {}
   });
+  const { t } = useTranslation();
 
   const dispatch = useDispatch<AppDispatch>();
 
@@ -112,14 +114,14 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             rules={{
               required: {
                 value: true,
-                message: inputValidationText(dictionary.az.email)
+                message: inputValidationText(t('email'))
               },
               pattern: {
                 value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                message: `${dictionary.az.email} ${dictionary.az.regexFormatValidatorText}`
+                message: `${t('email')} ${t('regexFormatValidatorText')}`
               }
             }}
-            label={inputPlaceholderText(dictionary.az.email)}
+            label={inputPlaceholderText(t('email'))}
             required
           />
           <div className="flex space-x-4">
@@ -201,14 +203,14 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             }}
             isInvalid={Boolean(errors.gender?.message)}
             control={control}
-            label={selectPlaceholderText(dictionary.az.gender)}
+            label={selectPlaceholderText(t('gender'))}
             // className=" app-select text-base sm:text-xl"
             size="sm"
             required
             rules={{
               required: {
                 value: true,
-                message: inputValidationText(dictionary.az.gender)
+                message: inputValidationText(t('gender'))
               }
             }}
             options={genderOptions}
@@ -232,10 +234,10 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             rules={{
               required: {
                 value: true,
-                message: inputValidationText(dictionary.az.firstName)
+                message: inputValidationText(t('firstName'))
               }
             }}
-            label={inputPlaceholderText(dictionary.az.firstName)}
+            label={inputPlaceholderText(t('firstName'))}
             required
           />
           <AppHandledInput
@@ -253,10 +255,10 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             rules={{
               required: {
                 value: true,
-                message: inputValidationText(dictionary.az.lastName)
+                message: inputValidationText(t('lastName'))
               }
             }}
-            label={inputPlaceholderText(dictionary.az.lastName)}
+            label={inputPlaceholderText(t('lastName'))}
             required
           />
         </div>

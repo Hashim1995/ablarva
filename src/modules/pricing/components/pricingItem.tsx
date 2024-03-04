@@ -1,7 +1,8 @@
 import { ILimitItem, IPackageItem } from '@/models/payment';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
 
 interface IPricingItemProps {
   item: IPackageItem;
@@ -19,6 +20,8 @@ function PricingItem({
   onOpen,
   modalOnopen
 }: IPricingItemProps) {
+  const { t } = useTranslation();
+
   return (
     <Card
       key={item?.packageId}
@@ -56,7 +59,7 @@ function PricingItem({
         }}
         className="w-full text-white py-2 rounded-lg text-mda mt-4 "
       >
-        {packageId === item.packageId ? 'Paketi yenilə' : dictionary.az.joinNow}
+        {packageId === item.packageId ? 'Paketi yenilə' : t('joinNow')}
       </Button>
     </Card>
   );

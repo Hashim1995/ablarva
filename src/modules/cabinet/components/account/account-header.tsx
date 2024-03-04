@@ -1,9 +1,10 @@
 import { setState } from '@/models/common';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { Button, Card, Tooltip, useDisclosure } from '@nextui-org/react';
 import { BsPencilSquare, BsFolder2 } from 'react-icons/bs';
 import { IoKeyOutline } from 'react-icons/io5';
 
+import { useTranslation } from 'react-i18next';
 import ChangePassword from './change-password';
 
 interface IAccountHeaderProps {
@@ -17,17 +18,18 @@ function AccountHeader({
   setFieldsIsDisable
 }: IAccountHeaderProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { t } = useTranslation();
 
   return (
     <Card className="rounded-b-none  bg-transparent shadow-none">
       <div className="flex justify-between items-center  bg-transparent p-2 sm:p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>
-            {dictionary.az.account} {dictionary.az.infos}
+            {t('account')} {t('infos')}
           </p>
         </div>
         <div className="flex gap-5">
-          <Tooltip placement="left" content={dictionary.az.changePassWord}>
+          <Tooltip placement="left" content={t('changePassWord')}>
             <Button
               size="sm"
               isIconOnly
@@ -43,7 +45,7 @@ function AccountHeader({
               />
             </Button>
           </Tooltip>
-          <Tooltip placement="left" content={dictionary.az.editAccount}>
+          <Tooltip placement="left" content={t('editAccount')}>
             <Button
               size="sm"
               isIconOnly
@@ -61,7 +63,7 @@ function AccountHeader({
             </Button>
           </Tooltip>
           {!fieldsIsDisable && (
-            <Tooltip placement="left" content={dictionary.az.save}>
+            <Tooltip placement="left" content={t('save')}>
               <Button
                 size="sm"
                 isLoading={isLoading}

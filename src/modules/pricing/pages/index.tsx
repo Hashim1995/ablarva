@@ -9,6 +9,7 @@ import {
   Tab,
   Tabs
 } from '@nextui-org/react';
+import { useTranslation } from 'react-i18next';
 import ChatPricing from '../components/chatPricing';
 import AsistanPricing from '../components/asistanPricing';
 
@@ -18,6 +19,8 @@ interface IPricingModal {
 }
 
 function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
+  const { t } = useTranslation();
+
   return (
     <div>
       <Modal
@@ -61,7 +64,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

@@ -1,5 +1,6 @@
 import { useDisclosure } from '@nextui-org/react';
 import InstructionModal from './instruction-modal';
+import { useTranslation } from 'react-i18next';
 
 interface IFooterProps {
   onOpenHelp: () => void;
@@ -7,6 +8,7 @@ interface IFooterProps {
 
 function Footer({ onOpenHelp }: IFooterProps) {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const { t } = useTranslation();
 
   return (
     <footer className="bg-black shadow z-10  w-full ">
@@ -16,7 +18,7 @@ function Footer({ onOpenHelp }: IFooterProps) {
           <a href="/#" className="hover:underline">
             AI-ZADE™
           </a>{' '}
-          © 2024{' '}
+          © {t('currentYearFooter')}
         </div>
         <div className="flex gap-5">
           <div
@@ -24,14 +26,14 @@ function Footer({ onOpenHelp }: IFooterProps) {
             onClick={onOpen}
             className="cursor-pointer text-sm text-center text-white"
           >
-            Təlimat
+            {t('instructionFooterText')}
           </div>
           <div
             aria-hidden
             onClick={onOpenHelp}
             className="cursor-pointer text-sm text-center text-white lg:hidden block"
           >
-            Kömək
+            {t('helpFooter')}
           </div>
         </div>
       </div>

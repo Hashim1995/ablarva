@@ -5,7 +5,7 @@ import { IGlobalResponseEmpty } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { AppDispatch } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 // import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
@@ -25,6 +25,7 @@ import { useForm } from 'react-hook-form';
 // import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import { useTranslation } from 'react-i18next';
 import InstructionModal from './instruction-modal';
 
 interface IFeedbackModal {
@@ -37,6 +38,8 @@ export interface IFeedbackModalForm {
 }
 
 function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
+  const { t } = useTranslation();
+
   const {
     handleSubmit,
     register,
@@ -82,7 +85,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                Təklif və iradlarınızı bizə bildirin
+                {t('suggestionsAndComments')}
               </ModalHeader>
               <ModalBody>
                 <form
@@ -152,14 +155,16 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
                       variant="bordered"
                       type="submit"
                     >
-                      {dictionary.az.send}
+                      {t('send')}
                     </Button>
                   </ButtonGroup>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onClick={instructionOnOpen}>Təlimat</Button>
-                <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+                <Button onClick={instructionOnOpen}>
+                  {t('instructionBTN')}
+                </Button>
+                <Button onPress={onClose}>{t('closeBtn')}</Button>
               </ModalFooter>
             </>
           )}

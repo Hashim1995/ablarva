@@ -1,4 +1,6 @@
-import { dictionary } from '@/utils/constants/dictionary';
+// import { dictionary } from '@/utils/constants/dictionary';
+import { useTranslation } from 'react-i18next';
+
 import {
   Modal,
   ModalContent,
@@ -13,6 +15,8 @@ interface IInstructionModal {
   onOpenChange: () => void;
 }
 function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
+  const { t } = useTranslation();
+
   return (
     <Modal
       size="4xl"
@@ -25,10 +29,12 @@ function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
       <ModalContent>
         {onClose => (
           <>
-            <ModalHeader className="flex flex-col gap-1">Təlimat</ModalHeader>
+            <ModalHeader className="flex flex-col gap-1">
+              {t('instructionText')}
+            </ModalHeader>
             <ModalBody>
               <iframe
-                title="Təlimat"
+                title={t('instructionText')}
                 height="400"
                 width="100%"
                 allow="fullscreen;"
@@ -36,7 +42,7 @@ function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
               />
             </ModalBody>
             <ModalFooter>
-              <Button onPress={onClose}>{dictionary.az.closeBtn}</Button>
+              <Button onPress={onClose}>{t('closeBtn')}</Button>
             </ModalFooter>
           </>
         )}
