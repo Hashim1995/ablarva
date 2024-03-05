@@ -72,7 +72,7 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
           await AuthService.getInstance().resetPassword(data);
         if (res.isSuccess) {
           onOpenChange();
-          toast.success('Şifrəniz uğurla dəyişdirildi', toastOptions);
+          toast.success(t('yourPasswordChangedSuccessfully'), toastOptions);
         }
       } catch (err) {
         console.log(err);

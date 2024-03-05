@@ -69,10 +69,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
         payload
       );
       if (res.isSuccess) {
-        toast.success(
-          'Uğurla qeydiyyatdan keçdiniz. Zəhmət olmasa yenidən daxil olun',
-          toastOptions
-        );
+        toast.success(t('youRegisteredSuccessfullyPleaseLogin'), toastOptions);
         handleFlip();
         setValue('confirmPassword', '');
         setValue('email', '');
@@ -176,13 +173,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }}
                   isInvalid={Boolean(errors.day?.message)}
                   control={control}
-                  label={'Gün'}
+                  label={t('day')}
                   size="sm"
                   required
                   rules={{
                     required: {
                       value: true,
-                      message: inputValidationText('Gün')
+                      message: inputValidationText(t('day'))
                     }
                   }}
                   options={daysList}
@@ -198,13 +195,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }}
                   isInvalid={Boolean(errors.month?.message)}
                   control={control}
-                  label={'Ay'}
+                  label={t('month')}
                   size="sm"
                   required
                   rules={{
                     required: {
                       value: true,
-                      message: inputValidationText('Ay')
+                      message: inputValidationText(t('month'))
                     }
                   }}
                   options={monthsList}
@@ -220,13 +217,13 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   }}
                   isInvalid={Boolean(errors.year?.message)}
                   control={control}
-                  label={'İl'}
+                  label={'year'}
                   size="sm"
                   required
                   rules={{
                     required: {
                       value: true,
-                      message: inputValidationText('İl')
+                      message: inputValidationText('year')
                     }
                   }}
                   options={yearsList}

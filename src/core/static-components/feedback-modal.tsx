@@ -64,7 +64,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
       if (res.isSuccess) {
         onOpenChange();
         dispatch(fetchUserData());
-        toast.success('Mesajınız uğurla göndərildi', toastOptions);
+        toast.success(t('yourMessageSentSuccesfully'), toastOptions);
       }
     } catch (err) {
       console.log(err);

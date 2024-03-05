@@ -1,5 +1,6 @@
 import { Select, SelectItem } from '@nextui-org/react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 interface IAppHandledSelect {
   name: string;
@@ -36,6 +37,7 @@ function AppHandledSelect({
   size,
   label
 }: IAppHandledSelect) {
+  const { t } = useTranslation();
   return (
     <Controller
       name={name}
@@ -55,7 +57,7 @@ function AppHandledSelect({
           // onSelectionChange={onChange}
           // selectedKeys={value}
           className={className}
-          errorMessage={isInvalid && 'Bu xana daxil edilməlidir'}
+          errorMessage={isInvalid && t('thisFieldMustEntered')}
           {...selectProps}
         >
           {options?.map(z => (

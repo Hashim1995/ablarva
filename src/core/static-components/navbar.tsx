@@ -185,7 +185,7 @@ export default function Navbar() {
             <Tooltip
               className="hidden sm:block"
               placement="bottom"
-              content={'Hazırlanır'}
+              content={t('itIsBeingPrepared')}
             >
               <Button
                 className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
@@ -193,7 +193,7 @@ export default function Navbar() {
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
               >
-                Kataliz
+                {t('kataliz')}
               </Button>
             </Tooltip>
           </ButtonGroup>

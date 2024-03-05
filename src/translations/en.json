@@ -248,6 +248,34 @@
     "awaitedResponseText": "A response is currently awaited.Are you sure you want to go to the new chat ?",
     "package": "package",
     "verification": "Verification",
-    "resetPackageConfirmation": "Your existing package will be reset. Perform the operation are you sure you want to?"
+    "resetPackageConfirmation": "Your existing package will be reset. Perform the operation are you sure you want to?",
+    "textList": [
+      "I'm trying to make a decision 🧐",
+      "The patient dervish achieves his desire 😌",
+      "I'm working, be patient 🛠️",
+      "Haste makes waste ⏳",
+      "Thinking, one moment 🤔",
+      "No pain, no gain 💪",
+      "Dogs bark, but the caravan goes on 🐶🚶‍♂️",
+      "You reap what you sow 🌱➡️🌾",
+      "I'm preparing your answer 💡",
+      "I'm thinking of the best answer to your question 🎯",
+      "I'm searching for information for you 🔍",
+      "Evaluating your query, please wait a moment ⌛",
+      "Please wait, your answer is on its way 📬",
+      "I'm working on your query 🖥️",
+      "A bit more time is needed, it's a complex issue 🧩",
+      "I'm gathering information to give you the best answer 📚",
+      "Clarifying your question, will respond shortly 🔍",
+      "Checking necessary information for your answer 📖",
+      "A little patience, I'll be with you shortly ⏰",
+      "Searching in my database 🌐",
+      "Selecting the most suitable information for your query ✅",
+      "I'm interested in your issue, give me a moment 🤝",
+      "Analyzing to give a precise answer 🔬",
+      "Complex query, investigating thoroughly 🕵️‍♂️",
+      "On the verge of finding the most suitable answer to your question 🔎",
+      "Looking for a solution, will reply soon 🛤️"
+    ]
   }
 }

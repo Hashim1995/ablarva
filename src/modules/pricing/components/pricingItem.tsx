@@ -59,7 +59,7 @@ function PricingItem({
         }}
         className="w-full text-white py-2 rounded-lg text-mda mt-4 "
       >
-        {packageId === item.packageId ? 'Paketi yenilə' : t('joinNow')}
+        {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
       </Button>
     </Card>
   );

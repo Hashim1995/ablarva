@@ -30,10 +30,10 @@ function Bottom() {
   const { t } = useTranslation();
 
   const columns: IColumn[] = [
-    { name: 'ƏMƏLİYYAT KODU', uid: 'orderId' },
-    { name: 'MƏBLƏĞ', uid: 'amount' },
-    { name: 'ƏMƏLİYYAT TARİXİ', uid: 'transactionDate' },
-    { name: 'STATUS', uid: 'status' }
+    { name: t('operationCode')?.toLocaleUpperCase(), uid: 'orderId' },
+    { name: t('amount')?.toLocaleUpperCase(), uid: 'amount' },
+    { name: t('operationDate')?.toLocaleUpperCase(), uid: 'transactionDate' },
+    { name: t('status')?.toLocaleUpperCase(), uid: 'status' }
   ];
 
   const getTransactions = useCallback(async () => {

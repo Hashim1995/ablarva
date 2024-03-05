@@ -9,6 +9,7 @@ import { Avatar, Button } from '@nextui-org/react';
 
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsHandThumbsDownFill } from 'react-icons/bs';
 import { FaCopy } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -86,7 +87,7 @@ function ChatBubble({
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
   const { user } = useSelector((state: RootState) => state.user);
-
+  const { t } = useTranslation();
   const feedbackBubble = async (type: number) => {
     const payload: IFeedbackPayload = {
       bubbleId,
@@ -184,7 +185,10 @@ function ChatBubble({
               onClick={() => {
                 navigator.clipboard.writeText(message).then(
                   () => {
-                    toast.success('Məlumat uğurla kopyalandı', toastOptions);
+                    toast.success(
+                      t('dataCopiedToClipboardSuccessFully'),
+                      toastOptions
+                    );
                   },
                   err => {
                     console.error('Async: Could not copy text: ', err);

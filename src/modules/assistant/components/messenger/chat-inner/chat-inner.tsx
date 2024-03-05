@@ -101,7 +101,7 @@ function ChatInner() {
       onOpen();
     } else if (!currentAssistantModel?.assistantId) {
       toast.error(
-        'Assistanlar ilə danışmaq üçün hərhansısa bir assistan seçimi etməlisiz',
+        t('youShouldSelectOneAssistantForConversation'),
         toastOptions
       );
     } else {
@@ -231,7 +231,7 @@ function ChatInner() {
           {hasError && (
             <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">
-                Beynim yandı
+                {t('myBrainBroken')}
               </Chip>
               <Button
                 onClick={() => {

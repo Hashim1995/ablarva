@@ -18,6 +18,7 @@ import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 import { setCurrentAssistantLanguage } from '@/redux/assistant/assistant-slice';
 import { useDispatch, useSelector } from 'react-redux';
 import { IAssistantChatForm } from '@/modules/assistant/types';
+import { useTranslation } from 'react-i18next';
 import { RootState } from '@/redux/store';
 import audioUrl from './mech-keyboard-02-102918.mp3';
 
@@ -36,6 +37,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
   const dispatch = useDispatch();
 
+  const { t } = useTranslation();
+
   const typewriterSound = new Audio(audioUrl);
   const matches = useMediaQuery('(min-width: 468px)');
   const { currentAssistantLanguage } = useSelector(
@@ -45,17 +48,17 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   const currentLanguageText = (id: string) => {
     switch (id) {
       case '0':
-        return 'Qlobal';
+        return t('asGlobalLang');
       case '1':
-        return 'Azərbaycan dilində';
+        return t('asAzerbaijaniLang');
       case '2':
-        return 'Türk dilində';
+        return t('asTurkishLang');
       case '3':
-        return 'İngilis dilində';
+        return t('asEnglishLang');
       case '4':
-        return 'Rus dilində';
+        return t('asRussianLang');
       default:
-        return 'Azərbaycan dilində';
+        return t('asAzerbaijaniLang');
     }
   };
   const currentLanguageFlag = (id: string) => {
@@ -126,8 +129,9 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           <div className="flex rounded-0 shadow-none   items-center justify-between">
             {
               <Chip className="sm:flex hidden bg-transparent text-[gray] text-sm">
-                Aİ-ZADƏ sizə {currentLanguageText(currentAssistantLanguage)}{' '}
-                cavab verəcək
+                {t('aiZadeToYou')}{' '}
+                {currentLanguageText(currentAssistantLanguage)}{' '}
+                {t('willAnswer')}
               </Chip>
             }
 

@@ -126,7 +126,7 @@ function MessengerHeader() {
           </Tabs>
 
           {!waitingForResponse ? (
-            <Tooltip placement="top-start" offset={12} content={'Yeni Çat'}>
+            <Tooltip placement="top-start" offset={12} content={t('newChat')}>
               <Button
                 size="sm"
                 isIconOnly

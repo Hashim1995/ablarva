@@ -59,7 +59,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
         });
       if (res.isSuccess) {
         onOpenChange();
-        toast.success('Email ünvanınız uğurla təsdiqləndi', toastOptions);
+        toast.success(t('yourEmailApprovedSuccessfully'), toastOptions);
         dispatch(fetchUserData());
       }
     } catch (err) {
