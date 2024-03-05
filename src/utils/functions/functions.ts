@@ -6,8 +6,7 @@
 import { selectOption } from '@/models/common';
 import { IHTTPSParams } from '@/services/adapter-config/config';
 // import { noTxt, sureModalDescription, sureModalTitle, yesTxt } from '../constants/texts';
-import i18next from 'i18next'
-
+import i18next from 'i18next';
 
 const userToken: any = localStorage.getItem('userToken');
 
@@ -64,25 +63,25 @@ function formatDateToWords(date: Date | string): string {
 
   if (diff < minute) {
     const seconds = Math.floor(diff / 1000);
-    return `${seconds}  ${i18next.t("second")} ${i18next.t("ago")}`;
+    return `${seconds}  ${i18next.t('second')} ${i18next.t('ago')}`;
   } else if (diff < hour) {
     const minutes = Math.floor(diff / minute);
-    return `${minutes}  ${i18next.t("minute")} ${i18next.t("ago")}`;
+    return `${minutes}  ${i18next.t('minute')} ${i18next.t('ago')}`;
   } else if (diff < day) {
     const hours = Math.floor(diff / hour);
-    return `${hours}  ${i18next.t("hour")} ${i18next.t("ago")}`;
+    return `${hours}  ${i18next.t('hour')} ${i18next.t('ago')}`;
   } else if (diff < week) {
     const days = Math.floor(diff / day);
-    return `${days}  ${i18next.t("day")} ${i18next.t("ago")}`;
+    return `${days}  ${i18next.t('day')} ${i18next.t('ago')}`;
   } else if (diff < month) {
     const weeks = Math.floor(diff / week);
-    return `${weeks}  ${i18next.t("week")} ${i18next.t("ago")}`;
+    return `${weeks}  ${i18next.t('week')} ${i18next.t('ago')}`;
   } else if (diff < year) {
     const months = Math.floor(diff / month);
-    return `${months}  ${i18next.t("month")} ${i18next.t("ago")}`;
+    return `${months}  ${i18next.t('month')} ${i18next.t('ago')}`;
   } else {
     const years = Math.floor(diff / year);
-    return `${years}  ${i18next.t("year")} ${i18next.t("ago")}`;
+    return `${years}  ${i18next.t('year')} ${i18next.t('ago')}`;
   }
 }
 

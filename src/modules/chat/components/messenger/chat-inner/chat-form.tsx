@@ -93,7 +93,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           color="primary"
           rows={3}
           maxRows={3}
-          placeholder="Type a message... 💬👨🏻‍💻"
+          placeholder={t('typeAMessage')}
           classNames={textAreaConfig}
           className="flex-1 px-4  !border-none text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
           onKeyDown={e => {
@@ -129,8 +129,9 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           <div className="flex rounded-0 shadow-none   items-center justify-between">
             {
               <Chip className="sm:flex hidden bg-transparent text-[gray] text-sm">
-                {t('aiZadeToYou')} {currentLanguageText(currentChatLanguage)}
-                {t('willAnswer')}
+                {t('willAnswer', {
+                  dynamicValue: currentLanguageText(currentChatLanguage)
+                })}
               </Chip>
             }
 

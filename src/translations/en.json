@@ -10,6 +10,8 @@
     "logOut": "Log Out",
     "cabinet": "Personal Cabinet",
     "account": "Account",
+    "placeholderDynamic": "Enter {{dynamicValue}}",
+    "placeholderSelectDynamic": "Select {{dynamicValue}}",
     "forgetPassword": "Forgot Password",
     "oldPassword": "Old Password",
     "emailVerify": "Verify your email address to use the free plan or to purchase a Premium package",
@@ -295,7 +297,7 @@
     "asTurkishLang": "In Turkish",
     "asEnglishLang": "In English",
     "asRussianLang": "In Russian",
-    "willAnswer": "will answer",
+    "willAnswer": "Ai-zade will  answer in {{dynamicValue}} language",
     "youShouldSelectOneAssistantForConversation": "You must select one assistant for the conversation",
     "dataCopiedToClipboardSuccessfully": "Data successfully copied to clipboard",
     "accountDataUpdatedSuccessfully": "Your account information was successfully updated",
@@ -323,10 +325,11 @@
       "November",
       "December"
     ],
-    "pick": "pick",
+    "pick": "select",
     "fieldShouldContainNumbers": "field can only contain numbers",
     "xFieldMustBeEntered": "field must be entered",
     "xfieldShouldContainAtLeastSymbol": "field should contain at least {{dynamicValue}} symbols",
-    "xfieldShouldContainMaxSymbol": "field should contain a maximum of {{dynamicValue}} symbols"
+    "xfieldShouldContainMaxSymbol": "field should contain a maximum of {{dynamicValue}} symbols",
+    "typeAMessage": "Type a message... 💬👨🏻‍💻"
   }
 }

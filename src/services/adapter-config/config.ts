@@ -3,7 +3,7 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig
 } from 'axios';
-import i18next from 'i18next'
+import i18next from 'i18next';
 
 import { selectOption } from '@/models/common';
 import { HttpError } from './http-error';
@@ -17,9 +17,9 @@ const axiosErrorHandler = (error: unknown) => {
     if (error?.response?.data?.errors?.length) {
       return error.response.data.errors;
     }
-    return i18next.t("errorOccurred");
+    return i18next.t('errorOccurred');
   }
-  return i18next.t("errorOccurred");
+  return i18next.t('errorOccurred');
 };
 
 const axiosErrorHandlerRaw = (error: any) => {

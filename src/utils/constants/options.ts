@@ -4,23 +4,17 @@
 /* eslint-disable no-restricted-globals */
 import { selectOption } from '@/models/common';
 import { Code } from '@/components/layout/markdown-code';
-import i18next from 'i18next'
+import i18next from 'i18next';
 import { MarkdownToJSX } from 'markdown-to-jsx';
-
-
-
-
 
 const genderOptions: selectOption[] = [
   {
     value: 1,
     label: i18next.t('male')
-
   },
   {
     value: 2,
     label: i18next.t('female')
-
   }
 ];
 
@@ -198,8 +192,7 @@ function createYearsArray(startYear = 1940, endYear = 2023) {
 }
 
 function getMonthsArray() {
-  const months: string[] = i18next.t('months', { returnObjects: true })
-
+  const months: string[] = i18next.t('months', { returnObjects: true });
 
   return months.map((month, index) => ({
     value: (index + 1)?.toString(),
@@ -211,10 +204,4 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-export {
-  genderOptions,
-  daysList,
-  yearsList,
-  monthsList,
-  markdownOptions
-};
+export { genderOptions, daysList, yearsList, monthsList, markdownOptions };

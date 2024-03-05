@@ -148,22 +148,24 @@ function Sessions() {
                     <div className="flex flex-1 justify-between items-center">
                       <div className="2xl:px-4 px-2">
                         <div className="tracking-wide text-[14px] text-white ">
-                          <span className=" text-gray-400">{t('system')}:</span>
+                          <span className=" text-gray-400">
+                            {t('system')}:{' '}
+                          </span>
                           {item.platformName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
                           <span className=" text-gray-400">
-                            {t('browser')}:
+                            {t('browser')}:{' '}
                           </span>
                           {item.browserName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
-                          <span className=" text-gray-400">{t('ip')}: </span>
+                          <span className=" text-gray-400">{t('ip')} : </span>
                           {item.ipAddress || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
                           <span className=" text-gray-400">
-                            {t('loginDate')}:
+                            {t('loginDate')}:{' '}
                           </span>
                           {item.loginDate || t('empty')}
                         </div>

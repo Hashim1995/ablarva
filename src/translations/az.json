@@ -11,6 +11,8 @@
     "logOut": "Çıxış",
     "cabinet": "Şəxsi kabinet",
     "account": "Hesab",
+    "placeholderDynamic": "{{dynamicValue}} xanaını daxil edin",
+    "placeholderSelectDynamic": "{{dynamicValue}} xanasını seçin",
     "forgetPassword": "Şifrəmi unutdum",
     "oldPassword": "Köhnə şifrə",
     "emailVerify": "Pulsuz plan işlətmək vəya Premium paket almaq üçün email adresinizi təsdiqləyin",
@@ -295,7 +297,7 @@
     "asTurkishLang": "Türk dilində",
     "asEnglishLang": "İngilis dilində",
     "asRussianLang": "Rus dilində",
-    "willAnswer": "cavab verəcək",
+    "willAnswer": "Ai-zade sizə {{dynamicValue}} - dilində cavab verəcək",
     "youShouldSelectOneAssistantForConversation": "Assistanlar ilə danışmaq üçün hərhansısa bir assistan seçimi etməlisiz",
     "dataCopiedToClipboardSuccessFully": "Məlumat uğurla kopyalandı",
     "accountDataUpdatedSuccessFully": "Hesab məlumatlarınız uğurla yeniləndi",
@@ -327,6 +329,7 @@
     "fieldShouldContainNumbers": "xanası ancaq rəqəm ola bilər",
     "xFieldMustBeEntered": "xanasının daxil edilməsi məcburidir",
     "xfieldShouldContainAtLeastSymbol": "xanası ən azı {{dynamicValue}} simvol olmalıdır ",
-    "xfieldShouldContainMaxSymbol": "xanası ən çox {{dynamicValue}} simvol olmalıdır "
+    "xfieldShouldContainMaxSymbol": "xanası ən çox {{dynamicValue}} simvol olmalıdır ",
+    "typeAMessage": "Bir şeylər soruş... 💬👨🏻‍💻"
   }
 }
