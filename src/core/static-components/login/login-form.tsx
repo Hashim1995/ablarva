@@ -57,7 +57,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
   };
   return (
     <>
-      <div className="p-4 py-6 text-white bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+      <div className="p-4 py-6 text-white bg-black/30 backdrop-blur-md md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
       <div className="p-4  border-l-1 md:p-3 md:flex-1 flex items-center flex-col	justify-around rounded-lg md:rounded-none">

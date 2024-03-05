@@ -4,7 +4,7 @@ import Sessions from './sessions/sessions';
 
 function Settings() {
   return (
-    <div className="grid gradient-bg grid-cols-12 grid-rows-6 gap-0 fixed-height">
+    <div className="grid  grid-cols-12 grid-rows-6 gap-0 fixed-height">
       <div className="col-span-8 row-span-2 ">
         <Account />
       </div>

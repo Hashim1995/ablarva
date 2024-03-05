@@ -82,7 +82,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
       })}
       className="    px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
     >
-      <div className="h-full w-full bg-darkBlack   rounded-xl">
+      <div className="h-full w-full bg-black/30 backdrop-blur-md   rounded-xl">
         <Textarea
           {...register('message', { required: true })}
           variant="bordered"

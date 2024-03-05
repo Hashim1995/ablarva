@@ -30,15 +30,15 @@ export default {
       themes: {
         light: {
           colors: {
-            black: '#020008',
-            darkBlack: '#020008',
+            black: '#0F0F0F',
+            darkBlack: '#0F0F0F',
             custom: 'red'
           }
         },
         dark: {
           colors: {
-            black: '#020008',
-            darkBlack: '#020008',
+            black: '#0F0F0F',
+            darkBlack: '#0F0F0F',
             custom: 'red'
           }
         }

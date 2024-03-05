@@ -121,7 +121,7 @@ function Bottom() {
           <TableHeader className="bg-transparent shadow-none" columns={columns}>
             {column => (
               <TableColumn
-                className="bg-black text-white shadow-none"
+                className="bg-black/30 backdrop-blur-md text-white shadow-none"
                 key={column.uid}
               >
                 {column.name}

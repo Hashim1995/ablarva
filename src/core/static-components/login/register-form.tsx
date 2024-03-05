@@ -89,7 +89,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
   return (
     <>
-      <div className="p-4 py-6 bg-black-500 md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
+      <div className="p-4 py-6 bg-black/30 backdrop-blur-md md:w-80 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
         <LoginLeftBar />
       </div>
 

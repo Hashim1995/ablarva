@@ -8,7 +8,7 @@ function Layout() {
       style={{
         borderRadius: '0 !important'
       }}
-      className="h-full rounded-none  shadow-none gradient-bg"
+      className="h-full rounded-none  shadow-none bg-transparent "
     >
       <MessengerHeader />
 
