@@ -113,12 +113,12 @@ function MessengerHeader() {
           >
             <Tab
               key="1"
-              title="Basic"
+              title={t('ordinary')}
               isDisabled={Boolean(searchParams.get('threadID'))}
             />
             <Tab
               key="2"
-              title="Premium"
+              title={t('premium')}
               isDisabled={
                 Boolean(searchParams.get('threadID')) || premium?.total === 0
               }
