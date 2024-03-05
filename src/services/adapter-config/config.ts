@@ -3,7 +3,8 @@ import axios, {
   AxiosResponse,
   InternalAxiosRequestConfig
 } from 'axios';
-import { dictionary } from '@/utils/constants/dictionary';
+import i18next from 'i18next'
+
 import { selectOption } from '@/models/common';
 import { HttpError } from './http-error';
 import { ErrorHandler } from './error-handler';
@@ -16,9 +17,9 @@ const axiosErrorHandler = (error: unknown) => {
     if (error?.response?.data?.errors?.length) {
       return error.response.data.errors;
     }
-    return dictionary.en.errorOccurred;
+    return i18next.t("errorOccurred");
   }
-  return dictionary.en.errorOccurred;
+  return i18next.t("errorOccurred");
 };
 
 const axiosErrorHandlerRaw = (error: any) => {

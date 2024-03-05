@@ -1,5 +1,5 @@
 import { ILimitItem, IPackageItem } from '@/models/payment';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';

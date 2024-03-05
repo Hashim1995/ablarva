@@ -1,21 +1,9 @@
 /* eslint-disable prefer-destructuring */
-import { dictionary } from './dictionary';
+import i18next from 'i18next'
 
 export const inputPlaceholderText = (t?: string): string =>
-  t ? `${t} daxil edin` : dictionary.en.enter;
+  t ? `${t} ${i18next.t('enter')}` : i18next.t('enter');
 
 export const selectPlaceholderText = (t?: string): string =>
-  t ? `${t} seçin` : dictionary.en.select;
+  t ? `${t} ${i18next.t("pick")}` : i18next.t("pick");
 
-// export const yesTxt: string = dictionary.en.yesTxt;
-// export const searchTxt: string = dictionary.en.searchTxt;
-// export const resetTxt: string = dictionary.en.resetTxt;
-// export const refreshTxt: string = dictionary.en.refreshTxt;
-// export const noTxt: string = dictionary.en.noTxt;
-// export const addBtn: string = dictionary.en.addBtn;
-// export const editBtn: string = dictionary.en.editBtn;
-// export const closeBtn: string = dictionary.en.closeBtn;
-// export const viewImgModalHeader: string = dictionary.en.viewImgModalHeader;
-// export const noDataText: string = dictionary.en.noDataText;
-// export const sureModalTitle: string = dictionary.en.confirmTitle;
-// export const sureModalDescription: string = dictionary.en.confirmDelete;

@@ -3,7 +3,7 @@ import { toastOptions } from '@/configs/global-configs';
 import { IFeedbackPayload } from '@/modules/chat/types';
 import { RootState } from '@/redux/store';
 import { ChatService } from '@/services/chat-services/chat-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 

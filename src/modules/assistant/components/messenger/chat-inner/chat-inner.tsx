@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Button, Chip, useDisclosure } from '@nextui-org/react';
 import { SubmitHandler } from 'react-hook-form';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { TfiFaceSad } from 'react-icons/tfi';
 
 import { BsRecycle } from 'react-icons/bs';

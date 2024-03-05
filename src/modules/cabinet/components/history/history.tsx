@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { PaymentService } from '@/services/payment-services/payment-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import {
   Table,
   TableHeader,

@@ -1,4 +1,3 @@
-// import { dictionary } from '@/utils/constants/dictionary';
 import { useTranslation } from 'react-i18next';
 
 import {

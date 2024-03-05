@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import {
   Modal,
   ModalContent,

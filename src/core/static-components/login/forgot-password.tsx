@@ -4,7 +4,7 @@ import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { AuthService } from '@/services/auth-services/auth-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {

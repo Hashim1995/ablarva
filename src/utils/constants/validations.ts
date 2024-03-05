@@ -1,11 +1,12 @@
-import { dictionary } from './dictionary';
+import i18next from 'i18next'
+
 
 export const onlyNumber = (t?: string): string =>
-  t ? `${t} filed should contain only digits` : dictionary.en.onlyDigitsField;
+  t ? `${t} ${i18next.t("fieldShouldContainNumbers")}` : i18next.t("fieldShouldContainNumbers");
 
 export const inputValidationText = (t?: string): string =>
-  t ? `${t} xanasının daxil edilməsi məcburidir` : dictionary.en.required;
+  t ? `${t} ${(i18next.t("xFieldMustBeEntered"))}` : i18next.t("required");
 export const minLengthCheck = (t: string, l: string): string =>
-  `${t} field should contain at least ${l} characters`;
+  `${t} ${i18next.t("xfieldShouldContainAtLeastSymbol", { dynamicValue: l || 1 })}`;
 export const maxLengthCheck = (t: string, l: string): string =>
-  `${t} field shoud be maximum ${l} characters`;
+  `${t} ${i18next.t("xfieldShouldContainMaxSymbol", { dynamicValue: l || 1 })}`;

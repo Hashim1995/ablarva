@@ -6,7 +6,7 @@ import {
 } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 

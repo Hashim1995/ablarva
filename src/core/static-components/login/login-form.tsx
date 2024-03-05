@@ -9,7 +9,6 @@ import {
 } from '@/services/auth-services/auth-services';
 import { useTranslation } from 'react-i18next';
 
-// import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import { Button, useDisclosure } from '@nextui-org/react';

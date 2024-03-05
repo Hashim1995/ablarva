@@ -7,7 +7,7 @@ import { IGlobalResponseEmpty } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { AppDispatch } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {

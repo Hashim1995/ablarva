@@ -308,6 +308,25 @@
     "loginDate": "Giriş tarixi",
     "system": "Sistem",
     "browser": "Brauzer",
-    "ip": "İP ünvan"
+    "ip": "İP ünvan",
+    "months": [
+      "Yanvar",
+      "Fevral",
+      "Mart",
+      "Aprel",
+      "May",
+      "İyun",
+      "İyul",
+      "Avqust",
+      "Sentyabr",
+      "Oktyabr",
+      "Noyabr",
+      "Dekabr"
+    ],
+    "pick": "seçin",
+    "fieldShouldContainNumbers": "xanası ancaq rəqəm ola bilər",
+    "xFieldMustBeEntered": "xanasının daxil edilməsi məcburidir",
+    "xfieldShouldContainAtLeastSymbol": "xanası ən azı {{dynamicValue}} simvol olmalıdır ",
+    "xfieldShouldContainMaxSymbol": "xanası ən çox {{dynamicValue}} simvol olmalıdır "
   }
 }

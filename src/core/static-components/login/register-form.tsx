@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import AppHandledInput from '@/components/forms/input/handled-input';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import {
   inputPlaceholderText,
   selectPlaceholderText

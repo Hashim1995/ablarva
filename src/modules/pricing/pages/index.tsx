@@ -1,4 +1,3 @@
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   Modal,
   ModalContent,
@@ -35,7 +34,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1">
-                {dictionary?.az?.tariffs}
+                {t('tariffs')}
               </ModalHeader>
               <ModalBody>
                 <div className="flex w-full flex-col">
@@ -47,18 +46,14 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                     }}
                     aria-label="Options"
                   >
-                    <Tab key="chat" title={dictionary?.az?.chat}>
+                    <Tab key="chat" title={t('chat')}>
                       <ChatPricing />
                     </Tab>
-                    <Tab key="assistan" title={dictionary?.az?.assistan}>
+                    <Tab key="assistan" title={t('assistan')}>
                       <AsistanPricing />
                     </Tab>
-                    <Tab
-                      isDisabled
-                      key="kataliz"
-                      title={dictionary?.az?.kataliz}
-                    >
-                      kataliz
+                    <Tab isDisabled key="kataliz" title={t('kataliz')}>
+                      {t('kataliz')}
                     </Tab>
                   </Tabs>
                 </div>
