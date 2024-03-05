@@ -123,7 +123,7 @@ function Sessions() {
   // };
 
   return (
-    <Card className="rounded-lg bg-transparent sm:rounded-2x  h-fulll shadow h-full ">
+    <Card className="bg-transparent   h-fulll !shadow-none !rounded-none h-full ">
       <div className="flex justify-between items-center xl:mb-4  p-3">
         <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
           <p>

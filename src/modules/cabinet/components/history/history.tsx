@@ -89,7 +89,7 @@ function Bottom() {
   };
 
   return (
-    <Card className="h-full    rounded-lg relative bg-transparent sm:rounded-2xl">
+    <Card className="h-full     relative bg-transparent !shadow-none !rounded-none">
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>

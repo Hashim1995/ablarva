@@ -177,7 +177,7 @@ export default function Navbar() {
               }}
               startContent={<BsYelp size={17} />}
             >
-              {t('assistan')}
+              {t('assistant')}
             </Button>
             <Tooltip
               className="hidden sm:block"
@@ -186,11 +186,11 @@ export default function Navbar() {
             >
               <Button
                 className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
-                  'Kataliz'
+                  'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
               >
-                {t('kataliz')}
+                {t('catalyst')}
               </Button>
             </Tooltip>
           </ButtonGroup>

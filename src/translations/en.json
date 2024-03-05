@@ -330,6 +330,7 @@
     "xFieldMustBeEntered": "field must be entered",
     "xfieldShouldContainAtLeastSymbol": "field should contain at least {{dynamicValue}} symbols",
     "xfieldShouldContainMaxSymbol": "field should contain a maximum of {{dynamicValue}} symbols",
-    "typeAMessage": "Type a message... 💬👨🏻‍💻"
+    "typeAMessage": "Type a message... 💬👨🏻‍💻",
+    "paymentHistory": "Payment history"
   }
 }

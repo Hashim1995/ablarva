@@ -52,8 +52,8 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                     <Tab key="assistan" title={t('assistan')}>
                       <AsistanPricing />
                     </Tab>
-                    <Tab isDisabled key="kataliz" title={t('kataliz')}>
-                      {t('kataliz')}
+                    <Tab isDisabled key="catalyst" title={t('catalyst')}>
+                      {t('catalyst')}
                     </Tab>
                   </Tabs>
                 </div>

@@ -1,7 +1,7 @@
 {
   "translation": {
     "simpleChat": "Sadə çat",
-    "assistan": "Assistan",
+    "assistant": "Assistan",
     "previous": "Əvvəlki",
     "firstName": "Ad",
     "lastName": "Soyad",
@@ -34,7 +34,7 @@
     "report": "Hesabat",
     "users": "İstifadəçilər",
     "contract": "Müqavilə",
-    "kataliz": "Kataliz",
+    "catalyst": "Kataliz",
     "attachment": "Əlavə",
     "invoice": "Faktura",
     "act": "Akt",
@@ -330,6 +330,7 @@
     "xFieldMustBeEntered": "xanasının daxil edilməsi məcburidir",
     "xfieldShouldContainAtLeastSymbol": "xanası ən azı {{dynamicValue}} simvol olmalıdır ",
     "xfieldShouldContainMaxSymbol": "xanası ən çox {{dynamicValue}} simvol olmalıdır ",
-    "typeAMessage": "Bir şeylər soruş... 💬👨🏻‍💻"
+    "typeAMessage": "Bir şeylər soruş... 💬👨🏻‍💻",
+    "paymentHistory": "Ödəniş tarixçəsi"
   }
 }

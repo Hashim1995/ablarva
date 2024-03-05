@@ -8,10 +8,10 @@ function Settings() {
       <div className="col-span-8 row-span-2 ">
         <Account />
       </div>
-      <div className="col-span-8 row-span-4 col-start-1 row-start-3 border-t-1">
+      <div className="col-span-8 row-span-4 col-start-1 row-start-3 border-t-2 border-default">
         <History />
       </div>
-      <div className="col-span-4 row-span-6 col-start-9 row-start-1 border-l-1">
+      <div className="col-span-4 row-span-6 col-start-9 row-start-1 border-l-2  border-default">
         <Sessions />
       </div>
     </div>
