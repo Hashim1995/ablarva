@@ -36,7 +36,6 @@ import {
   BsQuestionCircle
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { dictionary } from '@/utils/constants/dictionary';
 import { useState, useEffect, useRef } from 'react';
 import { IMenuItemsNavbar, LayoutLanguage } from '@/models/common';
 import { useDispatch, useSelector } from 'react-redux';
@@ -56,17 +55,17 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
   const menuItems: IMenuItemsNavbar[] = [
     {
-      label: `${dictionary.az.chat}`,
+      label: t('chat'),
       path: 'chat',
       icon: <BsFillChatLeftDotsFill />
     },
     {
-      label: `${dictionary.az.tariffs}`,
+      label: t('tariffs'),
       path: 'pricing',
       icon: <BsFillFilterSquareFill />
     },
     {
-      label: `${dictionary.az.settings}`,
+      label: t('settings'),
       path: 'settings',
       icon: <BsFillGearFill />
     }
@@ -122,7 +121,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="z-10  bg-black"
+        className="z-10  bg-black/30 backdrop-blur-md"
         maxWidth="full"
         isBlurred={false}
         position="static"
@@ -165,7 +164,6 @@ export default function Navbar() {
               }}
               startContent={<BsFillChatLeftDotsFill size={17} />}
             >
-              {/* {dictionary.az.chat} */}
               {t('simpleChat')}
             </Button>
             <Button
@@ -179,21 +177,20 @@ export default function Navbar() {
               }}
               startContent={<BsYelp size={17} />}
             >
-              {/* {dictionary.az.assistan} */}
-              {t('assistan')}
+              {t('assistant')}
             </Button>
             <Tooltip
               className="hidden sm:block"
               placement="bottom"
-              content={'Hazırlanır'}
+              content={t('itIsBeingPrepared')}
             >
               <Button
                 className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
-                  'Kataliz'
+                  'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
               >
-                Kataliz
+                {t('catalyst')}
               </Button>
             </Tooltip>
           </ButtonGroup>
@@ -315,40 +312,6 @@ export default function Navbar() {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            {/* <Dropdown className="block sm:hidden">
-              <DropdownTrigger>
-                <div>
-                  <Image
-                    src={`https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`}
-                    width={39}
-                    alt="user-image"
-                    className="rounded-full block sm:hidden"
-                  />
-                </div>
-              </DropdownTrigger>
-              <DropdownMenu aria-label="Static Actions">
-                <DropdownItem isReadOnly>
-                  <p className="text-xl text-black">
-                    {user
-                      ? `${user.firstName} ${user.lastName}`
-                      : dictionary.az.empty}
-                  </p>
-                  <p className="text-sm text-black">
-                    {user.email || dictionary.az.empty}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  onClick={() => {
-                    localStorage.removeItem('userToken');
-                    navigate('/login');
-                  }}
-                  key="logout"
-                  className="pt-0"
-                >
-                  <p className="text-sm">{dictionary.az.logOut}</p>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown> */}
           </NavbarItem>
         </NavbarContent>
         <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">

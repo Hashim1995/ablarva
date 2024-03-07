@@ -437,6 +437,22 @@ input[type='number'] {
 .gradient-bg {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   background-size: 800% 800%;
+
+  // background-image: linear-gradient(
+  //   to left top,
+  //   #6c1bdb,
+  //   #5327b7,
+  //   #412a93,
+  //   #33286e,
+  //   #29244a,
+  //   #252142,
+  //   #211d3b,
+  //   #1d1a33,
+  //   #1c1844,
+  //   #1b1555,
+  //   #190f66,
+  //   #1a0376
+  // );
 }
 
 @-webkit-keyframes AnimationName {

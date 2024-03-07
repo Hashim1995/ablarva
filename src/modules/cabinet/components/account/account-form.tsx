@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/no-unstable-nested-components */
-import { Controller, useForm } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { inputValidationText } from '@/utils/constants/validations';
-import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
@@ -25,7 +23,6 @@ import { AuthService } from '@/services/auth-services/auth-services';
 import { IGlobalResponseEmpty, setState } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
 import { convertDDMMYYYtoISOString } from '@/utils/functions/functions';
-import { Select, SelectItem } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import { IAccountForm } from '../../types';
 
@@ -68,7 +65,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
 
       if (res.isSuccess) {
         dispatch(fetchUserData());
-        toast.success('Hesab məlumatlarınız uğurla yeniləndi', toastOptions);
+        toast.success(t('accountDataUpdatedSuccessFully'), toastOptions);
       }
     } catch (err) {
       console.log(err);
@@ -134,13 +131,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 }}
                 isInvalid={Boolean(errors.day?.message)}
                 control={control}
-                label={'Gün'}
+                label={t('day')}
                 size="sm"
                 required
                 rules={{
                   required: {
                     value: true,
-                    message: inputValidationText('Gün')
+                    message: inputValidationText(t('day'))
                   }
                 }}
                 options={daysList}
@@ -157,13 +154,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 }}
                 isInvalid={Boolean(errors.month?.message)}
                 control={control}
-                label={'Ay'}
+                label={t('month')}
                 size="sm"
                 required
                 rules={{
                   required: {
                     value: true,
-                    message: inputValidationText('Ay')
+                    message: inputValidationText(t('month'))
                   }
                 }}
                 options={monthsList}
@@ -180,13 +177,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
                 }}
                 isInvalid={Boolean(errors.year?.message)}
                 control={control}
-                label={'İl'}
+                label={t('year')}
                 size="sm"
                 required
                 rules={{
                   required: {
                     value: true,
-                    message: inputValidationText('İl')
+                    message: inputValidationText(t('year'))
                   }
                 }}
                 options={yearsList}

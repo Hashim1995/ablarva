@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader
 } from '@nextui-org/react';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { useTranslation } from 'react-i18next';
 
 interface IPricingModal {

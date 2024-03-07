@@ -1,7 +1,7 @@
 import dayjs from 'dayjs';
 import { useCallback, useEffect, useState } from 'react';
 import { PaymentService } from '@/services/payment-services/payment-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import {
   Table,
   TableHeader,
@@ -30,10 +30,10 @@ function Bottom() {
   const { t } = useTranslation();
 
   const columns: IColumn[] = [
-    { name: 'ƏMƏLİYYAT KODU', uid: 'orderId' },
-    { name: 'MƏBLƏĞ', uid: 'amount' },
-    { name: 'ƏMƏLİYYAT TARİXİ', uid: 'transactionDate' },
-    { name: 'STATUS', uid: 'status' }
+    { name: t('operationCode')?.toLocaleUpperCase(), uid: 'orderId' },
+    { name: t('amount')?.toLocaleUpperCase(), uid: 'amount' },
+    { name: t('operationDate')?.toLocaleUpperCase(), uid: 'transactionDate' },
+    { name: t('status')?.toLocaleUpperCase(), uid: 'status' }
   ];
 
   const getTransactions = useCallback(async () => {
@@ -89,7 +89,7 @@ function Bottom() {
   };
 
   return (
-    <Card className="h-full    rounded-lg relative bg-transparent sm:rounded-2xl">
+    <Card className="h-full     relative bg-transparent !shadow-none !rounded-none">
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
@@ -121,7 +121,7 @@ function Bottom() {
           <TableHeader className="bg-transparent shadow-none" columns={columns}>
             {column => (
               <TableColumn
-                className="bg-black text-white shadow-none"
+                className="bg-black/30 backdrop-blur-md text-white shadow-none"
                 key={column.uid}
               >
                 {column.name}

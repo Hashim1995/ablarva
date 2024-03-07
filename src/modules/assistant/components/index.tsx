@@ -12,10 +12,13 @@ function Chat() {
   );
 
   return (
-    <div className="gradient-bg fixed-height   ">
+    <div className=" fixed-height   ">
       <div className="flex fixed-height relative">
         <div className=" w-full fixed-height">
-          <Drawer className="bg-black  z-50" isOpen={assistantsDrawer}>
+          <Drawer
+            className="bg-black/30 backdrop-blur-md  z-50"
+            isOpen={assistantsDrawer}
+          >
             <AsistantCardList />
           </Drawer>
           <Layout key={resetAssistantInner} />

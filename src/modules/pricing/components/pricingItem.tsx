@@ -1,5 +1,5 @@
 import { ILimitItem, IPackageItem } from '@/models/payment';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
 import { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -59,7 +59,7 @@ function PricingItem({
         }}
         className="w-full text-white py-2 rounded-lg text-mda mt-4 "
       >
-        {packageId === item.packageId ? 'Paketi yenilə' : t('joinNow')}
+        {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
       </Button>
     </Card>
   );

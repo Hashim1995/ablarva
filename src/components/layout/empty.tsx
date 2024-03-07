@@ -1,5 +1,5 @@
 import { useTranslation } from 'react-i18next';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { BsDatabaseSlash } from 'react-icons/bs';
 
 interface IEmpty {
