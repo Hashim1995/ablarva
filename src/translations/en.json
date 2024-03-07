@@ -331,6 +331,10 @@
     "xfieldShouldContainAtLeastSymbol": "field should contain at least {{dynamicValue}} symbols",
     "xfieldShouldContainMaxSymbol": "field should contain a maximum of {{dynamicValue}} symbols",
     "typeAMessage": "Type a message... 💬👨🏻‍💻",
-    "paymentHistory": "Payment history"
+    "paymentHistory": "Payment history",
+    "createNewAccount": "Create new account",
+    "loginAndDiscover": "Login and discover our AI assistans",
+    "dontYouHaveAccount": "Don't you have an account?",
+    "doYouHaveAccount": "Do you have account?"
   }
 }

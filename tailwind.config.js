@@ -18,6 +18,17 @@ export default {
       xl: '16px',
       '2xl': '18px',
       '3xl': '20px'
+    },
+    extend: {
+      animation: {
+        border: 'border 4s ease infinite'
+      },
+      keyframes: {
+        border: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' }
+        }
+      }
     }
   },
   darkMode: 'class',
