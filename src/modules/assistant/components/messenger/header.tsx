@@ -82,7 +82,7 @@ function MessengerHeader() {
                     label: ' text-[11px]  text-white pr-2',
                     value: ' text-[11px] text-white'
                   }}
-                  label={'premiumPackage'}
+                  label={t('premiumPackage')}
                   value={premiumAssistant?.remainder}
                   formatOptions={{}}
                   showValueLabel

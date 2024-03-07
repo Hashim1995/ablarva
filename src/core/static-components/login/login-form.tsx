@@ -75,7 +75,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                 onClick={handleFlip}
                 className="font-normal tracking-widest   text-sm me-1"
               >
-                {'dontYouHaveAccount'}
+                {t('dontYouHaveAccount')}
               </span>
               <span
                 className=" text-blue-500 text-sm    cursor-pointer"

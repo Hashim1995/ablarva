@@ -137,7 +137,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 isInvalid={Boolean(errors.email?.message)}
                 errors={errors}
                 size="sm"
-                className=" w-72"
+                className=" w-96"
                 rules={{
                   required: {
                     value: true,
@@ -157,7 +157,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   id: 'firstName'
                 }}
                 type="text"
-                className="w-72"
+                className="w-96"
                 control={control}
                 isInvalid={Boolean(errors.firstName?.message)}
                 errors={errors}
@@ -178,7 +178,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 }}
                 type="text"
                 control={control}
-                className="w-72"
+                className="w-96"
                 isInvalid={Boolean(errors.lastName?.message)}
                 errors={errors}
                 size="sm"
@@ -283,7 +283,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               <AppHandledInput
                 name="password"
                 control={control}
-                className="w-72"
+                className="w-96"
                 isInvalid={Boolean(errors.password?.message)}
                 errors={errors}
                 onChangeApp={() => {
@@ -352,7 +352,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 name="confirmPassword"
                 control={control}
                 size="sm"
-                className="w-72"
+                className="w-96"
                 isInvalid={Boolean(errors.confirmPassword?.message)}
                 errors={errors}
                 onChangeApp={() => {
