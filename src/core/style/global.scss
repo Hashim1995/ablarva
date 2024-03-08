@@ -64,6 +64,16 @@ body::-webkit-scrollbar-thumb,
   -ms-overflow-style: none !important; /* IE + Edge */
   scrollbar-width: none !important;
 }
+.scrollable-content {
+  overflow-y: auto; /* This will allow individual sections to scroll */
+}
+
+.fixed-height-scroll {
+  min-height: calc(
+    100vh - 64px
+  ); /* Adjust to viewport height minus the navbar */
+  overflow-y: auto; /* Allow scrolling within the container */
+}
 
 // .componentsScrollBar::-webkit-scrollbar {
 //   -webkit-appearance: none;

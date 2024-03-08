@@ -88,7 +88,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     setValue('gender', String(user.gender));
   }, [user]);
   return (
-    <div className="flex-1 remove-scrollbar flex items-center rounded-lg px-5 py-5 xl:p-5">
+    <div className="flex-1 remove-scrollbar overflow-y-auto flex items-center rounded-lg px-5 py-5 xl:p-5">
       <form
         id="account-form"
         onSubmit={handleSubmit(onSubmit)}

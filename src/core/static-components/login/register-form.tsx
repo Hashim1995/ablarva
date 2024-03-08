@@ -118,7 +118,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                 aria-hidden
                 onClick={handleFlip}
               >
-                {t('register')}
+                {t('login')}
               </span>
             </span>
           </div>

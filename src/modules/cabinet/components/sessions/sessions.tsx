@@ -124,13 +124,14 @@ function Sessions() {
 
   return (
     <Card className="bg-transparent   h-fulll !shadow-none !rounded-none h-full ">
-      <div className="flex justify-between items-center xl:mb-4  p-3">
-        <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
+      <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center  p-2 sm:p-3">
+        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
             {t('active')} {t('sessions')}
           </p>
         </div>
       </div>
+
       <div className=" rounded-lg  remove-scrollbar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
           <div>

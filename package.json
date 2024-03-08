@@ -22,6 +22,7 @@
   "dependencies": {
     "@microsoft/signalr": "^8.0.0",
     "@nextui-org/react": "^2.2.9",
+    "@react-stately/data": "^3.11.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react-redux": "~7.1.25",

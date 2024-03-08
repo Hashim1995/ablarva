@@ -1,8 +1,6 @@
-import dayjs from 'dayjs';
-import { useCallback, useEffect, useState } from 'react';
-import { PaymentService } from '@/services/payment-services/payment-services';
-
+import React, { useState } from 'react';
 import {
+  Card,
   Table,
   TableHeader,
   TableColumn,
@@ -10,10 +8,12 @@ import {
   TableRow,
   TableCell,
   Chip,
-  Spinner,
-  Pagination,
-  Card
+  Button,
+  Spinner
 } from '@nextui-org/react';
+import { useAsyncList } from '@react-stately/data';
+import { PaymentService } from '@/services/payment-services/payment-services';
+import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { ITransactionsItem } from '../../types';
 
@@ -22,120 +22,114 @@ interface IColumn {
   uid: keyof ITransactionsItem;
 }
 
-function Bottom() {
-  const [page, setPage] = useState<number>(1);
-  const [totalPage, setTotalPage] = useState<number>(0);
-  const [data, setData] = useState<ITransactionsItem[]>([]);
-  const [loading, setLoading] = useState(false);
+export default function Bottom() {
   const { t } = useTranslation();
+  const [isLoading, setIsLoading] = useState(false);
+
+  const list = useAsyncList<ITransactionsItem>({
+    async load({ cursor }) {
+      setIsLoading(true);
+      try {
+        // Convert the cursor to a number, defaulting to 1 if it's not available
+        const page: number = cursor ? parseInt(cursor, 10) : 1;
+        const res = await PaymentService.getInstance().getTransactions([
+          { name: 'page', value: page },
+          { name: 'pageSize', value: 10 }
+        ]);
+        setIsLoading(false);
+
+        return {
+          items: res.data.pagedData,
+          // Convert the new cursor value back to a string
+          cursor: (page + 1).toString()
+        };
+      } catch (err) {
+        console.error(err);
+        setIsLoading(false);
+        return { items: [] };
+      }
+    }
+  });
 
   const columns: IColumn[] = [
-    { name: t('operationCode')?.toLocaleUpperCase(), uid: 'orderId' },
-    { name: t('amount')?.toLocaleUpperCase(), uid: 'amount' },
-    { name: t('operationDate')?.toLocaleUpperCase(), uid: 'transactionDate' },
-    { name: t('status')?.toLocaleUpperCase(), uid: 'status' }
+    { name: t('operationCode').toLocaleUpperCase(), uid: 'orderId' },
+    { name: t('amount').toLocaleUpperCase(), uid: 'amount' },
+    { name: t('operationDate').toLocaleUpperCase(), uid: 'transactionDate' },
+    { name: t('status').toLocaleUpperCase(), uid: 'status' }
   ];
 
-  const getTransactions = useCallback(async () => {
-    setLoading(true);
-    try {
-      const res = await PaymentService.getInstance().getTransactions([
-        { name: 'page', value: page },
-        { name: 'pageSize', value: 7 }
-      ]);
-      if (res.isSuccess) {
-        setData(res.data.pagedData);
-        setTotalPage(res.data.totalPages);
-      }
-    } catch (err) {
-      console.log(err);
-    }
-    setLoading(false);
-  }, [page]);
-
-  useEffect(() => {
-    getTransactions();
-  }, [getTransactions]);
-
-  const renderCell = (z: ITransactionsItem, columnKey: any) => {
-    // Assert columnKey to be keyof ITransactionsItem
-    const key = columnKey as keyof ITransactionsItem;
-    const cellValue = z[key];
-
-    switch (key) {
+  const renderCell = (item: any, columnKey: any) => {
+    const value = item[columnKey];
+    switch (columnKey) {
       case 'orderId':
-        return z.orderId.toString();
+        return value.toString();
       case 'amount':
-        return `${z.amount} AZN`;
-
+        return `${value} AZN`;
       case 'transactionDate':
-        // Format the date as needed
-        return dayjs(new Date(z.transactionDate).toISOString()).format(
-          'DD.MM.YYYY HH:mm'
-        );
+        return dayjs(new Date(value).toISOString()).format('DD.MM.YYYY HH:mm');
       case 'status':
         return (
           <Chip
             className="text-white"
             color="success"
-            aria-label={`Status: ${z.status}`}
+            aria-label={`Status: ${value}`}
           >
             {t('active')}
           </Chip>
         );
       default:
-        return cellValue.toString();
+        return value.toString();
     }
   };
 
   return (
-    <Card className="h-full     relative bg-transparent !shadow-none !rounded-none">
-      <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center mb-4 p-2 sm:p-3">
+    <Card className="h-2/3 relative bg-transparent !shadow-none !rounded-none">
+      {/* Card Header */}
+      <div className="flex justify-between min-h-[48px] sm:min-h-[56px] items-center p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
             {t('account')} {`${t('history')}si`}
           </p>
         </div>
       </div>
-      <div className="settingHistoryTable  px-2">
+
+      {/* Table */}
+      <div className=" px-2">
         <Table
-          removeWrapper
           isHeaderSticky
+          aria-label="Transactions table"
+          className="remove-scrollbar overflow-x-scroll shadow-none overflow-y-hidden"
+          classNames={{
+            base: 'max-h-[520px] overflow-scroll',
+            table: 'min-h-[120px]'
+          }}
           bottomContent={
-            totalPage > 0 ? (
-              <div className="flex w-full justify-center mb-2">
-                <Pagination
-                  size="sm"
-                  showControls
-                  page={page}
-                  total={totalPage}
-                  onChange={(currentPage: number) => setPage(currentPage)}
-                />
+            list.items.length > 0 && (
+              <div className="flex justify-center my-4">
+                <Button onClick={() => list.loadMore()} disabled={isLoading}>
+                  Load More
+                </Button>
               </div>
-            ) : null
+            )
           }
-          aria-label="Example static collection  table "
-          className="remove-scrollbar overflow-x-scroll shadow-none overflow-y-auto min-h-full md:overflow-x-hidden"
-          classNames={{}}
         >
-          <TableHeader className="bg-transparent shadow-none" columns={columns}>
-            {column => (
+          <TableHeader>
+            {columns.map(column => (
               <TableColumn
-                className="bg-black/30 backdrop-blur-md text-white shadow-none"
                 key={column.uid}
+                className="bg-black/30 backdrop-blur-md text-white shadow-none"
               >
                 {column.name}
               </TableColumn>
-            )}
+            ))}
           </TableHeader>
           <TableBody
-            isLoading={loading}
+            items={list.items}
+            isLoading={isLoading}
             loadingContent={<Spinner />}
-            emptyContent={'No rows to display.'}
-            items={data}
           >
             {item => (
-              <TableRow key={item.id}>
+              <TableRow key={item?.id}>
                 {columnKey => (
                   <TableCell className="text-white">
                     {renderCell(item, columnKey)}
@@ -149,5 +143,3 @@ function Bottom() {
     </Card>
   );
 }
-
-export default Bottom;
