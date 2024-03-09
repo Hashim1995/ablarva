@@ -8,7 +8,7 @@ const assistantSlice = createSlice({
     resetAssistantInner: Date.now(),
     waitingForAssistantResponse: false,
     waitingForAssistantThreadLoad: false,
-    assistantsDrawer: false
+    assistantsDrawer: true
   },
   reducers: {
     setCurrentAssistantModel: (state, action: PayloadAction<any>) => {
