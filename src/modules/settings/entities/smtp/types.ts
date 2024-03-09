@@ -1,13 +1,13 @@
-import { IGlobalResponse } from "@/models/common"
+import { IGlobalResponse } from '@/models/common';
 
 interface ISmtpItem {
-    id: string,
-    mailAddress: string,
-    mailPassword: string,
-    hostName: string,
-    port: number
+  id: string;
+  mailAddress: string;
+  mailPassword: string;
+  hostName: string;
+  port: number;
 }
 interface ISmtpResponse extends IGlobalResponse {
-    data: ISmtpItem
+  data: ISmtpItem;
 }
-export type { ISmtpItem, ISmtpResponse }
+export type { ISmtpItem, ISmtpResponse };
