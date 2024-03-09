@@ -7,6 +7,7 @@ import {
 
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
+import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
 import { IAssistantItem } from '../types';
 
@@ -26,12 +27,13 @@ function Home() {
   };
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const { t } = useTranslation();
   useEffect(() => {
     fetchAssistansList();
   }, []);
 
   return (
-    <div className="py-10">
+    <div className="py-10 remove-scrollbar  home-container ">
       <div className="flex justify-center mb-3">
         <h1 className=" text-[3rem] font-medium">
           Unlock the Power of{' '}
@@ -40,7 +42,7 @@ function Home() {
         </h1>
       </div>
 
-      <div className="containerLg fixed-height remove-scrollbar  overflow-y-auto">
+      <div className="containerLg  ">
         {!loading ? (
           <div className="grid grid-cols-2 sm:grid-cols-3 r gap-7 ">
             {assistansList?.map((item: IAssistantItem) => (
@@ -83,7 +85,7 @@ function Home() {
                       navigate('/assistant');
                     }}
                   >
-                    Hire me
+                    {t('hireMe')}
                   </Button>
                 </div>
               </div>

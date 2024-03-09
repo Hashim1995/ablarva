@@ -40,7 +40,9 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
   const onSubmit = async (data: IEmailItemCreate) => {
     setLoading(true);
     const payload: IEmailItemCreate = {
-      emailAddress: data?.emailAddress
+      emailAddress: data?.emailAddress,
+      name: data?.name,
+      surname: data?.surname
     };
     try {
       const res = await SettingsService.getInstance().createEmailItem(payload);
@@ -77,6 +79,35 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
+                  {' '}
+                  <div className="flex flex-col gap-5  ">
+                    <AppHandledInput
+                      name="name"
+                      inputProps={{
+                        id: 'name'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.name?.message)}
+                      errors={errors}
+                      size="sm"
+                      label={inputPlaceholderText(t('name'))}
+                    />
+                  </div>{' '}
+                  <div className="flex flex-col gap-5  ">
+                    <AppHandledInput
+                      name="surname"
+                      inputProps={{
+                        id: 'surname'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.surname?.message)}
+                      errors={errors}
+                      size="sm"
+                      label={inputPlaceholderText(t('surname'))}
+                    />
+                  </div>
                   <div className="flex flex-col gap-5  ">
                     <AppHandledInput
                       name="emailAddress"
@@ -98,7 +129,6 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
                       required
                     />
                   </div>
-
                   <Divider />
                 </form>
               </ModalBody>

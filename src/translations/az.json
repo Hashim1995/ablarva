@@ -344,6 +344,8 @@
     "port": "Port",
     "emailSettings": "Email siyahısı",
     "addAnyData": "Məlumat əlavə et",
-    "editAnyData": "Məlumata düzəliş et"
+    "editAnyData": "Məlumata düzəliş et",
+    "hireMe": "İşə götür",
+    "addMultipleBtn": "Çoxlu formada əlavə et"
   }
 }
