@@ -126,6 +126,8 @@ export default function Email() {
           }
         >
           <TableHeader>
+            <TableColumn>{t('name').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('surname').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('mailAddress').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('createdAt').toLocaleUpperCase()}</TableColumn>
             <TableColumn className=" flex items-center justify-end">
@@ -139,6 +141,9 @@ export default function Email() {
           >
             {item => (
               <TableRow key={item?.id}>
+                <TableCell>{item?.name}</TableCell>
+                <TableCell>{item?.surname}</TableCell>
+
                 <TableCell>{item?.emailAddress}</TableCell>
                 <TableCell>
                   {dayjs.utc(item?.createdAt).format('DD.MM.YYYY')}
