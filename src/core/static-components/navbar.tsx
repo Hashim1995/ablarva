@@ -30,10 +30,10 @@ import {
   BsArrowRightCircle,
   BsFillGearFill,
   BsFillFilterSquareFill,
-  BsRobot,
   BsEnvelope,
   BsYelp,
-  BsQuestionCircle
+  BsQuestionCircle,
+  BsGear
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
@@ -48,6 +48,7 @@ import { RootState } from '@/redux/store';
 import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
+import logo from '../../assets/images/aizadə.png';
 
 export default function Navbar() {
   const { t, i18n } = useTranslation();
@@ -147,7 +148,7 @@ export default function Navbar() {
             aria-hidden
           >
             <NavbarBrand>
-              <BsRobot color="white" size={48} />
+              <img src={logo} className="h-[48px] w-[48px]" alt="" />
             </NavbarBrand>
           </div>
         </NavbarContent>
@@ -173,7 +174,7 @@ export default function Navbar() {
                   : ''
               }`}
               onClick={() => {
-                navigate('/assistant');
+                navigate('/assistant-home');
               }}
               startContent={<BsYelp size={17} />}
             >
@@ -296,6 +297,17 @@ export default function Navbar() {
                 >
                   <p className="flex items-center  m-0 gap-2">
                     <AiOutlineUser /> {t('cabinet')}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
+                  onClick={() => {
+                    navigate('/settings');
+                  }}
+                  key="settings"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <BsGear /> {t('settings')}
                   </p>
                 </DropdownItem>
                 <DropdownItem

@@ -22,6 +22,7 @@
   "dependencies": {
     "@microsoft/signalr": "^8.0.0",
     "@nextui-org/react": "^2.2.9",
+    "@react-stately/data": "^3.11.2",
     "@reduxjs/toolkit": "^1.9.7",
     "@tailwindcss/line-clamp": "^0.4.4",
     "@types/react-redux": "~7.1.25",
@@ -44,6 +45,7 @@
     "react-hook-form": "~7.45.2",
     "react-i18next": "^14.0.5",
     "react-icons": "~4.8.0",
+    "react-perfect-scrollbar": "^1.5.8",
     "react-redux": "~8.1.1",
     "react-router-dom": "~6.2.2",
     "react-scroll-to-bottom": "^4.2.0",

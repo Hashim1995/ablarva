@@ -8,7 +8,7 @@ function Account() {
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   return (
-    <Card className="overflow-visible !bg-transparent h-full flex !shadow-none !rounded-none">
+    <Card className="overflow-visible  !bg-transparent   min-h-[300px] flex !shadow-none !rounded-none">
       <AccountHeader
         fieldsIsDisable={fieldsIsDisable}
         setFieldsIsDisable={setFieldsIsDisable}

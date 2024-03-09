@@ -335,6 +335,12 @@
     "createNewAccount": "Create new account",
     "loginAndDiscover": "Login and discover our AI assistans",
     "dontYouHaveAccount": "Don't you have an account?",
-    "doYouHaveAccount": "Do you have account?"
+    "doYouHaveAccount": "Do you have account?",
+    "smtpSettings": "SMTP settings",
+    "loadMore": "Load more",
+    "mailAddress": "Email address",
+    "mailPassword": "Email password",
+    "hostName": "Host",
+    "port": "Port"
   }
 }

@@ -1,5 +1,5 @@
 import { useDisclosure } from '@nextui-org/react';
-import { BsRobot } from 'react-icons/bs';
+import logo from '@assets/images/aizadə.png';
 import { useTranslation } from 'react-i18next';
 import TermsConditionsModal from './terms-conditions';
 
@@ -10,7 +10,7 @@ function LoginLeftBar() {
   return (
     <>
       <div className="my-3 text-4xl font-bold tracking-wider flex items-center justify-center">
-        <BsRobot className="animate-pulse w-[100px] h-[100px]	 " />
+        <img src={logo} className="animate-pulse w-[200px] h-[200px]" alt="" />
       </div>
       <p className="mt-3 text-lg font-normal text-center text-white md:mt-0">
         {t('welcomeMessage')}
