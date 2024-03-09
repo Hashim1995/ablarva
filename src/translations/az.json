@@ -230,7 +230,7 @@
     "copy": "Kopyala",
     "my": "Mənim",
     "tariff": "Tarifim",
-    "deleteConfirmationPrompt": "Çatı silmək istəyinizə əminsinizmi?",
+    "deleteConfirmationPrompt": "Məlumatı silmək istəyinizə əminsinizmi?",
     "welcomeMessage": "Xoş gəlmisiniz! Bizim Suni İntelekt startapımız AIZade sizin gündəlik həyatınızı asanlaşdırmaq üçün buradadır. Səmərəli və yenilikçi texnologiyamızla, hər bir sualınıza anında cavablar tapa bilərsiniz Bizim platformamızda hər zaman yeniliklər və fərqliliklərə rast gələcəksiniz. Giriş edin və AIZade dünyasında səyahətə başlayın!",
     "privacyPolicySentence": "Gizlilik və məxfilik siyasəti",
     "questionAnswerAiZadeh": "Ağlında sual var? Bizim hörmətli Ai-zadə cavablandırmağa hazırdı! 😊",
@@ -245,7 +245,7 @@
     "ordinary": "Sadə",
     "premium": "Premium",
     "requestOptionAdded": "sorğu imkanı əlavə oluncaqdır",
-    "deleteChatConfirmation": "Çatı silmək istəyinizə əminsinizmi?",
+    "deleteChatConfirmation": "Məlumatı silmək istəyinizə əminsinizmi?",
     "general": "Ümumi",
     "used": "İstifadə olunan",
     "rest": "Geriyə qalan",
@@ -341,6 +341,9 @@
     "mailAddress": "Email ünvanı",
     "mailPassword": "Email şifrəsi",
     "hostName": "Host",
-    "port": "Port"
+    "port": "Port",
+    "emailSettings": "Email siyahısı",
+    "addAnyData": "Məlumat əlavə et",
+    "editAnyData": "Məlumata düzəliş et"
   }
 }

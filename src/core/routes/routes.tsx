@@ -5,6 +5,7 @@ import LoginPage from '@core/static-pages/login-page';
 import SettingsPage from '@/modules/settings/pages';
 import SmptpPage from '@/modules/settings/pages/smtp-page';
 import HistoryPage from '@/modules/settings/pages/history-page';
+import EmailPage from '@/modules/settings/pages/email-page';
 import SuspenseLoader from '../static-components/suspense-loader';
 import CabinetPage from '../../modules/cabinet/pages';
 
@@ -73,6 +74,14 @@ const routes = [
             element: (
               <Suspense fallback={<SuspenseLoader />}>
                 <HistoryPage />
+              </Suspense>
+            )
+          },
+          {
+            path: 'email',
+            element: (
+              <Suspense fallback={<SuspenseLoader />}>
+                <EmailPage />
               </Suspense>
             )
           }

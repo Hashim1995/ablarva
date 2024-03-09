@@ -1,7 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Listbox, ListboxItem } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
-import { BsMailbox } from 'react-icons/bs';
+import { BsEnvelope, BsMailbox } from 'react-icons/bs';
 import { FaMoneyBill } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -21,6 +21,16 @@ function Sidebar() {
             startContent={<BsMailbox />}
           >
             {t('smtpSettings')}
+          </ListboxItem>
+          <ListboxItem
+            onClick={() => {
+              navigate('/settings/email');
+            }}
+            key={3}
+            className="bg-default-100 rounded-lg p-3 mb-2"
+            startContent={<BsEnvelope />}
+          >
+            {t('emailSettings')}
           </ListboxItem>
           <ListboxItem
             onClick={() => {

@@ -2,26 +2,21 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponseEmpty } from '@/models/common';
-import {
-  IAssistantGetAssistansListResponse,
-  IAssistantSendMessagePayload,
-  IAssistantSendMessageResponse,
-  IAssistantThreadBubblesItemResponse,
-  IAssistantThreadHistoryListResponse
-} from '@/modules/assistant/types';
+import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
+
 
 import {
   ISmtpItem,
   ISmtpResponse
 } from '@/modules/settings/entities/smtp/types';
-import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
+import { IEmailItemCreate, IEmailItemUpdate, IEmailListResponse } from '@/modules/settings/entities/email/types';
+import { ErrorCallBack, HttpUtil, IHTTPSParams } from '../adapter-config/config';
 
 export class SettingsService {
   // eslint-disable-next-line no-use-before-define
   private static instance: SettingsService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   public static getInstance(): SettingsService {
     if (!this.instance) {
@@ -48,67 +43,54 @@ export class SettingsService {
     return res;
   }
 
-  public async sendMessage(
-    body: IAssistantSendMessagePayload,
-    onError?: ErrorCallBack,
-    abortController?: AbortController['signal']
-  ): Promise<IAssistantSendMessageResponse> {
-    const res = await HttpUtil.post(
-      'api/client/assistants/message',
-      body,
-      onError,
-      abortController
+  public async getEmailItems(param: IHTTPSParams[], onError?: ErrorCallBack): Promise<IEmailListResponse> {
+    const res = await HttpUtil.get(
+      'api/client/settings/emailEntities',
+      param,
+      false,
+      onError
     );
     return res;
   }
 
-  public async removeThread(
+
+  public async createEmailItem(
+    body: IEmailItemCreate,
+    onError?: ErrorCallBack,
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post(
+      'api/client/settings/emailEntity/',
+      body,
+      onError,
+    );
+    return res;
+  }
+
+  public async updateEmailItem(
+    body: IEmailItemUpdate,
+    onError?: ErrorCallBack,
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.put(
+      'api/client/settings/emailEntity/',
+      body,
+      onError,
+    );
+    return res;
+  }
+
+  public async removeEmailItem(
     id: string,
     onError?: ErrorCallBack,
     abortController?: AbortController['signal']
   ): Promise<IGlobalResponseEmpty> {
     const res = await HttpUtil.delete(
-      `api/client/assistants/threads/${id}`,
+      `api/client/settings/emailEntity/${id}`,
       onError,
       abortController
     );
     return res;
   }
 
-  public async fetchThreadHistory(
-    onError?: ErrorCallBack
-  ): Promise<IAssistantThreadHistoryListResponse> {
-    const res = await HttpUtil.get(
-      'api/client/assistants/threads',
-      null,
-      false,
-      onError
-    );
-    return res;
-  }
 
-  public async fetchAssistantsList(
-    onError?: ErrorCallBack
-  ): Promise<IAssistantGetAssistansListResponse> {
-    const res = await HttpUtil.get(
-      'api/client/assistants',
-      null,
-      false,
-      onError
-    );
-    return res;
-  }
 
-  public async fetchBubbleHistory(
-    id: string,
-    onError?: ErrorCallBack
-  ): Promise<IAssistantThreadBubblesItemResponse> {
-    const res = await HttpUtil.get(
-      `api/client/assistants/${id}/messages`,
-      null,
-      false,
-      onError
-    );
-    return res;
-  }
 }
