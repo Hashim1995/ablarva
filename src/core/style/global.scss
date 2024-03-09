@@ -75,22 +75,6 @@ body::-webkit-scrollbar-thumb,
   overflow-y: auto; /* Allow scrolling within the container */
 }
 
-// .componentsScrollBar::-webkit-scrollbar {
-//   -webkit-appearance: none;
-//   width: 50px;
-//   height: 8px;
-// }
-
-// .componentsScrollBar::-webkit-scrollbar-track {
-//   border-radius: 20px;
-//   background: green;
-// }
-
-// .componentsScrollBar::-webkit-scrollbar-thumb {
-//   border-radius: 4px;
-//   background-color: red;
-// }
-
 ::selection {
   color: white;
   background: blue;
@@ -468,22 +452,6 @@ input[type='number'] {
 .gradient-bg {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   background-size: 800% 800%;
-
-  // background-image: linear-gradient(
-  //   to left top,
-  //   #6c1bdb,
-  //   #5327b7,
-  //   #412a93,
-  //   #33286e,
-  //   #29244a,
-  //   #252142,
-  //   #211d3b,
-  //   #1d1a33,
-  //   #1c1844,
-  //   #1b1555,
-  //   #190f66,
-  //   #1a0376
-  // );
 }
 
 @-webkit-keyframes AnimationName {
@@ -557,4 +525,9 @@ input[type='number'] {
   -webkit-background-clip: text;
   background-clip: text;
   -webkit-text-fill-color: transparent;
+}
+.home-container {
+  max-height: calc(100vh - 64px);
+  min-height: calc(100vh - 64px);
+  overflow-y: auto; /* Enable vertical scrolling */
 }
