@@ -335,6 +335,12 @@
     "createNewAccount": "Yeni hesab yarad",
     "loginAndDiscover": "Daxil ol və asistanlarımızı kəşf et",
     "dontYouHaveAccount": "Hesabınız yoxdur?",
-    "doYouHaveAccount": "Hesabınız var?"
+    "doYouHaveAccount": "Hesabınız var?",
+    "smtpSettings": "SMTP tənzimləmələri",
+    "loadMore": "Daha çox",
+    "mailAddress": "Email ünvanı",
+    "mailPassword": "Email şifrəsi",
+    "hostName": "Host",
+    "port": "Port"
   }
 }

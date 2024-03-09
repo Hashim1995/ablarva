@@ -15,14 +15,14 @@ import { useAsyncList } from '@react-stately/data';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { ITransactionsItem } from '../../types';
+import { ITransactionsItem } from '../../../cabinet/types';
 
 interface IColumn {
   name: string;
   uid: keyof ITransactionsItem;
 }
 
-export default function Bottom() {
+export default function History() {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
 
@@ -83,13 +83,11 @@ export default function Bottom() {
   };
 
   return (
-    <Card className="h-2/3 relative bg-transparent !shadow-none !rounded-none">
+    <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
       {/* Card Header */}
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px] items-center p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
-          <p>
-            {t('account')} {`${t('history')}si`}
-          </p>
+          <p>{t('paymentHistory')}</p>
         </div>
       </div>
 
@@ -100,14 +98,14 @@ export default function Bottom() {
           aria-label="Transactions table"
           className="remove-scrollbar overflow-x-scroll shadow-none overflow-y-hidden"
           classNames={{
-            base: 'max-h-[520px] overflow-scroll',
+            base: ' overflow-scroll remove-scrollbar',
             table: 'min-h-[120px]'
           }}
           bottomContent={
             list.items.length > 0 && (
               <div className="flex justify-center my-4">
                 <Button onClick={() => list.loadMore()} disabled={isLoading}>
-                  Load More
+                  {t('loadMore')}
                 </Button>
               </div>
             )

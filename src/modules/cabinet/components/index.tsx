@@ -1,5 +1,4 @@
 import Account from './account/account';
-import History from './history/history';
 import Sessions from './sessions/sessions';
 
 function Settings() {
@@ -7,7 +6,6 @@ function Settings() {
     <div className="grid grid-cols-12 grid-rows-6  fixed-height">
       <div className="col-span-8 row-span-6  fixed-height">
         <Account />
-        <History />
       </div>
       <div className="col-span-4 row-span-6 col-start-9 ">
         <Sessions />

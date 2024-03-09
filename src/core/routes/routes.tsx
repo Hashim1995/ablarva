@@ -1,6 +1,10 @@
 import React, { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
+import AssistantHomePage from '@/modules/assistant/pages/home';
 import LoginPage from '@core/static-pages/login-page';
+import SettingsPage from '@/modules/settings/pages';
+import SmptpPage from '@/modules/settings/pages/smtp-page';
+import HistoryPage from '@/modules/settings/pages/history-page';
 import SuspenseLoader from '../static-components/suspense-loader';
 import CabinetPage from '../../modules/cabinet/pages';
 
@@ -25,14 +29,21 @@ const routes = [
         )
       },
       {
-        path: 'assistant',
+        path: 'assistant-home',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <AssistantHomePage />
+          </Suspense>
+        )
+      },
+      {
+        path: '/assistant',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <AssistantPage />
           </Suspense>
         )
       },
-
       {
         path: 'cabinet',
         element: (
@@ -41,7 +52,32 @@ const routes = [
           </Suspense>
         )
       },
-
+      {
+        path: 'settings/*',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <SettingsPage />
+          </Suspense>
+        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<SuspenseLoader />}>
+                <SmptpPage />
+              </Suspense>
+            )
+          },
+          {
+            path: 'payment-history',
+            element: (
+              <Suspense fallback={<SuspenseLoader />}>
+                <HistoryPage />
+              </Suspense>
+            )
+          }
+        ]
+      },
       {
         path: 'no-permission',
         element: <h1>no permission</h1>
