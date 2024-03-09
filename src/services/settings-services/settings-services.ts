@@ -4,19 +4,26 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 
-
 import {
   ISmtpItem,
   ISmtpResponse
 } from '@/modules/settings/entities/smtp/types';
-import { IEmailItemCreate, IEmailItemUpdate, IEmailListResponse } from '@/modules/settings/entities/email/types';
-import { ErrorCallBack, HttpUtil, IHTTPSParams } from '../adapter-config/config';
+import {
+  IEmailItemCreate,
+  IEmailItemUpdate,
+  IEmailListResponse
+} from '@/modules/settings/entities/email/types';
+import {
+  ErrorCallBack,
+  HttpUtil,
+  IHTTPSParams
+} from '../adapter-config/config';
 
 export class SettingsService {
   // eslint-disable-next-line no-use-before-define
   private static instance: SettingsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   public static getInstance(): SettingsService {
     if (!this.instance) {
@@ -43,7 +50,10 @@ export class SettingsService {
     return res;
   }
 
-  public async getEmailItems(param: IHTTPSParams[], onError?: ErrorCallBack): Promise<IEmailListResponse> {
+  public async getEmailItems(
+    param: IHTTPSParams[],
+    onError?: ErrorCallBack
+  ): Promise<IEmailListResponse> {
     const res = await HttpUtil.get(
       'api/client/settings/emailEntities',
       param,
@@ -53,27 +63,26 @@ export class SettingsService {
     return res;
   }
 
-
   public async createEmailItem(
     body: IEmailItemCreate,
-    onError?: ErrorCallBack,
+    onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
     const res = await HttpUtil.post(
       'api/client/settings/emailEntity/',
       body,
-      onError,
+      onError
     );
     return res;
   }
 
   public async updateEmailItem(
     body: IEmailItemUpdate,
-    onError?: ErrorCallBack,
+    onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
     const res = await HttpUtil.put(
       'api/client/settings/emailEntity/',
       body,
-      onError,
+      onError
     );
     return res;
   }
@@ -90,7 +99,4 @@ export class SettingsService {
     );
     return res;
   }
-
-
-
 }
