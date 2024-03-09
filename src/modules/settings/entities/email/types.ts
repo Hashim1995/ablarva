@@ -10,7 +10,10 @@ interface IEmailItem {
 }
 
 type IEmailItemCreate = Pick<IEmailItem, 'emailAddress' | 'name' | 'surname'>;
-type IEmailItemUpdate = Pick<IEmailItem, 'emailAddress' | 'id' | 'name' | 'surname'>;
+type IEmailItemUpdate = Pick<
+  IEmailItem,
+  'emailAddress' | 'id' | 'name' | 'surname'
+>;
 
 interface IEmailListResponse extends IGlobalResponse {
   data: {
