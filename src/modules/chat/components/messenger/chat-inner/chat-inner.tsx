@@ -205,7 +205,7 @@ function ChatInner() {
           {hasError && (
             <div className=" flex justify-center mt-2 gap-2 items-center ">
               <Chip startContent={<TfiFaceSad size={18} />} color="danger">
-                Beynim yandı
+                {t('myBrainBroken')}
               </Chip>
               <Button
                 onClick={() => {

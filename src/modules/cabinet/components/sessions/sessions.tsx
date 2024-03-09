@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
 /* eslint-disable jsx-a11y/control-has-associated-label */
 import { IUserSessions } from '@/models/user';
@@ -6,7 +5,6 @@ import {
   //  AppDispatch,
   RootState
 } from '@/redux/store';
-import { dictionary } from '@/utils/constants/dictionary';
 import { Card, Chip, Divider, Skeleton } from '@nextui-org/react';
 import { BsAndroid2 } from 'react-icons/bs';
 import {
@@ -29,6 +27,7 @@ import { useTranslation } from 'react-i18next';
 function Sessions() {
   const { userSessions } = useSelector((state: RootState) => state.user.user);
   // const dispatch = useDispatch<AppDispatch>();
+  // eslint-disable-next-line no-unused-vars
   const [loading, setLoading] = useState(false);
   const { t } = useTranslation();
 
@@ -124,14 +123,15 @@ function Sessions() {
   // };
 
   return (
-    <Card className="rounded-lg bg-transparent sm:rounded-2x  h-fulll shadow h-full ">
-      <div className="flex justify-between items-center xl:mb-4  p-3">
-        <div className="text-base sm:text-xl flex flex-row gap-1 sm:gap-0 text-white font-semibold">
+    <Card className="bg-transparent   h-fulll !shadow-none !rounded-none h-full ">
+      <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center  p-2 sm:p-3">
+        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
             {t('active')} {t('sessions')}
           </p>
         </div>
       </div>
+
       <div className=" rounded-lg  remove-scrollbar overflow-y-auto xl:py-3 xl:px-6 py-1 px-2">
         {!loading ? (
           <div>
@@ -149,19 +149,25 @@ function Sessions() {
                     <div className="flex flex-1 justify-between items-center">
                       <div className="2xl:px-4 px-2">
                         <div className="tracking-wide text-[14px] text-white ">
-                          <span className=" text-gray-400"> Sistem: </span>
+                          <span className=" text-gray-400">
+                            {t('system')}:{' '}
+                          </span>
                           {item.platformName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
-                          <span className=" text-gray-400">Brauzer: </span>
+                          <span className=" text-gray-400">
+                            {t('browser')}:{' '}
+                          </span>
                           {item.browserName || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
-                          <span className=" text-gray-400">IP: </span>
+                          <span className=" text-gray-400">{t('ip')} : </span>
                           {item.ipAddress || t('empty')}
                         </div>
                         <div className="tracking-wide text-[14px] text-white">
-                          <span className=" text-gray-400">Giriş tarixi: </span>
+                          <span className=" text-gray-400">
+                            {t('loginDate')}:{' '}
+                          </span>
                           {item.loginDate || t('empty')}
                         </div>
                       </div>

@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable consistent-return */
 import { toastOptions } from '@/configs/global-configs';
 import {
@@ -7,12 +6,13 @@ import {
 } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
 
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { BsHandThumbsDownFill } from 'react-icons/bs';
 import { FaCopy } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
@@ -79,13 +79,12 @@ function ChatBubble({
   isClient,
   assistantBubbleId,
   feedbackStatus,
-  assistantImagePath,
-  assistantName,
-  assistantThreadId
+  assistantImagePath
 }: IAssistantThreadBubblesItem) {
   const [liked, setLiked] = useState(false);
   const [dislike, setDisliked] = useState(false);
   const { user } = useSelector((state: RootState) => state.user);
+  const { t } = useTranslation();
 
   const feedbackBubble = async (type: number) => {
     const payload: IAssistantFeedbackPayload = {
@@ -187,7 +186,10 @@ function ChatBubble({
               onClick={() => {
                 navigator.clipboard.writeText(assistantContent).then(
                   () => {
-                    toast.success('Məlumat uğurla kopyalandı', toastOptions);
+                    toast.success(
+                      t('dataCopiedToClipboardSuccessFully'),
+                      toastOptions
+                    );
                   },
                   err => {
                     console.error('Async: Could not copy text: ', err);

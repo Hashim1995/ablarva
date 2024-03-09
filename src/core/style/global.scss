@@ -64,6 +64,16 @@ body::-webkit-scrollbar-thumb,
   -ms-overflow-style: none !important; /* IE + Edge */
   scrollbar-width: none !important;
 }
+.scrollable-content {
+  overflow-y: auto; /* This will allow individual sections to scroll */
+}
+
+.fixed-height-scroll {
+  min-height: calc(
+    100vh - 64px
+  ); /* Adjust to viewport height minus the navbar */
+  overflow-y: auto; /* Allow scrolling within the container */
+}
 
 // .componentsScrollBar::-webkit-scrollbar {
 //   -webkit-appearance: none;
@@ -425,6 +435,27 @@ input[type='number'] {
     width: 992px;
   }
 }
+.containerLg {
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+@media (min-width: 768px) {
+  .containerLg {
+    width: 750px;
+  }
+}
+@media (min-width: 992px) {
+  .containerLg {
+    width: 970px;
+  }
+}
+@media (min-width: 1200px) {
+  .containerLg {
+    width: 1170px;
+  }
+}
 
 .gradient-bg-with-keyframe {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
@@ -437,6 +468,22 @@ input[type='number'] {
 .gradient-bg {
   background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   background-size: 800% 800%;
+
+  // background-image: linear-gradient(
+  //   to left top,
+  //   #6c1bdb,
+  //   #5327b7,
+  //   #412a93,
+  //   #33286e,
+  //   #29244a,
+  //   #252142,
+  //   #211d3b,
+  //   #1d1a33,
+  //   #1c1844,
+  //   #1b1555,
+  //   #190f66,
+  //   #1a0376
+  // );
 }
 
 @-webkit-keyframes AnimationName {
@@ -471,4 +518,43 @@ input[type='number'] {
   100% {
     background-position: 90% 0%;
   }
+}
+
+.cardHover:hover .imageZoom {
+  transform: scale(1.1);
+}
+
+.imageZoom {
+  transition: transform 0.5s ease;
+}
+.theme-gradient {
+  background: linear-gradient(90deg, #12b5de -30%, #7130c3 30%, #ff3bd4 90%);
+  text-transform: capitalize;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-gradient-secondary {
+  background: linear-gradient(
+    to right,
+    var(--color-secondary-gradient-start),
+    var(--color-secondary-gradient-end)
+  );
+  text-transform: capitalize;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.theme-gradient-tertiary {
+  background: linear-gradient(
+    to right,
+    var(--color-tertiary-gradient-start),
+    var(--color-tertiary-gradient-end)
+  );
+  text-transform: capitalize;
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
 }

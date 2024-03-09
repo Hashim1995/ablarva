@@ -1,6 +1,6 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
-// import { dictionary } from '@/utils/constants/dictionary';
+
 import {
   Modal,
   ModalContent,
@@ -24,7 +24,7 @@ function TermsConditionsModal({
   return (
     <div>
       <Modal
-        size="lg"
+        size="2xl"
         backdrop="opaque"
         isOpen={isOpen}
         className="centerModalOnMobile"
@@ -38,7 +38,7 @@ function TermsConditionsModal({
                 {t('privacyPolicy')}
               </ModalHeader>
               <ModalBody className="scrollBar overflow-y-scroll">
-                <div className="justify-center   h-80 pr-3">
+                <div className="justify-center   h-96 pr-3">
                   <p className="pb-6 text-md">
                     We, in AI-zade, (" Company ", "we", "us", "our") are
                     committed to protecting your personal information and your

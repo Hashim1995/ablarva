@@ -18,6 +18,17 @@ export default {
       xl: '16px',
       '2xl': '18px',
       '3xl': '20px'
+    },
+    extend: {
+      animation: {
+        border: 'border 4s ease infinite'
+      },
+      keyframes: {
+        border: {
+          '0%, 100%': { backgroundPosition: '0% 50%' },
+          '50%': { backgroundPosition: '100% 50%' }
+        }
+      }
     }
   },
   darkMode: 'class',
@@ -30,15 +41,15 @@ export default {
       themes: {
         light: {
           colors: {
-            black: '#020008',
-            darkBlack: '#020008',
+            black: '#0F0F0F',
+            darkBlack: '#0F0F0F',
             custom: 'red'
           }
         },
         dark: {
           colors: {
-            black: '#020008',
-            darkBlack: '#020008',
+            black: '#0F0F0F',
+            darkBlack: '#0F0F0F',
             custom: 'red'
           }
         }
