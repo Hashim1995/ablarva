@@ -3,10 +3,12 @@ import { IGlobalResponse } from '@/models/common';
 interface IAssistantItem {
   assistantId: string;
   assistantName: string;
+  assistantPosition?: string;
   assistantDescription: string;
   assistantImagePath: string;
   assistantServicePlan: number;
   assistantServicePlanText: string;
+  isActive?: boolean,
 }
 
 interface IAssistantChatForm {

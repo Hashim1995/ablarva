@@ -49,7 +49,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                     <Tab key="chat" title={t('chat')}>
                       <ChatPricing />
                     </Tab>
-                    <Tab key="assistan" title={t('assistan')}>
+                    <Tab key="assistant" title={t('assistant')}>
                       <AsistanPricing />
                     </Tab>
                     <Tab isDisabled key="catalyst" title={t('catalyst')}>

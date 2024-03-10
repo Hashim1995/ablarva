@@ -353,6 +353,11 @@
     "templateMessageText3": "Bütün şirkət əməkdaşlarına Novruz bayramı təbrik emaili yaz",
     "templateMessageText4": "Müştərilərə illik hesabat emaillərini göndər",
     "unlockPowerOf": "Seç və Bizimlə",
-    "withSmartestAssistants": "Assistanlarımızın Potensialını Gör"
+    "withSmartestAssistants": "Assistanlarımızın Potensialını Gör",
+    "emailReports": "Email hesabatları",
+    "emailAddress": "Email ünvanı",
+    "emailTitle": "Email başlıqı",
+    "emailBody": "Email kontenti",
+    "detailedView": "Məlumata ətraflı baxış"
   }
 }

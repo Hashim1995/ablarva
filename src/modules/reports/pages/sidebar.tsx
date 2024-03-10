@@ -1,6 +1,7 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Listbox, ListboxItem } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
+import { BsEnvelope } from 'react-icons/bs';
 import { FaMoneyBill } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
@@ -22,6 +23,17 @@ function Sidebar() {
             startContent={<FaMoneyBill />}
           >
             {t('paymentHistory')}
+          </ListboxItem>
+
+          <ListboxItem
+            onClick={() => {
+              navigate('/reports/email-reports');
+            }}
+            key={2}
+            className="bg-default-100 rounded-lg p-3 mb-2"
+            startContent={<BsEnvelope />}
+          >
+            {t('emailReports')}
           </ListboxItem>
         </Listbox>
       </div>

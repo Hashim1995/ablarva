@@ -102,6 +102,7 @@
     "exchangeData": "Exchange Data",
     "docStatus": "Document Status",
     "docStatusSign": "Signing",
+    "verifyCodeSentSuccesfully": "Email verify code has been sent successfully",
     "docStatusAgree": "Agreement",
     "docInfo": "Document Information",
     "doc": "document",
@@ -353,6 +354,11 @@
     "templateMessageText3": "Write a congratulatory Novruz email to all company employees",
     "templateMessageText4": "Send annual report emails to clients",
     "unlockPowerOf": "Unlock the Power of",
-    "withSmartestAssistants": "with Smartest Assistants"
+    "withSmartestAssistants": "with Smartest Assistants",
+    "emailReports": "Email reports",
+    "emailAddress": "Email address",
+    "emailTitle": "Email title",
+    "emailBody": "Email content",
+    "detailedView": "Detaild view"
   }
 }
