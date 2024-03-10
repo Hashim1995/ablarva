@@ -25,6 +25,7 @@ import audioUrl from './mech-keyboard-02-102918.mp3';
 interface IChatFormProps {
   onSubmit: SubmitHandler<IAssistantChatForm>;
   waitingForResponse: boolean;
+  templateMessage?: string;
 }
 
 function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
@@ -77,6 +78,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         return <img width={22} alt="uk flag" src="/flags/global-flag.svg" />;
     }
   };
+
   return (
     <form
       onSubmit={handleSubmit(z => {
@@ -85,7 +87,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
       })}
       className="    px-0 absolute container  bottom-0  left-1/2 transform -translate-x-1/2 -translate-y-1/2   shadow-none  "
     >
-      <div className="h-full w-full bg-black/30 backdrop-blur-md   rounded-xl">
+      <div className="h-full w-full bg-black/50 backdrop-blur-sm   rounded-xl">
         <Textarea
           {...register('message', { required: true })}
           variant="bordered"

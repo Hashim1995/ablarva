@@ -25,7 +25,6 @@ interface IColumn {
 export default function History() {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-
   const list = useAsyncList<ITransactionsItem>({
     async load({ cursor }) {
       setIsLoading(true);
@@ -84,14 +83,11 @@ export default function History() {
 
   return (
     <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
-      {/* Card Header */}
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px] items-center p-2 sm:p-3">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>{t('paymentHistory')}</p>
         </div>
       </div>
-
-      {/* Table */}
       <div className=" px-2">
         <Table
           isHeaderSticky

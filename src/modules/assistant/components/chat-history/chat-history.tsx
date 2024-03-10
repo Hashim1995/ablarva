@@ -136,7 +136,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       <div className="flex  items-center gap-2 mb-2">
                         <Image
                           alt="Woman listing to music"
-                          className="object-cover h-full w-10 ounded-full"
+                          className="object-cover h-full w-10 rounded-full"
                           src={
                             `${
                               import.meta.env.VITE_BASE_URL

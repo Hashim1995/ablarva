@@ -274,40 +274,11 @@ input::-webkit-datetime-edit {
   }
 }
 
-.custom-row-chart-wrapper {
-  display: flex;
-  height: 233px !important;
-  align-items: center;
-  justify-content: space-between;
-
-  .recharts-legend-wrapper {
-    position: static !important;
-  }
-}
-
-@media (max-width: 767px) {
-  .chartsHeight {
-    height: 473px;
-  }
-}
-
-// @media (max-width: 480px) {
-//   .layoutHeight {
-//     height: calc(68vh - 56px) !important;
-//   }
-// }
-
 @media (max-width: 1024px) {
   .layoutHeight {
     height: 100%;
   }
 }
-
-// @media (min-width: 481px) and (max-width: 768px) {
-//   .layoutHeight {
-//     height: calc(72vh - 56px) !important;
-//   }
-// }
 
 @media (max-width: 639px) {
   .mobile-row-chart {
@@ -328,17 +299,6 @@ input::-webkit-datetime-edit {
   .dow {
     height: 1.5rem;
     width: 1.5rem;
-  }
-}
-
-.recharts-legend-wrapper {
-  display: flex;
-  justify-content: center;
-
-  .recharts-default-legend {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
   }
 }
 
@@ -450,8 +410,10 @@ input[type='number'] {
 }
 
 .gradient-bg {
-  background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
-  background-size: 800% 800%;
+  background-image: url('../../assets/images//main-bg.webp');
+  background-size: 86.125rem;
+  // background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
+  // background-size: 800% 800%;
 }
 
 @-webkit-keyframes AnimationName {
@@ -530,4 +492,8 @@ input[type='number'] {
   max-height: calc(100vh - 64px);
   min-height: calc(100vh - 64px);
   overflow-y: auto; /* Enable vertical scrolling */
+}
+.home-container-without-navbar {
+  min-height: 100vh; /* Ensure it fills the viewport height */
+  overflow-y: auto; /* Enable vertical scrolling when content exceeds the viewport height */
 }

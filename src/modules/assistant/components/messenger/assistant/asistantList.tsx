@@ -57,6 +57,7 @@ function AsistantCardList() {
               <AsistanCard
                 currentAssistanModel={currentAssistantModel}
                 data={item}
+                key={item?.assistantId}
               />
             ))}
           </>
