@@ -5,7 +5,7 @@ function AiEmptyWelcome() {
   const { t } = useTranslation();
 
   return (
-    <div className="  h-full">
+    <div className="h-full ">
       <div className=" flex-col  w-full h-full items-center	 justify-center ">
         <div className=" palette-2   flex items-center	 justify-center h-3/5 ">
           <div className="blobsWelcome ">

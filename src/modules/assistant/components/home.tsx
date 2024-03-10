@@ -37,7 +37,7 @@ function Home() {
       <div className="flex justify-center mb-3">
         <h1 className=" text-[3rem] font-medium">
           Unlock the Power of{' '}
-          <span className="theme-gradient font-bold">AI-ZADEI</span> <br />
+          <span className="theme-gradient font-bold">AI-ZADE</span> <br />
           with Smartest Assistants
         </h1>
       </div>

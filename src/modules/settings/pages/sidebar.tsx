@@ -2,7 +2,6 @@
 import { Listbox, ListboxItem } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import { BsEnvelope, BsMailbox } from 'react-icons/bs';
-import { FaMoneyBill } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
 function Sidebar() {
@@ -11,6 +10,7 @@ function Sidebar() {
   return (
     <div>
       <div className="w-full max-w-[260px]  py-2 rounded-small ">
+        <h1 className="text-center mb-2">{t('settings')}</h1>
         <Listbox variant="flat" aria-label="Listbox menu with descriptions">
           <ListboxItem
             onClick={() => {
@@ -32,16 +32,7 @@ function Sidebar() {
           >
             {t('emailSettings')}
           </ListboxItem>
-          <ListboxItem
-            onClick={() => {
-              navigate('/settings/payment-history');
-            }}
-            key={2}
-            className="bg-default-100 rounded-lg p-3 mb-2"
-            startContent={<FaMoneyBill />}
-          >
-            {t('paymentHistory')}
-          </ListboxItem>
+
           {/* <ListboxItem
             key="copy"
             onClick={() => {
