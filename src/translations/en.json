@@ -351,6 +351,8 @@
     "templateMessageText1": "Inform the staff that I will not be able to attend tomorrow's meeting",
     "templateMessageText2": "Can you send me the invoice details?",
     "templateMessageText3": "Write a congratulatory Novruz email to all company employees",
-    "templateMessageText4": "Send annual report emails to clients"
+    "templateMessageText4": "Send annual report emails to clients",
+    "unlockPowerOf": "Unlock the Power of",
+    "withSmartestAssistants": "with Smartest Assistants"
   }
 }
