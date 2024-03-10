@@ -8,7 +8,7 @@ interface IAssistantItem {
   assistantImagePath: string;
   assistantServicePlan: number;
   assistantServicePlanText: string;
-  isActive?: boolean,
+  isActive?: boolean;
 }
 
 interface IAssistantChatForm {

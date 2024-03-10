@@ -1,16 +1,16 @@
-import { IGlobalResponse } from "@/models/common"
+import { IGlobalResponse } from '@/models/common';
 
 interface IEmailReportItem {
-    id: string,
-    emailAddress: string,
-    emailTitle: string,
-    emailBody: string,
-    createdAt: any
+  id: string;
+  emailAddress: string;
+  emailTitle: string;
+  emailBody: string;
+  createdAt: any;
 }
 interface IEmailReportItemResponse extends IGlobalResponse {
-    data: {
-        pagedData: IEmailReportItem[];
-        totalPages: number;
-    };
+  data: {
+    pagedData: IEmailReportItem[];
+    totalPages: number;
+  };
 }
-export type { IEmailReportItem, IEmailReportItemResponse }
+export type { IEmailReportItem, IEmailReportItemResponse };
