@@ -8,8 +8,8 @@ interface IPricingItemProps {
   item: IPackageItem;
   verified: boolean;
   packageId: number;
-  onOpen: () => void;
-  modalOnopen: () => void;
+  buyModalOnOpen: () => void;
+  modalEmailOnOpen: () => void;
   setWantedPackageId: Dispatch<SetStateAction<number>>;
 }
 function PricingItem({
@@ -17,8 +17,8 @@ function PricingItem({
   setWantedPackageId,
   verified,
   packageId,
-  onOpen,
-  modalOnopen
+  buyModalOnOpen,
+  modalEmailOnOpen
 }: IPricingItemProps) {
   const { t } = useTranslation();
 
@@ -51,10 +51,10 @@ function PricingItem({
         variant="bordered"
         onClick={() => {
           if (!verified) {
-            modalOnopen();
+            modalEmailOnOpen();
           } else {
             setWantedPackageId(item.packageId);
-            onOpen();
+            buyModalOnOpen();
           }
         }}
         className="w-full text-white py-2 rounded-lg text-mda mt-4 "
