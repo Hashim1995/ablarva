@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+/* eslint-disable no-unused-vars */
+import { useState } from 'react';
 import {
   Card,
   Table,
@@ -7,28 +8,38 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  Chip,
   Button,
   Spinner,
   CardHeader,
-  CardBody
+  CardBody,
+  useDisclosure
 } from '@nextui-org/react';
+import utc from 'dayjs/plugin/utc'; // Import the UTC plugin
+
 import { useAsyncList } from '@react-stately/data';
-import { PaymentService } from '@/services/payment-services/payment-services';
+import { ReportsServices } from '@/services/reports-services/reports-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { ITransactionsItem } from '../../../cabinet/types';
+import { IoEllipsisVertical } from 'react-icons/io5';
+import { BsEye } from 'react-icons/bs';
+import { IEmailReportItem } from './types';
+import ViewEmailReportModal from './view-email-reports';
 
-export default function History() {
+dayjs.extend(utc); // Use the UTC plugin
+
+export default function Email() {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
-  const list = useAsyncList<ITransactionsItem>({
+  const [selectedItem, setSelectedItem] = useState<IEmailReportItem>();
+
+  const list = useAsyncList<IEmailReportItem>({
     async load({ cursor }) {
       setIsLoading(true);
       try {
-        // Convert the cursor to a number, defaulting to 1 if it's not available
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await PaymentService.getInstance().getTransactions([
+        const res = await ReportsServices.getInstance().getEmailReports([
           { name: 'page', value: page },
           { name: 'pageSize', value: 10 }
         ]);
@@ -36,7 +47,6 @@ export default function History() {
 
         return {
           items: res.data.pagedData,
-          // Convert the new cursor value back to a string
           cursor: (page + 1).toString()
         };
       } catch (err) {
@@ -49,11 +59,13 @@ export default function History() {
 
   return (
     <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
+      {/* Card Header */}
       <CardHeader className="flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-3 ">
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
-          <p>{t('paymentHistory')}</p>
+          <p>{t('emailReports')}</p>
         </div>
       </CardHeader>
+      {/* Table */}
       <CardBody className=" flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-2">
         <Table
           isHeaderSticky
@@ -75,10 +87,12 @@ export default function History() {
           }
         >
           <TableHeader>
-            <TableColumn>{t('operationCode').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('amount').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('operationDate').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('status').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('emailAddress').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('emailTitle').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('createdAt').toLocaleUpperCase()}</TableColumn>
+            <TableColumn className=" flex items-center justify-end ">
+              <IoEllipsisVertical />{' '}
+            </TableColumn>
           </TableHeader>
           <TableBody
             items={list.items}
@@ -87,27 +101,32 @@ export default function History() {
           >
             {item => (
               <TableRow key={item?.id}>
-                <TableCell>{item?.orderId}</TableCell>
-                <TableCell>{item?.amount} AZN</TableCell>
+                <TableCell>{item?.emailAddress}</TableCell>
+                <TableCell>{item?.emailTitle}</TableCell>
                 <TableCell>
-                  {' '}
-                  {dayjs.utc(item?.transactionDate).format('DD.MM.YYYY')}
+                  {dayjs.utc(item?.createdAt).format('DD.MM.YYYY')}
                 </TableCell>
-                <TableCell>
-                  {' '}
-                  <Chip
-                    className="text-white"
-                    color="success"
-                    aria-label={`Status: ${item?.status}`}
-                  >
-                    {t('active')}
-                  </Chip>
+                <TableCell
+                  onClick={() => {
+                    setSelectedItem(item);
+                    onOpen();
+                  }}
+                  className="cursor-pointer"
+                >
+                  <BsEye />
                 </TableCell>
               </TableRow>
             )}
           </TableBody>
         </Table>
       </CardBody>
+      {isOpen && (
+        <ViewEmailReportModal
+          selectedItem={selectedItem}
+          onOpenChange={onOpenChange}
+          isOpen={isOpen}
+        />
+      )}
     </Card>
   );
 }

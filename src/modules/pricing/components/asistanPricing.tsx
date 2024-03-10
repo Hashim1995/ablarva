@@ -14,16 +14,20 @@ import PricingItem from './pricingItem';
 function AsistanPricing() {
   const [data, setData] = useState<IPackageData>();
   const [loading, setLoading] = useState<boolean>(true);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: buyModalIsOpen,
+    onOpen: buyModalOnOpen,
+    onOpenChange: buyModalOnOpenChange
+  } = useDisclosure();
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
 
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
   // const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
   const {
-    isOpen: modalIsopen,
-    onOpen: modalOnopen,
-    onOpenChange: modalOpenChange
+    isOpen: modalEmailIsopen,
+    onOpen: modalEmailOnOpen,
+    onOpenChange: modalEmailOpenChange
   } = useDisclosure();
 
   const packageId = useSelector(
@@ -74,8 +78,8 @@ function AsistanPricing() {
                   setWantedPackageId={setWantedPackageId}
                   verified={verified}
                   packageId={packageId}
-                  modalOnopen={onOpen}
-                  onOpen={modalOnopen}
+                  modalEmailOnOpen={modalEmailOnOpen}
+                  buyModalOnOpen={buyModalOnOpen}
                 />
               ))}
             </div>
@@ -95,16 +99,19 @@ function AsistanPricing() {
         </div>
       )}
 
-      {isOpen && (
+      {buyModalIsOpen && (
         <PricingModal
           loading={buyPackageLoader}
           onOkFunction={buyPackage}
-          onOpenChange={onOpenChange}
-          isOpen={isOpen}
+          onOpenChange={buyModalOnOpenChange}
+          isOpen={buyModalIsOpen}
         />
       )}
-      {modalIsopen && (
-        <VerifyEmail onOpenChange={modalOpenChange} isOpen={modalIsopen} />
+      {modalEmailIsopen && (
+        <VerifyEmail
+          onOpenChange={modalEmailOpenChange}
+          isOpen={modalEmailIsopen}
+        />
       )}
     </div>
   );

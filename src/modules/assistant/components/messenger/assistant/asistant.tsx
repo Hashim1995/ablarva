@@ -18,7 +18,9 @@ function AsistantCard({
     assistantId,
     assistantName,
     assistantDescription,
-    assistantImagePath
+    assistantImagePath,
+    assistantPosition,
+    isActive
   } = data;
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -35,7 +37,9 @@ function AsistantCard({
             assistantId,
             assistantImagePath,
             assistantDescription,
-            assistanName: assistantName
+            assistanName: assistantName,
+            assistantPosition,
+            isActive
           })
         );
         navigate('/assistant');
@@ -62,7 +66,7 @@ function AsistantCard({
         <h3 className="text-[14px] group-hover:text-black transition-all duration-300 ease-in-out text-left leading-4 mb-1 sm:mb-2">
           {assistantName}
         </h3>
-        <p className="text-[10px] group-hover:text-black transition-all duration-300 ease-in-out text-left">
+        <p className="text-[10px] group-hover:text-black transition-all duration-300 ease-in-out text-left line-clamp-2">
           {assistantDescription}
         </p>
       </div>

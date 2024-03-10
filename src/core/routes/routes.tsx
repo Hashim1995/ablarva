@@ -1,6 +1,7 @@
 import React, { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
+import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
 
 const AssistantHomePage = React.lazy(
   () => import('@/modules/assistant/pages/home')
@@ -105,15 +106,15 @@ const routes = [
                 <HistoryPage />
               </Suspense>
             )
+          },
+          {
+            path: 'email-reports',
+            element: (
+              <Suspense fallback={<SuspenseLoader />}>
+                <EmailReportsPage />
+              </Suspense>
+            )
           }
-          // {
-          //   path: 'email',
-          //   element: (
-          //     <Suspense fallback={<SuspenseLoader />}>
-          //       <EmailPage />
-          //     </Suspense>
-          //   )
-          // }
         ]
       },
       {

@@ -14,18 +14,21 @@ import PricingItem from './pricingItem';
 function ChatPricing() {
   const [data, setData] = useState<IPackageData>();
   const [loading, setLoading] = useState<boolean>(true);
-  const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
 
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
   // const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
   const {
-    isOpen: modalIsopen,
-    onOpen: modalOnopen,
-    onOpenChange: modalOpenChange
+    isOpen: modalEmailIsopen,
+    onOpen: modalEmailOnOpen,
+    onOpenChange: modalEmailOpenChange
   } = useDisclosure();
-
+  const {
+    isOpen: buyModalIsOpen,
+    onOpen: buyModalOnOpen,
+    onOpenChange: buyModalOnOpenChange
+  } = useDisclosure();
   const packageId = useSelector(
     (state: RootState) => state.user.user.currentSubscription?.packageId
   );
@@ -74,8 +77,8 @@ function ChatPricing() {
                   setWantedPackageId={setWantedPackageId}
                   verified={verified}
                   packageId={packageId}
-                  modalOnopen={modalOnopen}
-                  onOpen={onOpen}
+                  modalEmailOnOpen={modalEmailOnOpen}
+                  buyModalOnOpen={buyModalOnOpen}
                 />
               ))}
             </div>
@@ -95,16 +98,19 @@ function ChatPricing() {
         </div>
       )}
 
-      {isOpen && (
+      {buyModalIsOpen && (
         <PricingModal
           loading={buyPackageLoader}
           onOkFunction={buyPackage}
-          onOpenChange={onOpenChange}
-          isOpen={isOpen}
+          onOpenChange={buyModalOnOpenChange}
+          isOpen={buyModalIsOpen}
         />
       )}
-      {modalIsopen && (
-        <VerifyEmail onOpenChange={modalOpenChange} isOpen={modalIsopen} />
+      {modalEmailIsopen && (
+        <VerifyEmail
+          onOpenChange={modalEmailOpenChange}
+          isOpen={modalEmailIsopen}
+        />
       )}
     </div>
   );
