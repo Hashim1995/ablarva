@@ -29,6 +29,8 @@ import { toast } from 'react-toastify';
 import ThinkText from '@/core/static-components/think-text';
 import { toastOptions } from '@/configs/global-configs';
 import { useTranslation } from 'react-i18next';
+import { templateMessageTexts } from '@/utils/constants/texts';
+import TempalteMessage from '@/components/layout/template-message';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
@@ -260,7 +262,22 @@ function ChatInner() {
           {!waitingForAssistantThreadLoad &&
             !hasError &&
             !waitingForAssistantResponse &&
-            bubbleList?.length < 1 && <AiEmptyWelcome />}
+            bubbleList?.length < 1 && (
+              <div className="h-full flex flex-col justify-between">
+                <AiEmptyWelcome />
+                {currentAssistantModel?.assistantId ? (
+                  <div className="gap-2 grid grid-cols-2 sm:grid-cols-2 mt-5">
+                    {templateMessageTexts?.map((item: string) => (
+                      <TempalteMessage
+                        key={item}
+                        text={item}
+                        onSubmit={onSubmit}
+                      />
+                    ))}
+                  </div>
+                ) : null}
+              </div>
+            )}
         </ScrollToBottom>
       </div>
 

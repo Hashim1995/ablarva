@@ -26,6 +26,8 @@ import dayjs from 'dayjs';
 import { SettingsService } from '@/services/settings-services/settings-services';
 import { useTranslation } from 'react-i18next';
 import { BsPen, BsTrash } from 'react-icons/bs';
+import { toast } from 'react-toastify';
+import { toastOptions } from '@/configs/global-configs';
 import { IoEllipsisVertical } from 'react-icons/io5';
 import { IEmailItem } from './types';
 import AddEmailModal from './add-modal';
@@ -93,7 +95,14 @@ export default function Email() {
         <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>{t('emailSettings')}</p>
         </div>
-        <Button onClick={addOnOpen}>{t('addBtn')}</Button>
+        <div className="flex items-center justify-between gap-2">
+          <Button
+            onClick={() => toast.success(t('itIsBeingPrepared'), toastOptions)}
+          >
+            {t('addMultipleBtn')}
+          </Button>
+          <Button onClick={addOnOpen}>{t('addBtn')}</Button>
+        </div>
       </CardHeader>
       {/* Table */}
       <CardBody className=" flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-2">
@@ -117,6 +126,8 @@ export default function Email() {
           }
         >
           <TableHeader>
+            <TableColumn>{t('name').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('surname').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('mailAddress').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('createdAt').toLocaleUpperCase()}</TableColumn>
             <TableColumn className=" flex items-center justify-end">
@@ -130,6 +141,9 @@ export default function Email() {
           >
             {item => (
               <TableRow key={item?.id}>
+                <TableCell>{item?.name}</TableCell>
+                <TableCell>{item?.surname}</TableCell>
+
                 <TableCell>{item?.emailAddress}</TableCell>
                 <TableCell>
                   {dayjs.utc(item?.createdAt).format('DD.MM.YYYY')}

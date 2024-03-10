@@ -41,6 +41,7 @@ import { IMenuItemsNavbar, LayoutLanguage } from '@/models/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
+import { TbReportAnalytics } from 'react-icons/tb';
 
 import PricingModal from '@/modules/pricing/pages';
 import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
@@ -138,7 +139,7 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent className="lg:hidden pr-3" justify="center">
           <NavbarBrand>
-            <p className="font-bold text-inherit">Ai-zadə</p>
+            <p className="font-bold text-inherit">Ai-zade</p>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
@@ -209,7 +210,7 @@ export default function Navbar() {
               }}
             >
               <DropdownTrigger>
-                <Button size="sm" className="capitalize ">
+                <Button size="sm" className="capitalize bg-transparent">
                   {currentLanguageFlag(currentLayoutLanguage)}
                 </Button>
               </DropdownTrigger>
@@ -222,6 +223,7 @@ export default function Navbar() {
                 onSelectionChange={(e: any) => {
                   dispatch(setCurrentLayoutLanguage(e?.currentKey));
                   i18n?.changeLanguage(e?.currentKey);
+                  window.location.reload();
                 }}
               >
                 <DropdownItem key={LayoutLanguage?.Azerbaijani}>
@@ -242,7 +244,7 @@ export default function Navbar() {
                   onClick={onOpen}
                   size="sm"
                   isIconOnly
-                  className="bg-black rounded-full flex "
+                  className="bg-transparent rounded-full flex "
                 >
                   <BsEnvelope
                     className="cursor-pointer animate-pulse"
@@ -256,7 +258,7 @@ export default function Navbar() {
               onClick={feedBackModalOnOpen}
               size="sm"
               isIconOnly
-              className="bg-black rounded-full flex "
+              className="bg-transparent rounded-full flex "
             >
               <BsQuestionCircle color="white" size={22} />
             </Button>
@@ -308,6 +310,17 @@ export default function Navbar() {
                 >
                   <p className="flex items-center  m-0 gap-2">
                     <BsGear /> {t('settings')}
+                  </p>
+                </DropdownItem>
+                <DropdownItem
+                  className=" "
+                  onClick={() => {
+                    navigate('/reports');
+                  }}
+                  key="reports"
+                >
+                  <p className="flex items-center  m-0 gap-2">
+                    <TbReportAnalytics /> {t('reports')}
                   </p>
                 </DropdownItem>
                 <DropdownItem

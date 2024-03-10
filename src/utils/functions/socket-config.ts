@@ -12,7 +12,9 @@ const generateStatisticsSocket = (token: string) => {
         // withCredentials: false,
       }
     )
-    .withAutomaticReconnect()
+    .withAutomaticReconnect({
+      nextRetryDelayInMilliseconds: () => 2000
+    })
     .build();
   return statisticsSocket;
 };

@@ -40,7 +40,9 @@ function EditEmailModal({
   } = useForm<IEmailItemUpdate>({
     mode: 'onChange',
     defaultValues: {
-      emailAddress: selectedItem?.emailAddress
+      emailAddress: selectedItem?.emailAddress,
+      name: selectedItem?.name,
+      surname: selectedItem?.surname
     }
   });
 
@@ -50,7 +52,9 @@ function EditEmailModal({
     setLoading(true);
     const payload: IEmailItemUpdate = {
       id: selectedItem?.id,
-      emailAddress: data?.emailAddress
+      emailAddress: data?.emailAddress,
+      name: data?.name,
+      surname: data?.surname
     };
     try {
       const res = await SettingsService.getInstance().updateEmailItem(payload);
@@ -89,6 +93,34 @@ function EditEmailModal({
                 >
                   <div className="flex flex-col gap-5  ">
                     <AppHandledInput
+                      name="name"
+                      inputProps={{
+                        id: 'name'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.name?.message)}
+                      errors={errors}
+                      size="sm"
+                      label={inputPlaceholderText(t('name'))}
+                    />
+                  </div>
+                  <div className="flex flex-col gap-5  ">
+                    <AppHandledInput
+                      name="surname"
+                      inputProps={{
+                        id: 'surname'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.surname?.message)}
+                      errors={errors}
+                      size="sm"
+                      label={inputPlaceholderText(t('surname'))}
+                    />
+                  </div>{' '}
+                  <div className="flex flex-col gap-5  ">
+                    <AppHandledInput
                       name="emailAddress"
                       inputProps={{
                         id: 'emailAddress'
@@ -108,7 +140,6 @@ function EditEmailModal({
                       required
                     />
                   </div>
-
                   <Divider />
                 </form>
               </ModalBody>

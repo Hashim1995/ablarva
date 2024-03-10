@@ -1,17 +1,28 @@
 import React, { Suspense } from 'react';
 import { Navigate } from 'react-router-dom';
-import AssistantHomePage from '@/modules/assistant/pages/home';
 import LoginPage from '@core/static-pages/login-page';
-import SettingsPage from '@/modules/settings/pages';
-import SmptpPage from '@/modules/settings/pages/smtp-page';
-import HistoryPage from '@/modules/settings/pages/history-page';
-import EmailPage from '@/modules/settings/pages/email-page';
-import SuspenseLoader from '../static-components/suspense-loader';
-import CabinetPage from '../../modules/cabinet/pages';
 
+const AssistantHomePage = React.lazy(
+  () => import('@/modules/assistant/pages/home')
+);
+const SettingsPage = React.lazy(() => import('@/modules/settings/pages'));
+const SmptpPage = React.lazy(
+  () => import('@/modules/settings/pages/smtp-page')
+);
+const ReportsPage = React.lazy(() => import('@/modules/reports/pages'));
+const HistoryPage = React.lazy(
+  () => import('@/modules/reports/pages/history-page')
+);
+const CabinetPage = React.lazy(() => import('@/modules/cabinet/pages'));
+const EmailPage = React.lazy(
+  () => import('@/modules/settings/pages/email-page')
+);
+const SuspenseLoader = React.lazy(
+  () => import('@core/static-components/suspense-loader')
+);
 const LayoutPage = React.lazy(() => import('@core/layout/layout'));
-const ChatPage = React.lazy(() => import('../../modules/chat/pages'));
-const AssistantPage = React.lazy(() => import('../../modules/assistant/pages'));
+const ChatPage = React.lazy(() => import('@/modules/chat/pages'));
+const AssistantPage = React.lazy(() => import('@/modules/assistant/pages'));
 
 const routes = [
   {
@@ -70,14 +81,6 @@ const routes = [
             )
           },
           {
-            path: 'payment-history',
-            element: (
-              <Suspense fallback={<SuspenseLoader />}>
-                <HistoryPage />
-              </Suspense>
-            )
-          },
-          {
             path: 'email',
             element: (
               <Suspense fallback={<SuspenseLoader />}>
@@ -85,6 +88,32 @@ const routes = [
               </Suspense>
             )
           }
+        ]
+      },
+      {
+        path: 'reports/*',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <ReportsPage />
+          </Suspense>
+        ),
+        children: [
+          {
+            index: true,
+            element: (
+              <Suspense fallback={<SuspenseLoader />}>
+                <HistoryPage />
+              </Suspense>
+            )
+          }
+          // {
+          //   path: 'email',
+          //   element: (
+          //     <Suspense fallback={<SuspenseLoader />}>
+          //       <EmailPage />
+          //     </Suspense>
+          //   )
+          // }
         ]
       },
       {

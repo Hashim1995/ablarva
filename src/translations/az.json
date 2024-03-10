@@ -344,6 +344,15 @@
     "port": "Port",
     "emailSettings": "Email siyahısı",
     "addAnyData": "Məlumat əlavə et",
-    "editAnyData": "Məlumata düzəliş et"
+    "editAnyData": "Məlumata düzəliş et",
+    "hireMe": "İşə götür",
+    "addMultipleBtn": "Çoxlu formada əlavə et",
+    "reports": "Hesabatlar",
+    "templateMessageText1": "Sabahkı iclasa qatıla bilməyəcimi əməkdaşlara bildir",
+    "templateMessageText2": "Faktura detallarını mənə göndərə bilərsən?",
+    "templateMessageText3": "Bütün şirkət əməkdaşlarına Novruz bayramı təbrik emaili yaz",
+    "templateMessageText4": "Müştərilərə illik hesabat emaillərini göndər",
+    "unlockPowerOf": "Seç və Bizimlə",
+    "withSmartestAssistants": "Assistanlarımızın Potensialını Gör"
   }
 }

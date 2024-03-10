@@ -230,7 +230,7 @@
     "copy": "Copy",
     "my": "My",
     "tariff": "Tariff",
-    "deleteConfirmationPrompt": "Are you sure you want to delete the chat?",
+    "deleteConfirmationPrompt": "Are you sure you want to delete the data?",
     "welcomeMessage": "Welcome! Our AI startup AIZade is here to simplify your daily life. With our efficient and innovative technology, you can find instant answers to every question. You will always find innovations and differences on our platform. Log in and start your journey in the world of AIZade!",
     "privacyPolicySentence": "Privacy and confidentiality policy",
     "questionAnswerAiZadeh": "Have a question? Our esteemed Ai-zade is ready to answer! 😊",
@@ -341,6 +341,18 @@
     "mailAddress": "Email address",
     "mailPassword": "Email password",
     "hostName": "Host",
-    "port": "Port"
+    "port": "Port",
+    "emailSettings": "Email list",
+    "addAnyData": "Add data",
+    "editAnyData": "Edit data",
+    "hireMe": "Hire",
+    "addMultipleBtn": "Add multiple",
+    "reports": "Reports",
+    "templateMessageText1": "Inform the staff that I will not be able to attend tomorrow's meeting",
+    "templateMessageText2": "Can you send me the invoice details?",
+    "templateMessageText3": "Write a congratulatory Novruz email to all company employees",
+    "templateMessageText4": "Send annual report emails to clients",
+    "unlockPowerOf": "Unlock the Power of",
+    "withSmartestAssistants": "with Smartest Assistants"
   }
 }
