@@ -37,7 +37,7 @@ function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
                 height="400"
                 width="100%"
                 allow="fullscreen;"
-                src="https://www.youtube.com/embed/tgbNymZ7vqY"
+                src="https://www.youtube.com/watch?v=X1k5Kcki90M"
               />
             </ModalBody>
             <ModalFooter>
