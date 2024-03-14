@@ -24,6 +24,13 @@ interface IAddEmailModal {
   onOpenChange: () => void;
 }
 
+/**
+ * Renders the add email modal. This modal allows the user to add a new email to the email list.
+ * @param props.isOpen The state of the modal.
+ * @param props.reloadData The function to reload the email list.
+ * @param props.onOpenChange The function to change the state of the modal.
+ * @returns The rendered add email modal.
+ */
 function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
   const { t } = useTranslation();
 
@@ -37,6 +44,13 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
 
   const [loading, setLoading] = useState<boolean>(false);
 
+  /**
+   * Submits the form. It adds a new email to the email list.
+   * @param data The email to be added.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   * @returns The result of the form submission.
+   */
   const onSubmit = async (data: IEmailItemCreate) => {
     setLoading(true);
     const payload: IEmailItemCreate = {

@@ -11,10 +11,22 @@ import { toast } from 'react-toastify';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { ISmtpItem } from './types';
 
+/**
+ * Renders the SMTP settings page. This page allows the user to configure the SMTP settings. The user can update the SMTP settings. The user can also view the current SMTP settings. Form validation is also implemented. The user can see the validation errors if the form is not valid.
+ *
+ * @returns The rendered SMTP settings page.
+ */
 function Smtp() {
   const [loading, setLoading] = useState(true);
   const [btnLoader, setBtnLoader] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
+
+  /**
+   * Fetches the SMTP settings from the server.
+   * @returns The SMTP settings.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   */
   const getSmtpConfig = async () => {
     try {
       const res = await SettingsService.getInstance().getSmtp();
@@ -37,6 +49,13 @@ function Smtp() {
   });
   const { t } = useTranslation();
 
+  /**
+   * Submits the form. It updates the SMTP settings.
+   * @param data The SMTP settings.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   * @returns The result of the form submission.
+   */
   const onSubmit = async (data: ISmtpItem) => {
     const payload: ISmtpItem = {
       mailAddress: data?.mailAddress,
@@ -87,7 +106,6 @@ function Smtp() {
                 isInvalid={Boolean(errors.mailAddress?.message)}
                 errors={errors}
                 size="sm"
-                // className="text-black bg-transparent text-base sm:text-xl"
                 rules={{
                   required: {
                     value: true,
@@ -159,7 +177,6 @@ function Smtp() {
                 isInvalid={Boolean(errors.hostName?.message)}
                 errors={errors}
                 size="sm"
-                // className="text-black bg-transparent text-base sm:text-xl"
                 rules={{
                   required: {
                     value: true,
@@ -180,7 +197,6 @@ function Smtp() {
                 isInvalid={Boolean(errors.port?.message)}
                 errors={errors}
                 size="sm"
-                // className="text-black bg-transparent text-base sm:text-xl"
                 rules={{
                   required: {
                     value: true,

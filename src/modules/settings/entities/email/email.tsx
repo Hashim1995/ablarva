@@ -7,7 +7,6 @@ import {
   TableBody,
   TableRow,
   TableCell,
-  //   Chip,
   Button,
   Spinner,
   Tooltip,
@@ -20,7 +19,6 @@ import {
   Divider
 } from '@nextui-org/react';
 import utc from 'dayjs/plugin/utc'; // Import the UTC plugin
-
 import { useAsyncList } from '@react-stately/data';
 import dayjs from 'dayjs';
 import { SettingsService } from '@/services/settings-services/settings-services';
@@ -34,6 +32,12 @@ import AddEmailModal from './add-modal';
 import EditEmailModal from './edit-modal';
 
 dayjs.extend(utc); // Use the UTC plugin
+
+/**
+ * Renders the email settings page. This page allows the user to configure the email list for use Email assitant. The user can add, edit, and delete email. The user can also view the current email settings.
+ * @returns The rendered email settings page.
+ * @async The function is asynchronous.
+ */
 
 export default function Email() {
   const {
@@ -51,6 +55,12 @@ export default function Email() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IEmailItem>();
 
+  /**
+   * Fetches the email list for email marketing assistants from the server.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   * @returns The result of the email settings.
+   */
   const list = useAsyncList<IEmailItem>({
     async load({ cursor }) {
       setIsLoading(true);
@@ -75,6 +85,12 @@ export default function Email() {
     }
   });
 
+  /**
+   * Removes the email from the email list.
+   * @param id The id of the email.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   */
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {

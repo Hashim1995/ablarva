@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAssistantChatForm } from '@/modules/assistant/types';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '@/redux/store';
-import audioUrl from './mech-keyboard-02-102918.mp3';
+import { clickKeyBoardSound } from '@/assets/sounds/asset-exporter';
 
 interface IChatFormProps {
   onSubmit: SubmitHandler<IAssistantChatForm>;
@@ -40,7 +40,6 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
   const { t } = useTranslation();
 
-  const typewriterSound = new Audio(audioUrl);
   const matches = useMediaQuery('(min-width: 468px)');
   const { currentAssistantLanguage } = useSelector(
     (state: RootState) => state?.assistant
@@ -101,8 +100,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           onKeyDown={e => {
             // Check if the key pressed is 'Enter' and there is no shift key pressed
             if (audioEnable) {
-              typewriterSound.currentTime = 0; // Reset the typewriterSound to the start
-              typewriterSound.play();
+              clickKeyBoardSound.currentTime = 0; // Reset the clickKeyBoardSound to the start
+              clickKeyBoardSound.play();
             }
 
             if (e.key === 'Enter' && !e.shiftKey && !waitingForResponse) {

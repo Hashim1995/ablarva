@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { typewriterSound } from '@/assets/sounds/asset-exporter';
 import { toastOptions } from '@/configs/global-configs';
 import { IFeedbackPayload } from '@/modules/chat/types';
 import { RootState } from '@/redux/store';
@@ -27,9 +28,6 @@ interface ITypewriter {
   message: string;
   isTyping: boolean;
 }
-const typewriterSound = new Audio(
-  'https://assets.codepen.io/162656/audio-old-typewriter.wav'
-);
 
 function Typewriter({ message, isTyping }: ITypewriter) {
   const [displayedContent, setDisplayedContent] = useState('');

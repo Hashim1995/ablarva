@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import { typewriterSound } from '@/assets/sounds/asset-exporter';
 import { toastOptions } from '@/configs/global-configs';
 import {
   IAssistantFeedbackPayload,
@@ -6,10 +7,8 @@ import {
 } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
-
 import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
-
 import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -23,9 +22,6 @@ interface ITypewriter {
   message: string;
   isTyping: boolean;
 }
-const typewriterSound = new Audio(
-  'https://assets.codepen.io/162656/audio-old-typewriter.wav'
-);
 
 function Typewriter({ message, isTyping }: ITypewriter) {
   const [displayedContent, setDisplayedContent] = useState('');
