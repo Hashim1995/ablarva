@@ -2,6 +2,11 @@ import { Card } from '@nextui-org/react';
 import MessengerHeader from './header';
 import ChatInner from './chat-inner/chat-inner';
 
+/**
+ * @description The `Layout` component is a React functional component that renders the layout for the messenger for Assistant chat.
+ *
+ * @returns JSX.Element representing the Layout component.
+ */
 function Layout() {
   return (
     <Card
@@ -13,10 +18,7 @@ function Layout() {
       <MessengerHeader />
 
       <div className="inner h-full flex  chat-wrapper">
-        <main
-          // style={{ height: 'calc(80vh - 56px) ' }}
-          className="flex-1  layoutHeight     transition-all duration-300 ease-in-out h-full"
-        >
+        <main className="flex-1  layoutHeight     transition-all duration-300 ease-in-out h-full">
           <ChatInner />
         </main>
       </div>

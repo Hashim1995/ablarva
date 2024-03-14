@@ -4,8 +4,12 @@ import { useSelector } from 'react-redux';
 import ChatHistory from './chat-history/chat-history';
 import Layout from './messenger/layout';
 import AsistantCardList from './messenger/assistant/asistantList';
-// import MyPlan from './my-plan/my-plan';
 
+/**
+ * @description The `Chat` component is a React functional component that renders the chat interface for Assistant.
+ *
+ * @returns The rendered chat component.
+ */
 function Chat() {
   const { resetAssistantInner, assistantsDrawer } = useSelector(
     (state: RootState) => state.assistant

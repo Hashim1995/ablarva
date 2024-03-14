@@ -4,7 +4,13 @@ import ChatHistory from './chat-history/chat-history';
 import Layout from './messenger/layout';
 // import MyPlan from './my-plan/my-plan';
 
+/**
+ * Renders the Chat component.
+ *
+ * @returns The rendered Chat component.
+ */
 function Chat() {
+  // resetChatInner is a key that is used to reset the chat inner component.
   const { resetChatInner } = useSelector((state: RootState) => state.chat);
   return (
     <div className=" fixed-height  ">

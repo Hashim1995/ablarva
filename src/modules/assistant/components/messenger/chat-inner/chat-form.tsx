@@ -28,6 +28,12 @@ interface IChatFormProps {
   templateMessage?: string;
 }
 
+/**
+ * @description The `ChatForm` component is a React functional component that renders the form for the chat with the Assistant.
+ *
+ * @param {IChatFormProps} props The props for the ChatForm component.
+ * @returns JSX.Element representing the ChatForm component.
+ */
 function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   // Initialize the hook form methods
   const { register, handleSubmit, reset } = useForm<IAssistantChatForm>();
@@ -45,6 +51,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
     (state: RootState) => state?.assistant
   );
 
+  // Function to get the current language text
   const currentLanguageText = (id: string) => {
     switch (id) {
       case '0':
@@ -61,6 +68,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         return t('asAzerbaijaniLang');
     }
   };
+  // Function to get the current language flag
   const currentLanguageFlag = (id: string) => {
     switch (id) {
       case '0':

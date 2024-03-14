@@ -9,6 +9,11 @@ import { BsJustify } from 'react-icons/bs';
 import { setAssistantsDrawer } from '@/redux/assistant/assistant-slice';
 import AsistanCard from './asistant';
 
+/**
+ * @description The `AsistantCardList` component is a React functional component that renders the list of Assistant cards.
+ *
+ * @returns JSX.Element representing the AsistantCardList component.
+ */
 function AsistantCardList() {
   const [assistansList, setAssistansList] = useState<IAssistantItem[]>();
   const [loading, setLoading] = useState<boolean>(true);
@@ -16,6 +21,8 @@ function AsistantCardList() {
   const { currentAssistantModel } = useSelector(
     (state: RootState) => state?.assistant
   );
+
+  // Fetching the list of assistants
   const fetchAssistansList = async () => {
     try {
       const res = await AssistantService.getInstance().fetchAssistantsList();

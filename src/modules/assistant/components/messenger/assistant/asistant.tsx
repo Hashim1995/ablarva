@@ -7,6 +7,12 @@ import { Image } from '@nextui-org/react';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+/**
+ * @description The `AsistantCard` component is a React functional component that renders the card for the Assistant.
+ *
+ * @param {IAssistantItem} data The data for the AsistantCard component.
+ * @returns JSX.Element representing the AsistantCard component.
+ */
 function AsistantCard({
   data,
   currentAssistanModel
@@ -30,6 +36,7 @@ function AsistantCard({
   return (
     <div
       onClick={() => {
+        // delete the threadID from the URL when the assistant is changed to avoid the assistant to be stuck in the same thread.
         searchParams.delete('threadID');
         dispatch(setResetAssistantInner(Date.now()));
         dispatch(

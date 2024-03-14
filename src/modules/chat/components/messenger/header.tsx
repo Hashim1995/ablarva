@@ -25,7 +25,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
 /**
- * Renders the header component for the messenger.
+ * @description Renders the header component for the messenger.
  *
  * @returns The JSX element representing the messenger header.
  */
@@ -210,6 +210,10 @@ function MessengerHeader() {
           )}
         </div>
       </div>
+
+      {/**
+       * @description Renders the email verification modal. This component displays the email verification modal.
+       */}
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
       )}

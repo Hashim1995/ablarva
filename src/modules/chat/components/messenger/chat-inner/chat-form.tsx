@@ -26,8 +26,34 @@ interface IChatFormProps {
   onSubmit: SubmitHandler<IChatForm>;
   waitingForResponse: boolean;
 }
+/**
+ * `ChatForm` is a React component that provides a chat form interface.
+ *
+ * @component
+ * @param {object} props - The properties that define the component's behavior and display.
+ * @param {SubmitHandler<IChatForm>} props.onSubmit - The function to be called when the form is submitted.
+ * @param {boolean} props.waitingForResponse - A flag indicating whether the form is waiting for a response.
+ *
+ * @returns {JSX.Element} The rendered `ChatForm` component.
+ *
+ * The component uses several hooks and utilities:
+ * - `useForm` from `react-hook-form` to manage form state and validation.
+ * - `useLocalStorage` from `usehooks-ts` to persist the audio enable state across sessions.
+ * - `useDispatch` and `useSelector` from `react-redux` to interact with the Redux store.
+ * - `useTranslation` from `react-i18next` to support internationalization.
+ * - `useMediaQuery` from `usehooks-ts` to adapt the UI based on the viewport width.
+ *
+ * The component also defines a helper function `currentLanguageText` to get the text representation of the current language based on its id.
+ *
+ * @example
+ * // Here is an example of how to use the ChatForm component.
+ * <ChatForm onSubmit={handleSubmit} waitingForResponse={false} />
 
-function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
+ */
+function ChatForm({
+  onSubmit,
+  waitingForResponse
+}: IChatFormProps): JSX.Element {
   // Initialize the hook form methods
   const { register, handleSubmit, reset } = useForm<IChatForm>();
   const [audioEnable, setAudioEnable] = useLocalStorage<Boolean>(
@@ -44,6 +70,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
   const { t } = useTranslation();
 
+  // Get the text representation of the current language based on its id
   const currentLanguageText = (id: string) => {
     switch (id) {
       case '0':
@@ -60,6 +87,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         return t('asAzerbaijaniLang');
     }
   };
+
+  // Get the flag representation of the current language based on its id
   const currentLanguageFlag = (id: string) => {
     switch (id) {
       case '0':
