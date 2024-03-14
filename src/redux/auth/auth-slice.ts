@@ -42,15 +42,28 @@ export const fetchUserData = createAsyncThunk(
 );
 
 // Create the user slice
+/**
+ * Represents a Redux slice for managing user state.
+ *
+ * @remarks
+ * This slice contains reducers and extra reducers to handle actions related to user data.
+ */
 const userSlice = createSlice({
   name: 'user',
   initialState,
   reducers: {
+    /**
+     * Sets the user data in the state.
+     *
+     * @param state - The current state.
+     * @param action - The action containing the payload.
+     */
     setUser: (state, action: PayloadAction<any>) => {
       state.user = action.payload;
     }
     // You can add more reducers here if needed
   },
+  // Add extra reducers to handle the async thunk actions (pending, fulfilled, rejected) and update the state accordingly
   extraReducers: builder => {
     builder
       .addCase(fetchUserData.pending, state => {

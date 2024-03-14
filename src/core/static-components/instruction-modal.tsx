@@ -13,7 +13,19 @@ interface IInstructionModal {
   isOpen: boolean;
   onOpenChange: () => void;
 }
-function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
+/**
+ * Renders an instruction modal component.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open or not.
+ * @param {Function} props.onOpenChange - Callback function to handle open/close state changes.
+ * @example <InstructionModal isOpen={true} onOpenChange={() => {}} />
+ * @returns {JSX.Element} The instruction modal component.
+ */
+function InstructionModal({
+  isOpen,
+  onOpenChange
+}: IInstructionModal): JSX.Element {
   const { t } = useTranslation();
 
   return (
@@ -33,11 +45,12 @@ function InstructionModal({ isOpen, onOpenChange }: IInstructionModal) {
             </ModalHeader>
             <ModalBody>
               <iframe
-                title={t('instructionText')}
                 height="400"
                 width="100%"
-                allow="fullscreen;"
-                src="https://www.youtube.com/watch?v=X1k5Kcki90M"
+                src="https://www.youtube.com/embed/X1k5Kcki90M"
+                title={t('instructionText')}
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowFullScreen
               />
             </ModalBody>
             <ModalFooter>

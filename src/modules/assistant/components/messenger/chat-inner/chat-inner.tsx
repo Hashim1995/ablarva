@@ -34,7 +34,36 @@ import TempalteMessage from '@/components/layout/template-message';
 import ChatBubble from './chat-bubble/chat-bubble';
 import ChatForm from './chat-form';
 
-function ChatInner() {
+/**
+ * `ChatInner` is a React component that handles the chat functionality of the application.
+ *
+ * @component
+ * @returns {JSX.Element} The rendered `ChatInner` component.
+ *
+ * @example
+ * <ChatInner />
+ *
+ * @description
+ * It manages the state of the chat, including the list of chat bubbles, error state, last question asked, and search parameters.
+ * It also handles the submission of chat messages, fetching of chat history, and scrolling to the bottom of the chat.
+ *
+ * The component uses several hooks from React and other libraries:
+ * - `useState` for managing local state.
+ * - `useEffect` for handling side effects.
+ * - `useRef` for referencing DOM elements and mutable variables.
+ * - `useDisclosure` for managing the state of disclosure components.
+ * - `useSelector` and `useDispatch` for interacting with the Redux store.
+ * - `useSearchParams` for accessing and updating the URL search parameters.
+ * - `useTranslation` for internationalization.
+ *
+ * The component dispatches several actions to the Redux store:
+ * - `setCurrentAssistantModel` to set the current assistant model.
+ * - `setWaitingForAssistantResponse` to indicate whether the assistant is currently processing a response.
+ * - `setWaitingForAssistantThreadLoad` to indicate whether the assistant is currently loading a thread.
+ *
+ * The component also interacts with the `AssistantService` to fetch the chat history and send messages.
+ */
+function ChatInner(): JSX.Element {
   const { t } = useTranslation();
 
   const [bubbleList, setBubbleList] = useState<IAssistantThreadBubblesItem[]>(
@@ -57,12 +86,15 @@ function ChatInner() {
   const abortController = useRef(new AbortController());
   const messengerBoxRef = useRef<HTMLDivElement>(null);
 
+  // Reset the abort controller when the component is unmounted
   const resetAbortController = () => {
     if (abortController.current) {
       abortController.current.abort();
     }
     abortController.current = new AbortController();
   };
+
+  // Scroll to the bottom of the chat
   const scrollToBottom = () => {
     if (messengerBoxRef.current) {
       messengerBoxRef?.current?.scrollIntoView({ behavior: 'smooth' });
@@ -70,16 +102,16 @@ function ChatInner() {
     }
   };
 
+  // Fetch the chat history from the URL
   const fetchThreadonUrl = async (id: string) => {
+    // Set the waiting state to true
     dispatch(setWaitingForAssistantThreadLoad(true));
     try {
       const res = await AssistantService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
+        // Set the bubble list and assistant model from the response data and set the waiting state to false once the data is fetched successfully
         setBubbleList(res?.data?.allThreadBubbles);
         dispatch(setWaitingForAssistantThreadLoad(false));
-        dispatch(
-          setCurrentAssistantModel(res?.data?.assistantParameters?.assistantId)
-        );
         dispatch(
           setCurrentAssistantModel({
             assistantId: res?.data?.assistantParameters?.assistantId,
@@ -96,17 +128,22 @@ function ChatInner() {
     }
   };
 
+  // Handle the submission of chat messages
   const onSubmit: SubmitHandler<IAssistantChatForm> = async data => {
+    // Get the current abort controller
     const currentAbortController = abortController.current;
 
+    // If the user is not verified, open the email verification modal
     if (!verified) {
       onOpen();
     } else if (!currentAssistantModel?.assistantId) {
+      // If the assistant model is not set, show an error message
       toast.error(
         t('youShouldSelectOneAssistantForConversation'),
         toastOptions
       );
     } else {
+      // If the assistant model is set, set the last question and add the user's message to the bubble list
       setLastQuestion(data?.message);
       setBubbleList(old => [
         ...old,
@@ -134,8 +171,8 @@ function ChatInner() {
           currentAbortController.signal
         );
         if (res.isSuccess) {
+          // Set the bubble list and search parameters from the response data and set the waiting state to false once the data is fetched successfully
           setSearchParams({ threadID: String(res?.data?.assistantThreadId) });
-
           setBubbleList(oldBubbles => [
             ...oldBubbles.map(bubble => ({
               ...bubble,
@@ -161,19 +198,21 @@ function ChatInner() {
     }
   };
 
+  // Reset the abort controller when the component is unmounted
   useEffect(() => {
     resetAbortController();
-
     return () => {
       resetAbortController();
     };
   }, [searchParams, waitingForAssistantThreadLoad]);
 
+  // Scroll to the bottom of the chat when the bubble list changes
   useEffect(() => {
     setHasError(false);
     scrollToBottom();
   }, [bubbleList]);
 
+  // Fetch the chat history from the URL when the thread ID changes
   useEffect(() => {
     const threadID = searchParams.get('threadID');
     if (threadID) {
@@ -181,12 +220,14 @@ function ChatInner() {
     }
   }, [searchParams]);
 
+  // Clear the bubble list when the assistant thread is loading
   useEffect(() => {
     if (waitingForAssistantThreadLoad) {
       setBubbleList([]);
     }
   }, [waitingForAssistantThreadLoad]);
 
+  // Clear the bubble list and error state when the search parameters change
   useEffect(
     () => () => {
       setBubbleList([]);
@@ -286,7 +327,6 @@ function ChatInner() {
         waitingForResponse={waitingForAssistantResponse}
         onSubmit={onSubmit}
       />
-      {/* </div> */}
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
     </div>
   );

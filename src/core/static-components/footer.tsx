@@ -1,12 +1,19 @@
 import { useDisclosure } from '@nextui-org/react';
-import InstructionModal from './instruction-modal';
 import { useTranslation } from 'react-i18next';
+import InstructionModal from './instruction-modal';
 
 interface IFooterProps {
   onOpenHelp: () => void;
 }
 
-function Footer({ onOpenHelp }: IFooterProps) {
+/**
+ * Renders the footer component.
+ *
+ * @param {IFooterProps} props - The props for the Footer component.
+ * @param {Function} props.onOpenHelp - The function to handle opening the help section.
+ * @returns {JSX.Element} The rendered Footer component.
+ */
+function Footer({ onOpenHelp }: IFooterProps): JSX.Element {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { t } = useTranslation();
 

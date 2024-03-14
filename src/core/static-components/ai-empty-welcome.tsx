@@ -1,6 +1,10 @@
 import { useTranslation } from 'react-i18next';
 import './ai-loader.scss';
 
+/**
+ * Renders the empty welcome component for the AI bot.
+ * This component displays a set of blobs and a welcome message.
+ */
 function AiEmptyWelcome() {
   const { t } = useTranslation();
 

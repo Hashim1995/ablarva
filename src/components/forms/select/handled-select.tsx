@@ -1,4 +1,5 @@
 import { Select, SelectItem } from '@nextui-org/react';
+import { ReactElement } from 'react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
@@ -24,6 +25,23 @@ interface IAppHandledSelect {
   IconElement?: any;
 }
 
+/**
+ * A custom handled select component.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.name - The name of the select input.
+ * @param {Object} props.control - The control object from react-hook-form.
+ * @param {Object} props.rules - The validation rules for the select input.
+ * @param {boolean} props.isInvalid - Indicates if the select input is invalid.
+ * @param {Function} props.onChangeApp - The callback function to handle select input change.
+ * @param {boolean} [props.required=false] - Indicates if the select input is required.
+ * @param {string} [props.className] - The CSS class name for the select input.
+ * @param {Object} [props.selectProps] - Additional props to be passed to the Select component.
+ * @param {Array} props.options - The options for the select input.
+ * @param {string} props.size - The size of the select input.
+ * @param {string} props.label - The label for the select input.
+ * @returns {JSX.Element} The rendered handled select component.
+ */
 function AppHandledSelect({
   name,
   control,
@@ -36,7 +54,7 @@ function AppHandledSelect({
   options,
   size,
   label
-}: IAppHandledSelect) {
+}: IAppHandledSelect): ReactElement {
   const { t } = useTranslation();
   return (
     <Controller

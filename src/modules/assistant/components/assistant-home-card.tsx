@@ -11,6 +11,12 @@ import {
 import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
 
+/**
+ * @description The `AssistantHomeCard` component is a React functional component that renders the assistant home card.
+ *
+ * @param {IAssistantItem} item The assistant item to be rendered.
+ * @returns JSX.Element representing the AssistantHomeCard component.
+ */
 function AssistantHomeCard({ item }: { item: IAssistantItem }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -39,6 +45,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
       <div className="flex justify-center mt-2 mb-3 space-x-3">
         <Button
           onClick={() => {
+            // if the assistant is active, set the assistant model and navigate to the assistant page
             if (item?.isActive) {
               dispatch(setResetAssistantInner(Date.now()));
               dispatch(

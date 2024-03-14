@@ -13,6 +13,11 @@ import { useTranslation } from 'react-i18next';
 import { BsJustify } from 'react-icons/bs';
 import { useDispatch, useSelector } from 'react-redux';
 
+/**
+ * @description The `MessengerHeader` component is a React functional component that renders the header for the messenger for Assistant chat.
+ *
+ * @returns JSX.Element representing the MessengerHeader component.
+ */
 function MessengerHeader() {
   const dispatch = useDispatch();
   const { isOpen: modalIsopen, onOpenChange } = useDisclosure();

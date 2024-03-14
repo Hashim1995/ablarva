@@ -25,6 +25,17 @@ import LoginLeftBar from './login-leftbar';
 interface ILoginFormProps {
   handleFlip: () => void;
 }
+/**
+ * Represents a login form component.
+ *
+ * This component renders a login form with email and password inputs,
+ * and handles the submission of the form data for user login.
+ *
+ * @component
+ * @param {object} props - The component props.
+ * @param {Function} props.handleFlip - The function to handle flipping between login and registration forms.
+ * @returns {JSX.Element} The rendered LoginForm component.
+ */
 function LoginForm({ handleFlip }: ILoginFormProps) {
   const { t } = useTranslation();
 
@@ -62,7 +73,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
       </div>
       <div className="animate-border  p-[3px] rounded-xl w-   bg-white bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%]">
         <div className="p-10 gradient-bg h-full  flex-1 flex items-start flex-col	justify-center rounded-xl  ">
-          <h4 className="mb-4 mb-5 tracking-widest text-sm text-default-400">
+          <h4 className=" mb-5 tracking-widest text-sm text-default-400">
             {t('loginAndDiscover')}
           </h4>
           <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-white">

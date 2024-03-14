@@ -12,12 +12,15 @@ import { StatisticsUpdateData } from './models/common';
 import generateStatisticsSocket from './utils/functions/socket-config';
 import VerifyEmail from './core/static-components/verify-email';
 
+/**
+ * The main component of the application. It renders the routes and handles user authentication and verification.
+ * @returns The main component of the application.
+ */
+
 function App() {
   const router = useRoutes(routesList);
   const dispatch = useDispatch<AppDispatch>();
   const isResponsive = useMediaQuery('(max-width: 1024px)');
-
-  // const { isDarkMode } = useDarkMode();
 
   const userToken: any = JSON.parse(localStorage.getItem('userToken') || '{}');
   const getme = useSelector((state: RootState) => state.user);
@@ -26,6 +29,11 @@ function App() {
 
   const navigate = useNavigate();
 
+  /*
+    This useEffect is responsible for handling user authentication and navigation.
+    If the user token is not available, it navigates to the login page.
+    Otherwise, it dispatches the fetchUserData action to retrieve user data.
+  */
   useEffect(() => {
     if (!userToken?.token) {
       navigate('/login');
@@ -33,6 +41,15 @@ function App() {
       dispatch(fetchUserData());
     }
   }, []);
+
+  /*
+    This useEffect is responsible for handling the statistics socket connection and updating the statistics count.
+    It only runs when the screen size is not responsive. This is to prevent multiple socket connections on mobile devices.
+    If the user token and current subscription are available, it creates a statistics socket and starts the connection.
+    When a 'StatisticsUpdate' event is received, it dispatches the setStatisticsCount action to update the statistics count in the Redux store.
+    If the socket connection fails, an error is logged to the console.
+    When the component is unmounted, the socket connection is stopped. 
+  */
 
   useEffect(() => {
     if (!isResponsive) {
@@ -56,27 +73,23 @@ function App() {
         }
       }
     }
-
     return () => {
       generateStatisticsSocket(userToken?.token).stop();
     };
   }, [getme, isResponsive]);
 
+  /*
+    This useEffect is responsible for checking if the user's email is verified.
+    If the email is not verified and the user ID is available, it opens the email verification modal.
+    It listens for changes in the 'verified' and 'getme' variables.
+  */
   useEffect(() => {
     if (!verified && getme?.user?.id) {
       onOpen();
     }
   }, [verified, getme]);
   return (
-    <main
-      className={`${
-        '  gradient-bg overflow-y-hidden'
-
-        // isDarkMode
-        //   ? 'dark h-screen text-foreground bg-background'
-        //   : 'h-screen text-foreground bg-background'
-      }`}
-    >
+    <main className="gradient-bg overflow-y-hidden">
       <Suspense fallback={<SuspenseLoader />}>
         {router}
         {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}

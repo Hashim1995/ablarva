@@ -1,6 +1,10 @@
 import { LayoutLanguage } from '@/models/common';
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+/**
+ * The coreSlice represents a slice of the Redux store for the 'core' module.
+ * It contains the current layout language state.
+ */
 const coreSlice = createSlice({
   name: 'core',
   initialState: {

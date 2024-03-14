@@ -2,8 +2,17 @@ import { useState } from 'react';
 import LoginForm from './login-form';
 import RegisterForm from './register-form';
 
+/**
+ * Renders the Login component.
+ *
+ * @returns The rendered Login component.
+ */
 function Login() {
   const [isFlipped, setIsFlipped] = useState(false);
+
+  /**
+   * Toggles the flip state of the Login component.
+   */
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };

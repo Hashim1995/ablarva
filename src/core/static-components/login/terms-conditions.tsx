@@ -16,6 +16,15 @@ interface ITermsConditionModalProps {
   onOpenChange: () => void;
 }
 
+/**
+ * Renders a modal component for displaying terms and conditions.
+ *
+ * @param isOpen - A boolean indicating whether the modal is open or not.
+ * @param onOpenChange - A callback function to handle the change in modal open state.
+ * @returns The rendered TermsConditionsModal component.
+ * @component  TermsConditionsModal
+ * @example <TermsConditionsModal isOpen={true} onOpenChange={() => {}} />
+ */
 function TermsConditionsModal({
   isOpen,
   onOpenChange

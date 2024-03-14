@@ -7,10 +7,16 @@ import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
 import AssistantHomeCard from './assistant-home-card';
 
+/**
+ * @description The `Home` component is a React functional component that renders the home page for Assistant.
+ *
+ * @returns JSX.Element representing the Home component.
+ */
 function Home() {
   const [assistansList, setAssistansList] = useState<IAssistantItem[]>();
   const [loading, setLoading] = useState<boolean>(true);
 
+  // Fetching the list of assistants
   const fetchAssistansList = async () => {
     try {
       const res = await AssistantService.getInstance().fetchAssistantsList();

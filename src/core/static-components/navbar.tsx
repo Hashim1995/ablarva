@@ -51,6 +51,16 @@ import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
 import logo from '../../assets/images/aizadə.png';
 
+// generate a documentation for the Navbar component
+/**
+ * The Navbar component is responsible for rendering the application's navigation bar.
+ * It includes a logo, a menu, and a user profile section.
+ * The component also provides a language selection option and a feedback modal.
+ * Additionally, the component displays buttons for user interaction and navigation.
+ * @component
+ * @returns {JSX.Element} The Navbar component.
+ */
+
 export default function Navbar() {
   const { t, i18n } = useTranslation();
 
@@ -72,8 +82,7 @@ export default function Navbar() {
       icon: <BsFillGearFill />
     }
   ];
-  // const { t, i18n } = useTranslation();
-  // const { toggle, isDarkMode } = useDarkMode();
+
   const location = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

@@ -27,6 +27,10 @@ import ViewEmailReportModal from './view-email-reports';
 
 dayjs.extend(utc); // Use the UTC plugin
 
+/**
+ * @description Renders the email reports. This component displays the user's email reports.
+ * @returns The rendered email reports.
+ */
 export default function Email() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
@@ -34,6 +38,12 @@ export default function Email() {
   const [isLoading, setIsLoading] = useState(false);
   const [selectedItem, setSelectedItem] = useState<IEmailReportItem>();
 
+  /**
+   * @description Loads the user's email reports.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   * @returns The user's email reports.
+   */
   const list = useAsyncList<IEmailReportItem>({
     async load({ cursor }) {
       setIsLoading(true);
@@ -120,6 +130,14 @@ export default function Email() {
           </TableBody>
         </Table>
       </CardBody>
+
+      {/**
+       * @description Renders the ViewEmailReportModal component.
+       * @returns The rendered ViewEmailReportModal component.
+       * @param selectedItem The selected email report item.
+       * @param onOpenChange The function to change the modal's open state.
+       * @param isOpen The modal's open state.
+       */}
       {isOpen && (
         <ViewEmailReportModal
           selectedItem={selectedItem}

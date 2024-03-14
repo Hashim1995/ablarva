@@ -1,10 +1,12 @@
 import { useTranslation } from 'react-i18next';
 import './think-text.scss';
 
+/**
+ * Renders a component that displays a list of text elements in a random order.
+ */
 function ThinkText() {
   const { t } = useTranslation();
 
-  // Assert the type of textList to be string[] explicitly
   const textList: string[] = t('textList', { returnObjects: true });
 
   return (

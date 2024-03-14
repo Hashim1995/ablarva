@@ -1,9 +1,12 @@
 import { ILimitItem, IPackageItem } from '@/models/payment';
 
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Props for the PricingItem component.
+ */
 interface IPricingItemProps {
   item: IPackageItem;
   verified: boolean;
@@ -12,6 +15,19 @@ interface IPricingItemProps {
   modalEmailOnOpen: () => void;
   setWantedPackageId: Dispatch<SetStateAction<number>>;
 }
+
+/**
+ * @description Renders the pricing item. This component displays the pricing item.
+ * @param {IPricingItemProps} props - The props for the component.
+ * @param {IPackageItem} props.item - The package item.
+ * @param {boolean} props.verified - The user's verification status.
+ * @param {number} props.packageId - The user's package ID.
+ * @param {() => void} props.buyModalOnOpen - The function to open the buy modal.
+ * @param {() => void} props.modalEmailOnOpen - The function to open the email modal.
+ * @param {Dispatch<SetStateAction<number>>} props.setWantedPackageId - The function to set the wanted package ID.
+ * @returns {JSX.Element} The rendered component.
+ */
+
 function PricingItem({
   item,
   setWantedPackageId,
@@ -19,7 +35,7 @@ function PricingItem({
   packageId,
   buyModalOnOpen,
   modalEmailOnOpen
-}: IPricingItemProps) {
+}: IPricingItemProps): React.ReactElement {
   const { t } = useTranslation();
 
   return (
@@ -50,6 +66,7 @@ function PricingItem({
       <Button
         variant="bordered"
         onClick={() => {
+          // If the user is not verified, open the email modal. Otherwise, open the buy modal.
           if (!verified) {
             modalEmailOnOpen();
           } else {

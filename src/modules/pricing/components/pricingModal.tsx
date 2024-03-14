@@ -16,6 +16,14 @@ interface IPricingModal {
   loading: boolean;
 }
 
+/**
+ * @description Renders the pricing modal. This component displays the pricing modal.
+ * @param isOpen The modal's open state.
+ * @param onOpenChange The modal's open state change handler.
+ * @param onOkFunction The function to execute when the user clicks the "Yes" button.
+ * @param loading The loading state.
+ * @returns The rendered pricing modal.
+ */
 function PricingModal({
   isOpen,
   onOpenChange,
