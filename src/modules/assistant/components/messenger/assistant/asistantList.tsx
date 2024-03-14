@@ -46,11 +46,12 @@ function AsistantCardList() {
           Asistan
         </h1>
         <Button
+          title="Toggle Assistant Drawer"
           size="sm"
           isIconOnly
           onClick={() => dispatch(setAssistantsDrawer(false))}
           className="bg-transparent block  ms-3"
-          aria-label="Filter"
+          aria-label="Toggle Assistant Drawe"
         >
           <BsJustify size={20} color="white" className={` rotate-90`} />
         </Button>

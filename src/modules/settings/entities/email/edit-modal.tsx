@@ -152,9 +152,17 @@ function EditEmailModal({
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
                 <Button
                   form="edit-email-form"
+                  title="Edit Email"
+                  aria-label="Edit Email"
                   isLoading={loading}
                   type="submit"
                 >

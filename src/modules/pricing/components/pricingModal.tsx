@@ -53,6 +53,8 @@ function PricingModal({
               </ModalBody>
               <ModalFooter>
                 <Button
+                  title="Yes"
+                  aria-label="Yes"
                   className="bg-black text-white"
                   onPress={onOkFunction}
                   isLoading={loading}
@@ -60,7 +62,13 @@ function PricingModal({
                 >
                   {t('yesTxt')}
                 </Button>
-                <Button onPress={onClose}>{t('noTxt')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('noTxt')}
+                </Button>
               </ModalFooter>
             </>
           )}

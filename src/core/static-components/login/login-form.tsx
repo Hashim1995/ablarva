@@ -135,6 +135,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
                     <button
                       className="focus:outline-none"
                       type="button"
+                      aria-label="Show Password"
+                      title="Show Password"
                       onClick={() => setShowPassword(z => !z)}
                     >
                       {showPassword ? (
@@ -183,6 +185,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               </div>
             </div>
             <Button
+              aria-label="Submit Login Form"
+              title="Submit Login Form"
               size="sm"
               isLoading={isSubmitting}
               className="w-full !mt-3 md:mt-5"

@@ -177,6 +177,8 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                     <Button
                       className="w-full"
                       size="md"
+                      aria-label="Send Feedback Button"
+                      title="Send Feedback Button"
                       isLoading={isSubmitting}
                       variant="bordered"
                       type="submit"
@@ -187,10 +189,20 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onClick={instructionOnOpen}>
+                <Button
+                  aria-label="Instruction Button"
+                  title="Instruction Button"
+                  onClick={instructionOnOpen}
+                >
                   {t('instructionBTN')}
                 </Button>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Button"
+                  aria-label="Close Button"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}

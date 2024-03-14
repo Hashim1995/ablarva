@@ -129,6 +129,13 @@ export default function Navbar() {
 
   useOnClickOutside(navRef, handleOutSideClick);
 
+  /**
+   * @component Navbar - The Navbar component is responsible for rendering the application's navigation bar.
+   * It includes a logo, a menu, and a user profile section.
+   * The component also provides a language selection option and a feedback modal.
+   * Additionally, the component displays buttons for user interaction and navigation.
+   * @returns {JSX.Element} The Navbar component.
+   */
   return (
     <>
       <NavbarNext
@@ -173,6 +180,8 @@ export default function Navbar() {
               onClick={() => {
                 navigate('/chat');
               }}
+              title="Chat"
+              aria-label="Chat"
               startContent={<BsFillChatLeftDotsFill size={17} />}
             >
               {t('simpleChat')}
@@ -187,6 +196,8 @@ export default function Navbar() {
                 navigate('/assistant-home');
               }}
               startContent={<BsYelp size={17} />}
+              aria-label="Assistant"
+              title="Assistant"
             >
               {t('assistant')}
             </Button>
@@ -200,6 +211,8 @@ export default function Navbar() {
                   'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
+                aria-label="Catalyst"
+                title="Catalyst"
               >
                 {t('catalyst')}
               </Button>
@@ -214,6 +227,7 @@ export default function Navbar() {
         >
           <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
             <Dropdown
+              role="menu"
               classNames={{
                 content: 'min-w-[auto] w-[80px]'
               }}
@@ -253,6 +267,8 @@ export default function Navbar() {
                   onClick={onOpen}
                   size="sm"
                   isIconOnly
+                  aria-label="email verify"
+                  title="Email verify"
                   className="bg-transparent rounded-full flex "
                 >
                   <BsEnvelope
@@ -267,6 +283,8 @@ export default function Navbar() {
               onClick={feedBackModalOnOpen}
               size="sm"
               isIconOnly
+              aria-label="feedback"
+              title="Feedback"
               className="bg-transparent rounded-full flex "
             >
               <BsQuestionCircle color="white" size={22} />
@@ -355,6 +373,8 @@ export default function Navbar() {
               key={`${item}-${index}`}
             >
               <Button
+                aria-label="Navbar Menu Item"
+                title="Navbar Menu Item"
                 className="w-full px-1 flex bg-transparent items-center font-medium"
                 onClick={() => {
                   navigate(`/${item.path}`);

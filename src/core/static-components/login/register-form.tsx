@@ -339,6 +339,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                   endContent: (
                     <button
                       className="focus:outline-none"
+                      aria-label="Show Password"
+                      title="Show Password"
                       type="button"
                       onClick={() => setShowPassword(z => !z)}
                     >
@@ -408,6 +410,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
                     <button
                       className="focus:outline-none"
                       type="button"
+                      aria-label="Show Password"
+                      title="Show Password"
                       onClick={() => setShowPasswordConfirm(z => !z)}
                     >
                       {showPasswordConfirm ? (
@@ -432,6 +436,8 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
               size="sm"
               isLoading={isSubmitting}
               variant="bordered"
+              aria-label="Register Form Submit Button"
+              title="Register Form Submit Button"
               className="w-full"
               type="submit"
             >

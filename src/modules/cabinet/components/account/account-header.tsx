@@ -31,10 +31,11 @@ function AccountHeader({
         <Tooltip placement="left" content={t('changePassWord')}>
           <Button
             size="sm"
+            title="Change Password"
             isIconOnly
             onClick={onOpen}
             className=" rounded-full"
-            aria-label="submit"
+            aria-label="Change Password"
             type="button"
           >
             <IoKeyOutline
@@ -48,10 +49,11 @@ function AccountHeader({
           <Button
             size="sm"
             isIconOnly
+            title="Edit Account"
             isDisabled={isLoading}
             onClick={() => setFieldsIsDisable(z => !z)}
             className="rounded-full"
-            aria-label="submit"
+            aria-label="Edit Account"
             type="button"
           >
             <BsPencilSquare
@@ -69,7 +71,8 @@ function AccountHeader({
               isIconOnly
               form="account-form"
               className="rounded-full"
-              aria-label="submit"
+              aria-label="Save"
+              title="Save"
               type="submit"
             >
               <BsFolder2

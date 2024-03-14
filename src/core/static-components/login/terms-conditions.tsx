@@ -506,7 +506,13 @@ function TermsConditionsModal({
                 </div>
               </ModalBody>
               <ModalFooter className="border-t-1">
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}

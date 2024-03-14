@@ -54,7 +54,9 @@ function InstructionModal({
               />
             </ModalBody>
             <ModalFooter>
-              <Button onPress={onClose}>{t('closeBtn')}</Button>
+              <Button title="Close" aria-label="Close" onPress={onClose}>
+                {t('closeBtn')}
+              </Button>
             </ModalFooter>
           </>
         )}

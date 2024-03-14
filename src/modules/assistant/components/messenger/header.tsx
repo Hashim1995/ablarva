@@ -37,6 +37,7 @@ function MessengerHeader() {
         onClick={() => dispatch(setAssistantsDrawer(true))}
         className="bg-transparent block  ms-3"
         aria-label="Filter"
+        title="Filter"
       >
         <BsJustify
           size={20}

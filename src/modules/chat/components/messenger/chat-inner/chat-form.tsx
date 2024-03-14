@@ -143,6 +143,8 @@ function ChatForm({
         <div className="flex  px-5    items-center justify-between   shadow-none  z-20 ">
           <Button
             type="button"
+            title="Toggle audio enable"
+            aria-label="Toggle audio enable"
             isIconOnly
             size="sm"
             onClick={() => setAudioEnable(z => !z)}
@@ -262,6 +264,8 @@ function ChatForm({
             <Button
               type="submit"
               isIconOnly
+              title="Send"
+              aria-label="Send"
               size="sm"
               isDisabled={waitingForResponse}
               className="bg-transparentrounded-full"
