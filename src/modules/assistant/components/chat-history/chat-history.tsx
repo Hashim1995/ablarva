@@ -171,7 +171,8 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                               size="sm"
                               isIconOnly
                               className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
-                              aria-label="Remove chat"
+                              aria-label="Remove chat popover trigger"
+                              title="Remove chat popover trigger"
                             >
                               <BsTrash size={16} className=" text-white" />
                             </Button>
@@ -190,6 +191,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                                     removeThreadFromList(conv.threadId);
                                   }}
                                   aria-label="Remove thread"
+                                  title='Remove thread "Yes"'
                                 >
                                   {t('yesTxt')}
                                 </Button>
@@ -197,6 +199,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                                   size="sm"
                                   className=" "
                                   aria-label="Remove thread"
+                                  title='Remove thread "No"'
                                   onClick={() =>
                                     setPopoversVisible({
                                       [conv?.threadId]: false

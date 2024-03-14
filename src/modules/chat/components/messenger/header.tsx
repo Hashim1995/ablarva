@@ -48,9 +48,12 @@ function MessengerHeader() {
   const { t } = useTranslation();
 
   return (
-    <div className=" pt-1 pb-3 h-[60px] flex   ">
+    <div className=" pt-1 pb-3 h-[60px] flex" role="banner">
       <div />
-      <div className="flex justify-between  items-center container">
+      <div
+        role={'navigation'}
+        className="flex justify-between  items-center container"
+      >
         <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
           {(premium || basic) && (
             <div className="flex w-[400px] justify-content-between gap-4">
@@ -140,9 +143,10 @@ function MessengerHeader() {
             <Tooltip placement="top-start" offset={12} content={t('newChat')}>
               <Button
                 size="sm"
+                title="New Chat"
+                aria-label="New Chat"
                 isIconOnly
                 className="bg-transparent rounded-full"
-                aria-label="Filter"
                 onClick={() => {
                   if (!verified) {
                     onOpen();
@@ -180,6 +184,8 @@ function MessengerHeader() {
                   <div className="flex gap-2">
                     <Button
                       size="sm"
+                      title="Remove thread from list"
+                      aria-label="Remove thread from list"
                       className="bg-black text-white"
                       onClick={() => {
                         if (!verified) {
@@ -191,15 +197,15 @@ function MessengerHeader() {
                           navigate('/chat');
                         }
                       }}
-                      aria-label="Remove thread"
                     >
                       {t('yesTxt')}
                     </Button>
                     <Button
                       size="sm"
                       onClick={() => setIsOpen(false)}
+                      title="Close"
+                      aria-label="Close"
                       className=" bg-black text-white"
-                      aria-label="Remove thread"
                     >
                       {t('noTxt')}
                     </Button>

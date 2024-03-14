@@ -65,6 +65,8 @@ function PricingItem({
 
       <Button
         variant="bordered"
+        title="Join Now"
+        aria-label="Join Now"
         onClick={() => {
           // If the user is not verified, open the email modal. Otherwise, open the buy modal.
           if (!verified) {

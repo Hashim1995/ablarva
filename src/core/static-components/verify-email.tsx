@@ -147,6 +147,8 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
 
                   <ButtonGroup>
                     <Button
+                      aria-label="Approve"
+                      title="Approve"
                       size={matches ? 'sm' : 'md'}
                       isLoading={isSubmitting}
                       variant="bordered"
@@ -155,6 +157,8 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                       {t('approve')}
                     </Button>
                     <Button
+                      aria-label="Resend"
+                      title="Resend"
                       size={matches ? 'sm' : 'md'}
                       onClick={resendVerificationCode}
                       isLoading={loading}
@@ -180,7 +184,9 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button title="Close" aria-label="Close" onPress={onClose}>
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}

@@ -277,6 +277,8 @@ function ChatInner(): JSX.Element {
                 {t('myBrainBroken')}
               </Chip>
               <Button
+                title="Regenerate the last question"
+                aria-label="Regenerate the last question"
                 onClick={() => {
                   onSubmit({
                     message: lastQuestion
@@ -286,6 +288,7 @@ function ChatInner(): JSX.Element {
                 startContent={
                   <Button
                     type="submit"
+                    aria-label="Regenerate the last question icon"
                     isIconOnly
                     size="sm"
                     className="bg-black rounded-full"

@@ -228,6 +228,8 @@ function ForgotPassword({
                             id: 'password',
                             endContent: (
                               <button
+                                aria-label="Show Password"
+                                title="Show Password"
                                 className="focus:outline-none"
                                 type="button"
                                 onClick={() => setShowPassword(z => !z)}
@@ -303,6 +305,8 @@ function ForgotPassword({
                               <button
                                 className="focus:outline-none"
                                 type="button"
+                                aria-label="Show Password"
+                                title="Show Password"
                                 onClick={() => setShowPasswordConfirm(z => !z)}
                               >
                                 {showPasswordConfirm ? (
@@ -335,6 +339,8 @@ function ForgotPassword({
                     </div>
                   )}
                   <Button
+                    title="Send Password To Email"
+                    aria-label="Send Password To Email"
                     size="md"
                     isLoading={isSubmitting}
                     variant="bordered"
@@ -345,7 +351,13 @@ function ForgotPassword({
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}

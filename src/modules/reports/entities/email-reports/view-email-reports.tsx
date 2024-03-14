@@ -51,7 +51,13 @@ function ViewEmailReportModal({
                 <p>{selectedItem?.emailBody}</p>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}

@@ -144,6 +144,8 @@ function Smtp() {
                   endContent: (
                     <button
                       className="focus:outline-none"
+                      title="Show Password"
+                      aria-label="Show Password"
                       type="button"
                       onClick={() => setShowPassword(z => !z)}
                     >

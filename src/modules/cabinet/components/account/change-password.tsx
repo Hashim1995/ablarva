@@ -109,6 +109,8 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                         id: 'oldPassword',
                         endContent: (
                           <button
+                            title="Show Password"
+                            aria-label="Show Password"
                             className="focus:outline-none"
                             type="button"
                             onClick={() => setShowOldPassword(z => !z)}
@@ -178,6 +180,8 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                           <button
                             className="focus:outline-none"
                             type="button"
+                            title="Show Password"
+                            aria-label="Show Password"
                             onClick={() => setShowPassword(z => !z)}
                           >
                             {showPassword ? (
@@ -245,6 +249,8 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                         endContent: (
                           <button
                             className="focus:outline-none"
+                            title="Show Password"
+                            aria-label="Show Password"
                             type="button"
                             onClick={() => setShowPasswordConfirm(z => !z)}
                           >
@@ -271,13 +277,21 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                     isLoading={isSubmitting}
                     variant="bordered"
                     type="submit"
+                    title="Approve"
+                    aria-label="Approve"
                   >
                     {t('approve')}
                   </Button>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
               </ModalFooter>
             </>
           )}
