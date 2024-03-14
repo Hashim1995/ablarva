@@ -1,3 +1,4 @@
+/* eslint-disable no-use-before-define */
 /* eslint-disable no-empty-function */
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
@@ -25,12 +26,31 @@ interface ITransactionResponse extends IGlobalResponse {
     totalPages: number;
   };
 }
+/**
+ * Represents a PaymentService class. It contains methods for payment services. It is a singleton class. It is used to get pricing list, buy a packet, and get transactions. It uses the HttpUtil class for HTTP requests. It is used in the Pricing module.
+ * @example
+ * const paymentService = PaymentService.getInstance();
+ * paymentService.getPricingList(id, onError);
+ * paymentService.buyPacket(body, onError);
+ * paymentService.getTransactions(params, onError);
+ */
 export class PaymentService {
-  // eslint-disable-next-line no-use-before-define
+  /**
+   * The singleton instance of the PaymentService class.
+   */
   private static instance: PaymentService | null;
 
-  private constructor() {}
+  /**
+   * Constructs a new instance of the PaymentService class.
+   * Private to enforce the singleton pattern.
+   */
+  private constructor() { }
 
+  /**
+   * Gets the singleton instance of the PaymentService class.
+   * If the instance does not exist, creates a new instance.
+   * @returns The singleton instance of the PaymentService class.
+   */
   public static getInstance(): PaymentService {
     if (!this.instance) {
       PaymentService.instance = new PaymentService();
@@ -38,6 +58,12 @@ export class PaymentService {
     return PaymentService.instance!;
   }
 
+  /**
+   * Retrieves the pricing list for a given ID.
+   * @param id - The ID of the pricing list.
+   * @param onError - Optional callback function to handle errors.
+   * @returns A promise that resolves to the pricing data response.
+   */
   public async getPricingList(
     id: number,
     onError?: ErrorCallBack
@@ -51,6 +77,12 @@ export class PaymentService {
     return res;
   }
 
+  /**
+   * Buys a packet using the provided body.
+   * @param body - The body containing the packet information.
+   * @param onError - Optional callback function to handle errors.
+   * @returns A promise that resolves to the buy packet service response.
+   */
   public async buyPacket(
     body: IBuyPacketBody,
     onError?: ErrorCallBack
@@ -59,6 +91,12 @@ export class PaymentService {
     return res;
   }
 
+  /**
+   * Retrieves the transactions based on the provided parameters.
+   * @param params - The parameters for the HTTP request.
+   * @param onError - Optional callback function to handle errors.
+   * @returns A promise that resolves to the transaction response.
+   */
   public async getTransactions(
     params: IHTTPSParams[],
     onError?: ErrorCallBack

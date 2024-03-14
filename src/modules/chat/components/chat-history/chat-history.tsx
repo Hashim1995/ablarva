@@ -18,6 +18,7 @@ import { BsTrash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 import Empty from '@/components/layout/empty';
+import { FcFlashOn } from 'react-icons/fc';
 import { useTranslation } from 'react-i18next';
 import { IThreadHistoryList } from '../../types';
 
@@ -130,6 +131,12 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
                       }}
                       className="flex  bg-default-50 relative items-center justify-between cursor-pointer text-white rounded-2xl  mb-2   p-3 z-10"
                     >
+                      {conv?.servicePlan === 2 && (
+                        <FcFlashOn
+                          size={18}
+                          className="absolute top-[-5px] right-[-5px]"
+                        />
+                      )}
                       <p className="text-white  leading-4  text-sm line-clamp-3">
                         {conv.firstMessageOfChat}
                       </p>

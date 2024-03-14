@@ -33,7 +33,20 @@ export interface IForgotPasswordForm {
   code?: string;
 }
 
-function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
+/**
+ * Renders a forgot password component.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open or not.
+ * @param {Function} props.onOpenChange - Callback function to handle open/close state changes.
+ * @example <ForgotPassword isOpen={true} onOpenChange={() => {}} />
+ * @returns {JSX.Element} The forgot password component.
+ */
+
+function ForgotPassword({
+  isOpen,
+  onOpenChange
+}: IForgotPassword): JSX.Element {
   const { t } = useTranslation();
 
   const {
@@ -49,8 +62,18 @@ function ForgotPassword({ isOpen, onOpenChange }: IForgotPassword) {
   });
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
+  /**
+   * Represents the state of whether a code has been entered or not.
+   */
   const [hasCode, setHasCode] = useState(false);
 
+  /**
+   * Handles the form submission for the forgot password functionality.
+   * If `hasCode` is false, it calls the `forgetPassword` method of the `AuthService` to initiate the password reset process.
+   * If `hasCode` is true, it calls the `resetPassword` method of the `AuthService` to reset the password.
+   *
+   * @param data - The form data containing the necessary information for password reset.
+   */
   const onSubmit = async (data: IForgotPasswordForm) => {
     if (!hasCode) {
       try {

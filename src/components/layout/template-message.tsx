@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
 import { CardBody } from '@nextui-org/react';
 
@@ -5,7 +6,15 @@ interface ITemplateMessage {
   text: string;
   onSubmit: (arg: { message: string }) => void;
 }
-function TempalteMessage({ text, onSubmit }: ITemplateMessage) {
+/**
+ * Renders a template message component.
+ *
+ * @param {Object} props - The component props.
+ * @param {string} props.text - The text of the template message.
+ * @param {Function} props.onSubmit - The function to be called when the template message is clicked.
+ * @returns {JSX.Element} The template message component.
+ */
+function TempalteMessage({ text, onSubmit }: ITemplateMessage): JSX.Element {
   return (
     <div
       aria-hidden

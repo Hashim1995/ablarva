@@ -3,6 +3,10 @@ import logo from '@assets/images/aizadə.png';
 import { useTranslation } from 'react-i18next';
 import TermsConditionsModal from './terms-conditions';
 
+/**
+ * Renders the left sidebar component for the login page.
+ * This component displays the logo, a welcome message, and a link to the privacy policy.
+ */
 function LoginLeftBar() {
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
   const { t } = useTranslation();

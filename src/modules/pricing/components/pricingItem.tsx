@@ -1,9 +1,12 @@
 import { ILimitItem, IPackageItem } from '@/models/payment';
 
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
-import { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * Props for the PricingItem component.
+ */
 interface IPricingItemProps {
   item: IPackageItem;
   verified: boolean;
@@ -12,6 +15,13 @@ interface IPricingItemProps {
   modalEmailOnOpen: () => void;
   setWantedPackageId: Dispatch<SetStateAction<number>>;
 }
+
+/**
+ * A component that represents a pricing item.
+ * @param {IPricingItemProps} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
+
 function PricingItem({
   item,
   setWantedPackageId,
@@ -19,7 +29,7 @@ function PricingItem({
   packageId,
   buyModalOnOpen,
   modalEmailOnOpen
-}: IPricingItemProps) {
+}: IPricingItemProps): React.ReactElement {
   const { t } = useTranslation();
 
   return (

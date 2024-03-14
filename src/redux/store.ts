@@ -6,19 +6,28 @@ import chatReducer from './chat/chat-slice';
 import assistantReducer from './assistant/assistant-slice';
 import coreReducer from './core/core-slice';
 
-// Attempt to load the initial layout language from localStorage
+// Define the initial layout language based on the value stored in localStorage, or use Azerbaijani as the default
 const savedLayoutLanguage = localStorage.getItem('currentLayoutLanguage');
 const initialLayoutLanguage = savedLayoutLanguage
   ? (savedLayoutLanguage as LayoutLanguage)
   : LayoutLanguage.Azerbaijani;
 
+// Create the preloaded state object with the initial layout language
 const preloadedState = {
   core: {
     currentLayoutLanguage: initialLayoutLanguage
   }
-  // Add other initial states if necessary
 };
 
+/**
+ * The Redux store configuration.
+ * @remarks
+ * This function creates a Redux store with the specified reducers and preloaded state.
+ * @param reducer - The root reducer that combines all the individual reducers.
+ * @param preloadedState - The initial state of the store.
+ * @returns The configured Redux store.
+ */
+// Create the Redux store with the specified reducers and preloaded state
 export const store = configureStore({
   reducer: {
     user: authReducer,

@@ -33,8 +33,8 @@ function AsistanPricing() {
   const packageId = useSelector(
     (state: RootState) => state.user.user.currentSubscription?.packageId
   );
-
-  const fetchPricing = async () => {
+  // optimie fetchPricing function more
+  async function fetchPricing() {
     try {
       const res = await PaymentService.getInstance().getPricingList(2);
       if (res.isSuccess) {
@@ -44,7 +44,7 @@ function AsistanPricing() {
       console.log(err);
     }
     setLoading(false);
-  };
+  }
 
   useEffect(() => {
     fetchPricing();
@@ -77,6 +77,7 @@ function AsistanPricing() {
                   item={item}
                   setWantedPackageId={setWantedPackageId}
                   verified={verified}
+                  key={item?.packageId}
                   packageId={packageId}
                   modalEmailOnOpen={modalEmailOnOpen}
                   buyModalOnOpen={buyModalOnOpen}

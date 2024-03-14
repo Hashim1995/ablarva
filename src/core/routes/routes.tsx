@@ -3,6 +3,22 @@ import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
 import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
 
+/**
+ * Lazy loads the application routes.
+ * @returns The application routes.
+ * @see https://reactjs.org/docs/code-splitting.html
+ * @see https://reactjs.org/docs/react-api.html#reactlazy
+ * @see https://reactjs.org/docs/react-api.html#reactsuspense
+ * @see https://reactjs.org/docs/react-api.html#reactsuspensefallback
+ * @see https://reactrouter.com/web/guides/code-splitting
+ * @see https://reactrouter.com/web/api/Suspense
+ * @see https://reactrouter.com/web/api/Suspense/fallback-prop
+ * @see https://reactrouter.com/web/api/Navigate
+ * @see https://reactrouter.com/web/api/Outlet
+ * @see https://reactrouter.com/web/api/Route
+ *
+ */
+
 const AssistantHomePage = React.lazy(
   () => import('@/modules/assistant/pages/home')
 );
@@ -25,6 +41,9 @@ const LayoutPage = React.lazy(() => import('@core/layout/layout'));
 const ChatPage = React.lazy(() => import('@/modules/chat/pages'));
 const AssistantPage = React.lazy(() => import('@/modules/assistant/pages'));
 
+/**
+ * Array of route objects that define the application routes.
+ */
 const routes = [
   {
     path: '/',
@@ -32,6 +51,9 @@ const routes = [
     children: [
       { path: '/', element: <Navigate to="chat" /> },
 
+      /**
+       * Route for the chat page.
+       */
       {
         index: true,
         path: 'chat/*',
@@ -41,6 +63,9 @@ const routes = [
           </Suspense>
         )
       },
+      /**
+       * Route for the assistant home page.
+       */
       {
         path: 'assistant-home',
         element: (
@@ -49,6 +74,9 @@ const routes = [
           </Suspense>
         )
       },
+      /**
+       * Route for the assistant page.
+       */
       {
         path: '/assistant',
         element: (
@@ -57,6 +85,9 @@ const routes = [
           </Suspense>
         )
       },
+      /**
+       * Route for the cabinet page.
+       */
       {
         path: 'cabinet',
         element: (
@@ -65,6 +96,9 @@ const routes = [
           </Suspense>
         )
       },
+      /**
+       * Route for the settings page.
+       */
       {
         path: 'settings/*',
         element: (
@@ -91,6 +125,9 @@ const routes = [
           }
         ]
       },
+      /**
+       * Route for the reports page.
+       */
       {
         path: 'reports/*',
         element: (
@@ -128,11 +165,17 @@ const routes = [
     ]
   },
 
+  /**
+   * Route for the login page.
+   */
   {
     path: 'login',
     element: <LoginPage />
   },
 
+  /**
+   * Route for handling unknown paths.
+   */
   {
     path: '*',
     element: <Navigate to="/404" />

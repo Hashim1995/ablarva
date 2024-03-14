@@ -1,4 +1,4 @@
-// import { inputConfig } from '@/configs/global-configs';
+/* eslint-disable no-undef */
 import { Input, InputProps } from '@nextui-org/react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 
@@ -12,7 +12,6 @@ interface IHandledInput {
     RegisterOptions<FieldValues>,
     'valueAsNumber' | 'valueAsDate' | 'setValueAs' | 'disabled'
   >;
-  // variant?: 'flat' | 'bordered' | 'faded' | 'underlined';
   required?: boolean;
   startContentIconType?: null;
   errors?: any;
@@ -24,12 +23,17 @@ interface IHandledInput {
   size?: 'sm' | 'md' | 'lg';
 }
 
+/**
+ * A custom input component that is controlled by a form library.
+ *
+ * @param {IHandledInput} props - The component props.
+ * @returns {JSX.Element} The rendered component.
+ */
 function AppHandledInput({
   name,
   control,
   placeholder,
   rules,
-  // variant = 'bordered',
   required = false,
   inputProps,
   isInvalid = false,
@@ -37,8 +41,8 @@ function AppHandledInput({
   label,
   errors,
   type = 'text',
-  onChangeApp // size // IconElement
-}: IHandledInput) {
+  onChangeApp
+}: IHandledInput): JSX.Element {
   return (
     <Controller
       name={name}
@@ -50,7 +54,6 @@ function AppHandledInput({
           label={label}
           placeholder={placeholder}
           required={required}
-          // labelPlacement="outside"
           onBlur={onBlur}
           onChange={e => {
             onChange(e);
