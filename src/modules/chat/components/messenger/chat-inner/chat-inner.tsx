@@ -263,6 +263,8 @@ function ChatInner(): JSX.Element {
                 startContent={
                   <Button
                     type="submit"
+                    title="Regenerate"
+                    aria-label="Regenerate"
                     isIconOnly
                     size="sm"
                     className="bg-black rounded-full"

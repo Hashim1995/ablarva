@@ -147,8 +147,20 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button onPress={onClose}>{t('closeBtn')}</Button>
-                <Button form="add-email-form" isLoading={loading} type="submit">
+                <Button
+                  title="Close Modal"
+                  aria-label="Close Modal"
+                  onPress={onClose}
+                >
+                  {t('closeBtn')}
+                </Button>
+                <Button
+                  title="Add Email"
+                  aria-label="Add Email"
+                  form="add-email-form"
+                  isLoading={loading}
+                  type="submit"
+                >
                   {t('addBtn')}
                 </Button>
               </ModalFooter>

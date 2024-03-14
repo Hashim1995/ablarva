@@ -124,6 +124,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         <div className="flex  px-5    items-center justify-between   shadow-none  z-20 ">
           <Button
             type="button"
+            title="Toggle Audio Enable/Disable"
+            aria-label="Toggle Audio Enable/Disable"
             isIconOnly
             size="sm"
             onClick={() => setAudioEnable(z => !z)}
@@ -151,7 +153,11 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
                 }}
               >
                 <DropdownTrigger>
-                  <Button size="sm" className="capitalize bg-transparent">
+                  <Button
+                    aria-label="Assistant Language"
+                    size="sm"
+                    className="capitalize bg-transparent"
+                  >
                     {currentLanguageFlag(currentAssistantLanguage)}
                   </Button>
                 </DropdownTrigger>
@@ -244,6 +250,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
             <Button
               type="submit"
+              title="Send Message"
+              aria-label="Send Message"
               isIconOnly
               size="sm"
               isDisabled={waitingForResponse}

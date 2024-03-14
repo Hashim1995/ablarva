@@ -89,7 +89,12 @@ export default function Email() {
           bottomContent={
             list.items.length > 0 && (
               <div className="flex justify-center my-4">
-                <Button onClick={() => list.loadMore()} disabled={isLoading}>
+                <Button
+                  title="Load More"
+                  aria-label="Load More"
+                  onClick={() => list.loadMore()}
+                  disabled={isLoading}
+                >
                   {t('loadMore')}
                 </Button>
               </div>

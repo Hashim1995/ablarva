@@ -113,11 +113,15 @@ export default function Email() {
         </div>
         <div className="flex items-center justify-between gap-2">
           <Button
+            title="Add multiple"
+            aria-label="Add multiple"
             onClick={() => toast.success(t('itIsBeingPrepared'), toastOptions)}
           >
             {t('addMultipleBtn')}
           </Button>
-          <Button onClick={addOnOpen}>{t('addBtn')}</Button>
+          <Button title="Add" aria-label="Add" onClick={addOnOpen}>
+            {t('addBtn')}
+          </Button>
         </div>
       </CardHeader>
       {/* Table */}
@@ -134,7 +138,12 @@ export default function Email() {
           bottomContent={
             list.items.length > 0 && (
               <div className="flex justify-center my-4">
-                <Button onClick={() => list.loadMore()} disabled={isLoading}>
+                <Button
+                  title="Load More"
+                  aria-label="Load More"
+                  onClick={() => list.loadMore()}
+                  disabled={isLoading}
+                >
                   {t('loadMore')}
                 </Button>
               </div>
@@ -182,9 +191,10 @@ export default function Email() {
                       <PopoverTrigger>
                         <Button
                           size="sm"
+                          title="Remove chat"
+                          aria-label="Remove chat popover"
                           isIconOnly
                           className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
-                          aria-label="Remove chat"
                         >
                           <BsTrash size={16} className=" text-danger" />
                         </Button>
@@ -196,13 +206,14 @@ export default function Email() {
                           <div className="w-full flex items-center gap-1">
                             <Button
                               size="sm"
+                              title="Yes"
+                              aria-label="Yes"
                               className=" "
                               variant="bordered"
                               isLoading={removeLoading}
                               onClick={() => {
                                 removeThreadFromList(item.id);
                               }}
-                              aria-label="Remove thread"
                             >
                               {t('yesTxt')}
                             </Button>

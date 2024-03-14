@@ -44,6 +44,8 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
       </div>
       <div className="flex justify-center mt-2 mb-3 space-x-3">
         <Button
+          aria-label="hire and navigate to assistant page"
+          title="hire and navigate to assistant page"
           onClick={() => {
             // if the assistant is active, set the assistant model and navigate to the assistant page
             if (item?.isActive) {

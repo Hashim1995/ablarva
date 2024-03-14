@@ -78,6 +78,8 @@ function ChatBubble({
               <>
                 <Button
                   type="button"
+                  title="Dislike"
+                  aria-label="Dislike"
                   isIconOnly
                   isDisabled={
                     dislike ||
@@ -100,6 +102,8 @@ function ChatBubble({
                 </Button>
                 <Button
                   type="submit"
+                  title="Like"
+                  aria-label="Like"
                   isIconOnly
                   isDisabled={
                     liked ||
@@ -127,6 +131,8 @@ function ChatBubble({
           <div className="flex  gap-2  items-center justify-between">
             <Button
               type="button"
+              title="Copy to Clipboard"
+              aria-label="Copy to Clipboard"
               onClick={() => {
                 navigator.clipboard.writeText(message).then(
                   () => {
