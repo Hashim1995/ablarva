@@ -20,9 +20,15 @@ import {
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsFillPlusCircleFill } from 'react-icons/bs';
+import { FcFlashOn } from 'react-icons/fc';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate, useSearchParams } from 'react-router-dom';
 
+/**
+ * @description Renders the header component for the messenger.
+ *
+ * @returns The JSX element representing the messenger header.
+ */
 function MessengerHeader() {
   const dispatch = useDispatch();
   // eslint-disable-next-line no-unused-vars
@@ -107,7 +113,7 @@ function MessengerHeader() {
             color="primary"
             className="mr-5"
             classNames={{
-              cursor: ' bg-[#292D32]',
+              cursor: ' bg-default-50',
               tabContent: 'group-data-[selected=true]:text-[white]'
             }}
           >
@@ -118,7 +124,12 @@ function MessengerHeader() {
             />
             <Tab
               key="2"
-              title={t('premium')}
+              title={
+                <span className="flex items-center">
+                  {t('premium')}
+                  <FcFlashOn size={16} />
+                </span>
+              }
               isDisabled={
                 Boolean(searchParams.get('threadID')) || premium?.total === 0
               }
@@ -199,6 +210,10 @@ function MessengerHeader() {
           )}
         </div>
       </div>
+
+      {/**
+       * @description Renders the email verification modal. This component displays the email verification modal.
+       */}
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
       )}

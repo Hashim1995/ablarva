@@ -20,7 +20,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { IAssistantChatForm } from '@/modules/assistant/types';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '@/redux/store';
-import audioUrl from './mech-keyboard-02-102918.mp3';
+import { clickKeyBoardSound } from '@/assets/sounds/asset-exporter';
 
 interface IChatFormProps {
   onSubmit: SubmitHandler<IAssistantChatForm>;
@@ -28,6 +28,12 @@ interface IChatFormProps {
   templateMessage?: string;
 }
 
+/**
+ * @description The `ChatForm` component is a React functional component that renders the form for the chat with the Assistant.
+ *
+ * @param {IChatFormProps} props The props for the ChatForm component.
+ * @returns JSX.Element representing the ChatForm component.
+ */
 function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
   // Initialize the hook form methods
   const { register, handleSubmit, reset } = useForm<IAssistantChatForm>();
@@ -40,12 +46,12 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
 
   const { t } = useTranslation();
 
-  const typewriterSound = new Audio(audioUrl);
   const matches = useMediaQuery('(min-width: 468px)');
   const { currentAssistantLanguage } = useSelector(
     (state: RootState) => state?.assistant
   );
 
+  // Function to get the current language text
   const currentLanguageText = (id: string) => {
     switch (id) {
       case '0':
@@ -62,6 +68,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         return t('asAzerbaijaniLang');
     }
   };
+  // Function to get the current language flag
   const currentLanguageFlag = (id: string) => {
     switch (id) {
       case '0':
@@ -101,8 +108,8 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           onKeyDown={e => {
             // Check if the key pressed is 'Enter' and there is no shift key pressed
             if (audioEnable) {
-              typewriterSound.currentTime = 0; // Reset the typewriterSound to the start
-              typewriterSound.play();
+              clickKeyBoardSound.currentTime = 0; // Reset the clickKeyBoardSound to the start
+              clickKeyBoardSound.play();
             }
 
             if (e.key === 'Enter' && !e.shiftKey && !waitingForResponse) {

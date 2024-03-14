@@ -27,7 +27,14 @@ interface IChatHistoryProps {
   isResponsive?: boolean;
 }
 
-function ChatHistory({ isResponsive }: IChatHistoryProps) {
+/**
+ * @description `ChatHistory` is a React component that provides a chat history interface.
+ * @component
+ * @param {Object} props The properties object.
+ * @param {boolean} props.isResponsive A flag indicating whether the component is responsive.
+ * @returns {JSX.Element} The rendered `ChatHistory` component.
+ */
+function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
   const [threadHistory, setThreadHistory] =
     useState<IAssistantThreadHistoryList[]>();
   const [removeLoading, setRemoveLoading] = useState<boolean>(false);
@@ -43,6 +50,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
 
+  // Fetch thread history from the server
   const fetchThreadHistory = async () => {
     try {
       const res = await AssistantService.getInstance().fetchThreadHistory();
@@ -55,16 +63,19 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
     }
   };
 
+  // Remove a thread from the list
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {
       const res = await AssistantService.getInstance().removeThread(id);
       if (res.isSuccess) {
+        // Refetch the thread history after removing a thread
         fetchThreadHistory();
         setPopoversVisible((prevState: { [key: string]: boolean }) => ({
           ...prevState,
           [id]: false
         }));
+        // If the current thread is removed, reset the assistant inner
         if (searchParams.get('threadID') === id) {
           searchParams.delete('threadID');
           navigate('/assistan', { replace: true });
@@ -102,13 +113,6 @@ function ChatHistory({ isResponsive }: IChatHistoryProps) {
             {threadHistory && threadHistory?.length !== 0 ? (
               threadHistory?.map(day => (
                 <div key={day.dateOfChats} className="pb-5">
-                  {/* <div
-                className={`text-sm font-medium mb-1  text-info text-[gray]`}
-              >
-                {dayjs(new Date(day.dateOfChats).toISOString()).format(
-                  'DD.MM.YYYY'
-                )}
-              </div> */}
                   <div className="flex items-center mb-1">
                     <div className="flex-1 border-t-1 border-gray-200" />
                     <span className="px-3 text-sm  text-[gray]">

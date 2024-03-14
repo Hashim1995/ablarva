@@ -36,7 +36,22 @@ export interface IVerifyEmailForm {
   code?: string | number;
 }
 
-function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
+/**
+ * The VerifyEmail component is responsible for rendering a modal that allows users to verify their email address.
+ * It includes a form where users can enter a verification code and submit it for verification.
+ * The component also provides an option to resend the verification code if needed.
+ * Once the email is successfully verified, the component triggers a callback function to handle the change in the modal's open state.
+ * Additionally, the component displays some informational text and buttons for user interaction.
+ * @component
+ * @param {IVerifyEmail} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the verification modal is open or not.
+ * @param {Function} props.onOpenChange - Callback function to handle the change in modal open state.
+ * @returns {JSX.Element} The VerifyEmail component.
+ * @example
+ * // Example here
+ * <VerifyEmail isOpen={true} onOpenChange={() => {}} />
+ */
+function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
   const { t } = useTranslation();
 
   const {
@@ -51,6 +66,10 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
   const dispatch = useDispatch<AppDispatch>();
   const matches = useMediaQuery('(max-width: 468px)');
 
+  /**
+   * Handles the form submission for verifying email.
+   * @param data - The form data containing the email verification code.
+   */
   const onSubmit = async (data: IVerifyEmailForm) => {
     try {
       const res: IGlobalResponseEmpty =
@@ -67,7 +86,10 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail) {
     }
   };
 
-  const resendVerificationCode = async () => {
+  /**
+   * Resends the verification code for email verification.
+   */
+  const resendVerificationCode = async (): Promise<void> => {
     setLoading(true);
     try {
       const res = await AuthService.getInstance().resendVerificationCode();

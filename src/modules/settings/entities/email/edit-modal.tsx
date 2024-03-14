@@ -25,6 +25,14 @@ interface IEditEmailModal {
   selectedItem: IEmailItemUpdate;
 }
 
+/**
+ * Renders the edit email modal. This modal allows the user to edit an existing email in the email list.
+ * @param props.isOpen The state of the modal.
+ * @param props.reloadData The function to reload the email list.
+ * @param props.onOpenChange The function to change the state of the modal.
+ * @param props.selectedItem The selected email item to be edited.
+ * @returns The rendered edit email modal.
+ */
 function EditEmailModal({
   isOpen,
   onOpenChange,

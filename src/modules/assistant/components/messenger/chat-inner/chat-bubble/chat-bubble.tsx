@@ -1,4 +1,5 @@
 /* eslint-disable consistent-return */
+import Typewriter from '@/components/layout/type-writer';
 import { toastOptions } from '@/configs/global-configs';
 import {
   IAssistantFeedbackPayload,
@@ -6,72 +7,13 @@ import {
 } from '@/modules/assistant/types';
 import { RootState } from '@/redux/store';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
-
-import { markdownOptions } from '@/utils/constants/options';
 import { Avatar, Button } from '@nextui-org/react';
-
-import Markdown from 'markdown-to-jsx';
 import { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { BsHandThumbsDownFill } from 'react-icons/bs';
 import { FaCopy } from 'react-icons/fa';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useReadLocalStorage } from 'usehooks-ts';
-
-interface ITypewriter {
-  message: string;
-  isTyping: boolean;
-}
-const typewriterSound = new Audio(
-  'https://assets.codepen.io/162656/audio-old-typewriter.wav'
-);
-
-function Typewriter({ message, isTyping }: ITypewriter) {
-  const [displayedContent, setDisplayedContent] = useState('');
-  const audioEnable = useReadLocalStorage('audioEnable');
-
-  useEffect(() => {
-    if (!isTyping) return;
-
-    if (displayedContent.length < message.length) {
-      const timeoutId = setTimeout(() => {
-        setDisplayedContent(message.slice(0, displayedContent.length + 1));
-        audioEnable && typewriterSound.play();
-      }, 5);
-
-      return () => {
-        clearTimeout(timeoutId);
-      };
-    }
-
-    // Stop the sound when the full message is displayed
-    if (audioEnable) {
-      typewriterSound.pause();
-      typewriterSound.currentTime = 0;
-    }
-  }, [displayedContent, message, isTyping]);
-
-  const stopAudio = () => {
-    if (audioEnable) {
-      typewriterSound.pause();
-      typewriterSound.currentTime = 0;
-    }
-  };
-
-  useEffect(
-    () => () => {
-      stopAudio();
-    },
-    []
-  );
-
-  return (
-    <Markdown options={markdownOptions}>
-      {isTyping ? displayedContent : message}
-    </Markdown>
-  );
-}
 
 function ChatBubble({
   assistantContent,

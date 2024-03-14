@@ -1,5 +1,8 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
+/**
+ * Represents the user's statistics slice of the Redux store.
+ */
 const statisticsSlice = createSlice({
   name: 'statisticsCount',
   initialState: {

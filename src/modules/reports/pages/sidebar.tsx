@@ -5,6 +5,9 @@ import { BsEnvelope } from 'react-icons/bs';
 import { FaMoneyBill } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Renders the sidebar component for the reports page. This component contains the links to the different reports pages.
+ */
 function Sidebar() {
   const { t } = useTranslation();
   const navigate = useNavigate();

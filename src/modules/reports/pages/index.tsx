@@ -2,6 +2,10 @@ import Drawer from '@/components/layout/drawer';
 import { Outlet } from 'react-router-dom';
 import Sidebar from './sidebar';
 
+/**
+ * Renders the Reports page. This page is the parent page for all the reports pages. It contains the sidebar and the content area. The sidebar contains the links to the different reports pages.
+ * @returns The JSX element representing the Reports page.
+ */
 function ReportsPage() {
   return (
     <div>

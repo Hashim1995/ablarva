@@ -17,6 +17,12 @@ interface IPricingModal {
   onOpenChange: () => void;
 }
 
+/**
+ * @description Renders the pricing modal. This component displays the pricing modal. ChatPricing and AsistanPricing are components that display the pricing for the chat and assistant features.
+ * @param isOpen The modal's open state.
+ * @param onOpenChange The modal's open state change handler.
+ * @returns The rendered pricing modal.
+ */
 function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
   const { t } = useTranslation();
 

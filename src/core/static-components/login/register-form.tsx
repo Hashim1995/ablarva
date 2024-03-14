@@ -9,12 +9,9 @@ import {
 import { inputValidationText } from '@/utils/constants/validations';
 import { Button } from '@nextui-org/react';
 import { useState } from 'react';
-
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
-import { useLocalStorage } from 'usehooks-ts';
 import AppHandledInput from '@/components/forms/input/handled-input';
-// import { dictionary } from '@/utils/constants/dictionary';
 import {
   inputPlaceholderText,
   selectPlaceholderText
@@ -35,6 +32,16 @@ import LoginLeftBar from './login-leftbar';
 interface IRegisterFormProps {
   handleFlip: () => void;
 }
+/**
+ * Represents a register form component.
+ * This component renders a register form with email, password, and other inputs,
+ * and handles the submission of the form data for user registration.
+ *
+ * @component
+ * @param {Object} props - The component props.
+ * @param {Function} props.handleFlip - The function to handle flipping between login and register forms.
+ * @returns {JSX.Element} The RegisterForm component.
+ */
 function RegisterForm({ handleFlip }: IRegisterFormProps) {
   const { t } = useTranslation();
   const {
@@ -50,11 +57,15 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     defaultValues: {}
   });
   // eslint-disable-next-line no-unused-vars
-  const [userToken, setUserToken] = useLocalStorage<any>('userToken', null);
   const [showPassword, setShowPassword] = useState(false);
   const [showPasswordConfirm, setShowPasswordConfirm] = useState(false);
 
-  const onSubmit = async (data: IUserRegister) => {
+  /**
+   * Handles the form submission for user registration.
+   *
+   * @param data - The user registration data.
+   */
+  async function onSubmit(data: IUserRegister) {
     const payload: IUserRegister = {
       ...data,
 
@@ -88,7 +99,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
     } catch (err) {
       console.log(err);
     }
-  };
+  }
 
   return (
     <>
@@ -98,7 +109,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps) {
 
       <div className="animate-border  p-[3px] rounded-xl w-   bg-white bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%]">
         <div className="p-10 gradient-bg h-full  flex-1 flex items-start flex-col	justify-center rounded-xl ">
-          <h4 className="mb-4 mb-5 tracking-widest text-sm text-default-400">
+          <h4 className=" mb-5 tracking-widest text-sm text-default-400">
             {t('createNewAccount')}
           </h4>
           <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-white">

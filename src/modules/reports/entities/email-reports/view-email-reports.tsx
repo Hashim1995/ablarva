@@ -17,6 +17,13 @@ interface IViewEmailReportModal {
   selectedItem: IEmailReportItem;
 }
 
+/**
+ * @description Renders the email report modal. This component displays the user's email report modal.
+ * @param isOpen The modal's open state.
+ * @param onOpenChange The modal's open state change handler.
+ * @param selectedItem The selected item to view.
+ * @returns The rendered email report modal.
+ */
 function ViewEmailReportModal({
   isOpen,
   onOpenChange,

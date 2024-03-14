@@ -1,5 +1,3 @@
-/* eslint-disable no-useless-escape */
-/* eslint-disable react/no-unstable-nested-components */
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
 import { fetchUserData } from '@/redux/auth/auth-slice';
@@ -7,7 +5,6 @@ import { AppDispatch } from '@/redux/store';
 import { AuthService } from '@/services/auth-services/auth-services';
 
 import { inputPlaceholderText } from '@/utils/constants/texts';
-// import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
   Modal,
@@ -22,7 +19,6 @@ import {
   useDisclosure
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
-// import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
 import { useTranslation } from 'react-i18next';
@@ -37,9 +33,22 @@ export interface IFeedbackModalForm {
   feedbackMessage: string;
 }
 
-function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
+// generatea JSdoc for this component
+/**
+ * Renders a feedback modal component.
+ *
+ * @param {Object} props - The component props.
+ * @param {boolean} props.isOpen - Indicates whether the modal is open or not.
+ * @param {Function} props.onOpenChange - Callback function to handle open/close state changes.
+ * @example <FeedbackModal isOpen={true} onOpenChange={() => {}} />
+ * @returns {JSX.Element} The feedback modal component.
+ */
+function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
   const { t } = useTranslation();
 
+  /**
+   * Represents a feedback modal form.
+   */
   const {
     handleSubmit,
     register,
@@ -55,19 +64,36 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal) {
     onOpenChange: instructionOnOpenChange
   } = useDisclosure();
 
-  const onSubmit = async (data: IFeedbackModalForm) => {
+  /**
+   * Handles the form submission for the feedback modal.
+   *
+   * @param data - The form data containing the feedback message.
+   * @returns A Promise that resolves to void.
+   * @throws Any error that occurs during the submission process.
+   */
+  const onSubmit = async (data: IFeedbackModalForm): Promise<void> => {
     try {
+      // Send feedback message using the AuthService
       const res: IGlobalResponseEmpty =
         await AuthService.getInstance().sendFeedback({
           feedbackMessage: data.feedbackMessage
         });
+
       if (res.isSuccess) {
+        // Close the feedback modal
         onOpenChange();
+
+        // Fetch updated user data
         dispatch(fetchUserData());
+
+        // Show success toast message
         toast.success(t('yourMessageSentSuccesfully'), toastOptions);
       }
-    } catch (err) {
-      console.log(err);
+    } catch (error) {
+      // Handle any errors that occur during the submission process
+      // (e.g., network errors, server errors)
+      console.error('Error submitting feedback:', error);
+      throw error;
     }
   };
 

@@ -4,6 +4,9 @@ import { useTranslation } from 'react-i18next';
 import { BsEnvelope, BsMailbox } from 'react-icons/bs';
 import { useNavigate } from 'react-router-dom';
 
+/**
+ * Renders the sidebar component for the settings page. This component contains the links to the settings pages. It is used to navigate between the settings pages.
+ */
 function Sidebar() {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -32,34 +35,6 @@ function Sidebar() {
           >
             {t('emailSettings')}
           </ListboxItem>
-
-          {/* <ListboxItem
-            key="copy"
-            onClick={() => {
-              navigate('/settings/test2');
-            }}
-            description="test 2"
-            startContent={<Bs0SquareFill />}
-          >
-            Test2
-          </ListboxItem>
-          <ListboxItem
-            key="edit"
-            showDivider
-            description="Allows you to edit the file"
-            startContent={<Bs6SquareFill />}
-          >
-            Edit file
-          </ListboxItem>
-          <ListboxItem
-            key="delete"
-            className="text-danger"
-            color="danger"
-            description="Permanently delete the file"
-            startContent={<BsFillTrashFill />}
-          >
-            Delete file
-          </ListboxItem> */}
         </Listbox>
       </div>
     </div>
