@@ -17,8 +17,14 @@ interface IPricingItemProps {
 }
 
 /**
- * A component that represents a pricing item.
- * @param {IPricingItemProps} props - The component props.
+ * @description Renders the pricing item. This component displays the pricing item.
+ * @param {IPricingItemProps} props - The props for the component.
+ * @param {IPackageItem} props.item - The package item.
+ * @param {boolean} props.verified - The user's verification status.
+ * @param {number} props.packageId - The user's package ID.
+ * @param {() => void} props.buyModalOnOpen - The function to open the buy modal.
+ * @param {() => void} props.modalEmailOnOpen - The function to open the email modal.
+ * @param {Dispatch<SetStateAction<number>>} props.setWantedPackageId - The function to set the wanted package ID.
  * @returns {JSX.Element} The rendered component.
  */
 
@@ -60,6 +66,7 @@ function PricingItem({
       <Button
         variant="bordered"
         onClick={() => {
+          // If the user is not verified, open the email modal. Otherwise, open the buy modal.
           if (!verified) {
             modalEmailOnOpen();
           } else {

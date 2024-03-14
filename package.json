@@ -1,5 +1,11 @@
 {
-  "name": "optimus",
+  "name": "ai-zade",
+  "author": {
+    "name": "Hashim hashimli",
+    "email": "hashimli.hshm@gmail.com"
+  },
+  "license": "AGPL-3.0-only",
+  "description": "An ai chatbot that can help you with your daily tasks and answer your questions.",
   "private": false,
   "version": "1.0.0",
   "type": "module",

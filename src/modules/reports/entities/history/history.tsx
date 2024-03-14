@@ -19,14 +19,24 @@ import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { ITransactionsItem } from '../../../cabinet/types';
 
+/**
+ * @description Renders the payment history. This component displays the user's payment history.
+ * @returns The rendered payment history.
+ */
 export default function History() {
   const { t } = useTranslation();
   const [isLoading, setIsLoading] = useState(false);
+
+  /**
+   * @description Loads the user's payment history.
+   * @async The function is asynchronous.
+   * @throws The function throws an error if it encounters an error.
+   * @returns The user's payment history.
+   */
   const list = useAsyncList<ITransactionsItem>({
     async load({ cursor }) {
       setIsLoading(true);
       try {
-        // Convert the cursor to a number, defaulting to 1 if it's not available
         const page: number = cursor ? parseInt(cursor, 10) : 1;
         const res = await PaymentService.getInstance().getTransactions([
           { name: 'page', value: page },
@@ -36,7 +46,6 @@ export default function History() {
 
         return {
           items: res.data.pagedData,
-          // Convert the new cursor value back to a string
           cursor: (page + 1).toString()
         };
       } catch (err) {

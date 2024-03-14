@@ -11,14 +11,16 @@ import Empty from '@/components/layout/empty';
 import PricingModal from './pricingModal';
 import PricingItem from './pricingItem';
 
+/**
+ * @description Renders the chat pricing. This component displays the chat pricing.
+ * @returns The rendered chat pricing.
+ */
 function ChatPricing() {
   const [data, setData] = useState<IPackageData>();
   const [loading, setLoading] = useState<boolean>(true);
   const [wantedPackageId, setWantedPackageId] = useState<number>(0);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
-
   const [buyPackageLoader, setBuyPackageLoader] = useState<boolean>(false);
-  // const [currentPackageId, setCurrentPackageId] = useState<number | null>(null);
   const {
     isOpen: modalEmailIsopen,
     onOpen: modalEmailOnOpen,
@@ -33,6 +35,10 @@ function ChatPricing() {
     (state: RootState) => state.user.user.currentSubscription?.packageId
   );
 
+  /**
+   * @description Fetches the pricing data.
+   * @returns The pricing data.
+   */
   const fetchPricing = async () => {
     try {
       const res = await PaymentService.getInstance().getPricingList(1);
@@ -49,6 +55,9 @@ function ChatPricing() {
     fetchPricing();
   }, []);
 
+  /**
+   * @description Buys a package.
+   */
   const buyPackage = async () => {
     setBuyPackageLoader(true);
     const payload: IBuyPacketBody = {
@@ -98,6 +107,14 @@ function ChatPricing() {
         </div>
       )}
 
+      {/**
+       * @description Renders the pricing modal. This component displays the pricing modal.
+       * @param isOpen The modal's open state.
+       * @param onOpenChange The modal's open state change handler.
+       * @param onOkFunction The function to execute when the user clicks the "Yes" button.
+       * @param loading The loading state.
+       * @returns The rendered pricing modal.
+       */}
       {buyModalIsOpen && (
         <PricingModal
           loading={buyPackageLoader}
@@ -106,6 +123,13 @@ function ChatPricing() {
           isOpen={buyModalIsOpen}
         />
       )}
+
+      {/**
+       * @description Renders the email verification modal. This component displays the email verification modal.
+       * @param isOpen The modal's open state.
+       * @param onOpenChange The modal's open state change handler.
+       * @returns The rendered email verification modal.
+       */}
       {modalEmailIsopen && (
         <VerifyEmail
           onOpenChange={modalEmailOpenChange}
