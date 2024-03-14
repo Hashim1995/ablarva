@@ -5,10 +5,10 @@ import enJSON from './translations/en.json';
 
 /**
  * The current layout language.
- * 
+ *
  * This variable represents the language used for the layout of the application.
  * It is retrieved from the local storage and defaults to 'az' if not found.
- * 
+ *
  * @type {string}
  */
 const currentLayoutLanguage: string =

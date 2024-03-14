@@ -12,7 +12,7 @@ import { toastOptions } from '@/configs/global-configs';
 export class ErrorHandler {
   private static instance: ErrorHandler | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the ErrorHandler class.

@@ -15,7 +15,7 @@ export class HttpError {
     public code: number,
     public message: string | string[],
     public rawError: any
-  ) { }
+  ) {}
 
   /**
    * Indicates whether the default behavior should be prevented.

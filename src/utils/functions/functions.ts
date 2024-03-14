@@ -8,7 +8,6 @@ import { selectOption } from '@/models/common';
 import { IHTTPSParams } from '@/services/adapter-config/config';
 import i18next from 'i18next';
 
-
 /**
  * Converts form data to query parameters.
  * @param formData - The form data to convert.
@@ -144,11 +143,11 @@ async function tokenizeImage(file: any, userToken: any): Promise<any> {
     }
   }
   return newFile;
-};
+}
 
 /**
  * Capitalizes the first letter of each word in a given string.
- * 
+ *
  * @param str - The string to be capitalized.
  * @returns The capitalized string.
  */

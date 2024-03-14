@@ -1,7 +1,7 @@
 import * as signalR from '@microsoft/signalr';
 
 /**
- * Generates a statistics socket connection using the provided token. The connection is used to receive real-time statistics updates. The connection is automatically re-established if it is lost. 
+ * Generates a statistics socket connection using the provided token. The connection is used to receive real-time statistics updates. The connection is automatically re-established if it is lost.
  * @param {string} token - The token used for authentication.
  * @returns {signalR.HubConnection} - The statistics socket connection.
  * @example const statisticsSocket = generateStatisticsSocket('token'); statisticsSocket.start(); statisticsSocket.on('update', (data) => { console.log(data); });
@@ -10,7 +10,8 @@ import * as signalR from '@microsoft/signalr';
 const generateStatisticsSocket = (token: string) => {
   const statisticsSocket = new signalR.HubConnectionBuilder()
     .withUrl(
-      `${import.meta.env.VITE_SOCKET_BASE_URL
+      `${
+        import.meta.env.VITE_SOCKET_BASE_URL
       }/hubs/statistics-hub?token=${token}`,
       {
         skipNegotiation: true,

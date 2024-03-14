@@ -13,9 +13,6 @@ const toastOptions: ToastOptions = {
   progress: undefined
 };
 
-
-
-
 /**
  * Configuration object for the text area component.
  */

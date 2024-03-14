@@ -20,7 +20,7 @@ export class ReportsServices {
   // eslint-disable-next-line no-use-before-define
   private static instance: ReportsServices | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Returns the singleton instance of ReportsServices.

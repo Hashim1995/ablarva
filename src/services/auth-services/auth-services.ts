@@ -27,7 +27,7 @@ export interface IRegisterResponse extends IGlobalResponse {
 }
 
 /**
- * Represents the AuthService class. It contains methods for authentication services. It is a singleton class. It is used to get user details, login, forget password, reset password, verify email, send feedback, resend verification code, change password, change user details, and register. It uses the HttpUtil class for HTTP requests. 
+ * Represents the AuthService class. It contains methods for authentication services. It is a singleton class. It is used to get user details, login, forget password, reset password, verify email, send feedback, resend verification code, change password, change user details, and register. It uses the HttpUtil class for HTTP requests.
  * @example
  * const authService = AuthService.getInstance();
  * authService.getMe(onError);
@@ -43,7 +43,7 @@ export class AuthService {
    * Constructs a new instance of the AuthService class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the AuthService class.

@@ -44,7 +44,7 @@ export class ChatService {
    * Constructs a new instance of the ChatService class.
    * Private to enforce singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the ChatService class.

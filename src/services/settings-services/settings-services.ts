@@ -35,7 +35,7 @@ export class SettingsService {
    */
   private static instance: SettingsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the SettingsService class.

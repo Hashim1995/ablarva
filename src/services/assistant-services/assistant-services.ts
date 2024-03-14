@@ -26,7 +26,7 @@ import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 export class AssistantService {
   private static instance: AssistantService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the instance of AssistantService.
