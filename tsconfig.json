@@ -33,6 +33,6 @@
     }
   },
 
-  "include": ["src", "public/service-worker.ts", "public/service.worker.ts"],
+  "include": ["src", "public/service-worker.ts", "public/service.worker.js"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
