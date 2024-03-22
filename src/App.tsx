@@ -35,6 +35,9 @@ function App() {
     Otherwise, it dispatches the fetchUserData action to retrieve user data.
   */
   useEffect(() => {
+    const mode = import.meta.env.VITE_APP_MODE; // 'development' or 'production'
+    document.title = mode === 'development' ? '(Dev) AI Zade' : 'AI Zade';
+
     if (!userToken?.token) {
       navigate('/login');
     } else {
