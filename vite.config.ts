@@ -14,14 +14,11 @@ export default defineConfig({
       usePolling: true
     }
   },
-  // build: {
-  //   outDir: 'dist',
-  // },
+  build: {
+    outDir: 'dist',
+  },
   // publicDir: 'assets',
-  optimizeDeps: {
-    exclude: ['react-particles-js']
-  }
-  ,
+
   resolve: {
     alias: {
       '@': path.resolve(__dirname, './src'),
