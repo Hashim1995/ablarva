@@ -16,7 +16,7 @@
     "oldPassword": "Old Password",
     "emailVerify": "Verify your email address to use the free plan or to purchase a Premium package",
     "editAccount": "Account Information",
-    "changePassword": "Change Password",
+    "changePassWord": "Change Password",
     "verifyCodeSentSuccessfully": "Email verification code was successfully sent to your email address",
     "newPwdSentToEmail": "A new password has been successfully sent to your email address. Enter the code received by email in the 'code' field and set your new password",
     "infos": "Informations",
