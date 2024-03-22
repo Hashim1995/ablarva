@@ -31,3 +31,16 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
     </BrowserRouter>
   </Provider>
 );
+
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker
+      .register('/public/service.worker.ts')
+      .then((registration: ServiceWorkerRegistration) => {
+        console.log('SW registered:', registration);
+      })
+      .catch((registrationError: Error) => {
+        console.log('SW registration failed:', registrationError);
+      });
+  });
+}

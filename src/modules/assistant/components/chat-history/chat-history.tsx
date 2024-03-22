@@ -29,6 +29,7 @@ interface IChatHistoryProps {
 
 /**
  * @description `ChatHistory` is a React component that provides a chat history interface.
+ * It displays a list of previous chats with the assistant.
  * @component
  * @param {Object} props The properties object.
  * @param {boolean} props.isResponsive A flag indicating whether the component is responsive.
