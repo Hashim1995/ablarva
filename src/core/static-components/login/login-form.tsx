@@ -36,7 +36,7 @@ interface ILoginFormProps {
  * @param {Function} props.handleFlip - The function to handle flipping between login and registration forms.
  * @returns {JSX.Element} The rendered LoginForm component.
  */
-function LoginForm({ handleFlip }: ILoginFormProps) {
+function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
   const { t } = useTranslation();
 
   const {
@@ -67,10 +67,8 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
     }
   };
   return (
-    <>
-      <div className="p-10 py-6 text-white bg-black-500 w-96 md:flex-shrink-0 md:flex md:flex-col md:items-center md:justify-evenly">
-        <LoginLeftBar />
-      </div>
+    <div className="flex  flex-col">
+      <LoginLeftBar />
       <div className="animate-border  p-[3px] rounded-xl w-   bg-white bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%]">
         <div className="p-10 gradient-bg h-full  flex-1 flex items-start flex-col	justify-center rounded-xl  ">
           <h4 className=" mb-5 tracking-widest text-sm text-default-400">
@@ -79,24 +77,7 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
           <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-white">
             {t('login')}
           </h3>
-          <div className="flex flex-col mb-5 md:mt-0 space-y-5">
-            <span className="flex items-center justify-center ">
-              <span
-                aria-hidden
-                onClick={handleFlip}
-                className="font-normal tracking-widest   text-sm me-1"
-              >
-                {t('dontYouHaveAccount')}
-              </span>
-              <span
-                className=" text-blue-500 text-sm    cursor-pointer"
-                aria-hidden
-                onClick={handleFlip}
-              >
-                {t('register')}
-              </span>
-            </span>
-          </div>
+
           <form
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col space-y-5"
@@ -189,23 +170,43 @@ function LoginForm({ handleFlip }: ILoginFormProps) {
               title="Submit Login Form"
               size="sm"
               isLoading={isSubmitting}
-              className="w-full !mt-3 md:mt-5"
+              className="w-full  !mt-3 md:mt-5"
               type="submit"
               variant="bordered"
             >
               {t('login')}
             </Button>
+            <div className="flex flex-col !my-[8px]  ">
+              <div className="flex items-center mb-1">
+                <div className="flex-1 border-t-1 border-gray-500" />
+                <span
+                  aria-hidden
+                  onClick={handleFlip}
+                  className="font-normal tracking-widest   text-sm mx-3"
+                >
+                  {t('or')}
+                </span>
+                <div className="flex-1 border-t-1 border-gray-500" />
+              </div>
+            </div>
+            <div className="flex flex-col !m-0  ">
+              <span className="flex items-center justify-center ">
+                <span
+                  className=" text-blue-500 text-sm    cursor-pointer"
+                  aria-hidden
+                  onClick={handleFlip}
+                >
+                  {t('register')}
+                </span>
+              </span>
+            </div>
           </form>
         </div>
         {isOpen && (
           <ForgotPassword onOpenChange={onOpenChange} isOpen={isOpen} />
         )}{' '}
       </div>
-      <div className="invisible w-96" />
-      {isOpen && (
-        <ForgotPassword onOpenChange={onOpenChange} isOpen={isOpen} />
-      )}{' '}
-    </>
+    </div>
   );
 }
 
