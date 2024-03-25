@@ -1,4 +1,16 @@
+import { LayoutLanguage } from '@/models/common';
+import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
+import { RootState } from '@/redux/store';
+import {
+  Dropdown,
+  DropdownTrigger,
+  Button,
+  DropdownMenu,
+  DropdownItem
+} from '@nextui-org/react';
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import LoginForm from './login-form';
 import RegisterForm from './register-form';
 
@@ -8,7 +20,13 @@ import RegisterForm from './register-form';
  * @returns The rendered Login component.
  */
 function Login() {
+  const dispatch = useDispatch();
+  const { i18n } = useTranslation();
+
   const [isFlipped, setIsFlipped] = useState(false);
+  const { currentLayoutLanguage } = useSelector(
+    (state: RootState) => state.core
+  );
 
   /**
    * Toggles the flip state of the Login component.
@@ -16,7 +34,19 @@ function Login() {
   const handleFlip = () => {
     setIsFlipped(!isFlipped);
   };
+  const currentLanguageFlag = (id: string) => {
+    switch (id) {
+      case LayoutLanguage?.Azerbaijani:
+        return <img width={22} alt="uk flag" src="/flags/az-flag.svg" />;
 
+      case LayoutLanguage?.English:
+        return <img width={22} alt="uk flag" src="/flags/en-flag.svg" />;
+      case LayoutLanguage?.Russian:
+        return <img width={22} alt="uk flag" src="/flags/ru-flag.svg" />;
+      default:
+        return <img width={22} alt="uk flag" src="/flags/global-flag.svg" />;
+    }
+  };
   return (
     <div>
       <div className="r">
@@ -26,14 +56,47 @@ function Login() {
           }`}
         >
           <div className="flip-card-inner flex  justify-center items-center">
-            <div className="front h-full   z-10 flex flex-col items-center justify-between remove-scrollbar  home-container-without-navbar  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
+            <div className="front h-full   z-10 flex  items-center justify-center remove-scrollbar  home-container-without-navbar  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
               <LoginForm handleFlip={handleFlip} />
             </div>
-            <div className="back  h-full   z-10 flex flex-col items-center justify-between remove-scrollbar  home-container-without-navbar  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
+            <div className="back w-[800px]  h-full   z-10 flex  items-center justify-center remove-scrollbar  home-container-without-navbar  gradient-bg shadow-lg max md:flex-row md:flex-1 ">
               <RegisterForm handleFlip={handleFlip} />
             </div>
           </div>
         </div>
+      </div>
+      <div className="fixed top-4 right-4">
+        <Dropdown
+          role="menu"
+          classNames={{
+            content: 'min-w-[auto] w-[80px]'
+          }}
+        >
+          <DropdownTrigger>
+            <Button size="sm" className="capitalize bg-transparent">
+              {currentLanguageFlag(currentLayoutLanguage)}
+            </Button>
+          </DropdownTrigger>
+          <DropdownMenu
+            aria-label="Single selection example"
+            variant="flat"
+            disallowEmptySelection
+            selectionMode="single"
+            selectedKeys={currentLayoutLanguage}
+            onSelectionChange={(e: any) => {
+              dispatch(setCurrentLayoutLanguage(e?.currentKey));
+              i18n?.changeLanguage(e?.currentKey);
+              window.location.reload();
+            }}
+          >
+            <DropdownItem key={LayoutLanguage?.Azerbaijani}>
+              <img width={22} alt="az flag" src="/flags/az-flag.svg" />
+            </DropdownItem>
+            <DropdownItem key={LayoutLanguage?.English}>
+              <img width={22} alt="en flag" src="/flags/en-flag.svg" />
+            </DropdownItem>
+          </DropdownMenu>
+        </Dropdown>
       </div>
     </div>
   );
