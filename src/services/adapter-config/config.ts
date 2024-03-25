@@ -51,9 +51,13 @@ const axiosErrorHandlerRaw = (error: any) => {
  */
 axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
   const token = JSON.parse(localStorage.getItem('userToken') || '{}');
+  const language = localStorage.getItem('currentLayoutLanguage');
   // Replace with your token retrieval logic
   if (token) {
     config.headers.Authorization = `Bearer ${token.token}`;
+    if (language) {
+      config.headers['Accept-Language'] = language;
+    }
   }
   return config;
 });
