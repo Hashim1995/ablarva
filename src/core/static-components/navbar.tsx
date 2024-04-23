@@ -12,7 +12,6 @@ import {
   NavbarMenuToggle,
   NavbarMenu,
   NavbarMenuItem,
-  ButtonGroup,
   User,
   DropdownTrigger,
   Dropdown,
@@ -26,12 +25,10 @@ import { useOnClickOutside } from 'usehooks-ts';
 
 import {
   BsFillChatLeftDotsFill,
-  BsClockFill,
   BsArrowRightCircle,
   BsFillGearFill,
   BsFillFilterSquareFill,
   BsEnvelope,
-  BsYelp,
   BsQuestionCircle,
   BsGear
 } from 'react-icons/bs';
@@ -170,7 +167,7 @@ export default function Navbar() {
           </div>
         </NavbarContent>
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-          <ButtonGroup className="!rounded-none">
+          {/* <ButtonGroup className="!rounded-none">
             <Button
               className={` w-40 !rounded-none text-white bg-transparent h-12  ${
                 location.pathname.includes('chat')
@@ -217,7 +214,7 @@ export default function Navbar() {
                 {t('catalyst')}
               </Button>
             </Tooltip>
-          </ButtonGroup>
+          </ButtonGroup> */}
         </NavbarContent>
         <NavbarContent
           style={{

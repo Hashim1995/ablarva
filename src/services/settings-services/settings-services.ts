@@ -8,12 +8,12 @@ import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
   ISmtpItem,
   ISmtpResponse
-} from '@/modules/settings/entities/smtp/types';
+} from '@/modules/EMA/settings/entities/smtp/types';
 import {
   IEmailItemCreate,
   IEmailItemUpdate,
   IEmailListResponse
-} from '@/modules/settings/entities/email/types';
+} from '@/modules/EMA/settings/entities/email/types';
 import {
   ErrorCallBack,
   HttpUtil,

@@ -1,7 +1,8 @@
 import React, { Suspense } from 'react';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
-import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
+import EmailReportsPage from '@/modules/EMA/reports/pages/email-reports-page';
+import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
 
 /**
  * Lazy loads the application routes.
@@ -19,27 +20,24 @@ import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
  *
  */
 
-const AssistantHomePage = React.lazy(
-  () => import('@/modules/assistant/pages/home')
-);
-const SettingsPage = React.lazy(() => import('@/modules/settings/pages'));
+const SettingsPage = React.lazy(() => import('@/modules/EMA/settings/pages'));
 const SmptpPage = React.lazy(
-  () => import('@/modules/settings/pages/smtp-page')
+  () => import('@/modules/EMA/settings/pages/smtp-page')
 );
-const ReportsPage = React.lazy(() => import('@/modules/reports/pages'));
+const ReportsPage = React.lazy(() => import('@/modules/EMA/reports/pages'));
 const HistoryPage = React.lazy(
-  () => import('@/modules/reports/pages/history-page')
+  () => import('@/modules/EMA/reports/pages/history-page')
 );
 const CabinetPage = React.lazy(() => import('@/modules/cabinet/pages'));
 const EmailPage = React.lazy(
-  () => import('@/modules/settings/pages/email-page')
+  () => import('@/modules/EMA/settings/pages/email-page')
 );
 const SuspenseLoader = React.lazy(
   () => import('@core/static-components/suspense-loader')
 );
-const LayoutPage = React.lazy(() => import('@core/layout/layout'));
-const ChatPage = React.lazy(() => import('@/modules/chat/pages'));
-const AssistantPage = React.lazy(() => import('@/modules/assistant/pages'));
+const LayoutPage = React.lazy(() => import('@/core/layout/home/home-layout'));
+const AssistantPage = React.lazy(() => import('@/modules/EMA/assistant/pages'));
+const HomePage = React.lazy(() => import('@/modules/home/pages/home-page'));
 
 /**
  * Array of route objects that define the application routes.
@@ -49,36 +47,43 @@ const routes = [
     path: '/',
     element: <LayoutPage />,
     children: [
-      { path: '/', element: <Navigate to="chat" /> },
-
-      /**
-       * Route for the chat page.
-       */
       {
         index: true,
-        path: 'chat/*',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
-            <ChatPage />
+            <HomePage />
           </Suspense>
         )
-      },
+      }
+    ]
+  },
+  {
+    path: 'email-marketing',
+    element: <EMALayoutPage />,
+    children: [
       /**
        * Route for the assistant home page.
        */
-      {
-        path: 'assistant-home',
-        element: (
-          <Suspense fallback={<SuspenseLoader />}>
-            <AssistantHomePage />
-          </Suspense>
-        )
-      },
       /**
        * Route for the assistant page.
        */
+
+      // { path: '/email-marketing', element: <Navigate to="dashboard" /> }, // Redirect to dashboard
       {
-        path: '/assistant',
+        index: true,
+        element: <h1>Dashboard</h1> // Your actual dashboard component
+      },
+      {
+        index: true,
+        path: 'dashboard',
+        element: <h1>Dashboard</h1> // Your actual dashboard component
+      },
+      {
+        path: '*',
+        element: <h1>404</h1>
+      },
+      {
+        path: 'assistant',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <AssistantPage />
@@ -153,14 +158,6 @@ const routes = [
             )
           }
         ]
-      },
-      {
-        path: 'no-permission',
-        element: <h1>no permission</h1>
-      },
-      {
-        path: '404',
-        element: <h1>404</h1>
       }
     ]
   },
@@ -178,7 +175,7 @@ const routes = [
    */
   {
     path: '*',
-    element: <Navigate to="/404" />
+    element: <h1>404</h1>
   }
 ];
 

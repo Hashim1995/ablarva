@@ -2,7 +2,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IEmailReportItemResponse } from '@/modules/reports/entities/email-reports/types';
+import { IEmailReportItemResponse } from '@/modules/EMA/reports/entities/email-reports/types';
 import {
   ErrorCallBack,
   HttpUtil,

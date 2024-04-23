@@ -32,15 +32,15 @@ ReactDOM.createRoot(document.getElementById('root') as HTMLElement).render(
   </Provider>
 );
 
-if ('serviceWorker' in navigator) {
-  window.addEventListener('load', () => {
-    navigator.serviceWorker
-      .register('/service.worker.js')
-      .then((registration: ServiceWorkerRegistration) => {
-        console.log('SW registered:', registration);
-      })
-      .catch((registrationError: Error) => {
-        console.log('SW registration failed:', registrationError);
-      });
-  });
-}
+// if ('serviceWorker' in navigator) {
+//   window.addEventListener('load', () => {
+//     navigator.serviceWorker
+//       .register('/service.worker.js')
+//       .then((registration: ServiceWorkerRegistration) => {
+//         console.log('SW registered:', registration);
+//       })
+//       .catch((registrationError: Error) => {
+//         console.log('SW registration failed:', registrationError);
+//       });
+//   });
+// }

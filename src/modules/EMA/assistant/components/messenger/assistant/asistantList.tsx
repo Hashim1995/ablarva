@@ -1,7 +1,7 @@
 /* eslint-disable react/jsx-no-useless-fragment */
 import { useEffect, useState } from 'react';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
-import { IAssistantItem } from '@/modules/assistant/types';
+import { IAssistantItem } from '@/modules/EMA/assistant/types';
 import { useDispatch, useSelector } from 'react-redux';
 import { Button, Divider, Skeleton } from '@nextui-org/react';
 import { RootState } from '@/redux/store';

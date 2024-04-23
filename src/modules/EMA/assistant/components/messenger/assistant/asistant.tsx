@@ -1,4 +1,4 @@
-import { IAssistantItem } from '@/modules/assistant/types';
+import { IAssistantItem } from '@/modules/EMA/assistant/types';
 import {
   setCurrentAssistantModel,
   setResetAssistantInner

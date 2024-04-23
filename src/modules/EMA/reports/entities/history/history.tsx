@@ -17,7 +17,7 @@ import { useAsyncList } from '@react-stately/data';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { ITransactionsItem } from '../../../cabinet/types';
+import { ITransactionsItem } from '../../../../cabinet/types';
 
 /**
  * @description Renders the payment history. This component displays the user's payment history.

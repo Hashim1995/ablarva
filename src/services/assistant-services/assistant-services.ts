@@ -11,7 +11,7 @@ import {
   IAssistantSendMessageResponse,
   IAssistantThreadBubblesItemResponse,
   IAssistantThreadHistoryListResponse
-} from '@/modules/assistant/types';
+} from '@/modules/EMA/assistant/types';
 
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 

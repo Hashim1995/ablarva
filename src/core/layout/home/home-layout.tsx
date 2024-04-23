@@ -1,5 +1,5 @@
 import { Outlet } from 'react-router-dom';
-import Navbar from '../static-components/navbar';
+import Navbar from '../../static-components/navbar';
 
 /**
  * Renders the layout page.

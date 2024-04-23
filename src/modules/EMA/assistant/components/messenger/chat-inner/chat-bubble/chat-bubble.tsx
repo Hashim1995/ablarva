@@ -4,7 +4,7 @@ import { toastOptions } from '@/configs/global-configs';
 import {
   IAssistantFeedbackPayload,
   IAssistantThreadBubblesItem
-} from '@/modules/assistant/types';
+} from '@/modules/EMA/assistant/types';
 import { RootState } from '@/redux/store';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
 import { Avatar, Button } from '@nextui-org/react';
