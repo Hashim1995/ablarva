@@ -1,6 +1,6 @@
 /* eslint-disable no-undef */
 /* eslint-disable no-unused-vars */
-import { CardBody } from '@nextui-org/react';
+import { CardBody, Card } from '@nextui-org/react';
 
 interface ITemplateMessage {
   text: string;
@@ -16,7 +16,7 @@ interface ITemplateMessage {
  */
 function TempalteMessage({ text, onSubmit }: ITemplateMessage): JSX.Element {
   return (
-    <div
+    <Card
       aria-hidden
       onClick={() => {
         onSubmit({
@@ -28,7 +28,7 @@ function TempalteMessage({ text, onSubmit }: ITemplateMessage): JSX.Element {
       <CardBody>
         <p className="text-sm">{text}</p>
       </CardBody>
-    </div>
+    </Card>
   );
 }
 

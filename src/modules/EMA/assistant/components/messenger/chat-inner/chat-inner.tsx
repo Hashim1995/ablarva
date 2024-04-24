@@ -237,12 +237,12 @@ function ChatInner(): JSX.Element {
   );
 
   return (
-    <div className="flex flex-col gap-2 h-full    relative">
-      <div className="h-full  pb-[13rem] ">
+    <>
+      <div className="h-full   w-full flex-1 rounded-t-lg p-6 flex flex-col gap-6 overflow-y-scroll remove-scrollbar  scroll-smooth ">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"
-          className="row-span-8 scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
+          className="scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >
           {bubbleList?.map(
             (item: IAssistantThreadBubblesItem, index: number) => (
@@ -331,7 +331,7 @@ function ChatInner(): JSX.Element {
         onSubmit={onSubmit}
       />
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
-    </div>
+    </>
   );
 }
 

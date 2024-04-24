@@ -1,7 +1,7 @@
 import { RootState } from '@/redux/store';
 import { useSelector } from 'react-redux';
 import ChatHistory from './chat-history/chat-history';
-import Layout from './messenger/layout';
+import ChatInner from './messenger/chat-inner/chat-inner';
 
 /**
  * @description The `Chat` component is a React functional component that renders the chat interface for Assistant.
@@ -14,15 +14,19 @@ function Chat() {
   );
 
   return (
-    <div className=" fixed-height   ">
-      <div className="flex fixed-height relative">
-        <div className=" w-full fixed-height">
-          <Layout key={resetAssistantInner} />
-        </div>
-        <div className="fixed-height ">
-          <ChatHistory />
+    <div className="flex">
+      <div className="relative flex-1 w-full h-full overflow-x-hidden  remove-scrollbar   ">
+        <div className="flex flex-col h-full ">
+          <div className="w-full h-screen ">
+            <div className="relative h-full">
+              <div className="flex flex-col w-full h-full ">
+                <ChatInner key={resetAssistantInner} />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+      <ChatHistory />
     </div>
   );
 }
