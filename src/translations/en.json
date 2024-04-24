@@ -359,6 +359,8 @@
     "emailAddress": "Email address",
     "emailTitle": "Email title",
     "emailBody": "Email content",
-    "detailedView": "Detaild view"
+    "detailedView": "Detaild view",
+    "main": "Main",
+    "others": "Others"
   }
 }

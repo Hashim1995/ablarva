@@ -60,7 +60,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
                   isActive: item?.isActive
                 })
               );
-              navigate('/assistant');
+              navigate('/email-marketing');
             } else {
               toast.success(t('itIsBeingPrepared'), toastOptions);
             }
