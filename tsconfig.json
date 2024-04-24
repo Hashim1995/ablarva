@@ -9,7 +9,7 @@
     "allowSyntheticDefaultImports": true,
     "strict": false,
     "forceConsistentCasingInFileNames": true,
-    "module": "ESNext",
+    "module": "commonjs",
     "noImplicitAny": true,
     "moduleResolution": "Node",
     "resolveJsonModule": true,

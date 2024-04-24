@@ -3,6 +3,7 @@ import React, { Suspense } from 'react';
 import LoginPage from '@core/static-pages/login-page';
 import EmailReportsPage from '@/modules/EMA/reports/pages/email-reports-page';
 import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
+import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
 
 /**
  * Lazy loads the application routes.
@@ -71,12 +72,12 @@ const routes = [
       // { path: '/email-marketing', element: <Navigate to="dashboard" /> }, // Redirect to dashboard
       {
         index: true,
-        element: <h1>Dashboard</h1> // Your actual dashboard component
+        element: <EmaDashboardPage /> // Your actual dashboard component
       },
       {
         index: true,
         path: 'dashboard',
-        element: <h1>Dashboard</h1> // Your actual dashboard component
+        element: <EmaDashboardPage /> // Your actual dashboard component
       },
       {
         path: '*',

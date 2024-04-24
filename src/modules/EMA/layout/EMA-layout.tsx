@@ -27,7 +27,7 @@ function EMALayoutPage() {
   return (
     <div className=" z-10  flex">
       <SidebarWrapper />
-      <div className="outlet-renderer w-full relative overflow-x-hidden">
+      <div className="outlet-renderer w-full relative remove-scrollbar   overflow-x-hidden">
         <Outlet />
       </div>
     </div>
