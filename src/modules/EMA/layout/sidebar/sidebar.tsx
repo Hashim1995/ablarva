@@ -3,6 +3,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Switch,
   User
 } from '@nextui-org/react';
 import {
@@ -27,7 +28,10 @@ import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { AiOutlineUser } from 'react-icons/ai';
 import { TbReportAnalytics } from 'react-icons/tb';
+import useDarkMode from 'use-dark-mode';
 import { useTranslation } from 'react-i18next';
+import { MoonIcon } from '@/assets/icons/moon-icon';
+import { SunIcon } from '@/assets/icons/sun-icon';
 import { Sidebar } from './sidebar.styles';
 import { SidebarItem } from './sidebar-item';
 import { SidebarMenu } from './sidebar-menu';
@@ -38,7 +42,11 @@ export function SidebarWrapper() {
   const { user } = useSelector((state: RootState) => state.user);
   const { t } = useTranslation();
   const { pathname } = location;
-
+  const darkMode = useDarkMode(false, {
+    classNameDark: 'dark',
+    classNameLight: 'light',
+    global: window // Just pass this as a config option
+  });
   return (
     <aside className="h-screen remove-scrollbar z-[20] sticky top-0">
       {/* {collapsed ? (
@@ -54,6 +62,14 @@ export function SidebarWrapper() {
           <img src={logo} className="h-[48px] w-[48px]" alt="" />
           <h6>Ablarva</h6>
         </div>
+        <Switch
+          defaultSelected={darkMode.value}
+          onValueChange={darkMode.toggle}
+          size="lg"
+          color="warning"
+          startContent={<MoonIcon />}
+          endContent={<SunIcon />}
+        />
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
             <SidebarMenu title={t('main')}>
@@ -118,7 +134,7 @@ export function SidebarWrapper() {
                 size: 'sm',
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
-              className="hidden sm:flex text-white"
+              className="hidden sm:flex text-default-900 dark:text-white"
             />
             <Dropdown className="">
               <DropdownTrigger className="">

@@ -393,6 +393,11 @@ input[type='number'] {
   // background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   // background-size: 800% 800%;
 }
+.gradient-bg-light {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//bg-light.svg');
+}
 
 @-webkit-keyframes AnimationName {
   0% {

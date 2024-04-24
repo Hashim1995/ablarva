@@ -34,25 +34,25 @@ export default {
   plugins: [
     require('@tailwindcss/line-clamp'),
     nextui({
-      addCommonColors: true,
-      defaultTheme: 'dark',
+      addCommonColors: true
+      // defaultTheme: 'light',
 
-      themes: {
-        light: {
-          colors: {
-            black: '#0F0F0F',
-            darkBlack: '#0F0F0F',
-            custom: 'red'
-          }
-        },
-        dark: {
-          colors: {
-            black: '#0F0F0F',
-            darkBlack: '#0F0F0F',
-            custom: 'red'
-          }
-        }
-      }
+      // themes: {
+      //   light: {
+      //     colors: {
+      //       black: '#0F0F0F',
+      //       darkBlack: '#0F0F0F',
+      //       custom: 'red'
+      //     }
+      //   },
+      //   dark: {
+      //     colors: {
+      //       black: '#0F0F0F',
+      //       darkBlack: '#0F0F0F',
+      //       custom: 'red'
+      //     }
+      //   }
+      // }
     })
   ]
 };

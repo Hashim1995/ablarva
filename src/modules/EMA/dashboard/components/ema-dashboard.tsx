@@ -16,7 +16,9 @@ function EmaDashboard() {
         <div className=" gap-6 flex flex-col w-full">
           {/* Card Section Top */}
           <div className="flex flex-col gap-2 justify-end">
-            <h3 className="text-xl font-semibold">Available Balance 💎</h3>
+            <h3 className="text-xl font-semibold text-default-900 dark:text-white">
+              {t('aviableBalance')} 💎
+            </h3>
             <div className="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full">
               <RemainBalance
                 icon={<FcLineChart size={30} />}
@@ -38,7 +40,9 @@ function EmaDashboard() {
 
           {/* Chart */}
           <div className="h-full flex flex-col gap-2">
-            <h3 className="text-xl font-semibold">{t('statistics')} 📊</h3>
+            <h3 className="text-xl text-default-900 dark:text-white font-semibold">
+              {t('statistics')} 📊
+            </h3>
             <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
               <EmaDashboardChart />
             </div>
@@ -49,11 +53,13 @@ function EmaDashboard() {
         <div className=" gap-2 flex flex-col xl:max-w-md w-full">
           <div className="flex flex-col justify-center gap-4 max-h-fit flex-wrap md:flex-nowrap md:flex-col">
             <div className="h-1/2  gap-2 flex-col flex">
-              <h3 className="text-xl font-semibold">{t('mailboxHealth')} 🍎</h3>
+              <h3 className="text-xl font-semibold text-default-900 dark:text-white">
+                {t('mailboxHealth')} 🍎
+              </h3>
               <MailBoxHealt />
             </div>
             <div className="h-1/2  gap-2 flex-col flex">
-              <h3 className="text-xl font-semibold">
+              <h3 className="text-xl font-semibold text-default-900 dark:text-white">
                 {t('totalEmailCapacityPerDay')} 📨
               </h3>
               <TotalCapacityPerDay />
@@ -63,14 +69,18 @@ function EmaDashboard() {
       </div>
       <div className="flex gap-5 my-5">
         <div className="h-full w-full flex flex-col gap-2">
-          <h3 className="text-xl font-semibold">{t('lastAddedLeads')}</h3>
+          <h3 className="text-xl font-semibold text-default-900 dark:text-white">
+            {t('lastAddedLeads')}
+          </h3>
 
           <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
             <LastAddedLeads />
           </div>
         </div>
         <div className="h-full w-full flex flex-col gap-2">
-          <h3 className="text-xl font-semibold">{t('aviableBalance')}</h3>
+          <h3 className="text-xl font-semibold text-default-900 dark:text-white">
+            {t('aviableBalance')}
+          </h3>
 
           <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
             <LastAddedLeads />
