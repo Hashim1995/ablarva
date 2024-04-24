@@ -1,6 +1,6 @@
 import { FcLineChart, FcMindMap, FcRadarPlot } from 'react-icons/fc';
 import { RemainBalance } from './remain-balance';
-import { CardTransactions } from './card-transactions';
+import { MailBoxHealt } from './mailbox-healt';
 import { EmaDashboardChart } from './chart';
 import EmaDashboardTable from './table';
 
@@ -43,13 +43,16 @@ function EmaDashboard() {
 
         {/* Left Section */}
         <div className=" gap-2 flex flex-col xl:max-w-md w-full">
-          <h3 className="text-xl font-semibold">Mailbox Healt</h3>
           <div className="flex flex-col justify-center gap-4 flex-wrap md:flex-nowrap md:flex-col">
-            <div className="h-1/2">
-              <CardTransactions />
+            <div className="h-1/2 gap-2 flex-col flex">
+              <h3 className="text-xl font-semibold">Mailbox Healt</h3>
+              <MailBoxHealt />
             </div>
-            <div className="h-1/2">
-              <CardTransactions />
+            <div className="h-1/2 gap-2 flex-col flex">
+              <h3 className="text-xl font-semibold">
+                Total email capacity per day
+              </h3>
+              <MailBoxHealt />
             </div>
           </div>
         </div>
