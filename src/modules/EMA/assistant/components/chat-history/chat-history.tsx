@@ -95,7 +95,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
     fetchThreadHistory();
   }, [searchParams.get('threadID')]);
   return (
-    <div className="w-[250px] bg-black/30 backdrop-blur-md overflow-y-auto remove-scrollbar fixed-height">
+    <div className="w-[250px] border-l border-divider  overflow-y-auto remove-scrollbar fixed-height">
       {!isResponsive && (
         <div className="flex justify-between items-center  p-3 h-[60px]">
           <h3 className="text-base sm:text-xl text-white font-semibold">

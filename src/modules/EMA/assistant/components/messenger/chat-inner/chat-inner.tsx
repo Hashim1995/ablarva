@@ -240,7 +240,7 @@ function ChatInner(): JSX.Element {
     <>
       <div className="h-full   w-full flex-1 rounded-t-lg p-6 flex flex-col gap-6 overflow-y-scroll remove-scrollbar  scroll-smooth ">
         <ScrollToBottom
-          scrollViewClassName="flex-grow flex-1 p-4 "
+          scrollViewClassName="flex-grow flex-1  "
           followButtonClassName="hidden"
           className="scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
         >

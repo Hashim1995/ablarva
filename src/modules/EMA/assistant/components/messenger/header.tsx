@@ -17,9 +17,7 @@ function MessengerHeader() {
   const { premiumAssistant, basicAssistant } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
-  // const { currentAssistantModel } = useSelector(
-  //   (state: RootState) => state?.assistant
-  // );
+
   return (
     <div className=" pt-1 pb-3 h-[60px] flex    ">
       <div className="flex justify-between  items-center gap-2 sm:gap-5">
@@ -75,23 +73,6 @@ function MessengerHeader() {
             </div>
           )}
         </div>
-
-        {/* {currentAssistantModel?.assistanName && (
-          <div className="bg-default-50 px-4 py-1 rounded-xl flex items-center gap-2">
-            <Image
-              alt="Woman listing to music"
-              className="object-contain h-full w-10  rounded-full"
-              src={
-                `${
-                  import.meta.env.VITE_BASE_URL
-                }${currentAssistantModel?.assistantImagePath}` || ''
-              }
-            />{' '}
-            <h3 className="text-[14px] group-hover:text-black transition-all duration-300 ease-in-out text-left leading-4 mb-1 sm:mb-2">
-              {currentAssistantModel?.assistanName}
-            </h3>
-          </div>
-        )} */}
       </div>
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />
