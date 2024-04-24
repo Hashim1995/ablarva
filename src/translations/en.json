@@ -361,6 +361,12 @@
     "emailBody": "Email content",
     "detailedView": "Detaild view",
     "main": "Main",
-    "others": "Others"
+    "others": "Others",
+    "aviableBalance": "Available balance",
+    "statistics": "Statistics",
+    "mailboxHealth": "Mailbox health",
+    "totalEmailCapacityPerDay": "Total email capacity per day",
+    "lastAddedLeads": "Last added leads",
+    "company": "Company"
   }
 }

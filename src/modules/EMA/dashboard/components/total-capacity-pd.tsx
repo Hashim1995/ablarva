@@ -63,7 +63,7 @@ const items = [
 
 export function TotalCapacityPerDay() {
   return (
-    <Card className=" bg-transparent border-1 border-divider rounded-xl shadow-md px-3  lg:max-h-[372px]  2xl:max-h-[305px]	 h-full">
+    <Card className=" bg-transparent border-1 border-divider rounded-xl shadow-md px-3 py-5  lg:max-h-[372px]  2xl:max-h-[305px]	 h-full">
       <CardBody className="py-1 gap-2 ">
         <div className="flex flex-col gap-2 overflow-y-auto remove-scrollbar">
           {items.map(item => (
