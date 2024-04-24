@@ -1,4 +1,4 @@
-import { Card, CardBody, CircularProgress } from '@nextui-org/react';
+import { Card, CardBody } from '@nextui-org/react';
 import { FcGoogle } from 'react-icons/fc';
 
 const items = [
@@ -61,11 +61,11 @@ const items = [
   }
 ];
 
-export function MailBoxHealt() {
+export function TotalCapacityPerDay() {
   return (
-    <Card className=" bg-transparent border-1 border-divider rounded-xl shadow-md px-3 h-full">
-      <CardBody className="py-1 gap-2 remove-scrollbar">
-        <div className="flex flex-col gap-2">
+    <Card className=" bg-transparent border-1 border-divider rounded-xl shadow-md px-3  lg:max-h-[372px]  2xl:max-h-[305px]	 h-full">
+      <CardBody className="py-1 gap-2 ">
+        <div className="flex flex-col gap-2 overflow-y-auto remove-scrollbar">
           {items.map(item => (
             <div key={item.email} className="py-1 flex  justify-between">
               <div className="flex gap-2.5 items-center">
@@ -76,20 +76,8 @@ export function MailBoxHealt() {
                   </span>
                 </div>
               </div>
-              <div className="flex gap-2.5 py-2 items-center">
-                <span className="text-success text-xl font-semibold">
-                  <div className="h-12 w-12">
-                    <CircularProgress
-                      size="lg"
-                      value={item?.percentage}
-                      color="success"
-                      showValueLabel
-                      classNames={{
-                        value: ' text-white'
-                      }}
-                    />
-                  </div>
-                </span>
+              <div className="flex gap-2.5 items-center">
+                <span className=" text-md ">{item?.percentage}</span>
               </div>
             </div>
           ))}
