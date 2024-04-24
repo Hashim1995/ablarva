@@ -238,7 +238,7 @@ function ChatInner(): JSX.Element {
 
   return (
     <div className="flex flex-col gap-2 h-full    relative">
-      <div className="h-full  pb-[13rem] container">
+      <div className="h-full  pb-[13rem] ">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1 p-4 "
           followButtonClassName="hidden"

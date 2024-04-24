@@ -1,17 +1,9 @@
 /* eslint-disable no-bitwise */
 import VerifyEmail from '@/core/static-components/verify-email';
-import { setAssistantsDrawer } from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
-import {
-  Button,
-  Tooltip,
-  useDisclosure,
-  Progress,
-  Image
-} from '@nextui-org/react';
+import { Tooltip, useDisclosure, Progress } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
-import { BsJustify } from 'react-icons/bs';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 /**
  * @description The `MessengerHeader` component is a React functional component that renders the header for the messenger for Assistant chat.
@@ -19,33 +11,18 @@ import { useDispatch, useSelector } from 'react-redux';
  * @returns JSX.Element representing the MessengerHeader component.
  */
 function MessengerHeader() {
-  const dispatch = useDispatch();
   const { isOpen: modalIsopen, onOpenChange } = useDisclosure();
   const { t } = useTranslation();
 
   const { premiumAssistant, basicAssistant } = useSelector(
     (state: RootState) => state?.statisticsCount?.statisticsCount?.data
   );
-  const { currentAssistantModel, assistantsDrawer } = useSelector(
-    (state: RootState) => state?.assistant
-  );
+  // const { currentAssistantModel } = useSelector(
+  //   (state: RootState) => state?.assistant
+  // );
   return (
     <div className=" pt-1 pb-3 h-[60px] flex    ">
-      <Button
-        size="sm"
-        isIconOnly
-        onClick={() => dispatch(setAssistantsDrawer(true))}
-        className="bg-transparent block  ms-3"
-        aria-label="Filter"
-        title="Filter"
-      >
-        <BsJustify
-          size={20}
-          color="white"
-          className={` ${assistantsDrawer ? 'rotate-90' : ''}`}
-        />
-      </Button>
-      <div className="flex justify-between  items-center container">
+      <div className="flex justify-between  items-center gap-2 sm:gap-5">
         <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
           {(premiumAssistant || basicAssistant) && (
             <div className="flex w-[400px] justify-content-between gap-4">
@@ -99,7 +76,7 @@ function MessengerHeader() {
           )}
         </div>
 
-        {currentAssistantModel?.assistanName && (
+        {/* {currentAssistantModel?.assistanName && (
           <div className="bg-default-50 px-4 py-1 rounded-xl flex items-center gap-2">
             <Image
               alt="Woman listing to music"
@@ -114,7 +91,7 @@ function MessengerHeader() {
               {currentAssistantModel?.assistanName}
             </h3>
           </div>
-        )}
+        )} */}
       </div>
       {modalIsopen && (
         <VerifyEmail onOpenChange={onOpenChange} isOpen={modalIsopen} />

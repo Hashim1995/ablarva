@@ -9,7 +9,7 @@ function EMALayoutPage() {
   return (
     <div className=" z-10  flex">
       <SidebarWrapper />
-      <div className="relative pl-5 pt-5 flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
+      <div className="outlet-renderer w-full relative pl-5 pt-5 overflow-x-hidden">
         <Outlet />
       </div>
     </div>

@@ -34,9 +34,9 @@ body::-webkit-scrollbar-thumb,
   scrollbar-width: none !important; /* Firefox */
 }
 .fixed-height {
-  height: calc(100vh - 64px);
-  max-height: calc(100vh - 64px);
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 0px);
+  max-height: calc(100vh - 0px);
+  min-height: calc(100vh - 0px);
 }
 .scroll-to-bottom-wrapper > div:first-child {
   -ms-overflow-style: none !important; /* IE + Edge */
