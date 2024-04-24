@@ -23,6 +23,7 @@ const genderOptions: selectOption[] = [
 
 const markdownOptions: MarkdownToJSX.Options = {
   disableParsingRawHTML: true,
+
   overrides: {
     code: {
       component: Code
