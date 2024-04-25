@@ -2,20 +2,20 @@ import { useState, useEffect } from 'react';
 import { Skeleton, useDisclosure } from '@nextui-org/react';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import { IPackageItem, IPackageData } from '@/models/payment';
-import { IBuyPacketBody } from '@/modules/pricing/types';
+import { IBuyPacketBody } from '@/modules/EMA/pricing/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
 // import Header from './header/header';
 import Empty from '@/components/layout/empty';
-import PricingModal from './pricingModal';
-import PricingItem from './pricingItem';
+import PricingModal from './ema-buy-verify-modal';
+import PricingItem from './ema-packages';
 
 /**
  * @description Renders the chat pricing. This component displays the chat pricing.
  * @returns The rendered chat pricing.
  */
-function AsistanPricing() {
+function EmaPricing() {
   const [data, setData] = useState<IPackageData>();
   const [loading, setLoading] = useState<boolean>(true);
   const {
@@ -76,7 +76,7 @@ function AsistanPricing() {
   };
 
   return (
-    <div>
+    <div className="">
       {!loading ? (
         <div>
           {data?.packages?.length > 0 ? (
@@ -98,13 +98,13 @@ function AsistanPricing() {
           )}
         </div>
       ) : (
-        <div className=" my-5 w-full flex items-center gap-3">
+        <div className="flex items-center gap-3 my-5 w-full">
           <div>
             <Skeleton className="flex rounded-full w-12 h-12" />
           </div>
-          <div className="w-full flex flex-col gap-2">
-            <Skeleton className="h-3 w-3/5 rounded-lg" />
-            <Skeleton className="h-3 w-4/5 rounded-lg" />
+          <div className="flex flex-col gap-2 w-full">
+            <Skeleton className="rounded-lg w-3/5 h-3" />
+            <Skeleton className="rounded-lg w-4/5 h-3" />
           </div>
         </div>
       )}
@@ -142,4 +142,4 @@ function AsistanPricing() {
   );
 }
 
-export default AsistanPricing;
+export default EmaPricing;

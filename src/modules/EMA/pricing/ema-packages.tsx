@@ -3,6 +3,7 @@ import { ILimitItem, IPackageItem } from '@/models/payment';
 import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
+import useDarkMode from 'use-dark-mode';
 
 /**
  * Props for the PricingItem component.
@@ -38,24 +39,26 @@ function PricingItem({
 }: IPricingItemProps): React.ReactElement {
   const { t } = useTranslation();
 
+  const darkMode = useDarkMode(false);
+
   return (
     <Card
       key={item?.packageId}
-      className={`gradient-bg p-4 rounded-lg shadow-lg w-1/4 ${
+      className={`gradient-bg ${
+        darkMode.value ? 'gradient-bg' : 'abstract-bg'
+      } p-4 rounded-lg shadow-lg w-1/4 ${
         packageId === item.packageId ? ' border-3 border-success-500' : ''
       }`}
     >
-      <CardHeader className="text-default-900 dark:text-white text-center flex flex-col">
-        <h2 className="text-lg ">{item?.packageName}</h2>
-        <p className="text-3xl font-bold ">{item?.price} / ay</p>
-        <p className=" text-default-500  text-sm ">
-          {item?.packageDescription}
-        </p>
+      <CardHeader className="flex flex-col text-center">
+        <h2 className="text-lg">{item?.packageName}</h2>
+        <p className="font-bold text-3xl">{item?.price} / ay</p>
+        <p className="text-sm">{item?.packageDescription}</p>
       </CardHeader>
       <CardBody>
         <ul className="">
           {item?.limitDetails?.map((limit: ILimitItem) => (
-            <li className="flex justify-between items-center text-default-900 dark:text-white text-sm mt-2">
+            <li className="flex justify-between items-center mt-2 text-sm">
               <span>{limit?.label}</span>
               <span>{limit?.price}</span>
             </li>
@@ -64,7 +67,6 @@ function PricingItem({
       </CardBody>
 
       <Button
-        variant="bordered"
         title="Join Now"
         aria-label="Join Now"
         onClick={() => {
@@ -76,7 +78,7 @@ function PricingItem({
             buyModalOnOpen();
           }
         }}
-        className="w-full text-default-900 dark:text-white py-2 rounded-lg text-mda mt-4 "
+        className="mt-4 py-2 rounded-lg w-full"
       >
         {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
       </Button>

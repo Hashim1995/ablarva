@@ -4,8 +4,8 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponse } from '@/models/common';
-import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/pricing/types';
-import { ITransactionsItem } from '@/modules/cabinet/types';
+import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/EMA/pricing/types';
+import { ITransactionsItem } from '@/modules/EMA/cabinet/types';
 import { IPackageData } from '@/models/payment';
 import {
   ErrorCallBack,
@@ -44,7 +44,7 @@ export class PaymentService {
    * Constructs a new instance of the PaymentService class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Gets the singleton instance of the PaymentService class.

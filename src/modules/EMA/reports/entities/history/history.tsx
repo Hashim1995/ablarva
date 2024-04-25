@@ -17,7 +17,7 @@ import { useAsyncList } from '@react-stately/data';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
-import { ITransactionsItem } from '../../../../cabinet/types';
+import { ITransactionsItem } from '../../../cabinet/types';
 
 /**
  * @description Renders the payment history. This component displays the user's payment history.
@@ -57,17 +57,17 @@ export default function History() {
   });
 
   return (
-    <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
-      <CardHeader className="flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-3 ">
-        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+    <Card className="relative bg-transparent !shadow-none !rounded-none containerLg">
+      <CardHeader className="flex justify-between bg-default-50 my-3 p-3 rounded-md min-h-[48px] sm:min-h-[56px]">
+        <div className="flex flex-row gap-1 sm:gap-0 font-semibold text-base text-default-900 sm:text-xl dark:text-white">
           <p>{t('paymentHistory')}</p>
         </div>
       </CardHeader>
-      <CardBody className=" flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-2">
+      <CardBody className="flex justify-between bg-default-50 my-3 p-2 rounded-md min-h-[48px] sm:min-h-[56px]">
         <Table
           isHeaderSticky
           aria-label="Transactions table"
-          className="remove-scrollbar !border-none  !rounded-none overflow-x-scroll shadow-none overflow-y-hidden"
+          className="shadow-none !border-none !rounded-none overflow-x-scroll overflow-y-hidden remove-scrollbar"
           classNames={{
             wrapper: '!border-none  !rounded-none shadow-none',
             base: ' overflow-scroll remove-scrollbar',

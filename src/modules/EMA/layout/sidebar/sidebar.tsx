@@ -174,7 +174,7 @@ export function SidebarWrapper() {
                   <DropdownItem
                     className=""
                     onClick={() => {
-                      navigate('/cabinet');
+                      navigate('cabinet');
                     }}
                     key="cabinet"
                   >

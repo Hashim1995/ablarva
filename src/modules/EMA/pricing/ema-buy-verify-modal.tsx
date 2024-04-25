@@ -24,7 +24,7 @@ interface IPricingModal {
  * @param loading The loading state.
  * @returns The rendered pricing modal.
  */
-function PricingModal({
+function BuyVerifyModal({
   isOpen,
   onOpenChange,
   onOkFunction,
@@ -38,7 +38,7 @@ function PricingModal({
         size="lg"
         backdrop="opaque"
         isOpen={isOpen}
-        className="centerModalOnMobile"
+        className="text-default-900 dark:text-white centerModalOnMobile"
         onOpenChange={onOpenChange}
         hideCloseButton
       >
@@ -48,14 +48,14 @@ function PricingModal({
               <ModalHeader className="flex flex-row items-center gap-1">
                 {t('verification')}
               </ModalHeader>
-              <ModalBody className="scrollBar overflow-y-scroll">
+              <ModalBody className="overflow-y-scroll scrollBar">
                 {t('resetPackageConfirmation')}
               </ModalBody>
               <ModalFooter>
                 <Button
                   title="Yes"
                   aria-label="Yes"
-                  className="bg-black text-default-900 dark:text-white"
+                  className="text-default-900 dark:text-white"
                   onPress={onOkFunction}
                   isLoading={loading}
                   variant="bordered"
@@ -78,4 +78,4 @@ function PricingModal({
   );
 }
 
-export default PricingModal;
+export default BuyVerifyModal;

@@ -368,6 +368,11 @@
     "totalEmailCapacityPerDay": "Total email capacity per day",
     "lastAddedLeads": "Last added leads",
     "company": "Company",
-    "newPswrdSentToEmail": "New password has been sent to your email address"
+    "newPswrdSentToEmail": "New password has been sent to your email address",
+    "start": "Start",
+    "comingSoon": "Coming soon",
+    "platformName": "Platform name",
+    "browserName": "Browser name",
+    "ipAddress": "IP address"
   }
 }

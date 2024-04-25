@@ -4,13 +4,10 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
-  Tab,
-  Tabs
+  Button
 } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
-import ChatPricing from '../components/chatPricing';
-import AsistanPricing from '../components/asistanPricing';
+import EmaPricing from './ema-pricing';
 
 interface IPricingModal {
   isOpen: boolean;
@@ -18,7 +15,7 @@ interface IPricingModal {
 }
 
 /**
- * @description Renders the pricing modal. This component displays the pricing modal. ChatPricing and AsistanPricing are components that display the pricing for the chat and assistant features.
+ * @description Renders the pricing modal. This component displays the pricing modal. EmaPricing is component that display the pricing for the chat and assistant features.
  * @param isOpen The modal's open state.
  * @param onOpenChange The modal's open state change handler.
  * @returns The rendered pricing modal.
@@ -32,36 +29,19 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
         size="5xl"
         isDismissable={false}
         backdrop="opaque"
-        className="centerModalOnMobile "
+        className="centerModalOnMobile"
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-default-900 dar:text-white">
                 {t('tariffs')}
               </ModalHeader>
               <ModalBody>
-                <div className="flex w-full flex-col">
-                  <Tabs
-                    className="w-full"
-                    variant="underlined"
-                    classNames={{
-                      tabList: 'w-full'
-                    }}
-                    aria-label="Options"
-                  >
-                    <Tab key="chat" title={t('chat')}>
-                      <ChatPricing />
-                    </Tab>
-                    <Tab key="assistant" title={t('assistant')}>
-                      <AsistanPricing />
-                    </Tab>
-                    <Tab isDisabled key="catalyst" title={t('catalyst')}>
-                      {t('catalyst')}
-                    </Tab>
-                  </Tabs>
+                <div className="flex flex-col w-full">
+                  <EmaPricing />
                 </div>
               </ModalBody>
               <ModalFooter>

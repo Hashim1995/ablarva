@@ -28,7 +28,7 @@ import { useState, useEffect, useRef } from 'react';
 import { LayoutLanguage } from '@/models/common';
 import { useDispatch, useSelector } from 'react-redux';
 
-import PricingModal from '@/modules/pricing/pages';
+import PricingModal from '@/modules/EMA/pricing/ema-buy-modal';
 import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
 import { RootState } from '@/redux/store';
 import { MoonIcon } from '@/assets/icons/moon-icon';

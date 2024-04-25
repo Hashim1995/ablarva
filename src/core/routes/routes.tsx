@@ -29,7 +29,7 @@ const ReportsPage = React.lazy(() => import('@/modules/EMA/reports/pages'));
 const HistoryPage = React.lazy(
   () => import('@/modules/EMA/reports/pages/history-page')
 );
-const CabinetPage = React.lazy(() => import('@/modules/cabinet/pages'));
+const CabinetPage = React.lazy(() => import('@/modules/EMA/cabinet/pages'));
 const EmailPage = React.lazy(
   () => import('@/modules/EMA/settings/pages/email-page')
 );

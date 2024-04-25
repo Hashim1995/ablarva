@@ -1,3 +1,4 @@
+/* eslint-disable no-nested-ternary */
 /* eslint-disable react/button-has-type */
 import { Button, useDisclosure } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -10,6 +11,7 @@ import {
 } from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
+import PricingModal from '@/modules/EMA/pricing/ema-buy-modal';
 import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
 
@@ -26,6 +28,12 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
     isOpen: isOpenVerifyModal,
     onOpen: onOpenVerifyModal,
     onOpenChange: onOpenChangeVerifyModal
+  } = useDisclosure();
+
+  const {
+    isOpen: buyIsOpen,
+    onOpen: buyOnOpen,
+    onOpenChange: buyOnOpenChange
   } = useDisclosure();
 
   const { t } = useTranslation();
@@ -62,18 +70,22 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
             // if the assistant is active, set the assistant model and navigate to the assistant page
             if (item?.isActive) {
               if (user?.verified) {
-                dispatch(setResetAssistantInner(Date.now()));
-                dispatch(
-                  setCurrentAssistantModel({
-                    assistantId: item?.assistantId,
-                    assistantImagePath: item?.assistantImagePath,
-                    assistantDescription: item?.assistantDescription,
-                    assistanName: item?.assistantName,
-                    assistantPosition: item?.assistantPosition,
-                    isActive: item?.isActive
-                  })
-                );
-                navigate('/email-marketing');
+                if (user?.currentSubscription) {
+                  dispatch(setResetAssistantInner(Date.now()));
+                  dispatch(
+                    setCurrentAssistantModel({
+                      assistantId: item?.assistantId,
+                      assistantImagePath: item?.assistantImagePath,
+                      assistantDescription: item?.assistantDescription,
+                      assistanName: item?.assistantName,
+                      assistantPosition: item?.assistantPosition,
+                      isActive: item?.isActive
+                    })
+                  );
+                  navigate('/email-marketing');
+                } else {
+                  buyOnOpen();
+                }
               } else {
                 onOpenVerifyModal();
               }
@@ -82,7 +94,11 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
             }
           }}
         >
-          {t('hireMe')}
+          {item?.isActive
+            ? user?.currentSubscription
+              ? t('start')
+              : t('hireMe')
+            : t('comingSoon')}
         </Button>
       </div>
       {isOpenVerifyModal && (
@@ -90,6 +106,9 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
           onOpenChange={onOpenChangeVerifyModal}
           isOpen={isOpenVerifyModal}
         />
+      )}
+      {buyIsOpen && (
+        <PricingModal onOpenChange={buyOnOpenChange} isOpen={buyIsOpen} />
       )}
     </div>
   );
