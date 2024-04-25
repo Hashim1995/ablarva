@@ -27,7 +27,7 @@ import {
 import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
 import { useTranslation } from 'react-i18next';
-import LoginLeftBar from './login-leftbar';
+import useDarkMode from 'use-dark-mode';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -100,17 +100,21 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
       console.log(err);
     }
   }
+  const darkMode = useDarkMode();
 
   return (
-    <div className="flex  flex-col">
-      <LoginLeftBar />
-      <div className="animate-border  p-[3px] rounded-xl w-   bg-white bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%]">
-        <div className="p-10 gradient-bg h-full  flex-1 flex items-start flex-col	justify-center rounded-xl ">
-          <h4 className=" mb-5 tracking-widest text-sm text-default-400">
-            {t('createNewAccount')}
+    <div className="flex flex-col">
+      <div className="bg-white p-[3px] rounded-xl animate-border">
+        <div
+          className={`flex flex-col flex-1 justify-center items-start p-10 rounded-xl h-full ${
+            darkMode.value ? 'gradient-bg' : 'backdrop-blur-md bg-white/30'
+          } `}
+        >
+          <h4 className="mb-5 text-default-400 text-sm dark:text-white tracking-widest">
+            {t('loginAndDiscover')}
           </h4>
-          <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-default-900 dark:text-white">
-            {t('joinUs')}
+          <h3 className="mb-5 font-semibold text-[34px] text-default-900 dark:text-white leading-none tracking-widest">
+            {t('login')}
           </h3>
 
           <form
@@ -129,7 +133,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
                   isInvalid={Boolean(errors.email?.message)}
                   errors={errors}
                   size="sm"
-                  className=" w-96"
+                  className="w-96"
                   rules={{
                     required: {
                       value: true,
@@ -186,7 +190,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
                   required
                 />
 
-                <div className="flex w-1/2 space-x-2">
+                <div className="flex space-x-2 w-1/2">
                   <div className="flex-1">
                     <AppHandledSelect
                       name="day"
@@ -197,7 +201,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
                       control={control}
                       label={t('day')}
                       required
-                      className=" w-[123.33px]  "
+                      className="w-[123.33px] text-white"
                       rules={{
                         required: {
                           value: true,
@@ -218,7 +222,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
                       isInvalid={Boolean(errors.month?.message)}
                       control={control}
                       label={t('month')}
-                      className=" w-[123.33px]  "
+                      className="w-[123.33px]"
                       required
                       rules={{
                         required: {
@@ -239,7 +243,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
                       }}
                       isInvalid={Boolean(errors.year?.message)}
                       control={control}
-                      className=" w-[123.33px]  "
+                      className="w-[123.33px]"
                       label={t('year')}
                       required
                       rules={{
@@ -429,23 +433,23 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
             >
               {t('register')}
             </Button>
-            <div className="flex flex-col !my-[8px]  ">
+            <div className="flex flex-col !my-[8px]">
               <div className="flex items-center mb-1">
-                <div className="flex-1 border-t-1 border-gray-500" />
+                <div className="flex-1 border-gray-500 border-t-1" />
                 <span
                   aria-hidden
                   onClick={handleFlip}
-                  className="font-normal tracking-widest   text-sm mx-3"
+                  className="mx-3 font-normal text-sm tracking-widest"
                 >
                   {t('or')}
                 </span>
-                <div className="flex-1 border-t-1 border-gray-500" />
+                <div className="flex-1 border-gray-500 border-t-1" />
               </div>
             </div>
-            <div className="flex flex-col !m-0  ">
-              <span className="flex items-center justify-center ">
+            <div className="flex flex-col !m-0">
+              <span className="flex justify-center items-center">
                 <span
-                  className=" text-blue-500 text-sm    cursor-pointer"
+                  className="text-blue-500 text-sm cursor-pointer"
                   aria-hidden
                   onClick={handleFlip}
                 >

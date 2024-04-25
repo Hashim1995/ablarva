@@ -110,7 +110,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-default-900 dark:text-white">
                 {t('suggestionsAndComments')}
               </ModalHeader>
               <ModalBody>
@@ -118,7 +118,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <Textarea
                       {...register('feedbackMessage', {
                         required: {
@@ -126,43 +126,43 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                           message: inputValidationText('Mesaj')
                         }
                       })}
-                      variant="bordered"
+                      // variant="bordered"
                       fullWidth
                       isRequired
                       label={inputPlaceholderText('Mesaj')}
-                      classNames={{
-                        label: 'text-md font-normal',
-                        innerWrapper: ' flex items-center',
-                        inputWrapper: [
-                          'relative',
-                          'w-full',
-                          'inline',
-                          'inline-flex',
-                          'tap-highlight-transparent',
-                          'shadow-sm',
-                          'min-h-unit-8',
-                          'flex-col',
-                          'items-start',
-                          'justify-center',
-                          'gap-0',
-                          'border',
-                          ' px-3',
-                          'py-1',
-                          'rounded-md',
-                          'data-[hover=true]:border-[#292D32]',
-                          'group-data-[focus=true]:border-gray-200',
-                          'border-[#292D32]',
-                          'transition-background',
-                          '!duration-150 ',
-                          'transition-colors',
-                          '',
-                          'motion-reduce:transition-none '
-                        ],
-                        input: ' font-light '
-                      }}
+                      // classNames={{
+                      //   label: 'text-md font-normal',
+                      //   innerWrapper: ' flex items-center',
+                      //   inputWrapper: [
+                      //     'relative',
+                      //     'w-full',
+                      //     'inline',
+                      //     'inline-flex',
+                      //     'tap-highlight-transparent',
+                      //     'shadow-sm',
+                      //     'min-h-unit-8',
+                      //     'flex-col',
+                      //     'items-start',
+                      //     'justify-center',
+                      //     'gap-0',
+                      //     'border',
+                      //     ' px-3',
+                      //     'py-1',
+                      //     'rounded-md',
+                      //     'data-[hover=true]:border-[#292D32]',
+                      //     'group-data-[focus=true]:border-gray-200',
+                      //     'border-[#292D32]',
+                      //     'transition-background',
+                      //     '!duration-150 ',
+                      //     'transition-colors',
+                      //     '',
+                      //     'motion-reduce:transition-none '
+                      //   ],
+                      //   input: ' font-light '
+                      // }}
                       minRows={5}
                       rows={5}
-                      className="flex-1 "
+                      className="flex-1"
                       errorMessage={
                         (errors.feedbackMessage &&
                           errors.feedbackMessage?.message) ||

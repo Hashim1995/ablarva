@@ -55,17 +55,17 @@ function Login() {
             isFlipped ? 'flipped' : ''
           }`}
         >
-          <div className="flip-card-inner flex  justify-center items-center">
-            <div className="front h-full   z-10 flex  items-center justify-center remove-scrollbar  home-container-without-navbar   shadow-lg max md:flex-row md:flex-1 ">
+          <div className="flex justify-center items-center flip-card-inner">
+            <div className="z-10 flex md:flex-row md:flex-1 justify-center items-center shadow-lg h-full front max remove-scrollbar">
               <LoginForm handleFlip={handleFlip} />
             </div>
-            <div className="back w-[800px]  h-full   z-10 flex  items-center justify-center remove-scrollbar  home-container-without-navbar   shadow-lg max md:flex-row md:flex-1 ">
+            <div className="z-10 flex md:flex-row md:flex-1 justify-center items-center shadow-lg w-[800px] h-full back max remove-scrollbar">
               <RegisterForm handleFlip={handleFlip} />
             </div>
           </div>
         </div>
       </div>
-      <div className="fixed top-4 right-4 hidden">
+      <div className="top-4 right-4 fixed hidden">
         <Dropdown
           role="menu"
           className=""
@@ -74,7 +74,7 @@ function Login() {
           }}
         >
           <DropdownTrigger>
-            <Button size="sm" className="capitalize bg-transparent">
+            <Button size="sm" className="bg-transparent capitalize">
               {currentLanguageFlag(currentLayoutLanguage)}
             </Button>
           </DropdownTrigger>

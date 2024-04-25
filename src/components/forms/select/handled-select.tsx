@@ -79,7 +79,11 @@ function AppHandledSelect({
           {...selectProps}
         >
           {options?.map(z => (
-            <SelectItem key={z.value} value={z.value}>
+            <SelectItem
+              className="text-default-900 dark:text-white"
+              key={z.value}
+              value={z.value}
+            >
               {z.label}
             </SelectItem>
           ))}

@@ -18,9 +18,9 @@ import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import useDarkMode from 'use-dark-mode';
 import { useLocalStorage } from 'usehooks-ts';
 import ForgotPassword from './forgot-password';
-import LoginLeftBar from './login-leftbar';
 
 interface ILoginFormProps {
   handleFlip: () => void;
@@ -61,20 +61,25 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
       if (!res) return;
       if (!userToken) setUserToken({ token: res.data.accessToken });
       dispatch(fetchUserData());
-      navigate('/chat');
+      navigate('/');
     } catch (err) {
       console.log(err);
     }
   };
+  const darkMode = useDarkMode();
+
   return (
-    <div className="flex  flex-col">
-      <LoginLeftBar />
-      <div className="animate-border  p-[3px] rounded-xl w-   bg-white bg-gradient-to-r from-red-500 via-purple-500 to-blue-500 bg-[length:400%_400%]">
-        <div className="p-10 gradient-bg h-full  flex-1 flex items-start flex-col	justify-center rounded-xl  ">
-          <h4 className=" mb-5 tracking-widest text-sm text-default-400">
+    <div className="flex flex-col">
+      <div className="bg-white p-[3px] rounded-xl animate-border">
+        <div
+          className={`flex flex-col flex-1 justify-center items-start p-10 rounded-xl h-full ${
+            darkMode.value ? 'gradient-bg' : 'backdrop-blur-md bg-white/30'
+          } `}
+        >
+          <h4 className="mb-5 text-default-400 text-sm dark:text-white tracking-widest">
             {t('loginAndDiscover')}
           </h4>
-          <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-default-900 dark:text-white">
+          <h3 className="mb-5 font-semibold text-[34px] text-default-900 dark:text-white leading-none tracking-widest">
             {t('login')}
           </h3>
 
@@ -82,7 +87,7 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
             onSubmit={handleSubmit(onSubmit)}
             className="flex flex-col space-y-5"
           >
-            <div className="flex flex-col gap-3 md:gap-5  ">
+            <div className="flex flex-col gap-3 md:gap-5">
               <AppHandledInput
                 name="email"
                 inputProps={{
@@ -93,7 +98,7 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
                 isInvalid={Boolean(errors.email?.message)}
                 errors={errors}
                 size="sm"
-                className=" w-96"
+                className="w-96"
                 rules={{
                   required: {
                     value: true,
@@ -149,16 +154,13 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
                 required
               />
               <div className="flex flex-col space-y-5">
-                <span className="flex items-center justify-start ">
+                <span className="flex justify-start items-center">
                   <span
                     aria-hidden
                     onClick={onOpen}
-                    className="font-normal  text-sm"
+                    className="font-normal text-sm"
                   >
-                    <span
-                      className=" text-blue-500   cursor-pointer"
-                      aria-hidden
-                    >
+                    <span className="text-blue-500 cursor-pointer" aria-hidden>
                       {t('forgetPassword')}
                     </span>
                   </span>
@@ -170,29 +172,29 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
               title="Submit Login Form"
               size="sm"
               isLoading={isSubmitting}
-              className="w-full  !mt-3 md:mt-5"
+              className="!mt-3 md:mt-5 w-full"
               type="submit"
               variant="bordered"
             >
               {t('login')}
             </Button>
-            <div className="flex flex-col !my-[8px]  ">
+            <div className="flex flex-col !my-[8px]">
               <div className="flex items-center mb-1">
-                <div className="flex-1 border-t-1 border-gray-500" />
+                <div className="flex-1 border-gray-500 border-t-1" />
                 <span
                   aria-hidden
                   onClick={handleFlip}
-                  className="font-normal tracking-widest   text-sm mx-3"
+                  className="mx-3 font-normal text-sm tracking-widest"
                 >
                   {t('or')}
                 </span>
-                <div className="flex-1 border-t-1 border-gray-500" />
+                <div className="flex-1 border-gray-500 border-t-1" />
               </div>
             </div>
-            <div className="flex flex-col !m-0  ">
-              <span className="flex items-center justify-center ">
+            <div className="flex flex-col !m-0">
+              <span className="flex justify-center items-center">
                 <span
-                  className=" text-blue-500 text-sm    cursor-pointer"
+                  className="text-blue-500 text-sm cursor-pointer"
                   aria-hidden
                   onClick={handleFlip}
                 >

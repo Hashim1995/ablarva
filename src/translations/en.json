@@ -367,6 +367,7 @@
     "mailboxHealth": "Mailbox health",
     "totalEmailCapacityPerDay": "Total email capacity per day",
     "lastAddedLeads": "Last added leads",
-    "company": "Company"
+    "company": "Company",
+    "newPswrdSentToEmail": "New password has been sent to your email address"
   }
 }

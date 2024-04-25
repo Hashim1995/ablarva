@@ -123,7 +123,7 @@ function ForgotPassword({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col px-6 py-3 md:px-6 md:py-4 gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-default-900 dark:text-white">
                 {t('forgetPassword')}
               </ModalHeader>
               <ModalBody>
@@ -131,7 +131,7 @@ function ForgotPassword({
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-3 md:space-y-5"
                 >
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="email"
                       inputProps={{
@@ -330,7 +330,7 @@ function ForgotPassword({
                   </div>
                   {hasCode && (
                     <div
-                      className="p-4 mb-4 text-sm  rounded-lg bg-green-50 text-green-400"
+                      className="bg-green-50 mb-4 p-4 rounded-lg text-green-400 text-sm"
                       role="alert"
                     >
                       <span className="font-medium">

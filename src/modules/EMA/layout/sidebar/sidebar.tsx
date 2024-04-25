@@ -48,7 +48,7 @@ export function SidebarWrapper() {
     global: window // Just pass this as a config option
   });
   return (
-    <aside className="h-screen remove-scrollbar z-[20] sticky top-0">
+    <aside className="top-0 z-[20] sticky h-screen remove-scrollbar">
       {/* {collapsed ? (
         <div className={Sidebar.Overlay()} onClick={setCollapsed} />
       ) : null} */}
@@ -59,7 +59,7 @@ export function SidebarWrapper() {
         })}
       >
         <div className={Sidebar.Header()}>
-          <img src={logo} className="h-[48px] w-[48px]" alt="" />
+          <img src={logo} className="w-[48px] h-[48px]" alt="" />
           <h6>Ablarva</h6>
         </div>
 
@@ -69,7 +69,7 @@ export function SidebarWrapper() {
               <SidebarItem
                 title="Dashboard"
                 icon={
-                  <MdOutlineDashboard className="text-default-900  dark:text-white" />
+                  <MdOutlineDashboard className="text-default-900 dark:text-white" />
                 }
                 isActive={pathname === '/email-marketing'}
                 href="/email-marketing"
@@ -78,7 +78,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/assistant')}
                 title="Chat"
                 icon={
-                  <BsChatDots className="text-default-900  dark:text-white" />
+                  <BsChatDots className="text-default-900 dark:text-white" />
                 }
                 href="assistant"
               />
@@ -86,7 +86,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/leads')}
                 title="Leads"
                 icon={
-                  <MdOutlineLeaderboard className="text-default-900  dark:text-white" />
+                  <MdOutlineLeaderboard className="text-default-900 dark:text-white" />
                 }
                 href="leads"
               />{' '}
@@ -97,7 +97,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/mailbox')}
                 title="Mailbox"
                 icon={
-                  <BsMailbox className="text-default-900  dark:text-white" />
+                  <BsMailbox className="text-default-900 dark:text-white" />
                 }
                 href="mailbox"
               />{' '}
@@ -105,7 +105,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/campaigns')}
                 title="Campaigns"
                 icon={
-                  <MdOutlineCampaign className="text-default-900  dark:text-white" />
+                  <MdOutlineCampaign className="text-default-900 dark:text-white" />
                 }
                 href="campaigns"
               />{' '}
@@ -113,7 +113,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/pending-mails')}
                 title="Pending mails"
                 icon={
-                  <MdOutlineMarkEmailUnread className="text-default-900  dark:text-white" />
+                  <MdOutlineMarkEmailUnread className="text-default-900 dark:text-white" />
                 }
                 href="pending-mails"
               />{' '}
@@ -121,7 +121,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/connected-mails')}
                 title="Connected mails"
                 icon={
-                  <MdOutlineAttachEmail className="text-default-900  dark:text-white" />
+                  <MdOutlineAttachEmail className="text-default-900 dark:text-white" />
                 }
                 href="connected-mails"
               />{' '}
@@ -129,7 +129,7 @@ export function SidebarWrapper() {
                 isActive={pathname.includes('/analytics')}
                 title="Analytics"
                 icon={
-                  <BsBarChart className="text-default-900  dark:text-white" />
+                  <BsBarChart className="text-default-900 dark:text-white" />
                 }
                 href="analytics"
               />
@@ -137,16 +137,7 @@ export function SidebarWrapper() {
           </div>
 
           <div>
-            <div className=" pt-16  pl-2">
-              <Switch
-                defaultSelected={darkMode.value}
-                onValueChange={darkMode.toggle}
-                size="sm"
-                startContent={<MoonIcon />}
-                endContent={<SunIcon />}
-              />
-            </div>
-            <div className="flex items-center justify-center gap-6 pt-1 pb-8 px-8 md:pt-10 md:pb-0">
+            <div className="flex justify-center items-center gap-6 px-8 pt-1 md:pt-10 pb-8 md:pb-0">
               <User
                 name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
                 description={user.email || t('empty')}
@@ -154,80 +145,89 @@ export function SidebarWrapper() {
                   size: 'sm',
                   src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
                 }}
-                className="hidden sm:flex text-default-900  dark:text-white"
+                className="sm:flex hidden text-default-900 dark:text-white"
               />
 
               <Dropdown className="">
                 <DropdownTrigger className="">
                   <div>
                     <BsGear
-                      className="cursor-pointer text-default-900  dark:text-white"
+                      className="text-default-900 dark:text-white cursor-pointer"
                       size={16}
                     />
                   </div>
                 </DropdownTrigger>
                 <DropdownMenu
-                  className="text-default-900  dark:text-white "
+                  className="text-default-900 dark:text-white"
                   aria-label="Static Actions"
                 >
                   <DropdownItem
-                    className=" "
+                    className=""
                     // onClick={pricingOnOpen}
                     key="pricing"
                   >
-                    <p className="flex items-center  m-0 gap-2">
-                      <MdAttachMoney className="text-default-900  dark:text-white" />{' '}
+                    <p className="flex items-center gap-2 m-0">
+                      <MdAttachMoney className="text-default-900 dark:text-white" />{' '}
                       {t('tariffs')}
                     </p>
                   </DropdownItem>
                   <DropdownItem
-                    className=" "
+                    className=""
                     onClick={() => {
                       navigate('/cabinet');
                     }}
                     key="cabinet"
                   >
-                    <p className="flex items-center   m-0 gap-2">
-                      <AiOutlineUser className="text-default-900  dark:text-white" />{' '}
+                    <p className="flex items-center gap-2 m-0">
+                      <AiOutlineUser className="text-default-900 dark:text-white" />{' '}
                       {t('cabinet')}
                     </p>
                   </DropdownItem>
                   <DropdownItem
-                    className=" "
+                    className=""
                     onClick={() => {
                       navigate('/settings');
                     }}
                     key="settings"
                   >
-                    <p className="flex items-center  m-0 gap-2">
-                      <BsGear className="text-default-900  dark:text-white" />{' '}
+                    <p className="flex items-center gap-2 m-0">
+                      <BsGear className="text-default-900 dark:text-white" />{' '}
                       {t('settings')}
                     </p>
                   </DropdownItem>
                   <DropdownItem
-                    className=" "
+                    className=""
                     onClick={() => {
                       navigate('/reports');
                     }}
                     key="reports"
                   >
-                    <p className="flex items-center  m-0 gap-2">
-                      <TbReportAnalytics className="text-default-900  dark:text-white" />{' '}
+                    <p className="flex items-center gap-2 m-0">
+                      <TbReportAnalytics className="text-default-900 dark:text-white" />{' '}
                       {t('reports')}
                     </p>
                   </DropdownItem>
                   <DropdownItem
-                    className=" "
+                    className=""
                     onClick={() => {
                       localStorage.removeItem('userToken');
-                      navigate('/login');
+                      window.location.reload();
                     }}
                     key="logout"
                   >
-                    <p className="flex items-center  m-0 gap-2">
-                      <BsArrowRightCircle className="text-default-900  dark:text-white" />{' '}
+                    <p className="flex items-center gap-2 m-0">
+                      <BsArrowRightCircle className="text-default-900 dark:text-white" />{' '}
                       {t('logOut')}
                     </p>
+                  </DropdownItem>
+                  <DropdownItem className="" key="theme">
+                    <Switch
+                      defaultSelected={darkMode.value}
+                      onValueChange={darkMode.toggle}
+                      size="sm"
+                      startContent={<MoonIcon />}
+                      endContent={<SunIcon />}
+                    />
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
