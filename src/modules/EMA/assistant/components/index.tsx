@@ -14,7 +14,7 @@ function Chat() {
   );
 
   return (
-    <div className="flex">
+    <div className="flex ">
       <div className="relative flex-1 w-full h-full  overflow-x-hidden  remove-scrollbar   ">
         <div className="flex flex-col h-full ">
           <div className="w-full h-screen ">

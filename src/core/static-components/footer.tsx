@@ -21,7 +21,7 @@ function Footer({ onOpenHelp }: IFooterProps): JSX.Element {
     <footer className="bg-black shadow z-10  w-full ">
       <div className="w-full mx-auto  px-4 py-1 flex items-center justify-between">
         <div />
-        <div className="text-sm  text-center text-white">
+        <div className="text-sm  text-center text-default-900 dark:text-white">
           <a href="/#" className="hover:underline">
             AI-ZADE™
           </a>{' '}
@@ -31,14 +31,14 @@ function Footer({ onOpenHelp }: IFooterProps): JSX.Element {
           <div
             aria-hidden
             onClick={onOpen}
-            className="cursor-pointer text-sm text-center text-white"
+            className="cursor-pointer text-sm text-center text-default-900 dark:text-white"
           >
             {t('instructionFooterText')}
           </div>
           <div
             aria-hidden
             onClick={onOpenHelp}
-            className="cursor-pointer text-sm text-center text-white lg:hidden block"
+            className="cursor-pointer text-sm text-center text-default-900 dark:text-white lg:hidden block"
           >
             {t('helpFooter')}
           </div>

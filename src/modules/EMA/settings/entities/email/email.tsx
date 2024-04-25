@@ -108,7 +108,7 @@ export default function Email() {
     <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
       {/* Card Header */}
       <CardHeader className="flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-3 ">
-        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>{t('emailSettings')}</p>
         </div>
         <div className="flex items-center justify-between gap-2">

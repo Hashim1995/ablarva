@@ -59,7 +59,7 @@ export default function History() {
   return (
     <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
       <CardHeader className="flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-3 ">
-        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>{t('paymentHistory')}</p>
         </div>
       </CardHeader>
@@ -110,7 +110,7 @@ export default function History() {
                 <TableCell>
                   {' '}
                   <Chip
-                    className="text-white"
+                    className="text-default-900 dark:text-white"
                     color="success"
                     aria-label={`Status: ${item?.status}`}
                   >

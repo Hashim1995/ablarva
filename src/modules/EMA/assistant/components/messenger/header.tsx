@@ -37,8 +37,9 @@ function MessengerHeader() {
                   classNames={{
                     base: 'max-w-md',
                     indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
-                    label: ' text-[11px]  text-white pr-2',
-                    value: 'text-[11px] text-white'
+                    label:
+                      ' text-[11px]  text-default-900 dark:text-white pr-2',
+                    value: 'text-[11px] text-default-900 dark:text-white'
                   }}
                   label={t('basicPackage')}
                   value={basicAssistant?.remainder}
@@ -60,8 +61,9 @@ function MessengerHeader() {
                   classNames={{
                     base: 'max-w-md',
                     indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
-                    label: ' text-[11px]  text-white pr-2',
-                    value: ' text-[11px] text-white'
+                    label:
+                      ' text-[11px]  text-default-900 dark:text-white pr-2',
+                    value: ' text-[11px] text-default-900 dark:text-white'
                   }}
                   label={t('premiumPackage')}
                   value={premiumAssistant?.remainder}

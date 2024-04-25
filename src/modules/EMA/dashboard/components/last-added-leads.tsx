@@ -97,6 +97,7 @@ export default function LastAddedLeads() {
   return (
     <Table
       removeWrapper
+      className="text-default-900  dark:text-white"
       classNames={{
         thead: '!bg-transparent',
         tr: '!bg-transparent',

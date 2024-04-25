@@ -98,7 +98,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
     <div className="w-[250px] border-l border-divider  overflow-y-auto remove-scrollbar fixed-height">
       {!isResponsive && (
         <div className="flex justify-between items-center  p-3 h-[60px]">
-          <h3 className="text-base sm:text-xl text-white font-semibold">
+          <h3 className="text-base sm:text-xl text-default-900 dark:text-white font-semibold">
             {t('previous')} {t('chats')}
           </h3>
         </div>
@@ -136,7 +136,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                           threadID: String(conv.threadId)
                         });
                       }}
-                      className="  bg-default-50 relative cursor-pointer text-white rounded-2xl  mb-2   px-3 py-2 z-10"
+                      className="  dark:bg-default-50 relative cursor-pointer backdrop-blur-md  dark:bg-none   text-default-900 dark:border-none border-1 border-divider dark:text-white rounded-2xl  mb-2   px-3 py-2 z-10"
                     >
                       <div className="flex  items-center gap-2 mb-2">
                         <Image
@@ -148,13 +148,13 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                             }${conv?.assistantImagePath}` || ''
                           }
                         />
-                        <p className="text-white  leading-4  text-sm line-clamp-3">
+                        <p className="text-default-900 dark:text-white  leading-4  text-sm line-clamp-3">
                           {conv?.assistantName}
                         </p>
                       </div>
 
                       <div className="flex  items-center justify-between mb-2">
-                        <p className="text-white  leading-4  text-sm line-clamp-3">
+                        <p className="text-default-900 dark:text-white  leading-4  text-sm line-clamp-3">
                           {conv?.threadFirstMessage}
                         </p>
                         <Popover
@@ -175,11 +175,14 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                               aria-label="Remove chat popover trigger"
                               title="Remove chat popover trigger"
                             >
-                              <BsTrash size={16} className=" text-white" />
+                              <BsTrash
+                                size={16}
+                                className=" text-default-900 dark:text-white"
+                              />
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent>
-                            <div className="px-1 py-2">
+                            <div className="px-1 py-2 text-default-900 dark:text-white">
                               <p>{t('deleteConfirmationPrompt')}</p>
                               <Divider className="my-2" />
                               <div className="w-full flex items-center gap-1">

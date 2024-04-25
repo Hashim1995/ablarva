@@ -399,6 +399,12 @@ input[type='number'] {
   background-image: url('../../assets/images//bg-light.svg');
 }
 
+.grid-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//grid.svg');
+}
+
 @-webkit-keyframes AnimationName {
   0% {
     background-position: 90% 0%;

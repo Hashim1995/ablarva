@@ -74,7 +74,7 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
           <h4 className=" mb-5 tracking-widest text-sm text-default-400">
             {t('loginAndDiscover')}
           </h4>
-          <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-white">
+          <h3 className="leading-none tracking-widest  mb-5 text-[34px] font-semibold text-default-900 dark:text-white">
             {t('login')}
           </h3>
 

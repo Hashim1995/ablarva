@@ -45,7 +45,7 @@ function PricingItem({
         packageId === item.packageId ? ' border-3 border-success-500' : ''
       }`}
     >
-      <CardHeader className="text-white text-center flex flex-col">
+      <CardHeader className="text-default-900 dark:text-white text-center flex flex-col">
         <h2 className="text-lg ">{item?.packageName}</h2>
         <p className="text-3xl font-bold ">{item?.price} / ay</p>
         <p className=" text-default-500  text-sm ">
@@ -55,7 +55,7 @@ function PricingItem({
       <CardBody>
         <ul className="">
           {item?.limitDetails?.map((limit: ILimitItem) => (
-            <li className="flex justify-between items-center text-white text-sm mt-2">
+            <li className="flex justify-between items-center text-default-900 dark:text-white text-sm mt-2">
               <span>{limit?.label}</span>
               <span>{limit?.price}</span>
             </li>
@@ -76,7 +76,7 @@ function PricingItem({
             buyModalOnOpen();
           }
         }}
-        className="w-full text-white py-2 rounded-lg text-mda mt-4 "
+        className="w-full text-default-900 dark:text-white py-2 rounded-lg text-mda mt-4 "
       >
         {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
       </Button>

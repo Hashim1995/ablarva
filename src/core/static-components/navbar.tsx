@@ -169,7 +169,7 @@ export default function Navbar() {
         <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
           {/* <ButtonGroup className="!rounded-none">
             <Button
-              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-900 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('chat')
                   ? ' border-b-1 border-white'
                   : ''
@@ -184,7 +184,7 @@ export default function Navbar() {
               {t('simpleChat')}
             </Button>
             <Button
-              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-900 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('assistant')
                   ? ' border-b-1 border-white'
                   : ''
@@ -204,7 +204,7 @@ export default function Navbar() {
               content={t('itIsBeingPrepared')}
             >
               <Button
-                className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
+                className={`isDisabled text-default-900 dark:text-white w-40 bg-transparent h-12  ${location.pathname.includes(
                   'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
@@ -292,7 +292,7 @@ export default function Navbar() {
               avatarProps={{
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
-              className="hidden sm:flex text-white"
+              className="hidden sm:flex text-default-900 dark:text-white"
             />
             <Dropdown className="">
               <DropdownTrigger className="">

@@ -62,33 +62,32 @@ export function SidebarWrapper() {
           <img src={logo} className="h-[48px] w-[48px]" alt="" />
           <h6>Ablarva</h6>
         </div>
-        <Switch
-          defaultSelected={darkMode.value}
-          onValueChange={darkMode.toggle}
-          size="lg"
-          color="warning"
-          startContent={<MoonIcon />}
-          endContent={<SunIcon />}
-        />
+
         <div className="flex flex-col justify-between h-full">
           <div className={Sidebar.Body()}>
             <SidebarMenu title={t('main')}>
               <SidebarItem
                 title="Dashboard"
-                icon={<MdOutlineDashboard />}
+                icon={
+                  <MdOutlineDashboard className="text-default-900  dark:text-white" />
+                }
                 isActive={pathname === '/email-marketing'}
                 href="/email-marketing"
               />
               <SidebarItem
                 isActive={pathname.includes('/assistant')}
                 title="Chat"
-                icon={<BsChatDots />}
+                icon={
+                  <BsChatDots className="text-default-900  dark:text-white" />
+                }
                 href="assistant"
               />
               <SidebarItem
                 isActive={pathname.includes('/leads')}
                 title="Leads"
-                icon={<MdOutlineLeaderboard />}
+                icon={
+                  <MdOutlineLeaderboard className="text-default-900  dark:text-white" />
+                }
                 href="leads"
               />{' '}
             </SidebarMenu>
@@ -97,108 +96,142 @@ export function SidebarWrapper() {
               <SidebarItem
                 isActive={pathname.includes('/mailbox')}
                 title="Mailbox"
-                icon={<BsMailbox />}
+                icon={
+                  <BsMailbox className="text-default-900  dark:text-white" />
+                }
                 href="mailbox"
               />{' '}
               <SidebarItem
                 isActive={pathname.includes('/campaigns')}
                 title="Campaigns"
-                icon={<MdOutlineCampaign />}
+                icon={
+                  <MdOutlineCampaign className="text-default-900  dark:text-white" />
+                }
                 href="campaigns"
               />{' '}
               <SidebarItem
                 isActive={pathname.includes('/pending-mails')}
                 title="Pending mails"
-                icon={<MdOutlineMarkEmailUnread />}
+                icon={
+                  <MdOutlineMarkEmailUnread className="text-default-900  dark:text-white" />
+                }
                 href="pending-mails"
               />{' '}
               <SidebarItem
                 isActive={pathname.includes('/connected-mails')}
                 title="Connected mails"
-                icon={<MdOutlineAttachEmail />}
+                icon={
+                  <MdOutlineAttachEmail className="text-default-900  dark:text-white" />
+                }
                 href="connected-mails"
               />{' '}
               <SidebarItem
                 isActive={pathname.includes('/analytics')}
                 title="Analytics"
-                icon={<BsBarChart />}
+                icon={
+                  <BsBarChart className="text-default-900  dark:text-white" />
+                }
                 href="analytics"
               />
             </SidebarMenu>
           </div>
-          <div className={Sidebar.Footer()}>
-            <User
-              name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
-              description={user.email || t('empty')}
-              avatarProps={{
-                size: 'sm',
-                src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
-              }}
-              className="hidden sm:flex text-default-900 dark:text-white"
-            />
-            <Dropdown className="">
-              <DropdownTrigger className="">
-                <div>
-                  <BsGear className="cursor-pointer" color="white" size={16} />
-                </div>
-              </DropdownTrigger>
-              <DropdownMenu className=" " aria-label="Static Actions">
-                <DropdownItem
-                  className=" "
-                  // onClick={pricingOnOpen}
-                  key="pricing"
+
+          <div>
+            <div className=" pt-16  pl-2">
+              <Switch
+                defaultSelected={darkMode.value}
+                onValueChange={darkMode.toggle}
+                size="lg"
+                startContent={<MoonIcon />}
+                endContent={<SunIcon />}
+              />
+            </div>
+            <div className="flex items-center justify-center gap-6 pt-1 pb-8 px-8 md:pt-10 md:pb-0">
+              <User
+                name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
+                description={user.email || t('empty')}
+                avatarProps={{
+                  size: 'sm',
+                  src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
+                }}
+                className="hidden sm:flex text-default-900  dark:text-white"
+              />
+
+              <Dropdown className="">
+                <DropdownTrigger className="">
+                  <div>
+                    <BsGear
+                      className="cursor-pointer text-default-900  dark:text-white"
+                      size={16}
+                    />
+                  </div>
+                </DropdownTrigger>
+                <DropdownMenu
+                  className="text-default-900  dark:text-white "
+                  aria-label="Static Actions"
                 >
-                  <p className="flex items-center  m-0 gap-2">
-                    <MdAttachMoney /> {t('tariffs')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/cabinet');
-                  }}
-                  key="cabinet"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <AiOutlineUser /> {t('cabinet')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/settings');
-                  }}
-                  key="settings"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <BsGear /> {t('settings')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/reports');
-                  }}
-                  key="reports"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <TbReportAnalytics /> {t('reports')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    localStorage.removeItem('userToken');
-                    navigate('/login');
-                  }}
-                  key="logout"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <BsArrowRightCircle /> {t('logOut')}
-                  </p>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+                  <DropdownItem
+                    className=" "
+                    // onClick={pricingOnOpen}
+                    key="pricing"
+                  >
+                    <p className="flex items-center  m-0 gap-2">
+                      <MdAttachMoney className="text-default-900  dark:text-white" />{' '}
+                      {t('tariffs')}
+                    </p>
+                  </DropdownItem>
+                  <DropdownItem
+                    className=" "
+                    onClick={() => {
+                      navigate('/cabinet');
+                    }}
+                    key="cabinet"
+                  >
+                    <p className="flex items-center   m-0 gap-2">
+                      <AiOutlineUser className="text-default-900  dark:text-white" />{' '}
+                      {t('cabinet')}
+                    </p>
+                  </DropdownItem>
+                  <DropdownItem
+                    className=" "
+                    onClick={() => {
+                      navigate('/settings');
+                    }}
+                    key="settings"
+                  >
+                    <p className="flex items-center  m-0 gap-2">
+                      <BsGear className="text-default-900  dark:text-white" />{' '}
+                      {t('settings')}
+                    </p>
+                  </DropdownItem>
+                  <DropdownItem
+                    className=" "
+                    onClick={() => {
+                      navigate('/reports');
+                    }}
+                    key="reports"
+                  >
+                    <p className="flex items-center  m-0 gap-2">
+                      <TbReportAnalytics className="text-default-900  dark:text-white" />{' '}
+                      {t('reports')}
+                    </p>
+                  </DropdownItem>
+                  <DropdownItem
+                    className=" "
+                    onClick={() => {
+                      localStorage.removeItem('userToken');
+                      navigate('/login');
+                    }}
+                    key="logout"
+                  >
+                    <p className="flex items-center  m-0 gap-2">
+                      <BsArrowRightCircle className="text-default-900  dark:text-white" />{' '}
+                      {t('logOut')}
+                    </p>
+                  </DropdownItem>
+                </DropdownMenu>
+              </Dropdown>
+            </div>
           </div>
         </div>
       </div>

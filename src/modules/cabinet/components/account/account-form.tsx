@@ -102,7 +102,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
               isDisabled: fieldsIsDisable
             }}
             type="email"
-            className="text-white"
+            className="text-default-900 dark:text-white"
             control={control}
             isInvalid={Boolean(errors.email?.message)}
             errors={errors}

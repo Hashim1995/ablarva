@@ -94,7 +94,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
       })}
       className=" self-end px-6 z-10 pt-[18px] pb-8 w-full dark:bg-transparent flex flex-col gap-4 "
     >
-      <div className="h-full w-full bg-black/50 backdrop-blur-sm   rounded-xl">
+      <div className="h-full w-ful  bg-purple-100/40 backdrop-blur-lg dark:bg-black/50   rounded-xl">
         <Textarea
           {...register('message', { required: true })}
           variant="bordered"
@@ -104,7 +104,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           maxRows={3}
           placeholder={t('typeAMessage')}
           classNames={textAreaConfig}
-          className="flex-1 px-4  !border-none text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
+          className="flex-1 px-4  !border-none text-default-900 dark:text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
           onKeyDown={e => {
             // Check if the key pressed is 'Enter' and there is no shift key pressed
             if (audioEnable) {
@@ -132,9 +132,16 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
             className="bg-transparent rounded-full "
           >
             {audioEnable ? (
-              <AiFillSound size={16} color="white" />
+              <AiFillSound
+                size={16}
+                className="text-default-900  dark:text-white"
+              />
             ) : (
-              <AiOutlineSound size={16} color="white" />
+              <AiOutlineSound
+                className="text-default-900  dark:text-white"
+                size={16}
+                color="white"
+              />
             )}{' '}
           </Button>
           <div className="flex rounded-0 shadow-none   items-center justify-between">
@@ -257,7 +264,10 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
               isDisabled={waitingForResponse}
               className="bg-transparentrounded-full"
             >
-              <BsFillSendFill size={16} color="white" />
+              <BsFillSendFill
+                size={16}
+                className="text-default-900  dark:text-white"
+              />
             </Button>
           </div>
         </div>

@@ -22,7 +22,7 @@ function AccountHeader({
 
   return (
     <div className="flex justify-between min-h-[48px] items-center p-2 sm:p-3">
-      <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+      <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
         <p>
           {t('account')} {t('infos')}
         </p>

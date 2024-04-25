@@ -272,8 +272,12 @@ function ChatInner(): JSX.Element {
             </div>
           )}
           {hasError && (
-            <div className=" flex justify-center mt-2 gap-2 items-center ">
-              <Chip startContent={<TfiFaceSad size={18} />} color="danger">
+            <div className=" text-default-900 dark:text-white  flex justify-center mt-2 gap-2 items-center ">
+              <Chip
+                startContent={<TfiFaceSad size={18} />}
+                className="text-sm"
+                color="danger"
+              >
                 {t('myBrainBroken')}
               </Chip>
               <Button
@@ -291,13 +295,13 @@ function ChatInner(): JSX.Element {
                     aria-label="Regenerate the last question icon"
                     isIconOnly
                     size="sm"
-                    className="bg-black rounded-full"
+                    className=" text-default-900 dark:text-white  rounded-full"
                   >
-                    <BsRecycle size={18} color="white" />
+                    <BsRecycle size={18} />
                   </Button>
                 }
                 size="sm"
-                className="bg-black text-white rounded-full pl-[2px]"
+                className="text-default-900 dark:text-white rounded-full pl-[2px]"
               >
                 {t('regenerate')}
               </Button>
@@ -310,7 +314,7 @@ function ChatInner(): JSX.Element {
               <div className="h-full flex flex-col justify-between">
                 <AiEmptyWelcome />
                 {currentAssistantModel?.assistantId ? (
-                  <div className="gap-2 grid grid-cols-2 sm:grid-cols-2 mt-5">
+                  <div className="gap-2 grid grid-cols-2 p-5 sm:grid-cols-2 mt-5">
                     {templateMessageTexts?.map((item: string) => (
                       <TempalteMessage
                         key={item}

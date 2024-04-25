@@ -13,11 +13,11 @@ function ThinkText() {
     <div className="thinkText-frame pl-6">
       <div className="thinkText-center">
         <div className="thinkText-carousel">
-          <div className="thinkText-pre lg:text-base text-white sm:text-sm text-xs">
+          <div className="thinkText-pre lg:text-base text-default-900 dark:text-white sm:text-sm text-xs">
             <strong>{t('aiZadeSay')}: </strong>{' '}
           </div>
           <div className="thinkText-change_outer">
-            <div className="thinkText-change_inner text-white">
+            <div className="thinkText-change_inner text-default-900 dark:text-white">
               {textList
                 ?.map((value: string) => ({ value, sort: Math.random() })) // Map operation 1
                 .sort((a, b) => a.sort - b.sort) // Sort operation

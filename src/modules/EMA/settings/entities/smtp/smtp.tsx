@@ -81,7 +81,7 @@ function Smtp() {
   return (
     <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px] items-center p-2 sm:p-3">
-        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>{t('smtpSettings')}</p>
         </div>
       </div>
@@ -101,7 +101,7 @@ function Smtp() {
                   id: 'mailAddress'
                 }}
                 type="email"
-                className="text-white"
+                className="text-default-900 dark:text-white"
                 control={control}
                 isInvalid={Boolean(errors.mailAddress?.message)}
                 errors={errors}
@@ -174,7 +174,7 @@ function Smtp() {
                   id: 'hostName'
                 }}
                 type="text"
-                className="text-white"
+                className="text-default-900 dark:text-white"
                 control={control}
                 isInvalid={Boolean(errors.hostName?.message)}
                 errors={errors}
@@ -194,7 +194,7 @@ function Smtp() {
                   id: 'port'
                 }}
                 type="number"
-                className="text-white"
+                className="text-default-900 dark:text-white"
                 control={control}
                 isInvalid={Boolean(errors.port?.message)}
                 errors={errors}

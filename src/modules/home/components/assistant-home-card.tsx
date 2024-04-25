@@ -22,7 +22,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
-    <div className="w-full mx-auto h-96 gradient-bg border-1 relative text-white rounded-xl overflow-hidden">
+    <div className="w-full mx-auto h-96 gradient-bg border-1 relative text-default-900 dark:text-white rounded-xl overflow-hidden">
       <div className="p-10 blur-sm h-32 bg-[url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMzczYmF0Y2g1LTIwMy5qcGc.jpg')]  rounded-b-3xl " />
       <img
         className=" w-28 h-28 items-center rounded-full mx-auto border-5 absolute top-8 left-1/2 transform -translate-x-1/2  border-white"

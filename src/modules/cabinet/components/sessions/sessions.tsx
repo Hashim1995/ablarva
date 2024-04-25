@@ -125,7 +125,7 @@ function Sessions() {
   return (
     <Card className="bg-transparent   h-fulll !shadow-none !rounded-none h-full ">
       <div className="flex justify-between min-h-[48px] sm:min-h-[56px]  items-center  p-2 sm:p-3">
-        <div className="text-base sm:text-xl text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
           <p>
             {t('active')} {t('sessions')}
           </p>
@@ -148,23 +148,23 @@ function Sessions() {
                     <Divider orientation="vertical" className="h-20" />
                     <div className="flex flex-1 justify-between items-center">
                       <div className="2xl:px-4 px-2">
-                        <div className="tracking-wide text-[14px] text-white ">
+                        <div className="tracking-wide text-[14px] text-default-900 dark:text-white ">
                           <span className=" text-gray-400">
                             {t('system')}:{' '}
                           </span>
                           {item.platformName || t('empty')}
                         </div>
-                        <div className="tracking-wide text-[14px] text-white">
+                        <div className="tracking-wide text-[14px] text-default-900 dark:text-white">
                           <span className=" text-gray-400">
                             {t('browser')}:{' '}
                           </span>
                           {item.browserName || t('empty')}
                         </div>
-                        <div className="tracking-wide text-[14px] text-white">
+                        <div className="tracking-wide text-[14px] text-default-900 dark:text-white">
                           <span className=" text-gray-400">{t('ip')} : </span>
                           {item.ipAddress || t('empty')}
                         </div>
-                        <div className="tracking-wide text-[14px] text-white">
+                        <div className="tracking-wide text-[14px] text-default-900 dark:text-white">
                           <span className=" text-gray-400">
                             {t('loginDate')}:{' '}
                           </span>
@@ -175,7 +175,7 @@ function Sessions() {
                       <div className="flex items-center">
                         <div className="font-bold 2xl:px-4 px-2">
                           <Chip
-                            className="text-white"
+                            className="text-default-900 dark:text-white"
                             color={item?.status ? 'success' : 'danger'}
                           >
                             {item?.status ? 'Aktiv' : item?.status}

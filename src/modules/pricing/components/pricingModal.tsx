@@ -55,7 +55,7 @@ function PricingModal({
                 <Button
                   title="Yes"
                   aria-label="Yes"
-                  className="bg-black text-white"
+                  className="bg-black text-default-900 dark:text-white"
                   onPress={onOkFunction}
                   isLoading={loading}
                   variant="bordered"

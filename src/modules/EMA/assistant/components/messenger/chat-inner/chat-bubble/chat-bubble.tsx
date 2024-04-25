@@ -54,12 +54,15 @@ function ChatBubble({
           size="sm"
           className="bg-transparent rounded-full"
         >
-          <TbClipboardCopy color="white" size={16} />
+          <TbClipboardCopy
+            className="text-default-900 dark:text-white"
+            size={16}
+          />
         </Button>
       </div>
 
       <div
-        className={`markdown-table-container p-3 px-4 rounded-3xl max-w-2xl backdrop-blur-sm bg-default-50/50  w-3/5  overflow-auto ${
+        className={`markdown-table-container p-3 px-4 rounded-3xl max-w-2xl  bg-gradient-to-r from-rose-50 dark:from-inherit dark:to-inherit to-teal-50   dark:bg-default-50/50   w-3/5  overflow-auto ${
           isClient ? 'rounded-tr-none ' : 'rounded-tl-none '
         }`}
       >

@@ -85,7 +85,7 @@ export function MailBoxHealt() {
                       color="success"
                       showValueLabel
                       classNames={{
-                        value: ' text-white'
+                        value: ' text-default-900 dark:text-white'
                       }}
                     />
                   </div>

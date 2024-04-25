@@ -23,7 +23,7 @@ function TempalteMessage({ text, onSubmit }: ITemplateMessage): JSX.Element {
           message: text
         });
       }}
-      className="flex flex-col relative overflow-hidden height-auto text-foreground box-border bg-transparent outline-none   rounded-large  cursor-pointer "
+      className="flex flex-col relative overflow-hidden height-auto text-foreground box-border bg-transparent outline-none    rounded-large  cursor-pointer "
     >
       <CardBody className="shadow-none bg-transparent">
         <p className="text-sm">{text}</p>
