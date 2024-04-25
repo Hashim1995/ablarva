@@ -55,6 +55,10 @@ const routes = [
             <HomePage />
           </Suspense>
         )
+      },
+      {
+        path: 'login',
+        element: <LoginPage />
       }
     ]
   },
@@ -166,10 +170,6 @@ const routes = [
   /**
    * Route for the login page.
    */
-  {
-    path: 'login',
-    element: <LoginPage />
-  },
 
   /**
    * Route for handling unknown paths.

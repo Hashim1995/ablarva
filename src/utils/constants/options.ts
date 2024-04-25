@@ -86,7 +86,8 @@ const markdownOptions: MarkdownToJSX.Options = {
     ul: {
       component: 'ul',
       props: {
-        className: 'list-disc text-default-900 dark:text-white list-inside space-y-2 p-1   rounded-xl'
+        className:
+          'list-disc text-default-900 dark:text-white list-inside space-y-2 p-1   rounded-xl'
       }
     },
     ol: {

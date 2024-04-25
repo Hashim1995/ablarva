@@ -22,8 +22,8 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
   const navigate = useNavigate();
   const { t } = useTranslation();
   return (
-    <div className="w-full mx-auto h-96 gradient-bg border-1 relative text-default-900 dark:text-white rounded-xl overflow-hidden">
-      <div className="p-10 blur-sm h-32 bg-[url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMzczYmF0Y2g1LTIwMy5qcGc.jpg')]  rounded-b-3xl " />
+    <div className="w-full mx-auto h-96 bg-[url('https://images.rawpixel.com/image_800/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtMzczYmF0Y2g1LTIwMy5qcGc.jpg')]  border-1 relative text-white rounded-xl overflow-hidden">
+      <div className="p-10 blur-sm h-32  rounded-b-3xl " />
       <img
         className=" w-28 h-28 items-center rounded-full mx-auto border-5 absolute top-8 left-1/2 transform -translate-x-1/2  border-white"
         src={
@@ -32,13 +32,15 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
         alt="profile"
       />
       <div className="flex justify-center items-center flex-col mt-5">
-        <div className="font-bold text-xl mt-2">{item?.assistantName}</div>
-        <p className="text-base mt-1">{item?.assistantPosition}</p>
+        <div className="font-bold text-xl mt-2 text-white">
+          {item?.assistantName}
+        </div>
+        <p className="text-base mt-1 :text-white">{item?.assistantPosition}</p>
       </div>
       <div className="h-[2px] w-3/5 mx-auto mt-1 bg-[purple]" />
 
       <div className="px-6 pt-4 ">
-        <p className="text-sm text-center min-h-[72px]">
+        <p className="text-default-900 text-white text-sm text-center min-h-[72px]">
           {item?.assistantDescription}
         </p>
       </div>

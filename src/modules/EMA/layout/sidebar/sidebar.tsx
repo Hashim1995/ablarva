@@ -141,7 +141,7 @@ export function SidebarWrapper() {
               <Switch
                 defaultSelected={darkMode.value}
                 onValueChange={darkMode.toggle}
-                size="lg"
+                size="sm"
                 startContent={<MoonIcon />}
                 endContent={<SunIcon />}
               />

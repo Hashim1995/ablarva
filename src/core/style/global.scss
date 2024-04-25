@@ -404,7 +404,11 @@ input[type='number'] {
   background-size: cover;
   background-image: url('../../assets/images//grid.svg');
 }
-
+.abstract-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//abstract.jpg');
+}
 @-webkit-keyframes AnimationName {
   0% {
     background-position: 90% 0%;

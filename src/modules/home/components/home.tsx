@@ -1,4 +1,5 @@
 /* eslint-disable no-unused-vars */
+import { WormIcon } from '@/assets/icons/warm-icon';
 import { AssistantService } from '@/services/assistant-services/assistant-services';
 import { Skeleton } from '@nextui-org/react';
 
@@ -32,6 +33,24 @@ function Home() {
     fetchAssistansList();
   }, []);
 
+  function getRandomPosition() {
+    return `${Math.floor(Math.random() * 100)}vh`; // Adjust the range as needed
+  }
+
+  const getRandomRotation = () => `${Math.floor(Math.random() * 360)}deg`;
+
+  const wormIcons = Array.from({ length: 10 }, (_, index) => (
+    <WormIcon
+      key={index}
+      style={{
+        top: getRandomPosition(),
+        left: getRandomPosition(),
+        transform: `rotate(${getRandomRotation()})`
+      }}
+      className="absolute w-[500px] h-[500px]"
+    />
+  ));
+
   return (
     <div className="py-10 remove-scrollbar  home-container ">
       <div className="flex justify-center mb-3">
@@ -41,6 +60,7 @@ function Home() {
           {t('withSmartestAssistants')}
         </h1>
       </div>
+      {/* {wormIcons} */}
 
       <div className="containerLg  ">
         {!loading ? (

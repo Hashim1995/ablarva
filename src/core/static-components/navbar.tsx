@@ -10,31 +10,27 @@ import {
   NavbarItem,
   Button,
   NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
   User,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure
+  useDisclosure,
+  Switch
 } from '@nextui-org/react';
 
 import { useOnClickOutside } from 'usehooks-ts';
 
 import {
-  BsFillChatLeftDotsFill,
   BsArrowRightCircle,
-  BsFillGearFill,
-  BsFillFilterSquareFill,
   BsEnvelope,
   BsQuestionCircle,
   BsGear
 } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { IMenuItemsNavbar, LayoutLanguage } from '@/models/common';
+import { LayoutLanguage } from '@/models/common';
 import { useDispatch, useSelector } from 'react-redux';
 import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -43,6 +39,9 @@ import { TbReportAnalytics } from 'react-icons/tb';
 import PricingModal from '@/modules/pricing/pages';
 import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
 import { RootState } from '@/redux/store';
+import { MoonIcon } from '@/assets/icons/moon-icon';
+import { SunIcon } from '@/assets/icons/sun-icon';
+import useDarkMode from 'use-dark-mode';
 import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
@@ -62,23 +61,6 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuItems: IMenuItemsNavbar[] = [
-    {
-      label: t('chat'),
-      path: 'chat',
-      icon: <BsFillChatLeftDotsFill />
-    },
-    {
-      label: t('tariffs'),
-      path: 'pricing',
-      icon: <BsFillFilterSquareFill />
-    },
-    {
-      label: t('settings'),
-      path: 'settings',
-      icon: <BsFillGearFill />
-    }
-  ];
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -101,7 +83,11 @@ export default function Navbar() {
     onOpenChange: feedBackModaOnOpenChange
   } = useDisclosure();
   const navRef = useRef(null);
-
+  const darkMode = useDarkMode(false, {
+    classNameDark: 'dark',
+    classNameLight: 'light',
+    global: window // Just pass this as a config option
+  });
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -136,7 +122,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="z-10  bg-black/30 backdrop-blur-md"
+        className="z-10  bg-transparent"
         maxWidth="full"
         isBlurred={false}
         position="static"
@@ -222,7 +208,7 @@ export default function Navbar() {
           }}
           justify="end"
         >
-          <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
+          <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center text-default-900 dark:text-white justify-between">
             <Dropdown
               role="menu"
               classNames={{
@@ -276,6 +262,13 @@ export default function Navbar() {
                 </Button>
               </Tooltip>
             )}
+            <Switch
+              defaultSelected={darkMode.value}
+              onValueChange={darkMode.toggle}
+              size="sm"
+              startContent={<MoonIcon />}
+              endContent={<SunIcon />}
+            />
             <Button
               onClick={feedBackModalOnOpen}
               size="sm"
@@ -284,7 +277,10 @@ export default function Navbar() {
               title="Feedback"
               className="bg-transparent rounded-full flex "
             >
-              <BsQuestionCircle color="white" size={22} />
+              <BsQuestionCircle
+                className="text-default-900 dark:text-white"
+                size={22}
+              />
             </Button>
             <User
               name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
@@ -292,14 +288,16 @@ export default function Navbar() {
               avatarProps={{
                 src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
               }}
+              classNames={{
+                description: 'text-default-900 dark:text-white'
+              }}
               className="hidden sm:flex text-default-900 dark:text-white"
             />
             <Dropdown className="">
               <DropdownTrigger className="">
                 <div>
                   <MdOutlineKeyboardArrowDown
-                    className="cursor-pointer"
-                    color="white"
+                    className="cursor-pointer text-default-900 dark:text-white"
                     size={20}
                   />
                 </div>
@@ -310,7 +308,7 @@ export default function Navbar() {
                   onClick={pricingOnOpen}
                   key="pricing"
                 >
-                  <p className="flex items-center  m-0 gap-2">
+                  <p className="flex text-default-900 dark:text-white items-center  m-0 gap-2">
                     <MdAttachMoney /> {t('tariffs')}
                   </p>
                 </DropdownItem>
@@ -321,7 +319,7 @@ export default function Navbar() {
                   }}
                   key="cabinet"
                 >
-                  <p className="flex items-center  m-0 gap-2">
+                  <p className="flex text-default-900 dark:text-white items-center  m-0 gap-2">
                     <AiOutlineUser /> {t('cabinet')}
                   </p>
                 </DropdownItem>
@@ -332,7 +330,7 @@ export default function Navbar() {
                   }}
                   key="settings"
                 >
-                  <p className="flex items-center  m-0 gap-2">
+                  <p className="flex text-default-900 dark:text-white items-center  m-0 gap-2">
                     <BsGear /> {t('settings')}
                   </p>
                 </DropdownItem>
@@ -343,7 +341,7 @@ export default function Navbar() {
                   }}
                   key="reports"
                 >
-                  <p className="flex items-center  m-0 gap-2">
+                  <p className="flex text-default-900 dark:text-white items-center  m-0 gap-2">
                     <TbReportAnalytics /> {t('reports')}
                   </p>
                 </DropdownItem>
@@ -355,7 +353,7 @@ export default function Navbar() {
                   }}
                   key="logout"
                 >
-                  <p className="flex items-center  m-0 gap-2">
+                  <p className="flex text-default-900 dark:text-white items-center  m-0 gap-2">
                     <BsArrowRightCircle /> {t('logOut')}
                   </p>
                 </DropdownItem>
@@ -363,25 +361,6 @@ export default function Navbar() {
             </Dropdown>
           </NavbarItem>
         </NavbarContent>
-        <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem
-              className="flex items-start"
-              key={`${item}-${index}`}
-            >
-              <Button
-                aria-label="Navbar Menu Item"
-                title="Navbar Menu Item"
-                className="w-full px-1 flex bg-transparent items-center font-medium"
-                onClick={() => {
-                  navigate(`/${item.path}`);
-                }}
-              >
-                {item.icon} {item.label}
-              </Button>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
       </NavbarNext>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
       {feedBackModalIsOpen && (

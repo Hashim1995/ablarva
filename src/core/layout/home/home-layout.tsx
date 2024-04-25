@@ -7,7 +7,7 @@ import Navbar from '../../static-components/navbar';
  */
 function LayoutPage() {
   return (
-    <div className="  app-wrapper">
+    <div className=" app-wrapper">
       <Navbar />
       <div className=" z-10   ">
         <Outlet />
