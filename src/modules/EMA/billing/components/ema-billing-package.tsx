@@ -6,9 +6,9 @@ import { useTranslation } from 'react-i18next';
 import useDarkMode from 'use-dark-mode';
 
 /**
- * Props for the PricingItem component.
+ * Props for the EmaBillingPackage component.
  */
-interface IPricingItemProps {
+interface IEmaBillingPackageProps {
   item: IPackageItem;
   verified: boolean;
   packageId: number;
@@ -19,7 +19,7 @@ interface IPricingItemProps {
 
 /**
  * @description Renders the pricing item. This component displays the pricing item.
- * @param {IPricingItemProps} props - The props for the component.
+ * @param {IEmaBillingPackageProps} props - The props for the component.
  * @param {IPackageItem} props.item - The package item.
  * @param {boolean} props.verified - The user's verification status.
  * @param {number} props.packageId - The user's package ID.
@@ -29,14 +29,14 @@ interface IPricingItemProps {
  * @returns {JSX.Element} The rendered component.
  */
 
-function PricingItem({
+function EmaBillingPackage({
   item,
   setWantedPackageId,
   verified,
   packageId,
   buyModalOnOpen,
   modalEmailOnOpen
-}: IPricingItemProps): React.ReactElement {
+}: IEmaBillingPackageProps): React.ReactElement {
   const { t } = useTranslation();
 
   const darkMode = useDarkMode(false);
@@ -47,7 +47,9 @@ function PricingItem({
       className={`gradient-bg ${
         darkMode.value ? 'gradient-bg' : 'abstract-bg'
       } p-4 rounded-lg shadow-lg w-1/4 ${
-        packageId === item.packageId ? ' border-3 border-success-500' : ''
+        packageId === item.packageId
+          ? ' border-1 border-divider border-success-500'
+          : ''
       }`}
     >
       <CardHeader className="flex flex-col text-center">
@@ -68,6 +70,7 @@ function PricingItem({
 
       <Button
         title="Join Now"
+        variant="bordered"
         aria-label="Join Now"
         onClick={() => {
           // If the user is not verified, open the email modal. Otherwise, open the buy modal.
@@ -86,4 +89,4 @@ function PricingItem({
   );
 }
 
-export default PricingItem;
+export default EmaBillingPackage;

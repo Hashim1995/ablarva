@@ -375,6 +375,7 @@
     "browserName": "Browser name",
     "ipAddress": "IP address",
     "billing": "Billing",
-    "senderInformation": "Sender information"
+    "senderInformation": "Sender information",
+    "packages": "Packages"
   }
 }

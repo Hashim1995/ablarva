@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useNavigate, useRoutes } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import routesList from '@core/routes/routes';
@@ -64,19 +63,19 @@ function App() {
           JSON.parse(localStorage.getItem('userToken') || '{}').token
         );
 
-        // if (statisticsSocket.state === 'Disconnected') {
-        //   statisticsSocket
-        //     .start()
-        //     .then(() => {
-        //       statisticsSocket.on(
-        //         'StatisticsUpdate',
-        //         (z: StatisticsUpdateData) => {
-        //           dispatch(setStatisticsCount(z));
-        //         }
-        //       );
-        //     })
-        //     .catch(error => console.error('SignalR connection failed:', error));
-        // }
+        if (statisticsSocket.state === 'Disconnected') {
+          statisticsSocket
+            .start()
+            .then(() => {
+              statisticsSocket.on(
+                'StatisticsUpdate',
+                (z: StatisticsUpdateData) => {
+                  dispatch(setStatisticsCount(z));
+                }
+              );
+            })
+            .catch(error => console.error('SignalR connection failed:', error));
+        }
       }
     }
     return () => {

@@ -9,7 +9,7 @@ import VerifyEmail from '@/core/static-components/verify-email';
 // import Header from './header/header';
 import Empty from '@/components/layout/empty';
 import PricingModal from './ema-buy-verify-modal';
-import PricingItem from './ema-packages';
+import PricingItem from './components/ema-billing-package';
 
 /**
  * @description Renders the chat pricing. This component displays the chat pricing.
