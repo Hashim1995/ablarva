@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import { Skeleton, useDisclosure } from '@nextui-org/react';
 import { PaymentService } from '@/services/payment-services/payment-services';
 import { IPackageItem, IPackageData } from '@/models/payment';
-import { IBuyPacketBody } from '@/modules/EMA/pricing/types';
+import { IBuyPacketBody } from '@/modules/EMA/billing/types';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';

@@ -4,7 +4,10 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponse } from '@/models/common';
-import { IBuyPacketBody, IBuyPacketResponse } from '@/modules/EMA/pricing/types';
+import {
+  IBuyPacketBody,
+  IBuyPacketResponse
+} from '@/modules/EMA/billing/types';
 import { ITransactionsItem } from '@/modules/EMA/cabinet/types';
 import { IPackageData } from '@/models/payment';
 import {

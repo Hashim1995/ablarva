@@ -67,6 +67,11 @@ function AppHandledSelect({
           label={label}
           size={size}
           isInvalid={isInvalid}
+          classNames={{
+            trigger: `border-1 border-divider ${
+              selectProps?.isDisabled ? 'bg-[#d7d7d7] dark:bg-[#27272A]' : ''
+            }`
+          }}
           onChange={e => {
             onChange(e);
             onChangeApp && onChangeApp(e);
@@ -77,6 +82,7 @@ function AppHandledSelect({
           className={className}
           errorMessage={isInvalid && t('thisFieldMustEntered')}
           {...selectProps}
+          variant={selectProps?.isDisabled ? 'flat' : 'bordered'}
         >
           {options?.map(z => (
             <SelectItem

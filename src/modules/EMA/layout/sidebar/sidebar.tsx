@@ -163,16 +163,6 @@ export function SidebarWrapper() {
                 >
                   <DropdownItem
                     className=""
-                    // onClick={pricingOnOpen}
-                    key="pricing"
-                  >
-                    <p className="flex items-center gap-2 m-0">
-                      <MdAttachMoney className="text-default-900 dark:text-white" />{' '}
-                      {t('tariffs')}
-                    </p>
-                  </DropdownItem>
-                  <DropdownItem
-                    className=""
                     onClick={() => {
                       navigate('cabinet');
                     }}
@@ -183,30 +173,32 @@ export function SidebarWrapper() {
                       {t('cabinet')}
                     </p>
                   </DropdownItem>
+
                   <DropdownItem
                     className=""
                     onClick={() => {
-                      navigate('/settings');
+                      navigate('/sender-information');
                     }}
-                    key="settings"
-                  >
-                    <p className="flex items-center gap-2 m-0">
-                      <BsGear className="text-default-900 dark:text-white" />{' '}
-                      {t('settings')}
-                    </p>
-                  </DropdownItem>
-                  <DropdownItem
-                    className=""
-                    onClick={() => {
-                      navigate('/reports');
-                    }}
-                    key="reports"
+                    key="sender-information"
                   >
                     <p className="flex items-center gap-2 m-0">
                       <TbReportAnalytics className="text-default-900 dark:text-white" />{' '}
-                      {t('reports')}
+                      {t('senderInformation')}
                     </p>
                   </DropdownItem>
+                  <DropdownItem
+                    className=""
+                    onClick={() => {
+                      navigate('billing');
+                    }}
+                    key="billing"
+                  >
+                    <p className="flex items-center gap-2 m-0">
+                      <MdAttachMoney className="text-default-900 dark:text-white" />{' '}
+                      {t('billing')}
+                    </p>
+                  </DropdownItem>
+
                   <DropdownItem
                     className=""
                     onClick={() => {

@@ -51,7 +51,13 @@ function AppHandledInput({
       render={({ field: { onChange, onBlur, value } }) => (
         <Input
           type={type}
+          classNames={{
+            inputWrapper: `border-1 border-divider ${
+              inputProps?.isDisabled ? 'bg-[#d7d7d7] dark:bg-[#27272A]' : ''
+            }`
+          }}
           label={label}
+          variant={inputProps?.isDisabled ? 'flat' : 'bordered'}
           placeholder={placeholder}
           required={required}
           onBlur={onBlur}

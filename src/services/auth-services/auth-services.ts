@@ -43,7 +43,7 @@ export class AuthService {
    * Constructs a new instance of the AuthService class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the AuthService class.

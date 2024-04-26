@@ -373,6 +373,8 @@
     "comingSoon": "Coming soon",
     "platformName": "Platform name",
     "browserName": "Browser name",
-    "ipAddress": "IP address"
+    "ipAddress": "IP address",
+    "billing": "Billing",
+    "senderInformation": "Sender information"
   }
 }

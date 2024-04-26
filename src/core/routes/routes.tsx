@@ -4,6 +4,7 @@ import LoginPage from '@core/static-pages/login-page';
 import EmailReportsPage from '@/modules/EMA/reports/pages/email-reports-page';
 import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
 import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
+import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
 
 /**
  * Lazy loads the application routes.
@@ -66,14 +67,6 @@ const routes = [
     path: 'email-marketing',
     element: <EMALayoutPage />,
     children: [
-      /**
-       * Route for the assistant home page.
-       */
-      /**
-       * Route for the assistant page.
-       */
-
-      // { path: '/email-marketing', element: <Navigate to="dashboard" /> }, // Redirect to dashboard
       {
         index: true,
         element: <EmaDashboardPage /> // Your actual dashboard component
@@ -103,6 +96,14 @@ const routes = [
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <CabinetPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'billing',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <EmaBillingPage />
           </Suspense>
         )
       },
@@ -166,14 +167,6 @@ const routes = [
       }
     ]
   },
-
-  /**
-   * Route for the login page.
-   */
-
-  /**
-   * Route for handling unknown paths.
-   */
   {
     path: '*',
     element: <h1>404</h1>

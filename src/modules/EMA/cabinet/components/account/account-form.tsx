@@ -88,13 +88,13 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
     setValue('gender', String(user.gender));
   }, [user]);
   return (
-    <div className="flex-1 remove-scrollbar overflow-y-auto flex items-center rounded-lg px-5 py-5 xl:p-5">
+    <div className="flex flex-1 items-center px-5 py-5 xl:p-5 rounded-lg overflow-y-auto remove-scrollbar">
       <form
         id="account-form"
         onSubmit={handleSubmit(onSubmit)}
-        className="flex flex-col sm:flex-row w-full justify-between gap-3 sm:gap-4"
+        className="flex sm:flex-row flex-col justify-between gap-3 sm:gap-4 w-full"
       >
-        <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4 w-full sm:w-1/2 xl:w-2/5">
           <AppHandledInput
             name="email"
             inputProps={{
@@ -107,7 +107,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             isInvalid={Boolean(errors.email?.message)}
             errors={errors}
             size="sm"
-            // className="text-black bg-transparent text-base sm:text-xl"
+            // className="bg-transparent text-base text-black sm:text-xl"
             rules={{
               required: {
                 value: true,
@@ -201,7 +201,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
             isInvalid={Boolean(errors.gender?.message)}
             control={control}
             label={selectPlaceholderText(t('gender'))}
-            // className=" app-select text-base sm:text-xl"
+            // className="app-select text-base sm:text-xl"
             size="sm"
             required
             rules={{
@@ -215,7 +215,7 @@ function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {
           />
         </div>
 
-        <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
+        <div className="flex flex-col gap-3 sm:gap-4 w-full sm:w-1/2 xl:w-2/5">
           <AppHandledInput
             name="firstName"
             inputProps={{

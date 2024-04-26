@@ -11,7 +11,7 @@ import {
 } from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
-import PricingModal from '@/modules/EMA/pricing/ema-buy-modal';
+import PricingModal from '@/modules/EMA/billing/ema-buy-modal';
 import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
 
