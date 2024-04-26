@@ -105,13 +105,13 @@ export default function Email() {
   };
 
   return (
-    <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
+    <Card className="relative bg-transparent !shadow-none !rounded-none containerLg">
       {/* Card Header */}
-      <CardHeader className="flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-3 ">
-        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+      <CardHeader className="flex justify-between bg-default-50 my-3 p-3 rounded-md min-h-[48px] sm:min-h-[56px]">
+        <div className="flex flex-row gap-1 sm:gap-0 font-semibold text-base text-default-800 sm:text-xl dark:text-white">
           <p>{t('emailSettings')}</p>
         </div>
-        <div className="flex items-center justify-between gap-2">
+        <div className="flex justify-between items-center gap-2">
           <Button
             title="Add multiple"
             aria-label="Add multiple"
@@ -125,11 +125,11 @@ export default function Email() {
         </div>
       </CardHeader>
       {/* Table */}
-      <CardBody className=" flex my-3 bg-default-50 rounded-md justify-between min-h-[48px] sm:min-h-[56px]  p-2">
+      <CardBody className="flex justify-between bg-default-50 my-3 p-2 rounded-md min-h-[48px] sm:min-h-[56px]">
         <Table
           isHeaderSticky
           aria-label="Transactions table"
-          className="remove-scrollbar !border-none  !rounded-none overflow-x-scroll shadow-none overflow-y-hidden"
+          className="shadow-none !border-none !rounded-none overflow-x-scroll overflow-y-hidden remove-scrollbar"
           classNames={{
             wrapper: '!border-none  !rounded-none shadow-none',
             base: ' overflow-scroll remove-scrollbar',
@@ -155,7 +155,7 @@ export default function Email() {
             <TableColumn>{t('surname').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('mailAddress').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('createdAt').toLocaleUpperCase()}</TableColumn>
-            <TableColumn className=" flex items-center justify-end">
+            <TableColumn className="flex justify-end items-center">
               <IoEllipsisVertical />{' '}
             </TableColumn>
           </TableHeader>
@@ -173,7 +173,7 @@ export default function Email() {
                 <TableCell>
                   {dayjs.utc(item?.createdAt).format('DD.MM.YYYY')}
                 </TableCell>
-                <TableCell className=" flex items-center justify-end p-0">
+                <TableCell className="flex justify-end items-center p-0">
                   <div className="relative flex items-center gap-2">
                     <Tooltip content="Edit user">
                       <span
@@ -182,7 +182,7 @@ export default function Email() {
                           setSelectedItem(item);
                           editOnOpen();
                         }}
-                        className="text-lg text-default-400 cursor-pointer active:opacity-50"
+                        className="active:opacity-50 text-default-400 text-lg cursor-pointer"
                       >
                         <BsPen />
                       </span>
@@ -194,21 +194,21 @@ export default function Email() {
                           title="Remove chat"
                           aria-label="Remove chat popover"
                           isIconOnly
-                          className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
+                          className="bg-transparent ml-2 rounded-full !w-6 !h-8 !unit-lg"
                         >
-                          <BsTrash size={16} className=" text-danger" />
+                          <BsTrash size={16} className="text-danger" />
                         </Button>
                       </PopoverTrigger>
                       <PopoverContent>
-                        <div className="px-1 py-2 ">
+                        <div className="px-1 py-2">
                           <p>{t('deleteChatConfirmation')}</p>
                           <Divider className="my-2" />
-                          <div className="w-full flex items-center gap-1">
+                          <div className="flex items-center gap-1 w-full">
                             <Button
                               size="sm"
                               title="Yes"
                               aria-label="Yes"
-                              className=" "
+                              className=""
                               variant="bordered"
                               isLoading={removeLoading}
                               onClick={() => {

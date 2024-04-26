@@ -53,7 +53,7 @@ function EmaBillingHistory() {
   return (
     <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
       <div className="flex flex-col gap-2 w-full h-full">
-        <h3 className="font-semibold text-default-900 text-xl dark:text-white">
+        <h3 className="font-semibold text-default-800 text-xl dark:text-white">
           {t('paymentHistory')} 💰
         </h3>
 

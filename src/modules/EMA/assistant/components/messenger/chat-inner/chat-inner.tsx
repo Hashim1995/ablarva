@@ -238,11 +238,11 @@ function ChatInner(): JSX.Element {
 
   return (
     <>
-      <div className="h-full   w-full flex-1 rounded-t-lg p-6 flex flex-col gap-6 overflow-y-scroll remove-scrollbar  scroll-smooth ">
+      <div className="flex flex-col flex-1 gap-6 p-6 rounded-t-lg w-full h-full overflow-y-scroll remove-scrollbar scroll-smooth">
         <ScrollToBottom
           scrollViewClassName="flex-grow flex-1  "
           followButtonClassName="hidden"
-          className="scroll-to-bottom-wrapper remove-scrollbar  overflow-x-auto   overflow-y-auto h-full"
+          className="scroll-to-bottom-wrapper h-full overflow-x-auto overflow-y-auto remove-scrollbar"
         >
           {bubbleList?.map(
             (item: IAssistantThreadBubblesItem, index: number) => (
@@ -261,18 +261,18 @@ function ChatInner(): JSX.Element {
             )
           )}
           {waitingForAssistantResponse && (
-            <div className=" flex justify-start mt-2 mb-5 items-center">
+            <div className="flex justify-start items-center mt-2 mb-5">
               <AiLoder />
               <ThinkText />
             </div>
           )}
           {waitingForAssistantThreadLoad && (
-            <div className="flex items-center justify-center h-full">
+            <div className="flex justify-center items-center h-full">
               <AiLoder />
             </div>
           )}
           {hasError && (
-            <div className=" text-default-900 dark:text-white  flex justify-center mt-2 gap-2 items-center ">
+            <div className="flex justify-center items-center gap-2 mt-2 text-default-800 dark:text-white">
               <Chip
                 startContent={<TfiFaceSad size={18} />}
                 className="text-sm"
@@ -295,13 +295,13 @@ function ChatInner(): JSX.Element {
                     aria-label="Regenerate the last question icon"
                     isIconOnly
                     size="sm"
-                    className=" text-default-900 dark:text-white  rounded-full"
+                    className="rounded-full text-default-800 dark:text-white"
                   >
                     <BsRecycle size={18} />
                   </Button>
                 }
                 size="sm"
-                className="text-default-900 dark:text-white rounded-full pl-[2px]"
+                className="pl-[2px] rounded-full text-default-900 dark:text-white"
               >
                 {t('regenerate')}
               </Button>
@@ -311,10 +311,10 @@ function ChatInner(): JSX.Element {
             !hasError &&
             !waitingForAssistantResponse &&
             bubbleList?.length < 1 && (
-              <div className="h-full flex flex-col justify-between">
+              <div className="flex flex-col justify-between h-full">
                 <AiEmptyWelcome />
                 {currentAssistantModel?.assistantId ? (
-                  <div className="gap-2 grid grid-cols-2 p-5 sm:grid-cols-2 mt-5">
+                  <div className="gap-2 grid grid-cols-2 sm:grid-cols-2 mt-5 p-5">
                     {templateMessageTexts?.map((item: string) => (
                       <TempalteMessage
                         key={item}

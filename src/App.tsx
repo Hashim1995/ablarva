@@ -99,8 +99,8 @@ function App() {
   return (
     <main
       className={`${
-        darkMode.value ? 'dark gradient-bg' : 'gradient-bg-light'
-      } text-default-900  dark:text-white `}
+        darkMode.value ? 'dark gradient-bg' : 'bg-gray-50'
+      } text-default-800  dark:text-white `}
     >
       <Suspense fallback={<SuspenseLoader />}>
         {router}

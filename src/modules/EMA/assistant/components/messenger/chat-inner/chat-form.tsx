@@ -92,9 +92,9 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
         onSubmit(z);
         reset();
       })}
-      className=" self-end px-6 z-10 pt-[18px] pb-8 w-full dark:bg-transparent flex flex-col gap-4 "
+      className="z-10 flex flex-col gap-4 dark:bg-transparent px-6 pt-[18px] pb-8 w-full self-end"
     >
-      <div className="h-full w-ful  bg-purple-100/40 backdrop-blur-lg dark:bg-black/50   rounded-xl">
+      <div className="bg-purple-100/40 dark:bg-black/50 backdrop-blur-lg rounded-xl w-ful h-full">
         <Textarea
           {...register('message', { required: true })}
           variant="bordered"
@@ -104,7 +104,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
           maxRows={3}
           placeholder={t('typeAMessage')}
           classNames={textAreaConfig}
-          className="flex-1 px-4  !border-none text-default-900 dark:text-white !shadow-none !outline-none !active:border-none !active:shadow-none !active:outline-none !focus:border-none !focus:shadow-none !focus:outline-none !hover:border-none !hover:shadow-none !hover:outline-none"
+          className="flex-1 !shadow-none !hover:shadow-none !focus:shadow-none !active:shadow-none px-4 !border-none !hover:border-none !focus:border-none !active:border-none text-default-800 dark:text-white !outline-none !active:outline-none !focus:outline-none !hover:outline-none"
           onKeyDown={e => {
             // Check if the key pressed is 'Enter' and there is no shift key pressed
             if (audioEnable) {
@@ -119,9 +119,9 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
             }
           }}
         />
-        <div className="flex-1 border-t-1 border-gray-600" />
+        <div className="flex-1 border-gray-600 border-t-1" />
 
-        <div className="flex  px-5    items-center justify-between   shadow-none  z-20 ">
+        <div className="z-20 flex justify-between items-center shadow-none px-5">
           <Button
             type="button"
             title="Toggle Audio Enable/Disable"
@@ -129,22 +129,22 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
             isIconOnly
             size="sm"
             onClick={() => setAudioEnable(z => !z)}
-            className="bg-transparent rounded-full "
+            className="bg-transparent rounded-full"
           >
             {audioEnable ? (
               <AiFillSound
                 size={16}
-                className="text-default-900  dark:text-white"
+                className="text-default-900 dark:text-white"
               />
             ) : (
               <AiOutlineSound
-                className="text-default-900  dark:text-white"
+                className="text-default-900 dark:text-white"
                 size={16}
                 color="white"
               />
             )}{' '}
           </Button>
-          <div className="flex rounded-0 shadow-none   items-center justify-between">
+          <div className="flex justify-between items-center shadow-none rounded-0">
             {
               <Chip className="sm:flex hidden bg-transparent text-[gray] text-sm">
                 {t('willAnswer', {
@@ -163,7 +163,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
                   <Button
                     aria-label="Assistant Language"
                     size="sm"
-                    className="capitalize bg-transparent"
+                    className="bg-transparent capitalize"
                   >
                     {currentLanguageFlag(currentAssistantLanguage)}
                   </Button>
@@ -266,7 +266,7 @@ function ChatForm({ onSubmit, waitingForResponse }: IChatFormProps) {
             >
               <BsFillSendFill
                 size={16}
-                className="text-default-900  dark:text-white"
+                className="text-default-900 dark:text-white"
               />
             </Button>
           </div>

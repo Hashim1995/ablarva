@@ -10,16 +10,16 @@ function EmaDashboard() {
   const { t } = useTranslation();
   return (
     // underline class creates a scroll : w-full h-screen remove-scrollbar p-5
-    <div className="w-full overflow-auto h-screen remove-scrollbar p-5  ">
-      <div className="flex justify-center remove-scrollbar  gap-4 xl:gap-6  lg:px-0  flex-wrap xl:flex-nowrap  mx-auto w-full">
+    <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
+      <div className="flex flex-wrap xl:flex-nowrap justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
         {/* Right Section */}
-        <div className=" gap-6 flex flex-col w-full">
+        <div className="flex flex-col gap-6 w-full">
           {/* Card Section Top */}
-          <div className="flex flex-col gap-2 justify-end">
-            <h3 className="text-xl font-semibold text-default-900 dark:text-default-900 dark:text-white">
+          <div className="flex flex-col justify-end gap-2">
+            <h3 className="font-semibold text-default-800 text-xl dark:text-default-900 dark:text-white">
               {t('aviableBalance')} 💎
             </h3>
-            <div className="grid md:grid-cols-2 grid-cols-1 2xl:grid-cols-3 gap-5  justify-center w-full">
+            <div className="justify-center gap-5 grid grid-cols-1 md:grid-cols-2 2xl:grid-cols-3 w-full">
               <RemainBalance
                 icon={<FcLineChart size={30} />}
                 title="Remain requests"
@@ -39,27 +39,27 @@ function EmaDashboard() {
           </div>
 
           {/* Chart */}
-          <div className="h-full flex flex-col gap-2">
-            <h3 className="text-xl text-default-900  dark:text-white font-semibold">
+          <div className="flex flex-col gap-2 h-full">
+            <h3 className="font-semibold text-default-800 text-xl dark:text-white">
               {t('statistics')} 📊
             </h3>
-            <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
+            <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
               <EmaDashboardChart />
             </div>
           </div>
         </div>
 
         {/* Left Section */}
-        <div className=" gap-2 flex flex-col xl:max-w-md w-full">
-          <div className="flex flex-col justify-center gap-4 max-h-fit flex-wrap md:flex-nowrap md:flex-col">
-            <div className="h-1/2  gap-2 flex-col flex">
-              <h3 className="text-xl font-semibold text-default-900  dark:text-white">
+        <div className="flex flex-col gap-2 w-full xl:max-w-md">
+          <div className="flex flex-col md:flex-col flex-wrap md:flex-nowrap justify-center gap-4 max-h-fit">
+            <div className="flex flex-col gap-2 h-1/2">
+              <h3 className="font-semibold text-default-800 text-xl dark:text-white">
                 {t('mailboxHealth')} 🍎
               </h3>
               <MailBoxHealt />
             </div>
-            <div className="h-1/2  gap-2 flex-col flex">
-              <h3 className="text-xl font-semibold text-default-900  dark:text-white">
+            <div className="flex flex-col gap-2 h-1/2">
+              <h3 className="font-semibold text-default-800 text-xl dark:text-white">
                 {t('totalEmailCapacityPerDay')} 📨
               </h3>
               <TotalCapacityPerDay />
@@ -68,21 +68,21 @@ function EmaDashboard() {
         </div>
       </div>
       <div className="flex gap-5 my-5">
-        <div className="h-full w-full flex flex-col gap-2">
-          <h3 className="text-xl font-semibold text-default-900  dark:text-white">
+        <div className="flex flex-col gap-2 w-full h-full">
+          <h3 className="font-semibold text-default-800 text-xl dark:text-white">
             {t('lastAddedLeads')}
           </h3>
 
-          <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
+          <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
             <LastAddedLeads />
           </div>
         </div>
-        <div className="h-full w-full flex flex-col gap-2">
-          <h3 className="text-xl font-semibold text-default-900  dark:text-white">
+        <div className="flex flex-col gap-2 w-full h-full">
+          <h3 className="font-semibold text-default-800 text-xl dark:text-white">
             {t('aviableBalance')}
           </h3>
 
-          <div className="w-full bg-transparent border-1 border-divider shadow-lg rounded-2xl p-6 ">
+          <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
             <LastAddedLeads />
           </div>
         </div>

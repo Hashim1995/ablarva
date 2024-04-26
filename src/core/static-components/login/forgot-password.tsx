@@ -123,7 +123,7 @@ function ForgotPassword({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-900 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('forgetPassword')}
               </ModalHeader>
               <ModalBody>

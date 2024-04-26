@@ -79,22 +79,22 @@ function Smtp() {
   };
 
   return (
-    <Card className=" relative bg-transparent !shadow-none !rounded-none containerLg">
-      <div className="flex justify-between min-h-[48px] sm:min-h-[56px] items-center p-2 sm:p-3">
-        <div className="text-base sm:text-xl text-default-900 dark:text-white flex flex-row gap-1 sm:gap-0 font-semibold">
+    <Card className="relative bg-transparent !shadow-none !rounded-none containerLg">
+      <div className="flex justify-between items-center p-2 sm:p-3 min-h-[48px] sm:min-h-[56px]">
+        <div className="flex flex-row gap-1 sm:gap-0 font-semibold text-base text-default-800 sm:text-xl dark:text-white">
           <p>{t('smtpSettings')}</p>
         </div>
       </div>
 
       {/* Table */}
-      <div className=" px-2">
+      <div className="px-2">
         {!loading ? (
           <form
             id="account-form"
             onSubmit={handleSubmit(onSubmit)}
-            className="flex flex-col sm:flex-row w-full justify-between gap-3 sm:gap-4"
+            className="flex sm:flex-row flex-col justify-between gap-3 sm:gap-4 w-full"
           >
-            <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
+            <div className="flex flex-col gap-3 sm:gap-4 w-full sm:w-1/2 xl:w-2/5">
               <AppHandledInput
                 name="mailAddress"
                 inputProps={{
@@ -167,7 +167,7 @@ function Smtp() {
               />
             </div>
 
-            <div className="flex-col w-full sm:w-1/2 xl:w-2/5 flex gap-3 sm:gap-4">
+            <div className="flex flex-col gap-3 sm:gap-4 w-full sm:w-1/2 xl:w-2/5">
               <AppHandledInput
                 name="hostName"
                 inputProps={{
@@ -214,13 +214,13 @@ function Smtp() {
             </div>
           </form>
         ) : (
-          <div className=" my-5 w-full flex items-center gap-3">
+          <div className="flex items-center gap-3 my-5 w-full">
             <div>
               <Skeleton className="flex rounded-full w-12 h-12" />
             </div>
-            <div className="w-full flex flex-col gap-2">
-              <Skeleton className="h-3 w-3/5 rounded-lg" />
-              <Skeleton className="h-3 w-4/5 rounded-lg" />
+            <div className="flex flex-col gap-2 w-full">
+              <Skeleton className="rounded-lg w-3/5 h-3" />
+              <Skeleton className="rounded-lg w-4/5 h-3" />
             </div>
           </div>
         )}

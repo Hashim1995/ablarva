@@ -95,10 +95,10 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
     fetchThreadHistory();
   }, [searchParams.get('threadID')]);
   return (
-    <div className="w-[250px] border-l border-divider  overflow-y-auto remove-scrollbar fixed-height">
+    <div className="fixed-height border-divider border-l w-[250px] overflow-y-auto remove-scrollbar">
       {!isResponsive && (
-        <div className="flex justify-between items-center  p-3 h-[60px]">
-          <h3 className="text-base sm:text-xl text-default-900 dark:text-white font-semibold">
+        <div className="flex justify-between items-center p-3 h-[60px]">
+          <h3 className="font-semibold text-base text-default-800 sm:text-xl dark:text-white">
             {t('previous')} {t('chats')}
           </h3>
         </div>
@@ -115,13 +115,13 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
               threadHistory?.map(day => (
                 <div key={day.dateOfChats} className="pb-5">
                   <div className="flex items-center mb-1">
-                    <div className="flex-1 border-t-1 border-gray-200" />
-                    <span className="px-3 text-sm  text-[gray]">
+                    <div className="flex-1 border-gray-200 border-t-1" />
+                    <span className="px-3 text-[gray] text-sm">
                       {dayjs(new Date(day.dateOfChats).toISOString()).format(
                         'DD.MM.YYYY'
                       )}
                     </span>
-                    <div className="flex-1 border-t-1 border-gray-200" />
+                    <div className="flex-1 border-gray-200 border-t-1" />
                   </div>
                   {day?.assistantChats?.map(conv => (
                     <div
@@ -136,25 +136,25 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                           threadID: String(conv.threadId)
                         });
                       }}
-                      className="  dark:bg-default-50 relative cursor-pointer backdrop-blur-md  dark:bg-none   text-default-900 dark:border-none border-1 border-divider dark:text-white rounded-2xl  mb-2   px-3 py-2 z-10"
+                      className="relative z-10 border-1 border-divider dark:bg-default-50 dark:bg-none backdrop-blur-md mb-2 px-3 py-2 dark:border-none rounded-2xl text-default-800 dark:text-white cursor-pointer"
                     >
-                      <div className="flex  items-center gap-2 mb-2">
+                      <div className="flex items-center gap-2 mb-2">
                         <Image
                           alt="Woman listing to music"
-                          className="object-cover h-full w-10 rounded-full"
+                          className="rounded-full w-10 h-full object-cover"
                           src={
                             `${
                               import.meta.env.VITE_BASE_URL
                             }${conv?.assistantImagePath}` || ''
                           }
                         />
-                        <p className="text-default-900 dark:text-white  leading-4  text-sm line-clamp-3">
+                        <p className="line-clamp-3 text-default-900 text-sm dark:text-white leading-4">
                           {conv?.assistantName}
                         </p>
                       </div>
 
-                      <div className="flex  items-center justify-between mb-2">
-                        <p className="text-default-900 dark:text-white  leading-4  text-sm line-clamp-3">
+                      <div className="flex justify-between items-center mb-2">
+                        <p className="line-clamp-3 text-default-900 text-sm dark:text-white leading-4">
                           {conv?.threadFirstMessage}
                         </p>
                         <Popover
@@ -171,24 +171,24 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                             <Button
                               size="sm"
                               isIconOnly
-                              className="bg-transparent rounded-full ml-2 !w-6 !h-8 !unit-lg"
+                              className="bg-transparent ml-2 rounded-full !w-6 !h-8 !unit-lg"
                               aria-label="Remove chat popover trigger"
                               title="Remove chat popover trigger"
                             >
                               <BsTrash
                                 size={16}
-                                className=" text-default-900 dark:text-white"
+                                className="text-default-800 dark:text-white"
                               />
                             </Button>
                           </PopoverTrigger>
                           <PopoverContent>
-                            <div className="px-1 py-2 text-default-900 dark:text-white">
+                            <div className="px-1 py-2 text-default-800 dark:text-white">
                               <p>{t('deleteConfirmationPrompt')}</p>
                               <Divider className="my-2" />
-                              <div className="w-full flex items-center gap-1">
+                              <div className="flex items-center gap-1 w-full">
                                 <Button
                                   size="sm"
-                                  className=" "
+                                  className=""
                                   variant="bordered"
                                   isLoading={removeLoading}
                                   onClick={() => {
@@ -201,7 +201,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                                 </Button>
                                 <Button
                                   size="sm"
-                                  className=" "
+                                  className=""
                                   aria-label="Remove thread"
                                   title='Remove thread "No"'
                                   onClick={() =>
@@ -227,40 +227,40 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
           </>
         ) : (
           <>
-            <div className=" my-5 w-full flex items-center gap-3">
+            <div className="flex items-center gap-3 my-5 w-full">
               <div>
                 <Skeleton className="flex rounded-full w-12 h-12" />
               </div>
-              <div className="w-full flex flex-col gap-2">
-                <Skeleton className="h-3 w-3/5 rounded-lg" />
-                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="rounded-lg w-3/5 h-3" />
+                <Skeleton className="rounded-lg w-4/5 h-3" />
               </div>
             </div>
-            <div className=" my-5 w-full flex items-center gap-3">
+            <div className="flex items-center gap-3 my-5 w-full">
               <div>
                 <Skeleton className="flex rounded-full w-12 h-12" />
               </div>
-              <div className="w-full flex flex-col gap-2">
-                <Skeleton className="h-3 w-3/5 rounded-lg" />
-                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="rounded-lg w-3/5 h-3" />
+                <Skeleton className="rounded-lg w-4/5 h-3" />
               </div>
             </div>
-            <div className=" my-5 w-full flex items-center gap-3">
+            <div className="flex items-center gap-3 my-5 w-full">
               <div>
                 <Skeleton className="flex rounded-full w-12 h-12" />
               </div>
-              <div className="w-full flex flex-col gap-2">
-                <Skeleton className="h-3 w-3/5 rounded-lg" />
-                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="rounded-lg w-3/5 h-3" />
+                <Skeleton className="rounded-lg w-4/5 h-3" />
               </div>
             </div>
-            <div className=" my-5 w-full flex items-center gap-3">
+            <div className="flex items-center gap-3 my-5 w-full">
               <div>
                 <Skeleton className="flex rounded-full w-12 h-12" />
               </div>
-              <div className="w-full flex flex-col gap-2">
-                <Skeleton className="h-3 w-3/5 rounded-lg" />
-                <Skeleton className="h-3 w-4/5 rounded-lg" />
+              <div className="flex flex-col gap-2 w-full">
+                <Skeleton className="rounded-lg w-3/5 h-3" />
+                <Skeleton className="rounded-lg w-4/5 h-3" />
               </div>
             </div>
           </>

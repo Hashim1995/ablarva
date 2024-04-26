@@ -59,7 +59,7 @@ export default function History() {
   return (
     <Card className="relative bg-transparent !shadow-none !rounded-none containerLg">
       <CardHeader className="flex justify-between bg-default-50 my-3 p-3 rounded-md min-h-[48px] sm:min-h-[56px]">
-        <div className="flex flex-row gap-1 sm:gap-0 font-semibold text-base text-default-900 sm:text-xl dark:text-white">
+        <div className="flex flex-row gap-1 sm:gap-0 font-semibold text-base text-default-800 sm:text-xl dark:text-white">
           <p>{t('paymentHistory')}</p>
         </div>
       </CardHeader>

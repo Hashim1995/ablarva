@@ -376,6 +376,12 @@
     "ipAddress": "IP address",
     "billing": "Billing",
     "senderInformation": "Sender information",
-    "packages": "Packages"
+    "senderInformationDescription": "Sender information data will be used during create email",
+    "packages": "Packages",
+    "senderFullName": "Sender full name",
+    "senderJobTitle": "Sender job title",
+    "senderCompany": "Sender company",
+    "senderWebsite": "Sender website",
+    "senderPhone": "Sender phone"
   }
 }

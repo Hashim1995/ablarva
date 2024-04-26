@@ -115,7 +115,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-900 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('emailVerify')}
               </ModalHeader>
               <ModalBody>
@@ -169,7 +169,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                     </Button>
                   </ButtonGroup>
                   <Divider />
-                  <p className="clear-both text-default-900 text-left text-sm dark:text-white">
+                  <p className="clear-both text-default-800 text-left text-sm dark:text-white">
                     <BsQuestionCircleFill
                       size={26}
                       color="orange"

@@ -36,7 +36,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-900 dar:text-white">
+              <ModalHeader className="flex flex-col gap-1 text-default-800 dar:text-white">
                 {t('tariffs')}
               </ModalHeader>
               <ModalBody>

@@ -148,7 +148,7 @@ export default function Navbar() {
         <NavbarContent className="lg:flex gap-4 hidden" justify="center">
           {/* <ButtonGroup className="!rounded-none">
             <Button
-              className={` w-40 !rounded-none text-default-900 dark:text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('chat')
                   ? ' border-b-1 border-white'
                   : ''
@@ -163,7 +163,7 @@ export default function Navbar() {
               {t('simpleChat')}
             </Button>
             <Button
-              className={` w-40 !rounded-none text-default-900 dark:text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('assistant')
                   ? ' border-b-1 border-white'
                   : ''
@@ -183,7 +183,7 @@ export default function Navbar() {
               content={t('itIsBeingPrepared')}
             >
               <Button
-                className={`isDisabled text-default-900 dark:text-white w-40 bg-transparent h-12  ${location.pathname.includes(
+                className={`isDisabled text-default-800 dark:text-white w-40 bg-transparent h-12  ${location.pathname.includes(
                   'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
@@ -201,7 +201,7 @@ export default function Navbar() {
           }}
           justify="end"
         >
-          <NavbarItem className="flex justify-between items-center gap-2 px-2 sm:px-3 p-1 text-default-900 dark:text-white">
+          <NavbarItem className="flex justify-between items-center gap-2 px-2 sm:px-3 p-1 text-default-800 dark:text-white">
             <Dropdown
               role="menu"
               classNames={{
@@ -288,7 +288,7 @@ export default function Navbar() {
                 classNames={{
                   description: 'text-default-900 dark:text-white'
                 }}
-                className="sm:flex hidden text-default-900 dark:text-white"
+                className="sm:flex hidden text-default-800 dark:text-white"
               />
             ) : null}
             {user?.id ? (

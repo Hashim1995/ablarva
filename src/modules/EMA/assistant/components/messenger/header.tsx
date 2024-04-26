@@ -19,11 +19,11 @@ function MessengerHeader() {
   );
 
   return (
-    <div className=" pt-1 pb-3 h-[60px] flex    ">
-      <div className="flex justify-between  items-center gap-2 sm:gap-5">
-        <div className="flex justify-between gap-2 sm:gap-5 items-center  ">
+    <div className="flex pt-1 pb-3 h-[60px]">
+      <div className="flex justify-between items-center gap-2 sm:gap-5">
+        <div className="flex justify-between items-center gap-2 sm:gap-5">
           {(premiumAssistant || basicAssistant) && (
-            <div className="flex w-[400px] justify-content-between gap-4">
+            <div className="flex justify-content-between gap-4 w-[400px]">
               <Tooltip
                 placement="top-start"
                 offset={12}
@@ -38,8 +38,8 @@ function MessengerHeader() {
                     base: 'max-w-md',
                     indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
                     label:
-                      ' text-[11px]  text-default-900 dark:text-white pr-2',
-                    value: 'text-[11px] text-default-900 dark:text-white'
+                      ' text-[11px]  text-default-800 dark:text-white pr-2',
+                    value: 'text-[11px] text-default-800 dark:text-white'
                   }}
                   label={t('basicPackage')}
                   value={basicAssistant?.remainder}
@@ -62,8 +62,8 @@ function MessengerHeader() {
                     base: 'max-w-md',
                     indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
                     label:
-                      ' text-[11px]  text-default-900 dark:text-white pr-2',
-                    value: ' text-[11px] text-default-900 dark:text-white'
+                      ' text-[11px]  text-default-800 dark:text-white pr-2',
+                    value: ' text-[11px] text-default-800 dark:text-white'
                   }}
                   label={t('premiumPackage')}
                   value={premiumAssistant?.remainder}

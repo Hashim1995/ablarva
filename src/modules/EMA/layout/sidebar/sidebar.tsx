@@ -23,7 +23,9 @@ import {
 } from 'react-icons/md';
 
 import { useLocation, useNavigate } from 'react-router-dom';
-import logo from '@assets/images/aizadə.png';
+import logoWhite from '@assets/images/logo-text-white.webp';
+// import logoBlack from '@assets/images/logo-text-black.webp';
+import logoBlue from '@assets/images/logo-text-blue.webp';
 import { useSelector } from 'react-redux';
 import { RootState } from '@/redux/store';
 import { AiOutlineUser } from 'react-icons/ai';
@@ -59,8 +61,11 @@ export function SidebarWrapper() {
         })}
       >
         <div className={Sidebar.Header()}>
-          <img src={logo} className="w-[48px] h-[48px]" alt="" />
-          <h6>Ablarva</h6>
+          <img
+            src={darkMode.value ? logoWhite : logoBlue}
+            className="h-8"
+            alt=""
+          />
         </div>
 
         <div className="flex flex-col justify-between h-full">
@@ -145,7 +150,7 @@ export function SidebarWrapper() {
                   size: 'sm',
                   src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
                 }}
-                className="sm:flex hidden text-default-900 dark:text-white"
+                className="sm:flex hidden text-default-800 dark:text-white"
               />
 
               <Dropdown className="">
@@ -177,7 +182,7 @@ export function SidebarWrapper() {
                   <DropdownItem
                     className=""
                     onClick={() => {
-                      navigate('/sender-information');
+                      navigate('sender-information');
                     }}
                     key="sender-information"
                   >

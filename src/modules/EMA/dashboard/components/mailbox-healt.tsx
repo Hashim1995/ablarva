@@ -63,29 +63,29 @@ const items = [
 
 export function MailBoxHealt() {
   return (
-    <Card className=" bg-transparent border-1 border-divider rounded-xl shadow-md px-3 py-5 lg:max-h-[372px]  2xl:max-h-[305px]	 h-full">
-      <CardBody className="py-1 gap-2 overflow-y-auto remove-scrollbar">
+    <Card className="border-1 border-divider bg-transparent shadow-md px-3 py-5 rounded-xl h-full lg:max-h-[372px] 2xl:max-h-[305px]">
+      <CardBody className="gap-2 py-1 overflow-y-auto remove-scrollbar">
         <div className="flex flex-col gap-2">
           {items.map(item => (
-            <div key={item.email} className="py-1 flex  justify-between">
-              <div className="flex gap-2.5 items-center">
+            <div key={item.email} className="flex justify-between py-1">
+              <div className="flex items-center gap-2.5">
                 <FcGoogle size={30} />
                 <div className="flex flex-col">
-                  <span className="text-default-900 text-[13px]">
+                  <span className="text-[13px] text-default-900">
                     {item.email}
                   </span>
                 </div>
               </div>
-              <div className="flex gap-2.5  items-center">
-                <span className="text-success text-xl font-semibold">
-                  <div className="h-12 w-12">
+              <div className="flex items-center gap-2.5">
+                <span className="font-semibold text-success text-xl">
+                  <div className="w-12 h-12">
                     <CircularProgress
                       size="lg"
                       value={item?.percentage}
                       color="success"
                       showValueLabel
                       classNames={{
-                        value: ' text-default-900 dark:text-white'
+                        value: ' text-default-800 dark:text-white'
                       }}
                     />
                   </div>

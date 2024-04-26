@@ -72,7 +72,7 @@ function Sessions() {
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">
-      <h3 className="font-semibold text-default-900 text-xl dark:text-white">
+      <h3 className="font-semibold text-default-800 text-xl dark:text-white">
         {t('sessions')} 💻
       </h3>
 

@@ -13,7 +13,7 @@ function EmaBillingStats() {
   return (
     <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
       <div className="flex flex-col gap-2 w-full h-full">
-        <h3 className="font-semibold text-default-900 text-xl dark:text-white">
+        <h3 className="font-semibold text-default-800 text-xl dark:text-white">
           {t('paymentHistory')} 💰
         </h3>
         <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
@@ -37,8 +37,8 @@ function EmaBillingStats() {
                       base: 'max-w-md',
                       indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
                       label:
-                        ' text-[11px]  text-default-900 dark:text-white pr-2',
-                      value: 'text-[11px] text-default-900 dark:text-white'
+                        ' text-[11px]  text-default-800 dark:text-white pr-2',
+                      value: 'text-[11px] text-default-800 dark:text-white'
                     }}
                     label={t('basicPackage')}
                     value={basicAssistant?.remainder}
@@ -64,8 +64,8 @@ function EmaBillingStats() {
                       base: 'max-w-md',
                       indicator: 'bg-gradient-to-r from-pink-500 to-yellow-500',
                       label:
-                        ' text-[11px]  text-default-900 dark:text-white pr-2',
-                      value: ' text-[11px] text-default-900 dark:text-white'
+                        ' text-[11px]  text-default-800 dark:text-white pr-2',
+                      value: ' text-[11px] text-default-800 dark:text-white'
                     }}
                     label={t('premiumPackage')}
                     value={premiumAssistant?.remainder}
