@@ -47,7 +47,7 @@ export class PaymentService {
    * Constructs a new instance of the PaymentService class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the PaymentService class.
