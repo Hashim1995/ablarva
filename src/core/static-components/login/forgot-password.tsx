@@ -355,6 +355,7 @@ function ForgotPassword({
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
+                  variant="bordered"
                 >
                   {t('closeBtn')}
                 </Button>

@@ -90,7 +90,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="oldPassword"
                       control={control}
@@ -289,6 +289,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
+                  variant="bordered"
                 >
                   {t('closeBtn')}
                 </Button>

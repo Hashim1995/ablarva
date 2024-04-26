@@ -200,6 +200,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                   title="Close Button"
                   aria-label="Close Button"
                   onPress={onClose}
+                  variant="bordered"
                 >
                   {t('closeBtn')}
                 </Button>

@@ -49,6 +49,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
+                  variant="bordered"
                 >
                   {t('closeBtn')}
                 </Button>

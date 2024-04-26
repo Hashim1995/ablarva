@@ -184,7 +184,12 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button title="Close" aria-label="Close" onPress={onClose}>
+                <Button
+                  variant="bordered"
+                  title="Close"
+                  aria-label="Close"
+                  onPress={onClose}
+                >
                   {t('closeBtn')}
                 </Button>
               </ModalFooter>

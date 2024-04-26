@@ -46,8 +46,8 @@ function TermsConditionsModal({
               <ModalHeader className="flex flex-row items-center gap-1 border-b-1">
                 {t('privacyPolicy')}
               </ModalHeader>
-              <ModalBody className="scrollBar overflow-y-scroll">
-                <div className="justify-center   h-96 pr-3">
+              <ModalBody className="overflow-y-scroll scrollBar">
+                <div className="justify-center pr-3 h-96">
                   <p className="pb-6 text-md">
                     We, in AI-zade, (" Company ", "we", "us", "our") are
                     committed to protecting your personal information and your
@@ -75,7 +75,7 @@ function TermsConditionsModal({
                     our Website ), as well as, any related services, sales,
                     marketing or events.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     1. What Information Do We Collect?
                   </h2>
                   <p className="pb-6 text-md">
@@ -98,7 +98,7 @@ function TermsConditionsModal({
                     provide to us must be true, complete and accurate, and you
                     must notify us of any changes to such personal information.
                   </p>
-                  <h3 className="pb-6 text-lg font-medium text-wuiSlate-700">
+                  <h3 className="pb-6 font-medium text-lg text-wuiSlate-700">
                     Information automatically collected
                   </h3>
                   <p className="pb-6 text-md">
@@ -126,7 +126,7 @@ function TermsConditionsModal({
                   <p className="pb-6 text-md">
                     The information we collect includes:
                   </p>
-                  <ul className="pl-6 list-disc text-md">
+                  <ul className="pl-6 text-md list-disc">
                     <li className="mb-6">
                       <span className="font-medium">Log and Usage Data: </span>
                       Log and usage data is service-related, diagnostic, usage
@@ -169,7 +169,7 @@ function TermsConditionsModal({
                       aspects of the Services.
                     </li>
                   </ul>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     2. How Do We Use Your Information?
                   </h2>
                   <p className="pb-6 text-md">
@@ -191,7 +191,7 @@ function TermsConditionsModal({
                   <p className="pb-6 text-md">
                     We use the information we collect or receive:
                   </p>
-                  <ul className="pl-6 list-disc text-md">
+                  <ul className="pl-6 text-md list-disc">
                     <li className="mb-6">
                       <span className="font-medium">
                         To protect our Services:{' '}
@@ -262,7 +262,7 @@ function TermsConditionsModal({
                       location and to measure its effectiveness.
                     </li>
                   </ul>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     3. Will Your Information Be Shared With Anyone?
                   </h2>
                   <p className="pb-6 text-md">
@@ -274,7 +274,7 @@ function TermsConditionsModal({
                     We may process or share your data that we hold based on the
                     following legal basis:
                   </p>
-                  <ul className="pl-6 list-disc text-md">
+                  <ul className="pl-6 text-md list-disc">
                     <li className="mb-6">
                       <span className="font-medium">Consent: </span>We may
                       process your data if you have given us specific consent to
@@ -321,7 +321,7 @@ function TermsConditionsModal({
                       portion of our business to another company.
                     </li>
                   </ul>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     4. Do We Use Cookies And Other Tracking Technologies?
                   </h2>
                   <p className="pb-6 text-md">
@@ -335,7 +335,7 @@ function TermsConditionsModal({
                     how you can refuse certain cookies is set out in our Cookie
                     Notice.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     5. What Is Our Stance On Third-party Websites?
                   </h2>
                   <p className="pb-6 text-md">
@@ -356,7 +356,7 @@ function TermsConditionsModal({
                     should review the policies of such third parties and contact
                     them directly to respond to your questions.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     6. How Long Do We Keep Your Information?
                   </h2>
                   <p className="pb-6 text-md">
@@ -382,7 +382,7 @@ function TermsConditionsModal({
                     personal information and isolate it from any further
                     processing until deletion is possible.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     7. What Are Your Privacy Rights?
                   </h2>
                   <p className="pb-6 text-md">
@@ -444,7 +444,7 @@ function TermsConditionsModal({
                     </a>
                     .
                   </p>
-                  <h3 className="pb-6 text-lg font-medium text-wuiSlate-700">
+                  <h3 className="pb-6 font-medium text-lg text-wuiSlate-700">
                     Cookies and similar technologies:
                   </h3>
                   <p className="pb-6 text-md">
@@ -454,7 +454,7 @@ function TermsConditionsModal({
                     remove cookies or reject cookies, this could affect certain
                     features or services of our Website.{' '}
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     8. Controls For Do-not-track Features
                   </h2>
                   <p className="pb-6 text-md">
@@ -471,7 +471,7 @@ function TermsConditionsModal({
                     must follow in the future, we will inform you about that
                     practice in a revised version of this privacy notice.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     9. Do We Make Updates To This Notice?
                   </h2>
                   <p className="pb-6 text-md">
@@ -489,7 +489,7 @@ function TermsConditionsModal({
                     frequently to be informed of how we are protecting your
                     information.
                   </p>
-                  <h2 className="pb-6 text-xl font-medium text-wuiSlate-800">
+                  <h2 className="pb-6 font-medium text-wuiSlate-800 text-xl">
                     10. How Can You Contact Us About This Notice?
                   </h2>
                   <p className="pb-6 text-md">
@@ -509,6 +509,7 @@ function TermsConditionsModal({
                 <Button
                   title="Close Modal"
                   aria-label="Close Modal"
+                  variant="bordered"
                   onPress={onClose}
                 >
                   {t('closeBtn')}

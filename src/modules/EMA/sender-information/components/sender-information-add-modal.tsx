@@ -214,6 +214,7 @@ function SenderInformationAddModal({
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
+                  variant="bordered"
                 >
                   {t('closeBtn')}
                 </Button>
@@ -222,8 +223,8 @@ function SenderInformationAddModal({
                   aria-label="Add Email"
                   form="sender-information-add-form"
                   isLoading={loading}
+                  // className="bg-[#303642]"
                   type="submit"
-                  color="primary"
                 >
                   {t('addBtn')}
                 </Button>

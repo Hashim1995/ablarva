@@ -152,6 +152,7 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
                 <Button
                   title="Close Modal"
                   aria-label="Close Modal"
+                  variant="bordered"
                   onPress={onClose}
                 >
                   {t('closeBtn')}

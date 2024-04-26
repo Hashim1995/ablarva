@@ -3,6 +3,7 @@ import {
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
+  Skeleton,
   Switch,
   User
 } from '@nextui-org/react';
@@ -143,15 +144,24 @@ export function SidebarWrapper() {
 
           <div>
             <div className="flex justify-center items-center gap-6 px-8 pt-1 md:pt-10 pb-8 md:pb-0">
-              <User
-                name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
-                description={user.email || t('empty')}
-                avatarProps={{
-                  size: 'sm',
-                  src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
-                }}
-                className="sm:flex hidden text-default-800 dark:text-white"
-              />
+              {user?.id ? (
+                <User
+                  name={
+                    user ? `${user.firstName} ${user.lastName}` : t('empty')
+                  }
+                  description={user.email || t('empty')}
+                  avatarProps={{
+                    size: 'sm',
+                    src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
+                  }}
+                  className="sm:flex hidden text-default-800 dark:text-white"
+                />
+              ) : (
+                <div className="flex flex-col gap-2 w-full">
+                  <Skeleton className="rounded-lg w-3/5 h-3" />
+                  <Skeleton className="rounded-lg w-4/5 h-3" />
+                </div>
+              )}
 
               <Dropdown className="">
                 <DropdownTrigger className="">
