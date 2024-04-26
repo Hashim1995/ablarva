@@ -84,8 +84,6 @@ export function MailBoxHealt() {
                       value={item?.percentage}
                       showValueLabel
                       classNames={{
-                        indicator:
-                          'bg-gradient-to-r from-pink-500 to-yellow-500',
                         value: ' text-default-800 dark:text-white'
                       }}
                     />

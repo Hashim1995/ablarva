@@ -5,6 +5,7 @@ import { MailBoxHealt } from './mailbox-healt';
 import { EmaDashboardChart } from './chart';
 import LastAddedLeads from './last-added-leads';
 import { TotalCapacityPerDay } from './total-capacity-pd';
+import { EmailResponseRate } from './email-response-rate';
 
 function EmaDashboard() {
   const { t } = useTranslation();
@@ -67,23 +68,23 @@ function EmaDashboard() {
           </div>
         </div>
       </div>
-      <div className="flex gap-5 my-5">
-        <div className="flex flex-col gap-2 w-full h-full">
+
+      <div className="flex flex-wrap xl:flex-nowrap justify-center gap-4 xl:gap-6 mx-auto my-4 lg:px-0 w-full remove-scrollbar">
+        <div className="flex flex-col gap-2 w-full h-full max-h-80">
           <h3 className="font-semibold text-default-800 text-xl dark:text-white">
-            {t('lastAddedLeads')}
+            {t('lastAddedLeads')} 🔆
           </h3>
 
-          <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
+          <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full overflow-auto remove-scrollbar">
             <LastAddedLeads />
           </div>
         </div>
-        <div className="flex flex-col gap-2 w-full h-full">
-          <h3 className="font-semibold text-default-800 text-xl dark:text-white">
-            {t('aviableBalance')}
-          </h3>
-
-          <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
-            <LastAddedLeads />
+        <div className="flex flex-col gap-2 w-full xl:max-w-md max-h-80">
+          <div className="flex flex-col gap-2 h-full">
+            <h3 className="font-semibold text-default-800 text-xl dark:text-white">
+              {t('emailResponseRate')} 🌟
+            </h3>
+            <EmailResponseRate />
           </div>
         </div>
       </div>

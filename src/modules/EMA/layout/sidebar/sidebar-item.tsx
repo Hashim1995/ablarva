@@ -13,13 +13,13 @@ export function SidebarItem({ icon, title, isActive, href = '' }: Props) {
     <Link to={href} className="bg-none max-w-full">
       <div
         className={`flex ${
-          isActive ? 'bg-default-100' : ''
+          isActive ? 'bg-default-200' : ''
         }   hover:bg-default-100 gap-2 w-full min-h-[44px] h-full items-center px-3.5 rounded-xl cursor-pointer transition-all duration-150 `}
         aria-hidden
         onClick={() => console.log('a')}
       >
         {icon}
-        <span className="text-default-900 text-[14px]">{title}</span>
+        <span className="text-[14px] text-default-900">{title}</span>
       </div>
     </Link>
   );

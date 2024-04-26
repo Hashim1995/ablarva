@@ -126,6 +126,11 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                   {day?.assistantChats?.map(conv => (
                     <div
                       key={conv?.threadId}
+                      className={`${
+                        conv?.threadId === searchParams.get('threadID')
+                          ? ' border-default-600 border-1 dark:border-white'
+                          : 'dark:border-0'
+                      } cursor-pointer relative z-10 border-1 border-divider dark:bg-default-50 dark:bg-none backdrop-blur-md mb-2 px-3 py-2  rounded-2xl text-default-800 dark:text-white cursor-pointer"`}
                       aria-hidden
                       onClick={() => {
                         dispatch(setWaitingForAssistantThreadLoad(true));
@@ -136,7 +141,6 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                           threadID: String(conv.threadId)
                         });
                       }}
-                      className="relative z-10 border-1 border-divider dark:bg-default-50 dark:bg-none backdrop-blur-md mb-2 px-3 py-2 dark:border-none rounded-2xl text-default-800 dark:text-white cursor-pointer"
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <Image

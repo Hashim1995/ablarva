@@ -385,6 +385,7 @@
     "senderPhone": "Sender phone",
     "editSenderInformation": "Edit sender information",
     "deleteSenderInformation": "Delete sender information",
-    "addSenderInformation": "Add sender information"
+    "addSenderInformation": "Add sender information",
+    "emailResponseRate": "Email response rate"
   }
 }
