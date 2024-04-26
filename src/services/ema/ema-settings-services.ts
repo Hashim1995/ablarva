@@ -35,7 +35,7 @@ export class EmaSettingsService {
    */
   private static instance: EmaSettingsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the EmaSettingsService class.

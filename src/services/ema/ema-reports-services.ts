@@ -20,7 +20,7 @@ export class EmaReportsServices {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaReportsServices | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Returns the singleton instance of EmaReportsServices.
