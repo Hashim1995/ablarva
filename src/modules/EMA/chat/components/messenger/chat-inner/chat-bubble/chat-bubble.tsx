@@ -1,7 +1,7 @@
 /* eslint-disable consistent-return */
 import Typewriter from '@/components/layout/type-writer';
 import { toastOptions } from '@/configs/global-configs';
-import { IAssistantThreadBubblesItem } from '@/modules/EMA/assistant/types';
+import { IAssistantThreadBubblesItem } from '@/modules/EMA/chat/types';
 import { RootState } from '@/redux/store';
 import { Avatar, Button } from '@nextui-org/react';
 import { TbClipboardCopy } from 'react-icons/tb';
@@ -70,8 +70,8 @@ function ChatBubble({
           {assistantName}
         </h3> */}
         <Typewriter message={assistantContent} isTyping={isTyping} />
-        <div className="flex mt-3  items-center justify-between">
-          <div className="flex  gap-2  items-center justify-between">
+        <div className="flex justify-between items-center mt-3">
+          <div className="flex justify-between items-center gap-2">
             {/* {!isClient && (
               <>
                 <Button

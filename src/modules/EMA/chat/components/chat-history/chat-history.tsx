@@ -79,7 +79,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
         // If the current thread is removed, reset the assistant inner
         if (searchParams.get('threadID') === id) {
           searchParams.delete('threadID');
-          navigate('/assistan', { replace: true });
+          navigate('/email-marketing/chat', { replace: true });
           setTimeout(() => {
             dispatch(setResetAssistantInner(Date.now()));
           }, 500);

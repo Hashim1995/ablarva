@@ -72,7 +72,10 @@ function SenderInformation() {
             </h3>
           </div>
           <Divider className="my-4" />
-          <div className="flex justify-end">
+          <div className="flex justify-between">
+            <h3 className="text-3xl text-default-800 dark:text-white italic">
+              3/3
+            </h3>
             <Button title="Add" onClick={addOnOpen} aria-label="Add">
               {t('addBtn')}
             </Button>

@@ -17,7 +17,7 @@ import { textAreaConfig } from '@/configs/global-configs';
 import { useLocalStorage, useMediaQuery } from 'usehooks-ts';
 import { setCurrentAssistantLanguage } from '@/redux/assistant/assistant-slice';
 import { useDispatch, useSelector } from 'react-redux';
-import { IAssistantChatForm } from '@/modules/EMA/assistant/types';
+import { IAssistantChatForm } from '@/modules/EMA/chat/types';
 import { useTranslation } from 'react-i18next';
 import { RootState } from '@/redux/store';
 import { clickKeyBoardSound } from '@/assets/sounds/asset-exporter';

@@ -39,7 +39,7 @@ const SuspenseLoader = React.lazy(
   () => import('@core/static-components/suspense-loader')
 );
 const LayoutPage = React.lazy(() => import('@/core/layout/home/home-layout'));
-const AssistantPage = React.lazy(() => import('@/modules/EMA/assistant/pages'));
+const AssistantPage = React.lazy(() => import('@/modules/EMA/chat/pages'));
 const HomePage = React.lazy(() => import('@/modules/home/pages/home-page'));
 
 /**
@@ -82,7 +82,7 @@ const routes = [
         element: <h1>404</h1>
       },
       {
-        path: 'assistant',
+        path: 'chat',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <AssistantPage />

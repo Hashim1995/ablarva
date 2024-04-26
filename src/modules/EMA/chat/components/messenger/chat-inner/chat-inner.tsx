@@ -24,7 +24,7 @@ import {
   IAssistantChatForm,
   IAssistantSendMessagePayload,
   IAssistantThreadBubblesItem
-} from '@/modules/EMA/assistant/types';
+} from '@/modules/EMA/chat/types';
 import { toast } from 'react-toastify';
 import ThinkText from '@/core/static-components/think-text';
 import { toastOptions } from '@/configs/global-configs';

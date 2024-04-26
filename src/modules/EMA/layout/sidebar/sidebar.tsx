@@ -81,12 +81,12 @@ export function SidebarWrapper() {
                 href="/email-marketing"
               />
               <SidebarItem
-                isActive={pathname.includes('/assistant')}
+                isActive={pathname.includes('/chat')}
                 title="Chat"
                 icon={
                   <BsChatDots className="text-default-900 dark:text-white" />
                 }
-                href="assistant"
+                href="chat"
               />
               <SidebarItem
                 isActive={pathname.includes('/leads')}

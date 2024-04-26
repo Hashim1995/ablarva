@@ -11,7 +11,6 @@ const toastOptions: ToastOptions = {
   pauseOnHover: true,
   draggable: false,
   progress: undefined
-
 };
 
 /**
