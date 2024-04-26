@@ -44,12 +44,12 @@ function EmaBillingPackage({
   return (
     <Card
       key={item?.packageId}
-      className={`gradient-bg ${
-        darkMode.value ? 'gradient-bg' : 'abstract-bg'
-      } p-4 rounded-lg shadow-lg w-1/4 ${
+      className={` w-full ${
+        darkMode.value ? 'gradient-bg' : ''
+      } p-4 rounded-lg shadow-lg w-72 ${
         packageId === item.packageId
-          ? ' border-1 border-divider border-success-500'
-          : ''
+          ? ' border-2  border-success-500'
+          : 'border-divider border-1'
       }`}
     >
       <CardHeader className="flex flex-col text-center">

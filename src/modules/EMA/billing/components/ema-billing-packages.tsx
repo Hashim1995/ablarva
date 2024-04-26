@@ -81,7 +81,7 @@ function EmaBillingPackages() {
           {!loading ? (
             <div>
               {data?.packages?.length > 0 ? (
-                <div className="flex justify-between space-x-4">
+                <div className="flex ld:justify-between xl:justify-evenly lg:gap-2 xl:gap-5 space-x-4">
                   {data?.packages?.map((item: IPackageItem) => (
                     <PricingItem
                       item={item}
