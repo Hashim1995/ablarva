@@ -23,30 +23,30 @@ import {
 /**
  * Represents a service for managing settings. It is a singleton class. It is used to update SMTP settings, retrieve SMTP settings, retrieve email items, create email items, update email items, and remove email items. It uses the HttpUtil class for HTTP requests.
  * @example
- * const settingsService = SettingsService.getInstance();
- * settingsService.updateSmtp(body, onError);
- * settingsService.getSmtp(onError);
- * settingsService.getEmailItems(param, onError);
- * settingsService.createEmailItem(body, onError);
+ * const EmaSettingsService = EmaSettingsService.getInstance();
+ * EmaSettingsService.updateSmtp(body, onError);
+ * EmaSettingsService.getSmtp(onError);
+ * EmaSettingsService.getEmailItems(param, onError);
+ * EmaSettingsService.createEmailItem(body, onError);
  */
-export class SettingsService {
+export class EmaSettingsService {
   /**
-   * The singleton instance of the SettingsService class.
+   * The singleton instance of the EmaSettingsService class.
    */
-  private static instance: SettingsService | null;
+  private static instance: EmaSettingsService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
-   * Gets the singleton instance of the SettingsService class.
+   * Gets the singleton instance of the EmaSettingsService class.
    * If the instance does not exist, it creates a new one.
-   * @returns The singleton instance of the SettingsService class.
+   * @returns The singleton instance of the EmaSettingsService class.
    */
-  public static getInstance(): SettingsService {
+  public static getInstance(): EmaSettingsService {
     if (!this.instance) {
-      SettingsService.instance = new SettingsService();
+      EmaSettingsService.instance = new EmaSettingsService();
     }
-    return SettingsService.instance!;
+    return EmaSettingsService.instance!;
   }
 
   /**

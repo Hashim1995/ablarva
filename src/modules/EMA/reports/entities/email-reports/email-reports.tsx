@@ -17,7 +17,7 @@ import {
 import utc from 'dayjs/plugin/utc'; // Import the UTC plugin
 
 import { useAsyncList } from '@react-stately/data';
-import { ReportsServices } from '@/services/reports-services/reports-services';
+import { EmaReportsServices } from '@/services/ema/ema-reports-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { IoEllipsisVertical } from 'react-icons/io5';
@@ -49,7 +49,7 @@ export default function Email() {
       setIsLoading(true);
       try {
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await ReportsServices.getInstance().getEmailReports([
+        const res = await EmaReportsServices.getInstance().getEmailReports([
           { name: 'page', value: page },
           { name: 'pageSize', value: 10 }
         ]);

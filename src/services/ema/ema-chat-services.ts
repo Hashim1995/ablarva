@@ -19,25 +19,25 @@ import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
  * Represents the AssistantService class. It contains methods for assistant services. It is a singleton class. It is used to send feedback, send a message, remove a thread, fetch thread history, fetch assistants list, and fetch bubble history. It is used in the Assistant module. It
  * uses the HttpUtil class for HTTP requests.
  * @example
- * const assistantService = AssistantService.getInstance();
- * assistantService.sendFeedback(payload, onError);
- * assistantService.sendMessage(payload, onError, abortController);
+ * const assistantService = EmaChatService.getInstance();
+ * EmaChatService.sendFeedback(payload, onError);
+ * EmaChatService.sendMessage(payload, onError, abortController);
  */
-export class AssistantService {
-  private static instance: AssistantService | null;
+export class EmaChatService {
+  private static instance: EmaChatService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
-   * Gets the instance of AssistantService.
+   * Gets the instance of EmaChatService.
    * If the instance does not exist, creates a new instance and returns it.
-   * @returns The instance of AssistantService.
+   * @returns The instance of EmaChatService.
    */
-  public static getInstance(): AssistantService {
+  public static getInstance(): EmaChatService {
     if (!this.instance) {
-      AssistantService.instance = new AssistantService();
+      EmaChatService.instance = new EmaChatService();
     }
-    return AssistantService.instance!;
+    return EmaChatService.instance!;
   }
 
   /**

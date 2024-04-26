@@ -14,11 +14,11 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
+import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
 import { toast } from 'react-toastify';
-import { EmaSettingsService } from '@/services/ema/ema-settings-services';
-import { IEmailItemCreate } from './types';
+import { ISenderInformationItem } from '../types';
 
-interface IAddEmailModal {
+interface IModalProps {
   isOpen: boolean;
   reloadData: () => void;
   onOpenChange: () => void;
@@ -31,19 +31,23 @@ interface IAddEmailModal {
  * @param props.onOpenChange The function to change the state of the modal.
  * @returns The rendered add email modal.
  */
-function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
+
+function SenderInformationAddModal({
+  isOpen,
+  onOpenChange,
+  reloadData
+}: IModalProps) {
   const { t } = useTranslation();
 
   const {
     handleSubmit,
     formState: { errors },
     control
-  } = useForm<IEmailItemCreate>({
+  } = useForm<ISenderInformationItem>({
     mode: 'onChange'
   });
 
   const [loading, setLoading] = useState<boolean>(false);
-
   /**
    * Submits the form. It adds a new email to the email list.
    * @param data The email to be added.
@@ -51,17 +55,20 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
    * @throws The function throws an error if it encounters an error.
    * @returns The result of the form submission.
    */
-  const onSubmit = async (data: IEmailItemCreate) => {
+  const onSubmit = async (data: ISenderInformationItem) => {
     setLoading(true);
-    const payload: IEmailItemCreate = {
-      emailAddress: data?.emailAddress,
-      name: data?.name,
-      surname: data?.surname
+    const payload: Omit<ISenderInformationItem, 'id'> = {
+      senderCompany: data?.senderCompany,
+      senderFullName: data?.senderFullName,
+      senderJobTitle: data?.senderJobTitle,
+      senderPhone: data?.senderPhone,
+      senderWebsite: data?.senderWebsite
     };
     try {
-      const res = await EmaSettingsService.getInstance().createEmailItem(
-        payload
-      );
+      const res =
+        await EmaSenderInformationService.getInstance().createSenderInformation(
+          payload
+        );
       if (res.isSuccess) {
         onOpenChange();
         toast.success(t('successTxt'), toastOptions);
@@ -86,62 +93,116 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
-                {t('addAnyData')}
+              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+                {t('addSenderInformation')}
               </ModalHeader>
               <ModalBody>
                 <form
-                  id="add-email-form"
+                  id="sender-information-add-form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
                   {' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="name"
+                      name="senderFullName"
                       inputProps={{
-                        id: 'name'
+                        id: 'senderFullName'
                       }}
                       type="text"
+                      rules={{
+                        required: {
+                          value: true,
+                          message: inputValidationText(t('senderFullName'))
+                        }
+                      }}
                       control={control}
-                      isInvalid={Boolean(errors.name?.message)}
+                      isInvalid={Boolean(errors.senderFullName?.message)}
                       errors={errors}
                       size="sm"
-                      label={inputPlaceholderText(t('name'))}
+                      label={inputPlaceholderText(t('senderFullName'))}
                     />
                   </div>{' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="surname"
+                      name="senderJobTitle"
                       inputProps={{
-                        id: 'surname'
+                        id: 'senderJobTitle'
                       }}
                       type="text"
+                      rules={{
+                        required: {
+                          value: true,
+                          message: inputValidationText(t('senderJobTitle'))
+                        }
+                      }}
                       control={control}
-                      isInvalid={Boolean(errors.surname?.message)}
+                      isInvalid={Boolean(errors.senderJobTitle?.message)}
                       errors={errors}
                       size="sm"
-                      label={inputPlaceholderText(t('surname'))}
+                      label={inputPlaceholderText(t('senderJobTitle'))}
                     />
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="emailAddress"
+                      name="senderCompany"
                       inputProps={{
-                        id: 'emailAddress'
+                        id: 'senderCompany'
                       }}
-                      type="email"
+                      type="text"
                       control={control}
-                      isInvalid={Boolean(errors.emailAddress?.message)}
+                      isInvalid={Boolean(errors.senderCompany?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
                         required: {
                           value: true,
-                          message: inputValidationText(t('mailAddress'))
+                          message: inputValidationText(t('senderCompany'))
                         }
                       }}
-                      label={inputPlaceholderText(t('mailAddress'))}
+                      label={inputPlaceholderText(t('senderCompany'))}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-5">
+                    <AppHandledInput
+                      name="senderWebsite"
+                      inputProps={{
+                        id: 'senderWebsite'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.senderWebsite?.message)}
+                      errors={errors}
+                      size="sm"
+                      rules={{
+                        required: {
+                          value: true,
+                          message: inputValidationText(t('senderWebsite'))
+                        }
+                      }}
+                      label={inputPlaceholderText(t('senderWebsite'))}
+                      required
+                    />
+                  </div>
+                  <div className="flex flex-col gap-5">
+                    <AppHandledInput
+                      name="senderPhone"
+                      inputProps={{
+                        id: 'senderPhone'
+                      }}
+                      type="text"
+                      control={control}
+                      isInvalid={Boolean(errors.senderPhone?.message)}
+                      errors={errors}
+                      size="sm"
+                      rules={{
+                        required: {
+                          value: true,
+                          message: inputValidationText(t('senderPhone'))
+                        }
+                      }}
+                      label={inputPlaceholderText(t('senderPhone'))}
                       required
                     />
                   </div>
@@ -159,9 +220,10 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
                 <Button
                   title="Add Email"
                   aria-label="Add Email"
-                  form="add-email-form"
+                  form="sender-information-add-form"
                   isLoading={loading}
                   type="submit"
+                  color="primary"
                 >
                   {t('addBtn')}
                 </Button>
@@ -174,4 +236,4 @@ function AddEmailModal({ isOpen, onOpenChange, reloadData }: IAddEmailModal) {
   );
 }
 
-export default AddEmailModal;
+export default SenderInformationAddModal;

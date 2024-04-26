@@ -15,7 +15,7 @@ import {
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'react-toastify';
-import { SettingsService } from '@/services/settings-services/settings-services';
+import { EmaSettingsService } from '@/services/ema/ema-settings-services';
 import { IEmailItemUpdate } from './types';
 
 interface IEditEmailModal {
@@ -65,7 +65,9 @@ function EditEmailModal({
       surname: data?.surname
     };
     try {
-      const res = await SettingsService.getInstance().updateEmailItem(payload);
+      const res = await EmaSettingsService.getInstance().updateEmailItem(
+        payload
+      );
       if (res.isSuccess) {
         onOpenChange();
         toast.success(t('successTxt'), toastOptions);
@@ -99,7 +101,7 @@ function EditEmailModal({
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="name"
                       inputProps={{
@@ -113,7 +115,7 @@ function EditEmailModal({
                       label={inputPlaceholderText(t('name'))}
                     />
                   </div>
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="surname"
                       inputProps={{
@@ -127,7 +129,7 @@ function EditEmailModal({
                       label={inputPlaceholderText(t('surname'))}
                     />
                   </div>{' '}
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="emailAddress"
                       inputProps={{

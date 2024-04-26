@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { WormIcon } from '@/assets/icons/warm-icon';
-import { AssistantService } from '@/services/assistant-services/assistant-services';
+import { EmaChatService } from '@/services/ema/ema-chat-services';
 import { Skeleton } from '@nextui-org/react';
 
 import { useEffect, useState } from 'react';
@@ -20,7 +20,7 @@ function Home() {
   // Fetching the list of assistants
   const fetchAssistansList = async () => {
     try {
-      const res = await AssistantService.getInstance().fetchAssistantsList();
+      const res = await EmaChatService.getInstance().fetchAssistantsList();
 
       setAssistansList(res?.data);
       setLoading(false);

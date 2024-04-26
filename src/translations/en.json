@@ -382,6 +382,9 @@
     "senderJobTitle": "Sender job title",
     "senderCompany": "Sender company",
     "senderWebsite": "Sender website",
-    "senderPhone": "Sender phone"
+    "senderPhone": "Sender phone",
+    "editSenderInformation": "Edit sender information",
+    "deleteSenderInformation": "Delete sender information",
+    "addSenderInformation": "Add sender information"
   }
 }

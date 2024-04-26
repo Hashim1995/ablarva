@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Skeleton, useDisclosure } from '@nextui-org/react';
-import { PaymentService } from '@/services/payment-services/payment-services';
+import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 import { IPackageItem, IPackageData } from '@/models/payment';
 import { IBuyPacketBody } from '@/modules/EMA/billing/types';
 import { useSelector } from 'react-redux';
@@ -42,7 +42,7 @@ function EmaPricing() {
    */
   async function fetchPricing() {
     try {
-      const res = await PaymentService.getInstance().getPricingList(2);
+      const res = await EmaBillingServices.getInstance().getPricingList(2);
       if (res.isSuccess) {
         setData(res?.data);
       }
@@ -65,7 +65,7 @@ function EmaPricing() {
       packageId: wantedPackageId
     };
     try {
-      const res = await PaymentService.getInstance().buyPacket(payload);
+      const res = await EmaBillingServices.getInstance().buyPacket(payload);
       if (res.isSuccess) {
         window.location.href = res.data.paymentLink;
       }

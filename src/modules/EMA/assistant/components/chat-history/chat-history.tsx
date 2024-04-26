@@ -19,7 +19,7 @@ import {
   setResetAssistantInner,
   setWaitingForAssistantThreadLoad
 } from '@/redux/assistant/assistant-slice';
-import { AssistantService } from '@/services/assistant-services/assistant-services';
+import { EmaChatService } from '@/services/ema/ema-chat-services';
 import { useTranslation } from 'react-i18next';
 import { IAssistantThreadHistoryList } from '../../types';
 
@@ -54,7 +54,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
   // Fetch thread history from the server
   const fetchThreadHistory = async () => {
     try {
-      const res = await AssistantService.getInstance().fetchThreadHistory();
+      const res = await EmaChatService.getInstance().fetchThreadHistory();
       if (res.isSuccess) {
         setThreadHistory(res?.data);
         setLoading(false);
@@ -68,7 +68,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {
-      const res = await AssistantService.getInstance().removeThread(id);
+      const res = await EmaChatService.getInstance().removeThread(id);
       if (res.isSuccess) {
         // Refetch the thread history after removing a thread
         fetchThreadHistory();

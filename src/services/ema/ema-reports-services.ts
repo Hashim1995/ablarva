@@ -10,27 +10,27 @@ import {
 } from '../adapter-config/config';
 
 /**
- * Represents the ReportsServices class. It contains methods for reports services. It is a singleton class. It is used to retrieve email reports. It uses the HttpUtil class for HTTP requests.
+ * Represents the EmaReportsServices class. It contains methods for reports services. It is a singleton class. It is used to retrieve email reports. It uses the HttpUtil class for HTTP requests.
  * @example
- * const reportsServices = ReportsServices.getInstance();
- * reportsServices.getEmailReports(param, onError);
- * reportsServices.getAssistantReports(param, onError);
+ * const reportsServices = EmaReportsServices.getInstance();
+ * EmaReportsServices.getEmailReports(param, onError);
+ * EmaReportsServices.getAssistantReports(param, onError);
  */
-export class ReportsServices {
+export class EmaReportsServices {
   // eslint-disable-next-line no-use-before-define
-  private static instance: ReportsServices | null;
+  private static instance: EmaReportsServices | null;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
-   * Returns the singleton instance of ReportsServices.
-   * @returns The singleton instance of ReportsServices.
+   * Returns the singleton instance of EmaReportsServices.
+   * @returns The singleton instance of EmaReportsServices.
    */
-  public static getInstance(): ReportsServices {
+  public static getInstance(): EmaReportsServices {
     if (!this.instance) {
-      ReportsServices.instance = new ReportsServices();
+      EmaReportsServices.instance = new EmaReportsServices();
     }
-    return ReportsServices.instance!;
+    return EmaReportsServices.instance!;
   }
 
   /**

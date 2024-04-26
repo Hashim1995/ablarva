@@ -1,4 +1,4 @@
-import { ReportsServices } from '@/services/reports-services/reports-services';
+import { EmaReportsServices } from '@/services/ema/ema-reports-services';
 import {
   Table,
   TableHeader,
@@ -32,7 +32,7 @@ export default function LastAddedLeads() {
       setIsLoading(true);
       try {
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await ReportsServices.getInstance().getEmailReports([
+        const res = await EmaReportsServices.getInstance().getEmailReports([
           { name: 'page', value: page },
           { name: 'pageSize', value: 10 }
         ]);
@@ -97,7 +97,7 @@ export default function LastAddedLeads() {
   return (
     <Table
       removeWrapper
-      className="text-default-900  dark:text-white"
+      className="text-default-900 dark:text-white"
       classNames={{
         thead: '!bg-transparent',
         tr: '!bg-transparent',

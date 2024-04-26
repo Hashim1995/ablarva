@@ -77,7 +77,7 @@ function AppHandledInput({
           }}
           isInvalid={isInvalid}
           value={value}
-          className={className}
+          className={`text-default-900 dark:text-white ${className}`}
           errorMessage={(isInvalid && errors[name].message) || ''}
           size="md"
           {...inputProps}

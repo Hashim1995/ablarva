@@ -6,7 +6,7 @@ import { Button, Card, Skeleton } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
-import { SettingsService } from '@/services/settings-services/settings-services';
+import { EmaSettingsService } from '@/services/ema/ema-settings-services';
 import { toast } from 'react-toastify';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { ISmtpItem } from './types';
@@ -29,7 +29,7 @@ function Smtp() {
    */
   const getSmtpConfig = async () => {
     try {
-      const res = await SettingsService.getInstance().getSmtp();
+      const res = await EmaSettingsService.getInstance().getSmtp();
       if (res.isSuccess) {
         setLoading(false);
         return res?.data;
@@ -67,7 +67,7 @@ function Smtp() {
 
     setBtnLoader(true);
     try {
-      const res = await SettingsService.getInstance().updateSmtp(payload);
+      const res = await EmaSettingsService.getInstance().updateSmtp(payload);
       if (res.isSuccess) {
         toast.success(t('successTxt'), toastOptions);
       }

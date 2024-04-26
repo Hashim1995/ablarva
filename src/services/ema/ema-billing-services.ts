@@ -30,35 +30,35 @@ interface ITransactionResponse extends IGlobalResponse {
   };
 }
 /**
- * Represents a PaymentService class. It contains methods for payment services. It is a singleton class. It is used to get pricing list, buy a packet, and get transactions. It uses the HttpUtil class for HTTP requests. It is used in the Pricing module.
+ * Represents a EmaBillingServices class. It contains methods for payment services. It is a singleton class. It is used to get pricing list, buy a packet, and get transactions. It uses the HttpUtil class for HTTP requests. It is used in the Pricing module.
  * @example
- * const paymentService = PaymentService.getInstance();
- * paymentService.getPricingList(id, onError);
- * paymentService.buyPacket(body, onError);
- * paymentService.getTransactions(params, onError);
+ * const EmaBillingServices = EmaBillingServices.getInstance();
+ * EmaBillingServices.getPricingList(id, onError);
+ * EmaBillingServices.buyPacket(body, onError);
+ * EmaBillingServices.getTransactions(params, onError);
  */
-export class PaymentService {
+export class EmaBillingServices {
   /**
-   * The singleton instance of the PaymentService class.
+   * The singleton instance of the EmaBillingServices class.
    */
-  private static instance: PaymentService | null;
+  private static instance: EmaBillingServices | null;
 
   /**
-   * Constructs a new instance of the PaymentService class.
+   * Constructs a new instance of the EmaBillingServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() {}
+  private constructor() { }
 
   /**
-   * Gets the singleton instance of the PaymentService class.
+   * Gets the singleton instance of the EmaBillingServices class.
    * If the instance does not exist, creates a new instance.
-   * @returns The singleton instance of the PaymentService class.
+   * @returns The singleton instance of the EmaBillingServices class.
    */
-  public static getInstance(): PaymentService {
+  public static getInstance(): EmaBillingServices {
     if (!this.instance) {
-      PaymentService.instance = new PaymentService();
+      EmaBillingServices.instance = new EmaBillingServices();
     }
-    return PaymentService.instance!;
+    return EmaBillingServices.instance!;
   }
 
   /**

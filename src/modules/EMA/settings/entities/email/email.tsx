@@ -21,7 +21,7 @@ import {
 import utc from 'dayjs/plugin/utc'; // Import the UTC plugin
 import { useAsyncList } from '@react-stately/data';
 import dayjs from 'dayjs';
-import { SettingsService } from '@/services/settings-services/settings-services';
+import { EmaSettingsService } from '@/services/ema/ema-settings-services';
 import { useTranslation } from 'react-i18next';
 import { BsPen, BsTrash } from 'react-icons/bs';
 import { toast } from 'react-toastify';
@@ -66,7 +66,7 @@ export default function Email() {
       setIsLoading(true);
       try {
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await SettingsService.getInstance().getEmailItems([
+        const res = await EmaSettingsService.getInstance().getEmailItems([
           { name: 'page', value: page },
           { name: 'pageSize', value: 10 }
         ]);
@@ -94,7 +94,7 @@ export default function Email() {
   const removeThreadFromList = async (id: string) => {
     setRemoveLoading(true);
     try {
-      const res = await SettingsService.getInstance().removeEmailItem(id);
+      const res = await EmaSettingsService.getInstance().removeEmailItem(id);
       if (res.isSuccess) {
         list.reload();
       }

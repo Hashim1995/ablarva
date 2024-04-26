@@ -19,7 +19,7 @@ import {
 import AiLoder from '@/core/static-components/ai-loader';
 import VerifyEmail from '@/core/static-components/verify-email';
 import AiEmptyWelcome from '@/core/static-components/ai-empty-welcome';
-import { AssistantService } from '@/services/assistant-services/assistant-services';
+import { EmaChatService } from '@/services/ema/ema-chat-services';
 import {
   IAssistantChatForm,
   IAssistantSendMessagePayload,
@@ -107,7 +107,7 @@ function ChatInner(): JSX.Element {
     // Set the waiting state to true
     dispatch(setWaitingForAssistantThreadLoad(true));
     try {
-      const res = await AssistantService.getInstance().fetchBubbleHistory(id);
+      const res = await EmaChatService.getInstance().fetchBubbleHistory(id);
       if (res.isSuccess) {
         // Set the bubble list and assistant model from the response data and set the waiting state to false once the data is fetched successfully
         setBubbleList(res?.data?.allThreadBubbles);
@@ -165,7 +165,7 @@ function ChatInner(): JSX.Element {
         threadId: searchParams.get('threadID') || null
       };
       try {
-        const res = await AssistantService.getInstance().sendMessage(
+        const res = await EmaChatService.getInstance().sendMessage(
           payload,
           undefined,
           currentAbortController.signal

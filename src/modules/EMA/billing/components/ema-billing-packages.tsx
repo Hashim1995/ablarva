@@ -2,7 +2,7 @@ import Empty from '@/components/layout/empty';
 import VerifyEmail from '@/core/static-components/verify-email';
 import { IPackageData, IPackageItem } from '@/models/payment';
 import { RootState } from '@/redux/store';
-import { PaymentService } from '@/services/payment-services/payment-services';
+import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 import { useDisclosure, Skeleton } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
@@ -38,7 +38,7 @@ function EmaBillingPackages() {
    */
   async function fetchPricing() {
     try {
-      const res = await PaymentService.getInstance().getPricingList(2);
+      const res = await EmaBillingServices.getInstance().getPricingList(2);
       if (res.isSuccess) {
         setData(res?.data);
       }
@@ -61,7 +61,7 @@ function EmaBillingPackages() {
       packageId: wantedPackageId
     };
     try {
-      const res = await PaymentService.getInstance().buyPacket(payload);
+      const res = await EmaBillingServices.getInstance().buyPacket(payload);
       if (res.isSuccess) {
         window.location.href = res.data.paymentLink;
       }

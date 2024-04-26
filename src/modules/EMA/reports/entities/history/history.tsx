@@ -14,7 +14,7 @@ import {
   CardBody
 } from '@nextui-org/react';
 import { useAsyncList } from '@react-stately/data';
-import { PaymentService } from '@/services/payment-services/payment-services';
+import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 import dayjs from 'dayjs';
 import { useTranslation } from 'react-i18next';
 import { ITransactionsItem } from '../../../cabinet/types';
@@ -38,7 +38,7 @@ export default function History() {
       setIsLoading(true);
       try {
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await PaymentService.getInstance().getTransactions([
+        const res = await EmaBillingServices.getInstance().getTransactions([
           { name: 'page', value: page },
           { name: 'pageSize', value: 10 }
         ]);
