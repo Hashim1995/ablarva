@@ -115,7 +115,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('emailVerify')}
               </ModalHeader>
               <ModalBody>
@@ -123,7 +123,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
-                  <div className="flex flex-col gap-5  ">
+                  <div className="flex flex-col gap-5">
                     <AppHandledInput
                       name="code"
                       inputProps={{
@@ -169,7 +169,7 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                     </Button>
                   </ButtonGroup>
                   <Divider />
-                  <p className="text-sm text-left clear-both    ">
+                  <p className="clear-both text-default-800 text-left text-sm dark:text-white">
                     <BsQuestionCircleFill
                       size={26}
                       color="orange"
@@ -184,7 +184,12 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button title="Close" aria-label="Close" onPress={onClose}>
+                <Button
+                  variant="bordered"
+                  title="Close"
+                  aria-label="Close"
+                  onPress={onClose}
+                >
                   {t('closeBtn')}
                 </Button>
               </ModalFooter>

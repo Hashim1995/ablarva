@@ -41,7 +41,7 @@ function AiEmptyWelcome() {
             </svg>
           </div>
         </div>
-        <h2 className="text-white text-center ">
+        <h2 className="text-default-900 dark:text-white text-center ">
           {t('questionAnswerAiZadeh')}
         </h2>
       </div>

@@ -6,34 +6,12 @@ html {
   overflow: hidden;
 }
 
-.app-wrapper {
-  /*
-* Created with https://www.css-gradient.com
-* Gradient link: https://www.css-gradient.com/?c1=3a24ca&c2=fd173a&gt=r&gd=dtl
-*/
-  // background: #3a24ca;
-  // background: radial-gradient(at left top, #3a24ca, #fd173a);
-}
-
 body {
   margin: 0;
   // overflow-y: auto;
 }
 * {
   font-family: 'Poppins', sans-serif;
-  // ::-webkit-scrollbar {
-  //   width: 10px;
-  //   border: 1px solid #292d3222;
-  // }
-
-  /* Track */
-
-  // /* Handle */
-  // ::-webkit-scrollbar-thumb {
-  //   background: #292d32;
-  //   height: 5px;
-  //   width: 10px;
-  // }
 }
 
 body::-webkit-scrollbar,
@@ -56,9 +34,9 @@ body::-webkit-scrollbar-thumb,
   scrollbar-width: none !important; /* Firefox */
 }
 .fixed-height {
-  height: calc(100vh - 64px);
-  max-height: calc(100vh - 64px);
-  min-height: calc(100vh - 64px);
+  height: calc(100vh - 0px);
+  max-height: calc(100vh - 0px);
+  min-height: calc(100vh - 0px);
 }
 .scroll-to-bottom-wrapper > div:first-child {
   -ms-overflow-style: none !important; /* IE + Edge */
@@ -415,7 +393,22 @@ input[type='number'] {
   // background: linear-gradient(167deg, #1c1c1c, #1a0376, #252525, #6c1bdb);
   // background-size: 800% 800%;
 }
+.gradient-bg-light {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//bg-light.svg');
+}
 
+.grid-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//grid.svg');
+}
+.abstract-bg {
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-image: url('../../assets/images//abstract.jpg');
+}
 @-webkit-keyframes AnimationName {
   0% {
     background-position: 90% 0%;

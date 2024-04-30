@@ -10,42 +10,31 @@ import {
   NavbarItem,
   Button,
   NavbarMenuToggle,
-  NavbarMenu,
-  NavbarMenuItem,
-  ButtonGroup,
   User,
   DropdownTrigger,
   Dropdown,
   DropdownMenu,
   Tooltip,
   DropdownItem,
-  useDisclosure
+  useDisclosure,
+  Switch
 } from '@nextui-org/react';
 
 import { useOnClickOutside } from 'usehooks-ts';
 
-import {
-  BsFillChatLeftDotsFill,
-  BsClockFill,
-  BsArrowRightCircle,
-  BsFillGearFill,
-  BsFillFilterSquareFill,
-  BsEnvelope,
-  BsYelp,
-  BsQuestionCircle,
-  BsGear
-} from 'react-icons/bs';
+import { BsEnvelope, BsQuestionCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
-import { IMenuItemsNavbar, LayoutLanguage } from '@/models/common';
+import { LayoutLanguage } from '@/models/common';
 import { useDispatch, useSelector } from 'react-redux';
-import { MdAttachMoney, MdOutlineKeyboardArrowDown } from 'react-icons/md';
-import { AiOutlineUser } from 'react-icons/ai';
-import { TbReportAnalytics } from 'react-icons/tb';
 
-import PricingModal from '@/modules/pricing/pages';
+import PricingModal from '@/modules/EMA/billing/ema-buy-modal';
 import { setCurrentLayoutLanguage } from '@/redux/core/core-slice';
 import { RootState } from '@/redux/store';
+import { MoonIcon } from '@/assets/icons/moon-icon';
+import { SunIcon } from '@/assets/icons/sun-icon';
+import { IoLogOutOutline } from 'react-icons/io5';
+import useDarkMode from 'use-dark-mode';
 import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
@@ -65,23 +54,6 @@ export default function Navbar() {
   const { t, i18n } = useTranslation();
 
   const [isMenuOpen, setIsMenuOpen] = useState<boolean>(false);
-  const menuItems: IMenuItemsNavbar[] = [
-    {
-      label: t('chat'),
-      path: 'chat',
-      icon: <BsFillChatLeftDotsFill />
-    },
-    {
-      label: t('tariffs'),
-      path: 'pricing',
-      icon: <BsFillFilterSquareFill />
-    },
-    {
-      label: t('settings'),
-      path: 'settings',
-      icon: <BsFillGearFill />
-    }
-  ];
 
   const location = useLocation();
   const dispatch = useDispatch();
@@ -92,11 +64,8 @@ export default function Navbar() {
 
   const { user } = useSelector((state: RootState) => state.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const {
-    isOpen: pricingIsOpen,
-    onOpen: pricingOnOpen,
-    onOpenChange: pricingOnOpenChange
-  } = useDisclosure();
+  const { isOpen: pricingIsOpen, onOpenChange: pricingOnOpenChange } =
+    useDisclosure();
 
   const {
     isOpen: feedBackModalIsOpen,
@@ -104,7 +73,11 @@ export default function Navbar() {
     onOpenChange: feedBackModaOnOpenChange
   } = useDisclosure();
   const navRef = useRef(null);
-
+  const darkMode = useDarkMode(false, {
+    classNameDark: 'dark',
+    classNameLight: 'light',
+    global: window // Just pass this as a config option
+  });
   useEffect(() => {
     setIsMenuOpen(false);
   }, [location]);
@@ -139,7 +112,7 @@ export default function Navbar() {
   return (
     <>
       <NavbarNext
-        className="z-10  bg-black/30 backdrop-blur-md"
+        className="z-10 bg-transparent"
         maxWidth="full"
         isBlurred={false}
         position="static"
@@ -158,21 +131,24 @@ export default function Navbar() {
             <p className="font-bold text-inherit">Ai-zade</p>
           </NavbarBrand>
         </NavbarContent>
-        <NavbarContent className="hidden lg:flex gap-4 z-10" justify="start">
+        <NavbarContent className="z-10 lg:flex gap-4 hidden" justify="start">
           <div
             onClick={() => navigate('/chat')}
             className="cursor-pointer"
             aria-hidden
           >
             <NavbarBrand>
-              <img src={logo} className="h-[48px] w-[48px]" alt="" />
+              <img src={logo} className="w-[48px] h-[48px]" alt="" />
+              <span className="ml-2 font-bold text-[1em] theme-gradient">
+                AI-ZADE
+              </span>
             </NavbarBrand>
           </div>
         </NavbarContent>
-        <NavbarContent className=" hidden lg:flex gap-4 " justify="center">
-          <ButtonGroup className="!rounded-none">
+        <NavbarContent className="lg:flex gap-4 hidden" justify="center">
+          {/* <ButtonGroup className="!rounded-none">
             <Button
-              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('chat')
                   ? ' border-b-1 border-white'
                   : ''
@@ -187,7 +163,7 @@ export default function Navbar() {
               {t('simpleChat')}
             </Button>
             <Button
-              className={` w-40 !rounded-none text-white bg-transparent h-12  ${
+              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
                 location.pathname.includes('assistant')
                   ? ' border-b-1 border-white'
                   : ''
@@ -202,12 +178,12 @@ export default function Navbar() {
               {t('assistant')}
             </Button>
             <Tooltip
-              className="hidden sm:block"
+              className="sm:block hidden"
               placement="bottom"
               content={t('itIsBeingPrepared')}
             >
               <Button
-                className={`isDisabled text-white w-40 bg-transparent h-12  ${location.pathname.includes(
+                className={`isDisabled text-default-800 dark:text-white w-40 bg-transparent h-12  ${location.pathname.includes(
                   'catalyst'
                 )}`}
                 startContent={<BsClockFill color="white" size={17} />}
@@ -217,7 +193,7 @@ export default function Navbar() {
                 {t('catalyst')}
               </Button>
             </Tooltip>
-          </ButtonGroup>
+          </ButtonGroup> */}
         </NavbarContent>
         <NavbarContent
           style={{
@@ -225,7 +201,7 @@ export default function Navbar() {
           }}
           justify="end"
         >
-          <NavbarItem className=" p-1 px-2 sm:px-3 flex gap-2 items-center justify-between">
+          <NavbarItem className="flex justify-between items-center gap-2 px-2 sm:px-3 p-1 text-default-800 dark:text-white">
             <Dropdown
               role="menu"
               classNames={{
@@ -233,7 +209,7 @@ export default function Navbar() {
               }}
             >
               <DropdownTrigger>
-                <Button size="sm" className="capitalize bg-transparent">
+                <Button size="sm" className="bg-transparent capitalize">
                   {currentLanguageFlag(currentLayoutLanguage)}
                 </Button>
               </DropdownTrigger>
@@ -257,10 +233,13 @@ export default function Navbar() {
                 </DropdownItem>
               </DropdownMenu>
             </Dropdown>
-            {!user.verified && (
+            {user?.id && !user.verified ? (
               <Tooltip
-                className="hidden sm:block"
+                className="sm:block hidden"
                 placement="bottom"
+                classNames={{
+                  content: 'text-default-900 dark:text-white'
+                }}
                 content={t('emailVerify')}
               >
                 <Button
@@ -269,122 +248,63 @@ export default function Navbar() {
                   isIconOnly
                   aria-label="email verify"
                   title="Email verify"
-                  className="bg-transparent rounded-full flex "
+                  className="flex bg-transparent rounded-full"
                 >
                   <BsEnvelope
-                    className="cursor-pointer animate-pulse"
-                    color="white"
+                    className="text-default-900 dark:text-white animate-pulse cursor-pointer"
                     size={22}
                   />
                 </Button>
               </Tooltip>
-            )}
+            ) : null}
+
             <Button
               onClick={feedBackModalOnOpen}
               size="sm"
               isIconOnly
               aria-label="feedback"
               title="Feedback"
-              className="bg-transparent rounded-full flex "
+              className="flex bg-transparent rounded-full"
             >
-              <BsQuestionCircle color="white" size={22} />
+              <BsQuestionCircle
+                className="text-default-900 dark:text-white"
+                size={22}
+              />
             </Button>
-            <User
-              name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
-              description={user.email || t('empty')}
-              avatarProps={{
-                src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
-              }}
-              className="hidden sm:flex text-white"
+            <Switch
+              defaultSelected={darkMode.value}
+              onValueChange={darkMode.toggle}
+              size="sm"
+              startContent={<MoonIcon />}
+              endContent={<SunIcon />}
             />
-            <Dropdown className="">
-              <DropdownTrigger className="">
-                <div>
-                  <MdOutlineKeyboardArrowDown
-                    className="cursor-pointer"
-                    color="white"
-                    size={20}
-                  />
-                </div>
-              </DropdownTrigger>
-              <DropdownMenu className=" " aria-label="Static Actions">
-                <DropdownItem
-                  className=" "
-                  onClick={pricingOnOpen}
-                  key="pricing"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <MdAttachMoney /> {t('tariffs')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/cabinet');
-                  }}
-                  key="cabinet"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <AiOutlineUser /> {t('cabinet')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/settings');
-                  }}
-                  key="settings"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <BsGear /> {t('settings')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
-                  onClick={() => {
-                    navigate('/reports');
-                  }}
-                  key="reports"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <TbReportAnalytics /> {t('reports')}
-                  </p>
-                </DropdownItem>
-                <DropdownItem
-                  className=" "
+            {user?.id ? (
+              <User
+                name={user ? `${user.firstName} ${user.lastName}` : t('empty')}
+                description={user.email || t('empty')}
+                avatarProps={{
+                  src: `https://ui-avatars.com/api/?name=${user?.firstName}+${user?.lastName}&background=0D8ABC&color=fff`
+                }}
+                classNames={{
+                  description: 'text-default-900 dark:text-white'
+                }}
+                className="sm:flex hidden text-default-800 dark:text-white"
+              />
+            ) : null}
+            {user?.id ? (
+              <div>
+                <IoLogOutOutline
+                  className="text-default-900 dark:text-white cursor-pointer"
+                  size={20}
                   onClick={() => {
                     localStorage.removeItem('userToken');
-                    navigate('/login');
+                    window.location.reload();
                   }}
-                  key="logout"
-                >
-                  <p className="flex items-center  m-0 gap-2">
-                    <BsArrowRightCircle /> {t('logOut')}
-                  </p>
-                </DropdownItem>
-              </DropdownMenu>
-            </Dropdown>
+                />
+              </div>
+            ) : null}
           </NavbarItem>
         </NavbarContent>
-        <NavbarMenu className="md:hidden items-start pt-3 sm:pt-4 mt-0 sm:mt-4 md:mt-1">
-          {menuItems.map((item, index) => (
-            <NavbarMenuItem
-              className="flex items-start"
-              key={`${item}-${index}`}
-            >
-              <Button
-                aria-label="Navbar Menu Item"
-                title="Navbar Menu Item"
-                className="w-full px-1 flex bg-transparent items-center font-medium"
-                onClick={() => {
-                  navigate(`/${item.path}`);
-                }}
-              >
-                {item.icon} {item.label}
-              </Button>
-            </NavbarMenuItem>
-          ))}
-        </NavbarMenu>
       </NavbarNext>
       {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
       {feedBackModalIsOpen && (

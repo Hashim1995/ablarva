@@ -1,7 +1,11 @@
 import React, { Suspense } from 'react';
-import { Navigate } from 'react-router-dom';
+// import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
-import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
+import EmailReportsPage from '@/modules/EMA/reports/pages/email-reports-page';
+import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
+import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
+import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
+import SenderInformationPage from '@/modules/EMA/sender-information/pages/sender-information-page';
 
 /**
  * Lazy loads the application routes.
@@ -19,27 +23,24 @@ import EmailReportsPage from '@/modules/reports/pages/email-reports-page';
  *
  */
 
-const AssistantHomePage = React.lazy(
-  () => import('@/modules/assistant/pages/home')
-);
-const SettingsPage = React.lazy(() => import('@/modules/settings/pages'));
+const SettingsPage = React.lazy(() => import('@/modules/EMA/settings/pages'));
 const SmptpPage = React.lazy(
-  () => import('@/modules/settings/pages/smtp-page')
+  () => import('@/modules/EMA/settings/pages/smtp-page')
 );
-const ReportsPage = React.lazy(() => import('@/modules/reports/pages'));
+const ReportsPage = React.lazy(() => import('@/modules/EMA/reports/pages'));
 const HistoryPage = React.lazy(
-  () => import('@/modules/reports/pages/history-page')
+  () => import('@/modules/EMA/reports/pages/history-page')
 );
-const CabinetPage = React.lazy(() => import('@/modules/cabinet/pages'));
+const CabinetPage = React.lazy(() => import('@/modules/EMA/cabinet/pages'));
 const EmailPage = React.lazy(
-  () => import('@/modules/settings/pages/email-page')
+  () => import('@/modules/EMA/settings/pages/email-page')
 );
 const SuspenseLoader = React.lazy(
   () => import('@core/static-components/suspense-loader')
 );
-const LayoutPage = React.lazy(() => import('@core/layout/layout'));
-const ChatPage = React.lazy(() => import('@/modules/chat/pages'));
-const AssistantPage = React.lazy(() => import('@/modules/assistant/pages'));
+const LayoutPage = React.lazy(() => import('@/core/layout/home/home-layout'));
+const AssistantPage = React.lazy(() => import('@/modules/EMA/chat/pages'));
+const HomePage = React.lazy(() => import('@/modules/home/pages/home-page'));
 
 /**
  * Array of route objects that define the application routes.
@@ -49,36 +50,39 @@ const routes = [
     path: '/',
     element: <LayoutPage />,
     children: [
-      { path: '/', element: <Navigate to="chat" /> },
-
-      /**
-       * Route for the chat page.
-       */
       {
         index: true,
-        path: 'chat/*',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
-            <ChatPage />
+            <HomePage />
           </Suspense>
         )
       },
-      /**
-       * Route for the assistant home page.
-       */
       {
-        path: 'assistant-home',
-        element: (
-          <Suspense fallback={<SuspenseLoader />}>
-            <AssistantHomePage />
-          </Suspense>
-        )
+        path: 'login',
+        element: <LoginPage />
+      }
+    ]
+  },
+  {
+    path: 'email-marketing',
+    element: <EMALayoutPage />,
+    children: [
+      {
+        index: true,
+        element: <EmaDashboardPage /> // Your actual dashboard component
       },
-      /**
-       * Route for the assistant page.
-       */
       {
-        path: '/assistant',
+        index: true,
+        path: 'dashboard',
+        element: <EmaDashboardPage /> // Your actual dashboard component
+      },
+      {
+        path: '*',
+        element: <h1>404</h1>
+      },
+      {
+        path: 'chat',
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <AssistantPage />
@@ -93,6 +97,22 @@ const routes = [
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <CabinetPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'sender-information',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <SenderInformationPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'billing',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <EmaBillingPage />
           </Suspense>
         )
       },
@@ -153,32 +173,12 @@ const routes = [
             )
           }
         ]
-      },
-      {
-        path: 'no-permission',
-        element: <h1>no permission</h1>
-      },
-      {
-        path: '404',
-        element: <h1>404</h1>
       }
     ]
   },
-
-  /**
-   * Route for the login page.
-   */
-  {
-    path: 'login',
-    element: <LoginPage />
-  },
-
-  /**
-   * Route for handling unknown paths.
-   */
   {
     path: '*',
-    element: <Navigate to="/404" />
+    element: <h1>404</h1>
   }
 ];
 

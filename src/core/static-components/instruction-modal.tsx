@@ -40,7 +40,7 @@ function InstructionModal({
       <ModalContent>
         {onClose => (
           <>
-            <ModalHeader className="flex flex-col gap-1">
+            <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
               {t('instructionText')}
             </ModalHeader>
             <ModalBody>
@@ -54,7 +54,12 @@ function InstructionModal({
               />
             </ModalBody>
             <ModalFooter>
-              <Button title="Close" aria-label="Close" onPress={onClose}>
+              <Button
+                title="Close"
+                variant="bordered"
+                aria-label="Close"
+                onPress={onClose}
+              >
                 {t('closeBtn')}
               </Button>
             </ModalFooter>

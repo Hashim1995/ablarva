@@ -3,6 +3,7 @@ import { Suspense, useEffect } from 'react';
 import routesList from '@core/routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDisclosure } from '@nextui-org/react';
+import useDarkMode from 'use-dark-mode';
 import { useMediaQuery } from 'usehooks-ts';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
@@ -35,6 +36,7 @@ function App() {
     Otherwise, it dispatches the fetchUserData action to retrieve user data.
   */
   useEffect(() => {
+    // @ts-ignore
     const mode = import.meta.env.VITE_APP_MODE; // 'development' or 'production'
     document.title = mode === 'development' ? '(Dev) AI Zade' : 'AI Zade';
 
@@ -91,8 +93,15 @@ function App() {
       onOpen();
     }
   }, [verified, getme]);
+
+  const darkMode = useDarkMode(false);
+
   return (
-    <main className="gradient-bg overflow-y-hidden">
+    <main
+      className={`${
+        darkMode.value ? 'dark gradient-bg' : 'bg-gray-50'
+      } text-default-800  dark:text-white `}
+    >
       <Suspense fallback={<SuspenseLoader />}>
         {router}
         {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
