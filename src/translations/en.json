@@ -386,6 +386,17 @@
     "editSenderInformation": "Edit sender information",
     "deleteSenderInformation": "Delete sender information",
     "addSenderInformation": "Add sender information",
-    "emailResponseRate": "Email response rate"
+    "emailResponseRate": "Email response rate",
+    "leads": "Leads",
+    "country": "Country",
+    "annualRevenue": "Annual revenue",
+    "companySize": "Company size",
+    "industries": "Industries",
+    "search": "Search",
+    "exportData": "Export data",
+    "deleteLeads": "Delete leads",
+    "sendQuickEmail": "Send quick email",
+    "createGroup": "Create a Group",
+    "addItToExistGroups": "Add it to exist groups"
   }
 }

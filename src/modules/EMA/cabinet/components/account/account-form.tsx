@@ -28,7 +28,7 @@ import { IAccountForm } from '../../types';
 
 interface IAccountFormProps {
   fieldsIsDisable: boolean;
-  setIsLoading: setState;
+  setIsLoading: setState<Boolean>;
 }
 
 function AccountForm({ setIsLoading, fieldsIsDisable }: IAccountFormProps) {

@@ -6,6 +6,7 @@ import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
 import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
 import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
 import SenderInformationPage from '@/modules/EMA/sender-information/pages/sender-information-page';
+import LeadsPage from '@/modules/EMA/leads/pages/leads-page';
 
 /**
  * Lazy loads the application routes.
@@ -89,6 +90,15 @@ const routes = [
           </Suspense>
         )
       },
+      {
+        path: 'leads',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <LeadsPage />
+          </Suspense>
+        )
+      },
+
       /**
        * Route for the cabinet page.
        */

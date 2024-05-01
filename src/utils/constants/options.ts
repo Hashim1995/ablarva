@@ -181,6 +181,21 @@ const markdownOptions: MarkdownToJSX.Options = {
   }
 };
 
+const industriesOptions: selectOption[] = [
+  {
+    value: '1',
+    label: 'Tech'
+  },
+  {
+    value: '2',
+    label: 'Marketing'
+  },
+  {
+    value: '3',
+    label: 'Machine learning'
+  }
+]
+
 /**
  * Creates an array of objects representing days of the month.
  * Each object contains a value and label representing the day.
@@ -228,4 +243,4 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-export { genderOptions, daysList, yearsList, monthsList, markdownOptions };
+export { genderOptions, daysList, yearsList, monthsList, markdownOptions, industriesOptions };
