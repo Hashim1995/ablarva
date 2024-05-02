@@ -29,7 +29,7 @@ function LeadsFilter() {
     <div className="flex flex-col gap-2 w-full h-full">
       <div className="flex justify-between">
         <h3 className="font-semibold text-default-800 text-xl dark:text-white">
-          {t('leads')} 🪪
+          {t('leadsFilter')} 🪪
         </h3>
       </div>
       <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">

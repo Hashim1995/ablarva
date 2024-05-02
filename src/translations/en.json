@@ -397,6 +397,8 @@
     "deleteLeads": "Delete leads",
     "sendQuickEmail": "Send quick email",
     "createGroup": "Create a Group",
-    "addItToExistGroups": "Add it to exist groups"
+    "addItToExistGroups": "Add it to exist groups",
+    "leadsFilter": "Leads filter",
+    "leadsTable": "Leads Table"
   }
 }

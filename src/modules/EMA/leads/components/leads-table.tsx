@@ -3,6 +3,7 @@ import { setState } from '@/models/common';
 import {
   Button,
   ButtonGroup,
+  Checkbox,
   Pagination,
   Spinner,
   Table,
@@ -11,7 +12,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-  Tooltip
+  Tooltip,
+  useDisclosure
 } from '@nextui-org/react';
 // import dayjs from 'dayjs';
 import {
@@ -26,6 +28,7 @@ import {
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
 import { ILeadItem } from '../types';
+import LeadViewModal from './lead-view-modal';
 
 interface IProps {
   data: ILeadItem[];
@@ -34,31 +37,80 @@ interface IProps {
   totalCount: number;
 }
 function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
-  const [selectedRows, setSelectedRows] = useState<string[]>([]);
+  const [selectionState, setSelectionState] = useState({
+    allSelected: false,
+    selectedRows: []
+  });
 
+  const {
+    isOpen: viewIsOpen,
+    onOpen: viewOnOpen,
+    onOpenChange: viewOnOpenChange
+  } = useDisclosure();
+
+  const toggleRowSelection = (id: string) => {
+    setSelectionState(prevSelection => {
+      const newSelectedRows = prevSelection.selectedRows.includes(id)
+        ? prevSelection.selectedRows.filter(rowId => rowId !== id)
+        : [...prevSelection.selectedRows, id];
+
+      const allSelected = newSelectedRows.length === data.length;
+
+      return { ...prevSelection, allSelected, selectedRows: newSelectedRows };
+    });
+  };
+
+  const toggleAllRowsSelection = () => {
+    setSelectionState(prevSelection => {
+      const allSelected = !prevSelection.allSelected;
+      const selectedRows = allSelected ? data.map(item => item.id) : [];
+
+      return { ...prevSelection, allSelected, selectedRows };
+    });
+  };
   useEffect(() => {
-    console.log(selectedRows);
-  }, [selectedRows]);
+    console.log(selectionState);
+  }, [selectionState]);
+
+  const renderRows = () =>
+    data?.map(item => (
+      <TableRow
+        className="cursor-pointer"
+        onClick={() => {
+          viewOnOpen();
+        }}
+        key={item?.id}
+      >
+        <TableCell>
+          <Checkbox
+            className={`${selectionState.selectedRows.includes(item.id)}`}
+            isSelected={
+              selectionState.selectedRows.includes(item.id) ||
+              selectionState?.allSelected
+            }
+            onChange={() => toggleRowSelection(item.id)}
+          />
+        </TableCell>
+        <TableCell>{item?.name}</TableCell>
+        <TableCell>{item?.company}</TableCell>
+        <TableCell>{item?.email}</TableCell>
+        <TableCell>{item?.engaged}</TableCell>
+        <TableCell>{item?.position}</TableCell>
+        <TableCell>{item?.lastContact}</TableCell>
+      </TableRow>
+    ));
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">
       <div className="relative flex justify-between">
         <h3 className="font-semibold text-default-800 text-xl dark:text-white">
-          {t('leads')} 🪪
+          {t('leadsTable')} 😎
         </h3>
       </div>
       <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
         <Table
           color="default"
           removeWrapper
-          onSelectionChange={keys => {
-            if (keys === 'all') {
-              setSelectedRows(Array.from(data?.map(z => z?.id)));
-            } else {
-              setSelectedRows(Array.from(keys).map(key => String(key)));
-            }
-          }}
-          selectionMode="multiple"
           className="text-default-900 dark:text-white"
           classNames={{
             thead: '!bg-transparent',
@@ -81,6 +133,12 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
           }
         >
           <TableHeader>
+            <TableColumn>
+              <Checkbox
+                isSelected={selectionState.allSelected}
+                onChange={toggleAllRowsSelection}
+              />
+            </TableColumn>
             <TableColumn>{t('name').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('company').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('email').toLocaleUpperCase()}</TableColumn>
@@ -88,39 +146,12 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
             <TableColumn>{t('position').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('lastContact').toLocaleUpperCase()}</TableColumn>
           </TableHeader>
-          <TableBody
-            items={data}
-            isLoading={false}
-            loadingContent={<Spinner />}
-          >
-            {item => (
-              <TableRow key={item?.id}>
-                <TableCell>{item?.name}</TableCell>
-                <TableCell>{item?.company}</TableCell>
-                <TableCell>{item?.email}</TableCell>
-                <TableCell>{item?.engaged}</TableCell>
-                <TableCell>{item?.position}</TableCell>
-                <TableCell>{item?.lastContact}</TableCell>
-                {/* <TableCell>
-                  {' '}
-                  {dayjs.utc(item?.transactionDate).format('DD.MM.YYYY')}
-                </TableCell> */}
-                {/* <TableCell>
-                  {' '}
-                  <Chip
-                    className="text-default-900 dark:text-white"
-                    color="success"
-                    aria-label={`Status: ${item?.status}`}
-                  >
-                    {t('active')}
-                  </Chip>
-                </TableCell> */}
-              </TableRow>
-            )}
+          <TableBody isLoading={false} loadingContent={<Spinner />}>
+            {renderRows()}
           </TableBody>
         </Table>
         <div className="flex justify-center my-2">
-          {selectedRows?.length > 0 ? (
+          {selectionState?.selectedRows?.length > 0 ? (
             <ButtonGroup className="bottom-3 z-50 fixed">
               <Button className="border-divider border-r-1">
                 {t('exportData')}
@@ -170,6 +201,9 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
           ) : null}
         </div>
       </div>
+      {viewIsOpen && (
+        <LeadViewModal onOpenChange={viewOnOpenChange} isOpen={viewIsOpen} />
+      )}
     </div>
   );
 }

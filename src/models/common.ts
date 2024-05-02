@@ -80,7 +80,6 @@ export enum LayoutLanguage {
  */
 type setState<T> = Dispatch<SetStateAction<T>>;
 
-
 export type {
   IGlobalResponseEmpty,
   selectOption,

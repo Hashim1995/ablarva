@@ -194,7 +194,7 @@ const industriesOptions: selectOption[] = [
     value: '3',
     label: 'Machine learning'
   }
-]
+];
 
 /**
  * Creates an array of objects representing days of the month.
@@ -243,4 +243,11 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-export { genderOptions, daysList, yearsList, monthsList, markdownOptions, industriesOptions };
+export {
+  genderOptions,
+  daysList,
+  yearsList,
+  monthsList,
+  markdownOptions,
+  industriesOptions
+};
