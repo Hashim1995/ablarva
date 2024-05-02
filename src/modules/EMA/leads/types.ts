@@ -19,8 +19,8 @@ interface ILeadItem {
 
 interface ILeadsListForm {
   country: string;
-  annualRevenue: number;
-  companySize: number;
+  annualRevenue: string;
+  companySize: any;
   industries: any;
 }
 

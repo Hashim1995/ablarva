@@ -116,6 +116,9 @@ function LeadViewModal({ isOpen, onOpenChange }: ILeadViewModal) {
                       </Chip>
                     </div>
                   </div>
+                  <div className="flex items-center border-divider pb-1 h-16 text-sm">
+                    <p className="mb-0">Azerbaijan</p>
+                  </div>
                 </div>
               </ModalBody>
               <ModalFooter>

@@ -1,6 +1,9 @@
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { industriesOptions } from '@/utils/constants/options';
+import {
+  industriesOptions,
+  companySizeOptions
+} from '@/utils/constants/options';
 import {
   inputPlaceholderText,
   selectPlaceholderText
@@ -16,9 +19,15 @@ function LeadsFilter() {
   const {
     handleSubmit,
     formState: { errors },
-    control
+    control,
+    reset
   } = useForm<ILeadsListForm>({
-    mode: 'onSubmit'
+    mode: 'onSubmit',
+    defaultValues: {
+      country: '',
+      annualRevenue: '',
+      companySize: ''
+    }
     // defaultValues: async () => getSmtpConfig()
   });
 
@@ -100,31 +109,24 @@ function LeadsFilter() {
               </div>
               <div className="flex flex-col gap-5 w-1/2">
                 <div className="w-full">
-                  <AppHandledInput
+                  <AppHandledSelect
                     name="companySize"
-                    inputProps={{
+                    selectProps={{
                       id: 'companySize'
                     }}
-                    type="email"
-                    className="text-default-900 dark:text-white"
-                    control={control}
                     isInvalid={Boolean(errors.companySize?.message)}
-                    errors={errors}
-                    size="sm"
+                    control={control}
+                    label={selectPlaceholderText(t('companySize'))}
+                    // className="app-select text-base sm:text-xl"
+                    required
                     rules={{
                       required: {
                         value: true,
                         message: inputValidationText(t('companySize'))
-                      },
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: `${t('companySize')} ${t(
-                          'regexFormatValidatorText'
-                        )}`
                       }
                     }}
-                    label={inputPlaceholderText(t('companySize'))}
-                    required
+                    options={companySizeOptions}
+                    errors={errors}
                   />
                 </div>
                 <div className="w-full">
@@ -154,7 +156,7 @@ function LeadsFilter() {
               <Button type="submit" isLoading={false}>
                 {t('search')}
               </Button>
-              <Button type="button" isLoading={false}>
+              <Button type="button" onClick={() => reset()}>
                 <MdRefresh size={20} />
               </Button>
             </div>

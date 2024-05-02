@@ -196,6 +196,29 @@ const industriesOptions: selectOption[] = [
   }
 ];
 
+const companySizeOptions: selectOption[] = [
+  {
+    value: 1,
+    label: '1-10'
+  },
+  {
+    value: 2,
+    label: '20-50'
+  },
+  {
+    value: 3,
+    label: '50-150'
+  },
+  {
+    value: 4,
+    label: '1500-500'
+  },
+  {
+    value: 5,
+    label: '500-1000'
+  }
+]
+
 /**
  * Creates an array of objects representing days of the month.
  * Each object contains a value and label representing the day.
@@ -249,5 +272,5 @@ export {
   yearsList,
   monthsList,
   markdownOptions,
-  industriesOptions
+  industriesOptions, companySizeOptions
 };
