@@ -1,6 +1,7 @@
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { ILimitItem, IPackageItem } from '@/models/payment';
 
-import { Button, Card, CardBody, CardHeader } from '@nextui-org/react';
+import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import useDarkMode from 'use-dark-mode';
@@ -68,9 +69,8 @@ function EmaBillingPackage({
         </ul>
       </CardBody>
 
-      <Button
+      <AppHandledSolidButton
         title="Join Now"
-        variant="bordered"
         aria-label="Join Now"
         onClick={() => {
           // If the user is not verified, open the email modal. Otherwise, open the buy modal.
@@ -84,7 +84,7 @@ function EmaBillingPackage({
         className="mt-4 py-2 rounded-lg w-full"
       >
         {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
-      </Button>
+      </AppHandledSolidButton>
     </Card>
   );
 }

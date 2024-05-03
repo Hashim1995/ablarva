@@ -9,13 +9,14 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   Divider
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
 import { toast } from 'react-toastify';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -219,15 +220,14 @@ function SenderInformationEditModal({
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
-                  variant="bordered"
                 >
                   {t('closeBtn')}
-                </Button>
-                <Button
+                </AppHandledBorderedButton>
+                <AppHandledSolidButton
                   form="sender-information-edit-form"
                   title="Edit Email"
                   aria-label="Edit Email"
@@ -235,7 +235,7 @@ function SenderInformationEditModal({
                   type="submit"
                 >
                   {t('editBtn')}
-                </Button>
+                </AppHandledSolidButton>
               </ModalFooter>
             </>
           )}

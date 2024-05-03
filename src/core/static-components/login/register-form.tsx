@@ -7,7 +7,6 @@ import {
   IRegisterResponse
 } from '@/services/auth-services/auth-services';
 import { inputValidationText } from '@/utils/constants/validations';
-import { Button } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
@@ -28,6 +27,7 @@ import { toast } from 'react-toastify';
 import { toastOptions } from '@/configs/global-configs';
 import { useTranslation } from 'react-i18next';
 import useDarkMode from 'use-dark-mode';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 
 interface IRegisterFormProps {
   handleFlip: () => void;
@@ -422,17 +422,15 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
               </div>
             </div>
 
-            <Button
-              size="sm"
+            <AppHandledSolidButton
               isLoading={isSubmitting}
-              variant="bordered"
               aria-label="Register Form Submit Button"
               title="Register Form Submit Button"
               className="w-full"
               type="submit"
             >
               {t('register')}
-            </Button>
+            </AppHandledSolidButton>
             <div className="flex flex-col !my-[8px]">
               <div className="flex items-center mb-1">
                 <div className="flex-1 border-gray-500 border-t-1" />
@@ -449,7 +447,7 @@ function RegisterForm({ handleFlip }: IRegisterFormProps): JSX.Element {
             <div className="flex flex-col !m-0">
               <span className="flex justify-center items-center">
                 <span
-                  className="text-blue-500 text-sm cursor-pointer"
+                  className="text-blue-300 text-sm cursor-pointer"
                   aria-hidden
                   onClick={handleFlip}
                 >

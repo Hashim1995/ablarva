@@ -1,6 +1,6 @@
 /* eslint-disable no-nested-ternary */
 /* eslint-disable react/button-has-type */
-import { Button, useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@nextui-org/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -12,6 +12,7 @@ import {
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
 import PricingModal from '@/modules/EMA/billing/ema-buy-modal';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
 
@@ -63,7 +64,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
         </p>
       </div>
       <div className="flex justify-center space-x-3 mt-2 mb-3">
-        <Button
+        <AppHandledSolidButton
           aria-label="hire and navigate to assistant page"
           title="hire and navigate to assistant page"
           onClick={() => {
@@ -99,7 +100,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
               ? t('start')
               : t('hireMe')
             : t('comingSoon')}
-        </Button>
+        </AppHandledSolidButton>
       </div>
       {isOpenVerifyModal && (
         <VerifyEmail

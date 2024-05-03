@@ -5,6 +5,7 @@ import {
   DropdownTrigger,
   Skeleton,
   Switch,
+  useDisclosure,
   User
 } from '@nextui-org/react';
 import {
@@ -12,7 +13,8 @@ import {
   BsBarChart,
   BsChatDots,
   BsGear,
-  BsMailbox
+  BsMailbox,
+  BsQuestionCircle
 } from 'react-icons/bs';
 import {
   MdOutlineDashboard,
@@ -34,6 +36,7 @@ import { TbReportAnalytics } from 'react-icons/tb';
 import useDarkMode from 'use-dark-mode';
 import { useTranslation } from 'react-i18next';
 import { MoonIcon } from '@/assets/icons/moon-icon';
+import FeedbackModal from '@/core/static-components/feedback-modal';
 import { SunIcon } from '@/assets/icons/sun-icon';
 import { Sidebar } from './sidebar.styles';
 import { SidebarItem } from './sidebar-item';
@@ -41,6 +44,12 @@ import { SidebarMenu } from './sidebar-menu';
 
 export function SidebarWrapper() {
   const navigate = useNavigate();
+
+  const {
+    isOpen: feedBackModalIsOpen,
+    onOpen: feedBackModalOnOpen,
+    onOpenChange: feedBackModaOnOpenChange
+  } = useDisclosure();
   const location = useLocation();
   const { user } = useSelector((state: RootState) => state.user);
   const { t } = useTranslation();
@@ -188,7 +197,6 @@ export function SidebarWrapper() {
                       {t('cabinet')}
                     </p>
                   </DropdownItem>
-
                   <DropdownItem
                     className=""
                     onClick={() => {
@@ -228,19 +236,36 @@ export function SidebarWrapper() {
                     </p>
                   </DropdownItem>
                   <DropdownItem className="" key="theme">
-                    <Switch
-                      defaultSelected={darkMode.value}
-                      onValueChange={darkMode.toggle}
-                      size="sm"
-                      startContent={<MoonIcon />}
-                      endContent={<SunIcon />}
-                    />
+                    <div className="flex justify-between">
+                      <Switch
+                        defaultSelected={darkMode.value}
+                        onValueChange={darkMode.toggle}
+                        size="sm"
+                        startContent={<MoonIcon />}
+                        endContent={<SunIcon />}
+                      />
+                      <p
+                        aria-hidden
+                        onClick={() => {
+                          feedBackModalOnOpen();
+                        }}
+                        className="flex items-center gap-2 m-0"
+                      >
+                        <BsQuestionCircle className="text-default-900 dark:text-white" />{' '}
+                      </p>
+                    </div>
                   </DropdownItem>
                 </DropdownMenu>
               </Dropdown>
             </div>
           </div>
         </div>
+        {feedBackModalIsOpen && (
+          <FeedbackModal
+            onOpenChange={feedBackModaOnOpenChange}
+            isOpen={feedBackModalIsOpen}
+          />
+        )}
       </div>
     </aside>
   );

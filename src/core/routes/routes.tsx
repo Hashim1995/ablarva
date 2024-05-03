@@ -1,7 +1,6 @@
 import React, { Suspense } from 'react';
 // import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
-import EmailReportsPage from '@/modules/EMA/reports/pages/email-reports-page';
 import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
 import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
 import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
@@ -24,18 +23,8 @@ import LeadsPage from '@/modules/EMA/leads/pages/leads-page';
  *
  */
 
-const SettingsPage = React.lazy(() => import('@/modules/EMA/settings/pages'));
-const SmptpPage = React.lazy(
-  () => import('@/modules/EMA/settings/pages/smtp-page')
-);
-const ReportsPage = React.lazy(() => import('@/modules/EMA/reports/pages'));
-const HistoryPage = React.lazy(
-  () => import('@/modules/EMA/reports/pages/history-page')
-);
 const CabinetPage = React.lazy(() => import('@/modules/EMA/cabinet/pages'));
-const EmailPage = React.lazy(
-  () => import('@/modules/EMA/settings/pages/email-page')
-);
+
 const SuspenseLoader = React.lazy(
   () => import('@core/static-components/suspense-loader')
 );
@@ -125,64 +114,6 @@ const routes = [
             <EmaBillingPage />
           </Suspense>
         )
-      },
-      /**
-       * Route for the settings page.
-       */
-      {
-        path: 'settings/*',
-        element: (
-          <Suspense fallback={<SuspenseLoader />}>
-            <SettingsPage />
-          </Suspense>
-        ),
-        children: [
-          {
-            index: true,
-            element: (
-              <Suspense fallback={<SuspenseLoader />}>
-                <SmptpPage />
-              </Suspense>
-            )
-          },
-          {
-            path: 'email',
-            element: (
-              <Suspense fallback={<SuspenseLoader />}>
-                <EmailPage />
-              </Suspense>
-            )
-          }
-        ]
-      },
-      /**
-       * Route for the reports page.
-       */
-      {
-        path: 'reports/*',
-        element: (
-          <Suspense fallback={<SuspenseLoader />}>
-            <ReportsPage />
-          </Suspense>
-        ),
-        children: [
-          {
-            index: true,
-            element: (
-              <Suspense fallback={<SuspenseLoader />}>
-                <HistoryPage />
-              </Suspense>
-            )
-          },
-          {
-            path: 'email-reports',
-            element: (
-              <Suspense fallback={<SuspenseLoader />}>
-                <EmailReportsPage />
-              </Suspense>
-            )
-          }
-        ]
       }
     ]
   },

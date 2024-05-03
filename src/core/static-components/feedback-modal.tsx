@@ -11,16 +11,16 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ButtonGroup,
   ModalFooter,
   Textarea,
   // Tooltip,
-  Button,
   useDisclosure
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { useTranslation } from 'react-i18next';
 import InstructionModal from './instruction-modal';
 
@@ -115,6 +115,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
               </ModalHeader>
               <ModalBody>
                 <form
+                  id="feedback-form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
@@ -172,38 +173,34 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                       maxRows={5}
                     />
                   </div>
-
-                  <ButtonGroup>
-                    <Button
-                      className="w-full"
-                      size="md"
-                      aria-label="Send Feedback Button"
-                      title="Send Feedback Button"
-                      isLoading={isSubmitting}
-                      variant="bordered"
-                      type="submit"
-                    >
-                      {t('send')}
-                    </Button>
-                  </ButtonGroup>
                 </form>
               </ModalBody>
-              <ModalFooter>
-                <Button
+              <ModalFooter className="flex justify-between">
+                <AppHandledSolidButton
                   aria-label="Instruction Button"
                   title="Instruction Button"
                   onClick={instructionOnOpen}
                 >
                   {t('instructionBTN')}
-                </Button>
-                <Button
-                  title="Close Button"
-                  aria-label="Close Button"
-                  onPress={onClose}
-                  variant="bordered"
-                >
-                  {t('closeBtn')}
-                </Button>
+                </AppHandledSolidButton>
+                <div className="flex gap-2">
+                  <AppHandledBorderedButton
+                    title="Close Button"
+                    aria-label="Close Button"
+                    onPress={onClose}
+                  >
+                    {t('closeBtn')}
+                  </AppHandledBorderedButton>
+                  <AppHandledSolidButton
+                    form="feedback-form"
+                    aria-label="Send Feedback Button"
+                    title="Send Feedback Button"
+                    isLoading={isSubmitting}
+                    type="submit"
+                  >
+                    {t('send')}
+                  </AppHandledSolidButton>
+                </div>
               </ModalFooter>
             </>
           )}

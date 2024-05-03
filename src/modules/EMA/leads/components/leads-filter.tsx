@@ -1,3 +1,5 @@
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import {
@@ -8,8 +10,6 @@ import {
   inputPlaceholderText,
   selectPlaceholderText
 } from '@/utils/constants/texts';
-import { inputValidationText } from '@/utils/constants/validations';
-import { Button } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import { MdRefresh } from 'react-icons/md';
@@ -59,23 +59,8 @@ function LeadsFilter() {
                     type="email"
                     className="text-default-900 dark:text-white"
                     control={control}
-                    isInvalid={Boolean(errors.country?.message)}
-                    errors={errors}
                     size="sm"
-                    rules={{
-                      required: {
-                        value: true,
-                        message: inputValidationText(t('country'))
-                      },
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: `${t('country')} ${t(
-                          'regexFormatValidatorText'
-                        )}`
-                      }
-                    }}
                     label={inputPlaceholderText(t('country'))}
-                    required
                   />
                 </div>
                 <div className="w-full">
@@ -87,23 +72,8 @@ function LeadsFilter() {
                     type="email"
                     className="text-default-900 dark:text-white"
                     control={control}
-                    isInvalid={Boolean(errors.annualRevenue?.message)}
-                    errors={errors}
                     size="sm"
-                    rules={{
-                      required: {
-                        value: true,
-                        message: inputValidationText(t('annualRevenue'))
-                      },
-                      pattern: {
-                        value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
-                        message: `${t('annualRevenue')} ${t(
-                          'regexFormatValidatorText'
-                        )}`
-                      }
-                    }}
                     label={inputPlaceholderText(t('annualRevenue'))}
-                    required
                   />
                 </div>
               </div>
@@ -114,17 +84,10 @@ function LeadsFilter() {
                     selectProps={{
                       id: 'companySize'
                     }}
-                    isInvalid={Boolean(errors.companySize?.message)}
                     control={control}
                     label={selectPlaceholderText(t('companySize'))}
                     // className="app-select text-base sm:text-xl"
-                    required
-                    rules={{
-                      required: {
-                        value: true,
-                        message: inputValidationText(t('companySize'))
-                      }
-                    }}
+
                     options={companySizeOptions}
                     errors={errors}
                   />
@@ -135,17 +98,10 @@ function LeadsFilter() {
                     selectProps={{
                       id: 'industries'
                     }}
-                    isInvalid={Boolean(errors.industries?.message)}
                     control={control}
                     label={selectPlaceholderText(t('industries'))}
                     // className="app-select text-base sm:text-xl"
-                    required
-                    rules={{
-                      required: {
-                        value: true,
-                        message: inputValidationText(t('industries'))
-                      }
-                    }}
+
                     options={industriesOptions}
                     errors={errors}
                   />
@@ -153,12 +109,12 @@ function LeadsFilter() {
               </div>
             </div>
             <div className="right flex flex-col items-end gap-2 w-40">
-              <Button type="submit" isLoading={false}>
+              <AppHandledSolidButton type="submit">
                 {t('search')}
-              </Button>
-              <Button type="button" onClick={() => reset()}>
+              </AppHandledSolidButton>
+              <AppHandledBorderedButton type="button" onClick={() => reset()}>
                 <MdRefresh size={20} />
-              </Button>
+              </AppHandledBorderedButton>
             </div>
           </div>
         </form>

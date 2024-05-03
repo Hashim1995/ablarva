@@ -81,13 +81,13 @@ body::-webkit-scrollbar-thumb,
   transform: rotateY(180deg);
 }
 
-button.opacity-disabled,
-button.isDisabled {
-  opacity: 1 !important;
-  background: transparent;
-  color: gray;
-  cursor: not-allowed !important;
-}
+// button.opacity-disabled,
+// button.isDisabled {
+//   opacity: 1 !important;
+//   background: transparent;
+//   color: gray;
+//   cursor: not-allowed !important;
+// }
 
 input[type='date']::-webkit-calendar-picker-indicator {
   color: rgba(0, 0, 0, 0);

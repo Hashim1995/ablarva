@@ -12,12 +12,13 @@ import { useTranslation } from 'react-i18next';
 // import { dictionary } from '@/utils/constants/dictionary';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
-import { Button, useDisclosure } from '@nextui-org/react';
+import { useDisclosure } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { BsEye, BsEyeSlash } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import useDarkMode from 'use-dark-mode';
 import { useLocalStorage } from 'usehooks-ts';
 import ForgotPassword from './forgot-password';
@@ -160,24 +161,22 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
                     onClick={onOpen}
                     className="font-normal text-sm"
                   >
-                    <span className="text-blue-500 cursor-pointer" aria-hidden>
+                    <span className="text-blue-300 cursor-pointer" aria-hidden>
                       {t('forgetPassword')}
                     </span>
                   </span>
                 </span>
               </div>
             </div>
-            <Button
+            <AppHandledSolidButton
               aria-label="Submit Login Form"
               title="Submit Login Form"
-              size="sm"
               isLoading={isSubmitting}
               className="!mt-3 md:mt-5 w-full"
               type="submit"
-              variant="bordered"
             >
               {t('login')}
-            </Button>
+            </AppHandledSolidButton>
             <div className="flex flex-col !my-[8px]">
               <div className="flex items-center mb-1">
                 <div className="flex-1 border-gray-500 border-t-1" />
@@ -194,7 +193,7 @@ function LoginForm({ handleFlip }: ILoginFormProps): JSX.Element {
             <div className="flex flex-col !m-0">
               <span className="flex justify-center items-center">
                 <span
-                  className="text-blue-500 text-sm cursor-pointer"
+                  className="text-blue-300 text-sm cursor-pointer"
                   aria-hidden
                   onClick={handleFlip}
                 >

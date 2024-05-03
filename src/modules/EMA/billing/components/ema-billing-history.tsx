@@ -1,5 +1,4 @@
 import {
-  Button,
   Chip,
   Spinner,
   Table,
@@ -14,11 +13,15 @@ import { useTranslation } from 'react-i18next';
 import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 import { useAsyncList } from '@react-stately/data';
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { useState } from 'react';
 import { ITransactionsItem } from '../../cabinet/types';
 
 function EmaBillingHistory() {
   const { t } = useTranslation();
+  dayjs.extend(utc);
 
   const [isLoading, setIsLoading] = useState(false);
 
@@ -70,14 +73,14 @@ function EmaBillingHistory() {
             bottomContent={
               list.items.length > 0 && (
                 <div className="flex justify-center my-4">
-                  <Button
+                  <AppHandledBorderedButton
                     title="Load More"
                     aria-label="Load More"
                     onClick={() => list.loadMore()}
-                    disabled={isLoading}
+                    isDisabled={isLoading}
                   >
                     {t('loadMore')}
-                  </Button>
+                  </AppHandledBorderedButton>
                 </div>
               )
             }

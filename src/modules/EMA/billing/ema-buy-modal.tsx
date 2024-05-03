@@ -1,10 +1,10 @@
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import {
   Modal,
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button
+  ModalFooter
 } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import EmaPricing from './ema-pricing';
@@ -45,14 +45,13 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
-                  variant="bordered"
                 >
                   {t('closeBtn')}
-                </Button>
+                </AppHandledBorderedButton>
               </ModalFooter>
             </>
           )}

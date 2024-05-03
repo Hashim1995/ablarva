@@ -6,11 +6,11 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   User,
   Avatar,
   Chip
 } from '@nextui-org/react';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
 interface ILeadViewModal {
   isOpen: boolean;
@@ -122,14 +122,15 @@ function LeadViewModal({ isOpen, onOpenChange }: ILeadViewModal) {
                 </div>
               </ModalBody>
               <ModalFooter>
-                <Button
-                  title="Close Modal"
-                  aria-label="Close Modal"
-                  variant="bordered"
+                <AppHandledBorderedButton
+                  buttonProps={{
+                    title: 'Close Modal',
+                    'aria-label': 'Close Modal'
+                  }}
                   onPress={onClose}
                 >
                   {t('closeBtn')}
-                </Button>
+                </AppHandledBorderedButton>
               </ModalFooter>
             </>
           )}

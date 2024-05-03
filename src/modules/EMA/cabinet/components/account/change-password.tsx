@@ -1,6 +1,8 @@
 /* eslint-disable react/jsx-no-duplicate-props */
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
@@ -13,8 +15,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button
+  ModalFooter
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -87,6 +88,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
               </ModalHeader>
               <ModalBody>
                 <form
+                  id="change-password-form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
@@ -271,28 +273,25 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
                       type={showPasswordConfirm ? 'text' : 'password'}
                     />
                   </div>
-
-                  <Button
-                    size="md"
-                    isLoading={isSubmitting}
-                    variant="bordered"
-                    type="submit"
-                    title="Approve"
-                    aria-label="Approve"
-                  >
-                    {t('approve')}
-                  </Button>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
-                  variant="bordered"
                 >
                   {t('closeBtn')}
-                </Button>
+                </AppHandledBorderedButton>
+                <AppHandledSolidButton
+                  isLoading={isSubmitting}
+                  type="submit"
+                  form="change-password-form"
+                  title="Approve"
+                  aria-label="Approve"
+                >
+                  {t('approve')}
+                </AppHandledSolidButton>
               </ModalFooter>
             </>
           )}

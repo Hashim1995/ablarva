@@ -5,9 +5,9 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter,
-  Button
+  ModalFooter
 } from '@nextui-org/react';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
 interface IInstructionModal {
   isOpen: boolean;
@@ -54,14 +54,13 @@ function InstructionModal({
               />
             </ModalBody>
             <ModalFooter>
-              <Button
-                title="Close"
-                variant="bordered"
-                aria-label="Close"
+              <AppHandledBorderedButton
+                title="Close Button"
+                aria-label="Close Button"
                 onPress={onClose}
               >
                 {t('closeBtn')}
-              </Button>
+              </AppHandledBorderedButton>
             </ModalFooter>
           </>
         )}

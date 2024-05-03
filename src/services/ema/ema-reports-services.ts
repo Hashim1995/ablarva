@@ -2,7 +2,6 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IEmailReportItemResponse } from '@/modules/EMA/reports/entities/email-reports/types';
 import {
   ErrorCallBack,
   HttpUtil,
@@ -20,7 +19,7 @@ export class EmaReportsServices {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaReportsServices | null;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Returns the singleton instance of EmaReportsServices.
@@ -42,7 +41,7 @@ export class EmaReportsServices {
   public async getEmailReports(
     param: IHTTPSParams[],
     onError?: ErrorCallBack
-  ): Promise<IEmailReportItemResponse> {
+  ): Promise<any> {
     const res = await HttpUtil.get(
       'api/client/assistantRecords/emailMarketer',
       param,

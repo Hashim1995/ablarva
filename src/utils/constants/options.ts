@@ -217,7 +217,7 @@ const companySizeOptions: selectOption[] = [
     value: 5,
     label: '500-1000'
   }
-]
+];
 
 /**
  * Creates an array of objects representing days of the month.
@@ -272,5 +272,6 @@ export {
   yearsList,
   monthsList,
   markdownOptions,
-  industriesOptions, companySizeOptions
+  industriesOptions,
+  companySizeOptions
 };

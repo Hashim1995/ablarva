@@ -1,3 +1,4 @@
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import {
   Table,
   TableHeader,
@@ -6,7 +7,6 @@ import {
   Spinner,
   TableRow,
   TableCell,
-  Button,
   Divider,
   useDisclosure,
   Tooltip
@@ -76,9 +76,13 @@ function SenderInformation() {
             <h3 className="text-3xl text-default-800 dark:text-white italic">
               3/3
             </h3>
-            <Button title="Add" onClick={addOnOpen} aria-label="Add">
+            <AppHandledSolidButton
+              title="Add"
+              onClick={addOnOpen}
+              aria-label="Add"
+            >
               {t('addBtn')}
-            </Button>
+            </AppHandledSolidButton>
           </div>
           <div className="bg-transparent py-6 rounded-2xl w-full">
             <Table
