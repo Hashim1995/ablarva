@@ -1,4 +1,7 @@
+
+
 interface IConnectedMailItem {
+  emailProviderType: number,
   id: string;
   email: string;
   senderName: string;

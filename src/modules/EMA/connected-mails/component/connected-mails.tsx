@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+import { useCallback } from 'react';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { selectOption } from '@/models/common';
@@ -10,10 +12,19 @@ import {
   TableBody,
   Spinner,
   TableRow,
-  TableCell
+  TableCell,
+  CircularProgress,
+  Chip,
+  Switch,
+  Tooltip
 } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
+import gmail from '@assets/icons/gmail.svg';
+import amazon from '@assets/icons/amazon.svg';
+import { BsPen, BsTrash3 } from 'react-icons/bs';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import microsoft from '@assets/icons/microsoft.svg';
 import { IConnectedMailItem } from '../types';
 
 const senderOptionListDummy: selectOption[] = [
@@ -35,19 +46,49 @@ const dummyMailItems: IConnectedMailItem[] = Array.from(
   { length: 15 },
   (_, index) => ({
     id: `id-${index + 1}`,
+    emailProviderType: 2,
     email: `user${index + 1}@example.com`,
     senderName: `Sender ${index + 1}`,
-    capacity: Math.floor(Math.random() * 1000),
-    accountHealth: Math.random(), // value between 0 and 1
+    capacity: 12,
+    accountHealth: 30, // value between 0 and 1
     status: Math.random() > 0.5 // randomly true or false
   })
 );
+
+const returnIcon = (emailProviderType: number) => {
+  switch (emailProviderType) {
+    case 1:
+      return <img className="h-5" alt="gmail" src={gmail} />;
+    case 2:
+      return <img className="h-5" alt="gmail" src={microsoft} />;
+    default:
+      return <img className="h-5" alt="gmail" src={amazon} />;
+  }
+};
 
 function ConnectedMails() {
   const {
     control,
     formState: { errors }
   } = useForm();
+
+  const updateSwitchStatus = useCallback(
+    async (id: string, newStatus: boolean) => {
+      // Your API call to update the backend
+      // await yourUpdateApiCall(id, newStatus);
+      console.log(`Switch status updated for ${id}: ${newStatus}`);
+    },
+    []
+  );
+
+  const handleSwitchChange = useCallback(
+    (id: string, event: any) => {
+      const newStatus = event.target.checked;
+      updateSwitchStatus(id, newStatus);
+    },
+    [updateSwitchStatus]
+  );
+
   return (
     <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
       <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
@@ -56,9 +97,15 @@ function ConnectedMails() {
             <h1 className="font-semibold text-[2em] text-default-800 dark:text-white">
               {t('connectedMails')}
             </h1>
-            <AppHandledSolidButton className="ml-4" size="sm">
+            <AppHandledBorderedButton
+              buttonProps={{
+                disableAnimation: true
+              }}
+              className="ml-4 cursor-default"
+              size="sm"
+            >
               3/3
-            </AppHandledSolidButton>
+            </AppHandledBorderedButton>
           </div>
           <Divider className="my-4" />
           <div className="flex justify-between">
@@ -100,26 +147,81 @@ function ConnectedMails() {
                   {t('accountHealth').toLocaleUpperCase()}
                 </TableColumn>
                 <TableColumn>{t('status').toLocaleUpperCase()}</TableColumn>
-                <TableColumn>{t('delete').toLocaleUpperCase()}</TableColumn>
-                <TableColumn>{}</TableColumn>
+                <TableColumn> </TableColumn>
               </TableHeader>
               <TableBody items={dummyMailItems} loadingContent={<Spinner />}>
-                {item => (
+                {(item: IConnectedMailItem) => (
                   <TableRow
                     className="border-divider border-b-1"
                     key={item?.id}
                   >
-                    <TableCell className="flex items-center gap-2">
-                      {item?.email}
+                    <TableCell>
+                      <div className="flex items-center gap-2">
+                        {returnIcon(item?.emailProviderType)} {item?.email}
+                      </div>
                     </TableCell>
+
                     <TableCell>{item?.senderName}</TableCell>
-                    <TableCell>{item?.senderName}</TableCell>
-                    <TableCell className="text-blue-800 dark:text-blue-200 italic">
-                      {item?.capacity}
+
+                    <TableCell>
+                      <Chip color="secondary">{item?.capacity}</Chip>
                     </TableCell>
-                    <TableCell>{item?.accountHealth}</TableCell>
-                    <TableCell>{item?.status}</TableCell>
-                    <TableCell>delete</TableCell>
+                    <TableCell>
+                      <CircularProgress
+                        size="lg"
+                        color={
+                          item?.accountHealth < 30
+                            ? 'danger'
+                            : item?.accountHealth < 70
+                            ? 'warning'
+                            : 'success'
+                        }
+                        value={item?.accountHealth}
+                        showValueLabel
+                        classNames={{
+                          value: ' text-default-800 dark:text-white'
+                        }}
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <Switch
+                        size="sm"
+                        defaultSelected={item?.status}
+                        onChange={event => handleSwitchChange(item.id, event)}
+                        aria-label="Switch mail status"
+                      />
+                    </TableCell>
+                    <TableCell>
+                      <div className="relative flex justify-end items-center gap-2">
+                        <Tooltip
+                          classNames={{
+                            content: 'text-default-800 dark:text-white'
+                          }}
+                          content={t('editBtn')}
+                        >
+                          <span
+                            aria-hidden
+                            // onClick={() => {
+                            //   setselectedItem(item);
+                            //   editOnOpen();
+                            // }}
+                            className="active:opacity-50 text-default-400 text-lg cursor-pointer"
+                          >
+                            <BsPen size={16} />
+                          </span>
+                        </Tooltip>
+                        <Tooltip
+                          classNames={{
+                            content: 'text-default-800 dark:text-white'
+                          }}
+                          content={t('delete')}
+                        >
+                          <span className="active:opacity-50 text-danger text-lg cursor-pointer">
+                            <BsTrash3 color="danger" size={16} />
+                          </span>
+                        </Tooltip>
+                      </div>
+                    </TableCell>
                   </TableRow>
                 )}
               </TableBody>

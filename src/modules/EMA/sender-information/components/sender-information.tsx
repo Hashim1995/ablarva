@@ -1,3 +1,4 @@
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import {
   Table,
@@ -63,19 +64,25 @@ function SenderInformation() {
     <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
       <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
         <div className="flex flex-col gap-2 w-full h-full">
-          <div className="flex flex-col">
+          <div className="flex items-center">
             <h1 className="font-semibold text-[2em] text-default-800 dark:text-white">
               {t('senderInformation')} 👨🏻‍💻
             </h1>
-            <h3 className="text-default-800 text-lg dark:text-white italic">
-              {t('senderInformationDescription')}
-            </h3>
-          </div>
-          <Divider className="my-4" />
-          <div className="flex justify-between">
-            <h3 className="text-3xl text-default-800 dark:text-white italic">
+            <AppHandledBorderedButton
+              buttonProps={{
+                disableAnimation: true
+              }}
+              className="ml-4 cursor-default"
+              size="sm"
+            >
               3/3
-            </h3>
+            </AppHandledBorderedButton>
+          </div>
+          <h3 className="text-default-800 text-lg dark:text-white italic">
+            {t('senderInformationDescription')}
+          </h3>
+          <Divider className="my-4" />
+          <div className="flex justify-end">
             <AppHandledSolidButton
               title="Add"
               onClick={addOnOpen}
