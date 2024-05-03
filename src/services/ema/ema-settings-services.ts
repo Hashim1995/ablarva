@@ -5,8 +5,6 @@
 
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 
-
-
 import {
   ErrorCallBack,
   HttpUtil,
@@ -28,7 +26,7 @@ export class EmaSettingsService {
    */
   private static instance: EmaSettingsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the EmaSettingsService class.
@@ -48,10 +46,7 @@ export class EmaSettingsService {
    * @param onError - Optional callback function to handle errors.
    * @returns A promise that resolves to the updated SMTP response.
    */
-  public async updateSmtp(
-    body: any,
-    onError?: ErrorCallBack
-  ): Promise<any> {
+  public async updateSmtp(body: any, onError?: ErrorCallBack): Promise<any> {
     const res = await HttpUtil.put('api/client/settings/smtp', body, onError);
     return res;
   }
