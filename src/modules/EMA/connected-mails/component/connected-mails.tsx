@@ -15,6 +15,7 @@ import {
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import { IConnectedMailItem } from '../types';
+
 const senderOptionListDummy: selectOption[] = [
   {
     value: 1,
