@@ -1,7 +1,10 @@
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { useTranslation } from 'react-i18next';
 import { toastOptions } from '@/configs/global-configs';
-import { inputPlaceholderText } from '@/utils/constants/texts';
+import {
+  inputPlaceholderText,
+  selectPlaceholderText
+} from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
   Modal,
@@ -17,6 +20,8 @@ import { EmaSenderInformationService } from '@/services/ema/ema-sender-informati
 import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import { jobtitleOptions } from '@/utils/constants/options';
+import AppHandledSelect from '@/components/forms/select/handled-select';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -127,23 +132,23 @@ function SenderInformationAddModal({
                     />
                   </div>{' '}
                   <div className="flex flex-col gap-5">
-                    <AppHandledInput
+                    <AppHandledSelect
                       name="senderJobTitle"
-                      inputProps={{
-                        id: 'senderJobTitle'
-                      }}
-                      type="text"
                       rules={{
                         required: {
                           value: true,
                           message: inputValidationText(t('senderJobTitle'))
                         }
                       }}
-                      control={control}
                       isInvalid={Boolean(errors.senderJobTitle?.message)}
+                      selectProps={{
+                        id: 'senderJobTitle'
+                      }}
+                      control={control}
+                      label={selectPlaceholderText(t('senderJobTitle'))}
+                      // className="app-select text-base sm:text-xl"
+                      options={jobtitleOptions}
                       errors={errors}
-                      size="sm"
-                      label={inputPlaceholderText(t('senderJobTitle'))}
                     />
                   </div>
                   <div className="flex flex-col gap-5">

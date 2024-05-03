@@ -22,7 +22,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 1,
     senderFullName: 'John Doe',
-    senderJobTitle: 'Sales manager',
+    senderJobTitle: 1,
     senderCompany: 'Google',
     senderWebsite: 'https://google.com',
     senderPhone: '+1 123 456 78 90'
@@ -30,7 +30,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 2,
     senderFullName: 'Jack Doe',
-    senderJobTitle: 'COO',
+    senderJobTitle: 2,
     senderCompany: 'Meta',
     senderWebsite: 'https://meta.com',
     senderPhone: '+1 123 456 78 90'
@@ -38,7 +38,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 3,
     senderFullName: 'Jane Doe',
-    senderJobTitle: 'Marketing manager',
+    senderJobTitle: 3,
     senderCompany: 'Amazon',
     senderWebsite: 'https://amazon.com',
     senderPhone: '+1 123 456 78 90'
@@ -121,7 +121,7 @@ function SenderInformation() {
                     <TableCell className="flex items-center gap-2">
                       {item?.senderFullName}
                     </TableCell>
-                    <TableCell>{item?.senderJobTitle}</TableCell>
+                    <TableCell>{item?.senderJobTitle?.label}</TableCell>
                     <TableCell>{item?.senderCompany}</TableCell>
                     <TableCell className="text-blue-800 dark:text-blue-200 italic">
                       <a href={item?.senderWebsite}>{item?.senderWebsite}</a>
