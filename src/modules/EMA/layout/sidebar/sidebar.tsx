@@ -73,8 +73,12 @@ export function SidebarWrapper() {
         <div className={Sidebar.Header()}>
           <img
             src={darkMode.value ? logoWhite : logoBlue}
-            className="h-8"
-            alt=""
+            className="h-8 cursor-pointer"
+            aria-hidden
+            onClick={() => {
+              navigate('/');
+            }}
+            alt="Ablarva logo"
           />
         </div>
 

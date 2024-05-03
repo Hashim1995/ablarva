@@ -4,7 +4,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Divider
 } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 import EmaPricing from './ema-pricing';
@@ -39,6 +40,8 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
               <ModalHeader className="flex flex-col gap-1 text-default-800 dar:text-white">
                 {t('tariffs')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <div className="flex flex-col w-full">
                   <EmaPricing />

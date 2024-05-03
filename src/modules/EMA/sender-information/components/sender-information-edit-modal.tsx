@@ -106,6 +106,8 @@ function SenderInformationEditModal({
               <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('editSenderInformation')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
                   id="sender-information-edit-form"

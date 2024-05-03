@@ -5,7 +5,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Divider
 } from '@nextui-org/react';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
@@ -43,6 +44,8 @@ function InstructionModal({
             <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
               {t('instructionText')}
             </ModalHeader>
+            <Divider className="mb-6" />
+
             <ModalBody>
               <iframe
                 height="400"

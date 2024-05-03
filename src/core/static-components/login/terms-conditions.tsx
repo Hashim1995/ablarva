@@ -7,7 +7,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button
+  Button,
+  Divider
 } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
 
@@ -46,6 +47,8 @@ function TermsConditionsModal({
               <ModalHeader className="flex flex-row items-center gap-1 border-b-1">
                 {t('privacyPolicy')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody className="overflow-y-scroll scrollBar">
                 <div className="justify-center pr-3 h-96">
                   <p className="pb-6 text-md">

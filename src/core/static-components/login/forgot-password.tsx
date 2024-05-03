@@ -14,7 +14,8 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ModalFooter
+  ModalFooter,
+  Divider
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -127,6 +128,8 @@ function ForgotPassword({
               <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('forgetPassword')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
                   id="forget-password-form"

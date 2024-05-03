@@ -21,7 +21,8 @@ import {
 } from '@nextui-org/react';
 
 import { useOnClickOutside } from 'usehooks-ts';
-
+import logoWhite from '@assets/images/logo-text-white.webp';
+import logoBlue from '@assets/images/logo-text-blue.webp';
 import { BsEnvelope, BsQuestionCircle } from 'react-icons/bs';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
@@ -38,7 +39,6 @@ import useDarkMode from 'use-dark-mode';
 import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
-import logo from '../../assets/images/aizadə.png';
 
 // generate a documentation for the Navbar component
 /**
@@ -133,15 +133,17 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent className="z-10 lg:flex gap-4 hidden" justify="start">
           <div
-            onClick={() => navigate('/chat')}
+            onClick={() => navigate('/')}
             className="cursor-pointer"
             aria-hidden
           >
             <NavbarBrand>
-              <img src={logo} className="w-[48px] h-[48px]" alt="" />
-              <span className="ml-2 font-bold text-[1em] theme-gradient">
-                AI-ZADE
-              </span>
+              <img
+                src={darkMode.value ? logoWhite : logoBlue}
+                className="h-8 cursor-pointer"
+                aria-hidden
+                alt="Ablarva logo"
+              />
             </NavbarBrand>
           </div>
         </NavbarContent>

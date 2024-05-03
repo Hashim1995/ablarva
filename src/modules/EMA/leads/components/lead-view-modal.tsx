@@ -8,7 +8,8 @@ import {
   ModalFooter,
   User,
   Avatar,
-  Chip
+  Chip,
+  Divider
 } from '@nextui-org/react';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
@@ -43,6 +44,8 @@ function LeadViewModal({ isOpen, onOpenChange }: ILeadViewModal) {
               <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 Jane Doe
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody className="text-default-800 dark:text-white">
                 <div className="flex flex-col">
                   <div className="flex items-center border-divider pb-1 border-b-1 h-16">

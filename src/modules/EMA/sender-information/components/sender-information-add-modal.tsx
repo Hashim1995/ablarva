@@ -97,6 +97,8 @@ function SenderInformationAddModal({
               <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('addSenderInformation')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
                   id="sender-information-add-form"

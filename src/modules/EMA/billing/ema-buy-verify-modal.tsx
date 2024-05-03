@@ -1,6 +1,7 @@
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import {
+  Divider,
   Modal,
   ModalBody,
   ModalContent,
@@ -49,6 +50,8 @@ function BuyVerifyModal({
               <ModalHeader className="flex flex-row items-center gap-1">
                 {t('verification')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody className="overflow-y-scroll scrollBar">
                 {t('resetPackageConfirmation')}
               </ModalBody>

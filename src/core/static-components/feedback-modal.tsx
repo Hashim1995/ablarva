@@ -14,7 +14,8 @@ import {
   ModalFooter,
   Textarea,
   // Tooltip,
-  useDisclosure
+  useDisclosure,
+  Divider
 } from '@nextui-org/react';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
@@ -113,6 +114,8 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
               <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
                 {t('suggestionsAndComments')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
                   id="feedback-form"
