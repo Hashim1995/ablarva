@@ -399,6 +399,11 @@
     "createGroup": "Create a Group",
     "addItToExistGroups": "Add it to exist groups",
     "leadsFilter": "Leads filter",
-    "leadsTable": "Leads Table"
+    "leadsTable": "Leads Table",
+    "connectedMails": "Connected mails",
+    "connect": "Connect",
+    "senderName": "Sender name",
+    "dailyEmailCapacity": "Daily email capacity",
+    "accountHealth": "Account health"
   }
 }

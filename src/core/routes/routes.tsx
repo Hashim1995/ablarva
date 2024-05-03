@@ -6,6 +6,7 @@ import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
 import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
 import SenderInformationPage from '@/modules/EMA/sender-information/pages/sender-information-page';
 import LeadsPage from '@/modules/EMA/leads/pages/leads-page';
+import ConnectedMailsPage from '@/modules/EMA/connected-mails/pages/connected-mails-page';
 
 /**
  * Lazy loads the application routes.
@@ -84,6 +85,14 @@ const routes = [
         element: (
           <Suspense fallback={<SuspenseLoader />}>
             <LeadsPage />
+          </Suspense>
+        )
+      },
+      {
+        path: 'connected-mails',
+        element: (
+          <Suspense fallback={<SuspenseLoader />}>
+            <ConnectedMailsPage />
           </Suspense>
         )
       },

@@ -358,6 +358,7 @@
     "emailAddress": "Email ünvanı",
     "emailTitle": "Email başlıqı",
     "emailBody": "Email kontenti",
-    "detailedView": "Məlumata ətraflı baxış"
+    "detailedView": "Məlumata ətraflı baxış",
+    "senderInformations": "Sender informations"
   }
 }
