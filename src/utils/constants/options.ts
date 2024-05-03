@@ -295,5 +295,6 @@ export {
   monthsList,
   markdownOptions,
   industriesOptions,
-  companySizeOptions, jobtitleOptions
+  companySizeOptions,
+  jobtitleOptions
 };
