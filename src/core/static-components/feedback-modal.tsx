@@ -111,7 +111,7 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
                 {t('suggestionsAndComments')}
               </ModalHeader>
               <Divider className="mb-6" />

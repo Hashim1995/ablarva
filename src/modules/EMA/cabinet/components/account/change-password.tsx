@@ -84,7 +84,7 @@ function ChangePassword({ isOpen, onOpenChange }: IChangePasswordProps) {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1">
+              <ModalHeader className="flex flex-col gap-1 pr-10">
                 {t('changePassWord')}
               </ModalHeader>
               <Divider className="mb-6" />

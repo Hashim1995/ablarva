@@ -47,7 +47,7 @@ function BuyVerifyModal({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-row items-center gap-1">
+              <ModalHeader className="flex flex-row items-center gap-1 pr-10">
                 {t('verification')}
               </ModalHeader>
               <Divider className="mb-6" />

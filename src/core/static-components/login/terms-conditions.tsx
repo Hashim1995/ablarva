@@ -44,7 +44,7 @@ function TermsConditionsModal({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-row items-center gap-1 border-b-1">
+              <ModalHeader className="flex flex-row items-center gap-1 pr-10 border-b-1">
                 {t('privacyPolicy')}
               </ModalHeader>
               <Divider className="mb-6" />
