@@ -16,7 +16,8 @@ import {
   CircularProgress,
   Chip,
   Switch,
-  Tooltip
+  Tooltip,
+  useDisclosure
 } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
@@ -26,6 +27,7 @@ import { BsPen, BsTrash3 } from 'react-icons/bs';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import microsoft from '@assets/icons/microsoft.svg';
 import { IConnectedMailItem } from '../types';
+import ConnectMailsModal from './connect-mails-modal';
 
 const senderOptionListDummy: selectOption[] = [
   {
@@ -71,6 +73,12 @@ function ConnectedMails() {
     control,
     formState: { errors }
   } = useForm();
+
+  const {
+    isOpen: connectModalIsOpen,
+    onOpen: connectModalOnOpen,
+    onOpenChange: connectModalOnOpenChange
+  } = useDisclosure();
 
   const updateSwitchStatus = useCallback(
     async (id: string, newStatus: boolean) => {
@@ -123,7 +131,11 @@ function ConnectedMails() {
                 errors={errors}
               />
             </form>
-            <AppHandledSolidButton title="Add" aria-label="Add">
+            <AppHandledSolidButton
+              onClick={connectModalOnOpen}
+              title="Add"
+              aria-label="Add"
+            >
               {t('connect')}
             </AppHandledSolidButton>
           </div>
@@ -229,6 +241,13 @@ function ConnectedMails() {
           </div>
         </div>
       </div>
+      {connectModalIsOpen && (
+        <ConnectMailsModal
+          reloadData={() => console.log('a')}
+          onOpenChange={connectModalOnOpenChange}
+          isOpen={connectModalIsOpen}
+        />
+      )}
     </div>
   );
 }

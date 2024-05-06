@@ -404,6 +404,11 @@
     "connect": "Connect",
     "senderName": "Sender name",
     "dailyEmailCapacity": "Daily email capacity",
-    "accountHealth": "Account health"
+    "accountHealth": "Account health",
+    "connectNewMail": "Connect a new email account",
+    "connectNewMailModalText": "Make sure to use email addresses on an outbound-specific domain, noton your main company email account.",
+    "google": "Google",
+    "microsoft": "Microsoft",
+    "aws": "AWS"
   }
 }
