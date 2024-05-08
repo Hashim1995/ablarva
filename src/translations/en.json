@@ -411,6 +411,17 @@
     "microsoft": "Microsoft",
     "aws": "AWS",
     "to": "To",
-    "message": "Message"
+    "message": "Message",
+    "pendingMails": "Pending mails",
+    "pendingMailsFilter": "Pending mails filter",
+    "pendingMailsList": "Pending mails list",
+    "campaign": "Campaign",
+    "language": "Language",
+    "templateType": "Template type",
+    "sender": "Sender",
+    "scheduledDate": "Scheduled Date",
+    "scheduledDateStart": "Scheduled start date",
+    "scheduledDateEnd": "Scheduled end date",
+    "test": "test"
   }
 }
