@@ -15,7 +15,6 @@ import { useForm } from 'react-hook-form';
 import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
 import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
-import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import gmail from '@assets/icons/gmail.svg';
 import amazon from '@assets/icons/amazon.svg';
 import microsoft from '@assets/icons/microsoft.svg';
@@ -93,7 +92,7 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
         onOpenChange={onOpenChange}
       >
         <ModalContent>
-          {onClose => (
+          {() => (
             <>
               <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
                 {t('connectNewMail')}
@@ -138,46 +137,40 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
                   <Divider />
                 </form>
               </ModalBody>
-              <ModalFooter className="flex justify-between">
+              <ModalFooter className="flex justify-between gap-2">
                 <AppHandledBorderedButton
-                  title="Close Modal"
-                  aria-label="Close Modal"
-                  onPress={onClose}
+                  title="Add Email"
+                  aria-label="Add Email"
+                  form="sender-information-add-form"
+                  isLoading={loading}
+                  type="submit"
+                  className="w-72"
                 >
-                  {t('closeBtn')}
+                  <img className="h-5" alt="gmail" src={gmail} />
+                  {t('google')}
                 </AppHandledBorderedButton>
-                <div className="flex gap-2">
-                  <AppHandledSolidButton
-                    title="Add Email"
-                    aria-label="Add Email"
-                    form="sender-information-add-form"
-                    isLoading={loading}
-                    type="submit"
-                  >
-                    <img className="h-5" alt="gmail" src={gmail} />
-                    {t('google')}
-                  </AppHandledSolidButton>
-                  <AppHandledSolidButton
-                    title="Add Email"
-                    aria-label="Add Email"
-                    form="sender-information-add-form"
-                    isLoading={loading}
-                    type="submit"
-                  >
-                    <img className="h-5" alt="gmail" src={microsoft} />
-                    {t('microsoft')}
-                  </AppHandledSolidButton>
-                  <AppHandledSolidButton
-                    title="Add Email"
-                    aria-label="Add Email"
-                    form="sender-information-add-form"
-                    isLoading={loading}
-                    type="submit"
-                  >
-                    <img className="h-5" alt="gmail" src={amazon} />
-                    {t('aws')}
-                  </AppHandledSolidButton>
-                </div>
+                <AppHandledBorderedButton
+                  title="Add Email"
+                  aria-label="Add Email"
+                  form="sender-information-add-form"
+                  isLoading={loading}
+                  type="submit"
+                  className="w-72"
+                >
+                  <img className="h-5" alt="gmail" src={microsoft} />
+                  {t('microsoft')}
+                </AppHandledBorderedButton>
+                <AppHandledBorderedButton
+                  title="Add Email"
+                  aria-label="Add Email"
+                  form="sender-information-add-form"
+                  isLoading={loading}
+                  type="submit"
+                  className="w-72"
+                >
+                  <img className="h-5" alt="gmail" src={amazon} />
+                  {t('aws')}
+                </AppHandledBorderedButton>
               </ModalFooter>
             </>
           )}

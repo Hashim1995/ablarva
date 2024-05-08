@@ -409,6 +409,8 @@
     "connectNewMailModalText": "Make sure to use email addresses on an outbound-specific domain, noton your main company email account.",
     "google": "Google",
     "microsoft": "Microsoft",
-    "aws": "AWS"
+    "aws": "AWS",
+    "to": "To",
+    "message": "Message"
   }
 }

@@ -13,6 +13,7 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
+  Divider,
   useDisclosure
 } from '@nextui-org/react';
 // import dayjs from 'dayjs';
@@ -27,8 +28,12 @@ import {
 
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
+import AppHandledDrawer from '@/components/layout/drawer/app-handled-drawer';
+import { BsToggles } from 'react-icons/bs';
+import { IoCloseOutline } from 'react-icons/io5';
 import { ILeadItem } from '../types';
 import LeadViewModal from './lead-view-modal';
+import QuickMail from './quick-mail';
 
 interface IProps {
   data: ILeadItem[];
@@ -41,6 +46,7 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
     allSelected: false,
     selectedRows: []
   });
+  const [quickMailDrawer, setQuickMailDrawer] = useState(false);
 
   const {
     isOpen: viewIsOpen,
@@ -163,7 +169,10 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
                 }}
                 content={t('sendQuickEmail')}
               >
-                <Button className="border-divider border-r-1">
+                <Button
+                  onClick={() => setQuickMailDrawer(true)}
+                  className="border-divider border-r-1"
+                >
                   <FcFlashOn size={20} />
                 </Button>
               </Tooltip>
@@ -204,6 +213,17 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
       {viewIsOpen && (
         <LeadViewModal onOpenChange={viewOnOpenChange} isOpen={viewIsOpen} />
       )}
+      <AppHandledDrawer
+        open={quickMailDrawer}
+        onClose={() => setQuickMailDrawer(z => !z)}
+        direction="right"
+        size={750}
+        className="bg-content1 h-full"
+      >
+        {quickMailDrawer && (
+          <QuickMail setQuickMailDrawer={setQuickMailDrawer} />
+        )}
+      </AppHandledDrawer>
     </div>
   );
 }

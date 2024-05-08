@@ -490,3 +490,55 @@ input[type='number'] {
   min-height: 100vh; /* Ensure it fills the viewport height */
   overflow-y: auto; /* Enable vertical scrolling when content exceeds the viewport height */
 }
+
+.rsw-editor {
+  width: 100%;
+  height: 400px !important;
+  border-radius: 16px !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+  .rsw-dd,
+  button[title='Clear formatting'],
+  button[title='HTML mode'] {
+    display: none;
+  }
+  .rsw-ce {
+    height: 100%;
+    overflow-y: auto;
+    ol {
+      display: block;
+      list-style-type: decimal;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 40px;
+      unicode-bidi: isolate;
+      li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+        unicode-bidi: isolate;
+      }
+    }
+    ul {
+      display: block;
+      list-style-type: disc;
+      margin-block-start: 1em;
+      margin-block-end: 1em;
+      margin-inline-start: 0px;
+      margin-inline-end: 0px;
+      padding-inline-start: 40px;
+      unicode-bidi: isolate;
+      li {
+        display: list-item;
+        text-align: -webkit-match-parent;
+        unicode-bidi: isolate;
+      }
+    }
+  }
+}
+
+.light-theme-handler-editor {
+  .rsw-editor {
+    border: 1px solid #dbdcdd !important;
+  }
+}
