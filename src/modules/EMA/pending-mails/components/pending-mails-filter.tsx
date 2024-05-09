@@ -1,6 +1,10 @@
+/* eslint-disable no-use-before-define */
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledDatePicker from '@/components/forms/date/app-handled-date-picker';
 import AppHandledSelect from '@/components/forms/select/handled-select';
+// import { parseDate } from '@internationalized/date';
+
 import {
   industriesOptions,
   companySizeOptions
@@ -22,6 +26,7 @@ function PendingMailsFilter() {
       country: '',
       annualRevenue: '',
       companySize: ''
+      // scheduledDateStart: parseDate('2024-04-04')
     }
     // defaultValues: async () => getSmtpConfig()
   });
@@ -106,7 +111,7 @@ function PendingMailsFilter() {
               </div>
               <div className="flex flex-col gap-5 w-1/3">
                 <div className="w-full">
-                  <AppHandledSelect
+                  <AppHandledDatePicker
                     name="scheduledDateStart"
                     selectProps={{
                       id: 'scheduledDateStart'
@@ -115,12 +120,11 @@ function PendingMailsFilter() {
                     label={selectPlaceholderText(t('scheduledDateStart'))}
                     // className="app-select text-base sm:text-xl"
 
-                    options={companySizeOptions}
                     errors={errors}
                   />
                 </div>
                 <div className="w-full">
-                  <AppHandledSelect
+                  <AppHandledDatePicker
                     name="scheduledDateEnd"
                     selectProps={{
                       id: 'scheduledDateEnd'
@@ -129,7 +133,6 @@ function PendingMailsFilter() {
                     label={selectPlaceholderText(t('scheduledDateEnd'))}
                     // className="app-select text-base sm:text-xl"
 
-                    options={industriesOptions}
                     errors={errors}
                   />
                 </div>
