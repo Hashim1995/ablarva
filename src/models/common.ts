@@ -78,7 +78,7 @@ export enum LayoutLanguage {
 /**
  * Represents the state setter function.
  */
-type setState = Dispatch<SetStateAction<boolean>>;
+type setState<T> = Dispatch<SetStateAction<T>>;
 
 export type {
   IGlobalResponseEmpty,

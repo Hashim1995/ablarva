@@ -1,5 +1,7 @@
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import {
-  Button,
+  Divider,
   Modal,
   ModalBody,
   ModalContent,
@@ -45,30 +47,30 @@ function BuyVerifyModal({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-row items-center gap-1">
+              <ModalHeader className="flex flex-row items-center gap-1 pr-10">
                 {t('verification')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody className="overflow-y-scroll scrollBar">
                 {t('resetPackageConfirmation')}
               </ModalBody>
               <ModalFooter>
-                <Button
-                  title="Yes"
-                  aria-label="Yes"
-                  className="text-default-900 dark:text-white"
-                  onPress={onOkFunction}
-                  isLoading={loading}
-                  variant="bordered"
-                >
-                  {t('yesTxt')}
-                </Button>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
                 >
                   {t('noTxt')}
-                </Button>
+                </AppHandledBorderedButton>
+                <AppHandledSolidButton
+                  title="Yes"
+                  aria-label="Yes"
+                  onPress={onOkFunction}
+                  isLoading={loading}
+                >
+                  {t('yesTxt')}
+                </AppHandledSolidButton>
               </ModalFooter>
             </>
           )}

@@ -21,6 +21,8 @@ import {
 } from '@/redux/assistant/assistant-slice';
 import { EmaChatService } from '@/services/ema/ema-chat-services';
 import { useTranslation } from 'react-i18next';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { IAssistantThreadHistoryList } from '../../types';
 
 interface IChatHistoryProps {
@@ -144,7 +146,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                     >
                       <div className="flex items-center gap-2 mb-2">
                         <Image
-                          alt="Woman listing to music"
+                          alt="Adam"
                           className="rounded-full w-10 h-full object-cover"
                           src={
                             `${
@@ -190,24 +192,21 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                               <p>{t('deleteConfirmationPrompt')}</p>
                               <Divider className="my-2" />
                               <div className="flex items-center gap-1 w-full">
-                                <Button
-                                  size="sm"
-                                  className=""
-                                  variant="bordered"
+                                <AppHandledBorderedButton
                                   isLoading={removeLoading}
                                   onClick={() => {
                                     removeThreadFromList(conv.threadId);
                                   }}
                                   aria-label="Remove thread"
+                                  size="sm"
                                   title='Remove thread "Yes"'
                                 >
                                   {t('yesTxt')}
-                                </Button>
-                                <Button
-                                  size="sm"
-                                  className=""
+                                </AppHandledBorderedButton>
+                                <AppHandledSolidButton
                                   aria-label="Remove thread"
                                   title='Remove thread "No"'
+                                  size="sm"
                                   onClick={() =>
                                     setPopoversVisible({
                                       [conv?.threadId]: false
@@ -215,7 +214,7 @@ function ChatHistory({ isResponsive }: IChatHistoryProps): JSX.Element {
                                   }
                                 >
                                   {t('noTxt')}
-                                </Button>
+                                </AppHandledSolidButton>
                               </div>
                             </div>
                           </PopoverContent>

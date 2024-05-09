@@ -15,9 +15,7 @@ import {
   ModalContent,
   ModalHeader,
   ModalBody,
-  ButtonGroup,
   ModalFooter,
-  Button,
   Divider
 } from '@nextui-org/react';
 import { useState } from 'react';
@@ -25,7 +23,8 @@ import { useForm } from 'react-hook-form';
 import { BsQuestionCircleFill } from 'react-icons/bs';
 import { useDispatch } from 'react-redux';
 import { toast } from 'react-toastify';
-import { useMediaQuery } from 'usehooks-ts';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
 interface IVerifyEmail {
   isOpen: boolean;
@@ -64,7 +63,6 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
 
   const [loading, setLoading] = useState<boolean>(false);
   const dispatch = useDispatch<AppDispatch>();
-  const matches = useMediaQuery('(max-width: 468px)');
 
   /**
    * Handles the form submission for verifying email.
@@ -115,11 +113,14 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 pr-10 pr-10 text-default-800 dark:text-white">
                 {t('emailVerify')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
+                  id="email-verify-form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-5"
                 >
@@ -145,30 +146,6 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                     />
                   </div>
 
-                  <ButtonGroup>
-                    <Button
-                      aria-label="Approve"
-                      title="Approve"
-                      size={matches ? 'sm' : 'md'}
-                      isLoading={isSubmitting}
-                      variant="bordered"
-                      type="submit"
-                    >
-                      {t('approve')}
-                    </Button>
-                    <Button
-                      aria-label="Resend"
-                      title="Resend"
-                      size={matches ? 'sm' : 'md'}
-                      onClick={resendVerificationCode}
-                      isLoading={loading}
-                      variant="bordered"
-                      type="button"
-                    >
-                      {t('sendCodeToEmail')}
-                    </Button>
-                  </ButtonGroup>
-                  <Divider />
                   <p className="clear-both text-default-800 text-left text-sm dark:text-white">
                     <BsQuestionCircleFill
                       size={26}
@@ -183,15 +160,35 @@ function VerifyEmail({ isOpen, onOpenChange }: IVerifyEmail): JSX.Element {
                   </p>
                 </form>
               </ModalBody>
-              <ModalFooter>
-                <Button
-                  variant="bordered"
-                  title="Close"
-                  aria-label="Close"
-                  onPress={onClose}
+              <ModalFooter className="flex justify-between">
+                <AppHandledBorderedButton
+                  aria-label="Resend"
+                  title="Resend"
+                  onClick={resendVerificationCode}
+                  isLoading={loading}
+                  type="button"
                 >
-                  {t('closeBtn')}
-                </Button>
+                  {t('sendCodeToEmail')}
+                </AppHandledBorderedButton>
+                <div className="flex gap-2">
+                  <AppHandledBorderedButton
+                    title="Close"
+                    aria-label="Close"
+                    onPress={onClose}
+                  >
+                    {t('closeBtn')}
+                  </AppHandledBorderedButton>
+
+                  <AppHandledSolidButton
+                    aria-label="Approve"
+                    form="email-verify-form"
+                    title="Approve"
+                    isLoading={isSubmitting}
+                    type="submit"
+                  >
+                    {t('approve')}
+                  </AppHandledSolidButton>
+                </div>
               </ModalFooter>
             </>
           )}

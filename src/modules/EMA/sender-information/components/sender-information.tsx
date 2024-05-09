@@ -1,3 +1,5 @@
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import {
   Table,
   TableHeader,
@@ -6,7 +8,6 @@ import {
   Spinner,
   TableRow,
   TableCell,
-  Button,
   Divider,
   useDisclosure,
   Tooltip
@@ -22,7 +23,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 1,
     senderFullName: 'John Doe',
-    senderJobTitle: 'Sales manager',
+    senderJobTitle: 1,
     senderCompany: 'Google',
     senderWebsite: 'https://google.com',
     senderPhone: '+1 123 456 78 90'
@@ -30,7 +31,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 2,
     senderFullName: 'Jack Doe',
-    senderJobTitle: 'COO',
+    senderJobTitle: 2,
     senderCompany: 'Meta',
     senderWebsite: 'https://meta.com',
     senderPhone: '+1 123 456 78 90'
@@ -38,7 +39,7 @@ const dummyData: ISenderInformationItem[] = [
   {
     id: 3,
     senderFullName: 'Jane Doe',
-    senderJobTitle: 'Marketing manager',
+    senderJobTitle: 3,
     senderCompany: 'Amazon',
     senderWebsite: 'https://amazon.com',
     senderPhone: '+1 123 456 78 90'
@@ -63,22 +64,32 @@ function SenderInformation() {
     <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
       <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
         <div className="flex flex-col gap-2 w-full h-full">
-          <div className="flex flex-col">
+          <div className="flex items-center">
             <h1 className="font-semibold text-[2em] text-default-800 dark:text-white">
               {t('senderInformation')} 👨🏻‍💻
             </h1>
-            <h3 className="text-default-800 text-lg dark:text-white italic">
-              {t('senderInformationDescription')}
-            </h3>
-          </div>
-          <Divider className="my-4" />
-          <div className="flex justify-between">
-            <h3 className="text-3xl text-default-800 dark:text-white italic">
+            <AppHandledBorderedButton
+              buttonProps={{
+                disableAnimation: true
+              }}
+              className="ml-4 cursor-default"
+              size="sm"
+            >
               3/3
-            </h3>
-            <Button title="Add" onClick={addOnOpen} aria-label="Add">
+            </AppHandledBorderedButton>
+          </div>
+          <h3 className="text-default-800 text-lg dark:text-white italic">
+            {t('senderInformationDescription')}
+          </h3>
+          <Divider className="my-4" />
+          <div className="flex justify-end">
+            <AppHandledSolidButton
+              title="Add"
+              onClick={addOnOpen}
+              aria-label="Add"
+            >
               {t('addBtn')}
-            </Button>
+            </AppHandledSolidButton>
           </div>
           <div className="bg-transparent py-6 rounded-2xl w-full">
             <Table
@@ -117,7 +128,7 @@ function SenderInformation() {
                     <TableCell className="flex items-center gap-2">
                       {item?.senderFullName}
                     </TableCell>
-                    <TableCell>{item?.senderJobTitle}</TableCell>
+                    <TableCell>{item?.senderJobTitle?.label}</TableCell>
                     <TableCell>{item?.senderCompany}</TableCell>
                     <TableCell className="text-blue-800 dark:text-blue-200 italic">
                       <a href={item?.senderWebsite}>{item?.senderWebsite}</a>

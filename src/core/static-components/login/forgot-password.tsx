@@ -1,5 +1,7 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable react/no-unstable-nested-components */
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { toastOptions } from '@/configs/global-configs';
 import { IGlobalResponseEmpty } from '@/models/common';
@@ -13,7 +15,7 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button
+  Divider
 } from '@nextui-org/react';
 import { useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -123,11 +125,14 @@ function ForgotPassword({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
                 {t('forgetPassword')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
+                  id="forget-password-form"
                   onSubmit={handleSubmit(onSubmit)}
                   className="flex flex-col space-y-3 md:space-y-5"
                 >
@@ -338,27 +343,25 @@ function ForgotPassword({
                       </span>
                     </div>
                   )}
-                  <Button
-                    title="Send Password To Email"
-                    aria-label="Send Password To Email"
-                    size="md"
-                    isLoading={isSubmitting}
-                    variant="bordered"
-                    type="submit"
-                  >
-                    {!hasCode ? t('sendPswrdToEmail') : t('approve')}
-                  </Button>
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
-                  variant="bordered"
                 >
                   {t('closeBtn')}
-                </Button>
+                </AppHandledBorderedButton>
+                <AppHandledSolidButton
+                  form="forget-password-form"
+                  title="Send Password To Email"
+                  aria-label="Send Password To Email"
+                  isLoading={isSubmitting}
+                  type="submit"
+                >
+                  {!hasCode ? t('send') : t('approve')}
+                </AppHandledSolidButton>
               </ModalFooter>
             </>
           )}

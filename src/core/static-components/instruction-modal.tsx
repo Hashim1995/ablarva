@@ -6,8 +6,9 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button
+  Divider
 } from '@nextui-org/react';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 
 interface IInstructionModal {
   isOpen: boolean;
@@ -40,9 +41,11 @@ function InstructionModal({
       <ModalContent>
         {onClose => (
           <>
-            <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+            <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
               {t('instructionText')}
             </ModalHeader>
+            <Divider className="mb-6" />
+
             <ModalBody>
               <iframe
                 height="400"
@@ -54,14 +57,13 @@ function InstructionModal({
               />
             </ModalBody>
             <ModalFooter>
-              <Button
-                title="Close"
-                variant="bordered"
-                aria-label="Close"
+              <AppHandledBorderedButton
+                title="Close Button"
+                aria-label="Close Button"
                 onPress={onClose}
               >
                 {t('closeBtn')}
-              </Button>
+              </AppHandledBorderedButton>
             </ModalFooter>
           </>
         )}

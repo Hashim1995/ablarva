@@ -26,7 +26,7 @@ import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 export class EmaChatService {
   private static instance: EmaChatService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the instance of EmaChatService.

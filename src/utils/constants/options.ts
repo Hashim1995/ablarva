@@ -181,6 +181,66 @@ const markdownOptions: MarkdownToJSX.Options = {
   }
 };
 
+const industriesOptions: selectOption[] = [
+  {
+    value: '1',
+    label: 'Tech'
+  },
+  {
+    value: '2',
+    label: 'Marketing'
+  },
+  {
+    value: '3',
+    label: 'Machine learning'
+  }
+];
+
+const companySizeOptions: selectOption[] = [
+  {
+    value: 1,
+    label: '1-10'
+  },
+  {
+    value: 2,
+    label: '20-50'
+  },
+  {
+    value: 3,
+    label: '50-150'
+  },
+  {
+    value: 4,
+    label: '1500-500'
+  },
+  {
+    value: 5,
+    label: '500-1000'
+  }
+];
+const jobtitleOptions: selectOption[] = [
+  {
+    value: 1,
+    label: 'Developer'
+  },
+  {
+    value: 2,
+    label: 'CEO'
+  },
+  {
+    value: 3,
+    label: 'CTO'
+  },
+  {
+    value: 4,
+    label: 'Marketing manager'
+  },
+  {
+    value: 5,
+    label: 'Human resource'
+  }
+];
+
 /**
  * Creates an array of objects representing days of the month.
  * Each object contains a value and label representing the day.
@@ -228,4 +288,13 @@ const monthsList = getMonthsArray();
 const daysList = createDaysArray();
 const yearsList = createYearsArray();
 
-export { genderOptions, daysList, yearsList, monthsList, markdownOptions };
+export {
+  genderOptions,
+  daysList,
+  yearsList,
+  monthsList,
+  markdownOptions,
+  industriesOptions,
+  companySizeOptions,
+  jobtitleOptions
+};

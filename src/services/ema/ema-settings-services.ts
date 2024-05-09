@@ -6,15 +6,6 @@
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 
 import {
-  ISmtpItem,
-  ISmtpResponse
-} from '@/modules/EMA/settings/entities/smtp/types';
-import {
-  IEmailItemCreate,
-  IEmailItemUpdate,
-  IEmailListResponse
-} from '@/modules/EMA/settings/entities/email/types';
-import {
   ErrorCallBack,
   HttpUtil,
   IHTTPSParams
@@ -55,10 +46,7 @@ export class EmaSettingsService {
    * @param onError - Optional callback function to handle errors.
    * @returns A promise that resolves to the updated SMTP response.
    */
-  public async updateSmtp(
-    body: ISmtpItem,
-    onError?: ErrorCallBack
-  ): Promise<ISmtpResponse> {
+  public async updateSmtp(body: any, onError?: ErrorCallBack): Promise<any> {
     const res = await HttpUtil.put('api/client/settings/smtp', body, onError);
     return res;
   }
@@ -68,7 +56,7 @@ export class EmaSettingsService {
    * @param onError - Optional callback function to handle errors.
    * @returns A promise that resolves to the SMTP response.
    */
-  public async getSmtp(onError?: ErrorCallBack): Promise<ISmtpResponse> {
+  public async getSmtp(onError?: ErrorCallBack): Promise<any> {
     const res = await HttpUtil.get(
       'api/client/settings/smtp',
       null,
@@ -87,7 +75,7 @@ export class EmaSettingsService {
   public async getEmailItems(
     param: IHTTPSParams[],
     onError?: ErrorCallBack
-  ): Promise<IEmailListResponse> {
+  ): Promise<any> {
     const res = await HttpUtil.get(
       'api/client/settings/emailEntities',
       param,
@@ -104,7 +92,7 @@ export class EmaSettingsService {
    * @returns A promise that resolves to the global response.
    */
   public async createEmailItem(
-    body: IEmailItemCreate,
+    body: any,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
     const res = await HttpUtil.post(
@@ -122,7 +110,7 @@ export class EmaSettingsService {
    * @returns A promise that resolves to the global response.
    */
   public async updateEmailItem(
-    body: IEmailItemUpdate,
+    body: any,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
     const res = await HttpUtil.put(

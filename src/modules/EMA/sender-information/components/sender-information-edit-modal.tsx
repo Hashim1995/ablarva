@@ -1,7 +1,10 @@
 import AppHandledInput from '@/components/forms/input/handled-input';
 import { useTranslation } from 'react-i18next';
 import { toastOptions } from '@/configs/global-configs';
-import { inputPlaceholderText } from '@/utils/constants/texts';
+import {
+  inputPlaceholderText,
+  selectPlaceholderText
+} from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
   Modal,
@@ -9,13 +12,16 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Button,
   Divider
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
 import { toast } from 'react-toastify';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledSelect from '@/components/forms/select/handled-select';
+import { jobtitleOptions } from '@/utils/constants/options';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -102,9 +108,11 @@ function SenderInformationEditModal({
         <ModalContent>
           {onClose => (
             <>
-              <ModalHeader className="flex flex-col gap-1 text-default-800 dark:text-white">
+              <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
                 {t('editSenderInformation')}
               </ModalHeader>
+              <Divider className="mb-6" />
+
               <ModalBody>
                 <form
                   id="sender-information-edit-form"
@@ -133,23 +141,23 @@ function SenderInformationEditModal({
                     />
                   </div>{' '}
                   <div className="flex flex-col gap-5">
-                    <AppHandledInput
+                    <AppHandledSelect
                       name="senderJobTitle"
-                      inputProps={{
-                        id: 'senderJobTitle'
-                      }}
-                      type="text"
                       rules={{
                         required: {
                           value: true,
                           message: inputValidationText(t('senderJobTitle'))
                         }
                       }}
-                      control={control}
                       isInvalid={Boolean(errors.senderJobTitle?.message)}
+                      selectProps={{
+                        id: 'senderJobTitle'
+                      }}
+                      control={control}
+                      label={selectPlaceholderText(t('senderJobTitle'))}
+                      // className="app-select text-base sm:text-xl"
+                      options={jobtitleOptions}
                       errors={errors}
-                      size="sm"
-                      label={inputPlaceholderText(t('senderJobTitle'))}
                     />
                   </div>
                   <div className="flex flex-col gap-5">
@@ -219,15 +227,14 @@ function SenderInformationEditModal({
                 </form>
               </ModalBody>
               <ModalFooter>
-                <Button
+                <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
                   onPress={onClose}
-                  variant="bordered"
                 >
                   {t('closeBtn')}
-                </Button>
-                <Button
+                </AppHandledBorderedButton>
+                <AppHandledSolidButton
                   form="sender-information-edit-form"
                   title="Edit Email"
                   aria-label="Edit Email"
@@ -235,7 +242,7 @@ function SenderInformationEditModal({
                   type="submit"
                 >
                   {t('editBtn')}
-                </Button>
+                </AppHandledSolidButton>
               </ModalFooter>
             </>
           )}
