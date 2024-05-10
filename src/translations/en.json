@@ -422,6 +422,8 @@
     "scheduledDate": "Scheduled Date",
     "scheduledDateStart": "Scheduled start date",
     "scheduledDateEnd": "Scheduled end date",
+    "scheduled": "Scheduled",
+    "scheduleAndSendAll": "Schedule and send all",
     "test": "test"
   }
 }

@@ -61,7 +61,9 @@ function AppHandledBorderedButton({
   return (
     <Button
       variant={variant}
-      className={`border-1 dark:text-white ${className}`}
+      className={`border-1 dark:text-white ${className} ${
+        variant === 'solid' ? 'border-secondary' : ''
+      }`}
       color={color}
       type={type}
       {...buttonProps}
