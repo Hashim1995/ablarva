@@ -3,6 +3,47 @@ import React, { useEffect, useMemo, useRef } from 'react';
 import type { CSSProperties } from 'react';
 import './style.scss';
 
+/**
+ * A responsive drawer component with customizable directions, overlay settings, and animations.
+ * The drawer can slide in from any direction and has options to control the background overlay
+ * opacity, size, and z-index. The background scrolling can also be locked while the drawer is open.
+ *
+ * @summary A fully customizable sliding drawer component.
+ * @module AppHandledDrawer
+ * @exports AppHandledDrawer
+ * @example
+ * // Example usage:
+ * <AppHandledDrawer
+ *   open={true}
+ *   direction="left"
+ *   onClose={() => console.log('Drawer closed')}
+ *   size={300}
+ *   duration={400}
+ *   lockBackgroundScroll={true}
+ *   overlayOpacity={0.5}
+ * >
+ *   <p>Drawer Content</p>
+ * </AppHandledDrawer>
+ *
+ * @param {Object} props - The properties object.
+ * @param {boolean} props.open - Determines if the drawer is open or closed.
+ * @param {VoidFunction} [props.onClose] - Function called when the drawer closes.
+ * @param {'left' | 'right' | 'top' | 'bottom'} props.direction - Direction from which the drawer slides in.
+ * @param {boolean} [props.lockBackgroundScroll=false] - If `true`, prevents background scrolling when the drawer is open.
+ * @param {React.ReactNode} [props.children] - Content to be displayed inside the drawer.
+ * @param {number} [props.duration=500] - Transition duration in milliseconds.
+ * @param {number} [props.overlayOpacity=0.4] - Opacity of the background overlay.
+ * @param {string} [props.overlayColor='#000'] - Background color of the overlay.
+ * @param {boolean} [props.enableOverlay=true] - Enables or disables the background overlay.
+ * @param {CSSProperties} [props.style] - Custom styles for the drawer.
+ * @param {number} [props.zIndex=100] - The base z-index value for the drawer.
+ * @param {number | string} [props.size=250] - Width/height of the drawer based on direction.
+ * @param {string} [props.className] - Additional class names for the drawer container.
+ * @param {string} [props.customIdSuffix] - Custom suffix for unique element IDs.
+ * @param {string} [props.overlayClassName] - Additional class names for the background overlay.
+ * @returns {JSX.Element} The drawer component.
+ */
+
 type IDirection = 'left' | 'right' | 'top' | 'bottom';
 
 type Props = {

@@ -4,6 +4,43 @@ import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 import './app-handled-date-picker.scss';
 
+/**
+ * A date picker component with advanced form handling, validation, and translation support.
+ * It integrates the NextUI DatePicker with React Hook Form, allowing fine-grained control over
+ * date selection, validation, and error messages. This component ensures a consistent user experience
+ * across different forms and use cases.
+ *
+ * @summary A highly customizable and translated date picker component with validation and dynamic event handling.
+ * @author Hashim Hashimli
+ * @module AppHandledDatePicker
+ * @exports AppHandledDatePicker
+ * @example
+ * // Example usage:
+ * <AppHandledDatePicker
+ *   name="birthDate"
+ *   control={formControl}
+ *   rules={{ required: true }}
+ *   isInvalid={formErrors.birthDate}
+ *   label="Birth Date"
+ *   size="md"
+ *   onChangeApp={(value) => console.log('Selected Date:', value)}
+ * />
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.name - The name of the input field in the form, which is used by `react-hook-form` for state management and validation.
+ * @param {Object} props.control - The control object from `react-hook-form`, responsible for managing form state and facilitating validation.
+ * @param {Object} [props.rules] - Validation rules from `react-hook-form` to apply to the date picker, ensuring correct and consistent data input.
+ * @param {boolean} [props.isInvalid=false] - Indicates whether the input field is in an invalid state and should visually display an error message.
+ * @param {Function} [props.onChangeApp] - An additional callback function triggered when the selected date changes, useful for external data handling.
+ * @param {boolean} [props.required=false] - If `true`, marks the field as required for form validation, helping enforce mandatory data input.
+ * @param {string} [props.className] - Additional custom styles that can be applied to the date picker, helping align it with broader design systems.
+ * @param {Object} [props.selectProps] - Extra properties passed directly to the date picker component for fine-tuned customization.
+ * @param {'sm' | 'md' | 'lg'} [props.size='md'] - Specifies the size of the date picker input field, affecting its overall appearance and layout.
+ * @param {string} [props.label] - Text label displayed alongside the date picker input field, providing contextual information about the expected input.
+ * @param {boolean} [props.showMonthAndYearPickers=false] - If `true`, enables the month and year selection in the date picker for broader date selection.
+ * @returns {ReactElement} The handled date picker component, fully integrated with `react-hook-form` and NextUI's DatePicker.
+ */
+
 interface IAppHandledDatePicker {
   name: string;
   control: any;
@@ -26,22 +63,6 @@ interface IAppHandledDatePicker {
   showMonthAndYearPickers?: boolean;
 }
 
-/**
- * A custom handled date component.
- *
- * @param {Object} props - The component props.
- * @param {string} props.name - The name of the select input.
- * @param {Object} props.control - The control object from react-hook-form.
- * @param {Object} props.rules - The validation rules for the select input.
- * @param {boolean} props.isInvalid - Indicates if the select input is invalid.
- * @param {Function} props.onChangeApp - The callback function to handle select input change.
- * @param {boolean} [props.required=false] - Indicates if the select input is required.
- * @param {string} [props.className] - The CSS class name for the select input.
- * @param {Object} [props.selectProps] - Additional props to be passed to the Select component.
- * @param {string} props.size - The size of the select input.
- * @param {string} props.label - The label for the select input.
- * @returns {JSX.Element} The rendered handled select component.
- */
 function AppHandledDatePicker({
   name,
   control,
@@ -69,17 +90,10 @@ function AppHandledDatePicker({
           size={size}
           value={value}
           isInvalid={isInvalid}
-          // classNames={{
-          //   base: `!border-1 border-divider rounded-2xl ${
-          //     selectProps?.isDisabled ? 'bg-[#d7d7d7] dark:bg-[#27272A]' : ''
-          //   }`
-          // }}
           onChange={e => {
             onChange(e);
             onChangeApp && onChangeApp(e);
           }}
-          // onSelectionChange={onChange}
-          // selectedKeys={value}
           className={`app-handled-date-picker ${className}`}
           showMonthAndYearPickers={showMonthAndYearPickers}
           errorMessage={isInvalid && t('thisFieldMustEntered')}
