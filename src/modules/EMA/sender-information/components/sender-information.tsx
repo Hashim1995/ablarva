@@ -22,27 +22,27 @@ import SenderInformationEditModal from './sender-information-edit-modal';
 const dummyData: ISenderInformationItem[] = [
   {
     id: 1,
-    senderFullName: 'John Doe',
-    senderJobTitle: 1,
-    senderCompany: 'Google',
-    senderWebsite: 'https://google.com',
-    senderPhone: '+1 123 456 78 90'
+    fullName: 'John Doe',
+    jobTitle: 1,
+    company: 'Google',
+    website: 'https://google.com',
+    phone: '+1 123 456 78 90'
   },
   {
     id: 2,
-    senderFullName: 'Jack Doe',
-    senderJobTitle: 2,
-    senderCompany: 'Meta',
-    senderWebsite: 'https://meta.com',
-    senderPhone: '+1 123 456 78 90'
+    fullName: 'Jack Doe',
+    jobTitle: 2,
+    company: 'Meta',
+    website: 'https://meta.com',
+    phone: '+1 123 456 78 90'
   },
   {
     id: 3,
-    senderFullName: 'Jane Doe',
-    senderJobTitle: 3,
-    senderCompany: 'Amazon',
-    senderWebsite: 'https://amazon.com',
-    senderPhone: '+1 123 456 78 90'
+    fullName: 'Jane Doe',
+    jobTitle: 3,
+    company: 'Amazon',
+    website: 'https://amazon.com',
+    phone: '+1 123 456 78 90'
   }
 ];
 
@@ -126,14 +126,14 @@ function SenderInformation() {
                     key={item?.id}
                   >
                     <TableCell className="flex items-center gap-2">
-                      {item?.senderFullName}
+                      {item?.fullName}
                     </TableCell>
-                    <TableCell>{item?.senderJobTitle?.label}</TableCell>
-                    <TableCell>{item?.senderCompany}</TableCell>
+                    <TableCell>{item?.jobTitle?.label}</TableCell>
+                    <TableCell>{item?.company}</TableCell>
                     <TableCell className="text-blue-800 dark:text-blue-200 italic">
-                      <a href={item?.senderWebsite}>{item?.senderWebsite}</a>
+                      <a href={item?.website}>{item?.website}</a>
                     </TableCell>
-                    <TableCell>{item?.senderPhone}</TableCell>
+                    <TableCell>{item?.phone}</TableCell>
                     <TableCell>
                       <div className="relative flex justify-end items-center gap-2">
                         <Tooltip

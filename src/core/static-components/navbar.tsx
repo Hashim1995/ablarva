@@ -1,8 +1,3 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable react/button-has-type */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable no-nested-ternary */
-/* eslint-disable jsx-a11y/anchor-is-valid */
 import {
   Navbar as NavbarNext,
   NavbarBrand,
@@ -40,14 +35,17 @@ import { useTranslation } from 'react-i18next';
 import VerifyEmail from './verify-email';
 import FeedbackModal from './feedback-modal';
 
-// generate a documentation for the Navbar component
 /**
- * The Navbar component is responsible for rendering the application's navigation bar.
- * It includes a logo, a menu, and a user profile section.
- * The component also provides a language selection option and a feedback modal.
- * Additionally, the component displays buttons for user interaction and navigation.
+ * Navbar component with language switcher, dark/light mode toggle, and user info display.
+ *
+ * This component provides navigation functionalities, including toggling modals,
+ * changing themes, and switching between languages.
+ *
  * @component
- * @returns {JSX.Element} The Navbar component.
+ * @example
+ * // Usage example:
+ * <Navbar />
+ *
  */
 
 export default function Navbar() {
@@ -76,7 +74,7 @@ export default function Navbar() {
   const darkMode = useDarkMode(false, {
     classNameDark: 'dark',
     classNameLight: 'light',
-    global: window // Just pass this as a config option
+    global: window
   });
   useEffect(() => {
     setIsMenuOpen(false);
@@ -102,13 +100,6 @@ export default function Navbar() {
 
   useOnClickOutside(navRef, handleOutSideClick);
 
-  /**
-   * @component Navbar - The Navbar component is responsible for rendering the application's navigation bar.
-   * It includes a logo, a menu, and a user profile section.
-   * The component also provides a language selection option and a feedback modal.
-   * Additionally, the component displays buttons for user interaction and navigation.
-   * @returns {JSX.Element} The Navbar component.
-   */
   return (
     <>
       <NavbarNext
@@ -147,56 +138,7 @@ export default function Navbar() {
             </NavbarBrand>
           </div>
         </NavbarContent>
-        <NavbarContent className="lg:flex gap-4 hidden" justify="center">
-          {/* <ButtonGroup className="!rounded-none">
-            <Button
-              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
-                location.pathname.includes('chat')
-                  ? ' border-b-1 border-white'
-                  : ''
-              }`}
-              onClick={() => {
-                navigate('/chat');
-              }}
-              title="Chat"
-              aria-label="Chat"
-              startContent={<BsFillChatLeftDotsFill size={17} />}
-            >
-              {t('simpleChat')}
-            </Button>
-            <Button
-              className={` w-40 !rounded-none text-default-800 dark:text-white bg-transparent h-12  ${
-                location.pathname.includes('assistant')
-                  ? ' border-b-1 border-white'
-                  : ''
-              }`}
-              onClick={() => {
-                navigate('/assistant-home');
-              }}
-              startContent={<BsYelp size={17} />}
-              aria-label="Assistant"
-              title="Assistant"
-            >
-              {t('assistant')}
-            </Button>
-            <Tooltip
-              className="sm:block hidden"
-              placement="bottom"
-              content={t('itIsBeingPrepared')}
-            >
-              <Button
-                className={`isDisabled text-default-800 dark:text-white w-40 bg-transparent h-12  ${location.pathname.includes(
-                  'catalyst'
-                )}`}
-                startContent={<BsClockFill color="white" size={17} />}
-                aria-label="Catalyst"
-                title="Catalyst"
-              >
-                {t('catalyst')}
-              </Button>
-            </Tooltip>
-          </ButtonGroup> */}
-        </NavbarContent>
+        <NavbarContent className="lg:flex gap-4 hidden" justify="center" />
         <NavbarContent
           style={{
             marginRight: '-23px'

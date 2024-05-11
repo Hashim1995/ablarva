@@ -1,10 +1,10 @@
 interface ISenderInformationItem {
   id: number;
-  senderFullName: string;
-  senderJobTitle: any;
-  senderCompany: string;
-  senderWebsite: string;
-  senderPhone: string;
+  fullName: string;
+  jobTitle: any;
+  company: string;
+  website: string;
+  phone: string;
 }
 
 export type { ISenderInformationItem };

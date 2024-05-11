@@ -54,11 +54,11 @@ function SenderInformationEditModal({
   } = useForm<ISenderInformationItem>({
     mode: 'onChange',
     defaultValues: {
-      senderFullName: selectedItem?.senderFullName,
-      senderJobTitle: selectedItem?.senderJobTitle,
-      senderCompany: selectedItem?.senderCompany,
-      senderWebsite: selectedItem?.senderWebsite,
-      senderPhone: selectedItem?.senderPhone
+      fullName: selectedItem?.fullName,
+      jobTitle: selectedItem?.jobTitle,
+      company: selectedItem?.company,
+      website: selectedItem?.website,
+      phone: selectedItem?.phone
     }
   });
 
@@ -73,11 +73,11 @@ function SenderInformationEditModal({
   const onSubmit = async (data: ISenderInformationItem) => {
     setLoading(true);
     const payload: Omit<ISenderInformationItem, 'id'> = {
-      senderCompany: data?.senderCompany,
-      senderFullName: data?.senderFullName,
-      senderJobTitle: data?.senderJobTitle,
-      senderPhone: data?.senderPhone,
-      senderWebsite: data?.senderWebsite
+      fullName: data?.fullName,
+      jobTitle: data?.jobTitle,
+      company: data?.company,
+      website: data?.website,
+      phone: data?.phone
     };
     try {
       const res =
@@ -122,9 +122,9 @@ function SenderInformationEditModal({
                   {' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderFullName"
+                      name="fullName"
                       inputProps={{
-                        id: 'senderFullName'
+                        id: 'fullName'
                       }}
                       type="text"
                       rules={{
@@ -134,7 +134,7 @@ function SenderInformationEditModal({
                         }
                       }}
                       control={control}
-                      isInvalid={Boolean(errors.senderFullName?.message)}
+                      isInvalid={Boolean(errors.fullName?.message)}
                       errors={errors}
                       size="sm"
                       label={inputPlaceholderText(t('senderFullName'))}
@@ -142,16 +142,16 @@ function SenderInformationEditModal({
                   </div>{' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledSelect
-                      name="senderJobTitle"
+                      name="jobTitle"
                       rules={{
                         required: {
                           value: true,
                           message: inputValidationText(t('senderJobTitle'))
                         }
                       }}
-                      isInvalid={Boolean(errors.senderJobTitle?.message)}
+                      isInvalid={Boolean(errors.jobTitle?.message)}
                       selectProps={{
-                        id: 'senderJobTitle'
+                        id: 'jobTitle'
                       }}
                       control={control}
                       label={selectPlaceholderText(t('senderJobTitle'))}
@@ -162,13 +162,13 @@ function SenderInformationEditModal({
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderCompany"
+                      name="phone"
                       inputProps={{
-                        id: 'senderCompany'
+                        id: 'phone'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderCompany?.message)}
+                      isInvalid={Boolean(errors.phone?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
@@ -183,13 +183,13 @@ function SenderInformationEditModal({
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderWebsite"
+                      name="website"
                       inputProps={{
-                        id: 'senderWebsite'
+                        id: 'website'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderWebsite?.message)}
+                      isInvalid={Boolean(errors.website?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
@@ -204,13 +204,13 @@ function SenderInformationEditModal({
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderPhone"
+                      name="phone"
                       inputProps={{
-                        id: 'senderPhone'
+                        id: 'phone'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderPhone?.message)}
+                      isInvalid={Boolean(errors.phone?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
