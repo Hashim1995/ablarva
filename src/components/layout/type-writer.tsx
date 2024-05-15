@@ -5,24 +5,30 @@ import { markdownOptions } from '@/utils/constants/options';
 import { typewriterSound } from '@/assets/sounds/asset-exporter';
 import { useState, useEffect } from 'react';
 
+/**
+ * A typewriter-style component that reveals the given message character by character while optionally playing a sound effect.
+ * It utilizes the `markdown-to-jsx` library to render the message as Markdown. The typing sound can be toggled via local storage.
+ *
+ * @summary A typewriter-style text component with Markdown support and an optional sound effect.
+ * @module Typewriter
+ * @exports Typewriter
+ * @example
+ * // Example usage:
+ * <Typewriter
+ *   message="Welcome to our platform! **Enjoy your stay.**"
+ *   isTyping={true}
+ * />
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.message - The full text content to be revealed character by character.
+ * @param {boolean} props.isTyping - If `true`, starts the typewriter effect; if `false`, displays the full message immediately.
+ * @returns {JSX.Element} The typewriter-style text component.
+ */
+
 interface ITypewriter {
   message: string;
   isTyping: boolean;
 }
-
-/**
- * `Typewriter` is a React component that renders text with a typewriter effect.
- *
- * @component
- * @param {Object} props The properties object.
- * @param {string} props.message The message to be displayed with the typewriter effect.
- * @param {boolean} props.isTyping A flag indicating whether the typewriter effect is active.
- *
- * @returns {JSX.Element} The rendered `Typewriter` component.
- *
- * @example
- * <Typewriter message="Hello, world!" isTyping={true} />
- */
 
 function Typewriter({ message, isTyping }: ITypewriter): JSX.Element {
   const [displayedContent, setDisplayedContent] = useState('');

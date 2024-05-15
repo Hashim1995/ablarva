@@ -1,6 +1,6 @@
 interface IConnectedMailItem {
   emailProviderType: number;
-  id: string;
+  id: number;
   email: string;
   senderName: string;
   capacity: number;

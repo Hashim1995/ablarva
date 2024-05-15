@@ -20,8 +20,9 @@ import { EmaSenderInformationService } from '@/services/ema/ema-sender-informati
 import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
-import { jobtitleOptions } from '@/utils/constants/options';
 import AppHandledSelect from '@/components/forms/select/handled-select';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -53,6 +54,7 @@ function SenderInformationAddModal({
     mode: 'onChange'
   });
 
+  const { jobTitleList } = useSelector((state: RootState) => state.ema);
   const [loading, setLoading] = useState<boolean>(false);
   /**
    * Submits the form. It adds a new email to the email list.
@@ -64,11 +66,11 @@ function SenderInformationAddModal({
   const onSubmit = async (data: ISenderInformationItem) => {
     setLoading(true);
     const payload: Omit<ISenderInformationItem, 'id'> = {
-      senderCompany: data?.senderCompany,
-      senderFullName: data?.senderFullName,
-      senderJobTitle: data?.senderJobTitle,
-      senderPhone: data?.senderPhone,
-      senderWebsite: data?.senderWebsite
+      company: data?.company,
+      fullName: data?.fullName,
+      jobTitle: data?.jobTitle,
+      phone: data?.phone,
+      website: data?.website
     };
     try {
       const res =
@@ -113,9 +115,9 @@ function SenderInformationAddModal({
                   {' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderFullName"
+                      name="fullName"
                       inputProps={{
-                        id: 'senderFullName'
+                        id: 'fullName'
                       }}
                       type="text"
                       rules={{
@@ -125,7 +127,7 @@ function SenderInformationAddModal({
                         }
                       }}
                       control={control}
-                      isInvalid={Boolean(errors.senderFullName?.message)}
+                      isInvalid={Boolean(errors.fullName?.message)}
                       errors={errors}
                       size="sm"
                       label={inputPlaceholderText(t('senderFullName'))}
@@ -133,33 +135,33 @@ function SenderInformationAddModal({
                   </div>{' '}
                   <div className="flex flex-col gap-5">
                     <AppHandledSelect
-                      name="senderJobTitle"
+                      name="jobTitle"
                       rules={{
                         required: {
                           value: true,
                           message: inputValidationText(t('senderJobTitle'))
                         }
                       }}
-                      isInvalid={Boolean(errors.senderJobTitle?.message)}
+                      isInvalid={Boolean(errors.jobTitle?.message)}
                       selectProps={{
-                        id: 'senderJobTitle'
+                        id: 'jobTitle'
                       }}
                       control={control}
                       label={selectPlaceholderText(t('senderJobTitle'))}
                       // className="app-select text-base sm:text-xl"
-                      options={jobtitleOptions}
+                      options={jobTitleList?.data}
                       errors={errors}
                     />
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderCompany"
+                      name="company"
                       inputProps={{
-                        id: 'senderCompany'
+                        id: 'company'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderCompany?.message)}
+                      isInvalid={Boolean(errors.company?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
@@ -174,13 +176,13 @@ function SenderInformationAddModal({
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderWebsite"
+                      name="website"
                       inputProps={{
-                        id: 'senderWebsite'
+                        id: 'website'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderWebsite?.message)}
+                      isInvalid={Boolean(errors.website?.message)}
                       errors={errors}
                       size="sm"
                       rules={{
@@ -195,13 +197,13 @@ function SenderInformationAddModal({
                   </div>
                   <div className="flex flex-col gap-5">
                     <AppHandledInput
-                      name="senderPhone"
+                      name="phone"
                       inputProps={{
-                        id: 'senderPhone'
+                        id: 'phone'
                       }}
                       type="text"
                       control={control}
-                      isInvalid={Boolean(errors.senderPhone?.message)}
+                      isInvalid={Boolean(errors.phone?.message)}
                       errors={errors}
                       size="sm"
                       rules={{

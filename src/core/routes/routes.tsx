@@ -1,42 +1,58 @@
 import React, { Suspense } from 'react';
-// import { Navigate } from 'react-router-dom';
 import LoginPage from '@core/static-pages/login-page';
 import EMALayoutPage from '@/modules/EMA/layout/EMA-layout';
 import EmaDashboardPage from '@/modules/EMA/dashboard/pages/dashboard-page';
-import EmaBillingPage from '@/modules/EMA/billing/pages/ema-billing-page';
-import SenderInformationPage from '@/modules/EMA/sender-information/pages/sender-information-page';
-import LeadsPage from '@/modules/EMA/leads/pages/leads-page';
-import ConnectedMailsPage from '@/modules/EMA/connected-mails/pages/connected-mails-page';
-import PendingMailsPage from '@/modules/EMA/pending-mails/pages/pending-mails-page';
-
-/**
- * Lazy loads the application routes.
- * @returns The application routes.
- * @see https://reactjs.org/docs/code-splitting.html
- * @see https://reactjs.org/docs/react-api.html#reactlazy
- * @see https://reactjs.org/docs/react-api.html#reactsuspense
- * @see https://reactjs.org/docs/react-api.html#reactsuspensefallback
- * @see https://reactrouter.com/web/guides/code-splitting
- * @see https://reactrouter.com/web/api/Suspense
- * @see https://reactrouter.com/web/api/Suspense/fallback-prop
- * @see https://reactrouter.com/web/api/Navigate
- * @see https://reactrouter.com/web/api/Outlet
- * @see https://reactrouter.com/web/api/Route
- *
- */
+import TermsandConditionsPage from '../static-pages/terms-conditions-page';
 
 const CabinetPage = React.lazy(() => import('@/modules/EMA/cabinet/pages'));
-
 const SuspenseLoader = React.lazy(
   () => import('@core/static-components/suspense-loader')
 );
 const LayoutPage = React.lazy(() => import('@/core/layout/home/home-layout'));
 const AssistantPage = React.lazy(() => import('@/modules/EMA/chat/pages'));
 const HomePage = React.lazy(() => import('@/modules/home/pages/home-page'));
+const PendingMailsPage = React.lazy(
+  () => import('@/modules/EMA/pending-mails/pages/pending-mails-page')
+);
+const ConnectedMailsPage = React.lazy(
+  () => import('@/modules/EMA/connected-mails/pages/connected-mails-page')
+);
+const LeadsPage = React.lazy(
+  () => import('@/modules/EMA/leads/pages/leads-page')
+);
+const SenderInformationPage = React.lazy(
+  () => import('@/modules/EMA/sender-information/pages/sender-information-page')
+);
+const EmaBillingPage = React.lazy(
+  () => import('@/modules/EMA/billing/pages/ema-billing-page')
+);
 
 /**
- * Array of route objects that define the application routes.
+ * Application routes for various pages in the app, including login, marketing, and dashboards.
+ * This configuration includes route paths, their corresponding React components, and the
+ * use of `Suspense` with fallback loaders to handle asynchronous page loading.
+ *
+ * @summary Application route configuration.
+ * @module Routes
+ * @exports routes
+ * @example
+ * // Usage with a router setup (e.g., React Router):
+ * import { BrowserRouter as Router, useRoutes } from 'react-router-dom';
+ * import routes from './path/to/routes-file';
+ * function App() {
+ *   const routing = useRoutes(routes);
+ *   return <Router>{routing}</Router>;
+ * }
+ *
+ * @type {Array<Object>} routes - Array of route objects with path, element, and nested routes.
+ * @property {string} path - The route path.
+ * @property {JSX.Element} element - The main component to render for the route.
+ * @property {Array<Object>} [children] - Nested route objects for sub-pages.
+ * @property {boolean} [index] - If `true`, indicates that this route is the index (default) route.
+ * @property {string} [path='*'] - Catch-all route for 404 handling.
+ * @property {JSX.Element} [fallback] - The fallback loader component to show while a page is loading.
  */
+
 const routes = [
   {
     path: '/',
@@ -53,6 +69,10 @@ const routes = [
       {
         path: 'login',
         element: <LoginPage />
+      },
+      {
+        path: 'terms-conditions',
+        element: <TermsandConditionsPage />
       }
     ]
   },
@@ -62,12 +82,12 @@ const routes = [
     children: [
       {
         index: true,
-        element: <EmaDashboardPage /> // Your actual dashboard component
+        element: <EmaDashboardPage />
       },
       {
         index: true,
         path: 'dashboard',
-        element: <EmaDashboardPage /> // Your actual dashboard component
+        element: <EmaDashboardPage />
       },
       {
         path: '*',
@@ -106,9 +126,6 @@ const routes = [
         )
       },
 
-      /**
-       * Route for the cabinet page.
-       */
       {
         path: 'cabinet',
         element: (

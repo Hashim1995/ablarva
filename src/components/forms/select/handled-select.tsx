@@ -3,6 +3,46 @@ import { ReactElement } from 'react';
 import { Controller, FieldValues, RegisterOptions } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+/**
+ * A select dropdown component with advanced form handling and validation.
+ * It integrates the NextUI Select component with React Hook Form, providing
+ * a smooth selection experience, validation, and error handling.
+ *
+ * @summary A customizable select dropdown component with form validation.
+ * @module AppHandledSelect
+ * @exports AppHandledSelect
+ * @example
+ * // Example usage:
+ * <AppHandledSelect
+ *   name="country"
+ *   control={formControl}
+ *   rules={{ required: true }}
+ *   isInvalid={formErrors.country}
+ *   label="Country"
+ *   size="md"
+ *   options={[
+ *     { value: 'us', label: 'United States' },
+ *     { value: 'ca', label: 'Canada' }
+ *   ]}
+ * />
+ *
+ * @param {Object} props - The properties object.
+ * @param {string} props.name - The name of the select field in the form.
+ * @param {Object} props.control - The control object from `react-hook-form`.
+ * @param {Object} [props.rules] - Validation rules from `react-hook-form` to apply to the select field.
+ * @param {boolean} [props.isInvalid=false] - Indicates whether the select field is in an invalid state.
+ * @param {Function} [props.onChangeApp] - Callback function triggered when the selected value changes.
+ * @param {boolean} [props.required=false] - If `true`, marks the field as required for form validation.
+ * @param {string} [props.className] - Additional custom styles for the select field.
+ * @param {Object} [props.selectProps] - Extra properties to pass directly to the NextUI Select component.
+ * @param {{value: string | number, label: string}[]} props.options - The list of options to display in the dropdown.
+ * @param {'flat' | 'bordered' | 'faded' | 'underlined'} [props.variant] - The visual style of the select field.
+ * @param {'sm' | 'md' | 'lg'} [props.size='md'] - The size of the select field.
+ * @param {string} [props.label] - Text label displayed alongside the select input field.
+ * @param {ReactElement} [props.IconElement] - An optional icon to be displayed inside the select field.
+ * @returns {ReactElement} The handled select dropdown component.
+ */
+
 interface IAppHandledSelect {
   name: string;
   control: any;
@@ -25,23 +65,6 @@ interface IAppHandledSelect {
   IconElement?: any;
 }
 
-/**
- * A custom handled select component.
- *
- * @param {Object} props - The component props.
- * @param {string} props.name - The name of the select input.
- * @param {Object} props.control - The control object from react-hook-form.
- * @param {Object} props.rules - The validation rules for the select input.
- * @param {boolean} props.isInvalid - Indicates if the select input is invalid.
- * @param {Function} props.onChangeApp - The callback function to handle select input change.
- * @param {boolean} [props.required=false] - Indicates if the select input is required.
- * @param {string} [props.className] - The CSS class name for the select input.
- * @param {Object} [props.selectProps] - Additional props to be passed to the Select component.
- * @param {Array} props.options - The options for the select input.
- * @param {string} props.size - The size of the select input.
- * @param {string} props.label - The label for the select input.
- * @returns {JSX.Element} The rendered handled select component.
- */
 function AppHandledSelect({
   name,
   control,

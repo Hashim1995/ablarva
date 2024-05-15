@@ -1,10 +1,20 @@
-import { useNavigate, useRoutes } from 'react-router-dom';
+/* eslint-disable no-unused-vars */
+import { useLocation, useNavigate, useRoutes } from 'react-router-dom';
 import { Suspense, useEffect } from 'react';
 import routesList from '@core/routes/routes';
 import { useDispatch, useSelector } from 'react-redux';
-import { useDisclosure } from '@nextui-org/react';
+import {
+  Button,
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure
+} from '@nextui-org/react';
 import useDarkMode from 'use-dark-mode';
 import { useMediaQuery } from 'usehooks-ts';
+import { FcPrivacy } from 'react-icons/fc';
 import SuspenseLoader from './core/static-components/suspense-loader';
 import { fetchUserData } from './redux/auth/auth-slice';
 import { AppDispatch, RootState } from './redux/store';
@@ -21,14 +31,20 @@ import VerifyEmail from './core/static-components/verify-email';
 function App() {
   const router = useRoutes(routesList);
   const dispatch = useDispatch<AppDispatch>();
-  const isResponsive = useMediaQuery('(max-width: 1024px)');
+  const notDesktop = useMediaQuery('(max-width: 1024px)');
 
   const userToken: any = JSON.parse(localStorage.getItem('userToken') || '{}');
   const getme = useSelector((state: RootState) => state.user);
   const { verified } = useSelector((state: RootState) => state?.user?.user);
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
+  const {
+    isOpen: deviceWarningModalIsOpen,
+    onOpen: deviceWarningModalOnOpen,
+    onOpenChange: deviceWarningModalOnOpenChange
+  } = useDisclosure();
 
   const navigate = useNavigate();
+  const location = useLocation();
 
   /*
     This useEffect is responsible for handling user authentication and navigation.
@@ -41,11 +57,21 @@ function App() {
     document.title = mode === 'development' ? '(Dev) AI Zade' : 'AI Zade';
 
     if (!userToken?.token) {
-      navigate('/login');
+      console.log(location?.pathname);
+      if (location?.pathname !== '/terms-conditions') {
+        navigate('/login');
+      }
     } else {
       dispatch(fetchUserData());
     }
   }, []);
+
+  useEffect(() => {
+    // Open the modal if the screen is small and it's not already opened
+    if (notDesktop) {
+      deviceWarningModalOnOpen();
+    }
+  }, [notDesktop]);
 
   /*
     This useEffect is responsible for handling the statistics socket connection and updating the statistics count.
@@ -57,31 +83,29 @@ function App() {
   */
 
   useEffect(() => {
-    if (!isResponsive) {
-      if (userToken?.token && getme.user.currentSubscription) {
-        const statisticsSocket = generateStatisticsSocket(
-          JSON.parse(localStorage.getItem('userToken') || '{}').token
-        );
+    if (userToken?.token && getme.user.currentSubscription) {
+      const statisticsSocket = generateStatisticsSocket(
+        JSON.parse(localStorage.getItem('userToken') || '{}').token
+      );
 
-        if (statisticsSocket.state === 'Disconnected') {
-          statisticsSocket
-            .start()
-            .then(() => {
-              statisticsSocket.on(
-                'StatisticsUpdate',
-                (z: StatisticsUpdateData) => {
-                  dispatch(setStatisticsCount(z));
-                }
-              );
-            })
-            .catch(error => console.error('SignalR connection failed:', error));
-        }
+      if (statisticsSocket.state === 'Disconnected') {
+        statisticsSocket
+          .start()
+          .then(() => {
+            statisticsSocket.on(
+              'StatisticsUpdate',
+              (z: StatisticsUpdateData) => {
+                dispatch(setStatisticsCount(z));
+              }
+            );
+          })
+          .catch(error => console.error('SignalR connection failed:', error));
       }
     }
     return () => {
       generateStatisticsSocket(userToken?.token).stop();
     };
-  }, [getme, isResponsive]);
+  }, [getme]);
 
   /*
     This useEffect is responsible for checking if the user's email is verified.
@@ -106,6 +130,30 @@ function App() {
         {router}
         {isOpen && <VerifyEmail onOpenChange={onOpenChange} isOpen={isOpen} />}
       </Suspense>
+      {notDesktop && (
+        <Modal
+          hideCloseButton
+          size="full"
+          isDismissable={false}
+          className="centerModalOnMobile"
+          shouldBlockScroll
+          isKeyboardDismissDisabled
+          defaultOpen={notDesktop}
+        >
+          <ModalContent>
+            <ModalBody className="py-10 dark:text-white">
+              <div className="flex flex-col items-center gap-5">
+                <FcPrivacy size={100} />
+
+                <p className="text-gray-600 dark:text-gray-300">
+                  The screen size is smaller than recommended. Please use a
+                  device with a larger screen for a better experience.
+                </p>
+              </div>
+            </ModalBody>
+          </ModalContent>
+        </Modal>
+      )}
     </main>
   );
 }

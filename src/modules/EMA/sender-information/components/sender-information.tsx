@@ -1,5 +1,9 @@
+/* eslint-disable no-unused-vars */
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import AppHandledRemoveModal from '@/components/layout/remove-modal';
+import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
+import { formatUrl } from '@/utils/functions/functions';
 import {
   Table,
   TableHeader,
@@ -13,38 +17,14 @@ import {
   Tooltip
 } from '@nextui-org/react';
 import { t } from 'i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { BsPen, BsTrash3 } from 'react-icons/bs';
-import { ISenderInformationItem } from '../types';
+import {
+  ISenderInformationItem,
+  ISenderInformationListResponse
+} from '../types';
 import SenderInformationAddModal from './sender-information-add-modal';
 import SenderInformationEditModal from './sender-information-edit-modal';
-
-const dummyData: ISenderInformationItem[] = [
-  {
-    id: 1,
-    senderFullName: 'John Doe',
-    senderJobTitle: 1,
-    senderCompany: 'Google',
-    senderWebsite: 'https://google.com',
-    senderPhone: '+1 123 456 78 90'
-  },
-  {
-    id: 2,
-    senderFullName: 'Jack Doe',
-    senderJobTitle: 2,
-    senderCompany: 'Meta',
-    senderWebsite: 'https://meta.com',
-    senderPhone: '+1 123 456 78 90'
-  },
-  {
-    id: 3,
-    senderFullName: 'Jane Doe',
-    senderJobTitle: 3,
-    senderCompany: 'Amazon',
-    senderWebsite: 'https://amazon.com',
-    senderPhone: '+1 123 456 78 90'
-  }
-];
 
 function SenderInformation() {
   const {
@@ -58,7 +38,51 @@ function SenderInformation() {
     onOpenChange: editOnOpenChange
   } = useDisclosure();
 
+  const {
+    isOpen: removeIsOpen,
+    onOpen: removeOnOpen,
+    onOpenChange: removeOnOpenChange,
+    onClose: removeOnClose
+  } = useDisclosure();
+
   const [selectedItem, setselectedItem] = useState<ISenderInformationItem>();
+  const [data, setData] = useState<ISenderInformationListResponse['data']>([]);
+  const [loading, setLoading] = useState(true);
+  const [removeLoading, setRemoveLoading] = useState(false);
+
+  const fetchSenderInformation = async () => {
+    try {
+      const res = await EmaSenderInformationService.getInstance().getList();
+      if (res?.isSuccess) {
+        setData(res?.data);
+        setLoading(false);
+      }
+      console.log(res?.data, 'test');
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  useEffect(() => {
+    fetchSenderInformation();
+  }, []);
+
+  const removeSenderInformation = async () => {
+    setRemoveLoading(true);
+    try {
+      const res =
+        await EmaSenderInformationService.getInstance().removeSenderInformation(
+          selectedItem?.id
+        );
+      if (res.isSuccess) {
+        fetchSenderInformation();
+        removeOnClose();
+      }
+    } catch (err) {
+      console.log(err);
+    }
+    setRemoveLoading(false);
+  };
 
   return (
     <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
@@ -75,7 +99,7 @@ function SenderInformation() {
               className="ml-4 cursor-default"
               size="sm"
             >
-              3/3
+              {data?.length}/3
             </AppHandledBorderedButton>
           </div>
           <h3 className="text-default-800 text-lg dark:text-white italic">
@@ -85,6 +109,7 @@ function SenderInformation() {
           <div className="flex justify-end">
             <AppHandledSolidButton
               title="Add"
+              isDisabled={data?.length >= 3}
               onClick={addOnOpen}
               aria-label="Add"
             >
@@ -119,21 +144,31 @@ function SenderInformation() {
                 </TableColumn>
                 <TableColumn>{}</TableColumn>
               </TableHeader>
-              <TableBody items={dummyData} loadingContent={<Spinner />}>
+              <TableBody
+                isLoading={loading}
+                items={data}
+                loadingContent={<Spinner />}
+              >
                 {item => (
                   <TableRow
                     className="border-divider border-b-1"
                     key={item?.id}
                   >
                     <TableCell className="flex items-center gap-2">
-                      {item?.senderFullName}
+                      {item?.fullName}
                     </TableCell>
-                    <TableCell>{item?.senderJobTitle?.label}</TableCell>
-                    <TableCell>{item?.senderCompany}</TableCell>
+                    <TableCell>{item?.jobTitle}</TableCell>
+                    <TableCell>{item?.company}</TableCell>
                     <TableCell className="text-blue-800 dark:text-blue-200 italic">
-                      <a href={item?.senderWebsite}>{item?.senderWebsite}</a>
+                      <a
+                        target="_blank"
+                        href={formatUrl(item?.website)}
+                        rel="noreferrer"
+                      >
+                        {item?.website}
+                      </a>
                     </TableCell>
-                    <TableCell>{item?.senderPhone}</TableCell>
+                    <TableCell>{item?.phone}</TableCell>
                     <TableCell>
                       <div className="relative flex justify-end items-center gap-2">
                         <Tooltip
@@ -159,7 +194,15 @@ function SenderInformation() {
                           }}
                           content={t('deleteSenderInformation')}
                         >
-                          <span className="active:opacity-50 text-danger text-lg cursor-pointer">
+                          <span
+                            aria-hidden
+                            onClick={() => {
+                              setselectedItem(item);
+
+                              removeOnOpen();
+                            }}
+                            className="active:opacity-50 text-danger text-lg cursor-pointer"
+                          >
                             <BsTrash3 color="danger" size={16} />
                           </span>
                         </Tooltip>
@@ -175,7 +218,7 @@ function SenderInformation() {
       {addIsOpen && (
         <SenderInformationAddModal
           reloadData={() => {
-            console.log('test');
+            fetchSenderInformation();
           }}
           onOpenChange={addOnOpenChange}
           isOpen={addIsOpen}
@@ -184,11 +227,19 @@ function SenderInformation() {
       {editIsOpen && (
         <SenderInformationEditModal
           reloadData={() => {
-            console.log('test');
+            fetchSenderInformation();
           }}
           onOpenChange={editOnOpenChange}
           isOpen={editIsOpen}
           selectedItem={selectedItem}
+        />
+      )}
+      {removeIsOpen && (
+        <AppHandledRemoveModal
+          isLoading={removeLoading}
+          onRemove={removeSenderInformation}
+          onOpenChange={removeOnOpenChange}
+          isOpen={removeIsOpen}
         />
       )}
     </div>
