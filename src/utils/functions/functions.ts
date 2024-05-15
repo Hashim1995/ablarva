@@ -198,6 +198,13 @@ function convertDDMMYYYtoISOString(dateStr: string): string {
   return dateObj;
 }
 
+function formatUrl(url: string) {
+  if (!url.startsWith('http://') && !url.startsWith('https://')) {
+    return `https://${url}`;
+  }
+  return url;
+}
+
 export {
   convertFormDataToQueryParams,
   generateOptionListPerNumber,
@@ -206,5 +213,5 @@ export {
   tokenizeImage,
   toCapitalize,
   convertDateFormat,
-  convertDDMMYYYtoISOString
+  convertDDMMYYYtoISOString, formatUrl
 };

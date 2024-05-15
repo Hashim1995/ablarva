@@ -66,7 +66,8 @@ interface IProps {
   children: any;
   className?: string;
   buttonProps?: ButtonProps;
-  onClick?: () => void;
+  // eslint-disable-next-line no-unused-vars
+  onClick?: (e?: any) => void;
   onPress?: () => void;
   isLoading?: boolean;
   isDisabled?: boolean;

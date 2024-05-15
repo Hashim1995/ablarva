@@ -20,8 +20,9 @@ import { EmaSenderInformationService } from '@/services/ema/ema-sender-informati
 import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
-import { jobtitleOptions } from '@/utils/constants/options';
 import AppHandledSelect from '@/components/forms/select/handled-select';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -53,6 +54,7 @@ function SenderInformationAddModal({
     mode: 'onChange'
   });
 
+  const { jobTitleList } = useSelector((state: RootState) => state.ema);
   const [loading, setLoading] = useState<boolean>(false);
   /**
    * Submits the form. It adds a new email to the email list.
@@ -147,7 +149,7 @@ function SenderInformationAddModal({
                       control={control}
                       label={selectPlaceholderText(t('senderJobTitle'))}
                       // className="app-select text-base sm:text-xl"
-                      options={jobtitleOptions}
+                      options={jobTitleList?.data}
                       errors={errors}
                     />
                   </div>

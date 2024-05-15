@@ -12,7 +12,8 @@ import {
   ModalHeader,
   ModalBody,
   ModalFooter,
-  Divider
+  Divider,
+  Skeleton
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
@@ -21,7 +22,8 @@ import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { jobtitleOptions } from '@/utils/constants/options';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -47,20 +49,32 @@ function SenderInformationEditModal({
 }: IModalProps) {
   const { t } = useTranslation();
 
+  // eslint-disable-next-line consistent-return
+  async function getSenderInformationItem() {
+    try {
+      const res =
+        await EmaSenderInformationService.getInstance().findSenderInformation(
+          selectedItem?.id
+        );
+      const data = {
+        ...res?.data,
+        jobTitle: res?.data?.jobTitle?.value
+      };
+      return data;
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
   const {
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isLoading },
     control
   } = useForm<ISenderInformationItem>({
     mode: 'onChange',
-    defaultValues: {
-      fullName: selectedItem?.fullName,
-      jobTitle: selectedItem?.jobTitle,
-      company: selectedItem?.company,
-      website: selectedItem?.website,
-      phone: selectedItem?.phone
-    }
+    defaultValues: async () => getSenderInformationItem()
   });
+  const { jobTitleList } = useSelector((state: RootState) => state.ema);
 
   const [loading, setLoading] = useState<boolean>(false);
   /**
@@ -72,7 +86,8 @@ function SenderInformationEditModal({
    */
   const onSubmit = async (data: ISenderInformationItem) => {
     setLoading(true);
-    const payload: Omit<ISenderInformationItem, 'id'> = {
+    const payload: ISenderInformationItem = {
+      id: selectedItem?.id,
       fullName: data?.fullName,
       jobTitle: data?.jobTitle,
       company: data?.company,
@@ -81,7 +96,7 @@ function SenderInformationEditModal({
     };
     try {
       const res =
-        await EmaSenderInformationService.getInstance().createSenderInformation(
+        await EmaSenderInformationService.getInstance().editSenderInformation(
           payload
         );
       if (res.isSuccess) {
@@ -114,117 +129,129 @@ function SenderInformationEditModal({
               <Divider className="mb-6" />
 
               <ModalBody>
-                <form
-                  id="sender-information-edit-form"
-                  onSubmit={handleSubmit(onSubmit)}
-                  className="flex flex-col space-y-5"
-                >
-                  {' '}
-                  <div className="flex flex-col gap-5">
-                    <AppHandledInput
-                      name="fullName"
-                      inputProps={{
-                        id: 'fullName'
-                      }}
-                      type="text"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText(t('senderFullName'))
-                        }
-                      }}
-                      control={control}
-                      isInvalid={Boolean(errors.fullName?.message)}
-                      errors={errors}
-                      size="sm"
-                      label={inputPlaceholderText(t('senderFullName'))}
-                    />
-                  </div>{' '}
-                  <div className="flex flex-col gap-5">
-                    <AppHandledSelect
-                      name="jobTitle"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText(t('senderJobTitle'))
-                        }
-                      }}
-                      isInvalid={Boolean(errors.jobTitle?.message)}
-                      selectProps={{
-                        id: 'jobTitle'
-                      }}
-                      control={control}
-                      label={selectPlaceholderText(t('senderJobTitle'))}
-                      // className="app-select text-base sm:text-xl"
-                      options={jobtitleOptions}
-                      errors={errors}
-                    />
+                {!isLoading ? (
+                  <form
+                    id="sender-information-edit-form"
+                    onSubmit={handleSubmit(onSubmit)}
+                    className="flex flex-col space-y-5"
+                  >
+                    {' '}
+                    <div className="flex flex-col gap-5">
+                      <AppHandledInput
+                        name="fullName"
+                        inputProps={{
+                          id: 'fullName'
+                        }}
+                        type="text"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: inputValidationText(t('senderFullName'))
+                          }
+                        }}
+                        control={control}
+                        isInvalid={Boolean(errors.fullName?.message)}
+                        errors={errors}
+                        size="sm"
+                        label={inputPlaceholderText(t('senderFullName'))}
+                      />
+                    </div>{' '}
+                    <div className="flex flex-col gap-5">
+                      <AppHandledSelect
+                        name="jobTitle"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: inputValidationText(t('senderJobTitle'))
+                          }
+                        }}
+                        isInvalid={Boolean(errors.jobTitle?.message)}
+                        selectProps={{
+                          id: 'jobTitle'
+                        }}
+                        control={control}
+                        label={selectPlaceholderText(t('senderJobTitle'))}
+                        // className="app-select text-base sm:text-xl"
+                        options={jobTitleList?.data}
+                        errors={errors}
+                      />
+                    </div>
+                    <div className="flex flex-col gap-5">
+                      <AppHandledInput
+                        name="company"
+                        inputProps={{
+                          id: 'company'
+                        }}
+                        type="text"
+                        control={control}
+                        isInvalid={Boolean(errors.company?.message)}
+                        errors={errors}
+                        size="sm"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: inputValidationText(t('senderCompany'))
+                          }
+                        }}
+                        label={inputPlaceholderText(t('senderCompany'))}
+                        required
+                      />
+                    </div>
+                    <div className="flex flex-col gap-5">
+                      <AppHandledInput
+                        name="website"
+                        inputProps={{
+                          id: 'website'
+                        }}
+                        type="text"
+                        control={control}
+                        isInvalid={Boolean(errors.website?.message)}
+                        errors={errors}
+                        size="sm"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: inputValidationText(t('senderWebsite'))
+                          }
+                        }}
+                        label={inputPlaceholderText(t('senderWebsite'))}
+                        required
+                      />
+                    </div>
+                    <div className="flex flex-col gap-5">
+                      <AppHandledInput
+                        name="phone"
+                        inputProps={{
+                          id: 'phone'
+                        }}
+                        type="text"
+                        control={control}
+                        isInvalid={Boolean(errors.phone?.message)}
+                        errors={errors}
+                        size="sm"
+                        rules={{
+                          required: {
+                            value: true,
+                            message: inputValidationText(t('senderPhone'))
+                          }
+                        }}
+                        label={inputPlaceholderText(t('senderPhone'))}
+                        required
+                      />
+                    </div>
+                    <Divider />
+                  </form>
+                ) : (
+                  <div>
+                    <div className="flex flex-col gap-2 w-full">
+                      <Skeleton className="rounded-lg w-full h-12" />
+                      <Skeleton className="rounded-lg w-full h-12" />
+                      <Skeleton className="rounded-lg w-full h-12" />
+                      <Skeleton className="rounded-lg w-full h-12" />
+                      <Skeleton className="rounded-lg w-full h-12" />
+                    </div>
                   </div>
-                  <div className="flex flex-col gap-5">
-                    <AppHandledInput
-                      name="phone"
-                      inputProps={{
-                        id: 'phone'
-                      }}
-                      type="text"
-                      control={control}
-                      isInvalid={Boolean(errors.phone?.message)}
-                      errors={errors}
-                      size="sm"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText(t('senderCompany'))
-                        }
-                      }}
-                      label={inputPlaceholderText(t('senderCompany'))}
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-5">
-                    <AppHandledInput
-                      name="website"
-                      inputProps={{
-                        id: 'website'
-                      }}
-                      type="text"
-                      control={control}
-                      isInvalid={Boolean(errors.website?.message)}
-                      errors={errors}
-                      size="sm"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText(t('senderWebsite'))
-                        }
-                      }}
-                      label={inputPlaceholderText(t('senderWebsite'))}
-                      required
-                    />
-                  </div>
-                  <div className="flex flex-col gap-5">
-                    <AppHandledInput
-                      name="phone"
-                      inputProps={{
-                        id: 'phone'
-                      }}
-                      type="text"
-                      control={control}
-                      isInvalid={Boolean(errors.phone?.message)}
-                      errors={errors}
-                      size="sm"
-                      rules={{
-                        required: {
-                          value: true,
-                          message: inputValidationText(t('senderPhone'))
-                        }
-                      }}
-                      label={inputPlaceholderText(t('senderPhone'))}
-                      required
-                    />
-                  </div>
-                  <Divider />
-                </form>
+                )}
               </ModalBody>
               <ModalFooter>
                 <AppHandledBorderedButton

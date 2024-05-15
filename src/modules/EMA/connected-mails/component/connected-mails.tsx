@@ -62,9 +62,9 @@ const returnIcon = (emailProviderType: number) => {
     case 1:
       return <img className="h-5" alt="gmail" src={gmail} />;
     case 2:
-      return <img className="h-5" alt="gmail" src={microsoft} />;
+      return <img className="h-5" alt="microsoft" src={microsoft} />;
     default:
-      return <img className="h-5" alt="gmail" src={amazon} />;
+      return <img className="h-5" alt="amazon" src={amazon} />;
   }
 };
 

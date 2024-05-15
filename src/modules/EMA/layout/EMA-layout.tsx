@@ -1,4 +1,6 @@
 import { setCurrentAssistantModel } from '@/redux/assistant/assistant-slice';
+import { fetchJobTitleList } from '@/redux/ema/ema-slice';
+import { AppDispatch } from '@/redux/store';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { Outlet } from 'react-router-dom';
@@ -9,7 +11,7 @@ import { SidebarWrapper } from './sidebar/sidebar';
  * @returns The layout page component.
  */
 function EMALayoutPage() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     dispatch(
@@ -23,11 +25,12 @@ function EMALayoutPage() {
         isActive: true
       })
     );
+    dispatch(fetchJobTitleList());
   }, []);
   return (
-    <div className=" z-10  flex">
+    <div className="z-10 flex">
       <SidebarWrapper />
-      <div className="outlet-renderer w-full relative remove-scrollbar   overflow-x-hidden">
+      <div className="relative w-full overflow-x-hidden outlet-renderer remove-scrollbar">
         <Outlet />
       </div>
     </div>
