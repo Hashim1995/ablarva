@@ -1,4 +1,4 @@
-import { IGlobalResponse } from "@/models/common";
+import { IGlobalResponse } from '@/models/common';
 
 interface ISenderInformationItem {
   id: number;
@@ -12,9 +12,11 @@ interface ISenderInformationListResponse extends IGlobalResponse {
   data: ISenderInformationItem[];
 }
 interface ISenderInformationFindResponse extends IGlobalResponse {
-  data: ISenderInformationItem
+  data: ISenderInformationItem;
 }
 
-
-
-export type { ISenderInformationItem, ISenderInformationFindResponse, ISenderInformationListResponse };
+export type {
+  ISenderInformationItem,
+  ISenderInformationFindResponse,
+  ISenderInformationListResponse
+};

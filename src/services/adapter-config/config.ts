@@ -57,7 +57,7 @@ axios.interceptors.request.use((config: InternalAxiosRequestConfig) => {
     config.headers.Authorization = `Bearer ${token.token}`;
     if (language) {
       config.headers['Accept-Language'] = language;
-      config.headers['X-Api-Locale'] = language
+      config.headers['X-Api-Locale'] = language;
     }
   }
   return config;

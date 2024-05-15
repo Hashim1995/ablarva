@@ -3,15 +3,18 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponseEmpty } from '@/models/common';
-import { ISenderInformationFindResponse, ISenderInformationItem, ISenderInformationListResponse } from '@/modules/EMA/sender-information/types';
+import {
+  ISenderInformationFindResponse,
+  ISenderInformationItem,
+  ISenderInformationListResponse
+} from '@/modules/EMA/sender-information/types';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
-
 
 export class EmaSenderInformationService {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaSenderInformationService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Returns the singleton instance of EmaSenderInformationService.
@@ -24,9 +27,16 @@ export class EmaSenderInformationService {
     return EmaSenderInformationService.instance!;
   }
 
-  public async getList(onError?: ErrorCallBack): Promise<ISenderInformationListResponse> {
-    const res = await HttpUtil.get(`api/client/senderInformations`, null, false, onError)
-    return res
+  public async getList(
+    onError?: ErrorCallBack
+  ): Promise<ISenderInformationListResponse> {
+    const res = await HttpUtil.get(
+      `api/client/senderInformations`,
+      null,
+      false,
+      onError
+    );
+    return res;
   }
 
   public async editSenderInformation(

@@ -47,7 +47,7 @@ const senderOptionListDummy: selectOption[] = [
 const dummyMailItems: IConnectedMailItem[] = Array.from(
   { length: 15 },
   (_, index) => ({
-    id: `id-${index + 1}`,
+    id: index + 1,
     emailProviderType: 2,
     email: `user${index + 1}@example.com`,
     senderName: `Sender ${index + 1}`,
@@ -81,7 +81,7 @@ function ConnectedMails() {
   } = useDisclosure();
 
   const updateSwitchStatus = useCallback(
-    async (id: string, newStatus: boolean) => {
+    async (id: number, newStatus: boolean) => {
       // Your API call to update the backend
       // await yourUpdateApiCall(id, newStatus);
       console.log(`Switch status updated for ${id}: ${newStatus}`);
@@ -90,7 +90,7 @@ function ConnectedMails() {
   );
 
   const handleSwitchChange = useCallback(
-    (id: string, event: any) => {
+    (id: number, event: any) => {
       const newStatus = event.target.checked;
       updateSwitchStatus(id, newStatus);
     },

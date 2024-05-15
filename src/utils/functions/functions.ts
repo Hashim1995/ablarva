@@ -213,5 +213,6 @@ export {
   tokenizeImage,
   toCapitalize,
   convertDateFormat,
-  convertDDMMYYYtoISOString, formatUrl
+  convertDDMMYYYtoISOString,
+  formatUrl
 };
