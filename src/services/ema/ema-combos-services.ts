@@ -6,11 +6,8 @@
 import { IGlobalResponse, selectOption } from '@/models/common';
 import { ErrorCallBack, HttpUtil } from '../adapter-config/config';
 
-export interface IGetJobTitleListReponse extends IGlobalResponse {
-  data: {
-    jobTitles: selectOption[];
-    total: number;
-  };
+export interface IListReponse extends IGlobalResponse {
+  data: selectOption[];
 }
 
 export class EmaCombosServices {
@@ -23,7 +20,7 @@ export class EmaCombosServices {
    * Constructs a new instance of the EmaCombosServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Gets the singleton instance of the EmaCombosServices class.
@@ -37,15 +34,22 @@ export class EmaCombosServices {
     return EmaCombosServices.instance!;
   }
 
-  /**
-   * Retrieves the pricing list for a given ID.
-   * @param id - The ID of the pricing list.
-   * @param onError - Optional callback function to handle errors.
-   * @returns A promise that resolves to the pricing data response.
-   */
+  public async getSenderInformationList(
+    onError?: ErrorCallBack
+  ): Promise<IListReponse> {
+    const res = await HttpUtil.get(
+      `api/client/senderInformations/select`,
+      null,
+      false,
+      onError
+    );
+    return res;
+  }
+
+
   public async getJobTitleList(
     onError?: ErrorCallBack
-  ): Promise<IGetJobTitleListReponse> {
+  ): Promise<IListReponse> {
     const res = await HttpUtil.get(
       `api/client/common/jobTitles`,
       null,

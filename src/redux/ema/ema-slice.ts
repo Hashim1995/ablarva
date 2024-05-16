@@ -11,6 +11,7 @@ interface IListState {
 
 interface RootState {
   jobTitleList: IListState;
+  senderInformationList: IListState
   // You can add more lists here
 }
 
@@ -23,7 +24,8 @@ const initialListState: IListState = {
 };
 
 const initialState: RootState = {
-  jobTitleList: initialListState
+  jobTitleList: initialListState,
+  senderInformationList: initialListState
 };
 
 // Async thunk for fetching jobtitle data
@@ -32,6 +34,18 @@ export const fetchJobTitleList = createAsyncThunk(
   async () => {
     try {
       const response = await EmaCombosServices.getInstance().getJobTitleList();
+      return response.data;
+    } catch (err) {
+      throw err;
+    }
+  }
+);
+
+export const fetchSenderInformationList = createAsyncThunk(
+  'user/fetchSenderInformationList',
+  async () => {
+    try {
+      const response = await EmaCombosServices.getInstance().getSenderInformationList();
       return response.data;
     } catch (err) {
       throw err;
@@ -57,11 +71,24 @@ const emaMetaSlice = createSlice({
       })
       .addCase(fetchJobTitleList.fulfilled, (state, action) => {
         state.jobTitleList.status = 'succeeded';
-        state.jobTitleList.data = action.payload?.jobTitles;
+        state.jobTitleList.data = action.payload;
       })
       .addCase(fetchJobTitleList.rejected, (state, action) => {
         state.jobTitleList.status = 'failed';
         state.jobTitleList.error = action.error;
+      });
+
+    builder
+      .addCase(fetchSenderInformationList.pending, state => {
+        state.senderInformationList.status = 'loading';
+      })
+      .addCase(fetchSenderInformationList.fulfilled, (state, action) => {
+        state.senderInformationList.status = 'succeeded';
+        state.senderInformationList.data = action.payload;
+      })
+      .addCase(fetchSenderInformationList.rejected, (state, action) => {
+        state.senderInformationList.status = 'failed';
+        state.senderInformationList.error = action.error;
       });
     // Add cases for other lists if necessary
   }

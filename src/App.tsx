@@ -82,30 +82,30 @@ function App() {
     When the component is unmounted, the socket connection is stopped. 
   */
 
-  useEffect(() => {
-    if (userToken?.token && getme.user.currentSubscription) {
-      const statisticsSocket = generateStatisticsSocket(
-        JSON.parse(localStorage.getItem('userToken') || '{}').token
-      );
+  // useEffect(() => {
+  //   if (userToken?.token && getme.user.currentSubscription) {
+  //     const statisticsSocket = generateStatisticsSocket(
+  //       JSON.parse(localStorage.getItem('userToken') || '{}').token
+  //     );
 
-      if (statisticsSocket.state === 'Disconnected') {
-        statisticsSocket
-          .start()
-          .then(() => {
-            statisticsSocket.on(
-              'StatisticsUpdate',
-              (z: StatisticsUpdateData) => {
-                dispatch(setStatisticsCount(z));
-              }
-            );
-          })
-          .catch(error => console.error('SignalR connection failed:', error));
-      }
-    }
-    return () => {
-      generateStatisticsSocket(userToken?.token).stop();
-    };
-  }, [getme]);
+  //     if (statisticsSocket.state === 'Disconnected') {
+  //       statisticsSocket
+  //         .start()
+  //         .then(() => {
+  //           statisticsSocket.on(
+  //             'StatisticsUpdate',
+  //             (z: StatisticsUpdateData) => {
+  //               dispatch(setStatisticsCount(z));
+  //             }
+  //           );
+  //         })
+  //         .catch(error => console.error('SignalR connection failed:', error));
+  //     }
+  //   }
+  //   return () => {
+  //     generateStatisticsSocket(userToken?.token).stop();
+  //   };
+  // }, [getme]);
 
   /*
     This useEffect is responsible for checking if the user's email is verified.
