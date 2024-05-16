@@ -1,6 +1,4 @@
-/* eslint-disable no-unused-vars */
 import { useTranslation } from 'react-i18next';
-import { toastOptions } from '@/configs/global-configs';
 import { selectPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -13,7 +11,6 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import gmail from '@assets/icons/gmail.svg';
 import amazon from '@assets/icons/amazon.svg';
@@ -27,7 +24,6 @@ import { IConnectedMailGenerateUrl } from '../types';
 
 interface IModalProps {
   isOpen: boolean;
-  reloadData: () => void;
   onOpenChange: () => void;
 }
 
@@ -39,7 +35,7 @@ interface IModalProps {
  * @returns The rendered add email modal.
  */
 
-function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
+function ConnectMailsModal({ isOpen, onOpenChange }: IModalProps) {
   const { t } = useTranslation();
 
   const {

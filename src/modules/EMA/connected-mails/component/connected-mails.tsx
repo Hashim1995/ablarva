@@ -1,6 +1,5 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
-import { useCallback, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledSelect from '@/components/forms/select/handled-select';
 import { selectPlaceholderText } from '@/utils/constants/texts';
@@ -23,7 +22,7 @@ import { t } from 'i18next';
 import { useForm, useWatch } from 'react-hook-form';
 import gmail from '@assets/icons/gmail.svg';
 import amazon from '@assets/icons/amazon.svg';
-import { BsPen, BsTrash3 } from 'react-icons/bs';
+import { BsTrash3 } from 'react-icons/bs';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { useSelector } from 'react-redux';
 import { toast } from 'react-toastify';
@@ -293,23 +292,6 @@ function ConnectedMails() {
                           classNames={{
                             content: 'text-default-800 dark:text-white'
                           }}
-                          content={t('editBtn')}
-                        >
-                          <span
-                            aria-hidden
-                            // onClick={() => {
-                            //   setselectedItem(item);
-                            //   editOnOpen();
-                            // }}
-                            className="active:opacity-50 text-default-400 text-lg cursor-pointer"
-                          >
-                            <BsPen size={16} />
-                          </span>
-                        </Tooltip>
-                        <Tooltip
-                          classNames={{
-                            content: 'text-default-800 dark:text-white'
-                          }}
                           content={t('delete')}
                         >
                           <span
@@ -335,7 +317,6 @@ function ConnectedMails() {
       </div>
       {connectModalIsOpen && (
         <ConnectMailsModal
-          reloadData={() => console.log('a')}
           onOpenChange={connectModalOnOpenChange}
           isOpen={connectModalIsOpen}
         />

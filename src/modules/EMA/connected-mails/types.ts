@@ -19,7 +19,6 @@ interface IConnectedMailGenerateUrl {
   senderInfoId: number;
 }
 
-
 interface IConnectedMailValidateUrl {
   state: string;
   code: string;
@@ -28,8 +27,14 @@ interface IConnectedMailValidateUrl {
 
 interface IConnectedMailGenerateUrlReponse extends IGlobalResponse {
   data: {
-    redirectUrl: string
-  }
+    redirectUrl: string;
+  };
 }
 
-export type { IConnectedMailItem, IConnectedMailListResponse, IConnectedMailValidateUrl, IConnectedMailGenerateUrlReponse, IConnectedMailGenerateUrl };
+export type {
+  IConnectedMailItem,
+  IConnectedMailListResponse,
+  IConnectedMailValidateUrl,
+  IConnectedMailGenerateUrlReponse,
+  IConnectedMailGenerateUrl
+};

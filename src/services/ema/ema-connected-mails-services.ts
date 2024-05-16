@@ -3,10 +3,13 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponseEmpty } from '@/models/common';
-import { IConnectedMailGenerateUrl, IConnectedMailGenerateUrlReponse, IConnectedMailListResponse, IConnectedMailValidateUrl } from '@/modules/EMA/connected-mails/types';
 import {
-  ISenderInformationFindResponse,
-} from '@/modules/EMA/sender-information/types';
+  IConnectedMailGenerateUrl,
+  IConnectedMailGenerateUrlReponse,
+  IConnectedMailListResponse,
+  IConnectedMailValidateUrl
+} from '@/modules/EMA/connected-mails/types';
+import { ISenderInformationFindResponse } from '@/modules/EMA/sender-information/types';
 import {
   ErrorCallBack,
   HttpUtil,
@@ -17,7 +20,7 @@ export class EmaConnectedMailsService {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaConnectedMailsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Returns the singleton instance of EmaConnectedMailsService.
