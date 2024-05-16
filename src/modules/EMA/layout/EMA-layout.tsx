@@ -1,5 +1,8 @@
 import { setCurrentAssistantModel } from '@/redux/assistant/assistant-slice';
-import { fetchJobTitleList } from '@/redux/ema/ema-slice';
+import {
+  fetchJobTitleList,
+  fetchSenderInformationList
+} from '@/redux/ema/ema-slice';
 import { AppDispatch } from '@/redux/store';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
@@ -26,6 +29,7 @@ function EMALayoutPage() {
       })
     );
     dispatch(fetchJobTitleList());
+    dispatch(fetchSenderInformationList());
   }, []);
   return (
     <div className="z-10 flex">

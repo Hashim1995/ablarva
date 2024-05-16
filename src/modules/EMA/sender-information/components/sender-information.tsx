@@ -1,6 +1,7 @@
 /* eslint-disable no-unused-vars */
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import Empty from '@/components/layout/empty';
 import AppHandledRemoveModal from '@/components/layout/remove-modal';
 import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
 import { formatUrl } from '@/utils/functions/functions';
@@ -147,6 +148,7 @@ function SenderInformation() {
               <TableBody
                 isLoading={loading}
                 items={data}
+                emptyContent={<Empty />}
                 loadingContent={<Spinner />}
               >
                 {item => (

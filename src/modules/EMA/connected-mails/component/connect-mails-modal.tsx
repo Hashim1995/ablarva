@@ -1,5 +1,4 @@
 import { useTranslation } from 'react-i18next';
-import { toastOptions } from '@/configs/global-configs';
 import { selectPlaceholderText } from '@/utils/constants/texts';
 import { inputValidationText } from '@/utils/constants/validations';
 import {
@@ -12,20 +11,19 @@ import {
 } from '@nextui-org/react';
 import { useState } from 'react';
 import { useForm } from 'react-hook-form';
-import { EmaSenderInformationService } from '@/services/ema/ema-sender-information-services';
-import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import gmail from '@assets/icons/gmail.svg';
 import amazon from '@assets/icons/amazon.svg';
 import microsoft from '@assets/icons/microsoft.svg';
-
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { industriesOptions } from '@/utils/constants/options';
 import { BsQuestionCircleFill } from 'react-icons/bs';
+import { useSelector } from 'react-redux';
+import { RootState } from '@/redux/store';
+import { EmaConnectedMailsService } from '@/services/ema/ema-connected-mails-services';
+import { IConnectedMailGenerateUrl } from '../types';
 
 interface IModalProps {
   isOpen: boolean;
-  reloadData: () => void;
   onOpenChange: () => void;
 }
 
@@ -37,7 +35,7 @@ interface IModalProps {
  * @returns The rendered add email modal.
  */
 
-function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
+function ConnectMailsModal({ isOpen, onOpenChange }: IModalProps) {
   const { t } = useTranslation();
 
   const {
@@ -48,32 +46,25 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
     mode: 'onChange'
   });
 
+  const { senderInformationList } = useSelector(
+    (state: RootState) => state.ema
+  );
+
   const [loading, setLoading] = useState<boolean>(false);
-  /**
-   * Submits the form. It adds a new email to the email list.
-   * @param data The email to be added.
-   * @async The function is asynchronous.
-   * @throws The function throws an error if it encounters an error.
-   * @returns The result of the form submission.
-   */
+
   const onSubmit = async (data: any) => {
     setLoading(true);
-    const payload: Omit<any, 'id'> = {
-      senderCompany: data?.senderCompany,
-      senderFullName: data?.senderFullName,
-      senderJobTitle: data?.senderJobTitle,
-      senderPhone: data?.senderPhone,
-      senderWebsite: data?.senderWebsite
+    const payload: IConnectedMailGenerateUrl = {
+      senderInfoId: Number(data?.sender),
+      connectionType: 1
     };
     try {
-      const res =
-        await EmaSenderInformationService.getInstance().createSenderInformation(
-          payload
-        );
+      const res = await EmaConnectedMailsService.getInstance().generateUrl(
+        payload
+      );
       if (res.isSuccess) {
-        onOpenChange();
-        toast.success(t('successTxt'), toastOptions);
-        reloadData();
+        console.log(res);
+        window.location.href = res?.data?.redirectUrl;
       }
     } catch (err) {
       console.log(err);
@@ -121,7 +112,7 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
                       control={control}
                       label={selectPlaceholderText(t('sender'))}
                       // className="app-select text-base sm:text-xl"
-                      options={industriesOptions}
+                      options={senderInformationList?.data}
                       errors={errors}
                     />
                   </div>
@@ -152,8 +143,8 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
                 <AppHandledBorderedButton
                   title="Add Email"
                   aria-label="Add Email"
+                  isDisabled
                   form="sender-information-add-form"
-                  isLoading={loading}
                   type="submit"
                   className="w-72"
                 >
@@ -163,8 +154,8 @@ function ConnectMailsModal({ isOpen, onOpenChange, reloadData }: IModalProps) {
                 <AppHandledBorderedButton
                   title="Add Email"
                   aria-label="Add Email"
+                  isDisabled
                   form="sender-information-add-form"
-                  isLoading={loading}
                   type="submit"
                   className="w-72"
                 >

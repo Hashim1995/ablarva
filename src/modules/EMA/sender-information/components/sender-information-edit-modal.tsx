@@ -22,8 +22,9 @@ import { toast } from 'react-toastify';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledSelect from '@/components/forms/select/handled-select';
-import { useSelector } from 'react-redux';
-import { RootState } from '@/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchSenderInformationList } from '@/redux/ema/ema-slice';
+import { AppDispatch, RootState } from '@/redux/store';
 import { ISenderInformationItem } from '../types';
 
 interface IModalProps {
@@ -75,6 +76,7 @@ function SenderInformationEditModal({
     defaultValues: async () => getSenderInformationItem()
   });
   const { jobTitleList } = useSelector((state: RootState) => state.ema);
+  const dispatch = useDispatch<AppDispatch>();
 
   const [loading, setLoading] = useState<boolean>(false);
   /**
@@ -103,6 +105,7 @@ function SenderInformationEditModal({
         onOpenChange();
         toast.success(t('successTxt'), toastOptions);
         reloadData();
+        dispatch(fetchSenderInformationList());
       }
     } catch (err) {
       console.log(err);
