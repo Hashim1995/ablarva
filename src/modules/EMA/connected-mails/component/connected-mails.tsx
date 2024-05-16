@@ -26,14 +26,22 @@ import amazon from '@assets/icons/amazon.svg';
 import { BsPen, BsTrash3 } from 'react-icons/bs';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { useSelector } from 'react-redux';
+import { toast } from 'react-toastify';
 import { RootState } from '@/redux/store';
 import microsoft from '@assets/icons/microsoft.svg';
 import { EmaConnectedMailsService } from '@/services/ema/ema-connected-mails-services';
 import { IHTTPSParams } from '@/services/adapter-config/config';
 import Empty from '@/components/layout/empty';
+import { useLocation, useNavigate } from 'react-router-dom';
+import { toastOptions } from '@/configs/global-configs';
 import AppHandledRemoveModal from '@/components/layout/remove-modal';
-import { IConnectedMailItem, IConnectedMailListResponse } from '../types';
+import {
+  IConnectedMailItem,
+  IConnectedMailListResponse,
+  IConnectedMailValidateUrl
+} from '../types';
 import ConnectMailsModal from './connect-mails-modal';
+import useHandleUrlCallback from './usehandleUrlCallback';
 
 const returnIcon = (emailProviderType: number) => {
   switch (emailProviderType) {
@@ -52,7 +60,10 @@ function ConnectedMails() {
   const [toggleLoading, setToggleLoading] = useState(false);
   const [removeLoading, setRemoveLoading] = useState(false);
   const [selectedItem, setselectedItem] = useState<IConnectedMailItem>();
+  const navigate = useNavigate();
+  const location = useLocation();
 
+  const successDetails = useHandleUrlCallback();
   const {
     control,
     formState: { errors }
@@ -92,6 +103,7 @@ function ConnectedMails() {
       setToggleLoading(false);
     }
   };
+
   const fetchConnectedMails = async (query?: IHTTPSParams[]) => {
     setLoading(true);
 
@@ -101,25 +113,16 @@ function ConnectedMails() {
         setData(res?.data);
         setLoading(false);
       }
-      console.log(res?.data, 'test');
     } catch (err) {
       console.log(err);
     }
   };
 
-  useEffect(() => {
-    if (selectedSender) {
-      fetchConnectedMails([{ name: 'senderId', value: selectedSender }]);
-    } else {
-      fetchConnectedMails();
-    }
-  }, [selectedSender]);
-
   const removeSenderInformation = async () => {
     setRemoveLoading(true);
     try {
       const res =
-        await EmaConnectedMailsService.getInstance().removeSenderInformation(
+        await EmaConnectedMailsService.getInstance().removeConnectedMail(
           selectedItem?.id
         );
       if (res.isSuccess) {
@@ -132,6 +135,41 @@ function ConnectedMails() {
     setRemoveLoading(false);
   };
 
+  const validateUrl = async (par: IConnectedMailValidateUrl) => {
+    setLoading(true);
+    const payload: IConnectedMailValidateUrl = {
+      code: par?.code,
+      scope: par?.scope,
+      state: par?.state
+    };
+    try {
+      const res = await EmaConnectedMailsService.getInstance().validateUrl(
+        payload
+      );
+      if (res.isSuccess) {
+        fetchConnectedMails();
+        toast.success(t('successTxt'), toastOptions);
+      }
+    } catch (err) {
+      console.log(err);
+    } finally {
+      navigate(location.pathname, { replace: true });
+    }
+    setLoading(false);
+  };
+
+  useEffect(() => {
+    if (successDetails) {
+      validateUrl(successDetails);
+    }
+  }, [successDetails]);
+  useEffect(() => {
+    if (selectedSender) {
+      fetchConnectedMails([{ name: 'senderId', value: selectedSender }]);
+    } else {
+      fetchConnectedMails();
+    }
+  }, [selectedSender]);
   return (
     <div className="p-5 w-full h-screen overflow-auto remove-scrollbar">
       <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
@@ -147,7 +185,7 @@ function ConnectedMails() {
               className="ml-4 cursor-default"
               size="sm"
             >
-              3/3
+              {data?.length}/3
             </AppHandledBorderedButton>
           </div>
 
@@ -173,6 +211,9 @@ function ConnectedMails() {
               onClick={connectModalOnOpen}
               title="Add"
               aria-label="Add"
+              buttonProps={{
+                isDisabled: data?.length >= 3
+              }}
             >
               {t('connect')}
             </AppHandledSolidButton>
