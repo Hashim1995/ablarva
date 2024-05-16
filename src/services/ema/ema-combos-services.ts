@@ -20,7 +20,7 @@ export class EmaCombosServices {
    * Constructs a new instance of the EmaCombosServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the EmaCombosServices class.
@@ -46,10 +46,7 @@ export class EmaCombosServices {
     return res;
   }
 
-
-  public async getJobTitleList(
-    onError?: ErrorCallBack
-  ): Promise<IListReponse> {
+  public async getJobTitleList(onError?: ErrorCallBack): Promise<IListReponse> {
     const res = await HttpUtil.get(
       `api/client/common/jobTitles`,
       null,

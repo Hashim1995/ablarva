@@ -11,7 +11,7 @@ interface IListState {
 
 interface RootState {
   jobTitleList: IListState;
-  senderInformationList: IListState
+  senderInformationList: IListState;
   // You can add more lists here
 }
 
@@ -45,7 +45,8 @@ export const fetchSenderInformationList = createAsyncThunk(
   'user/fetchSenderInformationList',
   async () => {
     try {
-      const response = await EmaCombosServices.getInstance().getSenderInformationList();
+      const response =
+        await EmaCombosServices.getInstance().getSenderInformationList();
       return response.data;
     } catch (err) {
       throw err;
