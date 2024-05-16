@@ -29,12 +29,14 @@ import Editor, {
   Toolbar
 } from 'react-simple-wysiwyg';
 import useDarkMode from 'use-dark-mode';
+import { ILeadItem } from '../types';
 
 interface IProps {
   setQuickMailDrawer: setState<boolean>;
+  selectedLeads: ILeadItem[];
 }
 
-function QuickMail({ setQuickMailDrawer }: IProps) {
+function QuickMail({ setQuickMailDrawer, selectedLeads }: IProps) {
   const {
     handleSubmit,
     formState: { errors },
@@ -47,11 +49,22 @@ function QuickMail({ setQuickMailDrawer }: IProps) {
     console.log('a');
   }
   const [html, setHtml] = useState('my <b>HTML</b>');
+  const [handledLeads, setHandledLeads] = useState(selectedLeads || []);
+
   function onChange(e: any) {
     setHtml(e.target.value);
   }
 
   const darkMode = useDarkMode(false);
+
+  const handleClose = (leadToRemove: ILeadItem) => {
+    setHandledLeads(prev =>
+      prev.filter((lead: ILeadItem) => lead !== leadToRemove)
+    );
+    if (handledLeads.length === 1) {
+      setHandledLeads(selectedLeads);
+    }
+  };
 
   return (
     <main className="flex flex-col justify-between h-full overflow-y-auto remove-scrollbar">
@@ -83,66 +96,17 @@ function QuickMail({ setQuickMailDrawer }: IProps) {
                 hideScrollBar
                 className="flex flex-wrap gap-2 max-h-28 overflow-y-auto max-h"
               >
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Information technologies
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Information technologies
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Marketing
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Sales
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Machine learning
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Alternative Energy
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Information technologies
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Marketing
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Sales
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Machine learning
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Alternative Energy
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Information technologies
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Marketing
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Sales
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Machine learning
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Alternative Energy
-                </Chip>
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Marketing
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Sales
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Machine learning
-                </Chip>{' '}
-                <Chip variant="bordered" className="h-7" size="sm">
-                  Alternative Energy
-                </Chip>
+                {handledLeads.map((lead: ILeadItem) => (
+                  <Chip
+                    key={lead?.id}
+                    onClose={() => handleClose(lead)}
+                    variant="bordered"
+                    className="h-7"
+                    size="sm"
+                  >
+                    {lead?.email}
+                  </Chip>
+                ))}
               </ScrollShadow>
             </div>
           </div>

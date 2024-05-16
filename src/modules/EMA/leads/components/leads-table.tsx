@@ -44,7 +44,7 @@ interface IProps {
 function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
   const [selectionState, setSelectionState] = useState({
     allSelected: false,
-    selectedRows: []
+    selectedRows: [] as ILeadItem[]
   });
   const [quickMailDrawer, setQuickMailDrawer] = useState(false);
 
@@ -54,24 +54,27 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
     onOpenChange: viewOnOpenChange
   } = useDisclosure();
 
-  const toggleRowSelection = (id: string) => {
-    setSelectionState(prevSelection => {
-      const newSelectedRows = prevSelection.selectedRows.includes(id)
-        ? prevSelection.selectedRows.filter(rowId => rowId !== id)
-        : [...prevSelection.selectedRows, id];
+  const toggleRowSelection = (item: ILeadItem) => {
+    setSelectionState(prev => {
+      const isSelected = prev.selectedRows.some(row => row.id === item.id);
+      const selectedRows = isSelected
+        ? prev.selectedRows.filter(row => row.id !== item.id)
+        : [...prev.selectedRows, item];
 
-      const allSelected = newSelectedRows.length === data.length;
-
-      return { ...prevSelection, allSelected, selectedRows: newSelectedRows };
+      return {
+        ...prev,
+        allSelected: selectedRows.length === data.length,
+        selectedRows
+      };
     });
   };
 
   const toggleAllRowsSelection = () => {
-    setSelectionState(prevSelection => {
-      const allSelected = !prevSelection.allSelected;
-      const selectedRows = allSelected ? data.map(item => item.id) : [];
-
-      return { ...prevSelection, allSelected, selectedRows };
+    setSelectionState(prev => {
+      if (prev.allSelected) {
+        return { allSelected: false, selectedRows: [] };
+      }
+      return { allSelected: true, selectedRows: [...data] };
     });
   };
   useEffect(() => {
@@ -89,12 +92,11 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
       >
         <TableCell>
           <Checkbox
-            className={`${selectionState.selectedRows.includes(item.id)}`}
             isSelected={
-              selectionState.selectedRows.includes(item.id) ||
-              selectionState?.allSelected
+              selectionState.selectedRows.some(row => row.id === item.id) ||
+              selectionState.allSelected
             }
-            onChange={() => toggleRowSelection(item.id)}
+            onChange={() => toggleRowSelection(item)}
           />
         </TableCell>
         <TableCell>{item?.name}</TableCell>
@@ -221,7 +223,10 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
         className="bg-content1 h-full"
       >
         {quickMailDrawer && (
-          <QuickMail setQuickMailDrawer={setQuickMailDrawer} />
+          <QuickMail
+            selectedLeads={selectionState?.selectedRows}
+            setQuickMailDrawer={setQuickMailDrawer}
+          />
         )}
       </AppHandledDrawer>
     </div>
