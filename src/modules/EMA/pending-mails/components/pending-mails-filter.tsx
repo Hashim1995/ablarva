@@ -12,7 +12,7 @@ import {
 import { selectPlaceholderText } from '@/utils/constants/texts';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
-import { MdRefresh } from 'react-icons/md';
+import { MdRefresh, MdSearch } from 'react-icons/md';
 
 function PendingMailsFilter() {
   const {
@@ -140,7 +140,7 @@ function PendingMailsFilter() {
             </div>
             <div className="right flex flex-col items-end gap-2 w-40">
               <AppHandledSolidButton type="submit">
-                {t('search')}
+                <MdSearch size={21} />
               </AppHandledSolidButton>
               <AppHandledBorderedButton type="button" onClick={() => reset()}>
                 <MdRefresh size={20} />
