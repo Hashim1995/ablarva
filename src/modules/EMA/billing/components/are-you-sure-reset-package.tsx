@@ -26,7 +26,7 @@ interface IPricingModal {
  * @param loading The loading state.
  * @returns The rendered pricing modal.
  */
-function BuyVerifyModal({
+function AreYouSureResetPackage({
   isOpen,
   onOpenChange,
   onOkFunction,
@@ -80,4 +80,4 @@ function BuyVerifyModal({
   );
 }
 
-export default BuyVerifyModal;
+export default AreYouSureResetPackage;

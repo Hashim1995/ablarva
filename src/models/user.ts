@@ -69,6 +69,8 @@ export interface IUserSessions {
 }
 
 export interface IUserCurrentSubscription {
+  isFreeTrial: boolean;
+  renewalType: 1 | 2;
   endDate: string;
   packageDescription: string;
   packageId: number;
@@ -89,4 +91,4 @@ export interface IUserData {
   userSessions: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }

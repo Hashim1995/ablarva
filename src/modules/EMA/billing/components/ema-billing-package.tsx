@@ -1,9 +1,16 @@
+/* eslint-disable react/jsx-no-bind */
+/* eslint-disable no-unused-vars */
 /* eslint-disable no-nested-ternary */
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import { RootState } from '@/redux/store';
+import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
-import React, { Dispatch, SetStateAction } from 'react';
+import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import useDarkMode from 'use-dark-mode';
 import { IEmaPackageItem, IEmaPackageItemLimitDetails } from '../types';
 
@@ -16,6 +23,8 @@ interface IEmaBillingPackageProps {
   packageId: number;
   buyModalOnOpen: () => void;
   modalEmailOnOpen: () => void;
+  buyDirectly: (id: IEmaPackageItem['packageId']) => void;
+
   setWantedPackageId: Dispatch<SetStateAction<number>>;
 }
 
@@ -37,11 +46,30 @@ function EmaBillingPackage({
   verified,
   packageId,
   buyModalOnOpen,
-  modalEmailOnOpen
+  modalEmailOnOpen,
+  buyDirectly
 }: IEmaBillingPackageProps): React.ReactElement {
   const { t } = useTranslation();
 
+  const { currentSubscription } = useSelector(
+    (state: RootState) => state.user.user
+  );
+
   const darkMode = useDarkMode(false);
+  const navigate = useNavigate();
+  const [cancelLoading, setCancelLoading] = useState(false);
+
+  async function cancelSubscription() {
+    setCancelLoading(true);
+    try {
+      await EmaBillingServices.getInstance().cancelSubscription();
+      navigate('/');
+    } catch (err) {
+      console.log(err);
+    } finally {
+      setCancelLoading(false);
+    }
+  }
 
   return (
     <Card
@@ -71,27 +99,45 @@ function EmaBillingPackage({
           ))}
         </ul>
       </CardBody>
+      <div className="flex items-center gap-2 mt-4 py-2">
+        {packageId === item.packageId && (
+          <AppHandledBorderedButton
+            title="Cancel package"
+            aria-label="Cancel package"
+            color="danger"
+            onClick={cancelSubscription}
+            className="w-1/2"
+            isLoading={cancelLoading}
+          >
+            {t('cancel')}
+          </AppHandledBorderedButton>
+        )}
 
-      <AppHandledSolidButton
-        title="Join Now"
-        aria-label="Join Now"
-        onClick={() => {
-          // If the user is not verified, open the email modal. Otherwise, open the buy modal.
-          if (!verified) {
-            modalEmailOnOpen();
-          } else {
-            setWantedPackageId(item.packageId);
-            buyModalOnOpen();
-          }
-        }}
-        className="mt-4 py-2 rounded-lg w-full"
-      >
-        {packageId === item.packageId
-          ? t('updatePackage')
-          : item?.hasFreeTrial
-          ? t('startFreeTrial')
-          : t('joinNow')}
-      </AppHandledSolidButton>
+        <AppHandledSolidButton
+          title="Join Now"
+          aria-label="Join Now"
+          onClick={() => {
+            // If the user is not verified, open the email modal. Otherwise, open the buy modal.
+            if (!verified) {
+              modalEmailOnOpen();
+            } else {
+              setWantedPackageId(item.packageId);
+              if (currentSubscription) {
+                buyModalOnOpen();
+              } else {
+                buyDirectly(item.packageId);
+              }
+            }
+          }}
+          className={` ${packageId === item.packageId ? 'w-1/2' : 'w-full'}`}
+        >
+          {packageId === item.packageId
+            ? t('renew')
+            : item?.hasFreeTrial
+            ? t('startFreeTrial')
+            : t('joinNow')}
+        </AppHandledSolidButton>
+      </div>
     </Card>
   );
 }

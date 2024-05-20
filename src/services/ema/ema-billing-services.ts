@@ -3,14 +3,13 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-
-import { IEmaPackageListResponse } from '@/modules/EMA/billing/types';
+import { IGlobalResponseEmpty } from '@/models/common';
+import { IEmaPackageItem, IEmaPackageListResponse } from '@/modules/EMA/billing/types';
 import {
   ErrorCallBack,
   HttpUtil,
   IHTTPSParams
 } from '../adapter-config/config';
-
 
 /**
  * Represents a EmaBillingServices class. It contains methods for payment services. It is a singleton class. It is used to get pricing list, buy a packet, and get transactions. It uses the HttpUtil class for HTTP requests. It is used in the Pricing module.
@@ -53,12 +52,7 @@ export class EmaBillingServices {
   public async getPackages(
     onError?: ErrorCallBack
   ): Promise<IEmaPackageListResponse> {
-    const res = await HttpUtil.get(
-      `api/client/packages`,
-      null,
-      false,
-      onError
-    );
+    const res = await HttpUtil.get(`api/client/packages`, null, false, onError);
     return res;
   }
 
@@ -68,10 +62,7 @@ export class EmaBillingServices {
    * @param onError - Optional callback function to handle errors.
    * @returns A promise that resolves to the buy packet service response.
    */
-  public async buyPacket(
-    body: any,
-    onError?: ErrorCallBack
-  ): Promise<any> {
+  public async buyPacket(body: Pick<IEmaPackageItem, 'packageId'>, onError?: ErrorCallBack): Promise<any> {
     const res = await HttpUtil.post('api/client/transactions', body, onError);
     return res;
   }
@@ -93,5 +84,10 @@ export class EmaBillingServices {
       onError
     );
     return res;
+  }
+
+  public async cancelSubscription(onError?: ErrorCallBack): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.put('api/client/subscriptions/cancel', null, onError)
+    return res
   }
 }

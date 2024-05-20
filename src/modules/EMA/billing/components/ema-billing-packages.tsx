@@ -6,9 +6,9 @@ import { useDisclosure, Skeleton } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import EmaPackageBuyModal from './ema-buy-verify-modal';
-import { IEmaPackageListResponse } from '../types';
+import { IEmaPackageItem, IEmaPackageListResponse } from '../types';
 import PackageItem from './ema-billing-package';
+import AreYouSureResetPackage from './are-you-sure-reset-package';
 
 function EmaBillingPackages() {
   const [packagesList, setPackagesList] =
@@ -48,10 +48,10 @@ function EmaBillingPackages() {
     fetchPricing();
   }, []);
 
-  const buyPackage = async () => {
+  const buyPackage = async (id?: IEmaPackageItem['packageId']) => {
     setBuyPackageLoader(true);
-    const payload: any = {
-      packageId: wantedPackageId
+    const payload: Pick<IEmaPackageItem, 'packageId'> = {
+      packageId: id || wantedPackageId
     };
     try {
       const res = await EmaBillingServices.getInstance().buyPacket(payload);
@@ -75,9 +75,10 @@ function EmaBillingPackages() {
             <div>
               {packagesList?.length > 0 ? (
                 <div className="flex ld:justify-between xl:justify-evenly lg:gap-2 xl:gap-5 space-x-4">
-                  {packagesList?.map((item: any) => (
+                  {packagesList?.map((item: IEmaPackageItem) => (
                     <PackageItem
                       item={item}
+                      buyDirectly={buyPackage}
                       setWantedPackageId={setWantedPackageId}
                       verified={verified}
                       key={item?.packageId}
@@ -113,7 +114,7 @@ function EmaBillingPackages() {
          * @returns The rendered pricing modal.
          */}
         {buyModalIsOpen && (
-          <EmaPackageBuyModal
+          <AreYouSureResetPackage
             loading={buyPackageLoader}
             onOkFunction={buyPackage}
             onOpenChange={buyModalOnOpenChange}

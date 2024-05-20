@@ -1,6 +1,4 @@
-import { IGlobalResponse } from "@/models/common";
-
-
+import { IGlobalResponse } from '@/models/common';
 
 interface IEmaPackageItemLimitDetails {
   label: string;
@@ -8,20 +6,21 @@ interface IEmaPackageItemLimitDetails {
 }
 
 interface IEmaPackageItem {
-  packageId: number,
-  packageName: string,
-  price: number,
-  packageDescription: string,
-  hasFreeTrial: boolean,
-  freeTrialPeriod: number,
-  limitDetails: IEmaPackageItemLimitDetails[]
+  packageId: number;
+  packageName: string;
+  price: number;
+  packageDescription: string;
+  hasFreeTrial: boolean;
+  freeTrialPeriod: number;
+  limitDetails: IEmaPackageItemLimitDetails[];
 }
 
 interface IEmaPackageListResponse extends IGlobalResponse {
-  data: IEmaPackageItem[]
+  data: IEmaPackageItem[];
 }
 
 export type {
-  IEmaPackageItem, IEmaPackageItemLimitDetails,
+  IEmaPackageItem,
+  IEmaPackageItemLimitDetails,
   IEmaPackageListResponse
-}
+};
