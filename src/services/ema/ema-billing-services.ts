@@ -4,7 +4,10 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponseEmpty } from '@/models/common';
-import { IEmaPackageItem, IEmaPackageListResponse } from '@/modules/EMA/billing/types';
+import {
+  IEmaPackageItem,
+  IEmaPackageListResponse
+} from '@/modules/EMA/billing/types';
 import {
   ErrorCallBack,
   HttpUtil,
@@ -29,7 +32,7 @@ export class EmaBillingServices {
    * Constructs a new instance of the EmaBillingServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the EmaBillingServices class.
@@ -62,7 +65,10 @@ export class EmaBillingServices {
    * @param onError - Optional callback function to handle errors.
    * @returns A promise that resolves to the buy packet service response.
    */
-  public async buyPacket(body: Pick<IEmaPackageItem, 'packageId'>, onError?: ErrorCallBack): Promise<any> {
+  public async buyPacket(
+    body: Pick<IEmaPackageItem, 'packageId'>,
+    onError?: ErrorCallBack
+  ): Promise<any> {
     const res = await HttpUtil.post('api/client/transactions', body, onError);
     return res;
   }
@@ -86,8 +92,14 @@ export class EmaBillingServices {
     return res;
   }
 
-  public async cancelSubscription(onError?: ErrorCallBack): Promise<IGlobalResponseEmpty> {
-    const res = await HttpUtil.put('api/client/subscriptions/cancel', null, onError)
-    return res
+  public async cancelSubscription(
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponseEmpty> {
+    const res = await HttpUtil.put(
+      'api/client/subscriptions/cancel',
+      null,
+      onError
+    );
+    return res;
   }
 }

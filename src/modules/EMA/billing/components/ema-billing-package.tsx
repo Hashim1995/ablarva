@@ -3,13 +3,14 @@
 /* eslint-disable no-nested-ternary */
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
-import { RootState } from '@/redux/store';
+import { fetchUserData } from '@/redux/auth/auth-slice';
+import { AppDispatch, RootState } from '@/redux/store';
 import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import React, { Dispatch, SetStateAction, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import useDarkMode from 'use-dark-mode';
 import { IEmaPackageItem, IEmaPackageItemLimitDetails } from '../types';
@@ -57,12 +58,15 @@ function EmaBillingPackage({
 
   const darkMode = useDarkMode(false);
   const navigate = useNavigate();
+  const dispatch = useDispatch<AppDispatch>();
   const [cancelLoading, setCancelLoading] = useState(false);
 
   async function cancelSubscription() {
     setCancelLoading(true);
     try {
       await EmaBillingServices.getInstance().cancelSubscription();
+      dispatch(fetchUserData());
+
       navigate('/');
     } catch (err) {
       console.log(err);

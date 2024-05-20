@@ -91,4 +91,4 @@ export interface IUserData {
   userSessions: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}
