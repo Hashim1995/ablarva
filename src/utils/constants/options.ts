@@ -182,18 +182,57 @@ const markdownOptions: MarkdownToJSX.Options = {
 };
 
 const industriesOptions: selectOption[] = [
-  {
-    value: '1',
-    label: 'Tech'
-  },
-  {
-    value: '2',
-    label: 'Marketing'
-  },
-  {
-    value: '3',
-    label: 'Machine learning'
-  }
+  { value: '1', label: 'Tech' },
+  { value: '2', label: 'Marketing' },
+  { value: '3', label: 'Machine learning' },
+  { value: '4', label: 'Biotechnology' },
+  { value: '5', label: 'Healthcare' },
+  { value: '6', label: 'Education' },
+  { value: '7', label: 'Finance' },
+  { value: '8', label: 'Insurance' },
+  { value: '9', label: 'Real Estate' },
+  { value: '10', label: 'Retail' },
+  { value: '11', label: 'Manufacturing' },
+  { value: '12', label: 'Transportation' },
+  { value: '13', label: 'Construction' },
+  { value: '14', label: 'Energy' },
+  { value: '15', label: 'Agriculture' },
+  { value: '16', label: 'Mining' },
+  { value: '17', label: 'Legal' },
+  { value: '18', label: 'Art & Design' },
+  { value: '19', label: 'Entertainment' },
+  { value: '20', label: 'Hospitality' },
+  { value: '21', label: 'Nonprofit' },
+  { value: '22', label: 'Government' },
+  { value: '23', label: 'Consulting' },
+  { value: '24', label: 'Food & Beverages' },
+  { value: '25', label: 'Telecommunications' },
+  { value: '26', label: 'Sports' },
+  { value: '27', label: 'Publishing' },
+  { value: '28', label: 'Fashion' },
+  { value: '29', label: 'Media' },
+  { value: '30', label: 'Advertising' },
+  { value: '31', label: 'Automotive' },
+  { value: '32', label: 'Aerospace' },
+  { value: '33', label: 'Chemicals' },
+  { value: '34', label: 'Computers' },
+  { value: '35', label: 'Electronics' },
+  { value: '36', label: 'Security' },
+  { value: '37', label: 'Maritime' },
+  { value: '38', label: 'Pharmaceuticals' },
+  { value: '39', label: 'Recreational' },
+  { value: '40', label: 'Utilities' },
+  { value: '41', label: 'Logistics' },
+  { value: '42', label: 'Crafts' },
+  { value: '43', label: 'Human Resources' },
+  { value: '44', label: 'Public Relations' },
+  { value: '45', label: 'Environment' },
+  { value: '46', label: 'Veterinary' },
+  { value: '47', label: 'Space' },
+  { value: '48', label: 'Archaeology' },
+  { value: '49', label: 'Meteorology' },
+  { value: '50', label: 'Oceanography' }
+
 ];
 
 const companySizeOptions: selectOption[] = [
