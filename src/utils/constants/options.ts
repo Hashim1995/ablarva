@@ -232,7 +232,6 @@ const industriesOptions: selectOption[] = [
   { value: '48', label: 'Archaeology' },
   { value: '49', label: 'Meteorology' },
   { value: '50', label: 'Oceanography' }
-
 ];
 
 const companySizeOptions: selectOption[] = [

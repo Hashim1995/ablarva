@@ -8,7 +8,7 @@ import {
   Divider
 } from '@nextui-org/react';
 import { useTranslation } from 'react-i18next';
-import EmaPricing from './ema-pricing';
+import EmaBillingPackages from './ema-billing-packages';
 
 interface IPricingModal {
   isOpen: boolean;
@@ -44,7 +44,7 @@ function PricingModal({ isOpen, onOpenChange }: IPricingModal) {
 
               <ModalBody>
                 <div className="flex flex-col w-full">
-                  <EmaPricing />
+                  <EmaBillingPackages />
                 </div>
               </ModalBody>
               <ModalFooter>

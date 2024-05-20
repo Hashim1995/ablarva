@@ -1,16 +1,17 @@
+/* eslint-disable no-nested-ternary */
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
-import { ILimitItem, IPackageItem } from '@/models/payment';
 
 import { Card, CardBody, CardHeader } from '@nextui-org/react';
 import React, { Dispatch, SetStateAction } from 'react';
 import { useTranslation } from 'react-i18next';
 import useDarkMode from 'use-dark-mode';
+import { IEmaPackageItem, IEmaPackageItemLimitDetails } from '../types';
 
 /**
  * Props for the EmaBillingPackage component.
  */
 interface IEmaBillingPackageProps {
-  item: IPackageItem;
+  item: IEmaPackageItem;
   verified: boolean;
   packageId: number;
   buyModalOnOpen: () => void;
@@ -55,12 +56,14 @@ function EmaBillingPackage({
     >
       <CardHeader className="flex flex-col text-center">
         <h2 className="text-lg">{item?.packageName}</h2>
-        <p className="font-bold text-3xl">{item?.price} / ay</p>
+        <p className="font-bold text-3xl">
+          {item?.price} AZN / {t('month')}
+        </p>
         <p className="text-sm">{item?.packageDescription}</p>
       </CardHeader>
       <CardBody>
         <ul className="">
-          {item?.limitDetails?.map((limit: ILimitItem) => (
+          {item?.limitDetails?.map((limit: IEmaPackageItemLimitDetails) => (
             <li className="flex justify-between items-center mt-2 text-sm">
               <span>{limit?.label}</span>
               <span>{limit?.price}</span>
@@ -83,7 +86,11 @@ function EmaBillingPackage({
         }}
         className="mt-4 py-2 rounded-lg w-full"
       >
-        {packageId === item.packageId ? t('updatePackage') : t('joinNow')}
+        {packageId === item.packageId
+          ? t('updatePackage')
+          : item?.hasFreeTrial
+          ? t('startFreeTrial')
+          : t('joinNow')}
       </AppHandledSolidButton>
     </Card>
   );

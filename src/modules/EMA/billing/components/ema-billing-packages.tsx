@@ -1,18 +1,18 @@
 import Empty from '@/components/layout/empty';
 import VerifyEmail from '@/core/static-components/verify-email';
-import { IPackageData, IPackageItem } from '@/models/payment';
 import { RootState } from '@/redux/store';
 import { EmaBillingServices } from '@/services/ema/ema-billing-services';
 import { useDisclosure, Skeleton } from '@nextui-org/react';
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import PricingModal from '../ema-buy-verify-modal';
-import PricingItem from './ema-billing-package';
-import { IBuyPacketBody } from '../types';
+import EmaPackageBuyModal from './ema-buy-verify-modal';
+import { IEmaPackageListResponse } from '../types';
+import PackageItem from './ema-billing-package';
 
 function EmaBillingPackages() {
-  const [data, setData] = useState<IPackageData>();
+  const [packagesList, setPackagesList] =
+    useState<IEmaPackageListResponse['data']>();
   const [loading, setLoading] = useState<boolean>(true);
   const {
     isOpen: buyModalIsOpen,
@@ -32,15 +32,11 @@ function EmaBillingPackages() {
     (state: RootState) => state.user.user.currentSubscription?.packageId
   );
 
-  /**
-   * @description Fetches the pricing data.
-   * @returns The pricing data.
-   */
   async function fetchPricing() {
     try {
-      const res = await EmaBillingServices.getInstance().getPricingList(2);
+      const res = await EmaBillingServices.getInstance().getPackages();
       if (res.isSuccess) {
-        setData(res?.data);
+        setPackagesList(res?.data);
       }
     } catch (err) {
       console.log(err);
@@ -52,12 +48,9 @@ function EmaBillingPackages() {
     fetchPricing();
   }, []);
 
-  /**
-   * @description Buys a package.
-   */
   const buyPackage = async () => {
     setBuyPackageLoader(true);
-    const payload: IBuyPacketBody = {
+    const payload: any = {
       packageId: wantedPackageId
     };
     try {
@@ -80,10 +73,10 @@ function EmaBillingPackages() {
         <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
           {!loading ? (
             <div>
-              {data?.packages?.length > 0 ? (
+              {packagesList?.length > 0 ? (
                 <div className="flex ld:justify-between xl:justify-evenly lg:gap-2 xl:gap-5 space-x-4">
-                  {data?.packages?.map((item: IPackageItem) => (
-                    <PricingItem
+                  {packagesList?.map((item: any) => (
+                    <PackageItem
                       item={item}
                       setWantedPackageId={setWantedPackageId}
                       verified={verified}
@@ -120,7 +113,7 @@ function EmaBillingPackages() {
          * @returns The rendered pricing modal.
          */}
         {buyModalIsOpen && (
-          <PricingModal
+          <EmaPackageBuyModal
             loading={buyPackageLoader}
             onOkFunction={buyPackage}
             onOpenChange={buyModalOnOpenChange}
