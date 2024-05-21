@@ -33,7 +33,7 @@ export class EmaBillingServices {
    * Constructs a new instance of the EmaBillingServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the EmaBillingServices class.
@@ -78,10 +78,13 @@ export class EmaBillingServices {
     body: IEmaBillingEnterpriseForm,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
-    const res = await HttpUtil.post('api/client/subscriptions/enterprise-contact', body, onError);
+    const res = await HttpUtil.post(
+      'api/client/subscriptions/enterprise-contact',
+      body,
+      onError
+    );
     return res;
   }
-
 
   public async getTransactions(
     params: IHTTPSParams[],
