@@ -6,6 +6,7 @@
 import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
   IEmaBillingEnterpriseForm,
+  IEmaBillingHistoryResponse,
   IEmaPackageItem,
   IEmaPackageListResponse
 } from '@/modules/EMA/billing/types';
@@ -33,7 +34,7 @@ export class EmaBillingServices {
    * Constructs a new instance of the EmaBillingServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Gets the singleton instance of the EmaBillingServices class.
@@ -89,7 +90,7 @@ export class EmaBillingServices {
   public async getTransactions(
     params: IHTTPSParams[],
     onError?: ErrorCallBack
-  ): Promise<any> {
+  ): Promise<IEmaBillingHistoryResponse> {
     const res = await HttpUtil.get(
       'api/client/transactions',
       params,
