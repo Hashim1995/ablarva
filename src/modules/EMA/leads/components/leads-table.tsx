@@ -22,26 +22,33 @@ import {
   FcAddDatabase,
   FcAddressBook,
   FcDeleteDatabase,
-  FcFlashOn,
-  FcFullTrash
+  FcFlashOn
 } from 'react-icons/fc';
 
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import AppHandledDrawer from '@/components/layout/drawer/app-handled-drawer';
 import { BsToggles } from 'react-icons/bs';
 import { IoCloseOutline } from 'react-icons/io5';
+import Empty from '@/components/layout/empty';
 import { ILeadItem } from '../types';
 import LeadViewModal from './lead-view-modal';
 import QuickMail from './quick-mail';
 
 interface IProps {
+  tableLoading: boolean;
   data: ILeadItem[];
   setCurrentPage: setState<number>;
   currentPage: number;
   totalCount: number;
 }
-function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
+function LeadsTable({
+  data,
+  tableLoading,
+  setCurrentPage,
+  currentPage,
+  totalCount
+}: IProps) {
   const [selectionState, setSelectionState] = useState({
     allSelected: false,
     selectedRows: [] as ILeadItem[]
@@ -77,9 +84,6 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
       return { allSelected: true, selectedRows: [...data] };
     });
   };
-  useEffect(() => {
-    console.log(selectionState);
-  }, [selectionState]);
 
   const renderRows = () =>
     data?.map(item => (
@@ -102,9 +106,10 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
         <TableCell>{item?.name}</TableCell>
         <TableCell>{item?.company}</TableCell>
         <TableCell>{item?.email}</TableCell>
-        <TableCell>{item?.engaged}</TableCell>
-        <TableCell>{item?.position}</TableCell>
-        <TableCell>{item?.lastContact}</TableCell>
+        <TableCell>{item?.country}</TableCell>
+        <TableCell>{item?.linkedin}</TableCell>
+        <TableCell>{item?.website}</TableCell>
+        <TableCell>{item?.jobTitle}</TableCell>
       </TableRow>
     ));
 
@@ -133,8 +138,8 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
                 isCompact
                 color="default"
                 showControls
+                total={Math.ceil(totalCount / 10)}
                 page={currentPage}
-                total={totalCount}
                 onChange={page => setCurrentPage(page)}
               />
             </div>
@@ -150,11 +155,16 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
             <TableColumn>{t('name').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('company').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('email').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('engaged').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('position').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('lastContact').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('country').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{'LinkedIn'.toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('website').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('jobTitle').toLocaleUpperCase()}</TableColumn>
           </TableHeader>
-          <TableBody isLoading={false} loadingContent={<Spinner />}>
+          <TableBody
+            emptyContent={<Empty />}
+            isLoading={tableLoading}
+            loadingContent={<Spinner />}
+          >
             {renderRows()}
           </TableBody>
         </Table>
