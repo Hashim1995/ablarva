@@ -7,18 +7,17 @@ interface IEmaPackageItemLimitDetails {
 
 interface IEmaBillingHistoryItem {
   amount: number;
-  id: number,
+  id: number;
   orderId: string;
   packageName: string;
-  transactionDate: any,
-
+  transactionDate: any;
 }
 
 interface IEmaBillingHistoryResponse extends IGlobalResponse {
   data: {
-    pagedData: IEmaBillingHistoryItem[],
-    totalPages: number
-  }
+    pagedData: IEmaBillingHistoryItem[];
+    totalPages: number;
+  };
 }
 
 interface IEmaPackageItem {
@@ -48,5 +47,6 @@ export type {
   IEmaPackageItemLimitDetails,
   IEmaPackageListResponse,
   IEmaBillingEnterpriseForm,
-  IEmaBillingHistoryItem, IEmaBillingHistoryResponse
+  IEmaBillingHistoryItem,
+  IEmaBillingHistoryResponse
 };
