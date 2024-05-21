@@ -3,8 +3,9 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
-import { IGlobalResponseEmpty } from '@/models/common';
+import { IGlobalResponse, IGlobalResponseEmpty } from '@/models/common';
 import {
+  IEmaBillingEnterpriseForm,
   IEmaPackageItem,
   IEmaPackageListResponse
 } from '@/modules/EMA/billing/types';
@@ -32,7 +33,7 @@ export class EmaBillingServices {
    * Constructs a new instance of the EmaBillingServices class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Gets the singleton instance of the EmaBillingServices class.
@@ -73,12 +74,15 @@ export class EmaBillingServices {
     return res;
   }
 
-  /**
-   * Retrieves the transactions based on the provided parameters.
-   * @param params - The parameters for the HTTP request.
-   * @param onError - Optional callback function to handle errors.
-   * @returns A promise that resolves to the transaction response.
-   */
+  public async sendEnterpriseRequest(
+    body: IEmaBillingEnterpriseForm,
+    onError?: ErrorCallBack
+  ): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post('api/client/subscriptions/enterprise-contact', body, onError);
+    return res;
+  }
+
+
   public async getTransactions(
     params: IHTTPSParams[],
     onError?: ErrorCallBack

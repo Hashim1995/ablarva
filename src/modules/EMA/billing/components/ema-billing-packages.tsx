@@ -1,19 +1,31 @@
+/* eslint-disable no-nested-ternary */
 import Empty from '@/components/layout/empty';
 import VerifyEmail from '@/core/static-components/verify-email';
 import { RootState } from '@/redux/store';
 import { EmaBillingServices } from '@/services/ema/ema-billing-services';
-import { useDisclosure, Skeleton } from '@nextui-org/react';
+import {
+  useDisclosure,
+  Skeleton,
+  Card,
+  CardBody,
+  CardHeader
+} from '@nextui-org/react';
 import { t } from 'i18next';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
+import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
+import useDarkMode from 'use-dark-mode';
 import { IEmaPackageItem, IEmaPackageListResponse } from '../types';
 import PackageItem from './ema-billing-package';
 import AreYouSureResetPackage from './are-you-sure-reset-package';
+import EmaBillingEnterpriseModal from './ema-billing-enterprise-modal';
 
 function EmaBillingPackages() {
   const [packagesList, setPackagesList] =
     useState<IEmaPackageListResponse['data']>();
   const [loading, setLoading] = useState<boolean>(true);
+  const darkMode = useDarkMode(false);
   const {
     isOpen: buyModalIsOpen,
     onOpen: buyModalOnOpen,
@@ -26,6 +38,13 @@ function EmaBillingPackages() {
     isOpen: modalEmailIsopen,
     onOpen: modalEmailOnOpen,
     onOpenChange: modalEmailOpenChange
+  } = useDisclosure();
+
+  const {
+    isOpen: enterpriseIsopen,
+    onOpen: enterpriseOnOpen,
+    onOpenChange: enterpriseOpenChange,
+    onClose: enterpriseOnClose
   } = useDisclosure();
 
   const packageId = useSelector(
@@ -87,6 +106,63 @@ function EmaBillingPackages() {
                       buyModalOnOpen={buyModalOnOpen}
                     />
                   ))}
+                  <Card
+                    className={` w-full ${
+                      darkMode.value ? 'gradient-bg' : ''
+                    } p-4 rounded-lg shadow-lg w-72 ${
+                      packageId === 0
+                        ? ' border-2  border-success-500'
+                        : 'border-divider border-1'
+                    }`}
+                  >
+                    <CardHeader className="flex flex-col text-center">
+                      <h2 className="text-lg">{t('enterprise')}</h2>
+                      <p className="font-bold text-3xl">{t('ondemand')}</p>
+                      <p className="text-sm"> {t('enterpriseDescription')}</p>
+                    </CardHeader>
+                    <CardBody>
+                      <ul className="">
+                        <li className="flex justify-between items-center mt-2 text-sm">
+                          <span>{t('emailLimits')}</span>
+                          <span>{t('unlimited')}</span>
+                        </li>
+                        <li className="flex justify-between items-center mt-2 text-sm">
+                          <span>{t('leadLimits')}</span>
+                          <span>{t('unlimited')}</span>
+                        </li>
+                      </ul>
+                    </CardBody>
+                    <div className="flex items-center gap-2 mt-4 py-2">
+                      {packageId === 0 && (
+                        <AppHandledBorderedButton
+                          title="Cancel package"
+                          aria-label="Cancel package"
+                          color="danger"
+                          // onClick={cancelSubscription}
+                          className="w-1/2"
+                          // isLoading={cancelLoading}
+                        >
+                          {t('cancel')}
+                        </AppHandledBorderedButton>
+                      )}
+
+                      <AppHandledSolidButton
+                        title="Join Now"
+                        aria-label="Join Now"
+                        onClick={() => {
+                          // If the user is not verified, open the email modal. Otherwise, open the buy modal.
+                          if (!verified) {
+                            modalEmailOnOpen();
+                          } else {
+                            enterpriseOnOpen();
+                          }
+                        }}
+                        className={` ${packageId === 0 ? 'w-1/2' : 'w-full'}`}
+                      >
+                        {packageId === 0 ? t('renew') : t('joinNow')}
+                      </AppHandledSolidButton>
+                    </div>
+                  </Card>
                 </div>
               ) : (
                 <Empty />
@@ -119,6 +195,14 @@ function EmaBillingPackages() {
             onOkFunction={buyPackage}
             onOpenChange={buyModalOnOpenChange}
             isOpen={buyModalIsOpen}
+          />
+        )}
+
+        {enterpriseIsopen && (
+          <EmaBillingEnterpriseModal
+            onOpenChange={enterpriseOpenChange}
+            isOpen={enterpriseIsopen}
+            enterpriseOnClose={enterpriseOnClose}
           />
         )}
 

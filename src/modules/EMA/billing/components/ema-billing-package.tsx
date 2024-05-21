@@ -66,8 +66,6 @@ function EmaBillingPackage({
     try {
       await EmaBillingServices.getInstance().cancelSubscription();
       dispatch(fetchUserData());
-
-      navigate('/');
     } catch (err) {
       console.log(err);
     } finally {

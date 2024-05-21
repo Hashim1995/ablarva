@@ -429,6 +429,15 @@
     "startFreeTrial": "Start free trial",
     "renew": "Renew",
     "cancel": "Cancel",
-    "test": "test"
+    "test": "test",
+    "enterprise": "Enterprise",
+    "enterpriseDescription": "Get unlimited leads and emails",
+    "unlimited": "Unlimited",
+    "emailLimits": "Email limits",
+    "leadLimits": "Lead limits",
+    "ondemand": "On demand",
+    "telephoneNumber": "Telephone number",
+    "companyName": "Company name",
+    "employeeCount": "Employee count"
   }
 }

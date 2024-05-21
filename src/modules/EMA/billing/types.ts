@@ -19,8 +19,16 @@ interface IEmaPackageListResponse extends IGlobalResponse {
   data: IEmaPackageItem[];
 }
 
+interface IEmaBillingEnterpriseForm {
+  name: string,
+  companyName: string,
+  email: string,
+  employeeCount: number | string,
+  telephoneNumber: string
+}
+
 export type {
   IEmaPackageItem,
   IEmaPackageItemLimitDetails,
-  IEmaPackageListResponse
+  IEmaPackageListResponse, IEmaBillingEnterpriseForm
 };

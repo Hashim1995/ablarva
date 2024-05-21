@@ -59,14 +59,14 @@ function AreYouSureResetPackage({
                 <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
-                  onPress={onClose}
+                  onClick={onClose}
                 >
                   {t('noTxt')}
                 </AppHandledBorderedButton>
                 <AppHandledSolidButton
                   title="Yes"
                   aria-label="Yes"
-                  onPress={onOkFunction}
+                  onClick={() => onOkFunction()}
                   isLoading={loading}
                 >
                   {t('yesTxt')}
