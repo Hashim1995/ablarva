@@ -80,11 +80,20 @@ export enum LayoutLanguage {
  */
 type setState<T> = Dispatch<SetStateAction<T>>;
 
+
+interface IDropzoneFile {
+  path: string,
+  lastModifiedDate: Date,
+  name: string,
+  size: number,
+  type: string,
+}
+
 export type {
   IGlobalResponseEmpty,
   selectOption,
   setState,
   IGlobalResponse,
   IMenuItemsNavbar,
-  StatisticsUpdateData
+  StatisticsUpdateData, IDropzoneFile
 };
