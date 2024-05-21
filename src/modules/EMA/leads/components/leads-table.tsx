@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { setState } from '@/models/common';
 import {
   Button,
@@ -13,27 +12,24 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
-  Divider,
   useDisclosure
 } from '@nextui-org/react';
-// import dayjs from 'dayjs';
 import {
   FcAddColumn,
   FcAddDatabase,
-  FcAddressBook,
   FcDeleteDatabase,
   FcFlashOn
 } from 'react-icons/fc';
 
 import { t } from 'i18next';
-import { useEffect, useMemo, useState } from 'react';
+import { useState } from 'react';
 import AppHandledDrawer from '@/components/layout/drawer/app-handled-drawer';
-import { BsToggles } from 'react-icons/bs';
-import { IoCloseOutline } from 'react-icons/io5';
 import Empty from '@/components/layout/empty';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { ILeadItem } from '../types';
 import LeadViewModal from './lead-view-modal';
 import QuickMail from './quick-mail';
+import LeadsAddModal from './leads-add-modal';
 
 interface IProps {
   tableLoading: boolean;
@@ -59,6 +55,11 @@ function LeadsTable({
     isOpen: viewIsOpen,
     onOpen: viewOnOpen,
     onOpenChange: viewOnOpenChange
+  } = useDisclosure();
+  const {
+    isOpen: addIsOpen,
+    onOpen: addOnOpen,
+    onOpenChange: addOnOpenChange
   } = useDisclosure();
 
   const toggleRowSelection = (item: ILeadItem) => {
@@ -115,10 +116,13 @@ function LeadsTable({
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">
-      <div className="relative flex justify-between">
+      <div className="relative flex justify-between items-center pe-6">
         <h3 className="font-semibold text-default-800 text-xl dark:text-white">
           {t('leadsTable')} 😎
         </h3>
+        <AppHandledSolidButton onClick={addOnOpen} form="leads-filter-form">
+          {t('addBtn')}
+        </AppHandledSolidButton>
       </div>
       <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
         <Table
@@ -224,6 +228,9 @@ function LeadsTable({
       </div>
       {viewIsOpen && (
         <LeadViewModal onOpenChange={viewOnOpenChange} isOpen={viewIsOpen} />
+      )}
+      {addIsOpen && (
+        <LeadsAddModal onOpenChange={addOnOpenChange} isOpen={addIsOpen} />
       )}
       <AppHandledDrawer
         open={quickMailDrawer}

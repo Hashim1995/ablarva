@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 
-import { IGlobalResponse } from "@/models/common";
+import { IGlobalResponse } from '@/models/common';
 
 // Use the `EngagedEnum` enumeration
 export enum EngagedEnum {
@@ -11,31 +11,31 @@ export enum EngagedEnum {
 }
 
 interface ILeadItem {
-  id: number,
-  name: string,
-  company: string,
-  email: string,
-  jobTitle: string,
-  website: string,
-  country: string,
-  linkedin: string
+  id: number;
+  name: string;
+  company: string;
+  email: string;
+  jobTitle: string;
+  website: string;
+  country: string;
+  linkedin: string;
 }
 
 interface ILeadListResponse extends IGlobalResponse {
   data: {
-    leads: ILeadItem[],
-    total: number
-  }
+    leads: ILeadItem[];
+    total: number;
+  };
 }
 
 interface ILeadsListForm {
-  name: string,
-  company: string,
-  email: string,
-  jobTitle: string,
-  website: string,
-  country: string,
-  linkedin: string
+  name: string;
+  company: string;
+  email: string;
+  jobTitle: string;
+  website: string;
+  country: string;
+  linkedin: string;
 }
 
 export type { ILeadItem, ILeadsListForm, ILeadListResponse };

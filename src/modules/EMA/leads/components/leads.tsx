@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { IHTTPSParams } from '@/services/adapter-config/config';
 import { EmaLeadsService } from '@/services/ema/ema-leads-services';
 import { useEffect, useState } from 'react';

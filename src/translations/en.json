@@ -440,6 +440,7 @@
     "companyName": "Company name",
     "employeeCount": "Employee count",
     "jobTitle": "Job title",
-    "website": "Website"
+    "website": "Website",
+    "groupName": "Group name"
   }
 }
