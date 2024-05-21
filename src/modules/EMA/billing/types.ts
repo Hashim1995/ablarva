@@ -1,36 +1,52 @@
-interface IPricingListHeader {
-  id: number;
-  title: string;
-  price: string | null;
-  desciption: string | null;
+import { IGlobalResponse } from '@/models/common';
+
+interface IEmaPackageItemLimitDetails {
+  label: string;
+  price: number;
 }
 
-interface IPricingListBody {
-  title: string;
-  chatLimit: number | null;
-  imgLimit: number | null;
-  voiceLimit: number | null;
-}
-
-interface IPricingListData {
-  tHeader: IPricingListHeader[];
-  tBody: IPricingListBody[];
-}
-
-interface IBuyPacketBody {
-  packageId: number;
-}
-interface IBuyPacketResponse {
+interface IEmaBillingHistoryItem {
   amount: number;
+  id: number;
   orderId: string;
-  paymentLink: string;
-  paymentMessage?: string;
-  selectedPackageName: string;
+  packageName: string;
+  transactionDate: any;
 }
+
+interface IEmaBillingHistoryResponse extends IGlobalResponse {
+  data: {
+    pagedData: IEmaBillingHistoryItem[];
+    totalPages: number;
+  };
+}
+
+interface IEmaPackageItem {
+  packageId: number;
+  packageName: string;
+  price: number;
+  packageDescription: string;
+  hasFreeTrial: boolean;
+  freeTrialPeriod: number;
+  limitDetails: IEmaPackageItemLimitDetails[];
+}
+
+interface IEmaPackageListResponse extends IGlobalResponse {
+  data: IEmaPackageItem[];
+}
+
+interface IEmaBillingEnterpriseForm {
+  name: string;
+  companyName: string;
+  email: string;
+  employeeCount: number | string;
+  telephoneNumber: string;
+}
+
 export type {
-  IPricingListBody,
-  IBuyPacketBody,
-  IBuyPacketResponse,
-  IPricingListHeader,
-  IPricingListData
+  IEmaPackageItem,
+  IEmaPackageItemLimitDetails,
+  IEmaPackageListResponse,
+  IEmaBillingEnterpriseForm,
+  IEmaBillingHistoryItem,
+  IEmaBillingHistoryResponse
 };

@@ -1,4 +1,5 @@
 /* eslint-disable no-use-before-define */
+// import AppHandledAutocomplete from '@/components/forms/autocomplete/autocomplete';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledDatePicker from '@/components/forms/date/app-handled-date-picker';
@@ -12,7 +13,7 @@ import {
 import { selectPlaceholderText } from '@/utils/constants/texts';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
-import { MdRefresh } from 'react-icons/md';
+import { MdRefresh, MdSearch } from 'react-icons/md';
 
 function PendingMailsFilter() {
   const {
@@ -94,6 +95,21 @@ function PendingMailsFilter() {
                     errors={errors}
                   />
                 </div>
+                {/* 
+                <div className="w-full">
+                  <AppHandledAutocomplete
+                    name="test"
+                    selectProps={{
+                      id: 'test'
+                    }}
+                    control={control}
+                    label={selectPlaceholderText(t('test'))}
+                    // className="app-select text-base sm:text-xl"
+
+                    options={industriesOptions}
+                    errors={errors}
+                  />
+                </div> */}
                 <div className="w-full">
                   <AppHandledSelect
                     name="sender"
@@ -140,7 +156,7 @@ function PendingMailsFilter() {
             </div>
             <div className="right flex flex-col items-end gap-2 w-40">
               <AppHandledSolidButton type="submit">
-                {t('search')}
+                <MdSearch size={21} />
               </AppHandledSolidButton>
               <AppHandledBorderedButton type="button" onClick={() => reset()}>
                 <MdRefresh size={20} />

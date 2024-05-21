@@ -11,7 +11,7 @@ import {
 } from '@/redux/assistant/assistant-slice';
 import { RootState } from '@/redux/store';
 import VerifyEmail from '@/core/static-components/verify-email';
-import PricingModal from '@/modules/EMA/billing/ema-buy-modal';
+import PricingModal from '@/modules/EMA/billing/components/ema-buy-modal';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { useTranslation } from 'react-i18next';
 import { IAssistantItem } from '../types';
@@ -32,9 +32,9 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
   } = useDisclosure();
 
   const {
-    isOpen: buyIsOpen,
-    onOpen: buyOnOpen,
-    onOpenChange: buyOnOpenChange
+    isOpen: EmaBuyIsOpen,
+    onOpen: EmaBuyOnOpen,
+    onOpenChange: EmaBuyOnOpenChange
   } = useDisclosure();
 
   const { t } = useTranslation();
@@ -85,7 +85,7 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
                   );
                   navigate('/email-marketing');
                 } else {
-                  buyOnOpen();
+                  EmaBuyOnOpen();
                 }
               } else {
                 onOpenVerifyModal();
@@ -108,8 +108,8 @@ function AssistantHomeCard({ item }: { item: IAssistantItem }) {
           isOpen={isOpenVerifyModal}
         />
       )}
-      {buyIsOpen && (
-        <PricingModal onOpenChange={buyOnOpenChange} isOpen={buyIsOpen} />
+      {EmaBuyIsOpen && (
+        <PricingModal onOpenChange={EmaBuyOnOpenChange} isOpen={EmaBuyIsOpen} />
       )}
     </div>
   );

@@ -1,5 +1,4 @@
 import {
-  Chip,
   Spinner,
   Table,
   TableBody,
@@ -17,7 +16,7 @@ import utc from 'dayjs/plugin/utc';
 
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import { useState } from 'react';
-import { ITransactionsItem } from '../../cabinet/types';
+import { IEmaBillingHistoryItem } from '../types';
 
 function EmaBillingHistory() {
   const { t } = useTranslation();
@@ -31,7 +30,7 @@ function EmaBillingHistory() {
    * @throws The function throws an error if it encounters an error.
    * @returns The user's payment history.
    */
-  const list = useAsyncList<ITransactionsItem>({
+  const list = useAsyncList<IEmaBillingHistoryItem>({
     async load({ cursor }) {
       setIsLoading(true);
       try {
@@ -93,7 +92,6 @@ function EmaBillingHistory() {
               <TableColumn>
                 {t('operationDate').toLocaleUpperCase()}
               </TableColumn>
-              <TableColumn>{t('status').toLocaleUpperCase()}</TableColumn>
             </TableHeader>
             <TableBody
               items={list.items}
@@ -106,17 +104,9 @@ function EmaBillingHistory() {
                   <TableCell>{item?.amount} AZN</TableCell>
                   <TableCell>
                     {' '}
-                    {dayjs.utc(item?.transactionDate).format('DD.MM.YYYY')}
-                  </TableCell>
-                  <TableCell>
-                    {' '}
-                    <Chip
-                      className="text-default-900 dark:text-white"
-                      color="success"
-                      aria-label={`Status: ${item?.status}`}
-                    >
-                      {t('active')}
-                    </Chip>
+                    {dayjs
+                      .utc(item?.transactionDate)
+                      .format('DD.MM.YYYY hh:mm')}
                   </TableCell>
                 </TableRow>
               )}

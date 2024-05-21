@@ -26,7 +26,7 @@ interface IPricingModal {
  * @param loading The loading state.
  * @returns The rendered pricing modal.
  */
-function BuyVerifyModal({
+function AreYouSureResetPackage({
   isOpen,
   onOpenChange,
   onOkFunction,
@@ -59,14 +59,14 @@ function BuyVerifyModal({
                 <AppHandledBorderedButton
                   title="Close Modal"
                   aria-label="Close Modal"
-                  onPress={onClose}
+                  onClick={onClose}
                 >
                   {t('noTxt')}
                 </AppHandledBorderedButton>
                 <AppHandledSolidButton
                   title="Yes"
                   aria-label="Yes"
-                  onPress={onOkFunction}
+                  onClick={() => onOkFunction()}
                   isLoading={loading}
                 >
                   {t('yesTxt')}
@@ -80,4 +80,4 @@ function BuyVerifyModal({
   );
 }
 
-export default BuyVerifyModal;
+export default AreYouSureResetPackage;

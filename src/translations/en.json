@@ -426,6 +426,18 @@
     "scheduleAndSendAll": "Schedule and send all",
     "removeModalDescription": "Are you sure you want to permanently delete this data? Please note that this action is irreversible and will result in the loss of all related information.",
     "removeModalTitle": "Confirm Deletion Request",
-    "test": "test"
+    "startFreeTrial": "Start free trial",
+    "renew": "Renew",
+    "cancel": "Cancel",
+    "test": "test",
+    "enterprise": "Enterprise",
+    "enterpriseDescription": "Get unlimited leads and emails",
+    "unlimited": "Unlimited",
+    "emailLimits": "Email limits",
+    "leadLimits": "Lead limits",
+    "ondemand": "On demand",
+    "telephoneNumber": "Telephone number",
+    "companyName": "Company name",
+    "employeeCount": "Employee count"
   }
 }

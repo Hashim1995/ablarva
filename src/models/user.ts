@@ -69,6 +69,8 @@ export interface IUserSessions {
 }
 
 export interface IUserCurrentSubscription {
+  isFreeTrial: boolean;
+  renewalType: 1 | 2;
   endDate: string;
   packageDescription: string;
   packageId: number;
