@@ -1,6 +1,6 @@
 /* eslint-disable no-shadow */
 
-import { IGlobalResponse, } from '@/models/common';
+import { IGlobalResponse } from '@/models/common';
 
 // Use the `EngagedEnum` enumeration
 export enum EngagedEnum {
@@ -42,10 +42,15 @@ interface ILeadsListForm {
 
 interface IUploadLeadsResponse extends IGlobalResponse {
   data: {
-    possibleHeaders: { value: string; label: string; isRequired: boolean }[],
-    supportedHeaders: { value: string; label: string; isRequired: boolean }[]
-    queuedLeadUpload: number,
-  }
+    possibleHeaders: { value: string; label: string; isRequired: boolean }[];
+    supportedHeaders: { value: string; label: string; isRequired: boolean }[];
+    queuedLeadUpload: number;
+  };
 }
 
-export type { ILeadItem, ILeadsListForm, ILeadListResponse, IUploadLeadsResponse };
+export type {
+  ILeadItem,
+  ILeadsListForm,
+  ILeadListResponse,
+  IUploadLeadsResponse
+};

@@ -3,7 +3,10 @@
 /* eslint-disable class-methods-use-this */
 
 import { IGlobalResponse } from '@/models/common';
-import { ILeadListResponse, IUploadLeadsResponse } from '@/modules/EMA/leads/types';
+import {
+  ILeadListResponse,
+  IUploadLeadsResponse
+} from '@/modules/EMA/leads/types';
 import {
   ErrorCallBack,
   HttpUtil,
@@ -14,7 +17,7 @@ export class EmaLeadsService {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaLeadsService | null;
 
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Returns the singleton instance of EmaLeadsService.
@@ -40,18 +43,12 @@ export class EmaLeadsService {
   }
 
   public async submitQuee(
-    payload: Record<string, string | number>
-    ,
+    payload: Record<string, string | number>,
     onError?: ErrorCallBack
   ): Promise<IGlobalResponse> {
-    const res = await HttpUtil.post(
-      'api/client/leads/queue',
-      payload,
-      onError
-    );
+    const res = await HttpUtil.post('api/client/leads/queue', payload, onError);
     return res;
   }
-
 
   public async getList(
     params?: IHTTPSParams[],
