@@ -87,7 +87,7 @@ function LeadsAddModal({ isOpen, onOpenChange }: IProps) {
           {onClose => (
             <>
               <ModalHeader className="flex flex-col gap-1 pr-10 text-default-800 dark:text-white">
-                {t('add')}
+                {t('addBtn')}
               </ModalHeader>
               <Divider className="mb-6" />
 
@@ -116,107 +116,111 @@ function LeadsAddModal({ isOpen, onOpenChange }: IProps) {
                       size="sm"
                       label={inputPlaceholderText(t('groupName'))}
                     />
-                    <p className="clear-both text-default-800 text-left text-sm dark:text-white">
-                      <SiMicrosoftexcel
-                        size={26}
-                        color="orange"
-                        className="float-left mr-2"
-                      />
-                      {t('exampleCSV')}
-                    </p>
-                    <Table
-                      removeWrapper
-                      className="border-collapse mt-4 text-default-800 dark:text-white overflow-y-auto"
-                      aria-label="Example static collection table"
-                    >
-                      <TableHeader>
-                        <TableColumn>{t('file')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                        <TableColumn>{t('size')}</TableColumn>
-                      </TableHeader>
-                      <TableBody>
-                        <TableRow className="border-divider border-b-1">
-                          <TableCell>{t('file')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                          <TableCell>{t('size')}</TableCell>
-                        </TableRow>
-                      </TableBody>
-                    </Table>
-                    <p className="clear-both text-default-800 text-left text-sm dark:text-white">
-                      <BsQuestionCircleFill
-                        size={26}
-                        color="orange"
-                        className="float-left mr-2"
-                      />
-                      {t('uploadYourExcelInfoText')}
-                    </p>
-                    <section className="border-divider shadow-md mx-auto rounded-md w-full">
-                      <div
-                        {...getRootProps({
-                          className:
-                            'dropzone flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-blue-500 transition-colors'
-                        })}
+                    <div className="mb-4">
+                      <p className="clear-both mb-1 text-default-800 text-left text-sm dark:text-white">
+                        <BsQuestionCircleFill
+                          size={26}
+                          color="orange"
+                          className="float-left mr-2"
+                        />
+                        {t('uploadYourExcelInfoText')}
+                      </p>
+                      <section className="border-divider shadow-md mx-auto rounded-md w-full">
+                        <div
+                          {...getRootProps({
+                            className:
+                              'dropzone flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-blue-500 transition-colors'
+                          })}
+                        >
+                          <input {...getInputProps()} />
+                          <p className="text-center text-gray-700 text-sm dark:text-gray-300">
+                            {t('dropzoneTextFirst')}
+                            <span className="text-blue-500 underline">
+                              {t('dropzoneTextSecond')}
+                            </span>
+                          </p>
+                        </div>
+                        <aside>
+                          {myFiles?.length ? (
+                            <Table
+                              removeWrapper
+                              className="border-collapse mt-4 text-default-800 dark:text-white"
+                              aria-label="Example static collection table"
+                            >
+                              <TableHeader>
+                                <TableColumn>{t('file')}</TableColumn>
+                                <TableColumn>{t('size')}</TableColumn>
+                                <TableColumn>{}</TableColumn>
+                              </TableHeader>
+                              <TableBody items={myFiles}>
+                                {(item: File) => (
+                                  <TableRow
+                                    className="border-divider border-b-1"
+                                    key={item?.name}
+                                  >
+                                    <TableCell>{item?.name}</TableCell>
+                                    <TableCell>
+                                      {convertBytesToReadableSize(item?.size)}
+                                    </TableCell>
+                                    <TableCell>
+                                      <BsTrash3
+                                        className="text-danger cursor-pointer"
+                                        onClick={() => {
+                                          removeFile(item);
+                                        }}
+                                        size={16}
+                                      />
+                                    </TableCell>
+                                  </TableRow>
+                                )}
+                              </TableBody>
+                            </Table>
+                          ) : null}
+                        </aside>
+                      </section>
+                    </div>
+                    <div>
+                      <p className="clear-both mb-1 text-default-800 text-left text-sm dark:text-white">
+                        <SiMicrosoftexcel
+                          size={26}
+                          color="orange"
+                          className="float-left mr-2"
+                        />
+                        {t('exampleCSV')}
+                      </p>
+                      <Table
+                        removeWrapper
+                        className="border-collapse text-default-800 dark:text-white overflow-y-auto remove-scrollbar"
+                        aria-label="Example static collection table"
                       >
-                        <input {...getInputProps()} />
-                        <p className="text-center text-gray-700 text-sm dark:text-gray-300">
-                          {t('dropzoneTextFirst')}
-                          <span className="text-blue-500 underline">
-                            {t('dropzoneTextSecond')}
-                          </span>
-                        </p>
-                      </div>
-                      <aside>
-                        {myFiles?.length ? (
-                          <Table
-                            removeWrapper
-                            className="border-collapse mt-4 text-default-800 dark:text-white"
-                            aria-label="Example static collection table"
-                          >
-                            <TableHeader>
-                              <TableColumn>{t('file')}</TableColumn>
-                              <TableColumn>{t('size')}</TableColumn>
-                              <TableColumn>{}</TableColumn>
-                            </TableHeader>
-                            <TableBody items={myFiles}>
-                              {(item: File) => (
-                                <TableRow
-                                  className="border-divider border-b-1"
-                                  key={item?.name}
-                                >
-                                  <TableCell>{item?.name}</TableCell>
-                                  <TableCell>
-                                    {convertBytesToReadableSize(item?.size)}
-                                  </TableCell>
-                                  <TableCell>
-                                    <BsTrash3
-                                      className="text-danger cursor-pointer"
-                                      onClick={() => {
-                                        removeFile(item);
-                                      }}
-                                      size={16}
-                                    />
-                                  </TableCell>
-                                </TableRow>
-                              )}
-                            </TableBody>
-                          </Table>
-                        ) : null}
-                      </aside>
-                    </section>
+                        <TableHeader>
+                          <TableColumn>{t('file')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('size')}</TableColumn>
+                        </TableHeader>
+                        <TableBody>
+                          <TableRow className="border-divider border-b-1">
+                            <TableCell>{t('file')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>{t('size')}</TableCell>
+                          </TableRow>
+                        </TableBody>
+                      </Table>
+                    </div>
                   </div>
                   <Divider />
                 </form>
