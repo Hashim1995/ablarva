@@ -47,6 +47,7 @@ function Leads() {
           tableLoading={tableLoading}
           currentPage={currentPage}
           setCurrentPage={setCurrentPage}
+          setReFetch={setReFetch}
         />
       </div>
     </div>

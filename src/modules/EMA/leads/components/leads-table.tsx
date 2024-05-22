@@ -37,12 +37,14 @@ interface IProps {
   setCurrentPage: setState<number>;
   currentPage: number;
   totalCount: number;
+  setReFetch: setState<boolean>;
 }
 function LeadsTable({
   data,
   tableLoading,
   setCurrentPage,
   currentPage,
+  setReFetch,
   totalCount
 }: IProps) {
   const [selectionState, setSelectionState] = useState({
@@ -59,7 +61,8 @@ function LeadsTable({
   const {
     isOpen: addIsOpen,
     onOpen: addOnOpen,
-    onOpenChange: addOnOpenChange
+    onOpenChange: addOnOpenChange,
+    onClose: addOnClose
   } = useDisclosure();
 
   const toggleRowSelection = (item: ILeadItem) => {
@@ -128,7 +131,7 @@ function LeadsTable({
         <Table
           color="default"
           removeWrapper
-          className="text-default-900 dark:text-white"
+          className="text-default-900 dark:text-white overflow-x-auto overflow-y-hidden"
           classNames={{
             thead: '!bg-transparent',
             tr: '!bg-transparent',
@@ -230,7 +233,12 @@ function LeadsTable({
         <LeadViewModal onOpenChange={viewOnOpenChange} isOpen={viewIsOpen} />
       )}
       {addIsOpen && (
-        <LeadsAddModal onOpenChange={addOnOpenChange} isOpen={addIsOpen} />
+        <LeadsAddModal
+          setReFetch={setReFetch}
+          addOnClose={addOnClose}
+          onOpenChange={addOnOpenChange}
+          isOpen={addIsOpen}
+        />
       )}
       <AppHandledDrawer
         open={quickMailDrawer}

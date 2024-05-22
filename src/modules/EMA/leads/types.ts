@@ -1,12 +1,14 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 
-import { IGlobalResponse } from '@/models/common';
+import { IGlobalResponse, } from '@/models/common';
 
 // Use the `EngagedEnum` enumeration
 export enum EngagedEnum {
+  // eslint-disable-next-line no-unused-vars
   ENGAGED = 1,
+  // eslint-disable-next-line no-unused-vars
   NOT_ENGAGED = 2,
+  // eslint-disable-next-line no-unused-vars
   INTERACTION = 3
 }
 
@@ -38,4 +40,12 @@ interface ILeadsListForm {
   linkedin: string;
 }
 
-export type { ILeadItem, ILeadsListForm, ILeadListResponse };
+interface IUploadLeadsResponse extends IGlobalResponse {
+  data: {
+    possibleHeaders: { value: string; label: string; isRequired: boolean }[],
+    supportedHeaders: { value: string; label: string; isRequired: boolean }[]
+    queuedLeadUpload: number,
+  }
+}
+
+export type { ILeadItem, ILeadsListForm, ILeadListResponse, IUploadLeadsResponse };

@@ -452,6 +452,7 @@
     "timeZone": "Time zone",
     "timeZoneOffset": "Time zone offset",
     "linkedin": "Linkedin",
-    "uploadAtLeast": "Uplaod at least {{dynamicValue}} file"
+    "uploadAtLeast": "Uplaod at least {{dynamicValue}} file",
+    "uploadCsv": "Upload CSV file"
   }
 }
