@@ -1,39 +1,47 @@
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import AppHandledInput from '@/components/forms/input/handled-input';
-import AppHandledSelect from '@/components/forms/select/handled-select';
-import {
-  industriesOptions,
-  companySizeOptions
-} from '@/utils/constants/options';
-import {
-  inputPlaceholderText,
-  selectPlaceholderText
-} from '@/utils/constants/texts';
+import { setState } from '@/models/common';
+import { IHTTPSParams } from '@/services/adapter-config/config';
+import { inputPlaceholderText } from '@/utils/constants/texts';
+import { convertFormDataToQueryParams } from '@/utils/functions/functions';
 import { t } from 'i18next';
 import { useForm } from 'react-hook-form';
 import { MdRefresh, MdSearch } from 'react-icons/md';
 import { ILeadsListForm } from '../types';
 
-function LeadsFilter() {
+interface IProps {
+  setCurrentPage: setState<number>;
+  setReFetch: setState<boolean>;
+  setQueryParams: setState<IHTTPSParams[]>;
+}
+
+function LeadsFilter({ setCurrentPage, setReFetch, setQueryParams }: IProps) {
   const {
     handleSubmit,
-    formState: { errors },
     control,
-    reset
+    reset,
+    formState: { errors }
   } = useForm<ILeadsListForm>({
     mode: 'onSubmit',
     defaultValues: {
+      name: '',
+      company: '',
+      email: '',
+      jobTitle: '',
+      website: '',
       country: '',
-      annualRevenue: '',
-      companySize: ''
+      linkedin: ''
     }
-    // defaultValues: async () => getSmtpConfig()
   });
 
-  function onSubmit() {
-    console.log('test');
-  }
+  const onSubmit = async (data: ILeadsListForm) => {
+    setCurrentPage(1);
+    const queryParamsData: IHTTPSParams[] =
+      convertFormDataToQueryParams<ILeadsListForm>(data);
+    setQueryParams(queryParamsData);
+    setReFetch(z => !z);
+  };
   return (
     <div className="flex flex-col gap-2 w-full h-full">
       <div className="flex justify-between">
@@ -43,7 +51,7 @@ function LeadsFilter() {
       </div>
       <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
         <form
-          id="account-form"
+          id="leads-filter-form"
           onSubmit={handleSubmit(onSubmit)}
           className="flex sm:flex-row flex-col justify-between gap-3 sm:gap-4 w-full"
         >
@@ -52,67 +60,112 @@ function LeadsFilter() {
               <div className="flex flex-col gap-5 w-1/2">
                 <div className="w-full">
                   <AppHandledInput
-                    name="country"
+                    name="name"
+                    required={false}
+                    errors={errors}
                     inputProps={{
-                      id: 'country'
+                      id: 'name'
                     }}
-                    type="email"
+                    type="text"
                     className="text-default-900 dark:text-white"
                     control={control}
                     size="sm"
-                    label={inputPlaceholderText(t('country'))}
+                    label={inputPlaceholderText(t('name'))}
                   />
                 </div>
                 <div className="w-full">
                   <AppHandledInput
-                    name="annualRevenue"
+                    name="company"
                     inputProps={{
-                      id: 'annualRevenue'
+                      id: 'company'
                     }}
-                    type="email"
+                    type="text"
                     className="text-default-900 dark:text-white"
                     control={control}
+                    required={false}
+                    errors={errors}
                     size="sm"
-                    label={inputPlaceholderText(t('annualRevenue'))}
+                    label={inputPlaceholderText(t('company'))}
+                  />
+                </div>
+                <div className="w-full">
+                  <AppHandledInput
+                    name="email"
+                    inputProps={{
+                      id: 'email'
+                    }}
+                    type="text"
+                    className="text-default-900 dark:text-white"
+                    control={control}
+                    required={false}
+                    errors={errors}
+                    size="sm"
+                    label={inputPlaceholderText(t('email'))}
                   />
                 </div>
               </div>
+
               <div className="flex flex-col gap-5 w-1/2">
                 <div className="w-full">
-                  <AppHandledSelect
-                    name="companySize"
-                    selectProps={{
-                      id: 'companySize'
+                  <AppHandledInput
+                    name="linkedin"
+                    inputProps={{
+                      id: 'linkedin'
                     }}
+                    type="text"
+                    className="text-default-900 dark:text-white"
                     control={control}
-                    label={selectPlaceholderText(t('companySize'))}
-                    // className="app-select text-base sm:text-xl"
-
-                    options={companySizeOptions}
+                    required={false}
                     errors={errors}
+                    size="sm"
+                    label={inputPlaceholderText(t('linkedin'))}
                   />
                 </div>
                 <div className="w-full">
-                  <AppHandledSelect
-                    name="industries"
-                    selectProps={{
-                      id: 'industries'
+                  <AppHandledInput
+                    name="jobTitle"
+                    inputProps={{
+                      id: 'jobTitle'
                     }}
+                    type="text"
+                    className="text-default-900 dark:text-white"
                     control={control}
-                    label={selectPlaceholderText(t('industries'))}
-                    // className="app-select text-base sm:text-xl"
-
-                    options={industriesOptions}
+                    required={false}
                     errors={errors}
+                    size="sm"
+                    label={inputPlaceholderText(t('jobTitle'))}
+                  />
+                </div>
+                <div className="w-full">
+                  <AppHandledInput
+                    name="country"
+                    inputProps={{
+                      id: 'country'
+                    }}
+                    type="text"
+                    className="text-default-900 dark:text-white"
+                    control={control}
+                    required={false}
+                    errors={errors}
+                    size="sm"
+                    label={inputPlaceholderText(t('country'))}
                   />
                 </div>
               </div>
             </div>
             <div className="right flex flex-col items-end gap-2 w-40">
-              <AppHandledSolidButton type="submit">
+              <AppHandledSolidButton form="leads-filter-form" type="submit">
                 <MdSearch size={21} />
               </AppHandledSolidButton>
-              <AppHandledBorderedButton type="button" onClick={() => reset()}>
+              <AppHandledBorderedButton
+                type="button"
+                onClick={() => {
+                  reset();
+                  setQueryParams([]);
+                  setReFetch(z => !z);
+                  setCurrentPage(1);
+                }}
+              >
                 <MdRefresh size={20} />
               </AppHandledBorderedButton>
             </div>

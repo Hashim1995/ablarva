@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { setState } from '@/models/common';
 import {
   Button,
@@ -13,35 +12,41 @@ import {
   TableHeader,
   TableRow,
   Tooltip,
-  Divider,
   useDisclosure
 } from '@nextui-org/react';
-// import dayjs from 'dayjs';
 import {
   FcAddColumn,
   FcAddDatabase,
-  FcAddressBook,
   FcDeleteDatabase,
-  FcFlashOn,
-  FcFullTrash
+  FcFlashOn
 } from 'react-icons/fc';
 
 import { t } from 'i18next';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import AppHandledDrawer from '@/components/layout/drawer/app-handled-drawer';
-import { BsToggles } from 'react-icons/bs';
-import { IoCloseOutline } from 'react-icons/io5';
+import Empty from '@/components/layout/empty';
+import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
 import { ILeadItem } from '../types';
 import LeadViewModal from './lead-view-modal';
 import QuickMail from './quick-mail';
+import LeadsAddModal from './leads-add-modal';
 
 interface IProps {
+  tableLoading: boolean;
   data: ILeadItem[];
   setCurrentPage: setState<number>;
   currentPage: number;
   totalCount: number;
+  setReFetch: setState<boolean>;
 }
-function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
+function LeadsTable({
+  data,
+  tableLoading,
+  setCurrentPage,
+  currentPage,
+  setReFetch,
+  totalCount
+}: IProps) {
   const [selectionState, setSelectionState] = useState({
     allSelected: false,
     selectedRows: [] as ILeadItem[]
@@ -52,6 +57,12 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
     isOpen: viewIsOpen,
     onOpen: viewOnOpen,
     onOpenChange: viewOnOpenChange
+  } = useDisclosure();
+  const {
+    isOpen: addIsOpen,
+    onOpen: addOnOpen,
+    onOpenChange: addOnOpenChange,
+    onClose: addOnClose
   } = useDisclosure();
 
   const toggleRowSelection = (item: ILeadItem) => {
@@ -77,9 +88,6 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
       return { allSelected: true, selectedRows: [...data] };
     });
   };
-  useEffect(() => {
-    console.log(selectionState);
-  }, [selectionState]);
 
   const renderRows = () =>
     data?.map(item => (
@@ -102,24 +110,28 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
         <TableCell>{item?.name}</TableCell>
         <TableCell>{item?.company}</TableCell>
         <TableCell>{item?.email}</TableCell>
-        <TableCell>{item?.engaged}</TableCell>
-        <TableCell>{item?.position}</TableCell>
-        <TableCell>{item?.lastContact}</TableCell>
+        <TableCell>{item?.country}</TableCell>
+        <TableCell>{item?.linkedin}</TableCell>
+        <TableCell>{item?.website}</TableCell>
+        <TableCell>{item?.jobTitle}</TableCell>
       </TableRow>
     ));
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">
-      <div className="relative flex justify-between">
+      <div className="relative flex justify-between items-center pe-6">
         <h3 className="font-semibold text-default-800 text-xl dark:text-white">
           {t('leadsTable')} 😎
         </h3>
+        <AppHandledSolidButton onClick={addOnOpen} form="leads-filter-form">
+          {t('addBtn')}
+        </AppHandledSolidButton>
       </div>
       <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
         <Table
           color="default"
           removeWrapper
-          className="text-default-900 dark:text-white"
+          className="text-default-900 dark:text-white overflow-x-auto overflow-y-hidden"
           classNames={{
             thead: '!bg-transparent',
             tr: '!bg-transparent',
@@ -133,8 +145,8 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
                 isCompact
                 color="default"
                 showControls
+                total={Math.ceil(totalCount / 10)}
                 page={currentPage}
-                total={totalCount}
                 onChange={page => setCurrentPage(page)}
               />
             </div>
@@ -150,11 +162,16 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
             <TableColumn>{t('name').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('company').toLocaleUpperCase()}</TableColumn>
             <TableColumn>{t('email').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('engaged').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('position').toLocaleUpperCase()}</TableColumn>
-            <TableColumn>{t('lastContact').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('country').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{'LinkedIn'.toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('website').toLocaleUpperCase()}</TableColumn>
+            <TableColumn>{t('jobTitle').toLocaleUpperCase()}</TableColumn>
           </TableHeader>
-          <TableBody isLoading={false} loadingContent={<Spinner />}>
+          <TableBody
+            emptyContent={<Empty />}
+            isLoading={tableLoading}
+            loadingContent={<Spinner />}
+          >
             {renderRows()}
           </TableBody>
         </Table>
@@ -214,6 +231,14 @@ function LeadsTable({ data, setCurrentPage, currentPage, totalCount }: IProps) {
       </div>
       {viewIsOpen && (
         <LeadViewModal onOpenChange={viewOnOpenChange} isOpen={viewIsOpen} />
+      )}
+      {addIsOpen && (
+        <LeadsAddModal
+          setReFetch={setReFetch}
+          addOnClose={addOnClose}
+          onOpenChange={addOnOpenChange}
+          isOpen={addIsOpen}
+        />
       )}
       <AppHandledDrawer
         open={quickMailDrawer}

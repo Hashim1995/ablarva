@@ -438,6 +438,21 @@
     "ondemand": "On demand",
     "telephoneNumber": "Telephone number",
     "companyName": "Company name",
-    "employeeCount": "Employee count"
+    "employeeCount": "Employee count",
+    "jobTitle": "Job title",
+    "website": "Website",
+    "groupName": "Group name",
+    "dropzoneTextFirst": " Drag 'n' drop some files here, or",
+    "dropzoneTextSecond": " click to select files",
+    "size": "Size",
+    "fileLimit": "You can add maximum",
+    "uploadYourExcelInfoText": "Please upload your Excel CSV file. An example of the acceptable file format is provided below. Note that only CSV files are supported.",
+    "exampleCSV": "Please ensure that the column headers in the uploaded Excel file correspond exactly to those specified in the provided example.",
+    "organizationName": "Organization name",
+    "timeZone": "Time zone",
+    "timeZoneOffset": "Time zone offset",
+    "linkedin": "Linkedin",
+    "uploadAtLeast": "Uplaod at least {{dynamicValue}} file",
+    "uploadCsv": "Upload CSV file"
   }
 }
