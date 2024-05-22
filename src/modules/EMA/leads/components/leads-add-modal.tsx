@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 import { useTranslation } from 'react-i18next';
 import {
   Modal,
@@ -12,9 +11,7 @@ import {
   TableCell,
   TableColumn,
   TableHeader,
-  TableRow,
-  Accordion,
-  AccordionItem
+  TableRow
 } from '@nextui-org/react';
 import AppHandledBorderedButton from '@/components/forms/button/app-handled-bordered-button';
 import AppHandledInput from '@/components/forms/input/handled-input';
@@ -23,11 +20,12 @@ import { useForm } from 'react-hook-form';
 import { inputPlaceholderText } from '@/utils/constants/texts';
 import { SiMicrosoftexcel } from 'react-icons/si';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
-import { useState, useCallback } from 'react';
-import { useDropzone } from 'react-dropzone';
-import { BsQuestionCircleFill, BsTrash3 } from 'react-icons/bs';
-import { convertBytesToReadableSize } from '@/utils/functions/functions';
+import { useState } from 'react';
+import { BsQuestionCircleFill } from 'react-icons/bs';
 import { toast } from 'react-toastify';
+import { toastOptions } from '@/configs/global-configs';
+import { EmaLeadsService } from '@/services/ema/ema-leads-services';
+import AppHandledDropzone from '@/components/forms/dropzone/app-handled-dropzone';
 
 interface IProps {
   isOpen: boolean;
@@ -44,39 +42,32 @@ function LeadsAddModal({ isOpen, onOpenChange }: IProps) {
     mode: 'onChange'
   });
 
-  async function onSubmit() {
-    console.log('object');
-  }
-  const [myFiles, setMyFiles] = useState([]);
+  const [files, setFiles] = useState([]);
 
-  const onDrop = useCallback(
-    (acceptedFiles: File[]) => {
-      if (!myFiles?.length) {
-        setMyFiles([...myFiles, ...acceptedFiles]);
-      } else {
-        toast.error(`${t('fileLimit')} : ${1} file`);
+  async function onSubmit(data: { groupName: string }) {
+    if (files?.length !== 1) {
+      toast.error(
+        t('uploadAtLeast', {
+          dynamicValue: '1'
+        }),
+        toastOptions
+      );
+    } else {
+      try {
+        const payload = new FormData();
+        payload.append('groupName', data?.groupName);
+        payload.append('csv', files[0]);
+        const res = await EmaLeadsService.getInstance().uploadLeads(payload);
+        console.log(res);
+      } catch (err) {
+        console.log(err);
       }
-    },
-    [myFiles]
-  );
-
-  const { getRootProps, getInputProps } = useDropzone({
-    onDrop,
-    maxFiles: 2,
-    multiple: false
-    // disabled: myFiles?.length > 0
-  });
-
-  const removeFile = (file: File) => {
-    const newFiles = [...myFiles];
-    newFiles.splice(newFiles.indexOf(file), 1);
-    setMyFiles(newFiles);
-  };
-
+    }
+  }
   return (
     <div>
       <Modal
-        size="lg"
+        size="2xl"
         isDismissable={false}
         backdrop="opaque"
         className="centerModalOnMobile"
@@ -125,59 +116,21 @@ function LeadsAddModal({ isOpen, onOpenChange }: IProps) {
                         />
                         {t('uploadYourExcelInfoText')}
                       </p>
-                      <section className="border-divider shadow-md mx-auto rounded-md w-full">
-                        <div
-                          {...getRootProps({
-                            className:
-                              'dropzone flex flex-col items-center justify-center p-6 border-2 border-dashed border-gray-300 dark:border-gray-600 rounded-lg cursor-pointer hover:border-blue-500 transition-colors'
-                          })}
-                        >
-                          <input {...getInputProps()} />
-                          <p className="text-center text-gray-700 text-sm dark:text-gray-300">
-                            {t('dropzoneTextFirst')}
-                            <span className="text-blue-500 underline">
-                              {t('dropzoneTextSecond')}
-                            </span>
-                          </p>
-                        </div>
-                        <aside>
-                          {myFiles?.length ? (
-                            <Table
-                              removeWrapper
-                              className="border-collapse mt-4 text-default-800 dark:text-white"
-                              aria-label="Example static collection table"
-                            >
-                              <TableHeader>
-                                <TableColumn>{t('file')}</TableColumn>
-                                <TableColumn>{t('size')}</TableColumn>
-                                <TableColumn>{}</TableColumn>
-                              </TableHeader>
-                              <TableBody items={myFiles}>
-                                {(item: File) => (
-                                  <TableRow
-                                    className="border-divider border-b-1"
-                                    key={item?.name}
-                                  >
-                                    <TableCell>{item?.name}</TableCell>
-                                    <TableCell>
-                                      {convertBytesToReadableSize(item?.size)}
-                                    </TableCell>
-                                    <TableCell>
-                                      <BsTrash3
-                                        className="text-danger cursor-pointer"
-                                        onClick={() => {
-                                          removeFile(item);
-                                        }}
-                                        size={16}
-                                      />
-                                    </TableCell>
-                                  </TableRow>
-                                )}
-                              </TableBody>
-                            </Table>
-                          ) : null}
-                        </aside>
-                      </section>
+                      <AppHandledDropzone
+                        setFiles={setFiles}
+                        files={files}
+                        maxLimit={1}
+                        multiple={false}
+                        accept={{
+                          '': [
+                            '.csv',
+                            '.text/csv',
+                            'application/csv',
+                            'text/x-csv',
+                            'application/x-csv'
+                          ]
+                        }}
+                      />
                     </div>
                     <div>
                       <p className="clear-both mb-1 text-default-800 text-left text-sm dark:text-white">
@@ -190,33 +143,35 @@ function LeadsAddModal({ isOpen, onOpenChange }: IProps) {
                       </p>
                       <Table
                         removeWrapper
-                        className="border-collapse text-default-800 dark:text-white overflow-y-auto remove-scrollbar"
+                        className="border-collapse text-default-800 dark:text-white overflow-y-auto"
                         aria-label="Example static collection table"
                       >
                         <TableHeader>
-                          <TableColumn>{t('file')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
-                          <TableColumn>{t('size')}</TableColumn>
+                          <TableColumn>{t('email')}</TableColumn>
+                          <TableColumn>{t('firstName')}</TableColumn>
+                          <TableColumn>{t('lastName')}</TableColumn>
+                          <TableColumn>{t('organizationName')}</TableColumn>
+                          <TableColumn>{t('jobTitle')}</TableColumn>
+                          <TableColumn>{t('website')}</TableColumn>
+                          <TableColumn>{t('timeZone')}</TableColumn>
+                          <TableColumn>{t('timeZoneOffset')}</TableColumn>
+                          <TableColumn>{t('country')}</TableColumn>
+                          <TableColumn>{t('linkedin')}</TableColumn>
                         </TableHeader>
                         <TableBody>
                           <TableRow className="border-divider border-b-1">
-                            <TableCell>{t('file')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
-                            <TableCell>{t('size')}</TableCell>
+                            <TableCell>john.doe@example.com</TableCell>
+                            <TableCell>John</TableCell>
+                            <TableCell>Doe</TableCell>
+                            <TableCell>Ablarva</TableCell>
+                            <TableCell>Marketing manager</TableCell>
+                            <TableCell>ablarva.com</TableCell>
+                            <TableCell>UTC</TableCell>
+                            <TableCell>+4</TableCell>
+                            <TableCell>Germany</TableCell>
+                            <TableCell>
+                              https://www.linkedin.com/in/johndoe
+                            </TableCell>
                           </TableRow>
                         </TableBody>
                       </Table>

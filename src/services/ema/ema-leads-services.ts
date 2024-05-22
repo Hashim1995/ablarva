@@ -2,6 +2,7 @@
 /* eslint-disable no-useless-constructor */
 /* eslint-disable class-methods-use-this */
 
+import { IGlobalResponse } from '@/models/common';
 import { ILeadListResponse } from '@/modules/EMA/leads/types';
 import {
   ErrorCallBack,
@@ -13,7 +14,7 @@ export class EmaLeadsService {
   // eslint-disable-next-line no-use-before-define
   private static instance: EmaLeadsService | null;
 
-  private constructor() {}
+  private constructor() { }
 
   /**
    * Returns the singleton instance of EmaLeadsService.
@@ -24,6 +25,11 @@ export class EmaLeadsService {
       EmaLeadsService.instance = new EmaLeadsService();
     }
     return EmaLeadsService.instance!;
+  }
+
+  public async uploadLeads(payload: FormData, onError?: ErrorCallBack): Promise<IGlobalResponse> {
+    const res = await HttpUtil.post('api/client/leads/upload', payload, onError)
+    return res
   }
 
   public async getList(
