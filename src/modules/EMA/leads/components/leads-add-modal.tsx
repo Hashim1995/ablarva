@@ -103,6 +103,7 @@ function LeadsAddModal({
       try {
         const payload = {
           ...dynamicFields,
+          groupName,
           queueIdentifier: currentQueue
         };
         const res = await EmaLeadsService.getInstance().submitQuee(payload);
