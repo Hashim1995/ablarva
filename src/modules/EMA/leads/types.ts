@@ -48,9 +48,16 @@ interface IUploadLeadsResponse extends IGlobalResponse {
   };
 }
 
+interface IQuickMail {
+  to: string[];
+  emailTitle: string;
+  message: string;
+  senderInformation: any
+}
+
 export type {
   ILeadItem,
   ILeadsListForm,
   ILeadListResponse,
-  IUploadLeadsResponse
+  IUploadLeadsResponse, IQuickMail
 };
