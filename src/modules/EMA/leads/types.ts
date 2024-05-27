@@ -52,12 +52,13 @@ interface IQuickMail {
   to: string[];
   emailTitle: string;
   message: string;
-  senderInformation: any
+  senderInformation: any;
 }
 
 export type {
   ILeadItem,
   ILeadsListForm,
   ILeadListResponse,
-  IUploadLeadsResponse, IQuickMail
+  IUploadLeadsResponse,
+  IQuickMail
 };

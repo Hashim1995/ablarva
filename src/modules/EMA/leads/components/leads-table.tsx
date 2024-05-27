@@ -22,7 +22,7 @@ import {
 } from 'react-icons/fc';
 
 import { t } from 'i18next';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppHandledDrawer from '@/components/layout/drawer/app-handled-drawer';
 import Empty from '@/components/layout/empty';
 import AppHandledSolidButton from '@/components/forms/button/app-handled-solid-button';
@@ -116,6 +116,13 @@ function LeadsTable({
         <TableCell>{item?.jobTitle}</TableCell>
       </TableRow>
     ));
+
+  useEffect(() => {
+    setSelectionState({
+      allSelected: false,
+      selectedRows: [] as ILeadItem[]
+    });
+  }, [currentPage]);
 
   return (
     <div className="flex flex-col gap-2 w-full h-full">
