@@ -1,3 +1,5 @@
+import { IGlobalResponse } from "./common";
+
 export interface ILegalEntityDto {
   Id: number;
   Name: string;
@@ -91,4 +93,8 @@ export interface IUserData {
   userSessions: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}
+export interface IGetUserSessionsResponse extends IGlobalResponse {
+  data: IUserSessions[]
+}
+
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
