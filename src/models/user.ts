@@ -60,7 +60,7 @@ export interface IUserData {
   emailAssistant: {
     currentQuotaDetailsDto: ICurrentQuotaDetails | null;
     currentSubscriptionDetails: IUserCurrentSubscription | null;
-  }
+  };
 
   accessToken: string;
   id: number;
@@ -76,4 +76,4 @@ export interface IGetUserSessionsResponse extends IGlobalResponse {
   data: IUserSessions[];
 }
 
-export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }
+export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> {}

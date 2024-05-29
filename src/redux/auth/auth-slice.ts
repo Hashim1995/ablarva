@@ -26,7 +26,7 @@ const initialState: AuthSliceInitalState = {
     id: 0,
     gender: 0,
     dateOfBirth: '',
-    verified: false,
+    verified: false
   },
   status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
   error: null
