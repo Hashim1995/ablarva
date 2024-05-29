@@ -14,15 +14,15 @@ function LoginLeftBar() {
 
   return (
     <div className="flex justify-center">
-      <div className="mt-3 mb-10 text-4xl font-bold tracking-wider flex items-center  gap-4">
-        <img src={logo} className="animate-pulse w-[100px] h-[100px] " alt="" />
-        <span className="theme-gradient font-bold text-[1.8em]">AI-ZADE</span>
+      <div className="flex items-center gap-4 mt-3 mb-10 font-bold text-4xl tracking-wider">
+        <img src={logo} className="w-[100px] h-[100px] animate-pulse" alt="" />
+        <span className="font-bold text-[1.8em] theme-gradient">ABLARVA</span>
       </div>
 
       {/* <p
         aria-hidden
         onClick={onOpen}
-        className="mt-3 md:mt-6 underline text-xl text-center text-blue-500 cursor-pointer"
+        className="mt-3 md:mt-6 text-blue-500 text-center text-xl underline cursor-pointer"
       >
         {t('privacyPolicySentence')}
       </p>

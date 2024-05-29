@@ -1,6 +1,5 @@
 import { IGlobalResponse } from './common';
 
-
 export interface ILogin {
   email: string;
   password: string;
@@ -34,32 +33,35 @@ export interface IUserSessions {
 }
 
 export interface IUserCurrentSubscription {
-  subscriptionId: number,
-  renewalType: number,
-  isFreeTrial: boolean,
-  startDate: any,
-  endDate: any,
-  packageId: number
+  subscriptionId: number;
+  renewalType: number;
+  isFreeTrial: boolean;
+  startDate: any;
+  endDate: any;
+  packageId: number;
 }
 
 export interface ICurrentQuotaDetails {
   emailQuota: {
-    total: number,
-    used: number,
-    remainder: number
-  },
+    total: number;
+    used: number;
+    remainder: number;
+  };
   leadQuota: {
-    total: number,
-    used: number,
-    remainder: number
-  }
+    total: number;
+    used: number;
+    remainder: number;
+  };
 }
 
 export interface IUserData {
   countryName: string;
   timezone: string;
-  currentQuotaDetailsDto: ICurrentQuotaDetails | null;
-  currentSubscriptionDetails: IUserCurrentSubscription | null;
+  emailAssistant: {
+    currentQuotaDetailsDto: ICurrentQuotaDetails | null;
+    currentSubscriptionDetails: IUserCurrentSubscription | null;
+  }
+
   accessToken: string;
   id: number;
   email: string;

@@ -55,7 +55,7 @@ function Home() {
     <div className="py-10 home-container remove-scrollbar">
       <div className="flex justify-center mb-3">
         <h1 className="font-medium text-[3rem]">
-          <span className="font-bold theme-gradient">AI-ZADE</span>:{' '}
+          <span className="font-bold theme-gradient">ABLARVA</span>:{' '}
           {t('unlockPowerOf')} <br />
           {t('withSmartestAssistants')}
         </h1>

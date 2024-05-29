@@ -6,19 +6,23 @@ import { useTranslation } from 'react-i18next';
 function EmaBillingStats() {
   const { t } = useTranslation();
 
-  const { premiumAssistant, basicAssistant } = useSelector(
-    (state: RootState) => state?.statisticsCount?.statisticsCount?.data
+  const currentQuotaDetailsDto = useSelector(
+    (state: RootState) =>
+      state?.user?.user?.emailAssistant?.currentQuotaDetailsDto
   );
+
+  const emailQuota = currentQuotaDetailsDto?.emailQuota;
+  const leadQuota = currentQuotaDetailsDto?.leadQuota;
 
   return (
     <div className="flex flex-col justify-center gap-4 xl:gap-6 mx-auto lg:px-0 w-full remove-scrollbar">
       <div className="flex flex-col gap-2 w-full h-full">
         <h3 className="font-semibold text-default-800 text-xl dark:text-white">
-          {t('paymentHistory')} 💰
+          {t('packageStats')} 💰
         </h3>
         <div className="border-1 border-divider bg-transparent shadow-lg p-6 rounded-2xl w-full">
           <div className="flex justify-between items-center gap-2 sm:gap-5">
-            {(premiumAssistant || basicAssistant) && (
+            {(emailQuota || leadQuota) && (
               <div className="flex justify-content-between gap-4 w-full">
                 <Tooltip
                   placement="top-start"
@@ -26,9 +30,11 @@ function EmaBillingStats() {
                   classNames={{
                     content: 'text-default-900 dark:text-white'
                   }}
-                  content={`${t(
-                    'general'
-                  )}: ${basicAssistant?.total}, ${'used'}: ${basicAssistant?.usage}, ${'rest'}: ${basicAssistant?.remainder}`}
+                  content={`${t('general')}: ${emailQuota?.total}, ${t(
+                    'used'
+                  )}: ${emailQuota?.used}, ${t(
+                    'rest'
+                  )}: ${emailQuota?.remainder}`}
                 >
                   <Progress
                     size="sm"
@@ -40,11 +46,11 @@ function EmaBillingStats() {
                         ' text-[11px]  text-default-800 dark:text-white pr-2',
                       value: 'text-[11px] text-default-800 dark:text-white'
                     }}
-                    label={t('basicPackage')}
-                    value={basicAssistant?.remainder}
+                    label={t('emailQuota')}
+                    value={emailQuota?.remainder}
                     formatOptions={{}}
                     showValueLabel
-                    maxValue={basicAssistant?.total}
+                    maxValue={emailQuota?.total}
                   />
                 </Tooltip>
                 <Tooltip
@@ -53,9 +59,11 @@ function EmaBillingStats() {
                   classNames={{
                     content: 'text-default-900 dark:text-white'
                   }}
-                  content={`${t(
-                    'general'
-                  )}: ${premiumAssistant?.total}, ${'used'}: ${premiumAssistant?.usage}, ${'rest'}: ${premiumAssistant?.remainder}`}
+                  content={`${t('general')}: ${leadQuota?.total}, ${t(
+                    'used'
+                  )}: ${leadQuota?.used}, ${t(
+                    'rest'
+                  )}: ${leadQuota?.remainder}`}
                 >
                   <Progress
                     size="sm"
@@ -67,11 +75,11 @@ function EmaBillingStats() {
                         ' text-[11px]  text-default-800 dark:text-white pr-2',
                       value: ' text-[11px] text-default-800 dark:text-white'
                     }}
-                    label={t('premiumPackage')}
-                    value={premiumAssistant?.remainder}
+                    label={t('leadQuota')}
+                    value={leadQuota?.remainder}
                     formatOptions={{}}
                     showValueLabel
-                    maxValue={premiumAssistant?.total}
+                    maxValue={leadQuota?.total}
                   />
                 </Tooltip>
               </div>

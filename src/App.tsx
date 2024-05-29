@@ -54,7 +54,7 @@ function App() {
   useEffect(() => {
     // @ts-ignore
     const mode = import.meta.env.VITE_APP_MODE; // 'development' or 'production'
-    document.title = mode === 'development' ? '(Dev) AI Zade' : 'AI Zade';
+    document.title = mode === 'development' ? '(Dev) ABLARVA' : 'ABLARVA';
 
     if (!userToken?.token) {
       console.log(location?.pathname);

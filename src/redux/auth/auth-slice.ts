@@ -16,13 +16,17 @@ const initialState: AuthSliceInitalState = {
     email: '',
     accessToken: '',
     firstName: '',
+    timezone: '',
+    countryName: '',
     lastName: '',
-    currentSubscription: null,
+    emailAssistant: {
+      currentSubscriptionDetails: null,
+      currentQuotaDetailsDto: null
+    },
     id: 0,
     gender: 0,
     dateOfBirth: '',
     verified: false,
-    userSessions: []
   },
   status: 'idle', // 'idle', 'loading', 'succeeded', 'failed'
   error: null

@@ -119,7 +119,7 @@ export default function Navbar() {
         </NavbarContent>
         <NavbarContent className="lg:hidden pr-3" justify="center">
           <NavbarBrand>
-            <p className="font-bold text-inherit">Ai-zade</p>
+            <p className="font-bold text-inherit">ABLARVA</p>
           </NavbarBrand>
         </NavbarContent>
         <NavbarContent className="z-10 lg:flex gap-4 hidden" justify="start">

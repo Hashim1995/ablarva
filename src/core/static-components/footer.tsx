@@ -23,7 +23,7 @@ function Footer({ onOpenHelp }: IFooterProps): JSX.Element {
         <div />
         <div className="text-center text-default-800 text-sm dark:text-white">
           <a href="/#" className="hover:underline">
-            AI-ZADE™
+            ABLARVA™
           </a>{' '}
           © {t('currentYearFooter')}
         </div>
