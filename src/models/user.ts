@@ -1,42 +1,5 @@
-import { IGlobalResponse } from "./common";
+import { IGlobalResponse } from './common';
 
-export interface ILegalEntityDto {
-  Id: number;
-  Name: string;
-  PhoneNumber: string;
-  Email: string;
-  Voen: string;
-  StatusId: number;
-  ActivityField: string;
-  Address: string;
-}
-
-export interface ILegalEntityPhoto {
-  id: number;
-  mimeType: string;
-  uploadDate: string;
-  size: number;
-  name: string;
-  fileUrl: string;
-}
-
-export interface IAuth {
-  Id: number;
-  Name: string;
-  Surname: string;
-  FathersName: string;
-  FinCode: string;
-  PhoneNumber: string;
-  Email: string;
-  Status: string;
-  Profession: string;
-  Permission: string;
-  IsFounder: boolean;
-  getLegalEntityDto: ILegalEntityDto;
-  getFile: ILegalEntityPhoto;
-}
-
-// old
 
 export interface ILogin {
   email: string;
@@ -71,17 +34,32 @@ export interface IUserSessions {
 }
 
 export interface IUserCurrentSubscription {
-  isFreeTrial: boolean;
-  renewalType: 1 | 2;
-  endDate: string;
-  packageDescription: string;
-  packageId: number;
-  packageName: string;
-  startDate: string;
-  subscriptionId: number;
+  subscriptionId: number,
+  renewalType: number,
+  isFreeTrial: boolean,
+  startDate: any,
+  endDate: any,
+  packageId: number
 }
+
+export interface ICurrentQuotaDetails {
+  emailQuota: {
+    total: number,
+    used: number,
+    remainder: number
+  },
+  leadQuota: {
+    total: number,
+    used: number,
+    remainder: number
+  }
+}
+
 export interface IUserData {
-  currentSubscription: IUserCurrentSubscription | null;
+  countryName: string;
+  timezone: string;
+  currentQuotaDetailsDto: ICurrentQuotaDetails | null;
+  currentSubscriptionDetails: IUserCurrentSubscription | null;
   accessToken: string;
   id: number;
   email: string;
@@ -90,11 +68,10 @@ export interface IUserData {
   dateOfBirth: Date | string;
   gender: number;
   verified: boolean;
-  userSessions: IUserSessions[];
 }
 
 export interface IGetUserSessionsResponse extends IGlobalResponse {
-  data: IUserSessions[]
+  data: IUserSessions[];
 }
 
 export interface IUserLoggedData extends Omit<IUserData, 'accessToken'> { }

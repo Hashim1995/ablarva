@@ -44,7 +44,7 @@ export class AuthService {
    * Constructs a new instance of the AuthService class.
    * Private to enforce the singleton pattern.
    */
-  private constructor() { }
+  private constructor() {}
 
   /**
    * Gets the singleton instance of the AuthService class.
@@ -73,7 +73,9 @@ export class AuthService {
     return res;
   }
 
-  public async getUserSessions(onError?: ErrorCallBack): Promise<IGetUserSessionsResponse> {
+  public async getUserSessions(
+    onError?: ErrorCallBack
+  ): Promise<IGetUserSessionsResponse> {
     const res = await HttpUtil.get(
       'api/client/user/Sessions',
       null,
