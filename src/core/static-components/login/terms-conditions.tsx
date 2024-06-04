@@ -52,14 +52,14 @@ function TermsConditionsModal({
               <ModalBody className="overflow-y-scroll scrollBar">
                 <div className="justify-center pr-3 h-96">
                   <p className="pb-6 text-md">
-                    We, in AI-zade, (" Company ", "we", "us", "our") are
+                    We, in ABLARVA, (" Company ", "we", "us", "our") are
                     committed to protecting your personal information and your
                     right to privacy.
                   </p>
                   <p className="pb-6 text-md">
                     When you visit our website{' '}
                     <a href="/" className="text-emerald-500">
-                      https:// ai-zade
+                      https:// ABLARVA
                     </a>{' '}
                     (the "Website"), and more generally, use any of our services
                     (the "Services", which include the Website ), we appreciate
@@ -405,12 +405,12 @@ function TermsConditionsModal({
                     information. To make such a request, please use our contact
                     email{' '}
                     <a
-                      href="mailto:info@ ai-zade.com"
+                      href="mailto:info@ ABLARVA.com"
                       target="blank"
                       className="text-emerald-500"
                       aria-label="Contact WindUI link"
                     >
-                      info@ ai-zade.com
+                      info@ ABLARVA.com
                     </a>
                     . We will consider and act upon any request in accordance
                     with applicable data protection laws.
@@ -431,19 +431,19 @@ function TermsConditionsModal({
                     local data protection supervisory authority. You can find
                     their contact details here:{' '}
                     <a className="text-emerald-500" href="/#">
-                      ai-zade.az
+                      ABLARVA.az
                     </a>
                   </p>
                   <p className="pb-6 text-md">
                     If you have questions or comments about your privacy rights,
                     you may contact us through our email{' '}
                     <a
-                      href="mailto:info@ai-zade.az"
+                      href="mailto:info@ABLARVA.az"
                       aria-label="Contact WindUI link"
                       target="blank"
                       className="text-emerald-500"
                     >
-                      info@ai-zade.az
+                      info@ABLARVA.az
                     </a>
                     .
                   </p>
@@ -499,11 +499,11 @@ function TermsConditionsModal({
                     If you have questions or comments about this notice, you may
                     contact us here{' '}
                     <a
-                      href="mailto:info@ai-zade.az"
+                      href="mailto:info@ABLARVA.az"
                       target="blank"
                       className="text-emerald-500"
                     >
-                      info@ai-zade.az
+                      info@ABLARVA.az
                     </a>
                   </p>
                 </div>

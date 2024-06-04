@@ -542,3 +542,8 @@ input[type='number'] {
     border: 1px solid #dbdcdd !important;
   }
 }
+.editor-has-error {
+  .rsw-editor {
+    border-color: rgb(243, 18, 96) !important;
+  }
+}

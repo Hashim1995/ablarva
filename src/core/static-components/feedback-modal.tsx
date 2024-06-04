@@ -127,13 +127,13 @@ function FeedbackModal({ isOpen, onOpenChange }: IFeedbackModal): JSX.Element {
                       {...register('feedbackMessage', {
                         required: {
                           value: true,
-                          message: inputValidationText('Mesaj')
+                          message: inputValidationText('message')
                         }
                       })}
                       // variant="bordered"
                       fullWidth
                       isRequired
-                      label={inputPlaceholderText('Mesaj')}
+                      label={inputPlaceholderText('message')}
                       // classNames={{
                       //   label: 'text-md font-normal',
                       //   innerWrapper: ' flex items-center',

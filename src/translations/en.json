@@ -232,9 +232,9 @@
     "my": "My",
     "tariff": "Tariff",
     "deleteConfirmationPrompt": "Are you sure you want to delete the data?",
-    "welcomeMessage": "Welcome! Our AI startup AIZade is here to simplify your daily life. With our efficient and innovative technology, you can find instant answers to every question. You will always find innovations and differences on our platform. Log in and start your journey in the world of AIZade!",
+    "welcomeMessage": "Welcome! Our AI startup Assistan is here to simplify your daily life. With our efficient and innovative technology, you can find instant answers to every question. You will always find innovations and differences on our platform. Log in and start your journey in the world of Ablarva!",
     "privacyPolicySentence": "Privacy and confidentiality policy",
-    "questionAnswerAiZadeh": "Have a question? Our esteemed Ai-zade is ready to answer! 😊",
+    "questionAnswerAiZadeh": "Have a question? Our esteemed Assistan is ready to answer! 😊",
     "suggestionsAndComments": "Let us know your suggestions and comments",
     "instructionBTN": "Instruction",
     "instructionFooterText": "Instruction",
@@ -286,8 +286,8 @@
       "A good friend is a valuable treasure 💎",
       "Time is more valuable than gold ⌛"
     ],
-    "aiZadeSay": "AI-ZADE says",
-    "aiZadeToYou": "AI-ZADE to you",
+    "aiZadeSay": "Assistan says",
+    "aiZadeToYou": "Assistan to you",
     "yourEmailApprovedSuccessfully": "Your email address was successfully verified",
     "yourPasswordChangedSuccessfully": "Your password was successfully changed",
     "youRegisteredSuccessfullyPleaseLogin": "You have registered successfully. Please log in again",
@@ -298,7 +298,7 @@
     "asTurkishLang": "In Turkish",
     "asEnglishLang": "In English",
     "asRussianLang": "In Russian",
-    "willAnswer": "Ai-zade will  answer in {{dynamicValue}} language",
+    "willAnswer": "Assistan will  answer in {{dynamicValue}} language",
     "youShouldSelectOneAssistantForConversation": "You must select one assistant for the conversation",
     "dataCopiedToClipboardSuccessfully": "Data successfully copied to clipboard",
     "accountDataUpdatedSuccessfully": "Your account information was successfully updated",
@@ -453,6 +453,9 @@
     "timeZoneOffset": "Time zone offset",
     "linkedin": "Linkedin",
     "uploadAtLeast": "Uplaod at least {{dynamicValue}} file",
-    "uploadCsv": "Upload CSV file"
+    "uploadCsv": "Upload CSV file",
+    "packageStats": "Package stats",
+    "emailQuota": "Email quota",
+    "leadQuota": "Lead quota"
   }
 }

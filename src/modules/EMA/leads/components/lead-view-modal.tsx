@@ -94,9 +94,9 @@ function LeadViewModal({ isOpen, onOpenChange }: ILeadViewModal) {
                     <Chip variant="bordered" className="p-2 h-10" size="md">
                       <a
                         className="text-blue-400"
-                        href=" https://www.aizade.com"
+                        href=" https://www.ablarva.com"
                       >
-                        https://www.aizade.com
+                        https://www.ablarva.com
                       </a>
                     </Chip>
                   </div>

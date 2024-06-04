@@ -1,4 +1,3 @@
-import { RootState } from '@/redux/store';
 import {
   Chip,
   Spinner,
@@ -12,13 +11,31 @@ import {
 import { BsAndroid2 } from 'react-icons/bs';
 import { MdOutlineLaptopMac } from 'react-icons/md';
 import { TbDeviceIpad } from 'react-icons/tb';
-import { useSelector } from 'react-redux';
 import { FaWindows, FaLinux, FaApple, FaBlackberry } from 'react-icons/fa';
 import { useTranslation } from 'react-i18next';
+import { useEffect, useState } from 'react';
+import { IUserSessions } from '@/models/user';
+import { AuthService } from '@/services/auth-services/auth-services';
 
 function Sessions() {
-  const { userSessions } = useSelector((state: RootState) => state.user.user);
   const { t } = useTranslation();
+
+  const [userSessions, setUserSessions] = useState<IUserSessions[]>([]);
+
+  async function getUserSessions() {
+    try {
+      const res = await AuthService.getInstance().getUserSessions();
+      if (res?.isSuccess) {
+        setUserSessions(res?.data);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  useEffect(() => {
+    getUserSessions();
+  }, []);
 
   const returnDeviceIconByType = (type: number) => {
     switch (type) {

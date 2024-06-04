@@ -1,8 +1,8 @@
-# AI-zadə AI Assistant App
+# ABLARVA AI Assistant App
 
 ## Introduction
 
-AI-zadə is an innovative AI chatbot application designed to streamline your daily tasks and provide instant answers to your questions. Utilizing the power of React and modern web technologies, AI-zadə offers a dynamic and intuitive user interface for seamless interaction with AI assistants.
+ABLARVA is an innovative AI chatbot application designed to streamline your daily tasks and provide instant answers to your questions. Utilizing the power of React and modern web technologies, ABLARVA offers a dynamic and intuitive user interface for seamless interaction with AI assistants.
 
 ## Key Features
 
