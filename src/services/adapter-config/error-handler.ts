@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable array-callback-return */
 /* eslint-disable no-use-before-define */
 /* eslint-disable no-empty-function */
@@ -32,10 +33,10 @@ export class ErrorHandler {
   public showError(messageText: string | string[]): void {
     if (Array.isArray(messageText)) {
       messageText.map((z: string) => {
-        toast.error(z, toastOptions);
+        // toast.error(z, toastOptions);
       });
     } else {
-      toast.error(messageText, toastOptions);
+      // toast.error(messageText, toastOptions);
     }
   }
 }
