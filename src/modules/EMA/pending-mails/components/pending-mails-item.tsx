@@ -45,17 +45,22 @@ function PendingMailsItem({ item }: IProps) {
           </Chip>
         </div>
         <div className="right flex flex-col justify-between py-3 pr-3 pl-3 w-full">
-          <h1 className="border-divider py-2 border-b-1 text-[1.5em]">
+          <h1 className="border-divider py-2 border-b-1 text-[1.2em]">
             {title}
           </h1>
-          <p className="py-2 text-2xl">{description}</p>
+          <pre
+            style={{
+              whiteSpace: 'break-spaces'
+            }}
+            className="py-2 text-[14px]"
+          >
+            {description}
+          </pre>
           <div className="flex justify-between border-divider pt-2 border-t-1">
-            <AppHandledSolidButton>Hello</AppHandledSolidButton>
+            <div />
             <div className="flex gap-3">
-              <AppHandledSolidButton>Hello</AppHandledSolidButton>
-              <AppHandledSolidButton>Hello</AppHandledSolidButton>
-              <AppHandledSolidButton>Hello</AppHandledSolidButton>
-              <AppHandledSolidButton>Hello</AppHandledSolidButton>
+              <AppHandledSolidButton>Schedule</AppHandledSolidButton>
+              <AppHandledSolidButton>Send</AppHandledSolidButton>
             </div>
           </div>
         </div>
