@@ -1,4 +1,3 @@
-import { EmaReportsServices } from '@/services/ema/ema-reports-services';
 import {
   Table,
   TableHeader,
@@ -32,11 +31,10 @@ export default function LastAddedLeads() {
       setIsLoading(true);
       try {
         const page: number = cursor ? parseInt(cursor, 10) : 1;
-        const res = await EmaReportsServices.getInstance().getEmailReports([
-          { name: 'page', value: page },
-          { name: 'pageSize', value: 10 }
-        ]);
-        console.log(res);
+        // const res = await EmaReportsServices.getInstance().getEmailReports([
+        //   { name: 'page', value: page },
+        //   { name: 'pageSize', value: 10 }
+        // ]);
         setIsLoading(false);
 
         return {

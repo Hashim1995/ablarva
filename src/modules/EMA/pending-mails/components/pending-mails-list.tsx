@@ -15,113 +15,35 @@ interface IProps {
 const dummy = [
   {
     id: 1,
-    to: 'sara@company.com',
-    campaignName: 'Holiday Specials',
-    language: 'Turkish',
-    templateType: 'Seasonal',
-    title: 'Yılbaşı için özel fırsatlar',
-    createdAt: '2024-04-01',
-    description:
-      'Yılbaşı sezonunda kazançlı fırsatlarımızdan yararlanın. Şimdi sipariş verin ve hediyenizi ücretsiz alın. Yılbaşı sezonunda kazançlı fırsatlarımızdan yararlanın. Şimdi sipariş verin ve hediyenizi ücretsiz alın.  Yılbaşı sezonunda kazançlı fırsatlarımızdan yararlanın. Şimdi sipariş verin ve hediyenizi ücretsiz alın.  Sezon boyunca geçerli olan özel indirimler, tatil ruhunu daha da anlamlı kılacak. Kaçırmayın!'
+    to: 'h.hashimli@optima.az',
+    campaignName: 'Adam Promotion - English',
+    language: 'English',
+    templateType: 'Promotion',
+    title: 'Enhance Your B2B Sales with Advanced Email Marketing',
+    createdAt: '2024-06-01',
+    description: `Dear Mr. Hashim,
+
+I noticed that Optima Group Co specializes in B2B services, where effective communication is key to increasing sales. Our AI-driven assistant, Adam, personalizes email campaigns to ensure maximum engagement and reach.
+
+Would you be available for a quick call to discuss how targeted email marketing can benefit your business?
+
+Looking forward to the possibility of working together.`
   },
   {
     id: 2,
-    to: 'james@business.com',
-    campaignName: 'New Product Launch',
-    language: 'Spanish',
-    templateType: 'Product Introduction',
-    title: 'Descubre nuestro nuevo producto',
-    createdAt: '2023-11-20',
-    description:
-      'Conozca nuestro nuevo producto innovador que revolucionará la industria.'
-  },
-  {
-    id: 3,
-    to: 'kate@enterprise.com',
-    campaignName: 'Summer Sales',
+    to: 's.jumazada@dha.com',
+    campaignName: 'Adam Promotion',
     language: 'English',
-    templateType: 'Discount Offer',
-    title: 'Beat the Heat with Summer Deals',
-    createdAt: '2024-06-15',
-    description:
-      'Stay cool this summer with Order now and save big! Order now and save big! Order now and save big! Order now and save big! exclusive discounts. Order now and save big!'
-  },
-  {
-    id: 4,
-    to: 'alex@marketplace.com',
-    campaignName: 'Back to School',
-    language: 'French',
-    templateType: 'Educational Campaign',
-    title: 'Préparez-vous pour la rentrée',
-    createdAt: '2024-08-01',
-    description:
-      'Découvrez notre collection spéciale rentrée scolaire et soyez prêts pour une nouvelle année! Offrez à vos enfants le meilleur Découvrez notre collection spéciale rentrée scolaire et soyez prêts pour une nouvelle année! Offrez à vos enfants le meilleur Découvrez notre collection spéciale rentrée scolaire et soyez prêts pour une nouvelle année! Offrez à vos enfants le meilleur Découvrez notre collection spéciale rentrée scolaire et soyez prêts pour une nouvelle année! Offrez à vos enfants le meilleur équipement pour garantir une année académique réussie. Des sacs à dos robustes aux fournitures modernes, tout ce dont vous avez besoin se trouve ici.'
-  },
-  {
-    id: 5,
-    to: 'linda@globalcorp.com',
-    campaignName: 'Black Friday Deals',
-    language: 'German',
-    templateType: 'Sales Campaign',
-    title: 'Sichern Sie sich die besten Black Friday Angebote',
-    createdAt: '2024-11-25',
-    description:
-      'Nutzen Sie die einmaligen Black Friday Angebote. Jetzt einkaufen und mehr sparen!'
-  },
-  {
-    id: 6,
-    to: 'maria@worldtrade.com',
-    campaignName: 'Cyber Monday Mega Sale',
-    language: 'Portuguese',
-    templateType: 'Online Promotion',
-    title: 'Mega Descontos na Cyber Monday',
-    createdAt: '2024-12-01',
-    description:
-      'Aproveite os descontos massivos da Cyber Monday.  descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. descontos massivos da Cyber Monday. Compre agora e economize!'
-  },
-  {
-    id: 7,
-    to: 'ivan@retailers.com',
-    campaignName: 'End of Year Clearance',
-    language: 'Russian',
-    templateType: 'Clearance Sale',
-    title: 'Грандиозная распродажа к концу года',
-    createdAt: '2024-12-15',
-    description:
-      'Покупайте сейчас и получите огромные скидки на все товары в конце года!'
-  },
-  {
-    id: 8,
-    to: 'keiko@techcorp.com',
-    campaignName: 'New Year New Tech',
-    language: 'Japanese',
-    templateType: 'Technology Campaign',
-    title: '新しい技術で新年を迎えましょう',
-    createdAt: '2025-01-01',
-    description:
-      '新しい年を迎え、最先端の技術製品で生産性を高めましょう。今すぐ購入してお得に!'
-  },
-  {
-    id: 9,
-    to: 'oliver@automotive.com',
-    campaignName: 'Spring Car Sales',
-    language: 'Italian',
-    templateType: 'Automotive Promotion',
-    title: 'Promozioni primaverili sulle automobili',
-    createdAt: '2024-03-20',
-    description:
-      'Goditi le nostre offerte speciali di primavera sulle auto. Approfittane ora e risparmia!'
-  },
-  {
-    id: 10,
-    to: 'noah@fashion.com',
-    campaignName: 'Autumn Wardrobe Refresh',
-    language: 'Dutch',
-    templateType: 'Fashion Campaign',
-    title: 'Verfris je garderobe voor de herfst',
-    createdAt: '2024-09-10',
-    description:
-      'Ontdek de nieuwste modetrends voor het herfstseizoen. Bestel nu en upgrade je look!'
+    templateType: 'Promotion',
+    title: 'Boost Your Email Marketing Results with Advanced AI',
+    createdAt: '2024-06-02',
+    description: `Dear Ms. Seljan,
+
+I am Adam, your potential AI-driven assistant. I've observed DHA Baku's dedication to both professional medical content and robust email marketing services, and I'm designed to enhance your marketing strategies and efficiency.
+
+Could we schedule a brief call to discuss how I could amplify your current email marketing efforts and contribute to even greater success at DHA Baku?
+
+Thank you for considering`
   }
 ];
 function PendingMailsList({ activeTab, setActiveTab }: IProps) {
